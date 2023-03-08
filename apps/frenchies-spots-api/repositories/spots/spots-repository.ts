@@ -1,14 +1,19 @@
 import {
-  SpotDto,
-  SpotFilterDto,
-  SpotOrderDto,
-  SpotPaginationDto,
-  SpotPicturesDto,
-  UpdateSpotPicturesDto
+  type SpotDto,
+  type SpotFilterDto,
+  type SpotOrderDto,
+  type SpotPaginationDto,
+  type SpotPicturesDto,
+  type UpdateSpotPicturesDto,
+  type PrismaSpotFindManyDto
 } from '../../dto';
 import { Spot, Profile } from '../../models';
 
 import { Prisma } from '@prisma/client';
+import {
+  Spot as SpotType,
+  SpotPicture as SpotPictureType
+} from '@prisma/client';
 
 const spotsRepository = {
   updateAverageRatingBySpotId: (
@@ -30,7 +35,7 @@ const spotsRepository = {
     paginationData: SpotPaginationDto,
     orderBy: SpotOrderDto['orderBy'],
     nameContains: string
-  ) => {
+  ): PrismaSpotFindManyDto => {
     return Spot.findMany({
       orderBy: {
         averageRating: orderBy
