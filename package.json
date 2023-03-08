@@ -1,0 +1,22 @@
+{
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "app": " dotenv -- turbo run dev --filter frenchies-spots-webui --no-daemon",
+    "api": " dotenv -- turbo run dev --filter frenchies-spots-api --no-daemon",
+    "dev": "dotenv -- turbo run dev",
+    "seed": " dotenv -- turbo run build --filter frenchies-spots-api",
+    "build": "turbo run build --no-daemon",
+    "clean": "turbo run clean && rm -rf node_modules",
+    "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,md}\" --ignore-path .gitignore"
+  },
+  "devDependencies": {
+    "prettier": "^2.7.1",
+    "turbo": "latest",
+    "dotenv-cli": "latest"
+  },
+  "packageManager": "yarn@1.22.17"
+}

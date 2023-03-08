@@ -1,0 +1,14 @@
+{
+  "translation": {
+    "pages": {
+      "home": {
+        "title": {
+          "first": "Mutual Aid",
+          "second": "Share",
+          "third": "Journey"
+        },
+        "exploreButton": "EXPLORE"
+      }
+    }
+  }
+}

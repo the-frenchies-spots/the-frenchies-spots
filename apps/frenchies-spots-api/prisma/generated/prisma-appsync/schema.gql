@@ -1,0 +1,2733 @@
+type User {
+    id: String!
+    email: AWSEmail!
+    password: String!
+    token: String!
+    role: Role!
+    profile: Profile
+}
+
+type Profile {
+    id: String!
+    pseudo: String!
+    photoUrl: String
+    gamePoint: Int!
+    userId: String!
+    user: User!
+    itinaryIDs: [String]
+    itinaries: [Itinary]
+    spots: [Spot]
+    ratings: [Rating]
+    favorites: [Favorite]
+}
+
+type Itinary {
+    id: String!
+    name: String!
+    description: String!
+    gamePoint: Int
+    photoUrl: String
+    profileIDs: [String]
+    profiles: [Profile]
+    spotIDs: [String]
+    spots: [Spot]
+}
+
+type Spot {
+    id: String!
+    name: String!
+    description: String!
+    isCanPark: Boolean!
+    isCanVisit: Boolean!
+    isTouristic: Boolean!
+    profile: Profile!
+    profileId: String!
+    itinaryIDs: [String]
+    itinaries: [Itinary]
+    lat: Float!
+    lng: Float!
+    region: String!
+    averageRating: Float!
+    spotPicture: [SpotPicture]
+    ratings: [Rating]
+    favorites: [Favorite]
+}
+
+type SpotPicture {
+    id: String!
+    url: AWSURL!
+    spot: Spot!
+    spotId: String!
+}
+
+type Product {
+    id: String!
+    photoUrl: String
+    gamePoints: Int!
+    price: Int!
+}
+
+type Rating {
+    id: String!
+    rate: Int!
+    profile: Profile!
+    profileId: String!
+    spot: Spot!
+    spotId: String!
+}
+
+type Favorite {
+    id: String!
+    profile: Profile!
+    profileId: String!
+    spot: Spot!
+    spotId: String!
+}
+
+type BatchPayload {
+    count: Int
+}
+
+enum Level {
+    Warning
+    Info
+    Error
+}
+
+input LevelEnumFilter {
+    equals: Level
+    in: [Level!]
+    not: LevelEnumFilter
+    notIn: [Level!]
+}
+
+input LevelEnumListFilter {
+    equals: [Level!]
+    has: Level
+    hasEvery: [Level!]
+    hasSome: [Level!]
+    isEmpty: Boolean
+}
+
+enum Role {
+    SIMPLE_USER
+    USER_ADMIN
+}
+
+input RoleEnumFilter {
+    equals: Role
+    in: [Role!]
+    not: RoleEnumFilter
+    notIn: [Role!]
+}
+
+input RoleEnumListFilter {
+    equals: [Role!]
+    has: Role
+    hasEvery: [Role!]
+    hasSome: [Role!]
+    isEmpty: Boolean
+}
+
+enum OrderByArg {
+    ASC
+    DESC
+}
+
+input UserFilter {
+    some: UserWhereInput
+    every: UserWhereInput
+    none: UserWhereInput
+}
+
+input UserWhereInput {
+    OR: [UserWhereInput]
+    NOT: [UserWhereInput]
+    AND: [UserWhereInput]
+    id: StringFilter
+    email: AWSEmailFilter
+    password: StringFilter
+    token: StringFilter
+    role: RoleEnumFilter
+    profile: ProfileWhereInput
+}
+
+input UserWhereUniqueInput {
+    id: String
+    email: AWSEmail
+    token: String
+}
+
+input UserExtendedWhereUniqueInput {
+    OR: [UserWhereInput]
+    NOT: [UserWhereInput]
+    AND: [UserWhereInput]
+    id: String
+    email: AWSEmail
+    password: StringFilter
+    token: String
+    role: RoleEnumFilter
+    profile: ProfileWhereInput
+}
+
+input UserOrderByInput {
+    id: OrderByArg
+    email: OrderByArg
+    password: OrderByArg
+    token: OrderByArg
+    role: OrderByArg
+    profile: ProfileOrderByInput
+}
+
+input UserCreateInput {
+    id: String!
+    email: AWSEmail!
+    password: String!
+    token: String!
+    role: Role!
+    profile: UserProfileCreateRelationInput
+}
+
+input UserCreateManyInput {
+    id: String!
+    email: AWSEmail!
+    password: String!
+    token: String!
+    role: Role!
+}
+
+input UserUpdateInput {
+    id: String
+    email: AWSEmail
+    password: String
+    token: String
+    role: Role
+    profile: UserProfileUpdateRelationsInput
+}
+
+input UserUpdateUniqueInput {
+    data: UserUpdateInput!
+    where: UserWhereUniqueInput!
+}
+
+input UserUpdateManyInput {
+    where: UserWhereInput!
+    data: UserUpdateInput!
+}
+
+input UserUpsertInput {
+    create: UserCreateInput!
+    update: UserUpdateInput!
+}
+
+input UserUpsertUniqueInput {
+    where: UserWhereUniqueInput!
+    create: UserCreateInput!
+    update: UserUpdateInput!
+}
+
+input UserConnectOrCreateInput {
+    where: UserWhereUniqueInput!
+    create: UserCreateInput!
+}
+
+input UserDeleteUniqueInput {
+    where: UserWhereUniqueInput!
+}
+
+input UserDeleteManyInput {
+    where: UserWhereInput!
+}
+
+input UserProfileCreateRelationInput {
+    create: ProfileCreateInput
+    connect: ProfileWhereUniqueInput
+    connectOrCreate: ProfileConnectOrCreateInput
+}
+
+input UserProfileUpdateRelationsInput {
+    connect: ProfileWhereUniqueInput
+    create: ProfileCreateInput
+    connectOrCreate: ProfileConnectOrCreateInput
+    update: ProfileUpdateInput
+    upsert: ProfileUpsertInput
+    delete: Boolean
+    disconnect: Boolean
+}
+
+input ProfileFilter {
+    some: ProfileWhereInput
+    every: ProfileWhereInput
+    none: ProfileWhereInput
+}
+
+input ProfileWhereInput {
+    OR: [ProfileWhereInput]
+    NOT: [ProfileWhereInput]
+    AND: [ProfileWhereInput]
+    id: StringFilter
+    pseudo: StringFilter
+    photoUrl: StringFilter
+    gamePoint: IntFilter
+    userId: StringFilter
+    user: UserWhereInput
+    itinaryIDs: StringListFilter
+    itinaries: ItinaryFilter
+    spots: SpotFilter
+    ratings: RatingFilter
+    favorites: FavoriteFilter
+}
+
+input ProfileWhereUniqueInput {
+    id: String
+    pseudo: String
+    userId: String
+}
+
+input ProfileExtendedWhereUniqueInput {
+    OR: [ProfileWhereInput]
+    NOT: [ProfileWhereInput]
+    AND: [ProfileWhereInput]
+    id: String
+    pseudo: String
+    photoUrl: StringFilter
+    gamePoint: IntFilter
+    userId: String
+    user: UserWhereInput
+    itinaryIDs: StringListFilter
+    itinaries: ItinaryFilter
+    spots: SpotFilter
+    ratings: RatingFilter
+    favorites: FavoriteFilter
+}
+
+input ProfileOrderByInput {
+    id: OrderByArg
+    pseudo: OrderByArg
+    photoUrl: OrderByArg
+    gamePoint: OrderByArg
+    userId: OrderByArg
+    user: UserOrderByInput
+    itinaryIDs: OrderByArg
+    itinaries: ItinaryOrderByInput
+    spots: SpotOrderByInput
+    ratings: RatingOrderByInput
+    favorites: FavoriteOrderByInput
+}
+
+input ProfileCreateInput {
+    id: String!
+    pseudo: String!
+    photoUrl: String
+    gamePoint: Int!
+    user: ProfileUserCreateRelationInput!
+    itinaries: ProfileItinariesCreateRelationInput
+    spots: ProfileSpotsCreateRelationInput
+    ratings: ProfileRatingsCreateRelationInput
+    favorites: ProfileFavoritesCreateRelationInput
+}
+
+input ProfileCreateManyInput {
+    id: String!
+    pseudo: String!
+    photoUrl: String
+    gamePoint: Int!
+}
+
+input ProfileUpdateInput {
+    id: String
+    pseudo: String
+    photoUrl: String
+    gamePoint: Int
+    user: ProfileUserUpdateRelationsInput
+    itinaries: ProfileItinariesUpdateRelationsInput
+    spots: ProfileSpotsUpdateRelationsInput
+    ratings: ProfileRatingsUpdateRelationsInput
+    favorites: ProfileFavoritesUpdateRelationsInput
+}
+
+input ProfileOperationInput {
+    gamePoint: IntOperation
+}
+
+input ProfileUpdateUniqueInput {
+    data: ProfileUpdateInput!
+    where: ProfileWhereUniqueInput!
+}
+
+input ProfileUpdateManyInput {
+    where: ProfileWhereInput!
+    data: ProfileUpdateInput!
+}
+
+input ProfileUpsertInput {
+    create: ProfileCreateInput!
+    update: ProfileUpdateInput!
+}
+
+input ProfileUpsertUniqueInput {
+    where: ProfileWhereUniqueInput!
+    create: ProfileCreateInput!
+    update: ProfileUpdateInput!
+}
+
+input ProfileConnectOrCreateInput {
+    where: ProfileWhereUniqueInput!
+    create: ProfileCreateInput!
+}
+
+input ProfileDeleteUniqueInput {
+    where: ProfileWhereUniqueInput!
+}
+
+input ProfileDeleteManyInput {
+    where: ProfileWhereInput!
+}
+
+input ProfileUserCreateRelationInput {
+    create: UserCreateInput
+    connect: UserWhereUniqueInput
+    connectOrCreate: UserConnectOrCreateInput
+}
+
+input ProfileUserUpdateRelationsInput {
+    connect: UserWhereUniqueInput
+    create: UserCreateInput
+    connectOrCreate: UserConnectOrCreateInput
+    update: UserUpdateInput
+    upsert: UserUpsertInput
+    delete: Boolean
+    disconnect: Boolean
+}
+input ProfileItinariesCreateRelationInput {
+    create: [ItinaryCreateInput]
+    connect: [ItinaryWhereUniqueInput]
+    connectOrCreate: [ItinaryConnectOrCreateInput]
+}
+
+input ProfileItinariesUpdateRelationsInput {
+    connect: [ItinaryWhereUniqueInput]
+    create: [ItinaryCreateInput]
+    connectOrCreate: [ItinaryConnectOrCreateInput]
+    update: [ItinaryUpdateUniqueInput]
+    upsert: [ItinaryUpsertUniqueInput]
+    delete: [ItinaryDeleteUniqueInput]
+    disconnect: [ItinaryWhereUniqueInput]
+    set: [ItinaryWhereUniqueInput]
+    updateMany: [ItinaryUpdateManyInput]
+    deleteMany: [ItinaryDeleteManyInput]
+}
+input ProfileSpotsCreateRelationInput {
+    create: [SpotCreateInput]
+    connect: [SpotWhereUniqueInput]
+    connectOrCreate: [SpotConnectOrCreateInput]
+}
+
+input ProfileSpotsUpdateRelationsInput {
+    connect: [SpotWhereUniqueInput]
+    create: [SpotCreateInput]
+    connectOrCreate: [SpotConnectOrCreateInput]
+    update: [SpotUpdateUniqueInput]
+    upsert: [SpotUpsertUniqueInput]
+    delete: [SpotDeleteUniqueInput]
+    disconnect: [SpotWhereUniqueInput]
+    set: [SpotWhereUniqueInput]
+    updateMany: [SpotUpdateManyInput]
+    deleteMany: [SpotDeleteManyInput]
+}
+input ProfileRatingsCreateRelationInput {
+    create: [RatingCreateInput]
+    connect: [RatingWhereUniqueInput]
+    connectOrCreate: [RatingConnectOrCreateInput]
+}
+
+input ProfileRatingsUpdateRelationsInput {
+    connect: [RatingWhereUniqueInput]
+    create: [RatingCreateInput]
+    connectOrCreate: [RatingConnectOrCreateInput]
+    update: [RatingUpdateUniqueInput]
+    upsert: [RatingUpsertUniqueInput]
+    delete: [RatingDeleteUniqueInput]
+    disconnect: [RatingWhereUniqueInput]
+    set: [RatingWhereUniqueInput]
+    updateMany: [RatingUpdateManyInput]
+    deleteMany: [RatingDeleteManyInput]
+}
+input ProfileFavoritesCreateRelationInput {
+    create: [FavoriteCreateInput]
+    connect: [FavoriteWhereUniqueInput]
+    connectOrCreate: [FavoriteConnectOrCreateInput]
+}
+
+input ProfileFavoritesUpdateRelationsInput {
+    connect: [FavoriteWhereUniqueInput]
+    create: [FavoriteCreateInput]
+    connectOrCreate: [FavoriteConnectOrCreateInput]
+    update: [FavoriteUpdateUniqueInput]
+    upsert: [FavoriteUpsertUniqueInput]
+    delete: [FavoriteDeleteUniqueInput]
+    disconnect: [FavoriteWhereUniqueInput]
+    set: [FavoriteWhereUniqueInput]
+    updateMany: [FavoriteUpdateManyInput]
+    deleteMany: [FavoriteDeleteManyInput]
+}
+
+input ItinaryFilter {
+    some: ItinaryWhereInput
+    every: ItinaryWhereInput
+    none: ItinaryWhereInput
+}
+
+input ItinaryWhereInput {
+    OR: [ItinaryWhereInput]
+    NOT: [ItinaryWhereInput]
+    AND: [ItinaryWhereInput]
+    id: StringFilter
+    name: StringFilter
+    description: StringFilter
+    gamePoint: IntFilter
+    photoUrl: StringFilter
+    profileIDs: StringListFilter
+    profiles: ProfileFilter
+    spotIDs: StringListFilter
+    spots: SpotFilter
+}
+
+input ItinaryWhereUniqueInput {
+    id: String
+}
+
+input ItinaryExtendedWhereUniqueInput {
+    OR: [ItinaryWhereInput]
+    NOT: [ItinaryWhereInput]
+    AND: [ItinaryWhereInput]
+    id: String
+    name: StringFilter
+    description: StringFilter
+    gamePoint: IntFilter
+    photoUrl: StringFilter
+    profileIDs: StringListFilter
+    profiles: ProfileFilter
+    spotIDs: StringListFilter
+    spots: SpotFilter
+}
+
+input ItinaryOrderByInput {
+    id: OrderByArg
+    name: OrderByArg
+    description: OrderByArg
+    gamePoint: OrderByArg
+    photoUrl: OrderByArg
+    profileIDs: OrderByArg
+    profiles: ProfileOrderByInput
+    spotIDs: OrderByArg
+    spots: SpotOrderByInput
+}
+
+input ItinaryCreateInput {
+    id: String!
+    name: String!
+    description: String!
+    gamePoint: Int
+    photoUrl: String
+    profiles: ItinaryProfilesCreateRelationInput
+    spots: ItinarySpotsCreateRelationInput
+}
+
+input ItinaryCreateManyInput {
+    id: String!
+    name: String!
+    description: String!
+    gamePoint: Int
+    photoUrl: String
+}
+
+input ItinaryUpdateInput {
+    id: String
+    name: String
+    description: String
+    gamePoint: Int
+    photoUrl: String
+    profiles: ItinaryProfilesUpdateRelationsInput
+    spots: ItinarySpotsUpdateRelationsInput
+}
+
+input ItinaryOperationInput {
+    gamePoint: IntOperation
+}
+
+input ItinaryUpdateUniqueInput {
+    data: ItinaryUpdateInput!
+    where: ItinaryWhereUniqueInput!
+}
+
+input ItinaryUpdateManyInput {
+    where: ItinaryWhereInput!
+    data: ItinaryUpdateInput!
+}
+
+input ItinaryUpsertInput {
+    create: ItinaryCreateInput!
+    update: ItinaryUpdateInput!
+}
+
+input ItinaryUpsertUniqueInput {
+    where: ItinaryWhereUniqueInput!
+    create: ItinaryCreateInput!
+    update: ItinaryUpdateInput!
+}
+
+input ItinaryConnectOrCreateInput {
+    where: ItinaryWhereUniqueInput!
+    create: ItinaryCreateInput!
+}
+
+input ItinaryDeleteUniqueInput {
+    where: ItinaryWhereUniqueInput!
+}
+
+input ItinaryDeleteManyInput {
+    where: ItinaryWhereInput!
+}
+
+input ItinaryProfilesCreateRelationInput {
+    create: [ProfileCreateInput]
+    connect: [ProfileWhereUniqueInput]
+    connectOrCreate: [ProfileConnectOrCreateInput]
+}
+
+input ItinaryProfilesUpdateRelationsInput {
+    connect: [ProfileWhereUniqueInput]
+    create: [ProfileCreateInput]
+    connectOrCreate: [ProfileConnectOrCreateInput]
+    update: [ProfileUpdateUniqueInput]
+    upsert: [ProfileUpsertUniqueInput]
+    delete: [ProfileDeleteUniqueInput]
+    disconnect: [ProfileWhereUniqueInput]
+    set: [ProfileWhereUniqueInput]
+    updateMany: [ProfileUpdateManyInput]
+    deleteMany: [ProfileDeleteManyInput]
+}
+input ItinarySpotsCreateRelationInput {
+    create: [SpotCreateInput]
+    connect: [SpotWhereUniqueInput]
+    connectOrCreate: [SpotConnectOrCreateInput]
+}
+
+input ItinarySpotsUpdateRelationsInput {
+    connect: [SpotWhereUniqueInput]
+    create: [SpotCreateInput]
+    connectOrCreate: [SpotConnectOrCreateInput]
+    update: [SpotUpdateUniqueInput]
+    upsert: [SpotUpsertUniqueInput]
+    delete: [SpotDeleteUniqueInput]
+    disconnect: [SpotWhereUniqueInput]
+    set: [SpotWhereUniqueInput]
+    updateMany: [SpotUpdateManyInput]
+    deleteMany: [SpotDeleteManyInput]
+}
+
+input SpotFilter {
+    some: SpotWhereInput
+    every: SpotWhereInput
+    none: SpotWhereInput
+}
+
+input SpotWhereInput {
+    OR: [SpotWhereInput]
+    NOT: [SpotWhereInput]
+    AND: [SpotWhereInput]
+    id: StringFilter
+    name: StringFilter
+    description: StringFilter
+    isCanPark: BooleanFilter
+    isCanVisit: BooleanFilter
+    isTouristic: BooleanFilter
+    profile: ProfileWhereInput
+    profileId: StringFilter
+    itinaryIDs: StringListFilter
+    itinaries: ItinaryFilter
+    lat: FloatFilter
+    lng: FloatFilter
+    region: StringFilter
+    averageRating: FloatFilter
+    spotPicture: SpotPictureFilter
+    ratings: RatingFilter
+    favorites: FavoriteFilter
+}
+
+input SpotWhereUniqueInput {
+    id: String
+    profileId: String
+}
+
+input SpotExtendedWhereUniqueInput {
+    OR: [SpotWhereInput]
+    NOT: [SpotWhereInput]
+    AND: [SpotWhereInput]
+    id: String
+    name: StringFilter
+    description: StringFilter
+    isCanPark: BooleanFilter
+    isCanVisit: BooleanFilter
+    isTouristic: BooleanFilter
+    profile: ProfileWhereInput
+    profileId: String
+    itinaryIDs: StringListFilter
+    itinaries: ItinaryFilter
+    lat: FloatFilter
+    lng: FloatFilter
+    region: StringFilter
+    averageRating: FloatFilter
+    spotPicture: SpotPictureFilter
+    ratings: RatingFilter
+    favorites: FavoriteFilter
+}
+
+input SpotOrderByInput {
+    id: OrderByArg
+    name: OrderByArg
+    description: OrderByArg
+    isCanPark: OrderByArg
+    isCanVisit: OrderByArg
+    isTouristic: OrderByArg
+    profile: ProfileOrderByInput
+    profileId: OrderByArg
+    itinaryIDs: OrderByArg
+    itinaries: ItinaryOrderByInput
+    lat: OrderByArg
+    lng: OrderByArg
+    region: OrderByArg
+    averageRating: OrderByArg
+    spotPicture: SpotPictureOrderByInput
+    ratings: RatingOrderByInput
+    favorites: FavoriteOrderByInput
+}
+
+input SpotCreateInput {
+    id: String!
+    name: String!
+    description: String!
+    isCanPark: Boolean!
+    isCanVisit: Boolean!
+    isTouristic: Boolean!
+    profile: SpotProfileCreateRelationInput!
+    itinaries: SpotItinariesCreateRelationInput
+    lat: Float!
+    lng: Float!
+    region: String!
+    averageRating: Float!
+    spotPicture: SpotSpotPictureCreateRelationInput
+    ratings: SpotRatingsCreateRelationInput
+    favorites: SpotFavoritesCreateRelationInput
+}
+
+input SpotCreateManyInput {
+    id: String!
+    name: String!
+    description: String!
+    isCanPark: Boolean!
+    isCanVisit: Boolean!
+    isTouristic: Boolean!
+    lat: Float!
+    lng: Float!
+    region: String!
+    averageRating: Float!
+}
+
+input SpotUpdateInput {
+    id: String
+    name: String
+    description: String
+    isCanPark: Boolean
+    isCanVisit: Boolean
+    isTouristic: Boolean
+    profile: SpotProfileUpdateRelationsInput
+    itinaries: SpotItinariesUpdateRelationsInput
+    lat: Float
+    lng: Float
+    region: String
+    averageRating: Float
+    spotPicture: SpotSpotPictureUpdateRelationsInput
+    ratings: SpotRatingsUpdateRelationsInput
+    favorites: SpotFavoritesUpdateRelationsInput
+}
+
+input SpotOperationInput {
+    lat: FloatOperation
+    lng: FloatOperation
+    averageRating: FloatOperation
+}
+
+input SpotUpdateUniqueInput {
+    data: SpotUpdateInput!
+    where: SpotWhereUniqueInput!
+}
+
+input SpotUpdateManyInput {
+    where: SpotWhereInput!
+    data: SpotUpdateInput!
+}
+
+input SpotUpsertInput {
+    create: SpotCreateInput!
+    update: SpotUpdateInput!
+}
+
+input SpotUpsertUniqueInput {
+    where: SpotWhereUniqueInput!
+    create: SpotCreateInput!
+    update: SpotUpdateInput!
+}
+
+input SpotConnectOrCreateInput {
+    where: SpotWhereUniqueInput!
+    create: SpotCreateInput!
+}
+
+input SpotDeleteUniqueInput {
+    where: SpotWhereUniqueInput!
+}
+
+input SpotDeleteManyInput {
+    where: SpotWhereInput!
+}
+
+input SpotProfileCreateRelationInput {
+    create: ProfileCreateInput
+    connect: ProfileWhereUniqueInput
+    connectOrCreate: ProfileConnectOrCreateInput
+}
+
+input SpotProfileUpdateRelationsInput {
+    connect: ProfileWhereUniqueInput
+    create: ProfileCreateInput
+    connectOrCreate: ProfileConnectOrCreateInput
+    update: ProfileUpdateInput
+    upsert: ProfileUpsertInput
+    delete: Boolean
+    disconnect: Boolean
+}
+input SpotItinariesCreateRelationInput {
+    create: [ItinaryCreateInput]
+    connect: [ItinaryWhereUniqueInput]
+    connectOrCreate: [ItinaryConnectOrCreateInput]
+}
+
+input SpotItinariesUpdateRelationsInput {
+    connect: [ItinaryWhereUniqueInput]
+    create: [ItinaryCreateInput]
+    connectOrCreate: [ItinaryConnectOrCreateInput]
+    update: [ItinaryUpdateUniqueInput]
+    upsert: [ItinaryUpsertUniqueInput]
+    delete: [ItinaryDeleteUniqueInput]
+    disconnect: [ItinaryWhereUniqueInput]
+    set: [ItinaryWhereUniqueInput]
+    updateMany: [ItinaryUpdateManyInput]
+    deleteMany: [ItinaryDeleteManyInput]
+}
+input SpotSpotPictureCreateRelationInput {
+    create: [SpotPictureCreateInput]
+    connect: [SpotPictureWhereUniqueInput]
+    connectOrCreate: [SpotPictureConnectOrCreateInput]
+}
+
+input SpotSpotPictureUpdateRelationsInput {
+    connect: [SpotPictureWhereUniqueInput]
+    create: [SpotPictureCreateInput]
+    connectOrCreate: [SpotPictureConnectOrCreateInput]
+    update: [SpotPictureUpdateUniqueInput]
+    upsert: [SpotPictureUpsertUniqueInput]
+    delete: [SpotPictureDeleteUniqueInput]
+    disconnect: [SpotPictureWhereUniqueInput]
+    set: [SpotPictureWhereUniqueInput]
+    updateMany: [SpotPictureUpdateManyInput]
+    deleteMany: [SpotPictureDeleteManyInput]
+}
+input SpotRatingsCreateRelationInput {
+    create: [RatingCreateInput]
+    connect: [RatingWhereUniqueInput]
+    connectOrCreate: [RatingConnectOrCreateInput]
+}
+
+input SpotRatingsUpdateRelationsInput {
+    connect: [RatingWhereUniqueInput]
+    create: [RatingCreateInput]
+    connectOrCreate: [RatingConnectOrCreateInput]
+    update: [RatingUpdateUniqueInput]
+    upsert: [RatingUpsertUniqueInput]
+    delete: [RatingDeleteUniqueInput]
+    disconnect: [RatingWhereUniqueInput]
+    set: [RatingWhereUniqueInput]
+    updateMany: [RatingUpdateManyInput]
+    deleteMany: [RatingDeleteManyInput]
+}
+input SpotFavoritesCreateRelationInput {
+    create: [FavoriteCreateInput]
+    connect: [FavoriteWhereUniqueInput]
+    connectOrCreate: [FavoriteConnectOrCreateInput]
+}
+
+input SpotFavoritesUpdateRelationsInput {
+    connect: [FavoriteWhereUniqueInput]
+    create: [FavoriteCreateInput]
+    connectOrCreate: [FavoriteConnectOrCreateInput]
+    update: [FavoriteUpdateUniqueInput]
+    upsert: [FavoriteUpsertUniqueInput]
+    delete: [FavoriteDeleteUniqueInput]
+    disconnect: [FavoriteWhereUniqueInput]
+    set: [FavoriteWhereUniqueInput]
+    updateMany: [FavoriteUpdateManyInput]
+    deleteMany: [FavoriteDeleteManyInput]
+}
+
+input SpotPictureFilter {
+    some: SpotPictureWhereInput
+    every: SpotPictureWhereInput
+    none: SpotPictureWhereInput
+}
+
+input SpotPictureWhereInput {
+    OR: [SpotPictureWhereInput]
+    NOT: [SpotPictureWhereInput]
+    AND: [SpotPictureWhereInput]
+    id: StringFilter
+    url: AWSURLFilter
+    spot: SpotWhereInput
+    spotId: StringFilter
+}
+
+input SpotPictureWhereUniqueInput {
+    id: String
+    spotId: String
+}
+
+input SpotPictureExtendedWhereUniqueInput {
+    OR: [SpotPictureWhereInput]
+    NOT: [SpotPictureWhereInput]
+    AND: [SpotPictureWhereInput]
+    id: String
+    url: AWSURLFilter
+    spot: SpotWhereInput
+    spotId: String
+}
+
+input SpotPictureOrderByInput {
+    id: OrderByArg
+    url: OrderByArg
+    spot: SpotOrderByInput
+    spotId: OrderByArg
+}
+
+input SpotPictureCreateInput {
+    id: String!
+    url: AWSURL!
+    spot: SpotPictureSpotCreateRelationInput!
+}
+
+input SpotPictureCreateManyInput {
+    id: String!
+    url: AWSURL!
+}
+
+input SpotPictureUpdateInput {
+    id: String
+    url: AWSURL
+    spot: SpotPictureSpotUpdateRelationsInput
+}
+
+input SpotPictureUpdateUniqueInput {
+    data: SpotPictureUpdateInput!
+    where: SpotPictureWhereUniqueInput!
+}
+
+input SpotPictureUpdateManyInput {
+    where: SpotPictureWhereInput!
+    data: SpotPictureUpdateInput!
+}
+
+input SpotPictureUpsertInput {
+    create: SpotPictureCreateInput!
+    update: SpotPictureUpdateInput!
+}
+
+input SpotPictureUpsertUniqueInput {
+    where: SpotPictureWhereUniqueInput!
+    create: SpotPictureCreateInput!
+    update: SpotPictureUpdateInput!
+}
+
+input SpotPictureConnectOrCreateInput {
+    where: SpotPictureWhereUniqueInput!
+    create: SpotPictureCreateInput!
+}
+
+input SpotPictureDeleteUniqueInput {
+    where: SpotPictureWhereUniqueInput!
+}
+
+input SpotPictureDeleteManyInput {
+    where: SpotPictureWhereInput!
+}
+
+input SpotPictureSpotCreateRelationInput {
+    create: SpotCreateInput
+    connect: SpotWhereUniqueInput
+    connectOrCreate: SpotConnectOrCreateInput
+}
+
+input SpotPictureSpotUpdateRelationsInput {
+    connect: SpotWhereUniqueInput
+    create: SpotCreateInput
+    connectOrCreate: SpotConnectOrCreateInput
+    update: SpotUpdateInput
+    upsert: SpotUpsertInput
+    delete: Boolean
+    disconnect: Boolean
+}
+
+input ProductFilter {
+    some: ProductWhereInput
+    every: ProductWhereInput
+    none: ProductWhereInput
+}
+
+input ProductWhereInput {
+    OR: [ProductWhereInput]
+    NOT: [ProductWhereInput]
+    AND: [ProductWhereInput]
+    id: StringFilter
+    photoUrl: StringFilter
+    gamePoints: IntFilter
+    price: IntFilter
+}
+
+input ProductWhereUniqueInput {
+    id: String
+}
+
+input ProductExtendedWhereUniqueInput {
+    OR: [ProductWhereInput]
+    NOT: [ProductWhereInput]
+    AND: [ProductWhereInput]
+    id: String
+    photoUrl: StringFilter
+    gamePoints: IntFilter
+    price: IntFilter
+}
+
+input ProductOrderByInput {
+    id: OrderByArg
+    photoUrl: OrderByArg
+    gamePoints: OrderByArg
+    price: OrderByArg
+}
+
+input ProductCreateInput {
+    id: String!
+    photoUrl: String
+    gamePoints: Int!
+    price: Int!
+}
+
+input ProductCreateManyInput {
+    id: String!
+    photoUrl: String
+    gamePoints: Int!
+    price: Int!
+}
+
+input ProductUpdateInput {
+    id: String
+    photoUrl: String
+    gamePoints: Int
+    price: Int
+}
+
+input ProductOperationInput {
+    gamePoints: IntOperation
+    price: IntOperation
+}
+
+input ProductUpdateUniqueInput {
+    data: ProductUpdateInput!
+    where: ProductWhereUniqueInput!
+}
+
+input ProductUpdateManyInput {
+    where: ProductWhereInput!
+    data: ProductUpdateInput!
+}
+
+input ProductUpsertInput {
+    create: ProductCreateInput!
+    update: ProductUpdateInput!
+}
+
+input ProductUpsertUniqueInput {
+    where: ProductWhereUniqueInput!
+    create: ProductCreateInput!
+    update: ProductUpdateInput!
+}
+
+input ProductConnectOrCreateInput {
+    where: ProductWhereUniqueInput!
+    create: ProductCreateInput!
+}
+
+input ProductDeleteUniqueInput {
+    where: ProductWhereUniqueInput!
+}
+
+input ProductDeleteManyInput {
+    where: ProductWhereInput!
+}
+
+input RatingFilter {
+    some: RatingWhereInput
+    every: RatingWhereInput
+    none: RatingWhereInput
+}
+
+input RatingWhereInput {
+    OR: [RatingWhereInput]
+    NOT: [RatingWhereInput]
+    AND: [RatingWhereInput]
+    id: StringFilter
+    rate: IntFilter
+    profile: ProfileWhereInput
+    profileId: StringFilter
+    spot: SpotWhereInput
+    spotId: StringFilter
+}
+
+input RatingWhereUniqueInput {
+    id: String
+    profileId: String
+    spotId: String
+}
+
+input RatingExtendedWhereUniqueInput {
+    OR: [RatingWhereInput]
+    NOT: [RatingWhereInput]
+    AND: [RatingWhereInput]
+    id: String
+    rate: IntFilter
+    profile: ProfileWhereInput
+    profileId: String
+    spot: SpotWhereInput
+    spotId: String
+}
+
+input RatingOrderByInput {
+    id: OrderByArg
+    rate: OrderByArg
+    profile: ProfileOrderByInput
+    profileId: OrderByArg
+    spot: SpotOrderByInput
+    spotId: OrderByArg
+}
+
+input RatingCreateInput {
+    id: String!
+    rate: Int!
+    profile: RatingProfileCreateRelationInput!
+    spot: RatingSpotCreateRelationInput!
+}
+
+input RatingCreateManyInput {
+    id: String!
+    rate: Int!
+}
+
+input RatingUpdateInput {
+    id: String
+    rate: Int
+    profile: RatingProfileUpdateRelationsInput
+    spot: RatingSpotUpdateRelationsInput
+}
+
+input RatingOperationInput {
+    rate: IntOperation
+}
+
+input RatingUpdateUniqueInput {
+    data: RatingUpdateInput!
+    where: RatingWhereUniqueInput!
+}
+
+input RatingUpdateManyInput {
+    where: RatingWhereInput!
+    data: RatingUpdateInput!
+}
+
+input RatingUpsertInput {
+    create: RatingCreateInput!
+    update: RatingUpdateInput!
+}
+
+input RatingUpsertUniqueInput {
+    where: RatingWhereUniqueInput!
+    create: RatingCreateInput!
+    update: RatingUpdateInput!
+}
+
+input RatingConnectOrCreateInput {
+    where: RatingWhereUniqueInput!
+    create: RatingCreateInput!
+}
+
+input RatingDeleteUniqueInput {
+    where: RatingWhereUniqueInput!
+}
+
+input RatingDeleteManyInput {
+    where: RatingWhereInput!
+}
+
+input RatingProfileCreateRelationInput {
+    create: ProfileCreateInput
+    connect: ProfileWhereUniqueInput
+    connectOrCreate: ProfileConnectOrCreateInput
+}
+
+input RatingProfileUpdateRelationsInput {
+    connect: ProfileWhereUniqueInput
+    create: ProfileCreateInput
+    connectOrCreate: ProfileConnectOrCreateInput
+    update: ProfileUpdateInput
+    upsert: ProfileUpsertInput
+    delete: Boolean
+    disconnect: Boolean
+}
+input RatingSpotCreateRelationInput {
+    create: SpotCreateInput
+    connect: SpotWhereUniqueInput
+    connectOrCreate: SpotConnectOrCreateInput
+}
+
+input RatingSpotUpdateRelationsInput {
+    connect: SpotWhereUniqueInput
+    create: SpotCreateInput
+    connectOrCreate: SpotConnectOrCreateInput
+    update: SpotUpdateInput
+    upsert: SpotUpsertInput
+    delete: Boolean
+    disconnect: Boolean
+}
+
+input FavoriteFilter {
+    some: FavoriteWhereInput
+    every: FavoriteWhereInput
+    none: FavoriteWhereInput
+}
+
+input FavoriteWhereInput {
+    OR: [FavoriteWhereInput]
+    NOT: [FavoriteWhereInput]
+    AND: [FavoriteWhereInput]
+    id: StringFilter
+    profile: ProfileWhereInput
+    profileId: StringFilter
+    spot: SpotWhereInput
+    spotId: StringFilter
+}
+
+input FavoriteWhereUniqueInput {
+    id: String
+    profileId: String
+    spotId: String
+}
+
+input FavoriteExtendedWhereUniqueInput {
+    OR: [FavoriteWhereInput]
+    NOT: [FavoriteWhereInput]
+    AND: [FavoriteWhereInput]
+    id: String
+    profile: ProfileWhereInput
+    profileId: String
+    spot: SpotWhereInput
+    spotId: String
+}
+
+input FavoriteOrderByInput {
+    id: OrderByArg
+    profile: ProfileOrderByInput
+    profileId: OrderByArg
+    spot: SpotOrderByInput
+    spotId: OrderByArg
+}
+
+input FavoriteCreateInput {
+    id: String!
+    profile: FavoriteProfileCreateRelationInput!
+    spot: FavoriteSpotCreateRelationInput!
+}
+
+input FavoriteCreateManyInput {
+    id: String!
+}
+
+input FavoriteUpdateInput {
+    id: String
+    profile: FavoriteProfileUpdateRelationsInput
+    spot: FavoriteSpotUpdateRelationsInput
+}
+
+input FavoriteUpdateUniqueInput {
+    data: FavoriteUpdateInput!
+    where: FavoriteWhereUniqueInput!
+}
+
+input FavoriteUpdateManyInput {
+    where: FavoriteWhereInput!
+    data: FavoriteUpdateInput!
+}
+
+input FavoriteUpsertInput {
+    create: FavoriteCreateInput!
+    update: FavoriteUpdateInput!
+}
+
+input FavoriteUpsertUniqueInput {
+    where: FavoriteWhereUniqueInput!
+    create: FavoriteCreateInput!
+    update: FavoriteUpdateInput!
+}
+
+input FavoriteConnectOrCreateInput {
+    where: FavoriteWhereUniqueInput!
+    create: FavoriteCreateInput!
+}
+
+input FavoriteDeleteUniqueInput {
+    where: FavoriteWhereUniqueInput!
+}
+
+input FavoriteDeleteManyInput {
+    where: FavoriteWhereInput!
+}
+
+input FavoriteProfileCreateRelationInput {
+    create: ProfileCreateInput
+    connect: ProfileWhereUniqueInput
+    connectOrCreate: ProfileConnectOrCreateInput
+}
+
+input FavoriteProfileUpdateRelationsInput {
+    connect: ProfileWhereUniqueInput
+    create: ProfileCreateInput
+    connectOrCreate: ProfileConnectOrCreateInput
+    update: ProfileUpdateInput
+    upsert: ProfileUpsertInput
+    delete: Boolean
+    disconnect: Boolean
+}
+input FavoriteSpotCreateRelationInput {
+    create: SpotCreateInput
+    connect: SpotWhereUniqueInput
+    connectOrCreate: SpotConnectOrCreateInput
+}
+
+input FavoriteSpotUpdateRelationsInput {
+    connect: SpotWhereUniqueInput
+    create: SpotCreateInput
+    connectOrCreate: SpotConnectOrCreateInput
+    update: SpotUpdateInput
+    upsert: SpotUpsertInput
+    delete: Boolean
+    disconnect: Boolean
+}
+
+input IntOperation {
+    set: Int
+    increment: Int
+    decrement: Int
+    multiply: Int
+    divide: Int
+}
+
+input FloatOperation {
+    set: Float
+    increment: Float
+    decrement: Float
+    multiply: Float
+    divide: Float
+}
+
+input AWSDateTimeFilter {
+    equals: AWSDateTime
+    gt: AWSDateTime
+    gte: AWSDateTime
+    in: [AWSDateTime!]
+    lt: AWSDateTime
+    lte: AWSDateTime
+    not: AWSDateTimeFilter
+    notIn: [AWSDateTime!]
+}
+
+input AWSDateTimeListFilter {
+    equals: [AWSDateTime!]
+    has: AWSDateTime
+    hasEvery: [AWSDateTime!]
+    hasSome: [AWSDateTime!]
+    isEmpty: Boolean
+}
+
+input FloatFilter {
+    equals: Float
+    gt: Float
+    gte: Float
+    in: [Float!]
+    lt: Float
+    lte: Float
+    not: FloatFilter
+    notIn: [Float!]
+}
+
+input FloatListFilter {
+    equals: [Float!]
+    has: Float
+    hasEvery: [Float!]
+    hasSome: [Float!]
+    isEmpty: Boolean
+}
+
+input IntFilter {
+    equals: Int
+    gt: Int
+    gte: Int
+    in: [Int!]
+    lt: Int
+    lte: Int
+    not: IntFilter
+    notIn: [Int!]
+}
+
+input IntListFilter {
+    equals: [Int!]
+    has: Int
+    hasEvery: [Int!]
+    hasSome: [Int!]
+    isEmpty: Boolean
+}
+
+input AWSJSONFilter {
+    contains: String
+    endsWith: String
+    equals: AWSJSON
+    in: [AWSJSON!]
+    not: AWSJSONFilter
+    notIn: [AWSJSON!]
+    startsWith: String
+}
+
+input AWSJSONListFilter {
+    equals: [AWSJSON!]
+    has: AWSJSON
+    hasEvery: [AWSJSON!]
+    hasSome: [AWSJSON!]
+    isEmpty: Boolean
+}
+
+input AWSEmailFilter {
+    contains: String
+    endsWith: String
+    equals: AWSEmail
+    in: [AWSEmail!]
+    not: AWSEmailFilter
+    notIn: [AWSEmail!]
+    startsWith: String
+}
+
+input AWSEmailListFilter {
+    equals: [AWSEmail!]
+    has: AWSEmail
+    hasEvery: [AWSEmail!]
+    hasSome: [AWSEmail!]
+    isEmpty: Boolean
+}
+
+input AWSURLFilter {
+    contains: String
+    endsWith: String
+    equals: AWSURL
+    in: [AWSURL!]
+    not: AWSURLFilter
+    notIn: [AWSURL!]
+    startsWith: String
+}
+
+input AWSURLListFilter {
+    equals: [AWSURL!]
+    has: AWSURL
+    hasEvery: [AWSURL!]
+    hasSome: [AWSURL!]
+    isEmpty: Boolean
+}
+
+input StringFilter {
+    contains: String
+    endsWith: String
+    equals: String
+    in: [String!]
+    not: StringFilter
+    notIn: [String!]
+    startsWith: String
+    mode: String
+}
+
+input StringListFilter {
+    equals: [String!]
+    has: String
+    hasEvery: [String!]
+    hasSome: [String!]
+    isEmpty: Boolean
+}
+
+input BooleanFilter {
+    equals: Boolean
+    not: BooleanFilter
+}
+
+input BooleanListFilter {
+    equals: [Boolean!]
+    has: Boolean
+    hasEvery: [Boolean!]
+    hasSome: [Boolean!]
+}
+
+type Mutation {
+    """
+    Create a new single User record.
+    """
+    createUser(data: UserCreateInput!): User
+
+    """
+    Create multiple new User records.
+    """
+    createManyUsers(
+        data: [UserCreateManyInput!]
+        skipDuplicates: Boolean
+    ): BatchPayload
+
+    """
+    Update an existing single User record.
+    """
+    updateUser(
+        where: UserWhereUniqueInput!
+        data: UserUpdateInput
+    ): User
+
+    """
+    Update multiple existing User records.
+    """
+    updateManyUsers(
+        where: UserWhereInput!
+        data: UserUpdateInput
+    ): BatchPayload
+
+    """
+    Update an existing or create a new single User record.
+    """
+    upsertUser(
+        data: UserUpdateInput!
+        where: UserWhereUniqueInput!
+    ): User
+
+    """
+    Delete a single User record.
+    """
+    deleteUser(where: UserWhereUniqueInput!): User
+
+    """
+    Delete multiple User records.
+    """
+    deleteManyUsers(where: UserWhereInput!): BatchPayload
+
+    """
+    Create a new single Profile record.
+    """
+    createProfile(data: ProfileCreateInput!): Profile
+
+    """
+    Create multiple new Profile records.
+    """
+    createManyProfiles(
+        data: [ProfileCreateManyInput!]
+        skipDuplicates: Boolean
+    ): BatchPayload
+
+    """
+    Update an existing single Profile record.
+    """
+    updateProfile(
+        where: ProfileWhereUniqueInput!
+        data: ProfileUpdateInput
+        operation: ProfileOperationInput
+    ): Profile
+
+    """
+    Update multiple existing Profile records.
+    """
+    updateManyProfiles(
+        where: ProfileWhereInput!
+        data: ProfileUpdateInput
+        operation: ProfileOperationInput
+    ): BatchPayload
+
+    """
+    Update an existing or create a new single Profile record.
+    """
+    upsertProfile(
+        data: ProfileUpdateInput!
+        where: ProfileWhereUniqueInput!
+    ): Profile
+
+    """
+    Delete a single Profile record.
+    """
+    deleteProfile(where: ProfileWhereUniqueInput!): Profile
+
+    """
+    Delete multiple Profile records.
+    """
+    deleteManyProfiles(
+        where: ProfileWhereInput!
+    ): BatchPayload
+
+    """
+    Create a new single Itinary record.
+    """
+    createItinary(data: ItinaryCreateInput!): Itinary
+
+    """
+    Create multiple new Itinary records.
+    """
+    createManyItinaries(
+        data: [ItinaryCreateManyInput!]
+        skipDuplicates: Boolean
+    ): BatchPayload
+
+    """
+    Update an existing single Itinary record.
+    """
+    updateItinary(
+        where: ItinaryWhereUniqueInput!
+        data: ItinaryUpdateInput
+        operation: ItinaryOperationInput
+    ): Itinary
+
+    """
+    Update multiple existing Itinary records.
+    """
+    updateManyItinaries(
+        where: ItinaryWhereInput!
+        data: ItinaryUpdateInput
+        operation: ItinaryOperationInput
+    ): BatchPayload
+
+    """
+    Update an existing or create a new single Itinary record.
+    """
+    upsertItinary(
+        data: ItinaryUpdateInput!
+        where: ItinaryWhereUniqueInput!
+    ): Itinary
+
+    """
+    Delete a single Itinary record.
+    """
+    deleteItinary(where: ItinaryWhereUniqueInput!): Itinary
+
+    """
+    Delete multiple Itinary records.
+    """
+    deleteManyItinaries(
+        where: ItinaryWhereInput!
+    ): BatchPayload
+
+    """
+    Create a new single Spot record.
+    """
+    createSpot(data: SpotCreateInput!): Spot
+
+    """
+    Create multiple new Spot records.
+    """
+    createManySpots(
+        data: [SpotCreateManyInput!]
+        skipDuplicates: Boolean
+    ): BatchPayload
+
+    """
+    Update an existing single Spot record.
+    """
+    updateSpot(
+        where: SpotWhereUniqueInput!
+        data: SpotUpdateInput
+        operation: SpotOperationInput
+    ): Spot
+
+    """
+    Update multiple existing Spot records.
+    """
+    updateManySpots(
+        where: SpotWhereInput!
+        data: SpotUpdateInput
+        operation: SpotOperationInput
+    ): BatchPayload
+
+    """
+    Update an existing or create a new single Spot record.
+    """
+    upsertSpot(
+        data: SpotUpdateInput!
+        where: SpotWhereUniqueInput!
+    ): Spot
+
+    """
+    Delete a single Spot record.
+    """
+    deleteSpot(where: SpotWhereUniqueInput!): Spot
+
+    """
+    Delete multiple Spot records.
+    """
+    deleteManySpots(where: SpotWhereInput!): BatchPayload
+
+    """
+    Create a new single SpotPicture record.
+    """
+    createSpotPicture(
+        data: SpotPictureCreateInput!
+    ): SpotPicture
+
+    """
+    Create multiple new SpotPicture records.
+    """
+    createManySpotPictures(
+        data: [SpotPictureCreateManyInput!]
+        skipDuplicates: Boolean
+    ): BatchPayload
+
+    """
+    Update an existing single SpotPicture record.
+    """
+    updateSpotPicture(
+        where: SpotPictureWhereUniqueInput!
+        data: SpotPictureUpdateInput
+    ): SpotPicture
+
+    """
+    Update multiple existing SpotPicture records.
+    """
+    updateManySpotPictures(
+        where: SpotPictureWhereInput!
+        data: SpotPictureUpdateInput
+    ): BatchPayload
+
+    """
+    Update an existing or create a new single SpotPicture record.
+    """
+    upsertSpotPicture(
+        data: SpotPictureUpdateInput!
+        where: SpotPictureWhereUniqueInput!
+    ): SpotPicture
+
+    """
+    Delete a single SpotPicture record.
+    """
+    deleteSpotPicture(
+        where: SpotPictureWhereUniqueInput!
+    ): SpotPicture
+
+    """
+    Delete multiple SpotPicture records.
+    """
+    deleteManySpotPictures(
+        where: SpotPictureWhereInput!
+    ): BatchPayload
+
+    """
+    Create a new single Product record.
+    """
+    createProduct(data: ProductCreateInput!): Product
+
+    """
+    Create multiple new Product records.
+    """
+    createManyProducts(
+        data: [ProductCreateManyInput!]
+        skipDuplicates: Boolean
+    ): BatchPayload
+
+    """
+    Update an existing single Product record.
+    """
+    updateProduct(
+        where: ProductWhereUniqueInput!
+        data: ProductUpdateInput
+        operation: ProductOperationInput
+    ): Product
+
+    """
+    Update multiple existing Product records.
+    """
+    updateManyProducts(
+        where: ProductWhereInput!
+        data: ProductUpdateInput
+        operation: ProductOperationInput
+    ): BatchPayload
+
+    """
+    Update an existing or create a new single Product record.
+    """
+    upsertProduct(
+        data: ProductUpdateInput!
+        where: ProductWhereUniqueInput!
+    ): Product
+
+    """
+    Delete a single Product record.
+    """
+    deleteProduct(where: ProductWhereUniqueInput!): Product
+
+    """
+    Delete multiple Product records.
+    """
+    deleteManyProducts(
+        where: ProductWhereInput!
+    ): BatchPayload
+
+    """
+    Create a new single Rating record.
+    """
+    createRating(data: RatingCreateInput!): Rating
+
+    """
+    Create multiple new Rating records.
+    """
+    createManyRatings(
+        data: [RatingCreateManyInput!]
+        skipDuplicates: Boolean
+    ): BatchPayload
+
+    """
+    Update an existing single Rating record.
+    """
+    updateRating(
+        where: RatingWhereUniqueInput!
+        data: RatingUpdateInput
+        operation: RatingOperationInput
+    ): Rating
+
+    """
+    Update multiple existing Rating records.
+    """
+    updateManyRatings(
+        where: RatingWhereInput!
+        data: RatingUpdateInput
+        operation: RatingOperationInput
+    ): BatchPayload
+
+    """
+    Update an existing or create a new single Rating record.
+    """
+    upsertRating(
+        data: RatingUpdateInput!
+        where: RatingWhereUniqueInput!
+    ): Rating
+
+    """
+    Delete a single Rating record.
+    """
+    deleteRating(where: RatingWhereUniqueInput!): Rating
+
+    """
+    Delete multiple Rating records.
+    """
+    deleteManyRatings(
+        where: RatingWhereInput!
+    ): BatchPayload
+
+    """
+    Create a new single Favorite record.
+    """
+    createFavorite(data: FavoriteCreateInput!): Favorite
+
+    """
+    Create multiple new Favorite records.
+    """
+    createManyFavorites(
+        data: [FavoriteCreateManyInput!]
+        skipDuplicates: Boolean
+    ): BatchPayload
+
+    """
+    Update an existing single Favorite record.
+    """
+    updateFavorite(
+        where: FavoriteWhereUniqueInput!
+        data: FavoriteUpdateInput
+    ): Favorite
+
+    """
+    Update multiple existing Favorite records.
+    """
+    updateManyFavorites(
+        where: FavoriteWhereInput!
+        data: FavoriteUpdateInput
+    ): BatchPayload
+
+    """
+    Update an existing or create a new single Favorite record.
+    """
+    upsertFavorite(
+        data: FavoriteUpdateInput!
+        where: FavoriteWhereUniqueInput!
+    ): Favorite
+
+    """
+    Delete a single Favorite record.
+    """
+    deleteFavorite(
+        where: FavoriteWhereUniqueInput!
+    ): Favorite
+
+    """
+    Delete multiple Favorite records.
+    """
+    deleteManyFavorites(
+        where: FavoriteWhereInput!
+    ): BatchPayload
+}
+type Query {
+    """
+    Find a single User record by unique identifier.
+    """
+    getUser(where: UserWhereUniqueInput!): User
+
+    """
+    Find many User records (optional query filters).
+    """
+    listUsers(
+        where: UserWhereInput
+        orderBy: [UserOrderByInput]
+        skip: Int
+        take: Int
+    ): [User]
+
+    """
+    Count all User records (optional query filters).
+    """
+    countUsers(
+        where: UserWhereInput
+        orderBy: [UserOrderByInput]
+        skip: Int
+        take: Int
+    ): Int
+
+    """
+    Find a single Profile record by unique identifier.
+    """
+    getProfile(where: ProfileWhereUniqueInput!): Profile
+
+    """
+    Find many Profile records (optional query filters).
+    """
+    listProfiles(
+        where: ProfileWhereInput
+        orderBy: [ProfileOrderByInput]
+        skip: Int
+        take: Int
+    ): [Profile]
+
+    """
+    Count all Profile records (optional query filters).
+    """
+    countProfiles(
+        where: ProfileWhereInput
+        orderBy: [ProfileOrderByInput]
+        skip: Int
+        take: Int
+    ): Int
+
+    """
+    Find a single Itinary record by unique identifier.
+    """
+    getItinary(where: ItinaryWhereUniqueInput!): Itinary
+
+    """
+    Find many Itinary records (optional query filters).
+    """
+    listItinaries(
+        where: ItinaryWhereInput
+        orderBy: [ItinaryOrderByInput]
+        skip: Int
+        take: Int
+    ): [Itinary]
+
+    """
+    Count all Itinary records (optional query filters).
+    """
+    countItinaries(
+        where: ItinaryWhereInput
+        orderBy: [ItinaryOrderByInput]
+        skip: Int
+        take: Int
+    ): Int
+
+    """
+    Find a single Spot record by unique identifier.
+    """
+    getSpot(where: SpotWhereUniqueInput!): Spot
+
+    """
+    Find many Spot records (optional query filters).
+    """
+    listSpots(
+        where: SpotWhereInput
+        orderBy: [SpotOrderByInput]
+        skip: Int
+        take: Int
+    ): [Spot]
+
+    """
+    Count all Spot records (optional query filters).
+    """
+    countSpots(
+        where: SpotWhereInput
+        orderBy: [SpotOrderByInput]
+        skip: Int
+        take: Int
+    ): Int
+
+    """
+    Find a single SpotPicture record by unique identifier.
+    """
+    getSpotPicture(
+        where: SpotPictureWhereUniqueInput!
+    ): SpotPicture
+
+    """
+    Find many SpotPicture records (optional query filters).
+    """
+    listSpotPictures(
+        where: SpotPictureWhereInput
+        orderBy: [SpotPictureOrderByInput]
+        skip: Int
+        take: Int
+    ): [SpotPicture]
+
+    """
+    Count all SpotPicture records (optional query filters).
+    """
+    countSpotPictures(
+        where: SpotPictureWhereInput
+        orderBy: [SpotPictureOrderByInput]
+        skip: Int
+        take: Int
+    ): Int
+
+    """
+    Find a single Product record by unique identifier.
+    """
+    getProduct(where: ProductWhereUniqueInput!): Product
+
+    """
+    Find many Product records (optional query filters).
+    """
+    listProducts(
+        where: ProductWhereInput
+        orderBy: [ProductOrderByInput]
+        skip: Int
+        take: Int
+    ): [Product]
+
+    """
+    Count all Product records (optional query filters).
+    """
+    countProducts(
+        where: ProductWhereInput
+        orderBy: [ProductOrderByInput]
+        skip: Int
+        take: Int
+    ): Int
+
+    """
+    Find a single Rating record by unique identifier.
+    """
+    getRating(where: RatingWhereUniqueInput!): Rating
+
+    """
+    Find many Rating records (optional query filters).
+    """
+    listRatings(
+        where: RatingWhereInput
+        orderBy: [RatingOrderByInput]
+        skip: Int
+        take: Int
+    ): [Rating]
+
+    """
+    Count all Rating records (optional query filters).
+    """
+    countRatings(
+        where: RatingWhereInput
+        orderBy: [RatingOrderByInput]
+        skip: Int
+        take: Int
+    ): Int
+
+    """
+    Find a single Favorite record by unique identifier.
+    """
+    getFavorite(where: FavoriteWhereUniqueInput!): Favorite
+
+    """
+    Find many Favorite records (optional query filters).
+    """
+    listFavorites(
+        where: FavoriteWhereInput
+        orderBy: [FavoriteOrderByInput]
+        skip: Int
+        take: Int
+    ): [Favorite]
+
+    """
+    Count all Favorite records (optional query filters).
+    """
+    countFavorites(
+        where: FavoriteWhereInput
+        orderBy: [FavoriteOrderByInput]
+        skip: Int
+        take: Int
+    ): Int
+}
+type Subscription {
+    """
+    Triggered from `createUser` mutation (excl. `createManyUsers` and `upsertUser`).
+    """
+    onCreatedUser(
+        id: String
+        email: AWSEmail
+        token: String
+    ): User @aws_subscribe(mutations: ["createUser"])
+
+    """
+    Triggered from `updateUser` mutation (excl. `updateManyUsers` and `upsertUser`).
+    """
+    onUpdatedUser(
+        id: String
+        email: AWSEmail
+        token: String
+    ): User @aws_subscribe(mutations: ["updateUser"])
+
+    """
+    Triggered from `upsertUser` mutation.
+    """
+    onUpsertedUser(
+        id: String
+        email: AWSEmail
+        token: String
+    ): User @aws_subscribe(mutations: ["upsertUser"])
+
+    """
+    Triggered from `deleteUser` mutation (excl. `deleteManyUsers`).
+    """
+    onDeletedUser(
+        id: String
+        email: AWSEmail
+        token: String
+    ): User @aws_subscribe(mutations: ["deleteUser"])
+
+    """
+    Triggered from ANY SINGLE record mutation.
+    """
+    onMutatedUser(
+        id: String
+        email: AWSEmail
+        token: String
+    ): User
+        @aws_subscribe(
+            mutations: [
+                "createUser"
+                "updateUser"
+                "upsertUser"
+                "deleteUser"
+            ]
+        )
+
+    """
+    Triggered from `createManyUsers` mutation.
+    """
+    onCreatedManyUsers: BatchPayload
+        @aws_subscribe(mutations: ["createManyUsers"])
+
+    """
+    Triggered from `updateManyUsers` mutation.
+    """
+    onUpdatedManyUsers: BatchPayload
+        @aws_subscribe(mutations: ["updateManyUsers"])
+
+    """
+    Triggered from ANY MULTIPLE records mutation.
+    """
+    onMutatedManyUsers: BatchPayload
+        @aws_subscribe(
+            mutations: [
+                "createManyUsers"
+                "updateManyUsers"
+                "deleteManyUsers"
+            ]
+        )
+
+    """
+    Triggered from `deleteManyUsers` mutation.
+    """
+    onDeletedManyUsers: BatchPayload
+        @aws_subscribe(mutations: ["deleteManyUsers"])
+
+    """
+    Triggered from `createProfile` mutation (excl. `createManyProfiles` and `upsertProfile`).
+    """
+    onCreatedProfile(
+        id: String
+        pseudo: String
+        userId: String
+    ): Profile @aws_subscribe(mutations: ["createProfile"])
+
+    """
+    Triggered from `updateProfile` mutation (excl. `updateManyProfiles` and `upsertProfile`).
+    """
+    onUpdatedProfile(
+        id: String
+        pseudo: String
+        userId: String
+    ): Profile @aws_subscribe(mutations: ["updateProfile"])
+
+    """
+    Triggered from `upsertProfile` mutation.
+    """
+    onUpsertedProfile(
+        id: String
+        pseudo: String
+        userId: String
+    ): Profile @aws_subscribe(mutations: ["upsertProfile"])
+
+    """
+    Triggered from `deleteProfile` mutation (excl. `deleteManyProfiles`).
+    """
+    onDeletedProfile(
+        id: String
+        pseudo: String
+        userId: String
+    ): Profile @aws_subscribe(mutations: ["deleteProfile"])
+
+    """
+    Triggered from ANY SINGLE record mutation.
+    """
+    onMutatedProfile(
+        id: String
+        pseudo: String
+        userId: String
+    ): Profile
+        @aws_subscribe(
+            mutations: [
+                "createProfile"
+                "updateProfile"
+                "upsertProfile"
+                "deleteProfile"
+            ]
+        )
+
+    """
+    Triggered from `createManyProfiles` mutation.
+    """
+    onCreatedManyProfiles: BatchPayload
+        @aws_subscribe(mutations: ["createManyProfiles"])
+
+    """
+    Triggered from `updateManyProfiles` mutation.
+    """
+    onUpdatedManyProfiles: BatchPayload
+        @aws_subscribe(mutations: ["updateManyProfiles"])
+
+    """
+    Triggered from ANY MULTIPLE records mutation.
+    """
+    onMutatedManyProfiles: BatchPayload
+        @aws_subscribe(
+            mutations: [
+                "createManyProfiles"
+                "updateManyProfiles"
+                "deleteManyProfiles"
+            ]
+        )
+
+    """
+    Triggered from `deleteManyProfiles` mutation.
+    """
+    onDeletedManyProfiles: BatchPayload
+        @aws_subscribe(mutations: ["deleteManyProfiles"])
+
+    """
+    Triggered from `createItinary` mutation (excl. `createManyItinaries` and `upsertItinary`).
+    """
+    onCreatedItinary(id: String): Itinary
+        @aws_subscribe(mutations: ["createItinary"])
+
+    """
+    Triggered from `updateItinary` mutation (excl. `updateManyItinaries` and `upsertItinary`).
+    """
+    onUpdatedItinary(id: String): Itinary
+        @aws_subscribe(mutations: ["updateItinary"])
+
+    """
+    Triggered from `upsertItinary` mutation.
+    """
+    onUpsertedItinary(id: String): Itinary
+        @aws_subscribe(mutations: ["upsertItinary"])
+
+    """
+    Triggered from `deleteItinary` mutation (excl. `deleteManyItinaries`).
+    """
+    onDeletedItinary(id: String): Itinary
+        @aws_subscribe(mutations: ["deleteItinary"])
+
+    """
+    Triggered from ANY SINGLE record mutation.
+    """
+    onMutatedItinary(id: String): Itinary
+        @aws_subscribe(
+            mutations: [
+                "createItinary"
+                "updateItinary"
+                "upsertItinary"
+                "deleteItinary"
+            ]
+        )
+
+    """
+    Triggered from `createManyItinaries` mutation.
+    """
+    onCreatedManyItinaries: BatchPayload
+        @aws_subscribe(mutations: ["createManyItinaries"])
+
+    """
+    Triggered from `updateManyItinaries` mutation.
+    """
+    onUpdatedManyItinaries: BatchPayload
+        @aws_subscribe(mutations: ["updateManyItinaries"])
+
+    """
+    Triggered from ANY MULTIPLE records mutation.
+    """
+    onMutatedManyItinaries: BatchPayload
+        @aws_subscribe(
+            mutations: [
+                "createManyItinaries"
+                "updateManyItinaries"
+                "deleteManyItinaries"
+            ]
+        )
+
+    """
+    Triggered from `deleteManyItinaries` mutation.
+    """
+    onDeletedManyItinaries: BatchPayload
+        @aws_subscribe(mutations: ["deleteManyItinaries"])
+
+    """
+    Triggered from `createSpot` mutation (excl. `createManySpots` and `upsertSpot`).
+    """
+    onCreatedSpot(id: String, profileId: String): Spot
+        @aws_subscribe(mutations: ["createSpot"])
+
+    """
+    Triggered from `updateSpot` mutation (excl. `updateManySpots` and `upsertSpot`).
+    """
+    onUpdatedSpot(id: String, profileId: String): Spot
+        @aws_subscribe(mutations: ["updateSpot"])
+
+    """
+    Triggered from `upsertSpot` mutation.
+    """
+    onUpsertedSpot(id: String, profileId: String): Spot
+        @aws_subscribe(mutations: ["upsertSpot"])
+
+    """
+    Triggered from `deleteSpot` mutation (excl. `deleteManySpots`).
+    """
+    onDeletedSpot(id: String, profileId: String): Spot
+        @aws_subscribe(mutations: ["deleteSpot"])
+
+    """
+    Triggered from ANY SINGLE record mutation.
+    """
+    onMutatedSpot(id: String, profileId: String): Spot
+        @aws_subscribe(
+            mutations: [
+                "createSpot"
+                "updateSpot"
+                "upsertSpot"
+                "deleteSpot"
+            ]
+        )
+
+    """
+    Triggered from `createManySpots` mutation.
+    """
+    onCreatedManySpots: BatchPayload
+        @aws_subscribe(mutations: ["createManySpots"])
+
+    """
+    Triggered from `updateManySpots` mutation.
+    """
+    onUpdatedManySpots: BatchPayload
+        @aws_subscribe(mutations: ["updateManySpots"])
+
+    """
+    Triggered from ANY MULTIPLE records mutation.
+    """
+    onMutatedManySpots: BatchPayload
+        @aws_subscribe(
+            mutations: [
+                "createManySpots"
+                "updateManySpots"
+                "deleteManySpots"
+            ]
+        )
+
+    """
+    Triggered from `deleteManySpots` mutation.
+    """
+    onDeletedManySpots: BatchPayload
+        @aws_subscribe(mutations: ["deleteManySpots"])
+
+    """
+    Triggered from `createSpotPicture` mutation (excl. `createManySpotPictures` and `upsertSpotPicture`).
+    """
+    onCreatedSpotPicture(
+        id: String
+        spotId: String
+    ): SpotPicture
+        @aws_subscribe(mutations: ["createSpotPicture"])
+
+    """
+    Triggered from `updateSpotPicture` mutation (excl. `updateManySpotPictures` and `upsertSpotPicture`).
+    """
+    onUpdatedSpotPicture(
+        id: String
+        spotId: String
+    ): SpotPicture
+        @aws_subscribe(mutations: ["updateSpotPicture"])
+
+    """
+    Triggered from `upsertSpotPicture` mutation.
+    """
+    onUpsertedSpotPicture(
+        id: String
+        spotId: String
+    ): SpotPicture
+        @aws_subscribe(mutations: ["upsertSpotPicture"])
+
+    """
+    Triggered from `deleteSpotPicture` mutation (excl. `deleteManySpotPictures`).
+    """
+    onDeletedSpotPicture(
+        id: String
+        spotId: String
+    ): SpotPicture
+        @aws_subscribe(mutations: ["deleteSpotPicture"])
+
+    """
+    Triggered from ANY SINGLE record mutation.
+    """
+    onMutatedSpotPicture(
+        id: String
+        spotId: String
+    ): SpotPicture
+        @aws_subscribe(
+            mutations: [
+                "createSpotPicture"
+                "updateSpotPicture"
+                "upsertSpotPicture"
+                "deleteSpotPicture"
+            ]
+        )
+
+    """
+    Triggered from `createManySpotPictures` mutation.
+    """
+    onCreatedManySpotPictures: BatchPayload
+        @aws_subscribe(
+            mutations: ["createManySpotPictures"]
+        )
+
+    """
+    Triggered from `updateManySpotPictures` mutation.
+    """
+    onUpdatedManySpotPictures: BatchPayload
+        @aws_subscribe(
+            mutations: ["updateManySpotPictures"]
+        )
+
+    """
+    Triggered from ANY MULTIPLE records mutation.
+    """
+    onMutatedManySpotPictures: BatchPayload
+        @aws_subscribe(
+            mutations: [
+                "createManySpotPictures"
+                "updateManySpotPictures"
+                "deleteManySpotPictures"
+            ]
+        )
+
+    """
+    Triggered from `deleteManySpotPictures` mutation.
+    """
+    onDeletedManySpotPictures: BatchPayload
+        @aws_subscribe(
+            mutations: ["deleteManySpotPictures"]
+        )
+
+    """
+    Triggered from `createProduct` mutation (excl. `createManyProducts` and `upsertProduct`).
+    """
+    onCreatedProduct(id: String): Product
+        @aws_subscribe(mutations: ["createProduct"])
+
+    """
+    Triggered from `updateProduct` mutation (excl. `updateManyProducts` and `upsertProduct`).
+    """
+    onUpdatedProduct(id: String): Product
+        @aws_subscribe(mutations: ["updateProduct"])
+
+    """
+    Triggered from `upsertProduct` mutation.
+    """
+    onUpsertedProduct(id: String): Product
+        @aws_subscribe(mutations: ["upsertProduct"])
+
+    """
+    Triggered from `deleteProduct` mutation (excl. `deleteManyProducts`).
+    """
+    onDeletedProduct(id: String): Product
+        @aws_subscribe(mutations: ["deleteProduct"])
+
+    """
+    Triggered from ANY SINGLE record mutation.
+    """
+    onMutatedProduct(id: String): Product
+        @aws_subscribe(
+            mutations: [
+                "createProduct"
+                "updateProduct"
+                "upsertProduct"
+                "deleteProduct"
+            ]
+        )
+
+    """
+    Triggered from `createManyProducts` mutation.
+    """
+    onCreatedManyProducts: BatchPayload
+        @aws_subscribe(mutations: ["createManyProducts"])
+
+    """
+    Triggered from `updateManyProducts` mutation.
+    """
+    onUpdatedManyProducts: BatchPayload
+        @aws_subscribe(mutations: ["updateManyProducts"])
+
+    """
+    Triggered from ANY MULTIPLE records mutation.
+    """
+    onMutatedManyProducts: BatchPayload
+        @aws_subscribe(
+            mutations: [
+                "createManyProducts"
+                "updateManyProducts"
+                "deleteManyProducts"
+            ]
+        )
+
+    """
+    Triggered from `deleteManyProducts` mutation.
+    """
+    onDeletedManyProducts: BatchPayload
+        @aws_subscribe(mutations: ["deleteManyProducts"])
+
+    """
+    Triggered from `createRating` mutation (excl. `createManyRatings` and `upsertRating`).
+    """
+    onCreatedRating(
+        id: String
+        profileId: String
+        spotId: String
+    ): Rating @aws_subscribe(mutations: ["createRating"])
+
+    """
+    Triggered from `updateRating` mutation (excl. `updateManyRatings` and `upsertRating`).
+    """
+    onUpdatedRating(
+        id: String
+        profileId: String
+        spotId: String
+    ): Rating @aws_subscribe(mutations: ["updateRating"])
+
+    """
+    Triggered from `upsertRating` mutation.
+    """
+    onUpsertedRating(
+        id: String
+        profileId: String
+        spotId: String
+    ): Rating @aws_subscribe(mutations: ["upsertRating"])
+
+    """
+    Triggered from `deleteRating` mutation (excl. `deleteManyRatings`).
+    """
+    onDeletedRating(
+        id: String
+        profileId: String
+        spotId: String
+    ): Rating @aws_subscribe(mutations: ["deleteRating"])
+
+    """
+    Triggered from ANY SINGLE record mutation.
+    """
+    onMutatedRating(
+        id: String
+        profileId: String
+        spotId: String
+    ): Rating
+        @aws_subscribe(
+            mutations: [
+                "createRating"
+                "updateRating"
+                "upsertRating"
+                "deleteRating"
+            ]
+        )
+
+    """
+    Triggered from `createManyRatings` mutation.
+    """
+    onCreatedManyRatings: BatchPayload
+        @aws_subscribe(mutations: ["createManyRatings"])
+
+    """
+    Triggered from `updateManyRatings` mutation.
+    """
+    onUpdatedManyRatings: BatchPayload
+        @aws_subscribe(mutations: ["updateManyRatings"])
+
+    """
+    Triggered from ANY MULTIPLE records mutation.
+    """
+    onMutatedManyRatings: BatchPayload
+        @aws_subscribe(
+            mutations: [
+                "createManyRatings"
+                "updateManyRatings"
+                "deleteManyRatings"
+            ]
+        )
+
+    """
+    Triggered from `deleteManyRatings` mutation.
+    """
+    onDeletedManyRatings: BatchPayload
+        @aws_subscribe(mutations: ["deleteManyRatings"])
+
+    """
+    Triggered from `createFavorite` mutation (excl. `createManyFavorites` and `upsertFavorite`).
+    """
+    onCreatedFavorite(
+        id: String
+        profileId: String
+        spotId: String
+    ): Favorite
+        @aws_subscribe(mutations: ["createFavorite"])
+
+    """
+    Triggered from `updateFavorite` mutation (excl. `updateManyFavorites` and `upsertFavorite`).
+    """
+    onUpdatedFavorite(
+        id: String
+        profileId: String
+        spotId: String
+    ): Favorite
+        @aws_subscribe(mutations: ["updateFavorite"])
+
+    """
+    Triggered from `upsertFavorite` mutation.
+    """
+    onUpsertedFavorite(
+        id: String
+        profileId: String
+        spotId: String
+    ): Favorite
+        @aws_subscribe(mutations: ["upsertFavorite"])
+
+    """
+    Triggered from `deleteFavorite` mutation (excl. `deleteManyFavorites`).
+    """
+    onDeletedFavorite(
+        id: String
+        profileId: String
+        spotId: String
+    ): Favorite
+        @aws_subscribe(mutations: ["deleteFavorite"])
+
+    """
+    Triggered from ANY SINGLE record mutation.
+    """
+    onMutatedFavorite(
+        id: String
+        profileId: String
+        spotId: String
+    ): Favorite
+        @aws_subscribe(
+            mutations: [
+                "createFavorite"
+                "updateFavorite"
+                "upsertFavorite"
+                "deleteFavorite"
+            ]
+        )
+
+    """
+    Triggered from `createManyFavorites` mutation.
+    """
+    onCreatedManyFavorites: BatchPayload
+        @aws_subscribe(mutations: ["createManyFavorites"])
+
+    """
+    Triggered from `updateManyFavorites` mutation.
+    """
+    onUpdatedManyFavorites: BatchPayload
+        @aws_subscribe(mutations: ["updateManyFavorites"])
+
+    """
+    Triggered from ANY MULTIPLE records mutation.
+    """
+    onMutatedManyFavorites: BatchPayload
+        @aws_subscribe(
+            mutations: [
+                "createManyFavorites"
+                "updateManyFavorites"
+                "deleteManyFavorites"
+            ]
+        )
+
+    """
+    Triggered from `deleteManyFavorites` mutation.
+    """
+    onDeletedManyFavorites: BatchPayload
+        @aws_subscribe(mutations: ["deleteManyFavorites"])
+}
