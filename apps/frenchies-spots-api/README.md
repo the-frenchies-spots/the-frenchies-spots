@@ -1,5 +1,3 @@
----
-
 Commit rules:
 
 - if the task isn't finish add wip to the description
