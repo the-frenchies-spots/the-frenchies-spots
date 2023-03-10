@@ -1,13 +1,14 @@
-import { itinariesRepository } from "../../repositories";
-import { CreateItinaryDto, buysItinaryDto } from "../../dto";
+import { itinariesRepository } from '../../repositories';
+import { CreateItinaryDto, buysItinaryDto } from '../../dto';
 // import { SpotCreateCoordinateDto } from "../../dto/spot-dto";
-import { ProfileSpotDto } from "./../../dto/spot-dto";
+import { ProfileSpotDto } from './../../dto/spot-dto';
+import { ConnectUserToItinary, ItinaryFindManyResult } from '../../types';
 
 const itinariesBusiness = {
   /**
    * Get all itinary
    */
-  getAll: () => {
+  getAll: (): ItinaryFindManyResult => {
     return itinariesRepository.getAll();
   },
 
@@ -29,9 +30,9 @@ const itinariesBusiness = {
   /**
    * @param {buysItinaryDto} data
    */
-  connectUser: (data: buysItinaryDto) => {
+  connectUser: (data: buysItinaryDto): ConnectUserToItinary => {
     return itinariesRepository.connectUser(data);
-  },
+  }
 };
 
 export default itinariesBusiness;

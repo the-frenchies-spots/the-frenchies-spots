@@ -2,10 +2,16 @@ import { spotsRepository } from '../../repositories';
 import { ReadSpotDto, SpotDto, SpotPicturesDto } from '../../dto';
 import { codeErrors, GenericError } from '../../utils';
 import { UpdateSpotDto, UpdateSpotPicturesDto } from '../../dto/spot-dto';
+import {
+  CreateSpotResult,
+  SpotFindByIdResult,
+  SpotFindManyResult,
+  UpdateExistingSpotResult
+} from '../../types';
 const { SPOT_ID_NOT_MATCH_PROFILE_ID, SPOT_NOT_FOUND } = codeErrors;
 
 const spotsBusiness = {
-  getAll: (data: ReadSpotDto) => {
+  getAll: (data: ReadSpotDto): SpotFindManyResult => {
     const { searchValue, orderBy, skip, take, itinaryIDs, ...other } =
       data;
     const filterData = { ...other };
@@ -19,14 +25,14 @@ const spotsBusiness = {
     );
   },
 
-  getById: (spotId: string) => {
+  getById: (spotId: string): SpotFindByIdResult => {
     return spotsRepository.getById(spotId);
   },
 
   create: (
     data: SpotDto & { pictures: SpotPicturesDto },
     profileId: string
-  ) => {
+  ): CreateSpotResult => {
     const { pictures, itinaryIDs, ...other } = data;
     const spotData = { ...other };
     return spotsRepository.create(spotData, pictures, profileId);
@@ -35,14 +41,17 @@ const spotsBusiness = {
   update: async (
     data: UpdateSpotDto & { pictures: UpdateSpotPicturesDto },
     currentProfileId: string
-  ) => {
+  ): UpdateExistingSpotResult => {
     const { id: spotId, pictures, ...other } = data;
     const updateData = { ...other };
     await checkCreatedByCurrentUserOrThrow(spotId, currentProfileId);
     return spotsRepository.update(updateData, spotId, pictures);
   },
 
-  delete: async (data: UpdateSpotDto, currentProfileId: string) => {
+  delete: async (
+    data: UpdateSpotDto,
+    currentProfileId: string
+  ): Promise<boolean> => {
     const { id: spotId } = data;
     await checkCreatedByCurrentUserOrThrow(spotId, currentProfileId);
     return spotsRepository.delete(currentProfileId, spotId);
@@ -52,7 +61,7 @@ const spotsBusiness = {
 async function checkCreatedByCurrentUserOrThrow(
   spotId: string,
   currentProfileId: string
-) {
+): Promise<void> {
   const spot = await spotsRepository.getById(spotId);
 
   if (!spot) throw new GenericError(SPOT_NOT_FOUND, spotId);

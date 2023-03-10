@@ -1,7 +1,8 @@
-import { itinariesBusiness } from "../../business";
-import { CreateItinaryDto, buysItinaryDto } from "../../dto";
-import { TContext } from "../../graphql/context";
-import { GenericError, codeErrors } from "../../utils";
+import { itinariesBusiness } from '../../business';
+import { CreateItinaryDto, buysItinaryDto } from '../../dto';
+import { TContext } from '../../graphql/context';
+import { ConnectUserToItinary } from '../../types';
+import { GenericError, codeErrors } from '../../utils';
 const { UNAUTHENTICATED } = codeErrors;
 
 export const itinariesMutation = {
@@ -20,7 +21,10 @@ export const itinariesMutation = {
   /**
    * @param {buysItinaryDto} data
    */
-  buysItinary: (_: undefined, data: buysItinaryDto) => {
+  buysItinary: (
+    _: undefined,
+    data: buysItinaryDto
+  ): ConnectUserToItinary => {
     return itinariesBusiness.connectUser(data);
-  },
+  }
 };

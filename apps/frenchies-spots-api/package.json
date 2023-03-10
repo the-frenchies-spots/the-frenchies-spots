@@ -12,7 +12,7 @@
     "lint": "next lint",
     "studio": "npx prisma studio",
     "generate": "npx prisma generate",
-    "seed": "npx prisma migrate reset"
+    "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed.ts"
   },
   "dependencies": {
     "@apollo/server": "^4.3.0",

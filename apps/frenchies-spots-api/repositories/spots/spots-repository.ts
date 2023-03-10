@@ -1,25 +1,26 @@
 import {
   type SpotDto,
-  type SpotFilterDto,
   type SpotOrderDto,
   type SpotPaginationDto,
   type SpotPicturesDto,
-  type UpdateSpotPicturesDto,
-  type PrismaSpotFindManyDto
+  type UpdateSpotPicturesDto
 } from '../../dto';
+import {
+  CreateSpotResult,
+  SpotFindByIdResult,
+  UpdateSpotResult,
+  type UpdateRatingAverageBySpotIdResult,
+  type SpotFindManyResult
+} from '../../types';
 import { Spot, Profile } from '../../models';
 
 import { Prisma } from '@prisma/client';
-import {
-  Spot as SpotType,
-  SpotPicture as SpotPictureType
-} from '@prisma/client';
 
 const spotsRepository = {
   updateAverageRatingBySpotId: (
     spotId: string,
     avg: SpotDto['averageRating']
-  ) => {
+  ): UpdateRatingAverageBySpotIdResult => {
     return Spot.update({
       where: {
         id: spotId
@@ -35,7 +36,7 @@ const spotsRepository = {
     paginationData: SpotPaginationDto,
     orderBy: SpotOrderDto['orderBy'],
     nameContains: string
-  ): PrismaSpotFindManyDto => {
+  ): SpotFindManyResult => {
     return Spot.findMany({
       orderBy: {
         averageRating: orderBy
@@ -54,7 +55,7 @@ const spotsRepository = {
     });
   },
 
-  getById: (id: string) => {
+  getById: (id: string): SpotFindByIdResult => {
     return Spot.findUnique({
       where: {
         id
@@ -72,7 +73,7 @@ const spotsRepository = {
     data: Omit<Prisma.SpotCreateInput, 'profile'>,
     pictures: SpotPicturesDto,
     profileId: string
-  ) => {
+  ): CreateSpotResult => {
     return Spot.create({
       data: {
         ...data,
@@ -91,7 +92,7 @@ const spotsRepository = {
     data: SpotDto,
     spotId: string,
     pictures: UpdateSpotPicturesDto = []
-  ) => {
+  ): UpdateSpotResult => {
     const spotPicture = {
       upsert: pictures.map((picture) => {
         const { id = undefined, url } = picture;
@@ -112,7 +113,7 @@ const spotsRepository = {
    * @param {string} profileId
    * @param {string} spotId
    */
-  delete: (profileId: string, spotId: string) => {
+  delete: (profileId: string, spotId: string): Promise<boolean> => {
     return Profile.update({
       where: {
         id: profileId

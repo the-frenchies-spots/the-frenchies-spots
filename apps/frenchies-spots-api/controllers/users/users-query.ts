@@ -1,10 +1,11 @@
-import { usersBusiness } from "../../business";
-import { TContext } from "../../graphql/context";
-import { GenericError, codeErrors } from "../../utils";
+import { usersBusiness } from '../../business';
+import { TContext } from '../../graphql/context';
+import { UserFindManyResult } from '../../types';
+import { GenericError, codeErrors } from '../../utils';
 const { UNAUTHENTICATED } = codeErrors;
 
 export const usersQuery = {
-  users: () => {
+  users: (): UserFindManyResult => {
     return usersBusiness.getAll();
   },
 
@@ -16,5 +17,5 @@ export const usersQuery = {
     const { user } = context;
     if (!user) throw new GenericError(UNAUTHENTICATED);
     return user;
-  },
+  }
 };

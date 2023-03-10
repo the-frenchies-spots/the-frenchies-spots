@@ -1,56 +1,66 @@
-import { Favorite, Spot, Profile } from "../../models";
+import { Favorite, Spot, Profile } from '../../models';
+import {
+  CreateFavoriteResult,
+  DeleteFavoriteResult,
+  FavoriteByIdResult,
+  FavoriteFindByProfileResult
+} from '../../types';
 
 const favoritesRepository = {
-  getProfileFavorites: (profileId: string) => {
+  getProfileFavorites: (
+    profileId: string
+  ): FavoriteFindByProfileResult => {
     return Profile.findUnique({
       where: {
-        id: profileId,
+        id: profileId
       },
       include: {
-        favorites: { include: { spot: { include: { spotPicture: true } } } },
-      },
+        favorites: {
+          include: { spot: { include: { spotPicture: true } } }
+        }
+      }
     });
   },
 
-  getById: (id: string) => {
+  getById: (id: string): FavoriteByIdResult => {
     return Favorite.findUnique({
       where: {
-        id,
-      },
+        id
+      }
     });
   },
 
-  create: (spotId: string, profileId: string) => {
+  create: (spotId: string, profileId: string): CreateFavoriteResult => {
     return Spot.update({
       where: {
-        id: spotId,
+        id: spotId
       },
       data: {
         favorites: {
           create: {
-            profileId,
-          },
-        },
+            profileId
+          }
+        }
       },
-      include: { favorites: true },
+      include: { favorites: true }
     });
   },
 
-  delete: (spotId: string, favoriteId: string) => {
+  delete: (spotId: string, favoriteId: string): DeleteFavoriteResult => {
     return Spot.update({
       where: {
-        id: spotId,
+        id: spotId
       },
       data: {
         favorites: {
           delete: {
-            id: favoriteId,
-          },
-        },
+            id: favoriteId
+          }
+        }
       },
-      include: { favorites: true },
+      include: { favorites: true }
     });
-  },
+  }
 };
 
 export default favoritesRepository;

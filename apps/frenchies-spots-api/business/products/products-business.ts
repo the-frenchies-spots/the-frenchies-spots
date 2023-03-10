@@ -1,14 +1,16 @@
-import { productsRepository, stripeRepository } from "../../repositories";
-import { ProductDto } from "../../dto";
-import { GenericError, codeErrors } from "../../utils";
+import { productsRepository, stripeRepository } from '../../repositories';
+import { ProductDto } from '../../dto';
+import { GenericError, codeErrors } from '../../utils';
+import { CreateProductResult, ProductFindManyResult } from '../../types';
+import { Profile } from '@prisma/client';
 const { INTERNAL_SERVER_ERROR } = codeErrors;
 
 const productsBusiness = {
-  getAll: () => {
+  getAll: (): ProductFindManyResult => {
     return productsRepository.getAll();
   },
 
-  create: (data: ProductDto) => {
+  create: (data: ProductDto): CreateProductResult => {
     return productsRepository.create(data);
   },
 
@@ -22,7 +24,7 @@ const productsBusiness = {
     userGamePoint: number,
     token: string,
     amount: number
-  ) => {
+  ): Promise<Profile> => {
     return stripeRepository
       .payment(token, amount)
       .then(() => {
@@ -41,10 +43,12 @@ const productsBusiness = {
    * Request to buy game points
    * Logic for stripe android
    */
-  buyRequest: async (amount: number) => {
-    const paymentIntent = await stripeRepository.createPaymentRequest(amount);
+  buyRequest: async (amount: number): Promise<string | null> => {
+    const paymentIntent = await stripeRepository.createPaymentRequest(
+      amount
+    );
     return paymentIntent.client_secret;
-  },
+  }
 };
 
 export default productsBusiness;

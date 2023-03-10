@@ -1,15 +1,20 @@
 import { spotsRepository, ratingsRepository } from '../../repositories';
+import {
+  CreateOrUpdateRating,
+  RatingFindByIdResult,
+  RatingFindManyResult
+} from '../../types';
 import { codeErrors, GenericError } from '../../utils';
 
 const { SPOT_NOT_FOUND, SPOT_ID_MATCH_PROFILE_ID, RATING_OUT_OF_RANGE } =
   codeErrors;
 
 const ratingsBusiness = {
-  getAll: () => {
+  getAll: (): RatingFindManyResult => {
     return ratingsRepository.getAll();
   },
 
-  getById: (ratingId: string) => {
+  getById: (ratingId: string): RatingFindByIdResult => {
     return ratingsRepository.getById(ratingId);
   },
 
@@ -18,7 +23,7 @@ const ratingsBusiness = {
     ratingId: string | undefined = undefined,
     spotId: string,
     profileId: string
-  ) => {
+  ): CreateOrUpdateRating => {
     if (rate < 1 || rate > 5) throw new GenericError(RATING_OUT_OF_RANGE);
 
     const spot = await spotsRepository.getById(spotId);

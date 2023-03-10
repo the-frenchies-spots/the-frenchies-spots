@@ -1,11 +1,11 @@
-import { buysItinaryDto } from "../../dto";
-import { Itinary, Profile } from "../../models";
-import { CreateItinariesRepositoryDto } from "../../dto";
+import { buysItinaryDto } from '../../dto';
+import { Itinary, Profile } from '../../models';
+import { ConnectUserToItinary, ItinaryFindManyResult } from '../../types';
 
 const itinariesRepository = {
-  getAll: () => {
+  getAll: (): ItinaryFindManyResult => {
     return Itinary.findMany({
-      include: { spots: true },
+      include: { spots: true }
     });
   },
 
@@ -29,22 +29,22 @@ const itinariesRepository = {
    * Connect a user with an itinary
    * @param {buysItinaryDto} data
    */
-  connectUser: (data: buysItinaryDto) => {
+  connectUser: (data: buysItinaryDto): ConnectUserToItinary => {
     const { profileId, itinaryId } = data;
     return Profile.update({
       where: {
-        id: profileId,
+        id: profileId
       },
       data: {
         itinaries: {
           connect: {
-            id: itinaryId,
-          },
-        },
+            id: itinaryId
+          }
+        }
       },
-      include: { itinaries: true },
+      include: { itinaries: true }
     });
-  },
+  }
 };
 
 export default itinariesRepository;

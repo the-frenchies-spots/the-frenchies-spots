@@ -1,6 +1,16 @@
-import { Profile as ProfileDto } from "@prisma/client";
-import { UserDto } from "../../dto/users-dto";
-import { Profile, User } from "../../models";
+import { Profile as ProfileDto } from '@prisma/client';
+import { UserDto } from '../../dto/users-dto';
+import { Profile, User } from '../../models';
+import {
+  CreateUserResult,
+  DeleteUserResult,
+  DeletProfileResult,
+  FindUserResult,
+  LoginResult,
+  UpdateUserResult,
+  UserFindByEmailResult,
+  UserFindManyResult
+} from '../../types';
 
 const usersRepository = {
   /**
@@ -8,85 +18,97 @@ const usersRepository = {
    * @param {{ searchString: string }} args
    * @param {{ prisma: Prisma }} ctx
    */
-  getAll: () => {
+  getAll: (): UserFindManyResult => {
     return User.findMany();
   },
 
-  getOne: (email: string) => {
+  getOne: (email: string): UserFindByEmailResult => {
     return User.findUnique({ where: { email } });
   },
 
-  create: (pseudo: string, email: string, password: string, token: string) => {
+  create: (
+    pseudo: string,
+    email: string,
+    password: string,
+    token: string
+  ): CreateUserResult => {
     return User.create({
       data: {
         email,
         password,
         token,
-        profile: { create: { pseudo } },
+        profile: { create: { pseudo } }
       },
-      include: { profile: true },
+      include: { profile: true }
     });
   },
 
-  update: (user: Pick<UserDto, "email" | "password">, profile: Pick<ProfileDto, "pseudo" | "photoUrl">, userId: string) => {
+  update: (
+    user: Pick<UserDto, 'email' | 'password'>,
+    profile: Pick<ProfileDto, 'pseudo' | 'photoUrl'>,
+    userId: string
+  ): UpdateUserResult => {
     return User.update({
       where: {
-        id: userId,
+        id: userId
       },
       data: {
         ...user,
         profile: {
           upsert: {
             update: {
-              ...profile,
+              ...profile
             },
             create: {
-              ...profile,
-            },
-          },
-        },
+              ...profile
+            }
+          }
+        }
       },
-      include: { profile: true },
+      include: { profile: true }
     });
   },
 
-  deleteUser: (userId: string) => {
+  deleteUser: (userId: string): DeleteUserResult => {
     return User.delete({
       where: {
-        id: userId,
-      },
+        id: userId
+      }
     });
   },
 
-  deleteProfile: (profileId: string) => {
+  deleteProfile: (profileId: string): DeletProfileResult => {
     return Profile.delete({
       where: {
-        id: profileId,
-      },
+        id: profileId
+      }
     });
   },
 
-  login: (email: string, token: string) => {
+  login: (email: string, token: string): LoginResult => {
     return User.update({
       where: { email },
       data: { token },
-      include: { profile: true },
+      include: { profile: true }
     });
   },
 
-  logout: async (token: string) => {
+  logout: async (token: string): Promise<boolean> => {
     return User.update({
       where: { token },
-      data: { token: "" },
-      include: { profile: true },
+      data: { token: '' },
+      include: { profile: true }
     })
       .then(() => true)
       .catch(() => false);
   },
 
-  getAuth: (token: string) => {
-    return User.findUnique({ where: { token }, include: { profile: true } });
-  },
+  getAuth: (token: string): FindUserResult => {
+    return User.findUnique({
+      where: { token },
+      include: { profile: true }
+    });
+  }
 };
 
 export default usersRepository;

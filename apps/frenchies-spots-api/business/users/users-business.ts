@@ -1,34 +1,44 @@
-import { usersRepository } from "../../repositories";
-import { SignInDto } from "../../dto";
-import { GenericError, codeErrors } from "../../utils";
-import bcrypt, { hash } from "bcrypt";
-import jwt from "jsonwebtoken";
-import { UserDto } from "../../dto/users-dto";
+import { usersRepository } from '../../repositories';
+import { SignInDto } from '../../dto';
+import { GenericError, codeErrors } from '../../utils';
+import bcrypt, { hash } from 'bcrypt';
+import jwt from 'jsonwebtoken';
+import { UserDto } from '../../dto/users-dto';
+import {
+  AuthByTockenResult,
+  CreateVerifiedUserResult,
+  SignInResult,
+  UpdateUserResult,
+  UserFindManyResult
+} from '../../types';
 
-const { USER_ALREADY_EXISTS, USER_NOT_FOUND, INCORRECT_PASSWORD } = codeErrors;
+const { USER_ALREADY_EXISTS, USER_NOT_FOUND, INCORRECT_PASSWORD } =
+  codeErrors;
 const secretKey = process.env.SECRET_KEY;
 
 const usersBusiness = {
-  getAll: () => {
+  getAll: (): UserFindManyResult => {
     return usersRepository.getAll();
   },
 
-  update: (data: UserDto, userId: string) => {
+  update: (data: UserDto, userId: string): UpdateUserResult => {
     const { email, password, pseudo, photoUrl } = data;
     const user = { email, password };
     const profile = { pseudo, photoUrl };
     return usersRepository.update(user, profile, userId);
   },
 
-  delete: async (userId: string, profileId: string) => {
-    const isProfileDeleted = await usersRepository.deleteProfile(profileId);
+  delete: async (userId: string, profileId: string): Promise<boolean> => {
+    const isProfileDeleted = await usersRepository.deleteProfile(
+      profileId
+    );
     const isUserDeleted = await usersRepository.deleteUser(userId);
 
     if (isProfileDeleted && isUserDeleted) return true;
     return false;
   },
 
-  signUp: async (data: SignInDto) => {
+  signUp: async (data: SignInDto): CreateVerifiedUserResult => {
     const { pseudo, email, password } = data;
 
     // See if an old user exists with email attemting to register
@@ -42,14 +52,18 @@ const usersBusiness = {
     const hashPassword = await hash(password, 10);
 
     // Create our token
-    const token = jwt.sign({ email, password: hashPassword }, `${secretKey}`, {
-      expiresIn: "48h",
-    });
+    const token = jwt.sign(
+      { email, password: hashPassword },
+      `${secretKey}`,
+      {
+        expiresIn: '48h'
+      }
+    );
 
     return usersRepository.create(pseudo, email, hashPassword, token);
   },
 
-  signIn: async (data: SignInDto) => {
+  signIn: async (data: SignInDto): SignInResult => {
     const { email, password } = data;
 
     // See if a user exists with the email
@@ -69,7 +83,7 @@ const usersBusiness = {
         { email, password: hashPassword },
         `${secretKey}`,
         {
-          expiresIn: "48h",
+          expiresIn: '48h'
         }
       );
 
@@ -79,13 +93,13 @@ const usersBusiness = {
     throw new GenericError(INCORRECT_PASSWORD);
   },
 
-  authByToken: async (token: string) => {
+  authByToken: async (token: string): AuthByTockenResult => {
     return usersRepository.getAuth(token);
   },
 
-  signOut: async (token: string) => {
+  signOut: async (token: string): Promise<boolean> => {
     return await usersRepository.logout(token);
-  },
+  }
 };
 
 export default usersBusiness;
