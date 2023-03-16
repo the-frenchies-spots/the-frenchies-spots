@@ -1,5 +1,16 @@
-import { Favorite } from "@prisma/client";
+import { z } from 'zod';
 
-export type FavoriteDto = Pick<Favorite, "profileId" | "spotId">;
+const favoriteDtoSchema = z.object({
+  profileId: z.string(),
+  spotId: z.string()
+});
 
-export type UpdateFavoriteDto = Pick<Favorite, "id" | "profileId" | "spotId">;
+export type FavoriteDto = z.infer<typeof favoriteDtoSchema>;
+
+const updateFavoriteDtoSchema = z.object({
+  id: z.string(),
+  profilId: z.string(),
+  spotId: z.string()
+});
+
+export type UpdateFavoriteDto = z.infer<typeof updateFavoriteDtoSchema>;

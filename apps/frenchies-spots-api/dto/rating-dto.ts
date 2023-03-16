@@ -1,9 +1,21 @@
-import { Rating } from "@prisma/client";
+import { Rating } from '@prisma/client';
+import { z } from 'zod';
 
-export type RatingDto = Pick<Rating, "rate" | "profileId" | "spotId">;
+const ratingtoSchema = z.object({
+  rate: z.number(),
+  spotId: z.string(),
+  profilId: z.string()
+});
 
-export interface UpdateRatingDto extends Pick<Rating, "rate" | "profileId" | "spotId"> {
-    ratingId: Rating["id"]
-};
+export type RatingDto = z.infer<typeof ratingtoSchema>;
 
-export type AverageRatingDto = Pick<Rating, "rate" | "spotId">;
+export interface UpdateRatingDto
+  extends Pick<Rating, 'rate' | 'profileId' | 'spotId'> {
+  ratingId: Rating['id'];
+}
+
+const averageRatingDtoSchema = z.object({
+  rate: z.number(),
+  spotId: z.string()
+});
+export type AverageRatingDto = z.infer<typeof averageRatingDtoSchema>;

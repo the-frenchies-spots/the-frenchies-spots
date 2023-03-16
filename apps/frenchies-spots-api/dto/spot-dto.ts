@@ -1,22 +1,77 @@
-import { Spot, SpotPicture } from "@prisma/client";
+import { Spot, SpotPicture } from '@prisma/client';
+import { z } from 'zod';
 
 export interface ProfileSpotDto
-  extends Pick<Spot, "name" | "description" | "lat" | "lng"> {
+  extends Pick<Spot, 'name' | 'description' | 'lat' | 'lng'> {
   profileId: string;
 }
 
-export type SpotPicturesDto = Pick<SpotPicture, "url">[];
-export type UpdateSpotPicturesDto = Omit<SpotPicture, "spotId">[];
+const spotPictureDtoSchema = z.array(
+  z.object({
+    url: z.string()
+  })
+);
+export type SpotPicturesDto = z.infer<typeof spotPictureDtoSchema>;
 
-export type SpotDto = Omit<Spot, "profileId" | "id">;
+const updateSpotPictureDtoSchema = z.array(
+  z.object({
+    id: z.string(),
+    url: z.string()
+  })
+);
+export type UpdateSpotPicturesDto = z.infer<
+  typeof updateSpotPictureDtoSchema
+>;
 
-export type UpdateSpotDto = Omit<Spot, "profileId">;
+const spotDtoSchema = z.object({
+  name: z.string(),
+  description: z.string(),
+  isCanPark: z.boolean(),
+  isCanVisit: z.boolean(),
+  isTouristic: z.boolean(),
+  itinaryIDs: z.array(z.string()),
+  lat: z.number(),
+  lng: z.number(),
+  region: z.string(),
+  averageRating: z.number()
+});
+export type SpotDto = z.infer<typeof spotDtoSchema>;
 
-export type SpotFilterDto = Omit<Spot, "id" | "name" | "description">;
+const updateSpotDtoSchema = z.object({
+  id: z.string(),
+  name: z.string(),
+  description: z.string(),
+  isCanPark: z.boolean(),
+  isCanVisit: z.boolean(),
+  isTouristic: z.boolean(),
+  itinaryIDs: z.array(z.string()),
+  lat: z.number(),
+  lng: z.number(),
+  region: z.string(),
+  averageRating: z.number()
+});
+export type UpdateSpotDto = z.infer<typeof updateSpotDtoSchema>;
 
-export type SpotPaginationDto = { take: number; skip: number };
+const spotFilterDtoSchema = z.object({
+  isCanPark: z.boolean(),
+  isCanVisit: z.boolean(),
+  isTouristic: z.boolean(),
+  itinaryIDs: z.array(z.string()),
+  lat: z.number(),
+  lng: z.number(),
+  profileId: z.string(),
+  region: z.string(),
+  averageRating: z.number()
+});
+export type SpotFilterDto = z.infer<typeof spotFilterDtoSchema>;
 
-export type SpotOrderDto = { orderBy: "asc" | "desc" };
+const spotPaginationDtoSchema = z.object({
+  take: z.number(),
+  skip: z.number()
+});
+export type SpotPaginationDto = z.infer<typeof spotPaginationDtoSchema>;
+
+export type SpotOrderDto = { orderBy: 'asc' | 'desc' };
 
 export interface ReadSpotDto
   extends SpotFilterDto,
