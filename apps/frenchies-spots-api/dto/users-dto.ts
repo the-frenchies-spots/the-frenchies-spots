@@ -12,6 +12,6 @@ const userDtoSchema = z.object({
   email: z.string(),
   password: z.string(),
   pseudo: z.string(),
-  photoUrl: z.string().optional()
+  photoUrl: z.string()
 });
 export type UserDto = z.infer<typeof userDtoSchema>;
