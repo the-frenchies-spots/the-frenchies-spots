@@ -1,8 +1,9 @@
 {
   "name": "@frenchies-spots/theme",
   "version": "1.0.0",
-  "main": "./dist/index.js",
-  "types": "./dist/index.d.ts",
+  "main": "./src/index.tsx",
+  "types": "./src/index.tsx",
+  "sources": "./src/index.tsx",
   "scripts": {
     "build": "tsup src/index.tsx --format esm,cjs --dts --external react",
     "dev": "tsup src/index.tsx --format esm,cjs --watch --dts --external react",
@@ -20,4 +21,3 @@
     "react-native": "^0.70.3"
   }
 }
-

@@ -1,20 +1,26 @@
-import React from "react";
+import { StyleSheet, View } from "react-native";
 import "@expo/match-media";
-import "./translate";
+import { StatusBar } from "expo-status-bar";
 import { RootNavigator } from "./navigation/root-navigator";
 import { NavigationContainer } from "@react-navigation/native";
-import { StatusBar } from "expo-status-bar";
-import { Providers } from "./providers";
 
-const App = () => {
+import { Provider } from "./providers";
+
+export default function Native() {
   return (
-    <Providers>
-      <NavigationContainer>
-        <RootNavigator />
-        <StatusBar style="auto" />
-      </NavigationContainer>
-    </Providers>
+    <Provider>
+      <View style={styles.container}>
+        <NavigationContainer>
+          <RootNavigator />
+          <StatusBar hidden={true} />
+        </NavigationContainer>
+      </View>
+    </Provider>
   );
-};
+}
 
-export default App;
+const styles = StyleSheet.create({
+  container: {
+    height: "100%",
+  },
+});

@@ -4,11 +4,7 @@ import {
   BoxProps as NativeBoxProps,
 } from "@react-native-material/core";
 
-export type BoxProps = NativeBoxProps;
-
-const Box = (props: BoxProps) => {
+export const Box = (props: NativeBoxProps) => {
   const { ...other } = props;
   return <NativeBox {...other} />;
 };
-
-export default Box;

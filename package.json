@@ -5,11 +5,10 @@
     "packages/*"
   ],
   "scripts": {
-    "app": " dotenv -- turbo run dev --filter frenchies-spots-webui --no-daemon",
-    "api": " dotenv -- turbo run dev --filter frenchies-spots-api --no-daemon",
     "dev": "dotenv -- turbo run dev",
-    "seed": " dotenv -- turbo run build --filter frenchies-spots-api",
-    "build": "turbo run build --no-daemon",
+    "webui": " dotenv -- turbo run dev --filter frenchies-spots-webui --no-daemon",
+    "api": " dotenv -- turbo run dev --filter frenchies-spots-api --no-daemon",
+    "build": "turbo run build",
     "clean": "turbo run clean && rm -rf node_modules",
     "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,md}\" --ignore-path .gitignore"
   },
@@ -18,5 +17,5 @@
     "turbo": "latest",
     "dotenv-cli": "latest"
   },
-  "packageManager": "yarn@1.22.17"
+  "packageManager": "pnpm@7.0.0"
 }

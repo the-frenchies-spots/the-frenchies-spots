@@ -1,12 +1,8 @@
 {
+  "extends": "tsconfig/react-native-library",
+  "include": ["./**/*"],
+  "exclude": ["dist", "build", "node_modules"],
   "compilerOptions": {
-    "jsx": "react",
-    "lib": ["ES2015", "dom"],
-    "module": "CommonJS",
-    "outDir": "./dist",
-    "rootDir": "./src"
-  },
-  "types": ["node"],
-  "exclude": ["node_modules"],
-  "extends": "tsconfig/base.json"
+    "strict": true
+  }
 }

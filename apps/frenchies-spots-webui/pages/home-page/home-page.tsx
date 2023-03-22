@@ -1,50 +1,11 @@
-import React from "react";
-import { HomePageMobile } from "./home-page-mobile";
-import { HomePageDesktop } from "./home-page-desktop";
-import { useMediaQuery, useNavigation } from "../../hooks";
-import { useTranslation } from "react-i18next";
+import React, { useState } from "react";
+// import { View } from "react-native";
+import { Navbar } from "../../components/navbar/navbar";
 
-export interface HomePageProps {
-  firstTitle: string;
-  secondTitle: string;
-  thirdTitle: string;
-  exploreButtonLabel: string;
-  onExporeClick: () => void;
-}
+import { Box, Swiper } from "@frenchies-spots/materials";
 
-const HomePage = () => {
-  const { isPhone } = useMediaQuery();
-  const { t: translate } = useTranslation();
-  const { navigateTo } = useNavigation();
-
-  const firstTitle = translate("pages.home.title.first");
-  const secondTitle = translate("pages.home.title.second");
-  const thirdTitle = translate("pages.home.title.third");
-  const exploreButtonLabel = translate("pages.home.exploreButton");
-
-  const handleAuthPress = () => {
-    navigateTo("spotExploreur");
-  };
-
-  if (isPhone)
-    return (
-      <HomePageMobile
-        firstTitle={firstTitle}
-        secondTitle={secondTitle}
-        thirdTitle={thirdTitle}
-        exploreButtonLabel={exploreButtonLabel}
-        onExporeClick={handleAuthPress}
-      />
-    );
+export const HomePage = () => {
   return (
-    <HomePageDesktop
-      firstTitle={firstTitle}
-      secondTitle={secondTitle}
-      thirdTitle={thirdTitle}
-      exploreButtonLabel={exploreButtonLabel}
-      onExporeClick={handleAuthPress}
-    />
+    <Box style={{ width: "100%", height: "100%" }}>{/* <Swiper /> */}</Box>
   );
 };
-
-export default HomePage;

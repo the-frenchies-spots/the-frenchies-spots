@@ -1,62 +1,66 @@
-import { View } from 'react-native';
-import React from 'react';
-import Icon from '@expo/vector-icons/MaterialCommunityIcons';
+import { View } from "react-native";
+import React from "react";
+import Icon from "@expo/vector-icons/MaterialCommunityIcons";
+import { ViewStyle, TextStyle, ImageStyle } from "react-native";
+
+type SxProps = ViewStyle | TextStyle | ImageStyle;
+
 import {
   MaterialIcons,
   MaterialCommunityIcons,
   FontAwesome5,
   AntDesign,
-  Ionicons
-} from '@expo/vector-icons';
+  Ionicons,
+} from "@expo/vector-icons";
 
 enum IoniconsEnum {
-  'add'
+  "add",
 }
 
 enum AntDesignEnum {
-  'picture'
+  "picture",
 }
 
 enum FontAwesome5Enum {
-  'coins'
+  "coins",
 }
 
 enum MaterialCommunityEnum {
-  'road-variant',
-  'sort-ascending',
-  'cards-heart-outline',
-  'map-search',
-  'close-circle-outline',
-  'trash-can-outline',
-  'heart'
+  "road-variant",
+  "sort-ascending",
+  "cards-heart-outline",
+  "map-search",
+  "close-circle-outline",
+  "trash-can-outline",
+  "heart",
 }
 
 enum MaterialIconsEnum {
-  'landscape',
-  'search',
-  'arrow-back-ios',
-  'settings',
-  'payment',
-  'payments',
-  'add-circle-outline',
-  'edit'
+  "landscape",
+  "search",
+  "arrow-back-ios",
+  "settings",
+  "payment",
+  "payments",
+  "add-circle-outline",
+  "edit",
 }
 enum ExpoIconsEnum {
-  'eye',
-  'login',
-  'account',
-  'account-circle',
-  'map-marker',
-  'picture-in-picture-bottom-right',
-  'picture-in-picture-bottom-right-outline',
-  'picture-in-picture-top-right',
-  'picture-in-picture-top-right-outline',
-  'camera',
-  'shopping',
-  'shopping-music',
-  'shopping-outline',
-  'shopping-search',
-  'road'
+  "eye",
+  "login",
+  "account",
+  "account-circle",
+  "map-marker",
+  "picture-in-picture-bottom-right",
+  "picture-in-picture-bottom-right-outline",
+  "picture-in-picture-top-right",
+  "picture-in-picture-top-right-outline",
+  "camera",
+  "shopping",
+  "shopping-music",
+  "shopping-outline",
+  "shopping-search",
+  "road",
 }
 
 type MaterialIconsType = keyof typeof MaterialIconsEnum;
@@ -76,16 +80,15 @@ export type IconProps = {
     | IoniconsEnumType;
   size?: number;
   color?: string;
-  style?: Record<string, string | number>;
+  style?: SxProps;
 };
 
 export const AppIcon = (props: IconProps) => {
-  const { name = 'landscape', size = 16, color, style } = props;
+  const { name = "landscape", size = 16, color, style } = props;
 
   const isExpoIcons = Object.values(ExpoIconsEnum).includes(name);
   const isMaterialIcons = Object.values(MaterialIconsEnum).includes(name);
-  const isFontAwesome5Icons =
-    Object.values(FontAwesome5Enum).includes(name);
+  const isFontAwesome5Icons = Object.values(FontAwesome5Enum).includes(name);
   const isAntDesignIcons = Object.values(AntDesignEnum).includes(name);
   const isIoniconsIcons = Object.values(IoniconsEnum).includes(name);
   const isMaterialCommunityIcons = Object.values(
