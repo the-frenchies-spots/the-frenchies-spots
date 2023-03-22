@@ -32,7 +32,7 @@ export const MapPage = () => {
         <Text style={{ color: "#86827e", fontSize: 16 }}>Open Drawer</Text>
       </ButtonBase>
 
-      <Drawer isOpen={isOpen} onToggleOpen={handleToggleOpen}></Drawer>
+      <Drawer isOpen={isOpen} onToggleOpen={handleToggleOpen} />
     </Box>
   );
 };

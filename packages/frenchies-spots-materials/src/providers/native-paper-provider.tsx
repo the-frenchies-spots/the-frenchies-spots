@@ -11,6 +11,7 @@ export const NativePaperProvider = (props: ProviderProps) => {
   const [fontLoaded] = useFonts({
     "Montserrat-Bold": require("../fonts/Montserrat/static/Montserrat-Bold.ttf"),
     "Montserrat-Medium": require("../fonts/Montserrat/static/Montserrat-Medium.ttf"),
+    "Montserrat-Regular": require("../fonts/Montserrat/static/Montserrat-Regular.ttf"),
   });
 
   if (!fontLoaded) return null;
