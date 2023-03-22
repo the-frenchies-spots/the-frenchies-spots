@@ -90,6 +90,8 @@ type Tag {
     id: String!
     name: String!
     tagPictureUrl: String!
+    isResources: Boolean!
+    isSpareTime: Boolean!
     spotIDs: [String]
     spots: [Spot]
 }
@@ -141,7 +143,7 @@ input RoleEnumListFilter {
 
 enum CategorySpot {
     SPARE_TIME_SPOT
-    RESSOURCES_SPOT
+    RESOURCES_SPOT
 }
 
 input CategorySpotEnumFilter {
@@ -1408,6 +1410,8 @@ input TagWhereInput {
     id: StringFilter
     name: StringFilter
     tagPictureUrl: StringFilter
+    isResources: BooleanFilter
+    isSpareTime: BooleanFilter
     spotIDs: StringListFilter
     spots: SpotFilter
 }
@@ -1423,6 +1427,8 @@ input TagExtendedWhereUniqueInput {
     id: String
     name: StringFilter
     tagPictureUrl: StringFilter
+    isResources: BooleanFilter
+    isSpareTime: BooleanFilter
     spotIDs: StringListFilter
     spots: SpotFilter
 }
@@ -1431,6 +1437,8 @@ input TagOrderByInput {
     id: OrderByArg
     name: OrderByArg
     tagPictureUrl: OrderByArg
+    isResources: OrderByArg
+    isSpareTime: OrderByArg
     spotIDs: OrderByArg
     spots: SpotOrderByInput
 }
@@ -1439,6 +1447,8 @@ input TagCreateInput {
     id: String!
     name: String!
     tagPictureUrl: String!
+    isResources: Boolean!
+    isSpareTime: Boolean!
     spots: TagSpotsCreateRelationInput
 }
 
@@ -1446,12 +1456,16 @@ input TagCreateManyInput {
     id: String!
     name: String!
     tagPictureUrl: String!
+    isResources: Boolean!
+    isSpareTime: Boolean!
 }
 
 input TagUpdateInput {
     id: String
     name: String
     tagPictureUrl: String
+    isResources: Boolean
+    isSpareTime: Boolean
     spots: TagSpotsUpdateRelationsInput
 }
 

@@ -45,7 +45,7 @@ const typeDefs = gql`
 
   enum CategorySpot {
     SPARE_TIME_SPOT
-    RESSOURCES_SPOT
+    RESOURCES_SPOT
   }
 
   type Spot {
@@ -107,6 +107,8 @@ const typeDefs = gql`
   type Tag {
     id: String
     name: String
+    isResources: Boolean
+    isSpareTime: Boolean
     tagPictureUrl: String
     spots: [Spot]
   }
@@ -120,6 +122,10 @@ const typeDefs = gql`
 
   input PictureInput {
     url: String
+  }
+
+  input TagInput {
+    id: String
   }
 
   input UpdatePictureInput {
@@ -140,12 +146,13 @@ const typeDefs = gql`
       profileId: String
       orderBy: OrderByEnum
       isCanPark: Boolean
-      isCanVisit: Boolean
-      isTouristic: Boolean
+      isHidden: Boolean
+      category: CategorySpot
       searchValue: String
       region: String
       skip: Int
       take: Int
+      tags: [TagInput]
     ): [Spot]
 
     spot(id: String): Spot
@@ -183,11 +190,12 @@ const typeDefs = gql`
       lat: Float
       lng: Float
       isCanPark: Boolean
-      isCanVisit: Boolean
-      isTouristic: Boolean
+      isHidden: Boolean
+      category: CategorySpot
       region: String
       averageRating: Float
       pictures: [PictureInput]
+      tags: [TagInput]
     ): Spot
 
     updateSpot(
@@ -197,11 +205,12 @@ const typeDefs = gql`
       lat: Float
       lng: Float
       isCanPark: Boolean
-      isCanVisit: Boolean
-      isTouristic: Boolean
+      isHidden: Boolean
+      category: CategorySpot
       region: String
       pictures: [UpdatePictureInput]
       averageRating: Float
+      tags: [TagInput]
     ): Spot
 
     deleteSpot(
@@ -211,11 +220,12 @@ const typeDefs = gql`
       lat: Float
       lng: Float
       isCanPark: Boolean
-      isCanVisit: Boolean
-      isTouristic: Boolean
+      isHidden: Boolean
+      category: CategorySpot
       region: String
       averageRating: Float
       pictures: [PictureInput]
+      tags: [TagInput]
     ): Boolean
 
     # createItinary(
@@ -237,6 +247,14 @@ const typeDefs = gql`
     createTest(text: String): Test
 
     addSpotPicture(url: String, spotId: String): SpotPicture
+
+    addTag(
+      name: String
+      tagPictureUrl: String
+      isResources: Boolean
+      isSpareTime: Boolean
+      spotId: String
+    ): Tag
   }
 `;
 

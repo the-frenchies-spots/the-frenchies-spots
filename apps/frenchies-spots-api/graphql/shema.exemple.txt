@@ -35,7 +35,6 @@ model Spot {
   id Int @id @default(autoincrement())
   rating Int?
   isCanPark Boolean
-  isCanVisit Boolean
   name String
   defaultPictureId Int
   isTouristic Boolean

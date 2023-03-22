@@ -72,11 +72,18 @@ const spotsRepository = {
   create: (
     data: Omit<Prisma.SpotCreateInput, 'profile'>,
     pictures: SpotPicturesDto,
+    tags: { id: string }[],
     profileId: string
   ): CreateSpotResult => {
+    console.log(tags);
+    console.log('*******');
+    console.log(data);
     return Spot.create({
       data: {
         ...data,
+        tags: {
+          connect: tags
+        },
         profile: {
           connect: { id: profileId }
         },
@@ -84,7 +91,7 @@ const spotsRepository = {
           create: [...pictures]
         }
       },
-      include: { spotPicture: true }
+      include: { spotPicture: true, tags: true }
     });
   },
 

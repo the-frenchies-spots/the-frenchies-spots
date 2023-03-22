@@ -1,4 +1,3 @@
-import { Product } from '@prisma/client';
 import { z } from 'zod';
 
 const productDtoSchema = z.object({

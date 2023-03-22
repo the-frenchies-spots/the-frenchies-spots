@@ -133,6 +133,8 @@ model Tag {
   id String @id @default(auto()) @map("_id") @db.ObjectId
   name String
   tagPictureUrl String
+  isResources Boolean
+  isSpareTime Boolean
   // Implicit relations many to many with itinary
   spotIDs String[] @db.ObjectId
   spots Spot[] @relation(fields: [spotIDs], references: [id])
@@ -140,5 +142,5 @@ model Tag {
 
 enum CategorySpot {
   SPARE_TIME_SPOT
-  RESSOURCES_SPOT
+  RESOURCES_SPOT
 }
