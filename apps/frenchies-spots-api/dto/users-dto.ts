@@ -1,7 +1,17 @@
-import { User, Profile } from "@prisma/client";
+import { User, Profile } from '@prisma/client';
+import { z } from 'zod';
 
-export type SignInDto = Pick<User, "email" | "password"> &
-  Pick<Profile, "pseudo">;
+const signInDtoSchema = z.object({
+  email: z.string(),
+  password: z.string(),
+  pseudo: z.string()
+});
+export type SignInDto = z.infer<typeof signInDtoSchema>;
 
-export type UserDto = Pick<User, "email" | "password"> &
-  Pick<Profile, "pseudo" | "photoUrl">;
+const userDtoSchema = z.object({
+  email: z.string(),
+  password: z.string(),
+  pseudo: z.string(),
+  photoUrl: z.string()
+});
+export type UserDto = z.infer<typeof userDtoSchema>;
