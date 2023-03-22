@@ -1,4 +1,3 @@
-import { User, Profile } from '@prisma/client';
 import { z } from 'zod';
 
 const signInDtoSchema = z.object({

@@ -1,4 +1,4 @@
-import { gql } from "apollo-server-micro";
+import { gql } from 'apollo-server-micro';
 
 const typeDefs = gql`
   enum Role {
@@ -43,9 +43,9 @@ const typeDefs = gql`
     text: String
   }
 
-  enum Role {
-    SIMPLE_USER
-    USER_ADMIN
+  enum CategorySpot {
+    SPARE_TIME_SPOT
+    RESOURCES_SPOT
   }
 
   type Spot {
@@ -53,8 +53,8 @@ const typeDefs = gql`
     name: String
     description: String
     isCanPark: Boolean
-    isCanVisit: Boolean
-    isTouristic: Boolean
+    isHidden: Boolean
+    category: CategorySpot
     profile: Profile
     profileId: String
     itinaries: [Itinary]
@@ -65,6 +65,7 @@ const typeDefs = gql`
     averageRating: Float
     ratings: [Rating]
     favorites: [Favorite]
+    tags: [Tag]
   }
 
   type SpotPicture {
@@ -103,6 +104,15 @@ const typeDefs = gql`
     maxVote: Int
   }
 
+  type Tag {
+    id: String
+    name: String
+    isResources: Boolean
+    isSpareTime: Boolean
+    tagPictureUrl: String
+    spots: [Spot]
+  }
+
   input SpotInput {
     name: String
     description: String
@@ -112,6 +122,10 @@ const typeDefs = gql`
 
   input PictureInput {
     url: String
+  }
+
+  input TagInput {
+    id: String
   }
 
   input UpdatePictureInput {
@@ -132,12 +146,13 @@ const typeDefs = gql`
       profileId: String
       orderBy: OrderByEnum
       isCanPark: Boolean
-      isCanVisit: Boolean
-      isTouristic: Boolean
+      isHidden: Boolean
+      category: CategorySpot
       searchValue: String
       region: String
       skip: Int
       take: Int
+      tags: [TagInput]
     ): [Spot]
 
     spot(id: String): Spot
@@ -175,11 +190,12 @@ const typeDefs = gql`
       lat: Float
       lng: Float
       isCanPark: Boolean
-      isCanVisit: Boolean
-      isTouristic: Boolean
+      isHidden: Boolean
+      category: CategorySpot
       region: String
       averageRating: Float
       pictures: [PictureInput]
+      tags: [TagInput]
     ): Spot
 
     updateSpot(
@@ -189,11 +205,12 @@ const typeDefs = gql`
       lat: Float
       lng: Float
       isCanPark: Boolean
-      isCanVisit: Boolean
-      isTouristic: Boolean
+      isHidden: Boolean
+      category: CategorySpot
       region: String
       pictures: [UpdatePictureInput]
       averageRating: Float
+      tags: [TagInput]
     ): Spot
 
     deleteSpot(
@@ -203,11 +220,12 @@ const typeDefs = gql`
       lat: Float
       lng: Float
       isCanPark: Boolean
-      isCanVisit: Boolean
-      isTouristic: Boolean
+      isHidden: Boolean
+      category: CategorySpot
       region: String
       averageRating: Float
       pictures: [PictureInput]
+      tags: [TagInput]
     ): Boolean
 
     # createItinary(
@@ -229,6 +247,14 @@ const typeDefs = gql`
     createTest(text: String): Test
 
     addSpotPicture(url: String, spotId: String): SpotPicture
+
+    addTag(
+      name: String
+      tagPictureUrl: String
+      isResources: Boolean
+      isSpareTime: Boolean
+      spotId: String
+    ): Tag
   }
 `;
 

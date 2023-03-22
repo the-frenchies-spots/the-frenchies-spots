@@ -38,8 +38,8 @@ type Spot {
     name: String!
     description: String!
     isCanPark: Boolean!
-    isCanVisit: Boolean!
-    isTouristic: Boolean!
+    isHidden: Boolean!
+    category: CategorySpot!
     profile: Profile!
     profileId: String!
     itinaryIDs: [String]
@@ -51,6 +51,8 @@ type Spot {
     spotPicture: [SpotPicture]
     ratings: [Rating]
     favorites: [Favorite]
+    tagIDs: [String]
+    tags: [Tag]
 }
 
 type SpotPicture {
@@ -82,6 +84,16 @@ type Favorite {
     profileId: String!
     spot: Spot!
     spotId: String!
+}
+
+type Tag {
+    id: String!
+    name: String!
+    tagPictureUrl: String!
+    isResources: Boolean!
+    isSpareTime: Boolean!
+    spotIDs: [String]
+    spots: [Spot]
 }
 
 type BatchPayload {
@@ -126,6 +138,26 @@ input RoleEnumListFilter {
     has: Role
     hasEvery: [Role!]
     hasSome: [Role!]
+    isEmpty: Boolean
+}
+
+enum CategorySpot {
+    SPARE_TIME_SPOT
+    RESOURCES_SPOT
+}
+
+input CategorySpotEnumFilter {
+    equals: CategorySpot
+    in: [CategorySpot!]
+    not: CategorySpotEnumFilter
+    notIn: [CategorySpot!]
+}
+
+input CategorySpotEnumListFilter {
+    equals: [CategorySpot!]
+    has: CategorySpot
+    hasEvery: [CategorySpot!]
+    hasSome: [CategorySpot!]
     isEmpty: Boolean
 }
 
@@ -641,8 +673,8 @@ input SpotWhereInput {
     name: StringFilter
     description: StringFilter
     isCanPark: BooleanFilter
-    isCanVisit: BooleanFilter
-    isTouristic: BooleanFilter
+    isHidden: BooleanFilter
+    category: CategorySpotEnumFilter
     profile: ProfileWhereInput
     profileId: StringFilter
     itinaryIDs: StringListFilter
@@ -654,6 +686,8 @@ input SpotWhereInput {
     spotPicture: SpotPictureFilter
     ratings: RatingFilter
     favorites: FavoriteFilter
+    tagIDs: StringListFilter
+    tags: TagFilter
 }
 
 input SpotWhereUniqueInput {
@@ -669,8 +703,8 @@ input SpotExtendedWhereUniqueInput {
     name: StringFilter
     description: StringFilter
     isCanPark: BooleanFilter
-    isCanVisit: BooleanFilter
-    isTouristic: BooleanFilter
+    isHidden: BooleanFilter
+    category: CategorySpotEnumFilter
     profile: ProfileWhereInput
     profileId: String
     itinaryIDs: StringListFilter
@@ -682,6 +716,8 @@ input SpotExtendedWhereUniqueInput {
     spotPicture: SpotPictureFilter
     ratings: RatingFilter
     favorites: FavoriteFilter
+    tagIDs: StringListFilter
+    tags: TagFilter
 }
 
 input SpotOrderByInput {
@@ -689,8 +725,8 @@ input SpotOrderByInput {
     name: OrderByArg
     description: OrderByArg
     isCanPark: OrderByArg
-    isCanVisit: OrderByArg
-    isTouristic: OrderByArg
+    isHidden: OrderByArg
+    category: OrderByArg
     profile: ProfileOrderByInput
     profileId: OrderByArg
     itinaryIDs: OrderByArg
@@ -702,6 +738,8 @@ input SpotOrderByInput {
     spotPicture: SpotPictureOrderByInput
     ratings: RatingOrderByInput
     favorites: FavoriteOrderByInput
+    tagIDs: OrderByArg
+    tags: TagOrderByInput
 }
 
 input SpotCreateInput {
@@ -709,8 +747,8 @@ input SpotCreateInput {
     name: String!
     description: String!
     isCanPark: Boolean!
-    isCanVisit: Boolean!
-    isTouristic: Boolean!
+    isHidden: Boolean!
+    category: CategorySpot!
     profile: SpotProfileCreateRelationInput!
     itinaries: SpotItinariesCreateRelationInput
     lat: Float!
@@ -720,6 +758,7 @@ input SpotCreateInput {
     spotPicture: SpotSpotPictureCreateRelationInput
     ratings: SpotRatingsCreateRelationInput
     favorites: SpotFavoritesCreateRelationInput
+    tags: SpotTagsCreateRelationInput
 }
 
 input SpotCreateManyInput {
@@ -727,8 +766,8 @@ input SpotCreateManyInput {
     name: String!
     description: String!
     isCanPark: Boolean!
-    isCanVisit: Boolean!
-    isTouristic: Boolean!
+    isHidden: Boolean!
+    category: CategorySpot!
     lat: Float!
     lng: Float!
     region: String!
@@ -740,8 +779,8 @@ input SpotUpdateInput {
     name: String
     description: String
     isCanPark: Boolean
-    isCanVisit: Boolean
-    isTouristic: Boolean
+    isHidden: Boolean
+    category: CategorySpot
     profile: SpotProfileUpdateRelationsInput
     itinaries: SpotItinariesUpdateRelationsInput
     lat: Float
@@ -751,6 +790,7 @@ input SpotUpdateInput {
     spotPicture: SpotSpotPictureUpdateRelationsInput
     ratings: SpotRatingsUpdateRelationsInput
     favorites: SpotFavoritesUpdateRelationsInput
+    tags: SpotTagsUpdateRelationsInput
 }
 
 input SpotOperationInput {
@@ -879,6 +919,24 @@ input SpotFavoritesUpdateRelationsInput {
     set: [FavoriteWhereUniqueInput]
     updateMany: [FavoriteUpdateManyInput]
     deleteMany: [FavoriteDeleteManyInput]
+}
+input SpotTagsCreateRelationInput {
+    create: [TagCreateInput]
+    connect: [TagWhereUniqueInput]
+    connectOrCreate: [TagConnectOrCreateInput]
+}
+
+input SpotTagsUpdateRelationsInput {
+    connect: [TagWhereUniqueInput]
+    create: [TagCreateInput]
+    connectOrCreate: [TagConnectOrCreateInput]
+    update: [TagUpdateUniqueInput]
+    upsert: [TagUpsertUniqueInput]
+    delete: [TagDeleteUniqueInput]
+    disconnect: [TagWhereUniqueInput]
+    set: [TagWhereUniqueInput]
+    updateMany: [TagUpdateManyInput]
+    deleteMany: [TagDeleteManyInput]
 }
 
 input SpotPictureFilter {
@@ -1337,6 +1395,131 @@ input FavoriteSpotUpdateRelationsInput {
     upsert: SpotUpsertInput
     delete: Boolean
     disconnect: Boolean
+}
+
+input TagFilter {
+    some: TagWhereInput
+    every: TagWhereInput
+    none: TagWhereInput
+}
+
+input TagWhereInput {
+    OR: [TagWhereInput]
+    NOT: [TagWhereInput]
+    AND: [TagWhereInput]
+    id: StringFilter
+    name: StringFilter
+    tagPictureUrl: StringFilter
+    isResources: BooleanFilter
+    isSpareTime: BooleanFilter
+    spotIDs: StringListFilter
+    spots: SpotFilter
+}
+
+input TagWhereUniqueInput {
+    id: String
+}
+
+input TagExtendedWhereUniqueInput {
+    OR: [TagWhereInput]
+    NOT: [TagWhereInput]
+    AND: [TagWhereInput]
+    id: String
+    name: StringFilter
+    tagPictureUrl: StringFilter
+    isResources: BooleanFilter
+    isSpareTime: BooleanFilter
+    spotIDs: StringListFilter
+    spots: SpotFilter
+}
+
+input TagOrderByInput {
+    id: OrderByArg
+    name: OrderByArg
+    tagPictureUrl: OrderByArg
+    isResources: OrderByArg
+    isSpareTime: OrderByArg
+    spotIDs: OrderByArg
+    spots: SpotOrderByInput
+}
+
+input TagCreateInput {
+    id: String!
+    name: String!
+    tagPictureUrl: String!
+    isResources: Boolean!
+    isSpareTime: Boolean!
+    spots: TagSpotsCreateRelationInput
+}
+
+input TagCreateManyInput {
+    id: String!
+    name: String!
+    tagPictureUrl: String!
+    isResources: Boolean!
+    isSpareTime: Boolean!
+}
+
+input TagUpdateInput {
+    id: String
+    name: String
+    tagPictureUrl: String
+    isResources: Boolean
+    isSpareTime: Boolean
+    spots: TagSpotsUpdateRelationsInput
+}
+
+input TagUpdateUniqueInput {
+    data: TagUpdateInput!
+    where: TagWhereUniqueInput!
+}
+
+input TagUpdateManyInput {
+    where: TagWhereInput!
+    data: TagUpdateInput!
+}
+
+input TagUpsertInput {
+    create: TagCreateInput!
+    update: TagUpdateInput!
+}
+
+input TagUpsertUniqueInput {
+    where: TagWhereUniqueInput!
+    create: TagCreateInput!
+    update: TagUpdateInput!
+}
+
+input TagConnectOrCreateInput {
+    where: TagWhereUniqueInput!
+    create: TagCreateInput!
+}
+
+input TagDeleteUniqueInput {
+    where: TagWhereUniqueInput!
+}
+
+input TagDeleteManyInput {
+    where: TagWhereInput!
+}
+
+input TagSpotsCreateRelationInput {
+    create: [SpotCreateInput]
+    connect: [SpotWhereUniqueInput]
+    connectOrCreate: [SpotConnectOrCreateInput]
+}
+
+input TagSpotsUpdateRelationsInput {
+    connect: [SpotWhereUniqueInput]
+    create: [SpotCreateInput]
+    connectOrCreate: [SpotConnectOrCreateInput]
+    update: [SpotUpdateUniqueInput]
+    upsert: [SpotUpsertUniqueInput]
+    delete: [SpotDeleteUniqueInput]
+    disconnect: [SpotWhereUniqueInput]
+    set: [SpotWhereUniqueInput]
+    updateMany: [SpotUpdateManyInput]
+    deleteMany: [SpotDeleteManyInput]
 }
 
 input IntOperation {
@@ -1901,6 +2084,53 @@ type Mutation {
     deleteManyFavorites(
         where: FavoriteWhereInput!
     ): BatchPayload
+
+    """
+    Create a new single Tag record.
+    """
+    createTag(data: TagCreateInput!): Tag
+
+    """
+    Create multiple new Tag records.
+    """
+    createManyTags(
+        data: [TagCreateManyInput!]
+        skipDuplicates: Boolean
+    ): BatchPayload
+
+    """
+    Update an existing single Tag record.
+    """
+    updateTag(
+        where: TagWhereUniqueInput!
+        data: TagUpdateInput
+    ): Tag
+
+    """
+    Update multiple existing Tag records.
+    """
+    updateManyTags(
+        where: TagWhereInput!
+        data: TagUpdateInput
+    ): BatchPayload
+
+    """
+    Update an existing or create a new single Tag record.
+    """
+    upsertTag(
+        data: TagUpdateInput!
+        where: TagWhereUniqueInput!
+    ): Tag
+
+    """
+    Delete a single Tag record.
+    """
+    deleteTag(where: TagWhereUniqueInput!): Tag
+
+    """
+    Delete multiple Tag records.
+    """
+    deleteManyTags(where: TagWhereInput!): BatchPayload
 }
 type Query {
     """
@@ -2101,6 +2331,31 @@ type Query {
     countFavorites(
         where: FavoriteWhereInput
         orderBy: [FavoriteOrderByInput]
+        skip: Int
+        take: Int
+    ): Int
+
+    """
+    Find a single Tag record by unique identifier.
+    """
+    getTag(where: TagWhereUniqueInput!): Tag
+
+    """
+    Find many Tag records (optional query filters).
+    """
+    listTags(
+        where: TagWhereInput
+        orderBy: [TagOrderByInput]
+        skip: Int
+        take: Int
+    ): [Tag]
+
+    """
+    Count all Tag records (optional query filters).
+    """
+    countTags(
+        where: TagWhereInput
+        orderBy: [TagOrderByInput]
         skip: Int
         take: Int
     ): Int
@@ -2730,4 +2985,71 @@ type Subscription {
     """
     onDeletedManyFavorites: BatchPayload
         @aws_subscribe(mutations: ["deleteManyFavorites"])
+
+    """
+    Triggered from `createTag` mutation (excl. `createManyTags` and `upsertTag`).
+    """
+    onCreatedTag(id: String): Tag
+        @aws_subscribe(mutations: ["createTag"])
+
+    """
+    Triggered from `updateTag` mutation (excl. `updateManyTags` and `upsertTag`).
+    """
+    onUpdatedTag(id: String): Tag
+        @aws_subscribe(mutations: ["updateTag"])
+
+    """
+    Triggered from `upsertTag` mutation.
+    """
+    onUpsertedTag(id: String): Tag
+        @aws_subscribe(mutations: ["upsertTag"])
+
+    """
+    Triggered from `deleteTag` mutation (excl. `deleteManyTags`).
+    """
+    onDeletedTag(id: String): Tag
+        @aws_subscribe(mutations: ["deleteTag"])
+
+    """
+    Triggered from ANY SINGLE record mutation.
+    """
+    onMutatedTag(id: String): Tag
+        @aws_subscribe(
+            mutations: [
+                "createTag"
+                "updateTag"
+                "upsertTag"
+                "deleteTag"
+            ]
+        )
+
+    """
+    Triggered from `createManyTags` mutation.
+    """
+    onCreatedManyTags: BatchPayload
+        @aws_subscribe(mutations: ["createManyTags"])
+
+    """
+    Triggered from `updateManyTags` mutation.
+    """
+    onUpdatedManyTags: BatchPayload
+        @aws_subscribe(mutations: ["updateManyTags"])
+
+    """
+    Triggered from ANY MULTIPLE records mutation.
+    """
+    onMutatedManyTags: BatchPayload
+        @aws_subscribe(
+            mutations: [
+                "createManyTags"
+                "updateManyTags"
+                "deleteManyTags"
+            ]
+        )
+
+    """
+    Triggered from `deleteManyTags` mutation.
+    """
+    onDeletedManyTags: BatchPayload
+        @aws_subscribe(mutations: ["deleteManyTags"])
 }

@@ -1,4 +1,3 @@
-import { Rating } from '@prisma/client';
 import { z } from 'zod';
 
 const ratingBusinessDtoSchema = z.object({

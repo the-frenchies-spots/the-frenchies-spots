@@ -1,6 +1,8 @@
 import { Spot, SpotPicture } from '@prisma/client';
 import { z } from 'zod';
 
+const CATEGORIES_SPOT = ['SPARE_TIME_SPOT', 'RESOURCES_SPOT'] as const;
+
 export interface ProfileSpotDto
   extends Pick<Spot, 'name' | 'description' | 'lat' | 'lng'> {
   profileId: string;
@@ -27,41 +29,47 @@ const spotDtoSchema = z.object({
   name: z.string(),
   description: z.string(),
   isCanPark: z.boolean(),
-  isCanVisit: z.boolean(),
-  isTouristic: z.boolean(),
+  isHidden: z.boolean(),
+  category: z.enum(CATEGORIES_SPOT),
   itinaryIDs: z.array(z.string()),
   lat: z.number(),
   lng: z.number(),
   region: z.string(),
-  averageRating: z.number()
+  averageRating: z.number(),
+  tagIDs: z.array(z.string())
 });
-export type SpotDto = z.infer<typeof spotDtoSchema>;
+// export type SpotDto = z.infer<typeof spotDtoSchema>;
+export interface SpotDto extends Omit<Spot, 'id' | 'tagIDs'> {
+  tags: { id: string }[];
+}
 
 const updateSpotDtoSchema = z.object({
   id: z.string(),
   name: z.string(),
   description: z.string(),
   isCanPark: z.boolean(),
-  isCanVisit: z.boolean(),
-  isTouristic: z.boolean(),
+  isHidden: z.boolean(),
+  category: z.enum(CATEGORIES_SPOT),
   itinaryIDs: z.array(z.string()),
   lat: z.number(),
   lng: z.number(),
   region: z.string(),
-  averageRating: z.number()
+  averageRating: z.number(),
+  tagIDs: z.array(z.string())
 });
 export type UpdateSpotDto = z.infer<typeof updateSpotDtoSchema>;
 
 const spotFilterDtoSchema = z.object({
   isCanPark: z.boolean(),
-  isCanVisit: z.boolean(),
-  isTouristic: z.boolean(),
+  isHidden: z.boolean(),
+  category: z.enum(CATEGORIES_SPOT),
   itinaryIDs: z.array(z.string()),
   lat: z.number(),
   lng: z.number(),
   profileId: z.string(),
   region: z.string(),
-  averageRating: z.number()
+  averageRating: z.number(),
+  tagIDs: z.array(z.string())
 });
 export type SpotFilterDto = z.infer<typeof spotFilterDtoSchema>;
 

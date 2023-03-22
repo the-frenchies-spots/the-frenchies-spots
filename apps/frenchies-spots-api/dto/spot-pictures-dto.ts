@@ -1,4 +1,3 @@
-import { SpotPicture } from '@prisma/client';
 import { z } from 'zod';
 
 const spotPictureDtoSchema = z.object({

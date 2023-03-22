@@ -1,1 +1,1 @@
-export { default as spotsController } from "./spots-controller";
+export { default as spotsController } from './spots-controller';

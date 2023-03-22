@@ -6,7 +6,9 @@ import {
   productsController,
   ratingsController,
   favoritesController,
-} from "../controllers";
+  tagsController
+} from '../controllers';
+import { tagsQuery } from '../controllers/tags/tags-query';
 
 const Query = {
   ...usersController.query,
@@ -15,6 +17,7 @@ const Query = {
   ...spotPicturesController.query,
   ...ratingsController.query,
   ...favoritesController.query,
+  ...tagsController.query
 };
 
 const Mutation = {
@@ -25,6 +28,7 @@ const Mutation = {
   ...productsController.mutation,
   ...ratingsController.mutation,
   ...favoritesController.mutation,
+  ...tagsController.mutation
 };
 
 const resolvers = { Query, Mutation };

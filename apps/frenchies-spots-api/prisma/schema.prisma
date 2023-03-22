@@ -37,7 +37,6 @@ enum Role {
   USER_ADMIN
 }
 
-
 model Profile {
   id        String    @id @default(auto()) @map("_id") @db.ObjectId
   pseudo    String    @unique
@@ -75,8 +74,8 @@ model Spot {
   name          String
   description   String
   isCanPark     Boolean        @default(false)
-  isCanVisit    Boolean        @default(false)
-  isTouristic   Boolean        @default(false)
+  isHidden      Boolean        @default(false)
+  category      CategorySpot
   // Relations one to many with profile
   profile       Profile        @relation(fields: [profileId], references: [id], onDelete: Cascade)
   profileId     String         @unique @db.ObjectId
@@ -87,12 +86,15 @@ model Spot {
   lng           Float
   region        String
   averageRating Float @default(0)
-  // Relations one to many with spot_pictures
+  // Relation one to many with spot_pictures
   spotPicture   SpotPicture[]
-  // Relations one to many with rating
+  // Relation one to many with rating
   ratings       Rating[]
-  // Relations one to many with favorite
+  // Relation one to many with favorite
   favorites     Favorite[]
+  // Implicit relations many to many with itinary
+  tagIDs String[] @db.ObjectId
+  tags Tag[] @relation(fields: [tagIDs], references: [id])
 }
 
 model SpotPicture {
@@ -125,4 +127,20 @@ model Favorite {
   profileId String  @unique @db.ObjectId
   spot      Spot    @relation(fields: [spotId], references: [id], onDelete: Cascade)
   spotId    String  @unique @db.ObjectId
+}
+
+model Tag {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  name String
+  tagPictureUrl String
+  isResources Boolean
+  isSpareTime Boolean
+  // Implicit relations many to many with itinary
+  spotIDs String[] @db.ObjectId
+  spots Spot[] @relation(fields: [spotIDs], references: [id])
+}
+
+enum CategorySpot {
+  SPARE_TIME_SPOT
+  RESOURCES_SPOT
 }
