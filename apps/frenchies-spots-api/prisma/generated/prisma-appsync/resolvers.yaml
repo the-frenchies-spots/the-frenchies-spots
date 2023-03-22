@@ -238,3 +238,33 @@
 - typeName: Mutation
   fieldName: deleteManyFavorites
   dataSource: prisma-appsync
+- typeName: Query
+  fieldName: getTag
+  dataSource: prisma-appsync
+- typeName: Query
+  fieldName: listTags
+  dataSource: prisma-appsync
+- typeName: Query
+  fieldName: countTags
+  dataSource: prisma-appsync
+- typeName: Mutation
+  fieldName: createTag
+  dataSource: prisma-appsync
+- typeName: Mutation
+  fieldName: updateTag
+  dataSource: prisma-appsync
+- typeName: Mutation
+  fieldName: upsertTag
+  dataSource: prisma-appsync
+- typeName: Mutation
+  fieldName: deleteTag
+  dataSource: prisma-appsync
+- typeName: Mutation
+  fieldName: createManyTags
+  dataSource: prisma-appsync
+- typeName: Mutation
+  fieldName: updateManyTags
+  dataSource: prisma-appsync
+- typeName: Mutation
+  fieldName: deleteManyTags
+  dataSource: prisma-appsync

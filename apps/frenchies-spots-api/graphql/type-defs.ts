@@ -1,4 +1,4 @@
-import { gql } from "apollo-server-micro";
+import { gql } from 'apollo-server-micro';
 
 const typeDefs = gql`
   enum Role {
@@ -43,9 +43,9 @@ const typeDefs = gql`
     text: String
   }
 
-  enum Role {
-    SIMPLE_USER
-    USER_ADMIN
+  enum CategorySpot {
+    SPARE_TIME_SPOT
+    RESSOURCES_SPOT
   }
 
   type Spot {
@@ -53,8 +53,8 @@ const typeDefs = gql`
     name: String
     description: String
     isCanPark: Boolean
-    isCanVisit: Boolean
-    isTouristic: Boolean
+    isHidden: Boolean
+    category: CategorySpot
     profile: Profile
     profileId: String
     itinaries: [Itinary]
@@ -65,6 +65,7 @@ const typeDefs = gql`
     averageRating: Float
     ratings: [Rating]
     favorites: [Favorite]
+    tags: [Tag]
   }
 
   type SpotPicture {
@@ -101,6 +102,13 @@ const typeDefs = gql`
     currentRating: Rating
     avg: Float
     maxVote: Int
+  }
+
+  type Tag {
+    id: String
+    name: String
+    tagPictureUrl: String
+    spots: [Spot]
   }
 
   input SpotInput {
