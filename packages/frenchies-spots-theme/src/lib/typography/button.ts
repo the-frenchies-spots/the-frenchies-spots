@@ -9,4 +9,10 @@ export const button: Record<string, SxProps> = {
     fontStyle: "normal",
     fontWeight: "500",
   },
+  secondary: {
+    fontFamily: "Montserrat-Medium",
+    fontSize: 16,
+    fontStyle: "normal",
+    fontWeight: "500",
+  },
 };

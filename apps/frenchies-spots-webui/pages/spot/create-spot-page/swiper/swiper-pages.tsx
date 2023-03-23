@@ -6,6 +6,9 @@ import {
   BodyText,
   SubTitle,
   Caption,
+  PrimaryButton,
+  VStack,
+  SecondaryButton,
 } from "@frenchies-spots/materials";
 
 interface PagesListParams {
@@ -45,6 +48,19 @@ export const pagesList = (params: PagesListParams) => [
         <Caption>
           Caption - A quelle catégorie associerais-tu ton spot ?
         </Caption>
+        <VStack style={{ width: 200, height: "100%" }} justify="between">
+          <PrimaryButton>Contained</PrimaryButton>
+          <PrimaryButton little>Contained little</PrimaryButton>
+
+          <PrimaryButton variant="outlined">Outlined</PrimaryButton>
+          <PrimaryButton variant="outlined" little>
+            Outlined little
+          </PrimaryButton>
+
+          <SecondaryButton>default</SecondaryButton>
+          <SecondaryButton isSelected>selected</SecondaryButton>
+          <SecondaryButton isDisabled>disabled</SecondaryButton>
+        </VStack>
       </Box>
     ),
   },

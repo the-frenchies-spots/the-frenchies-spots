@@ -4,13 +4,13 @@ import { ViewStyle, TextStyle, ImageStyle } from "react-native";
 
 type SxProps = ViewStyle | TextStyle | ImageStyle;
 
-interface FloatingProps {
+interface PrimaryProps {
   backgroundColor: string;
   label: SxProps;
   global: SxProps & { boxShadow?: string; border?: number };
 }
 
-export const primary: Record<string, FloatingProps> = {
+export const primary: Record<string, PrimaryProps> = {
   contained: {
     backgroundColor: TFScolors.yellow,
     label: {
@@ -25,8 +25,8 @@ export const primary: Record<string, FloatingProps> = {
     },
     global: {
       borderRadius: 8,
-      border: 1,
       borderColor: TFScolors.yellow,
+      borderWidth: 1,
     },
   },
 };
