@@ -1,5 +1,5 @@
-import { Favorite, Prisma, Rating } from '@prisma/client';
-import { Spot, SpotPicture } from '@prisma/client';
+import { Favorite, Prisma, Rating } from "@prisma/client";
+import { Spot, SpotPicture } from "@prisma/client";
 
 export type SpotFindManyResult = Prisma.PrismaPromise<
   (Spot & {

@@ -1,13 +1,13 @@
-import { spotsBusiness } from '../../business';
+import { spotsBusiness } from "../../business";
 import {
   SpotDto,
   UpdateSpotDto,
   SpotPicturesDto,
-  UpdateSpotPicturesDto
-} from '../../dto/spot-dto';
-import { TContext } from '../../graphql/context';
-import { CreateSpotResult, UpdateExistingSpotResult } from '../../types';
-import { GenericError, codeErrors } from '../../utils';
+  UpdateSpotPicturesDto,
+} from "../../dto/spot-dto";
+import { TContext } from "../../graphql/context";
+import { CreateSpotResult, UpdateExistingSpotResult } from "../../types";
+import { GenericError, codeErrors } from "../../utils";
 const { UNAUTHENTICATED } = codeErrors;
 
 export const spotsMutation = {
@@ -46,5 +46,5 @@ export const spotsMutation = {
     const profileId = user?.profile.id;
     if (!profileId) throw new GenericError(UNAUTHENTICATED);
     return spotsBusiness.delete(data, profileId);
-  }
+  },
 };

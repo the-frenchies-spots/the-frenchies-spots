@@ -1,16 +1,16 @@
-import { Spot, SpotPicture } from '@prisma/client';
-import { z } from 'zod';
+import { Spot, SpotPicture } from "@prisma/client";
+import { z } from "zod";
 
-const CATEGORIES_SPOT = ['SPARE_TIME_SPOT', 'RESOURCES_SPOT'] as const;
+const CATEGORIES_SPOT = ["SPARE_TIME_SPOT", "RESOURCES_SPOT"] as const;
 
 export interface ProfileSpotDto
-  extends Pick<Spot, 'name' | 'description' | 'lat' | 'lng'> {
+  extends Pick<Spot, "name" | "description" | "lat" | "lng"> {
   profileId: string;
 }
 
 const spotPictureDtoSchema = z.array(
   z.object({
-    url: z.string()
+    url: z.string(),
   })
 );
 export type SpotPicturesDto = z.infer<typeof spotPictureDtoSchema>;
@@ -18,12 +18,10 @@ export type SpotPicturesDto = z.infer<typeof spotPictureDtoSchema>;
 const updateSpotPictureDtoSchema = z.array(
   z.object({
     id: z.string(),
-    url: z.string()
+    url: z.string(),
   })
 );
-export type UpdateSpotPicturesDto = z.infer<
-  typeof updateSpotPictureDtoSchema
->;
+export type UpdateSpotPicturesDto = z.infer<typeof updateSpotPictureDtoSchema>;
 
 const spotDtoSchema = z.object({
   name: z.string(),
@@ -36,12 +34,12 @@ const spotDtoSchema = z.object({
   lng: z.number(),
   region: z.string(),
   averageRating: z.number(),
-  tagIDs: z.array(z.string())
+  tags: z.array(z.object({ id: z.string() })),
 });
-// export type SpotDto = z.infer<typeof spotDtoSchema>;
-export interface SpotDto extends Omit<Spot, 'id' | 'tagIDs'> {
-  tags: { id: string }[];
-}
+export type SpotDto = z.infer<typeof spotDtoSchema>;
+// export interface SpotDto extends Omit<Spot, "id" | "tagIDs"> {
+//   tags: { id: string }[];
+// }
 
 const updateSpotDtoSchema = z.object({
   id: z.string(),
@@ -55,7 +53,7 @@ const updateSpotDtoSchema = z.object({
   lng: z.number(),
   region: z.string(),
   averageRating: z.number(),
-  tagIDs: z.array(z.string())
+  tags: z.array(z.object({ id: z.string() })),
 });
 export type UpdateSpotDto = z.infer<typeof updateSpotDtoSchema>;
 
@@ -69,17 +67,17 @@ const spotFilterDtoSchema = z.object({
   profileId: z.string(),
   region: z.string(),
   averageRating: z.number(),
-  tagIDs: z.array(z.string())
+  tagIDs: z.array(z.string()),
 });
 export type SpotFilterDto = z.infer<typeof spotFilterDtoSchema>;
 
 const spotPaginationDtoSchema = z.object({
   take: z.number(),
-  skip: z.number()
+  skip: z.number(),
 });
 export type SpotPaginationDto = z.infer<typeof spotPaginationDtoSchema>;
 
-export type SpotOrderDto = { orderBy: 'asc' | 'desc' };
+export type SpotOrderDto = { orderBy: "asc" | "desc" };
 
 export interface ReadSpotDto
   extends SpotFilterDto,
