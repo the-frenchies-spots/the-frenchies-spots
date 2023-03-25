@@ -5,8 +5,9 @@ import {
   Swiper,
   useSwiper,
   PaginationSwiper,
+  SwiperLayout,
 } from "@frenchies-spots/materials";
-import { SwiperLayout } from "./swiper/swiper-layout";
+
 import { pagesList } from "./swiper/swiper-pages";
 
 export const CreateSpotPage = () => {

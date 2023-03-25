@@ -4,19 +4,15 @@ export const styles = StyleSheet.create({
   swiperLayout: {
     width: "100%",
     height: "100%",
-    paddingHorizontal: 16,
-    paddingTop: 96,
+    paddingVertical: 16,
+    paddingHorizontal: 20,
   },
   buttonBar: {
     width: "100%",
-    borderWidth: 2,
-    borderColor: "blue",
-    height: 60,
-    alignItems: "center",
+    height: 80,
   },
   content: {
     flex: 1,
     width: "100%",
-    borderWidth: 4,
   },
 });

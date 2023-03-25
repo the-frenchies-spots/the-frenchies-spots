@@ -2,6 +2,11 @@ import { View } from "react-native";
 import React from "react";
 import Icon from "@expo/vector-icons/MaterialCommunityIcons";
 import { ViewStyle, TextStyle, ImageStyle } from "react-native";
+import { theme } from "@frenchies-spots/theme";
+
+const themeColor = theme.TFS.colors;
+
+export type TColors = keyof typeof theme.TFS.colors;
 
 type SxProps = ViewStyle | TextStyle | ImageStyle;
 
@@ -30,9 +35,12 @@ enum MaterialCommunityEnum {
   "sort-ascending",
   "cards-heart-outline",
   "map-search",
+  "map-marker-plus",
   "close-circle-outline",
   "trash-can-outline",
   "heart",
+  "bell",
+  "trophy-award",
 }
 
 enum MaterialIconsEnum {
@@ -79,12 +87,12 @@ export type IconProps = {
     | AntDesignEnumType
     | IoniconsEnumType;
   size?: number;
-  color?: string;
+  color?: TColors;
   style?: SxProps;
 };
 
 export const AppIcon = (props: IconProps) => {
-  const { name = "landscape", size = 16, color, style } = props;
+  const { name = "landscape", size = 16, color = "darkPurple", style } = props;
 
   const isExpoIcons = Object.values(ExpoIconsEnum).includes(name);
   const isMaterialIcons = Object.values(MaterialIconsEnum).includes(name);
@@ -101,7 +109,7 @@ export const AppIcon = (props: IconProps) => {
         <Icon
           name={name as ExpoIconsType}
           size={size}
-          color={color}
+          color={themeColor[color]}
           style={style}
         />
       )}
@@ -109,7 +117,7 @@ export const AppIcon = (props: IconProps) => {
         <MaterialIcons
           name={name as MaterialIconsType}
           size={size}
-          color={color}
+          color={themeColor[color]}
           style={style}
         />
       )}
@@ -117,7 +125,7 @@ export const AppIcon = (props: IconProps) => {
         <MaterialCommunityIcons
           name={name as MaterialCommunityType}
           size={size}
-          color={color}
+          color={themeColor[color]}
           style={style}
         />
       )}
@@ -126,7 +134,7 @@ export const AppIcon = (props: IconProps) => {
         <FontAwesome5
           name={name as FontAwesome5EnumType}
           size={size}
-          color={color}
+          color={themeColor[color]}
           style={style}
         />
       )}
@@ -134,7 +142,7 @@ export const AppIcon = (props: IconProps) => {
         <AntDesign
           name={name as AntDesignEnumType}
           size={size}
-          color={color}
+          color={themeColor[color]}
           style={style}
         />
       )}
@@ -143,7 +151,7 @@ export const AppIcon = (props: IconProps) => {
         <Ionicons
           name={name as IoniconsEnumType}
           size={size}
-          color={color}
+          color={themeColor[color]}
           style={style}
         />
       )}
