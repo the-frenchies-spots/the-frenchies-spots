@@ -8,16 +8,14 @@ npm install @prisma/client
 
 npx prisma init
 
-> .env
+# .env
 
-```
 DATABASE_URL="postgres://user:password@host/dbname"
 SHADOW_DATABASE_URL="postgres://jfps.dev21:oh3l5OigAVDJ@ep-delicate-frost-675944.eu-central-1.aws.neon.tech/neondb"
-```
 
-> schema.prisma
 
-```
+# schema.prisma
+
 model Log {
   id String @id @default(uuid())
   message String
@@ -30,28 +28,8 @@ enum Level {
   Info
   Error
 }
-```
 
-(if we do a migration don't need generate because the migration do the generation)
-
-npx prisma generate
-
-npx prisma migrate dev --name init
-
-npx prisma studio
-
-npx prisma migrate reset
-
-lancer le serveur : yarn dev
-
-lancer le seed : yarn seed
-
-prisma migrate reset
-npx prisma db seed
-
----
-
-Commit rules:
+# Commit rules:
 
 - if the task isn't finish add wip to the description
 - for the PATH it's "nameProject-api" or "nameProject-front" we've to indicate if it's front or api, this will be usefull to go to a monorepo

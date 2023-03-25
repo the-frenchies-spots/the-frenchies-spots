@@ -1,6 +1,16 @@
----
+# start with the api
 
-Commit rules:
+### generate project
+npx prisma generate
+
+### start server
+pnpm api
+
+### how to seed
+npx prisma db seed
+
+
+# Commit rules:
 
 - if the task isn't finish add wip to the description
 - for the PATH it's "nameProject-api" or "nameProject-front" we've to indicate if it's front or api, this will be usefull to go to a monorepo
