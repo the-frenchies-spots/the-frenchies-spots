@@ -75,7 +75,7 @@ model Spot {
   description   String
   isCanPark     Boolean        @default(false)
   isHidden      Boolean        @default(false)
-  category      CategorySpot
+  category      CategoriesSpotAndTag
   // Relations one to many with profile
   profile       Profile        @relation(fields: [profileId], references: [id], onDelete: Cascade)
   profileId     String         @unique @db.ObjectId
@@ -120,7 +120,6 @@ model Rating {
   spotId    String  @unique @db.ObjectId
 }
 
-
 model Favorite {
   id        String  @id @default(auto()) @map("_id") @db.ObjectId
   profile   Profile @relation(fields: [profileId], references: [id], onDelete: Cascade)
@@ -131,16 +130,15 @@ model Favorite {
 
 model Tag {
   id String @id @default(auto()) @map("_id") @db.ObjectId
-  name String
+  name String @unique
   tagPictureUrl String
-  isResources Boolean
-  isSpareTime Boolean
+  category CategoriesSpotAndTag
   // Implicit relations many to many with itinary
   spotIDs String[] @db.ObjectId
   spots Spot[] @relation(fields: [spotIDs], references: [id])
 }
 
-enum CategorySpot {
+enum CategoriesSpotAndTag {
   SPARE_TIME_SPOT
   RESOURCES_SPOT
 }

@@ -43,7 +43,7 @@ const typeDefs = gql`
     text: String
   }
 
-  enum CategorySpot {
+  enum CategoriesSpotAndTag {
     SPARE_TIME_SPOT
     RESOURCES_SPOT
   }
@@ -54,7 +54,7 @@ const typeDefs = gql`
     description: String
     isCanPark: Boolean
     isHidden: Boolean
-    category: CategorySpot
+    category: CategoriesSpotAndTag
     profile: Profile
     profileId: String
     itinaries: [Itinary]
@@ -147,7 +147,7 @@ const typeDefs = gql`
       orderBy: OrderByEnum
       isCanPark: Boolean
       isHidden: Boolean
-      category: CategorySpot
+      category: CategoriesSpotAndTag
       searchValue: String
       region: String
       skip: Int
@@ -191,7 +191,7 @@ const typeDefs = gql`
       lng: Float
       isCanPark: Boolean
       isHidden: Boolean
-      category: CategorySpot
+      category: CategoriesSpotAndTag
       region: String
       averageRating: Float
       pictures: [PictureInput]
@@ -206,7 +206,7 @@ const typeDefs = gql`
       lng: Float
       isCanPark: Boolean
       isHidden: Boolean
-      category: CategorySpot
+      category: CategoriesSpotAndTag
       region: String
       pictures: [UpdatePictureInput]
       averageRating: Float
@@ -221,7 +221,7 @@ const typeDefs = gql`
       lng: Float
       isCanPark: Boolean
       isHidden: Boolean
-      category: CategorySpot
+      category: CategoriesSpotAndTag
       region: String
       averageRating: Float
       pictures: [PictureInput]
@@ -251,10 +251,11 @@ const typeDefs = gql`
     addTag(
       name: String
       tagPictureUrl: String
-      isResources: Boolean
-      isSpareTime: Boolean
+      category: CategoriesSpotAndTag
       spotId: String
     ): Tag
+
+    createTagsList: [Tag]
   }
 `;
 

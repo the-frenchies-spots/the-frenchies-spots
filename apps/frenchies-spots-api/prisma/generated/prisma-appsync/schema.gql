@@ -39,7 +39,7 @@ type Spot {
     description: String!
     isCanPark: Boolean!
     isHidden: Boolean!
-    category: CategorySpot!
+    category: CategoriesSpotAndTag!
     profile: Profile!
     profileId: String!
     itinaryIDs: [String]
@@ -90,8 +90,7 @@ type Tag {
     id: String!
     name: String!
     tagPictureUrl: String!
-    isResources: Boolean!
-    isSpareTime: Boolean!
+    category: CategoriesSpotAndTag!
     spotIDs: [String]
     spots: [Spot]
 }
@@ -141,23 +140,23 @@ input RoleEnumListFilter {
     isEmpty: Boolean
 }
 
-enum CategorySpot {
+enum CategoriesSpotAndTag {
     SPARE_TIME_SPOT
     RESOURCES_SPOT
 }
 
-input CategorySpotEnumFilter {
-    equals: CategorySpot
-    in: [CategorySpot!]
-    not: CategorySpotEnumFilter
-    notIn: [CategorySpot!]
+input CategoriesSpotAndTagEnumFilter {
+    equals: CategoriesSpotAndTag
+    in: [CategoriesSpotAndTag!]
+    not: CategoriesSpotAndTagEnumFilter
+    notIn: [CategoriesSpotAndTag!]
 }
 
-input CategorySpotEnumListFilter {
-    equals: [CategorySpot!]
-    has: CategorySpot
-    hasEvery: [CategorySpot!]
-    hasSome: [CategorySpot!]
+input CategoriesSpotAndTagEnumListFilter {
+    equals: [CategoriesSpotAndTag!]
+    has: CategoriesSpotAndTag
+    hasEvery: [CategoriesSpotAndTag!]
+    hasSome: [CategoriesSpotAndTag!]
     isEmpty: Boolean
 }
 
@@ -674,7 +673,7 @@ input SpotWhereInput {
     description: StringFilter
     isCanPark: BooleanFilter
     isHidden: BooleanFilter
-    category: CategorySpotEnumFilter
+    category: CategoriesSpotAndTagEnumFilter
     profile: ProfileWhereInput
     profileId: StringFilter
     itinaryIDs: StringListFilter
@@ -704,7 +703,7 @@ input SpotExtendedWhereUniqueInput {
     description: StringFilter
     isCanPark: BooleanFilter
     isHidden: BooleanFilter
-    category: CategorySpotEnumFilter
+    category: CategoriesSpotAndTagEnumFilter
     profile: ProfileWhereInput
     profileId: String
     itinaryIDs: StringListFilter
@@ -748,7 +747,7 @@ input SpotCreateInput {
     description: String!
     isCanPark: Boolean!
     isHidden: Boolean!
-    category: CategorySpot!
+    category: CategoriesSpotAndTag!
     profile: SpotProfileCreateRelationInput!
     itinaries: SpotItinariesCreateRelationInput
     lat: Float!
@@ -767,7 +766,7 @@ input SpotCreateManyInput {
     description: String!
     isCanPark: Boolean!
     isHidden: Boolean!
-    category: CategorySpot!
+    category: CategoriesSpotAndTag!
     lat: Float!
     lng: Float!
     region: String!
@@ -780,7 +779,7 @@ input SpotUpdateInput {
     description: String
     isCanPark: Boolean
     isHidden: Boolean
-    category: CategorySpot
+    category: CategoriesSpotAndTag
     profile: SpotProfileUpdateRelationsInput
     itinaries: SpotItinariesUpdateRelationsInput
     lat: Float
@@ -1410,14 +1409,14 @@ input TagWhereInput {
     id: StringFilter
     name: StringFilter
     tagPictureUrl: StringFilter
-    isResources: BooleanFilter
-    isSpareTime: BooleanFilter
+    category: CategoriesSpotAndTagEnumFilter
     spotIDs: StringListFilter
     spots: SpotFilter
 }
 
 input TagWhereUniqueInput {
     id: String
+    name: String
 }
 
 input TagExtendedWhereUniqueInput {
@@ -1425,10 +1424,9 @@ input TagExtendedWhereUniqueInput {
     NOT: [TagWhereInput]
     AND: [TagWhereInput]
     id: String
-    name: StringFilter
+    name: String
     tagPictureUrl: StringFilter
-    isResources: BooleanFilter
-    isSpareTime: BooleanFilter
+    category: CategoriesSpotAndTagEnumFilter
     spotIDs: StringListFilter
     spots: SpotFilter
 }
@@ -1437,8 +1435,7 @@ input TagOrderByInput {
     id: OrderByArg
     name: OrderByArg
     tagPictureUrl: OrderByArg
-    isResources: OrderByArg
-    isSpareTime: OrderByArg
+    category: OrderByArg
     spotIDs: OrderByArg
     spots: SpotOrderByInput
 }
@@ -1447,8 +1444,7 @@ input TagCreateInput {
     id: String!
     name: String!
     tagPictureUrl: String!
-    isResources: Boolean!
-    isSpareTime: Boolean!
+    category: CategoriesSpotAndTag!
     spots: TagSpotsCreateRelationInput
 }
 
@@ -1456,16 +1452,14 @@ input TagCreateManyInput {
     id: String!
     name: String!
     tagPictureUrl: String!
-    isResources: Boolean!
-    isSpareTime: Boolean!
+    category: CategoriesSpotAndTag!
 }
 
 input TagUpdateInput {
     id: String
     name: String
     tagPictureUrl: String
-    isResources: Boolean
-    isSpareTime: Boolean
+    category: CategoriesSpotAndTag
     spots: TagSpotsUpdateRelationsInput
 }
 
@@ -2989,31 +2983,31 @@ type Subscription {
     """
     Triggered from `createTag` mutation (excl. `createManyTags` and `upsertTag`).
     """
-    onCreatedTag(id: String): Tag
+    onCreatedTag(id: String, name: String): Tag
         @aws_subscribe(mutations: ["createTag"])
 
     """
     Triggered from `updateTag` mutation (excl. `updateManyTags` and `upsertTag`).
     """
-    onUpdatedTag(id: String): Tag
+    onUpdatedTag(id: String, name: String): Tag
         @aws_subscribe(mutations: ["updateTag"])
 
     """
     Triggered from `upsertTag` mutation.
     """
-    onUpsertedTag(id: String): Tag
+    onUpsertedTag(id: String, name: String): Tag
         @aws_subscribe(mutations: ["upsertTag"])
 
     """
     Triggered from `deleteTag` mutation (excl. `deleteManyTags`).
     """
-    onDeletedTag(id: String): Tag
+    onDeletedTag(id: String, name: String): Tag
         @aws_subscribe(mutations: ["deleteTag"])
 
     """
     Triggered from ANY SINGLE record mutation.
     """
-    onMutatedTag(id: String): Tag
+    onMutatedTag(id: String, name: String): Tag
         @aws_subscribe(
             mutations: [
                 "createTag"
