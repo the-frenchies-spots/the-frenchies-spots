@@ -1,12 +1,11 @@
-import { spotsRepository } from '../../repositories';
+import { spotsRepository, tagsRepository } from '../../repositories';
 import { ReadSpotDto, SpotDto, SpotPicturesDto } from '../../dto';
 import { codeErrors, GenericError } from '../../utils';
-import { UpdateSpotDto, UpdateSpotPicturesDto } from '../../dto/spot-dto';
+import { UpdateSpotDto } from '../../dto/spot-dto';
 import {
   CreateSpotResult,
   SpotFindByIdResult,
   SpotFindManyResult,
-  UpdateExistingSpotResult
 } from '../../types';
 const { SPOT_ID_NOT_MATCH_PROFILE_ID, SPOT_NOT_FOUND } = codeErrors;
 
@@ -18,7 +17,7 @@ const spotsBusiness = {
       skip,
       take,
       itinaryIDs,
-      tagIDs,
+      tags,
       ...other
     } = data;
     const filterData = { ...other };
@@ -45,15 +44,15 @@ const spotsBusiness = {
     return spotsRepository.create(spotData, pictures, tags, profileId);
   },
 
-  update: async (
-    data: UpdateSpotDto & { pictures: UpdateSpotPicturesDto },
-    currentProfileId: string
-  ): UpdateExistingSpotResult => {
-    const { id: spotId, pictures, ...other } = data;
-    const updateData = { ...other };
-    await checkCreatedByCurrentUserOrThrow(spotId, currentProfileId);
-    return spotsRepository.update(updateData, spotId, pictures);
-  },
+  // update: async (
+  //   data: UpdateSpotDto & { pictures: UpdateSpotPicturesDto },
+  //   currentProfileId: string
+  // ): UpdateExistingSpotResult => {
+  //   const { id: spotId, pictures, ...other } = data;
+  //   const updateData = { ...other };
+  //   await checkCreatedByCurrentUserOrThrow(spotId, currentProfileId);
+  //   return spotsRepository.update(updateData, spotId, pictures);
+  // },
 
   delete: async (
     data: UpdateSpotDto,

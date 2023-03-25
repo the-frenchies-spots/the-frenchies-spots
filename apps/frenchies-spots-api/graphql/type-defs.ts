@@ -107,8 +107,7 @@ const typeDefs = gql`
   type Tag {
     id: String
     name: String
-    isResources: Boolean
-    isSpareTime: Boolean
+    category: CategoriesSpotAndTag
     tagPictureUrl: String
     spots: [Spot]
   }
@@ -248,12 +247,16 @@ const typeDefs = gql`
 
     addSpotPicture(url: String, spotId: String): SpotPicture
 
-    addTag(
+    createTag(
       name: String
       tagPictureUrl: String
       category: CategoriesSpotAndTag
       spotId: String
     ): Tag
+
+    deleteTag(
+      id: String
+    ): Boolean
 
     createTagsList: [Tag]
   }

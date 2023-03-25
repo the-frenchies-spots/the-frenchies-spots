@@ -1,12 +1,12 @@
 import { Prisma } from '@prisma/client';
 import prisma from '../prisma';
 
-export const tagsDataList: Prisma.TagCreateWithoutSpotsInput[] = [
+const tagsDataList: Prisma.TagCreateWithoutSpotsInput[] = [
   {
     id: "641dace3aa8cb5748dea534d",
     name: "montagne",
     tagPictureUrl: "https://emojipedia.org/fr/mont-fuji/",
-    category: "SPARE_TIME_SPOT",
+    category: "SPARE_TIME_SPOT"
   },
   {
     id: "641dacefaa522e8ce4a447f6",
@@ -114,7 +114,16 @@ const userData: Prisma.UserCreateInput[] = [
                 ]
               },
               averageRating: 4,
-              tagIDs: ["641dad477d3480f05227d8e3"]
+              tags: {
+                create: [
+                  {
+                    tagId: "641dad0ae575f3177b56447b"
+                  },
+                  {
+                    tagId: "641dad01b6acd761acf471d5"
+                  },
+                ]
+              }
             },
             {
               id: '640779bca1e1a3dc3fb33dc6',
@@ -761,21 +770,24 @@ const userData: Prisma.UserCreateInput[] = [
 async function main() {
   console.log(`Start seeding ...`);
     await prisma.tag
+      .deleteMany()
+
+    for (const u of userData) {
+      await prisma.user
+        .deleteMany()
+    }
+
+    await prisma.tag
       .createMany({
-        data: tagsDataList,
-        // skipDuplicates: true,
+        data: tagsDataList
       })
 
-  for (const u of userData) {
-    await prisma.user
-      .create({
-        data: u
-      })
-      .then((_user) => {
-        console.log(_user);
-        console.log(`Created user with id: ${_user.id}`);
-      });
-  }
+    for (const u of userData) {
+      await prisma.user
+        .create({
+          data: u
+        })
+    }
   console.log(`Seeding finished.`);
 }
 

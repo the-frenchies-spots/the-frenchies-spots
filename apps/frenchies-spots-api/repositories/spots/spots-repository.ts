@@ -51,7 +51,7 @@ const spotsRepository = {
 
       ...paginationData,
 
-      include: { spotPicture: true }
+      include: { spotPicture: true, tags: true }
     });
   },
 
@@ -72,17 +72,20 @@ const spotsRepository = {
   create: (
     data: Omit<Prisma.SpotCreateInput, 'profile'>,
     pictures: SpotPicturesDto,
-    tags: { id: string }[],
+    tags: {id: string}[],
     profileId: string
   ): CreateSpotResult => {
-    console.log(tags);
-    console.log('*******');
-    console.log(data);
     return Spot.create({
       data: {
         ...data,
         tags: {
-          connect: tags
+          create: tags.map((tag) => {
+            return {
+              tag: {
+                connect: { id: tag.id }
+              }
+            }
+          })
         },
         profile: {
           connect: { id: profileId }
@@ -95,26 +98,26 @@ const spotsRepository = {
     });
   },
 
-  update: (
-    data: SpotDto,
-    spotId: string,
-    pictures: UpdateSpotPicturesDto = []
-  ): UpdateSpotResult => {
-    const spotPicture = {
-      upsert: pictures.map((picture) => {
-        const { id = undefined, url } = picture;
-        return { where: { id }, update: { url }, create: { url } };
-      })
-    };
+  // update: (
+  //   data: SpotDto,
+  //   spotId: string,
+  //   pictures: UpdateSpotPicturesDto = []
+  // ): UpdateSpotResult => {
+  //   const spotPicture = {
+  //     upsert: pictures.map((picture) => {
+  //       const { id = undefined, url } = picture;
+  //       return { where: { id }, update: { url }, create: { url } };
+  //     })
+  //   };
 
-    return Spot.update({
-      where: {
-        id: spotId
-      },
-      data: pictures ? { ...data, spotPicture } : data,
-      include: { spotPicture: true }
-    });
-  },
+  //   return Spot.update({
+  //     where: {
+  //       id: spotId
+  //     },
+  //     data: pictures ? { ...data, spotPicture } : data,
+  //     include: { spotPicture: true }
+  //   });
+  // },
 
   /**
    * @param {string} profileId
