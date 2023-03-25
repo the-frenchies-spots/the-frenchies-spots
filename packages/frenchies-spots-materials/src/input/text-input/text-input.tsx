@@ -1,14 +1,19 @@
 import React from "react";
 import {
   TextInput as TextInputNative,
-  type TextInputProps as TextInputPropsNative,
+  TextInputProps as TextInputPropsNative,
 } from "react-native";
+import { styles } from "./text-input-styles";
 
-export interface TextInputProps extends Omit<TextInputPropsNative, "style"> {
-  style: Record<string, string | number>;
-}
+export type TextInputProps = TextInputPropsNative;
 
 export const TextInput = (props: TextInputProps) => {
   const { style = {}, ...other } = props;
-  return <TextInputNative {...other} style={{ ...style }} />;
+  const inputStyle = styles();
+  return (
+    <TextInputNative
+      {...other}
+      style={{ ...inputStyle.input, ...(style as Record<string, string>) }}
+    />
+  );
 };
