@@ -28,13 +28,13 @@ const spotsRepository = {
       }
     });
   },
-
+  
   getAll: (
     filterData: Prisma.SpotWhereInput,
     paginationData: SpotPaginationDto,
     orderBy: SpotOrderDto['orderBy'],
     nameContains: string
-  ): SpotFindManyResult => {
+    ): SpotFindManyResult => {
     return Spot.findMany({
       orderBy: {
         averageRating: orderBy
@@ -49,7 +49,7 @@ const spotsRepository = {
 
       ...paginationData,
 
-      include: { spotPicture: true, tags: true }
+      include: { spotPicture: true, tags: { include: { tag: true }} }
     });
   },
 

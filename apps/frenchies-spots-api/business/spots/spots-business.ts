@@ -1,4 +1,4 @@
-import { spotsRepository, tagsRepository } from '../../repositories';
+import { spotsRepository } from '../../repositories';
 import { ReadSpotDto, SpotDto, SpotPicturesDto } from '../../dto';
 import { codeErrors, GenericError } from '../../utils';
 import { UpdateSpotDto } from '../../dto/spot-dto';

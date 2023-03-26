@@ -58,6 +58,7 @@ const updateSpotDtoSchema = z.object({
   averageRating: z.number(),
   tags: z.array(z.string())
 });
+
 export type UpdateSpotDto = z.infer<typeof updateSpotDtoSchema>;
 
 const spotFilterDtoSchema = z.object({

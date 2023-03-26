@@ -65,7 +65,22 @@ const typeDefs = gql`
     averageRating: Float
     ratings: [Rating]
     favorites: [Favorite]
-    tags: [Tag]
+    tags: [TagsOnSpots]
+  }
+
+  type TagsOnSpots {
+    id: String
+    tag: Tag
+    spotId: String
+    tagId: String
+  }
+
+  type Tag {
+    id: String
+    name: String
+    category: CategoriesSpotAndTag
+    tagPictureUrl: String
+    spots: [Spot]
   }
 
   type SpotPicture {
@@ -102,14 +117,6 @@ const typeDefs = gql`
     currentRating: Rating
     avg: Float
     maxVote: Int
-  }
-
-  type Tag {
-    id: String
-    name: String
-    category: CategoriesSpotAndTag
-    tagPictureUrl: String
-    spots: [Spot]
   }
 
   input SpotInput {
@@ -169,6 +176,7 @@ const typeDefs = gql`
       tagPictureUrl: String
       category: CategoriesSpotAndTag
       searchValue: String
+      ids: [String]
     ): [Tag]
   }
 
@@ -249,6 +257,11 @@ const typeDefs = gql`
       tagPictureUrl: String
       category: CategoriesSpotAndTag
       spotId: String
+    ): Tag
+
+    updateTag(
+      id: String
+      tagPictureUrl: String
     ): Tag
 
     deleteTag(
