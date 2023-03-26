@@ -1,7 +1,19 @@
 import Tag from '../../models/tag';
 import { TagDto } from '../../dto';
+import { Prisma } from '@prisma/client';
 
 const tagsRepository = {
+getAll: (filterData: Prisma.TagWhereInput, searchValue: string) => {
+  return Tag.findMany({
+    where: {
+      ...filterData,
+      name: {
+        contains: searchValue
+      }
+    },
+  })
+},
+
   create: (data: TagDto) => {
     return Tag.create({
       data: {

@@ -9,3 +9,13 @@ const tagDtoSchema = z.object({
 });
 
 export type TagDto = z.infer<typeof tagDtoSchema>;
+
+const tagFilterDtoSchema = z.object({
+  category: z.enum(CATEGORIES_SPOT_AND_TAG)
+});
+
+export type TagFilterDto = z.infer<typeof tagFilterDtoSchema>;
+export interface ReadTagDto
+  extends TagFilterDto {
+    searchValue: string;
+  }

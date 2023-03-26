@@ -3,12 +3,10 @@ import {
   type SpotOrderDto,
   type SpotPaginationDto,
   type SpotPicturesDto,
-  type UpdateSpotPicturesDto
 } from '../../dto';
 import {
   CreateSpotResult,
   SpotFindByIdResult,
-  UpdateSpotResult,
   type UpdateRatingAverageBySpotIdResult,
   type SpotFindManyResult
 } from '../../types';

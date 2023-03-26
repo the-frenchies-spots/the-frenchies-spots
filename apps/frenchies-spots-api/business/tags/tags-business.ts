@@ -1,7 +1,20 @@
-import { TagDto } from '../../dto';
+import { ReadTagDto, TagDto } from '../../dto';
 import { tagsRepository } from '../../repositories';
 
 const tagsBusiness = {
+  getAll: (data: ReadTagDto) => {
+    const {
+      searchValue,
+      ...other
+    } = data;
+    const filterData = { ...other };
+
+    return tagsRepository.getAll(
+      filterData,
+      searchValue
+    );
+  },
+
   create: (data: TagDto) => {
     return tagsRepository.create(data);
   }, 

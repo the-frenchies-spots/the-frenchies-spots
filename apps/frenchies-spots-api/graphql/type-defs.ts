@@ -163,6 +163,13 @@ const typeDefs = gql`
     ratings: [Rating]
     rating(id: String): Rating
     ratingsAverage: Rating
+
+    tags(
+      name: String
+      tagPictureUrl: String
+      category: CategoriesSpotAndTag
+      searchValue: String
+    ): [Tag]
   }
 
   type Mutation {
@@ -227,11 +234,7 @@ const typeDefs = gql`
       tags: [TagInput]
     ): Boolean
 
-    # createItinary(
-    #   name: String
-    #   description: String
-    #   spots: [SpotInput]
-    # ): Itinary
+    addSpotPicture(url: String, spotId: String): SpotPicture
 
     createOrUpdateRating(
       ratingId: String
@@ -240,13 +243,7 @@ const typeDefs = gql`
     ): AverageRating
 
     toggleFavorite(spotId: String, id: String): Spot
-
-    buysItinary(profileId: String, itinaryId: String): Profile
-
-    createTest(text: String): Test
-
-    addSpotPicture(url: String, spotId: String): SpotPicture
-
+    
     createTag(
       name: String
       tagPictureUrl: String
@@ -259,6 +256,16 @@ const typeDefs = gql`
     ): Boolean
 
     createTagsList: [Tag]
+
+    createTest(text: String): Test
+
+    buysItinary(profileId: String, itinaryId: String): Profile
+
+    # createItinary(
+    #   name: String
+    #   description: String
+    #   spots: [SpotInput]
+    # ): Itinary
   }
 `;
 
