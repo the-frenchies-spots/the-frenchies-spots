@@ -1,23 +1,39 @@
 import Tag from '../../models/tag';
-import { TagDto } from '../../dto';
-import { Prisma } from '@prisma/client';
+import { TagDto, TagFilterDto, TagUpdateDto } from '../../dto';
 
 const tagsRepository = {
-getAll: (filterData: Prisma.TagWhereInput, searchValue: string) => {
-  return Tag.findMany({
-    where: {
-      ...filterData,
-      name: {
-        contains: searchValue
-      }
-    },
-  })
-},
+  getAll: (filterData: TagFilterDto, searchValue: string) => {
+    const { category } = filterData;
+    return Tag.findMany({
+      where: {
+        category,
+        id: {
+          in: filterData.ids
+        },
+        name: {
+          contains: searchValue
+        }
+      },
+    })
+  },
 
   create: (data: TagDto) => {
     return Tag.create({
       data: {
         ...data
+      }
+    });
+  },
+
+  update: (
+    data: TagUpdateDto,
+  ) => {
+    return Tag.update({
+      where: {
+        id: data.id
+      },
+      data: {
+        tagPictureUrl: data.tagPictureUrl
       }
     });
   },
@@ -31,32 +47,7 @@ getAll: (filterData: Prisma.TagWhereInput, searchValue: string) => {
       console.log(err);
       return false
     });
-  },
-
-  // update: (
-  //   data: TagDto,
-  //   tagId: string,
-  //   spot: Pick<SpotDto, "tagsIds">,
-  // ) => {
-  //   return Tag.update({
-  //     where: {
-  //       id: tagId
-  //     },
-  //     data: {
-  //       ...data,
-  //       spot: {
-
-  //       }
-  //     }
-  //     include: { spot: true }
-  //   });
-  // },
-
-  // createTagsList: (data: TagDto[]) => {
-  //   return Tag.createMany({
-  //     data: data
-  //   });
-  // }
+  }
 };
 
 export default tagsRepository;

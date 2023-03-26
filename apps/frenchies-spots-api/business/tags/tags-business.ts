@@ -1,4 +1,4 @@
-import { ReadTagDto, TagDto } from '../../dto';
+import { ReadTagDto, TagDto, TagUpdateDto } from '../../dto';
 import { tagsRepository } from '../../repositories';
 
 const tagsBusiness = {
@@ -11,7 +11,7 @@ const tagsBusiness = {
 
     return tagsRepository.getAll(
       filterData,
-      searchValue
+      searchValue,
     );
   },
 
@@ -19,12 +19,12 @@ const tagsBusiness = {
     return tagsRepository.create(data);
   }, 
 
-  delete: (tagId: string) => {
-    return tagsRepository.delete(tagId);
+  update: (data: TagUpdateDto) => {
+    return tagsRepository.update(data);
   },
 
-  // createTagsList: (data: TagDto[]) => {
-  //   return tagsRepository.createTagsList(data);
-  // }
+  delete: (tagId: string) => {
+    return tagsRepository.delete(tagId);
+  }
 };
 export default tagsBusiness;
