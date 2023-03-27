@@ -1,17 +1,16 @@
 import React from "react";
-import { Box, Dialogue, PrimaryButton, Text } from "@frenchies-spots/materials";
-import { TextController } from "../../components/from-controllers";
+import { Box, Dialogue } from "@frenchies-spots/materials";
+import { TextController } from "../../from-controllers";
 import {
   FieldErrors,
   UseFormWatch,
   type Control,
   type FieldValues,
 } from "react-hook-form";
-import { type TFields } from "./auth-page-fields";
-import { AuthFormValues } from "./auth-page";
+import { type TFields } from "../../../pages/auth-page/auth-page-fields";
+import { AuthFormValues } from "./auth-form";
 import { TFunction } from "i18next";
-import Toast from "react-native-root-toast";
-import { LoginContainer } from "../../components";
+import { LoginContainer } from "../login-container";
 
 interface SectionListParams {
   onSubmitForm: () => void;
@@ -24,7 +23,7 @@ interface SectionListParams {
   t: TFunction<"translation", undefined, "translation">;
 }
 
-export const sectionList = (params: SectionListParams) => {
+export const authSwipSection = (params: SectionListParams) => {
   const { fields, control, errors, watch, t } = params;
   const { pseudo, email, password, confirmPassword } = watch();
 
