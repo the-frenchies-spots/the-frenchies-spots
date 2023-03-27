@@ -15,4 +15,7 @@ export const styles = StyleSheet.create({
     flex: 1,
     width: "100%",
   },
+  counter: {
+    paddingBottom: 20,
+  },
 });

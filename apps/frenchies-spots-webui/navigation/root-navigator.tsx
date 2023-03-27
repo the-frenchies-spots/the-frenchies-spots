@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useContext } from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { AuthContext } from "../context";
 import {
   HomePage,
   SpotFavoritePage,
@@ -33,13 +34,17 @@ const options = {
 };
 
 export const RootNavigator = () => {
-  // const { currentUser } = useContext(AuthContext);
+  const { currentUser } = useContext(AuthContext);
 
   return (
     <Navigator>
       <Group screenOptions={options}>
-        <Screen name="authPage" component={AuthPage} />
-        <Screen name="profile" component={ProfilePage} />
+        {!currentUser ? (
+          <Screen name="authPage" component={AuthPage} />
+        ) : (
+          <Screen name="profile" component={ProfilePage} />
+        )}
+
         <Screen name="createSpot" component={CreateSpotPage} />
 
         <Screen name="home" component={HomePage} />

@@ -1,6 +1,7 @@
 import React, { ReactNode } from "react";
 import { Box } from "../../box";
 import { SecondaryButton, TextButton } from "../../button";
+import { PaginationCounter } from "../../pagination";
 import { HStack } from "../../stack";
 import { styles } from "./swiper-layout-styles";
 
@@ -13,6 +14,7 @@ export interface SwiperLayoutProps {
   isNextDisable?: boolean | undefined;
   prevLabel?: string;
   nextLabel?: string;
+  isPagination?: boolean;
 }
 
 export const SwiperLayout = (props: SwiperLayoutProps) => {
@@ -25,6 +27,7 @@ export const SwiperLayout = (props: SwiperLayoutProps) => {
     nextLabel = "Suivant",
     isNextDisable,
     lastIndex,
+    isPagination = false,
   } = props;
 
   const nextDisabled =
@@ -34,17 +37,26 @@ export const SwiperLayout = (props: SwiperLayoutProps) => {
 
   return (
     <Box style={styles.swiperLayout}>
+      {isPagination && (
+        <HStack justify="end" style={styles.counter}>
+          <PaginationCounter currentPage={swiperIndex} maxPage={lastIndex} />
+        </HStack>
+      )}
       <Box style={styles.content}>{children}</Box>
       <HStack style={styles.buttonBar} justify="between" items="center">
         {goToPrevIndex && (
           <Box style={{ width: "50%", paddingRight: 10 }}>
-            <TextButton onPress={goToPrevIndex} disabled={swiperIndex === 0}>
+            <TextButton
+              onPress={goToPrevIndex}
+              variant="default"
+              disabled={swiperIndex === 0}
+            >
               {prevLabel}
             </TextButton>
           </Box>
         )}
         <Box style={{ width: "50%", paddingLeft: 10 }}>
-          <SecondaryButton onPress={onComfirm} disabled={nextDisabled} little>
+          <SecondaryButton onPress={onComfirm} isDisabled={nextDisabled} little>
             {nextLabel}
           </SecondaryButton>
         </Box>

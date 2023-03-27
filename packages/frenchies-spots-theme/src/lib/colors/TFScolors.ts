@@ -11,4 +11,5 @@ export const TFScolors = {
   grey: "#ECECEC",
   superLightGrey: "#FBFBFB",
   white: "#FFFFFF",
+  error: "#D73636",
 };

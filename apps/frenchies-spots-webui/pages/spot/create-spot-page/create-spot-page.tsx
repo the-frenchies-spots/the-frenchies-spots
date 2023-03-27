@@ -4,7 +4,7 @@ import {
   CornerBar,
   Swiper,
   useSwiper,
-  PaginationSwiper,
+  Stepper,
   SwiperLayout,
 } from "@frenchies-spots/materials";
 
@@ -21,7 +21,7 @@ export const CreateSpotPage = () => {
   return (
     <Box style={{ width: "100%", height: "100%" }}>
       <CornerBar mode="top">
-        <PaginationSwiper
+        <Stepper
           nb={swiperList.length}
           goToIndex={goToIndex}
           swiperIndex={currentIndex}

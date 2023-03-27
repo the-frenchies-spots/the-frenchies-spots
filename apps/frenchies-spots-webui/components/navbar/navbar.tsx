@@ -17,7 +17,7 @@ export const Navbar = () => {
   );
 
   return (
-    <CornerBar>
+    <CornerBar disableContainer={true}>
       <NavbarMaterial>
         <NavbarButton
           name="map-marker"

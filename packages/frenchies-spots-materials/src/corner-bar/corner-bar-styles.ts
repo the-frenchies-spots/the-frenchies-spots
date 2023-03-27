@@ -5,11 +5,12 @@ const defaultColor = theme.TFS.colors.darkPurple;
 
 export const styles = (
   color: string | undefined = defaultColor,
-  mode: "top" | "bottom"
+  mode: "top" | "bottom",
+  zIndex: number
 ) =>
   StyleSheet.create({
     container: {
-      zIndex: 10,
+      zIndex,
       height: mode === "bottom" ? "100%" : "auto",
       width: "100%",
       position: "absolute",

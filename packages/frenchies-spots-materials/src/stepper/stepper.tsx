@@ -1,22 +1,19 @@
 import React, { ReactNode } from "react";
-import { Box } from "../../box";
-import {
-  PaginationSwiperButton,
-  type PaginationSwiperButtonProps,
-} from "./pagination-swiper-button";
-import { styles } from "./pagination-swiper-styles";
+import { Box } from "../box";
+import { StepperButton, type StepperButtonProps } from "./stepper-button";
+import { styles } from "./stepper-styles";
 
-interface PaginationSwiperProps {
+interface StepperProps {
   nb: ReactNode;
   goToIndex: (index: number) => void;
   swiperIndex: number;
 }
-export const PaginationSwiper = (props: PaginationSwiperProps) => {
+export const Stepper = (props: StepperProps) => {
   const { nb = 1, goToIndex, swiperIndex } = props;
   return (
     <Box style={styles.paginationBar}>
       {[...Array(nb)].map((_, index) => (
-        <PaginationSwiperButton
+        <StepperButton
           key={index}
           onPress={() => goToIndex(index)}
           isSelected={index === swiperIndex}

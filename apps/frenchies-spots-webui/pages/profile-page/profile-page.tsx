@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import { Page } from "../../components";
 import { Image } from "react-native";
 import {
@@ -18,8 +18,20 @@ import {
 } from "@frenchies-spots/materials";
 import { styles } from "./profile-page-styles";
 import { TouchableOpacity } from "react-native";
+import { AuthContext } from "../../context";
 
 export const ProfilePage = () => {
+  const [isLoading, setIsLoading] = useState(false);
+
+  const { currentUser, processSignOut } = useContext(AuthContext);
+
+  const handleLogoutClick = () => {
+    setIsLoading(true);
+    if (typeof processSignOut === "function") {
+      processSignOut().then(() => setIsLoading(false));
+    }
+  };
+
   return (
     <Page isBackground={false}>
       <HStack justify="between" items="center">
@@ -37,8 +49,8 @@ export const ProfilePage = () => {
 
       <VStack center spacing={15} style={styles.vstackProfile}>
         <Avatar />
-        <Title variant="h3">Athéna Déesse de la Guerre</Title>
-        <TextButton>Déconnexion</TextButton>
+        <Title variant="h3">{currentUser?.pseudo}</Title>
+        <TextButton onPress={handleLogoutClick}>Déconnexion</TextButton>
       </VStack>
 
       <VStack spacing={15}>

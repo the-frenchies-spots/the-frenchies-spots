@@ -1,13 +1,13 @@
 import React from "react";
 import { TouchableOpacity, type TouchableOpacityProps } from "react-native";
-import { styles } from "./pagination-swiper-button-styles";
-import { Box } from "../../../box";
+import { styles } from "./stepper-button-styles";
+import { Box } from "../../box";
 
-export interface PaginationSwiperButtonProps extends TouchableOpacityProps {
+export interface StepperButtonProps extends TouchableOpacityProps {
   isSelected: boolean;
 }
 
-export const PaginationSwiperButton = (props: PaginationSwiperButtonProps) => {
+export const StepperButton = (props: StepperButtonProps) => {
   const { isSelected, ...other } = props;
   const style = styles(isSelected);
   return (
