@@ -1,5 +1,4 @@
-import { Favorite, Prisma, Rating } from "@prisma/client";
-import { Spot, SpotPicture } from "@prisma/client";
+import { Favorite, Prisma, Rating, Tag,  Spot, SpotPicture } from "@prisma/client";
 
 export type SpotFindManyResult = Prisma.PrismaPromise<
   (Spot & {
@@ -17,6 +16,7 @@ export type SpotFindByIdResult = Prisma.Prisma__SpotClient<
       spotPicture: SpotPicture[];
       ratings: Rating[];
       favorites: Favorite[];
+      // tags: Tag[];
     })
   | null,
   null

@@ -22,16 +22,16 @@ export const spotsMutation = {
     return spotsBusiness.create(data, profileId);
   },
 
-  // updateSpot: (
-  //   _: undefined,
-  //   data: UpdateSpotDto & { pictures: UpdateSpotPicturesDto },
-  //   context: TContext
-  // ): UpdateExistingSpotResult => {
-  //   const { user } = context;
-  //   const profileId = user?.profile.id;
-  //   if (!profileId) throw new GenericError(UNAUTHENTICATED);
-  //   return spotsBusiness.update(data, profileId);
-  // },
+  updateSpot: (
+    _: undefined,
+    data: UpdateSpotDto & { pictures: UpdateSpotPicturesDto },
+    context: TContext
+  ): UpdateExistingSpotResult => {
+    const { user } = context;
+    const profileId = user?.profile.id;
+    if (!profileId) throw new GenericError(UNAUTHENTICATED);
+    return spotsBusiness.update(data, profileId);
+  },
 
   /**
    * @param {string} profileId

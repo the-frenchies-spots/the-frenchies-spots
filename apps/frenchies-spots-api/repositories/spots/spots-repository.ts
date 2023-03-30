@@ -1,4 +1,5 @@
 import {
+  UpdateSpotDto,
   type SpotDto,
   type SpotOrderDto,
   type SpotPaginationDto,
@@ -10,6 +11,7 @@ import {
   SpotFindByIdResult,
   type UpdateRatingAverageBySpotIdResult,
   type SpotFindManyResult,
+  UpdateSpotResult,
 } from "../../types";
 import { Spot, Profile } from "../../models";
 
@@ -59,7 +61,7 @@ const spotsRepository = {
       where: {
         id,
       },
-      include: { spotPicture: true, ratings: true, favorites: true },
+      include: { spotPicture: true, tags: { include: { tag: true }}, ratings: true, favorites: true },
     });
   },
 
@@ -93,16 +95,14 @@ const spotsRepository = {
           create: [...pictures],
         },
       },
-      include: { spotPicture: true, tags: true },
+      include: { spotPicture: true, tags: { include: { tag: true }} },
     });
   },
 
   update: (
-    data: SpotDto,
-    spotId: string,
-    connectTagsId: { id: string }[],
-    disconnectTagsId: { id: string }[],
-    pictures: UpdateSpotPicturesDto = []
+    data: UpdateSpotDto,
+    pictures: UpdateSpotPicturesDto = [],
+    tags: {id: string}[]
   ): UpdateSpotResult => {
     const spotPicture = {
       upsert: pictures.map((picture) => {
@@ -110,23 +110,41 @@ const spotsRepository = {
         return { where: { id }, update: { url }, create: { url } };
       }),
     };
+
+    const { id: spotId, ...other } = data;
+    const updateData = { ...other };
+
     return Spot.update({
       where: {
         id: spotId,
       },
-      data: pictures
-        ? {
-            ...data,
-            spotPicture,
-          }
-        : {
-            data,
-          },
-
-      include: { spotPicture: true },
+      data: { 
+        ...updateData,
+        spotPicture,
+        tags: {
+          deleteMany: {},
+          create: tags.map((tag) => {
+            console.log("---------je suis dedans ! ---------", tag);
+            return {
+              tag: {
+                connect: { id: tag.id }
+              }
+            }
+          })
+        }
+        // spotPicture: spotPicture
+      },
+      include: { spotPicture: true, tags: { include: { tag: true }} },
     });
   },
-
+    // data: pictures
+      //   ? {
+      //       ...data,
+      //       spotPicture,
+      //     }
+      //   : {
+      //       data,
+      //     },
   /**
    * @param {string} profileId
    * @param {string} spotId
@@ -156,6 +174,7 @@ const spotsRepository = {
       include: { spotPicture: true, ratings: true, favorites: true },
     });
     return spotFind.tags;
-  },
+  }
+};
 
 export default spotsRepository;

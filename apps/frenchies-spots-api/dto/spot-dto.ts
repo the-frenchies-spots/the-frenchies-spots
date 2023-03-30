@@ -1,4 +1,4 @@
-import { Spot, SpotPicture } from "@prisma/client";
+import { Spot } from "@prisma/client";
 import { z } from "zod";
 
 export const CATEGORIES_SPOT_AND_TAG = ['SPARE_TIME_SPOT', 'RESOURCES_SPOT'] as const;
@@ -34,13 +34,10 @@ const spotDtoSchema = z.object({
   lng: z.number(),
   region: z.string(),
   averageRating: z.number(),
-  tags: z.array(z.string())
+  tags: z.array(z.object({ id: z.string()}))
 });
 
 export type SpotDto = z.infer<typeof spotDtoSchema>;
-// export interface SpotDto extends Omit<Spot, "id" | "tags"> {
-//   tags: { id: string }[];
-// }
 
 const updateSpotDtoSchema = z.object({
   id: z.string(),
@@ -54,7 +51,7 @@ const updateSpotDtoSchema = z.object({
   lng: z.number(),
   region: z.string(),
   averageRating: z.number(),
-  tags: z.array(z.object({ id: z.string() })),
+  tags: z.array(z.object({ id: z.string()}))
 });
 
 export type UpdateSpotDto = z.infer<typeof updateSpotDtoSchema>;
