@@ -6,7 +6,6 @@ import {
   CreateSpotResult,
   SpotFindByIdResult,
   SpotFindManyResult,
-  UpdateExistingSpotResult,
   UpdateSpotResult,
 } from "../../types";
 const { SPOT_ID_NOT_MATCH_PROFILE_ID, SPOT_NOT_FOUND } = codeErrors;
@@ -51,13 +50,12 @@ const spotsBusiness = {
     currentProfileId: string
   ): Promise<UpdateSpotResult> => {
     const { id: spotId, pictures, tags, ...other } = data;
-    const updateData = { ...other };
 
     await checkCreatedByCurrentUserOrThrow(spotId, currentProfileId);
     
     return spotsRepository.update(
-      updateData,
-      spotId,
+      data,
+      pictures,
       tags
     );
   },

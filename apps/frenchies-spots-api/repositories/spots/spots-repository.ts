@@ -104,12 +104,12 @@ const spotsRepository = {
     pictures: UpdateSpotPicturesDto = [],
     tags: {id: string}[]
   ): UpdateSpotResult => {
-    const spotPicture = {
-      upsert: pictures.map((picture) => {
-        const { id = undefined, url } = picture;
-        return { where: { id }, update: { url }, create: { url } };
-      }),
-    };
+    // const spotPicture = {
+    //   upsert: pictures.map((picture) => {
+    //     const { id = undefined, url } = picture;
+    //     return { where: { id }, update: { url }, create: { url } };
+    //   }),
+    // };
 
     const { id: spotId, ...other } = data;
     const updateData = { ...other };
@@ -120,7 +120,7 @@ const spotsRepository = {
       },
       data: { 
         ...updateData,
-        spotPicture,
+        // spotPicture,
         tags: {
           deleteMany: {},
           create: tags.map((tag) => {
