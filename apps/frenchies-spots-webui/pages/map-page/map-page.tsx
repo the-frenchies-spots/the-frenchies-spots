@@ -1,10 +1,29 @@
 import React, { useState } from "react";
-// import { View } from "react-native";
-import { Navbar } from "../../components/navbar/navbar";
+import { styles } from "./map-page-style";
+import { useMapBox } from "../../hooks";
+import {
+  Page,
+  MapBox,
+  MapBoxMarker,
+  NotificationButton,
+} from "../../components";
+import {
+  Box,
+  Drawer,
+  HStack,
+  FilterInput,
+  FloatingButton,
+} from "@frenchies-spots/materials";
 
-import { Box, Text, Drawer, ButtonBase } from "@frenchies-spots/materials";
+interface MapPageProps {
+  route?: { params: { lat: number | undefined; lng: number | undefined } };
+}
 
-export const MapPage = () => {
+export const MapPage = (props: MapPageProps) => {
+  const lat = props?.route?.params?.lat;
+  const lng = props?.route?.params?.lng;
+
+  const { viewport, onViewportChange, onCoordinateClick } = useMapBox();
   const [isOpen, setIsOpen] = useState(false);
 
   const handleToggleOpen = () => {
@@ -12,27 +31,31 @@ export const MapPage = () => {
   };
 
   return (
-    <Box style={{ width: "100%", height: "100%" }}>
-      <Navbar />
-      <Text style={{ color: "#86827e", fontSize: 16 }}>Yo Modal ou quoi !</Text>
-      <Text style={{ color: "#86827e", fontSize: 16 }}>Yo Modal ou quoi !</Text>
-      <Text style={{ color: "#86827e", fontSize: 16 }}>Yo Modal ou quoi !</Text>
-      <ButtonBase
-        onPress={handleToggleOpen}
-        style={{
-          width: "90%",
-          alignItems: "center",
-          justifyContent: "center",
-          borderWidth: 1,
-          borderColor: "#86827e",
-          paddingVertical: 12,
-          borderRadius: 8,
-        }}
-      >
-        <Text style={{ color: "#86827e", fontSize: 16 }}>Open Drawer</Text>
-      </ButtonBase>
+    <Page isBackground={false} isPadding={false}>
+      <Box style={styles.mapMenuContainer}>
+        <HStack justify="end" style={styles.topIconContainer}>
+          <NotificationButton />
+        </HStack>
+        <FilterInput onSearchPress={handleToggleOpen} />
+      </Box>
+
+      <Box style={styles.displayModeButtonContainer}>
+        <Box style={styles.displayModeButton}>
+          <FloatingButton icon="map">Liste</FloatingButton>
+        </Box>
+      </Box>
+
+      <Box style={styles.container}>
+        <MapBox
+          viewport={viewport}
+          onViewportChange={onViewportChange}
+          onCoordinateClick={onCoordinateClick}
+        >
+          {lat && lng && <MapBoxMarker lat={lat} lng={lng} />}
+        </MapBox>
+      </Box>
 
       <Drawer isOpen={isOpen} onToggleOpen={handleToggleOpen} />
-    </Box>
+    </Page>
   );
 };
