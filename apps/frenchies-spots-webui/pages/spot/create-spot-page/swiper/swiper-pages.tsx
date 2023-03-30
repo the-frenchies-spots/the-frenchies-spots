@@ -1,12 +1,5 @@
 import React from "react";
-import {
-  Text,
-  Box,
-  Title,
-  BodyText,
-  SubTitle,
-  Caption,
-} from "@frenchies-spots/materials";
+import { Text, Box, Title } from "@frenchies-spots/materials";
 
 interface PagesListParams {
   onSubmitForm: () => void;
@@ -20,31 +13,9 @@ export const pagesList = (params: PagesListParams) => [
     onComfirm: () => params.goToNextIndex(),
     render: (
       <Box>
-        <Title variant="h1">
-          h1 - A quelle catégorie associerais-tu ton spot ?
-        </Title>
         <Title variant="h2">
           h2 - A quelle catégorie associerais-tu ton spot ?
         </Title>
-        <Title variant="h3">
-          h3 - A quelle catégorie associerais-tu ton spot ?
-        </Title>
-        <Title variant="h4">
-          h4 - A quelle catégorie associerais-tu ton spot ?
-        </Title>
-        <Title variant="h5">
-          h5 - A quelle catégorie associerais-tu ton spot ?
-        </Title>
-        <BodyText>body - A quelle catégorie associerais-tu ton spot ?</BodyText>
-        <SubTitle variant="sub1">
-          sub1 - body - A quelle catégorie associerais-tu ton spot ?
-        </SubTitle>
-        <SubTitle variant="sub2">
-          sub2 - A quelle catégorie associerais-tu ton spot ?
-        </SubTitle>
-        <Caption>
-          Caption - A quelle catégorie associerais-tu ton spot ?
-        </Caption>
       </Box>
     ),
   },

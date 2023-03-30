@@ -23,6 +23,16 @@ enum Level {
   Error
 }
 
+enum CategoriesSpotAndTag {
+  SPARE_TIME_SPOT
+  RESOURCES_SPOT
+}
+
+enum Role {
+  SIMPLE_USER
+  USER_ADMIN
+}
+
 model User {
   id       String   @id @default(auto()) @map("_id") @db.ObjectId
   email    String   @unique
@@ -30,11 +40,6 @@ model User {
   token    String   @unique
   role     Role     @default(SIMPLE_USER)
   profile  Profile?
-}
-
-enum Role {
-  SIMPLE_USER
-  USER_ADMIN
 }
 
 model Profile {
@@ -55,27 +60,13 @@ model Profile {
   favorites Favorite[]
 }
 
-model Itinary {
-  id          String    @id @default(auto()) @map("_id") @db.ObjectId
-  name        String
-  description String
-  gamePoint   Int?
-  photoUrl    String?
-  // Implicit relations many to many with profile
-  profileIDs  String[]   @db.ObjectId
-  profiles    Profile[]  @relation(fields: [profileIDs], references: [id])
-  // Implicit relations many to many with spot
-  spotIDs  String[]   @db.ObjectId
-  spots    Spot[]     @relation(fields: [spotIDs], references: [id])
-}
-
 model Spot {
   id            String         @id @default(auto()) @map("_id") @db.ObjectId
   name          String
   description   String
   isCanPark     Boolean        @default(false)
   isHidden      Boolean        @default(false)
-  category      CategorySpot
+  category      CategoriesSpotAndTag
   // Relations one to many with profile
   profile       Profile        @relation(fields: [profileId], references: [id], onDelete: Cascade)
   profileId     String         @unique @db.ObjectId
@@ -92,9 +83,27 @@ model Spot {
   ratings       Rating[]
   // Relation one to many with favorite
   favorites     Favorite[]
-  // Implicit relations many to many with itinary
-  tagIDs String[] @db.ObjectId
-  tags Tag[] @relation(fields: [tagIDs], references: [id])
+  // Explicit relations many to many with tags
+  tags TagsOnSpots[]
+}
+
+// Explicit relations many to many
+model TagsOnSpots {
+  id     String @id @default(auto()) @map("_id") @db.ObjectId
+  spot   Spot? @relation(fields: [spotId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  tag    Tag?  @relation(fields: [tagId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  spotId String? @db.ObjectId
+  tagId  String? @db.ObjectId
+}
+
+
+model Tag {
+  id            String @id @default(auto()) @map("_id") @db.ObjectId
+  name          String @unique
+  tagPictureUrl String
+  category      CategoriesSpotAndTag
+  // Explicit relations many to many with itinary
+  spots TagsOnSpots[]
 }
 
 model SpotPicture {
@@ -102,13 +111,6 @@ model SpotPicture {
   url    String
   spot   Spot   @relation(fields: [spotId], references: [id], onDelete: Cascade)
   spotId String @unique @db.ObjectId
-}
-
-model Product {
-  id  String @id @default(auto()) @map("_id") @db.ObjectId
-  photoUrl    String?
-  gamePoints Int
-  price Int
 }
 
 model Rating {
@@ -120,7 +122,6 @@ model Rating {
   spotId    String  @unique @db.ObjectId
 }
 
-
 model Favorite {
   id        String  @id @default(auto()) @map("_id") @db.ObjectId
   profile   Profile @relation(fields: [profileId], references: [id], onDelete: Cascade)
@@ -129,18 +130,23 @@ model Favorite {
   spotId    String  @unique @db.ObjectId
 }
 
-model Tag {
-  id String @id @default(auto()) @map("_id") @db.ObjectId
-  name String
-  tagPictureUrl String
-  isResources Boolean
-  isSpareTime Boolean
-  // Implicit relations many to many with itinary
-  spotIDs String[] @db.ObjectId
-  spots Spot[] @relation(fields: [spotIDs], references: [id])
+model Product {
+  id  String @id @default(auto()) @map("_id") @db.ObjectId
+  photoUrl    String?
+  gamePoints Int
+  price Int
 }
 
-enum CategorySpot {
-  SPARE_TIME_SPOT
-  RESOURCES_SPOT
+model Itinary {
+  id          String    @id @default(auto()) @map("_id") @db.ObjectId
+  name        String
+  description String
+  gamePoint   Int?
+  photoUrl    String?
+  // Implicit relations many to many with profile
+  profileIDs  String[]   @db.ObjectId
+  profiles    Profile[]  @relation(fields: [profileIDs], references: [id])
+  // Implicit relations many to many with spot
+  spotIDs  String[]   @db.ObjectId
+  spots    Spot[]     @relation(fields: [spotIDs], references: [id])
 }

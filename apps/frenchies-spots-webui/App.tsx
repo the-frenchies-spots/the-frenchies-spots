@@ -5,22 +5,20 @@ import { RootNavigator } from "./navigation/root-navigator";
 import { NavigationContainer } from "@react-navigation/native";
 
 import { Provider } from "./providers";
+import { AppContainer } from "./components";
 
-export default function Native() {
+const App = () => {
   return (
     <Provider>
-      <View style={styles.container}>
+      <AppContainer>
         <NavigationContainer>
           <RootNavigator />
+
           <StatusBar hidden={true} />
         </NavigationContainer>
-      </View>
+      </AppContainer>
     </Provider>
   );
-}
+};
 
-const styles = StyleSheet.create({
-  container: {
-    height: "100%",
-  },
-});
+export default App;

@@ -1,3 +1,22 @@
+# Project
+
+Description of the project
+
+# start with the project
+
+### generate project
+npx prisma generate
+
+### start server
+pnpm api
+
+### start webui
+pnpm webui
+
+### how to seed
+npx prisma db seed
+
+
 # Turborepo react-native starter
 
 This is an official starter Turborepo.

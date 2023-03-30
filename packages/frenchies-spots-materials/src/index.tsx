@@ -1,5 +1,4 @@
 export * from "./button";
-export { BottomNavigation } from "./bottom-navigation/bottom-navigation";
 export * from "./input";
 export * from "./providers";
 export * from "./typography";
@@ -11,3 +10,6 @@ export * from "./icon";
 export * from "./drawer";
 export * from "./swiper";
 export * from "./pagination";
+export * from "./avatar";
+export * from "./divider";
+export * from "./input";

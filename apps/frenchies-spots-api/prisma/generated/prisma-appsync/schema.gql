@@ -21,25 +21,13 @@ type Profile {
     favorites: [Favorite]
 }
 
-type Itinary {
-    id: String!
-    name: String!
-    description: String!
-    gamePoint: Int
-    photoUrl: String
-    profileIDs: [String]
-    profiles: [Profile]
-    spotIDs: [String]
-    spots: [Spot]
-}
-
 type Spot {
     id: String!
     name: String!
     description: String!
     isCanPark: Boolean!
     isHidden: Boolean!
-    category: CategorySpot!
+    category: CategoriesSpotAndTag!
     profile: Profile!
     profileId: String!
     itinaryIDs: [String]
@@ -51,8 +39,23 @@ type Spot {
     spotPicture: [SpotPicture]
     ratings: [Rating]
     favorites: [Favorite]
-    tagIDs: [String]
-    tags: [Tag]
+    tags: [TagsOnSpots]
+}
+
+type TagsOnSpots {
+    id: String!
+    spot: Spot
+    tag: Tag
+    spotId: String
+    tagId: String
+}
+
+type Tag {
+    id: String!
+    name: String!
+    tagPictureUrl: String!
+    category: CategoriesSpotAndTag!
+    spots: [TagsOnSpots]
 }
 
 type SpotPicture {
@@ -60,13 +63,6 @@ type SpotPicture {
     url: AWSURL!
     spot: Spot!
     spotId: String!
-}
-
-type Product {
-    id: String!
-    photoUrl: String
-    gamePoints: Int!
-    price: Int!
 }
 
 type Rating {
@@ -86,12 +82,21 @@ type Favorite {
     spotId: String!
 }
 
-type Tag {
+type Product {
+    id: String!
+    photoUrl: String
+    gamePoints: Int!
+    price: Int!
+}
+
+type Itinary {
     id: String!
     name: String!
-    tagPictureUrl: String!
-    isResources: Boolean!
-    isSpareTime: Boolean!
+    description: String!
+    gamePoint: Int
+    photoUrl: String
+    profileIDs: [String]
+    profiles: [Profile]
     spotIDs: [String]
     spots: [Spot]
 }
@@ -121,6 +126,26 @@ input LevelEnumListFilter {
     isEmpty: Boolean
 }
 
+enum CategoriesSpotAndTag {
+    SPARE_TIME_SPOT
+    RESOURCES_SPOT
+}
+
+input CategoriesSpotAndTagEnumFilter {
+    equals: CategoriesSpotAndTag
+    in: [CategoriesSpotAndTag!]
+    not: CategoriesSpotAndTagEnumFilter
+    notIn: [CategoriesSpotAndTag!]
+}
+
+input CategoriesSpotAndTagEnumListFilter {
+    equals: [CategoriesSpotAndTag!]
+    has: CategoriesSpotAndTag
+    hasEvery: [CategoriesSpotAndTag!]
+    hasSome: [CategoriesSpotAndTag!]
+    isEmpty: Boolean
+}
+
 enum Role {
     SIMPLE_USER
     USER_ADMIN
@@ -138,26 +163,6 @@ input RoleEnumListFilter {
     has: Role
     hasEvery: [Role!]
     hasSome: [Role!]
-    isEmpty: Boolean
-}
-
-enum CategorySpot {
-    SPARE_TIME_SPOT
-    RESOURCES_SPOT
-}
-
-input CategorySpotEnumFilter {
-    equals: CategorySpot
-    in: [CategorySpot!]
-    not: CategorySpotEnumFilter
-    notIn: [CategorySpot!]
-}
-
-input CategorySpotEnumListFilter {
-    equals: [CategorySpot!]
-    has: CategorySpot
-    hasEvery: [CategorySpot!]
-    hasSome: [CategorySpot!]
     isEmpty: Boolean
 }
 
@@ -504,161 +509,6 @@ input ProfileFavoritesUpdateRelationsInput {
     deleteMany: [FavoriteDeleteManyInput]
 }
 
-input ItinaryFilter {
-    some: ItinaryWhereInput
-    every: ItinaryWhereInput
-    none: ItinaryWhereInput
-}
-
-input ItinaryWhereInput {
-    OR: [ItinaryWhereInput]
-    NOT: [ItinaryWhereInput]
-    AND: [ItinaryWhereInput]
-    id: StringFilter
-    name: StringFilter
-    description: StringFilter
-    gamePoint: IntFilter
-    photoUrl: StringFilter
-    profileIDs: StringListFilter
-    profiles: ProfileFilter
-    spotIDs: StringListFilter
-    spots: SpotFilter
-}
-
-input ItinaryWhereUniqueInput {
-    id: String
-}
-
-input ItinaryExtendedWhereUniqueInput {
-    OR: [ItinaryWhereInput]
-    NOT: [ItinaryWhereInput]
-    AND: [ItinaryWhereInput]
-    id: String
-    name: StringFilter
-    description: StringFilter
-    gamePoint: IntFilter
-    photoUrl: StringFilter
-    profileIDs: StringListFilter
-    profiles: ProfileFilter
-    spotIDs: StringListFilter
-    spots: SpotFilter
-}
-
-input ItinaryOrderByInput {
-    id: OrderByArg
-    name: OrderByArg
-    description: OrderByArg
-    gamePoint: OrderByArg
-    photoUrl: OrderByArg
-    profileIDs: OrderByArg
-    profiles: ProfileOrderByInput
-    spotIDs: OrderByArg
-    spots: SpotOrderByInput
-}
-
-input ItinaryCreateInput {
-    id: String!
-    name: String!
-    description: String!
-    gamePoint: Int
-    photoUrl: String
-    profiles: ItinaryProfilesCreateRelationInput
-    spots: ItinarySpotsCreateRelationInput
-}
-
-input ItinaryCreateManyInput {
-    id: String!
-    name: String!
-    description: String!
-    gamePoint: Int
-    photoUrl: String
-}
-
-input ItinaryUpdateInput {
-    id: String
-    name: String
-    description: String
-    gamePoint: Int
-    photoUrl: String
-    profiles: ItinaryProfilesUpdateRelationsInput
-    spots: ItinarySpotsUpdateRelationsInput
-}
-
-input ItinaryOperationInput {
-    gamePoint: IntOperation
-}
-
-input ItinaryUpdateUniqueInput {
-    data: ItinaryUpdateInput!
-    where: ItinaryWhereUniqueInput!
-}
-
-input ItinaryUpdateManyInput {
-    where: ItinaryWhereInput!
-    data: ItinaryUpdateInput!
-}
-
-input ItinaryUpsertInput {
-    create: ItinaryCreateInput!
-    update: ItinaryUpdateInput!
-}
-
-input ItinaryUpsertUniqueInput {
-    where: ItinaryWhereUniqueInput!
-    create: ItinaryCreateInput!
-    update: ItinaryUpdateInput!
-}
-
-input ItinaryConnectOrCreateInput {
-    where: ItinaryWhereUniqueInput!
-    create: ItinaryCreateInput!
-}
-
-input ItinaryDeleteUniqueInput {
-    where: ItinaryWhereUniqueInput!
-}
-
-input ItinaryDeleteManyInput {
-    where: ItinaryWhereInput!
-}
-
-input ItinaryProfilesCreateRelationInput {
-    create: [ProfileCreateInput]
-    connect: [ProfileWhereUniqueInput]
-    connectOrCreate: [ProfileConnectOrCreateInput]
-}
-
-input ItinaryProfilesUpdateRelationsInput {
-    connect: [ProfileWhereUniqueInput]
-    create: [ProfileCreateInput]
-    connectOrCreate: [ProfileConnectOrCreateInput]
-    update: [ProfileUpdateUniqueInput]
-    upsert: [ProfileUpsertUniqueInput]
-    delete: [ProfileDeleteUniqueInput]
-    disconnect: [ProfileWhereUniqueInput]
-    set: [ProfileWhereUniqueInput]
-    updateMany: [ProfileUpdateManyInput]
-    deleteMany: [ProfileDeleteManyInput]
-}
-input ItinarySpotsCreateRelationInput {
-    create: [SpotCreateInput]
-    connect: [SpotWhereUniqueInput]
-    connectOrCreate: [SpotConnectOrCreateInput]
-}
-
-input ItinarySpotsUpdateRelationsInput {
-    connect: [SpotWhereUniqueInput]
-    create: [SpotCreateInput]
-    connectOrCreate: [SpotConnectOrCreateInput]
-    update: [SpotUpdateUniqueInput]
-    upsert: [SpotUpsertUniqueInput]
-    delete: [SpotDeleteUniqueInput]
-    disconnect: [SpotWhereUniqueInput]
-    set: [SpotWhereUniqueInput]
-    updateMany: [SpotUpdateManyInput]
-    deleteMany: [SpotDeleteManyInput]
-}
-
 input SpotFilter {
     some: SpotWhereInput
     every: SpotWhereInput
@@ -674,7 +524,7 @@ input SpotWhereInput {
     description: StringFilter
     isCanPark: BooleanFilter
     isHidden: BooleanFilter
-    category: CategorySpotEnumFilter
+    category: CategoriesSpotAndTagEnumFilter
     profile: ProfileWhereInput
     profileId: StringFilter
     itinaryIDs: StringListFilter
@@ -686,8 +536,7 @@ input SpotWhereInput {
     spotPicture: SpotPictureFilter
     ratings: RatingFilter
     favorites: FavoriteFilter
-    tagIDs: StringListFilter
-    tags: TagFilter
+    tags: TagsOnSpotsFilter
 }
 
 input SpotWhereUniqueInput {
@@ -704,7 +553,7 @@ input SpotExtendedWhereUniqueInput {
     description: StringFilter
     isCanPark: BooleanFilter
     isHidden: BooleanFilter
-    category: CategorySpotEnumFilter
+    category: CategoriesSpotAndTagEnumFilter
     profile: ProfileWhereInput
     profileId: String
     itinaryIDs: StringListFilter
@@ -716,8 +565,7 @@ input SpotExtendedWhereUniqueInput {
     spotPicture: SpotPictureFilter
     ratings: RatingFilter
     favorites: FavoriteFilter
-    tagIDs: StringListFilter
-    tags: TagFilter
+    tags: TagsOnSpotsFilter
 }
 
 input SpotOrderByInput {
@@ -738,8 +586,7 @@ input SpotOrderByInput {
     spotPicture: SpotPictureOrderByInput
     ratings: RatingOrderByInput
     favorites: FavoriteOrderByInput
-    tagIDs: OrderByArg
-    tags: TagOrderByInput
+    tags: TagsOnSpotsOrderByInput
 }
 
 input SpotCreateInput {
@@ -748,7 +595,7 @@ input SpotCreateInput {
     description: String!
     isCanPark: Boolean!
     isHidden: Boolean!
-    category: CategorySpot!
+    category: CategoriesSpotAndTag!
     profile: SpotProfileCreateRelationInput!
     itinaries: SpotItinariesCreateRelationInput
     lat: Float!
@@ -767,7 +614,7 @@ input SpotCreateManyInput {
     description: String!
     isCanPark: Boolean!
     isHidden: Boolean!
-    category: CategorySpot!
+    category: CategoriesSpotAndTag!
     lat: Float!
     lng: Float!
     region: String!
@@ -780,7 +627,7 @@ input SpotUpdateInput {
     description: String
     isCanPark: Boolean
     isHidden: Boolean
-    category: CategorySpot
+    category: CategoriesSpotAndTag
     profile: SpotProfileUpdateRelationsInput
     itinaries: SpotItinariesUpdateRelationsInput
     lat: Float
@@ -921,22 +768,260 @@ input SpotFavoritesUpdateRelationsInput {
     deleteMany: [FavoriteDeleteManyInput]
 }
 input SpotTagsCreateRelationInput {
-    create: [TagCreateInput]
-    connect: [TagWhereUniqueInput]
-    connectOrCreate: [TagConnectOrCreateInput]
+    create: [TagsOnSpotsCreateInput]
+    connect: [TagsOnSpotsWhereUniqueInput]
+    connectOrCreate: [TagsOnSpotsConnectOrCreateInput]
 }
 
 input SpotTagsUpdateRelationsInput {
-    connect: [TagWhereUniqueInput]
-    create: [TagCreateInput]
-    connectOrCreate: [TagConnectOrCreateInput]
-    update: [TagUpdateUniqueInput]
-    upsert: [TagUpsertUniqueInput]
-    delete: [TagDeleteUniqueInput]
-    disconnect: [TagWhereUniqueInput]
-    set: [TagWhereUniqueInput]
-    updateMany: [TagUpdateManyInput]
-    deleteMany: [TagDeleteManyInput]
+    connect: [TagsOnSpotsWhereUniqueInput]
+    create: [TagsOnSpotsCreateInput]
+    connectOrCreate: [TagsOnSpotsConnectOrCreateInput]
+    update: [TagsOnSpotsUpdateUniqueInput]
+    upsert: [TagsOnSpotsUpsertUniqueInput]
+    delete: [TagsOnSpotsDeleteUniqueInput]
+    disconnect: [TagsOnSpotsWhereUniqueInput]
+    set: [TagsOnSpotsWhereUniqueInput]
+    updateMany: [TagsOnSpotsUpdateManyInput]
+    deleteMany: [TagsOnSpotsDeleteManyInput]
+}
+
+input TagsOnSpotsFilter {
+    some: TagsOnSpotsWhereInput
+    every: TagsOnSpotsWhereInput
+    none: TagsOnSpotsWhereInput
+}
+
+input TagsOnSpotsWhereInput {
+    OR: [TagsOnSpotsWhereInput]
+    NOT: [TagsOnSpotsWhereInput]
+    AND: [TagsOnSpotsWhereInput]
+    id: StringFilter
+    spot: SpotWhereInput
+    tag: TagWhereInput
+    spotId: StringFilter
+    tagId: StringFilter
+}
+
+input TagsOnSpotsWhereUniqueInput {
+    id: String
+}
+
+input TagsOnSpotsExtendedWhereUniqueInput {
+    OR: [TagsOnSpotsWhereInput]
+    NOT: [TagsOnSpotsWhereInput]
+    AND: [TagsOnSpotsWhereInput]
+    id: String
+    spot: SpotWhereInput
+    tag: TagWhereInput
+    spotId: StringFilter
+    tagId: StringFilter
+}
+
+input TagsOnSpotsOrderByInput {
+    id: OrderByArg
+    spot: SpotOrderByInput
+    tag: TagOrderByInput
+    spotId: OrderByArg
+    tagId: OrderByArg
+}
+
+input TagsOnSpotsCreateInput {
+    id: String!
+    spot: TagsOnSpotsSpotCreateRelationInput
+    tag: TagsOnSpotsTagCreateRelationInput
+}
+
+input TagsOnSpotsCreateManyInput {
+    id: String!
+}
+
+input TagsOnSpotsUpdateInput {
+    id: String
+    spot: TagsOnSpotsSpotUpdateRelationsInput
+    tag: TagsOnSpotsTagUpdateRelationsInput
+}
+
+input TagsOnSpotsUpdateUniqueInput {
+    data: TagsOnSpotsUpdateInput!
+    where: TagsOnSpotsWhereUniqueInput!
+}
+
+input TagsOnSpotsUpdateManyInput {
+    where: TagsOnSpotsWhereInput!
+    data: TagsOnSpotsUpdateInput!
+}
+
+input TagsOnSpotsUpsertInput {
+    create: TagsOnSpotsCreateInput!
+    update: TagsOnSpotsUpdateInput!
+}
+
+input TagsOnSpotsUpsertUniqueInput {
+    where: TagsOnSpotsWhereUniqueInput!
+    create: TagsOnSpotsCreateInput!
+    update: TagsOnSpotsUpdateInput!
+}
+
+input TagsOnSpotsConnectOrCreateInput {
+    where: TagsOnSpotsWhereUniqueInput!
+    create: TagsOnSpotsCreateInput!
+}
+
+input TagsOnSpotsDeleteUniqueInput {
+    where: TagsOnSpotsWhereUniqueInput!
+}
+
+input TagsOnSpotsDeleteManyInput {
+    where: TagsOnSpotsWhereInput!
+}
+
+input TagsOnSpotsSpotCreateRelationInput {
+    create: SpotCreateInput
+    connect: SpotWhereUniqueInput
+    connectOrCreate: SpotConnectOrCreateInput
+}
+
+input TagsOnSpotsSpotUpdateRelationsInput {
+    connect: SpotWhereUniqueInput
+    create: SpotCreateInput
+    connectOrCreate: SpotConnectOrCreateInput
+    update: SpotUpdateInput
+    upsert: SpotUpsertInput
+    delete: Boolean
+    disconnect: Boolean
+}
+input TagsOnSpotsTagCreateRelationInput {
+    create: TagCreateInput
+    connect: TagWhereUniqueInput
+    connectOrCreate: TagConnectOrCreateInput
+}
+
+input TagsOnSpotsTagUpdateRelationsInput {
+    connect: TagWhereUniqueInput
+    create: TagCreateInput
+    connectOrCreate: TagConnectOrCreateInput
+    update: TagUpdateInput
+    upsert: TagUpsertInput
+    delete: Boolean
+    disconnect: Boolean
+}
+
+input TagFilter {
+    some: TagWhereInput
+    every: TagWhereInput
+    none: TagWhereInput
+}
+
+input TagWhereInput {
+    OR: [TagWhereInput]
+    NOT: [TagWhereInput]
+    AND: [TagWhereInput]
+    id: StringFilter
+    name: StringFilter
+    tagPictureUrl: StringFilter
+    category: CategoriesSpotAndTagEnumFilter
+    spots: TagsOnSpotsFilter
+}
+
+input TagWhereUniqueInput {
+    id: String
+    name: String
+}
+
+input TagExtendedWhereUniqueInput {
+    OR: [TagWhereInput]
+    NOT: [TagWhereInput]
+    AND: [TagWhereInput]
+    id: String
+    name: String
+    tagPictureUrl: StringFilter
+    category: CategoriesSpotAndTagEnumFilter
+    spots: TagsOnSpotsFilter
+}
+
+input TagOrderByInput {
+    id: OrderByArg
+    name: OrderByArg
+    tagPictureUrl: OrderByArg
+    category: OrderByArg
+    spots: TagsOnSpotsOrderByInput
+}
+
+input TagCreateInput {
+    id: String!
+    name: String!
+    tagPictureUrl: String!
+    category: CategoriesSpotAndTag!
+    spots: TagSpotsCreateRelationInput
+}
+
+input TagCreateManyInput {
+    id: String!
+    name: String!
+    tagPictureUrl: String!
+    category: CategoriesSpotAndTag!
+}
+
+input TagUpdateInput {
+    id: String
+    name: String
+    tagPictureUrl: String
+    category: CategoriesSpotAndTag
+    spots: TagSpotsUpdateRelationsInput
+}
+
+input TagUpdateUniqueInput {
+    data: TagUpdateInput!
+    where: TagWhereUniqueInput!
+}
+
+input TagUpdateManyInput {
+    where: TagWhereInput!
+    data: TagUpdateInput!
+}
+
+input TagUpsertInput {
+    create: TagCreateInput!
+    update: TagUpdateInput!
+}
+
+input TagUpsertUniqueInput {
+    where: TagWhereUniqueInput!
+    create: TagCreateInput!
+    update: TagUpdateInput!
+}
+
+input TagConnectOrCreateInput {
+    where: TagWhereUniqueInput!
+    create: TagCreateInput!
+}
+
+input TagDeleteUniqueInput {
+    where: TagWhereUniqueInput!
+}
+
+input TagDeleteManyInput {
+    where: TagWhereInput!
+}
+
+input TagSpotsCreateRelationInput {
+    create: [TagsOnSpotsCreateInput]
+    connect: [TagsOnSpotsWhereUniqueInput]
+    connectOrCreate: [TagsOnSpotsConnectOrCreateInput]
+}
+
+input TagSpotsUpdateRelationsInput {
+    connect: [TagsOnSpotsWhereUniqueInput]
+    create: [TagsOnSpotsCreateInput]
+    connectOrCreate: [TagsOnSpotsConnectOrCreateInput]
+    update: [TagsOnSpotsUpdateUniqueInput]
+    upsert: [TagsOnSpotsUpsertUniqueInput]
+    delete: [TagsOnSpotsDeleteUniqueInput]
+    disconnect: [TagsOnSpotsWhereUniqueInput]
+    set: [TagsOnSpotsWhereUniqueInput]
+    updateMany: [TagsOnSpotsUpdateManyInput]
+    deleteMany: [TagsOnSpotsDeleteManyInput]
 }
 
 input SpotPictureFilter {
@@ -1042,103 +1127,6 @@ input SpotPictureSpotUpdateRelationsInput {
     upsert: SpotUpsertInput
     delete: Boolean
     disconnect: Boolean
-}
-
-input ProductFilter {
-    some: ProductWhereInput
-    every: ProductWhereInput
-    none: ProductWhereInput
-}
-
-input ProductWhereInput {
-    OR: [ProductWhereInput]
-    NOT: [ProductWhereInput]
-    AND: [ProductWhereInput]
-    id: StringFilter
-    photoUrl: StringFilter
-    gamePoints: IntFilter
-    price: IntFilter
-}
-
-input ProductWhereUniqueInput {
-    id: String
-}
-
-input ProductExtendedWhereUniqueInput {
-    OR: [ProductWhereInput]
-    NOT: [ProductWhereInput]
-    AND: [ProductWhereInput]
-    id: String
-    photoUrl: StringFilter
-    gamePoints: IntFilter
-    price: IntFilter
-}
-
-input ProductOrderByInput {
-    id: OrderByArg
-    photoUrl: OrderByArg
-    gamePoints: OrderByArg
-    price: OrderByArg
-}
-
-input ProductCreateInput {
-    id: String!
-    photoUrl: String
-    gamePoints: Int!
-    price: Int!
-}
-
-input ProductCreateManyInput {
-    id: String!
-    photoUrl: String
-    gamePoints: Int!
-    price: Int!
-}
-
-input ProductUpdateInput {
-    id: String
-    photoUrl: String
-    gamePoints: Int
-    price: Int
-}
-
-input ProductOperationInput {
-    gamePoints: IntOperation
-    price: IntOperation
-}
-
-input ProductUpdateUniqueInput {
-    data: ProductUpdateInput!
-    where: ProductWhereUniqueInput!
-}
-
-input ProductUpdateManyInput {
-    where: ProductWhereInput!
-    data: ProductUpdateInput!
-}
-
-input ProductUpsertInput {
-    create: ProductCreateInput!
-    update: ProductUpdateInput!
-}
-
-input ProductUpsertUniqueInput {
-    where: ProductWhereUniqueInput!
-    create: ProductCreateInput!
-    update: ProductUpdateInput!
-}
-
-input ProductConnectOrCreateInput {
-    where: ProductWhereUniqueInput!
-    create: ProductCreateInput!
-}
-
-input ProductDeleteUniqueInput {
-    where: ProductWhereUniqueInput!
-}
-
-input ProductDeleteManyInput {
-    where: ProductWhereInput!
 }
 
 input RatingFilter {
@@ -1397,119 +1385,246 @@ input FavoriteSpotUpdateRelationsInput {
     disconnect: Boolean
 }
 
-input TagFilter {
-    some: TagWhereInput
-    every: TagWhereInput
-    none: TagWhereInput
+input ProductFilter {
+    some: ProductWhereInput
+    every: ProductWhereInput
+    none: ProductWhereInput
 }
 
-input TagWhereInput {
-    OR: [TagWhereInput]
-    NOT: [TagWhereInput]
-    AND: [TagWhereInput]
+input ProductWhereInput {
+    OR: [ProductWhereInput]
+    NOT: [ProductWhereInput]
+    AND: [ProductWhereInput]
+    id: StringFilter
+    photoUrl: StringFilter
+    gamePoints: IntFilter
+    price: IntFilter
+}
+
+input ProductWhereUniqueInput {
+    id: String
+}
+
+input ProductExtendedWhereUniqueInput {
+    OR: [ProductWhereInput]
+    NOT: [ProductWhereInput]
+    AND: [ProductWhereInput]
+    id: String
+    photoUrl: StringFilter
+    gamePoints: IntFilter
+    price: IntFilter
+}
+
+input ProductOrderByInput {
+    id: OrderByArg
+    photoUrl: OrderByArg
+    gamePoints: OrderByArg
+    price: OrderByArg
+}
+
+input ProductCreateInput {
+    id: String!
+    photoUrl: String
+    gamePoints: Int!
+    price: Int!
+}
+
+input ProductCreateManyInput {
+    id: String!
+    photoUrl: String
+    gamePoints: Int!
+    price: Int!
+}
+
+input ProductUpdateInput {
+    id: String
+    photoUrl: String
+    gamePoints: Int
+    price: Int
+}
+
+input ProductOperationInput {
+    gamePoints: IntOperation
+    price: IntOperation
+}
+
+input ProductUpdateUniqueInput {
+    data: ProductUpdateInput!
+    where: ProductWhereUniqueInput!
+}
+
+input ProductUpdateManyInput {
+    where: ProductWhereInput!
+    data: ProductUpdateInput!
+}
+
+input ProductUpsertInput {
+    create: ProductCreateInput!
+    update: ProductUpdateInput!
+}
+
+input ProductUpsertUniqueInput {
+    where: ProductWhereUniqueInput!
+    create: ProductCreateInput!
+    update: ProductUpdateInput!
+}
+
+input ProductConnectOrCreateInput {
+    where: ProductWhereUniqueInput!
+    create: ProductCreateInput!
+}
+
+input ProductDeleteUniqueInput {
+    where: ProductWhereUniqueInput!
+}
+
+input ProductDeleteManyInput {
+    where: ProductWhereInput!
+}
+
+input ItinaryFilter {
+    some: ItinaryWhereInput
+    every: ItinaryWhereInput
+    none: ItinaryWhereInput
+}
+
+input ItinaryWhereInput {
+    OR: [ItinaryWhereInput]
+    NOT: [ItinaryWhereInput]
+    AND: [ItinaryWhereInput]
     id: StringFilter
     name: StringFilter
-    tagPictureUrl: StringFilter
-    isResources: BooleanFilter
-    isSpareTime: BooleanFilter
+    description: StringFilter
+    gamePoint: IntFilter
+    photoUrl: StringFilter
+    profileIDs: StringListFilter
+    profiles: ProfileFilter
     spotIDs: StringListFilter
     spots: SpotFilter
 }
 
-input TagWhereUniqueInput {
+input ItinaryWhereUniqueInput {
     id: String
 }
 
-input TagExtendedWhereUniqueInput {
-    OR: [TagWhereInput]
-    NOT: [TagWhereInput]
-    AND: [TagWhereInput]
+input ItinaryExtendedWhereUniqueInput {
+    OR: [ItinaryWhereInput]
+    NOT: [ItinaryWhereInput]
+    AND: [ItinaryWhereInput]
     id: String
     name: StringFilter
-    tagPictureUrl: StringFilter
-    isResources: BooleanFilter
-    isSpareTime: BooleanFilter
+    description: StringFilter
+    gamePoint: IntFilter
+    photoUrl: StringFilter
+    profileIDs: StringListFilter
+    profiles: ProfileFilter
     spotIDs: StringListFilter
     spots: SpotFilter
 }
 
-input TagOrderByInput {
+input ItinaryOrderByInput {
     id: OrderByArg
     name: OrderByArg
-    tagPictureUrl: OrderByArg
-    isResources: OrderByArg
-    isSpareTime: OrderByArg
+    description: OrderByArg
+    gamePoint: OrderByArg
+    photoUrl: OrderByArg
+    profileIDs: OrderByArg
+    profiles: ProfileOrderByInput
     spotIDs: OrderByArg
     spots: SpotOrderByInput
 }
 
-input TagCreateInput {
+input ItinaryCreateInput {
     id: String!
     name: String!
-    tagPictureUrl: String!
-    isResources: Boolean!
-    isSpareTime: Boolean!
-    spots: TagSpotsCreateRelationInput
+    description: String!
+    gamePoint: Int
+    photoUrl: String
+    profiles: ItinaryProfilesCreateRelationInput
+    spots: ItinarySpotsCreateRelationInput
 }
 
-input TagCreateManyInput {
+input ItinaryCreateManyInput {
     id: String!
     name: String!
-    tagPictureUrl: String!
-    isResources: Boolean!
-    isSpareTime: Boolean!
+    description: String!
+    gamePoint: Int
+    photoUrl: String
 }
 
-input TagUpdateInput {
+input ItinaryUpdateInput {
     id: String
     name: String
-    tagPictureUrl: String
-    isResources: Boolean
-    isSpareTime: Boolean
-    spots: TagSpotsUpdateRelationsInput
+    description: String
+    gamePoint: Int
+    photoUrl: String
+    profiles: ItinaryProfilesUpdateRelationsInput
+    spots: ItinarySpotsUpdateRelationsInput
 }
 
-input TagUpdateUniqueInput {
-    data: TagUpdateInput!
-    where: TagWhereUniqueInput!
+input ItinaryOperationInput {
+    gamePoint: IntOperation
 }
 
-input TagUpdateManyInput {
-    where: TagWhereInput!
-    data: TagUpdateInput!
+input ItinaryUpdateUniqueInput {
+    data: ItinaryUpdateInput!
+    where: ItinaryWhereUniqueInput!
 }
 
-input TagUpsertInput {
-    create: TagCreateInput!
-    update: TagUpdateInput!
+input ItinaryUpdateManyInput {
+    where: ItinaryWhereInput!
+    data: ItinaryUpdateInput!
 }
 
-input TagUpsertUniqueInput {
-    where: TagWhereUniqueInput!
-    create: TagCreateInput!
-    update: TagUpdateInput!
+input ItinaryUpsertInput {
+    create: ItinaryCreateInput!
+    update: ItinaryUpdateInput!
 }
 
-input TagConnectOrCreateInput {
-    where: TagWhereUniqueInput!
-    create: TagCreateInput!
+input ItinaryUpsertUniqueInput {
+    where: ItinaryWhereUniqueInput!
+    create: ItinaryCreateInput!
+    update: ItinaryUpdateInput!
 }
 
-input TagDeleteUniqueInput {
-    where: TagWhereUniqueInput!
+input ItinaryConnectOrCreateInput {
+    where: ItinaryWhereUniqueInput!
+    create: ItinaryCreateInput!
 }
 
-input TagDeleteManyInput {
-    where: TagWhereInput!
+input ItinaryDeleteUniqueInput {
+    where: ItinaryWhereUniqueInput!
 }
 
-input TagSpotsCreateRelationInput {
+input ItinaryDeleteManyInput {
+    where: ItinaryWhereInput!
+}
+
+input ItinaryProfilesCreateRelationInput {
+    create: [ProfileCreateInput]
+    connect: [ProfileWhereUniqueInput]
+    connectOrCreate: [ProfileConnectOrCreateInput]
+}
+
+input ItinaryProfilesUpdateRelationsInput {
+    connect: [ProfileWhereUniqueInput]
+    create: [ProfileCreateInput]
+    connectOrCreate: [ProfileConnectOrCreateInput]
+    update: [ProfileUpdateUniqueInput]
+    upsert: [ProfileUpsertUniqueInput]
+    delete: [ProfileDeleteUniqueInput]
+    disconnect: [ProfileWhereUniqueInput]
+    set: [ProfileWhereUniqueInput]
+    updateMany: [ProfileUpdateManyInput]
+    deleteMany: [ProfileDeleteManyInput]
+}
+input ItinarySpotsCreateRelationInput {
     create: [SpotCreateInput]
     connect: [SpotWhereUniqueInput]
     connectOrCreate: [SpotConnectOrCreateInput]
 }
 
-input TagSpotsUpdateRelationsInput {
+input ItinarySpotsUpdateRelationsInput {
     connect: [SpotWhereUniqueInput]
     create: [SpotCreateInput]
     connectOrCreate: [SpotConnectOrCreateInput]
@@ -1780,57 +1895,6 @@ type Mutation {
     ): BatchPayload
 
     """
-    Create a new single Itinary record.
-    """
-    createItinary(data: ItinaryCreateInput!): Itinary
-
-    """
-    Create multiple new Itinary records.
-    """
-    createManyItinaries(
-        data: [ItinaryCreateManyInput!]
-        skipDuplicates: Boolean
-    ): BatchPayload
-
-    """
-    Update an existing single Itinary record.
-    """
-    updateItinary(
-        where: ItinaryWhereUniqueInput!
-        data: ItinaryUpdateInput
-        operation: ItinaryOperationInput
-    ): Itinary
-
-    """
-    Update multiple existing Itinary records.
-    """
-    updateManyItinaries(
-        where: ItinaryWhereInput!
-        data: ItinaryUpdateInput
-        operation: ItinaryOperationInput
-    ): BatchPayload
-
-    """
-    Update an existing or create a new single Itinary record.
-    """
-    upsertItinary(
-        data: ItinaryUpdateInput!
-        where: ItinaryWhereUniqueInput!
-    ): Itinary
-
-    """
-    Delete a single Itinary record.
-    """
-    deleteItinary(where: ItinaryWhereUniqueInput!): Itinary
-
-    """
-    Delete multiple Itinary records.
-    """
-    deleteManyItinaries(
-        where: ItinaryWhereInput!
-    ): BatchPayload
-
-    """
     Create a new single Spot record.
     """
     createSpot(data: SpotCreateInput!): Spot
@@ -1878,6 +1942,106 @@ type Mutation {
     Delete multiple Spot records.
     """
     deleteManySpots(where: SpotWhereInput!): BatchPayload
+
+    """
+    Create a new single TagsOnSpots record.
+    """
+    createTagsOnSpots(
+        data: TagsOnSpotsCreateInput!
+    ): TagsOnSpots
+
+    """
+    Create multiple new TagsOnSpots records.
+    """
+    createManyTagsOnSpots(
+        data: [TagsOnSpotsCreateManyInput!]
+        skipDuplicates: Boolean
+    ): BatchPayload
+
+    """
+    Update an existing single TagsOnSpots record.
+    """
+    updateTagsOnSpots(
+        where: TagsOnSpotsWhereUniqueInput!
+        data: TagsOnSpotsUpdateInput
+    ): TagsOnSpots
+
+    """
+    Update multiple existing TagsOnSpots records.
+    """
+    updateManyTagsOnSpots(
+        where: TagsOnSpotsWhereInput!
+        data: TagsOnSpotsUpdateInput
+    ): BatchPayload
+
+    """
+    Update an existing or create a new single TagsOnSpots record.
+    """
+    upsertTagsOnSpots(
+        data: TagsOnSpotsUpdateInput!
+        where: TagsOnSpotsWhereUniqueInput!
+    ): TagsOnSpots
+
+    """
+    Delete a single TagsOnSpots record.
+    """
+    deleteTagsOnSpots(
+        where: TagsOnSpotsWhereUniqueInput!
+    ): TagsOnSpots
+
+    """
+    Delete multiple TagsOnSpots records.
+    """
+    deleteManyTagsOnSpots(
+        where: TagsOnSpotsWhereInput!
+    ): BatchPayload
+
+    """
+    Create a new single Tag record.
+    """
+    createTag(data: TagCreateInput!): Tag
+
+    """
+    Create multiple new Tag records.
+    """
+    createManyTags(
+        data: [TagCreateManyInput!]
+        skipDuplicates: Boolean
+    ): BatchPayload
+
+    """
+    Update an existing single Tag record.
+    """
+    updateTag(
+        where: TagWhereUniqueInput!
+        data: TagUpdateInput
+    ): Tag
+
+    """
+    Update multiple existing Tag records.
+    """
+    updateManyTags(
+        where: TagWhereInput!
+        data: TagUpdateInput
+    ): BatchPayload
+
+    """
+    Update an existing or create a new single Tag record.
+    """
+    upsertTag(
+        data: TagUpdateInput!
+        where: TagWhereUniqueInput!
+    ): Tag
+
+    """
+    Delete a single Tag record.
+    """
+    deleteTag(where: TagWhereUniqueInput!): Tag
+
+    """
+    Delete multiple Tag records.
+    """
+    deleteManyTags(where: TagWhereInput!): BatchPayload
 
     """
     Create a new single SpotPicture record.
@@ -1930,57 +2094,6 @@ type Mutation {
     """
     deleteManySpotPictures(
         where: SpotPictureWhereInput!
-    ): BatchPayload
-
-    """
-    Create a new single Product record.
-    """
-    createProduct(data: ProductCreateInput!): Product
-
-    """
-    Create multiple new Product records.
-    """
-    createManyProducts(
-        data: [ProductCreateManyInput!]
-        skipDuplicates: Boolean
-    ): BatchPayload
-
-    """
-    Update an existing single Product record.
-    """
-    updateProduct(
-        where: ProductWhereUniqueInput!
-        data: ProductUpdateInput
-        operation: ProductOperationInput
-    ): Product
-
-    """
-    Update multiple existing Product records.
-    """
-    updateManyProducts(
-        where: ProductWhereInput!
-        data: ProductUpdateInput
-        operation: ProductOperationInput
-    ): BatchPayload
-
-    """
-    Update an existing or create a new single Product record.
-    """
-    upsertProduct(
-        data: ProductUpdateInput!
-        where: ProductWhereUniqueInput!
-    ): Product
-
-    """
-    Delete a single Product record.
-    """
-    deleteProduct(where: ProductWhereUniqueInput!): Product
-
-    """
-    Delete multiple Product records.
-    """
-    deleteManyProducts(
-        where: ProductWhereInput!
     ): BatchPayload
 
     """
@@ -2086,51 +2199,106 @@ type Mutation {
     ): BatchPayload
 
     """
-    Create a new single Tag record.
+    Create a new single Product record.
     """
-    createTag(data: TagCreateInput!): Tag
+    createProduct(data: ProductCreateInput!): Product
 
     """
-    Create multiple new Tag records.
+    Create multiple new Product records.
     """
-    createManyTags(
-        data: [TagCreateManyInput!]
+    createManyProducts(
+        data: [ProductCreateManyInput!]
         skipDuplicates: Boolean
     ): BatchPayload
 
     """
-    Update an existing single Tag record.
+    Update an existing single Product record.
     """
-    updateTag(
-        where: TagWhereUniqueInput!
-        data: TagUpdateInput
-    ): Tag
+    updateProduct(
+        where: ProductWhereUniqueInput!
+        data: ProductUpdateInput
+        operation: ProductOperationInput
+    ): Product
 
     """
-    Update multiple existing Tag records.
+    Update multiple existing Product records.
     """
-    updateManyTags(
-        where: TagWhereInput!
-        data: TagUpdateInput
+    updateManyProducts(
+        where: ProductWhereInput!
+        data: ProductUpdateInput
+        operation: ProductOperationInput
     ): BatchPayload
 
     """
-    Update an existing or create a new single Tag record.
+    Update an existing or create a new single Product record.
     """
-    upsertTag(
-        data: TagUpdateInput!
-        where: TagWhereUniqueInput!
-    ): Tag
+    upsertProduct(
+        data: ProductUpdateInput!
+        where: ProductWhereUniqueInput!
+    ): Product
 
     """
-    Delete a single Tag record.
+    Delete a single Product record.
     """
-    deleteTag(where: TagWhereUniqueInput!): Tag
+    deleteProduct(where: ProductWhereUniqueInput!): Product
 
     """
-    Delete multiple Tag records.
+    Delete multiple Product records.
     """
-    deleteManyTags(where: TagWhereInput!): BatchPayload
+    deleteManyProducts(
+        where: ProductWhereInput!
+    ): BatchPayload
+
+    """
+    Create a new single Itinary record.
+    """
+    createItinary(data: ItinaryCreateInput!): Itinary
+
+    """
+    Create multiple new Itinary records.
+    """
+    createManyItinaries(
+        data: [ItinaryCreateManyInput!]
+        skipDuplicates: Boolean
+    ): BatchPayload
+
+    """
+    Update an existing single Itinary record.
+    """
+    updateItinary(
+        where: ItinaryWhereUniqueInput!
+        data: ItinaryUpdateInput
+        operation: ItinaryOperationInput
+    ): Itinary
+
+    """
+    Update multiple existing Itinary records.
+    """
+    updateManyItinaries(
+        where: ItinaryWhereInput!
+        data: ItinaryUpdateInput
+        operation: ItinaryOperationInput
+    ): BatchPayload
+
+    """
+    Update an existing or create a new single Itinary record.
+    """
+    upsertItinary(
+        data: ItinaryUpdateInput!
+        where: ItinaryWhereUniqueInput!
+    ): Itinary
+
+    """
+    Delete a single Itinary record.
+    """
+    deleteItinary(where: ItinaryWhereUniqueInput!): Itinary
+
+    """
+    Delete multiple Itinary records.
+    """
+    deleteManyItinaries(
+        where: ItinaryWhereInput!
+    ): BatchPayload
 }
 type Query {
     """
@@ -2184,31 +2352,6 @@ type Query {
     ): Int
 
     """
-    Find a single Itinary record by unique identifier.
-    """
-    getItinary(where: ItinaryWhereUniqueInput!): Itinary
-
-    """
-    Find many Itinary records (optional query filters).
-    """
-    listItinaries(
-        where: ItinaryWhereInput
-        orderBy: [ItinaryOrderByInput]
-        skip: Int
-        take: Int
-    ): [Itinary]
-
-    """
-    Count all Itinary records (optional query filters).
-    """
-    countItinaries(
-        where: ItinaryWhereInput
-        orderBy: [ItinaryOrderByInput]
-        skip: Int
-        take: Int
-    ): Int
-
-    """
     Find a single Spot record by unique identifier.
     """
     getSpot(where: SpotWhereUniqueInput!): Spot
@@ -2229,6 +2372,58 @@ type Query {
     countSpots(
         where: SpotWhereInput
         orderBy: [SpotOrderByInput]
+        skip: Int
+        take: Int
+    ): Int
+
+    """
+    Find a single TagsOnSpots record by unique identifier.
+    """
+    getTagsOnSpots(
+        where: TagsOnSpotsWhereUniqueInput!
+    ): TagsOnSpots
+
+    """
+    Find many TagsOnSpots records (optional query filters).
+    """
+    listTagsOnSpots(
+        where: TagsOnSpotsWhereInput
+        orderBy: [TagsOnSpotsOrderByInput]
+        skip: Int
+        take: Int
+    ): [TagsOnSpots]
+
+    """
+    Count all TagsOnSpots records (optional query filters).
+    """
+    countTagsOnSpots(
+        where: TagsOnSpotsWhereInput
+        orderBy: [TagsOnSpotsOrderByInput]
+        skip: Int
+        take: Int
+    ): Int
+
+    """
+    Find a single Tag record by unique identifier.
+    """
+    getTag(where: TagWhereUniqueInput!): Tag
+
+    """
+    Find many Tag records (optional query filters).
+    """
+    listTags(
+        where: TagWhereInput
+        orderBy: [TagOrderByInput]
+        skip: Int
+        take: Int
+    ): [Tag]
+
+    """
+    Count all Tag records (optional query filters).
+    """
+    countTags(
+        where: TagWhereInput
+        orderBy: [TagOrderByInput]
         skip: Int
         take: Int
     ): Int
@@ -2256,31 +2451,6 @@ type Query {
     countSpotPictures(
         where: SpotPictureWhereInput
         orderBy: [SpotPictureOrderByInput]
-        skip: Int
-        take: Int
-    ): Int
-
-    """
-    Find a single Product record by unique identifier.
-    """
-    getProduct(where: ProductWhereUniqueInput!): Product
-
-    """
-    Find many Product records (optional query filters).
-    """
-    listProducts(
-        where: ProductWhereInput
-        orderBy: [ProductOrderByInput]
-        skip: Int
-        take: Int
-    ): [Product]
-
-    """
-    Count all Product records (optional query filters).
-    """
-    countProducts(
-        where: ProductWhereInput
-        orderBy: [ProductOrderByInput]
         skip: Int
         take: Int
     ): Int
@@ -2336,26 +2506,51 @@ type Query {
     ): Int
 
     """
-    Find a single Tag record by unique identifier.
+    Find a single Product record by unique identifier.
     """
-    getTag(where: TagWhereUniqueInput!): Tag
+    getProduct(where: ProductWhereUniqueInput!): Product
 
     """
-    Find many Tag records (optional query filters).
+    Find many Product records (optional query filters).
     """
-    listTags(
-        where: TagWhereInput
-        orderBy: [TagOrderByInput]
+    listProducts(
+        where: ProductWhereInput
+        orderBy: [ProductOrderByInput]
         skip: Int
         take: Int
-    ): [Tag]
+    ): [Product]
 
     """
-    Count all Tag records (optional query filters).
+    Count all Product records (optional query filters).
     """
-    countTags(
-        where: TagWhereInput
-        orderBy: [TagOrderByInput]
+    countProducts(
+        where: ProductWhereInput
+        orderBy: [ProductOrderByInput]
+        skip: Int
+        take: Int
+    ): Int
+
+    """
+    Find a single Itinary record by unique identifier.
+    """
+    getItinary(where: ItinaryWhereUniqueInput!): Itinary
+
+    """
+    Find many Itinary records (optional query filters).
+    """
+    listItinaries(
+        where: ItinaryWhereInput
+        orderBy: [ItinaryOrderByInput]
+        skip: Int
+        take: Int
+    ): [Itinary]
+
+    """
+    Count all Itinary records (optional query filters).
+    """
+    countItinaries(
+        where: ItinaryWhereInput
+        orderBy: [ItinaryOrderByInput]
         skip: Int
         take: Int
     ): Int
@@ -2528,73 +2723,6 @@ type Subscription {
         @aws_subscribe(mutations: ["deleteManyProfiles"])
 
     """
-    Triggered from `createItinary` mutation (excl. `createManyItinaries` and `upsertItinary`).
-    """
-    onCreatedItinary(id: String): Itinary
-        @aws_subscribe(mutations: ["createItinary"])
-
-    """
-    Triggered from `updateItinary` mutation (excl. `updateManyItinaries` and `upsertItinary`).
-    """
-    onUpdatedItinary(id: String): Itinary
-        @aws_subscribe(mutations: ["updateItinary"])
-
-    """
-    Triggered from `upsertItinary` mutation.
-    """
-    onUpsertedItinary(id: String): Itinary
-        @aws_subscribe(mutations: ["upsertItinary"])
-
-    """
-    Triggered from `deleteItinary` mutation (excl. `deleteManyItinaries`).
-    """
-    onDeletedItinary(id: String): Itinary
-        @aws_subscribe(mutations: ["deleteItinary"])
-
-    """
-    Triggered from ANY SINGLE record mutation.
-    """
-    onMutatedItinary(id: String): Itinary
-        @aws_subscribe(
-            mutations: [
-                "createItinary"
-                "updateItinary"
-                "upsertItinary"
-                "deleteItinary"
-            ]
-        )
-
-    """
-    Triggered from `createManyItinaries` mutation.
-    """
-    onCreatedManyItinaries: BatchPayload
-        @aws_subscribe(mutations: ["createManyItinaries"])
-
-    """
-    Triggered from `updateManyItinaries` mutation.
-    """
-    onUpdatedManyItinaries: BatchPayload
-        @aws_subscribe(mutations: ["updateManyItinaries"])
-
-    """
-    Triggered from ANY MULTIPLE records mutation.
-    """
-    onMutatedManyItinaries: BatchPayload
-        @aws_subscribe(
-            mutations: [
-                "createManyItinaries"
-                "updateManyItinaries"
-                "deleteManyItinaries"
-            ]
-        )
-
-    """
-    Triggered from `deleteManyItinaries` mutation.
-    """
-    onDeletedManyItinaries: BatchPayload
-        @aws_subscribe(mutations: ["deleteManyItinaries"])
-
-    """
     Triggered from `createSpot` mutation (excl. `createManySpots` and `upsertSpot`).
     """
     onCreatedSpot(id: String, profileId: String): Spot
@@ -2660,6 +2788,140 @@ type Subscription {
     """
     onDeletedManySpots: BatchPayload
         @aws_subscribe(mutations: ["deleteManySpots"])
+
+    """
+    Triggered from `createTagsOnSpots` mutation (excl. `createManyTagsOnSpots` and `upsertTagsOnSpots`).
+    """
+    onCreatedTagsOnSpots(id: String): TagsOnSpots
+        @aws_subscribe(mutations: ["createTagsOnSpots"])
+
+    """
+    Triggered from `updateTagsOnSpots` mutation (excl. `updateManyTagsOnSpots` and `upsertTagsOnSpots`).
+    """
+    onUpdatedTagsOnSpots(id: String): TagsOnSpots
+        @aws_subscribe(mutations: ["updateTagsOnSpots"])
+
+    """
+    Triggered from `upsertTagsOnSpots` mutation.
+    """
+    onUpsertedTagsOnSpots(id: String): TagsOnSpots
+        @aws_subscribe(mutations: ["upsertTagsOnSpots"])
+
+    """
+    Triggered from `deleteTagsOnSpots` mutation (excl. `deleteManyTagsOnSpots`).
+    """
+    onDeletedTagsOnSpots(id: String): TagsOnSpots
+        @aws_subscribe(mutations: ["deleteTagsOnSpots"])
+
+    """
+    Triggered from ANY SINGLE record mutation.
+    """
+    onMutatedTagsOnSpots(id: String): TagsOnSpots
+        @aws_subscribe(
+            mutations: [
+                "createTagsOnSpots"
+                "updateTagsOnSpots"
+                "upsertTagsOnSpots"
+                "deleteTagsOnSpots"
+            ]
+        )
+
+    """
+    Triggered from `createManyTagsOnSpots` mutation.
+    """
+    onCreatedManyTagsOnSpots: BatchPayload
+        @aws_subscribe(mutations: ["createManyTagsOnSpots"])
+
+    """
+    Triggered from `updateManyTagsOnSpots` mutation.
+    """
+    onUpdatedManyTagsOnSpots: BatchPayload
+        @aws_subscribe(mutations: ["updateManyTagsOnSpots"])
+
+    """
+    Triggered from ANY MULTIPLE records mutation.
+    """
+    onMutatedManyTagsOnSpots: BatchPayload
+        @aws_subscribe(
+            mutations: [
+                "createManyTagsOnSpots"
+                "updateManyTagsOnSpots"
+                "deleteManyTagsOnSpots"
+            ]
+        )
+
+    """
+    Triggered from `deleteManyTagsOnSpots` mutation.
+    """
+    onDeletedManyTagsOnSpots: BatchPayload
+        @aws_subscribe(mutations: ["deleteManyTagsOnSpots"])
+
+    """
+    Triggered from `createTag` mutation (excl. `createManyTags` and `upsertTag`).
+    """
+    onCreatedTag(id: String, name: String): Tag
+        @aws_subscribe(mutations: ["createTag"])
+
+    """
+    Triggered from `updateTag` mutation (excl. `updateManyTags` and `upsertTag`).
+    """
+    onUpdatedTag(id: String, name: String): Tag
+        @aws_subscribe(mutations: ["updateTag"])
+
+    """
+    Triggered from `upsertTag` mutation.
+    """
+    onUpsertedTag(id: String, name: String): Tag
+        @aws_subscribe(mutations: ["upsertTag"])
+
+    """
+    Triggered from `deleteTag` mutation (excl. `deleteManyTags`).
+    """
+    onDeletedTag(id: String, name: String): Tag
+        @aws_subscribe(mutations: ["deleteTag"])
+
+    """
+    Triggered from ANY SINGLE record mutation.
+    """
+    onMutatedTag(id: String, name: String): Tag
+        @aws_subscribe(
+            mutations: [
+                "createTag"
+                "updateTag"
+                "upsertTag"
+                "deleteTag"
+            ]
+        )
+
+    """
+    Triggered from `createManyTags` mutation.
+    """
+    onCreatedManyTags: BatchPayload
+        @aws_subscribe(mutations: ["createManyTags"])
+
+    """
+    Triggered from `updateManyTags` mutation.
+    """
+    onUpdatedManyTags: BatchPayload
+        @aws_subscribe(mutations: ["updateManyTags"])
+
+    """
+    Triggered from ANY MULTIPLE records mutation.
+    """
+    onMutatedManyTags: BatchPayload
+        @aws_subscribe(
+            mutations: [
+                "createManyTags"
+                "updateManyTags"
+                "deleteManyTags"
+            ]
+        )
+
+    """
+    Triggered from `deleteManyTags` mutation.
+    """
+    onDeletedManyTags: BatchPayload
+        @aws_subscribe(mutations: ["deleteManyTags"])
 
     """
     Triggered from `createSpotPicture` mutation (excl. `createManySpotPictures` and `upsertSpotPicture`).
@@ -2748,73 +3010,6 @@ type Subscription {
         @aws_subscribe(
             mutations: ["deleteManySpotPictures"]
         )
-
-    """
-    Triggered from `createProduct` mutation (excl. `createManyProducts` and `upsertProduct`).
-    """
-    onCreatedProduct(id: String): Product
-        @aws_subscribe(mutations: ["createProduct"])
-
-    """
-    Triggered from `updateProduct` mutation (excl. `updateManyProducts` and `upsertProduct`).
-    """
-    onUpdatedProduct(id: String): Product
-        @aws_subscribe(mutations: ["updateProduct"])
-
-    """
-    Triggered from `upsertProduct` mutation.
-    """
-    onUpsertedProduct(id: String): Product
-        @aws_subscribe(mutations: ["upsertProduct"])
-
-    """
-    Triggered from `deleteProduct` mutation (excl. `deleteManyProducts`).
-    """
-    onDeletedProduct(id: String): Product
-        @aws_subscribe(mutations: ["deleteProduct"])
-
-    """
-    Triggered from ANY SINGLE record mutation.
-    """
-    onMutatedProduct(id: String): Product
-        @aws_subscribe(
-            mutations: [
-                "createProduct"
-                "updateProduct"
-                "upsertProduct"
-                "deleteProduct"
-            ]
-        )
-
-    """
-    Triggered from `createManyProducts` mutation.
-    """
-    onCreatedManyProducts: BatchPayload
-        @aws_subscribe(mutations: ["createManyProducts"])
-
-    """
-    Triggered from `updateManyProducts` mutation.
-    """
-    onUpdatedManyProducts: BatchPayload
-        @aws_subscribe(mutations: ["updateManyProducts"])
-
-    """
-    Triggered from ANY MULTIPLE records mutation.
-    """
-    onMutatedManyProducts: BatchPayload
-        @aws_subscribe(
-            mutations: [
-                "createManyProducts"
-                "updateManyProducts"
-                "deleteManyProducts"
-            ]
-        )
-
-    """
-    Triggered from `deleteManyProducts` mutation.
-    """
-    onDeletedManyProducts: BatchPayload
-        @aws_subscribe(mutations: ["deleteManyProducts"])
 
     """
     Triggered from `createRating` mutation (excl. `createManyRatings` and `upsertRating`).
@@ -2987,69 +3182,136 @@ type Subscription {
         @aws_subscribe(mutations: ["deleteManyFavorites"])
 
     """
-    Triggered from `createTag` mutation (excl. `createManyTags` and `upsertTag`).
+    Triggered from `createProduct` mutation (excl. `createManyProducts` and `upsertProduct`).
     """
-    onCreatedTag(id: String): Tag
-        @aws_subscribe(mutations: ["createTag"])
+    onCreatedProduct(id: String): Product
+        @aws_subscribe(mutations: ["createProduct"])
 
     """
-    Triggered from `updateTag` mutation (excl. `updateManyTags` and `upsertTag`).
+    Triggered from `updateProduct` mutation (excl. `updateManyProducts` and `upsertProduct`).
     """
-    onUpdatedTag(id: String): Tag
-        @aws_subscribe(mutations: ["updateTag"])
+    onUpdatedProduct(id: String): Product
+        @aws_subscribe(mutations: ["updateProduct"])
 
     """
-    Triggered from `upsertTag` mutation.
+    Triggered from `upsertProduct` mutation.
     """
-    onUpsertedTag(id: String): Tag
-        @aws_subscribe(mutations: ["upsertTag"])
+    onUpsertedProduct(id: String): Product
+        @aws_subscribe(mutations: ["upsertProduct"])
 
     """
-    Triggered from `deleteTag` mutation (excl. `deleteManyTags`).
+    Triggered from `deleteProduct` mutation (excl. `deleteManyProducts`).
     """
-    onDeletedTag(id: String): Tag
-        @aws_subscribe(mutations: ["deleteTag"])
+    onDeletedProduct(id: String): Product
+        @aws_subscribe(mutations: ["deleteProduct"])
 
     """
     Triggered from ANY SINGLE record mutation.
     """
-    onMutatedTag(id: String): Tag
+    onMutatedProduct(id: String): Product
         @aws_subscribe(
             mutations: [
-                "createTag"
-                "updateTag"
-                "upsertTag"
-                "deleteTag"
+                "createProduct"
+                "updateProduct"
+                "upsertProduct"
+                "deleteProduct"
             ]
         )
 
     """
-    Triggered from `createManyTags` mutation.
+    Triggered from `createManyProducts` mutation.
     """
-    onCreatedManyTags: BatchPayload
-        @aws_subscribe(mutations: ["createManyTags"])
+    onCreatedManyProducts: BatchPayload
+        @aws_subscribe(mutations: ["createManyProducts"])
 
     """
-    Triggered from `updateManyTags` mutation.
+    Triggered from `updateManyProducts` mutation.
     """
-    onUpdatedManyTags: BatchPayload
-        @aws_subscribe(mutations: ["updateManyTags"])
+    onUpdatedManyProducts: BatchPayload
+        @aws_subscribe(mutations: ["updateManyProducts"])
 
     """
     Triggered from ANY MULTIPLE records mutation.
     """
-    onMutatedManyTags: BatchPayload
+    onMutatedManyProducts: BatchPayload
         @aws_subscribe(
             mutations: [
-                "createManyTags"
-                "updateManyTags"
-                "deleteManyTags"
+                "createManyProducts"
+                "updateManyProducts"
+                "deleteManyProducts"
             ]
         )
 
     """
-    Triggered from `deleteManyTags` mutation.
+    Triggered from `deleteManyProducts` mutation.
     """
-    onDeletedManyTags: BatchPayload
-        @aws_subscribe(mutations: ["deleteManyTags"])
+    onDeletedManyProducts: BatchPayload
+        @aws_subscribe(mutations: ["deleteManyProducts"])
+
+    """
+    Triggered from `createItinary` mutation (excl. `createManyItinaries` and `upsertItinary`).
+    """
+    onCreatedItinary(id: String): Itinary
+        @aws_subscribe(mutations: ["createItinary"])
+
+    """
+    Triggered from `updateItinary` mutation (excl. `updateManyItinaries` and `upsertItinary`).
+    """
+    onUpdatedItinary(id: String): Itinary
+        @aws_subscribe(mutations: ["updateItinary"])
+
+    """
+    Triggered from `upsertItinary` mutation.
+    """
+    onUpsertedItinary(id: String): Itinary
+        @aws_subscribe(mutations: ["upsertItinary"])
+
+    """
+    Triggered from `deleteItinary` mutation (excl. `deleteManyItinaries`).
+    """
+    onDeletedItinary(id: String): Itinary
+        @aws_subscribe(mutations: ["deleteItinary"])
+
+    """
+    Triggered from ANY SINGLE record mutation.
+    """
+    onMutatedItinary(id: String): Itinary
+        @aws_subscribe(
+            mutations: [
+                "createItinary"
+                "updateItinary"
+                "upsertItinary"
+                "deleteItinary"
+            ]
+        )
+
+    """
+    Triggered from `createManyItinaries` mutation.
+    """
+    onCreatedManyItinaries: BatchPayload
+        @aws_subscribe(mutations: ["createManyItinaries"])
+
+    """
+    Triggered from `updateManyItinaries` mutation.
+    """
+    onUpdatedManyItinaries: BatchPayload
+        @aws_subscribe(mutations: ["updateManyItinaries"])
+
+    """
+    Triggered from ANY MULTIPLE records mutation.
+    """
+    onMutatedManyItinaries: BatchPayload
+        @aws_subscribe(
+            mutations: [
+                "createManyItinaries"
+                "updateManyItinaries"
+                "deleteManyItinaries"
+            ]
+        )
+
+    """
+    Triggered from `deleteManyItinaries` mutation.
+    """
+    onDeletedManyItinaries: BatchPayload
+        @aws_subscribe(mutations: ["deleteManyItinaries"])
 }

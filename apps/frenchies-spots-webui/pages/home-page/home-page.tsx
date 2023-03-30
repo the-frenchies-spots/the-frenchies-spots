@@ -1,11 +1,11 @@
-import React, { useState } from "react";
-// import { View } from "react-native";
-import { Navbar } from "../../components/navbar/navbar";
-
-import { Box, Swiper } from "@frenchies-spots/materials";
+import React from "react";
+import { Page } from "../../components";
+import { Title } from "@frenchies-spots/materials";
 
 export const HomePage = () => {
   return (
-    <Box style={{ width: "100%", height: "100%" }}>{/* <Swiper /> */}</Box>
+    <Page opacity={0.7}>
+      <Title>Est-ce que c'est bon pour vous ?</Title>
+    </Page>
   );
 };

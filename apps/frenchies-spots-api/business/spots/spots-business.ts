@@ -1,7 +1,7 @@
 import { spotsRepository } from "../../repositories";
 import { ReadSpotDto, SpotDto, SpotPicturesDto } from "../../dto";
 import { codeErrors, GenericError } from "../../utils";
-import { UpdateSpotDto, UpdateSpotPicturesDto } from "../../dto/spot-dto";
+import { UpdateSpotDto } from "../../dto/spot-dto";
 import {
   CreateSpotResult,
   SpotFindByIdResult,
@@ -13,7 +13,7 @@ const { SPOT_ID_NOT_MATCH_PROFILE_ID, SPOT_NOT_FOUND } = codeErrors;
 
 const spotsBusiness = {
   getAll: (data: ReadSpotDto): SpotFindManyResult => {
-    const { searchValue, orderBy, skip, take, itinaryIDs, tagIDs, ...other } =
+    const { searchValue, orderBy, skip, take, itinaryIDs, tags, ...other } =
       data;
     const filterData = { ...other };
     const paginationData = { take, skip };

@@ -8,7 +8,6 @@ import {
 import {
   CreateSpotResult,
   SpotFindByIdResult,
-  UpdateSpotResult,
   type UpdateRatingAverageBySpotIdResult,
   type SpotFindManyResult,
 } from "../../types";
@@ -30,13 +29,13 @@ const spotsRepository = {
       },
     });
   },
-
+  
   getAll: (
     filterData: Prisma.SpotWhereInput,
     paginationData: SpotPaginationDto,
     orderBy: SpotOrderDto["orderBy"],
     nameContains: string
-  ): SpotFindManyResult => {
+    ): SpotFindManyResult => {
     return Spot.findMany({
       orderBy: {
         averageRating: orderBy,
@@ -51,7 +50,7 @@ const spotsRepository = {
 
       ...paginationData,
 
-      include: { spotPicture: true },
+      include: { spotPicture: true, tags: { include: { tag: true }} }
     });
   },
 
@@ -72,14 +71,20 @@ const spotsRepository = {
   create: (
     data: Omit<Prisma.SpotCreateInput, "profile">,
     pictures: SpotPicturesDto,
-    tags: { id: string }[],
+    tags: {id: string}[],
     profileId: string
   ): CreateSpotResult => {
     return Spot.create({
       data: {
         ...data,
         tags: {
-          connect: tags,
+          create: tags.map((tag) => {
+            return {
+              tag: {
+                connect: { id: tag.id }
+              }
+            }
+          })
         },
         profile: {
           connect: { id: profileId },
@@ -152,6 +157,5 @@ const spotsRepository = {
     });
     return spotFind.tags;
   },
-};
 
 export default spotsRepository;

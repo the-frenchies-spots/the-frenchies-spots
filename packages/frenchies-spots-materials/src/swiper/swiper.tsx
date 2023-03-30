@@ -1,5 +1,5 @@
 import React, { RefObject, ReactNode } from "react";
-import { StyleSheet, Dimensions } from "react-native";
+import { Dimensions } from "react-native";
 import SwiperFlatListRefProps from "react-native-swiper-flatlist";
 import SwiperFlatList from "react-native-swiper-flatlist";
 import { Box } from "../box";
@@ -22,8 +22,6 @@ export const Swiper = (props: SwiperProps) => {
         renderItem={({ item }) => (
           <Box
             style={{
-              borderWidth: 4,
-              borderColor: "blue",
               width,
               height: "100%",
             }}

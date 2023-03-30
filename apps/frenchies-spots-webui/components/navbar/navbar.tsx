@@ -1,6 +1,5 @@
 import React, { useCallback } from "react";
 import {
-  Box,
   CornerBar,
   Navbar as NavbarMaterial,
   NavbarButton,
@@ -25,10 +24,21 @@ export const Navbar = () => {
           isSelected={isSelectedRoute("home")}
           onPress={() => navigateTo("home")}
         />
-        <NavbarButton name="landscape" />
-        <NavbarButton name="shopping" />
-        <NavbarButton name="road-variant" />
-        <NavbarButton name="account-circle" />
+        <NavbarButton
+          name="heart"
+          isSelected={isSelectedRoute("spotFavorite")}
+          onPress={() => navigateTo("spotFavorite")}
+        />
+        <NavbarButton
+          name="shopping"
+          isSelected={isSelectedRoute("shopping")}
+          onPress={() => navigateTo("shopping")}
+        />
+        <NavbarButton
+          name="account-circle"
+          isSelected={isSelectedRoute("profile")}
+          onPress={() => navigateTo("profile")}
+        />
       </NavbarMaterial>
     </CornerBar>
   );

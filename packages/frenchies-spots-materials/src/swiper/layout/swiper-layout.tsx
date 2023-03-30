@@ -1,5 +1,7 @@
 import React, { ReactNode } from "react";
-import { Box, HStack, VStack, ButtonBase } from "@frenchies-spots/materials";
+import { Box } from "../../box";
+import { SecondaryButton, TextButton } from "../../button";
+import { HStack } from "../../stack";
 import { styles } from "./swiper-layout-styles";
 
 export interface SwiperLayoutProps {
@@ -33,15 +35,19 @@ export const SwiperLayout = (props: SwiperLayoutProps) => {
   return (
     <Box style={styles.swiperLayout}>
       <Box style={styles.content}>{children}</Box>
-      <HStack style={styles.buttonBar} justify="around">
+      <HStack style={styles.buttonBar} justify="between" items="center">
         {goToPrevIndex && (
-          <ButtonBase onPress={goToPrevIndex} disabled={swiperIndex === 0}>
-            {prevLabel}
-          </ButtonBase>
+          <Box style={{ width: "50%", paddingRight: 10 }}>
+            <TextButton onPress={goToPrevIndex} disabled={swiperIndex === 0}>
+              {prevLabel}
+            </TextButton>
+          </Box>
         )}
-        <ButtonBase onPress={onComfirm} disabled={nextDisabled}>
-          {nextLabel}
-        </ButtonBase>
+        <Box style={{ width: "50%", paddingLeft: 10 }}>
+          <SecondaryButton onPress={onComfirm} disabled={nextDisabled} little>
+            {nextLabel}
+          </SecondaryButton>
+        </Box>
       </HStack>
     </Box>
   );
