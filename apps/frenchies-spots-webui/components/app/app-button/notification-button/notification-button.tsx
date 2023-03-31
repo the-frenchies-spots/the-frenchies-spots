@@ -3,9 +3,17 @@ import React from "react";
 import { TouchableOpacity } from "react-native";
 import { styles } from "./notification-button-styles";
 
-export const NotificationButton = () => {
+interface NotificationButtonProps {
+  withShadow?: boolean;
+}
+
+export const NotificationButton = (props: NotificationButtonProps) => {
+  const { withShadow = false } = props;
+
+  const style = styles(withShadow);
+
   return (
-    <TouchableOpacity style={styles.notifButton}>
+    <TouchableOpacity style={style.notifButton}>
       <Icon name="bell" color="purple" size={22} />
     </TouchableOpacity>
   );

@@ -13,3 +13,5 @@ export const TFScolors = {
   white: "#FFFFFF",
   error: "#D73636",
 };
+
+export type TColors = keyof typeof TFScolors;

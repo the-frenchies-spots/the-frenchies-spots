@@ -2,12 +2,10 @@ import { View } from "react-native";
 import React from "react";
 import Icon from "@expo/vector-icons/MaterialCommunityIcons";
 import { ViewStyle, TextStyle, ImageStyle } from "react-native";
-import { theme } from "@frenchies-spots/theme";
+
+import { theme, type TColors } from "@frenchies-spots/theme";
 
 const themeColor = theme.TFS.colors;
-
-export type TColors = keyof typeof theme.TFS.colors;
-
 type SxProps = ViewStyle | TextStyle | ImageStyle;
 
 import {
@@ -52,6 +50,10 @@ enum MaterialIconsEnum {
   "payments",
   "add-circle-outline",
   "edit",
+  "star",
+  "chat",
+  "directions-run",
+  "local-parking",
 }
 enum ExpoIconsEnum {
   "eye",

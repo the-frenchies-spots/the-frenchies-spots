@@ -2,7 +2,7 @@ import React, { ReactNode } from "react";
 import { Box } from "@frenchies-spots/materials";
 import { Image } from "react-native";
 import { styles } from "./page-styles";
-import { Navbar } from "../navbar";
+import { Navbar } from "../app/navbar";
 import { useMediaQuery } from "../../hooks";
 
 interface PageProps {

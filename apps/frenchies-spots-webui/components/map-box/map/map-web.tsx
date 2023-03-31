@@ -1,7 +1,7 @@
 import React, { useState, useRef, type ReactNode } from "react";
 import ReactMapGL from "react-map-gl";
-import "mapbox-gl/dist/mapbox-gl.css";
-import "react-map-gl-geocoder/dist/mapbox-gl-geocoder.css";
+// import "mapbox-gl/dist/mapbox-gl.css";
+// import "react-map-gl-geocoder/dist/mapbox-gl-geocoder.css";
 import { TViewport, TCoordinate } from "../../../types";
 
 const MAPBOX_API_KEY =

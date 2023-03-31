@@ -27,6 +27,7 @@ export const primary: Record<string, PrimaryProps> = {
       borderRadius: 8,
       borderColor: TFScolors.yellow,
       borderWidth: 1,
+      // boxShadow: "0px 4px 6px #E3E3FA",
     },
   },
 };

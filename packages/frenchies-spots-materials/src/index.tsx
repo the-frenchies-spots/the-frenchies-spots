@@ -15,3 +15,6 @@ export * from "./divider";
 export * from "./input";
 export * from "./chat";
 export * from "./stepper";
+export * from "./card";
+export * from "./image";
+export * from "./loader";

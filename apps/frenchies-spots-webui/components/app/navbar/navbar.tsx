@@ -5,7 +5,7 @@ import {
   NavbarButton,
   Box,
 } from "@frenchies-spots/materials";
-import { useNavigation } from "../../hooks";
+import { useNavigation } from "../../../hooks";
 
 export const Navbar = () => {
   const { navigateTo, currentRoute } = useNavigation();

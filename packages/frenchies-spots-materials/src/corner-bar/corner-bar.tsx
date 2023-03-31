@@ -22,7 +22,7 @@ export const CornerBar = (props: CornerBarProps) => {
     mode = "bottom",
     cornerWidth = 50,
     cornerHeight = 50,
-    zIndex = 10,
+    zIndex = 5,
     disableContainer = false,
     contentStyle = {},
   } = props;
