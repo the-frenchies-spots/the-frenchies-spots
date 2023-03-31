@@ -9,6 +9,7 @@ import {
 } from "@frenchies-spots/materials";
 
 import { pagesList } from "./swiper/swiper-pages";
+import { Page } from "../../../components";
 
 export const CreateSpotPage = () => {
   const { swiperRef, currentIndex, goToNextIndex, goToPrevIndex, goToIndex } =
@@ -19,7 +20,7 @@ export const CreateSpotPage = () => {
   const swiperList = pagesList({ goToNextIndex, onSubmitForm: handleSubmit });
 
   return (
-    <Box style={{ width: "100%", height: "100%" }}>
+    <Page isPadding={false} opacity={1} isBackground={false} isNavBar={false}>
       <CornerBar mode="top">
         <Stepper
           nb={swiperList.length}
@@ -47,6 +48,6 @@ export const CreateSpotPage = () => {
           );
         })}
       />
-    </Box>
+    </Page>
   );
 };

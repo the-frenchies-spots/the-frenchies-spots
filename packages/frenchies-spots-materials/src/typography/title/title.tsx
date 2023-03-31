@@ -13,15 +13,16 @@ export interface TitleProps extends TextProps {
 }
 
 export const Title = (props: TitleProps) => {
-  const { variant = "h1", color, ...other } = props;
+  const { variant = "h1", style, color, ...other } = props;
   return (
     <Text
       {...other}
-      style={
-        color
+      style={{
+        ...(style as Object),
+        ...(color
           ? { ...styles[variant], color: theme.TFS.colors[color] }
-          : styles[variant]
-      }
+          : styles[variant]),
+      }}
     />
   );
 };

@@ -18,3 +18,5 @@ export * from "./stepper";
 export * from "./card";
 export * from "./image";
 export * from "./loader";
+export * from "./select";
+export * from "./wrap";
