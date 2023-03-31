@@ -28,10 +28,7 @@ const variantStyle = {
   },
 };
 
-export const styles = (
-  variant: IVariant,
-  variantBase: "default" | "normal"
-) => {
+export const styles = (variant: IVariant, variantBase: IVariant) => {
   return StyleSheet.create({
     input: {
       outlineStyle: "none",

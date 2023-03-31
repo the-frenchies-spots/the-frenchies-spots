@@ -20,3 +20,5 @@ export * from "./image";
 export * from "./loader";
 export * from "./select";
 export * from "./wrap";
+export * from "./checkbox";
+export * from "./image-picker";

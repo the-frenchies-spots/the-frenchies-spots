@@ -6,6 +6,11 @@ import {
   SelectCard,
   type TCardItem,
   SelectTag,
+  TextInput,
+  Checkbox,
+  BodyText,
+  ImagePicker,
+  HStack,
 } from "@frenchies-spots/materials";
 
 interface PagesListParams {
@@ -124,15 +129,16 @@ const tagsDataList = [
 
 export const pagesList = (params: PagesListParams) => [
   {
-    prevLabel: "Retour",
+    prevLabel: "",
     nextLabel: "Suivant",
+    isNextDisable: false,
     onComfirm: () => params.goToNextIndex(),
     render: (
       <Box style={{ marginTop: 100 }}>
         <Title variant="h2" style={{ marginBottom: 20 }}>
           A quelle catégorie associerais-tu ton spot ?{" "}
         </Title>
-        <SelectCard list={spotTypeList} />
+        <SelectCard value="SPARE_TIME_SPOT" list={spotTypeList} />
       </Box>
     ),
   },
@@ -157,9 +163,31 @@ export const pagesList = (params: PagesListParams) => [
     render: (
       <Box style={{ marginTop: 100 }}>
         <Title variant="h2" style={{ marginBottom: 20 }}>
-          A quelle catégorie associerais-tu ton spot ?{" "}
+          Dis nous en plus sur ton spot !
         </Title>
-        <SelectCard list={spotTypeList} />
+
+        <TextInput
+          variant="default"
+          label={"Nom du spot*"}
+          style={{ marginTop: 30 }}
+        />
+        <TextInput
+          variant="default"
+          label={"Description"}
+          style={{ marginTop: 30 }}
+          contentStyle={{ height: 105 }}
+          multiline
+        />
+
+        <Checkbox
+          label="Est ce que je peux me garer ?"
+          style={{ marginTop: 30, marginBottom: 20 }}
+        />
+
+        <BodyText>Rajoute une image</BodyText>
+        <HStack justify="center" style={{ marginTop: 30 }}>
+          <ImagePicker />
+        </HStack>
       </Box>
     ),
   },

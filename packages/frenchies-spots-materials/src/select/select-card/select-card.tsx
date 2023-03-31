@@ -1,16 +1,21 @@
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import { Box } from "../../box";
 import { VStack } from "../../stack";
 import { SelectCardItem, type TCardItem } from "./select-card-item";
 
 interface SelectCardProps {
+  value: TCardItem["value"];
   list: TCardItem[];
   onChange?: (value: TCardItem["value"]) => void;
 }
 
 export const SelectCard = (props: SelectCardProps) => {
-  const { list, onChange } = props;
-  const [currentIndex, setIndex] = useState<number>(0);
+  const { value, list, onChange } = props;
+
+  const initItem = useMemo(() => list.find((item) => item.value === value), []);
+  const [currentIndex, setIndex] = useState<number>(
+    initItem ? list.indexOf(initItem) : 0
+  );
 
   const handleChange = (index: number) => {
     if (typeof onChange === "function") {
