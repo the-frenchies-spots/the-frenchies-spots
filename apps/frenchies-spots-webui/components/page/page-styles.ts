@@ -1,6 +1,10 @@
 import { StyleSheet } from "react-native";
 
-export const styles = (opacity: number, isPadding: boolean) => {
+export const styles = (
+  opacity: number,
+  darkOpacity: number,
+  isPadding: boolean
+) => {
   return StyleSheet.create({
     container: {
       flex: 1,
@@ -33,6 +37,24 @@ export const styles = (opacity: number, isPadding: boolean) => {
       position: "absolute",
       backgroundColor: "white",
       opacity,
+    },
+    darkOpacity: {
+      width: "100%",
+      height: "100%",
+      position: "absolute",
+      backgroundColor: "black",
+      opacity: darkOpacity,
+    },
+    mainContainer: {
+      width: "100%",
+      height: "100%",
+    },
+    opaque: {
+      zIndex: 5,
+      width: "100%",
+      height: "100%",
+      position: "absolute",
+      backgroundColor: "rgba(0, 0, 0, 0.5)",
     },
   });
 };

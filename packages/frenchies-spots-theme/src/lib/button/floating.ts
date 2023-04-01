@@ -8,6 +8,7 @@ interface FloatingProps {
   backgroundColor: string;
   label: SxProps;
   global: SxProps & { boxShadow: string };
+  content: SxProps;
 }
 
 export const floating: FloatingProps = {
@@ -18,5 +19,8 @@ export const floating: FloatingProps = {
   global: {
     boxShadow: `0px 2px 8px 1px ${TFScolors.greyDisable}`,
     borderRadius: 50,
+  },
+  content: {
+    // padding: 60,
   },
 };

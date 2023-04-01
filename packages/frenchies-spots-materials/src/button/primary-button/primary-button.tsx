@@ -30,7 +30,7 @@ export const PrimaryButton = (props: PrimaryButtonProps) => {
       textColor={sx.text.color}
       buttonColor={sx.button.color}
       labelStyle={{ ...sx.label, fontSize }}
-      style={{ ...sx.global, width, height }}
+      style={{ ...sx.global, width, height, ...style }}
     >
       {typeof children === "string" && !little ? upperCase(children) : children}
     </ButtonBase>

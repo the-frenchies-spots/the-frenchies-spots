@@ -16,6 +16,7 @@ import {
 } from "../graphql";
 import { TOKEN_STORAGE_KEY } from "../utils";
 import useStorage from "./use-storage";
+import Toast from "react-native-root-toast";
 
 type UseAuth = {
   token: string | undefined;
@@ -48,6 +49,10 @@ export const useAuth = (): UseAuth => {
       updateToken(token);
       setUser({ id, profileId, pseudo, photoUrl, gamePoint });
       console.log("Successfully logged in");
+      Toast.show(`L'aventure n'attend que vous !`, {
+        position: Toast.positions.TOP,
+        duration: Toast.durations.LONG,
+      });
     }
   };
 
@@ -87,9 +92,16 @@ export const useAuth = (): UseAuth => {
   };
 
   const handleSignOut = async (): Promise<void> => {
-    signOut();
-    updateToken("");
-    setUser(undefined);
+    signOut()
+      .then(() => {
+        setUser(undefined);
+        updateToken("");
+        Toast.show(`À bientôt`, {
+          position: Toast.positions.TOP,
+          duration: Toast.durations.LONG,
+        });
+      })
+      .catch(console.log);
   };
 
   return {

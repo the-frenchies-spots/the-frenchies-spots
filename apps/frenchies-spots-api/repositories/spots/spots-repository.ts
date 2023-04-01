@@ -3,62 +3,62 @@ import {
   type SpotOrderDto,
   type SpotPaginationDto,
   type SpotPicturesDto,
-} from '../../dto';
+} from "../../dto";
 import {
   CreateSpotResult,
   SpotFindByIdResult,
   type UpdateRatingAverageBySpotIdResult,
-  type SpotFindManyResult
-} from '../../types';
-import { Spot, Profile } from '../../models';
+  type SpotFindManyResult,
+} from "../../types";
+import { Spot, Profile } from "../../models";
 
-import { Prisma } from '@prisma/client';
+import { Prisma } from "@prisma/client";
 
 const spotsRepository = {
   updateAverageRatingBySpotId: (
     spotId: string,
-    avg: SpotDto['averageRating']
+    avg: SpotDto["averageRating"]
   ): UpdateRatingAverageBySpotIdResult => {
     return Spot.update({
       where: {
-        id: spotId
+        id: spotId,
       },
       data: {
-        averageRating: avg
-      }
+        averageRating: avg,
+      },
     });
   },
-  
+
   getAll: (
     filterData: Prisma.SpotWhereInput,
     paginationData: SpotPaginationDto,
-    orderBy: SpotOrderDto['orderBy'],
+    orderBy: SpotOrderDto["orderBy"],
     nameContains: string
-    ): SpotFindManyResult => {
+  ): SpotFindManyResult => {
     return Spot.findMany({
       orderBy: {
-        averageRating: orderBy
+        averageRating: orderBy,
       },
 
       where: {
         ...filterData,
         name: {
-          contains: nameContains
-        }
+          contains: nameContains,
+        },
       },
 
       ...paginationData,
 
-      include: { spotPicture: true, tags: { include: { tag: true }} }
+      include: { spotPicture: true, tags: { include: { tag: true } } },
     });
   },
 
   getById: (id: string): SpotFindByIdResult => {
     return Spot.findUnique({
       where: {
-        id
+        id,
       },
-      include: { spotPicture: true, ratings: true, favorites: true }
+      include: { spotPicture: true, ratings: true, favorites: true },
     });
   },
 
@@ -68,9 +68,9 @@ const spotsRepository = {
    * @param {string} profileId
    */
   create: (
-    data: Omit<Prisma.SpotCreateInput, 'profile'>,
+    data: Omit<Prisma.SpotCreateInput, "profile">,
     pictures: SpotPicturesDto,
-    tags: {id: string}[],
+    tags: { id: string }[],
     profileId: string
   ): CreateSpotResult => {
     return Spot.create({
@@ -80,19 +80,19 @@ const spotsRepository = {
           create: tags.map((tag) => {
             return {
               tag: {
-                connect: { id: tag.id }
-              }
-            }
-          })
+                connect: { id: tag.id },
+              },
+            };
+          }),
         },
         profile: {
-          connect: { id: profileId }
+          connect: { id: profileId },
         },
         spotPicture: {
-          create: [...pictures]
-        }
+          create: [...pictures],
+        },
       },
-      include: { spotPicture: true, tags: true }
+      include: { spotPicture: true, tags: true },
     });
   },
 
@@ -124,19 +124,19 @@ const spotsRepository = {
   delete: (profileId: string, spotId: string): Promise<boolean> => {
     return Profile.update({
       where: {
-        id: profileId
+        id: profileId,
       },
       data: {
         spots: {
           delete: {
-            id: spotId
-          }
-        }
-      }
+            id: spotId,
+          },
+        },
+      },
     })
       .then(() => true)
       .catch(() => false);
-  }
+  },
 };
 
 export default spotsRepository;

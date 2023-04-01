@@ -21,4 +21,4 @@ export { teal } from "./teal";
 export { violet } from "./violet";
 export { yellow } from "./yellow";
 export { zinc } from "./zinc";
-export { TFScolors } from "./TFScolors";
+export { TFScolors, type TColors } from "./TFScolors";
