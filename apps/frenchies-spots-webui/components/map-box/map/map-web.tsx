@@ -3,11 +3,12 @@ import ReactMapGL from "react-map-gl";
 // import "mapbox-gl/dist/mapbox-gl.css";
 // import "react-map-gl-geocoder/dist/mapbox-gl-geocoder.css";
 import { TViewport, TCoordinate } from "../../../types";
+import "mapbox-gl/dist/mapbox-gl.css";
 
 const MAPBOX_API_KEY =
   "pk.eyJ1IjoiZnJlbmNoaWVzcG90cyIsImEiOiJjbGZzbmZ3YjEwMDQwM25wZWM1bm96emc4In0.CrgJmxNyiLfQ4QUewh_jXg";
 const MAPBOX_STYLE =
-  "mapbox://styles/frenchiespots/clfsnj9dp00i501p4s22dqtw7?optimize=true";
+  "mapbox://styles/frenchiespots/clfxsngb6000b01p78iuug52q?optimize=true";
 
 interface MapWebProps {
   viewport: TViewport;

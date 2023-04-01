@@ -18,7 +18,7 @@ export const Title = (props: TitleProps) => {
     <Text
       {...other}
       style={{
-        ...(style as Object),
+        // ...(style as Object),
         ...(color
           ? { ...styles[variant], color: theme.TFS.colors[color] }
           : styles[variant]),

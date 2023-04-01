@@ -5,14 +5,15 @@ import { styles } from "./spot-picture-detail-styles";
 
 interface SpotPictureDetail {
   src: string;
+  goBackDisabled?: boolean;
 }
 
 export const SpotPictureDetail = (props: SpotPictureDetail) => {
-  const { src } = props;
+  const { src, goBackDisabled = false } = props;
   return (
     <Box style={styles.container}>
       <Image src={src} style={styles.picture} />
-      <BackButton style={styles.backButton} />
+      {!goBackDisabled && <BackButton style={styles.backButton} />}
     </Box>
   );
 };

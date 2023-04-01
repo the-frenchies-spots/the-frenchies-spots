@@ -49,5 +49,12 @@ export const styles = (
       width: "100%",
       height: "100%",
     },
+    opaque: {
+      zIndex: 5,
+      width: "100%",
+      height: "100%",
+      position: "absolute",
+      backgroundColor: "rgba(0, 0, 0, 0.5)",
+    },
   });
 };

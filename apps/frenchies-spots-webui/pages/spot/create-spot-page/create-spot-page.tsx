@@ -1,4 +1,5 @@
 import React from "react";
+
 import {
   Box,
   CornerBar,
@@ -32,7 +33,7 @@ export const CreateSpotPage = () => {
       <Swiper
         swiperRef={swiperRef}
         items={swiperList.map((page) => {
-          const { render, prevLabel, nextLabel, onComfirm } = page;
+          const { render, prevLabel, nextLabel, isPadding, onComfirm } = page;
           return (
             <SwiperLayout
               prevLabel={prevLabel}
@@ -42,6 +43,7 @@ export const CreateSpotPage = () => {
               isNextDisable={page?.isNextDisable}
               goToPrevIndex={goToPrevIndex}
               onComfirm={onComfirm}
+              paddingDisabled={isPadding}
             >
               {render}
             </SwiperLayout>

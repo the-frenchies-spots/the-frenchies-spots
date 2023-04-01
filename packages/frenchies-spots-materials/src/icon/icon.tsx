@@ -14,10 +14,15 @@ import {
   FontAwesome5,
   AntDesign,
   Ionicons,
+  Entypo,
 } from "@expo/vector-icons";
 
 enum IoniconsEnum {
   "add",
+}
+
+enum EntypoEnum {
+  "cross",
 }
 
 enum AntDesignEnum {
@@ -79,6 +84,7 @@ type MaterialCommunityType = keyof typeof MaterialCommunityEnum;
 type FontAwesome5EnumType = keyof typeof FontAwesome5Enum;
 type AntDesignEnumType = keyof typeof AntDesignEnum;
 type IoniconsEnumType = keyof typeof IoniconsEnum;
+type EntypoEnumType = keyof typeof EntypoEnum;
 
 export type IconProps = {
   name?:
@@ -87,7 +93,8 @@ export type IconProps = {
     | MaterialCommunityType
     | FontAwesome5EnumType
     | AntDesignEnumType
-    | IoniconsEnumType;
+    | IoniconsEnumType
+    | EntypoEnumType;
   size?: number;
   color?: TColors;
   style?: SxProps;
@@ -101,6 +108,7 @@ export const AppIcon = (props: IconProps) => {
   const isFontAwesome5Icons = Object.values(FontAwesome5Enum).includes(name);
   const isAntDesignIcons = Object.values(AntDesignEnum).includes(name);
   const isIoniconsIcons = Object.values(IoniconsEnum).includes(name);
+  const isEntypoIcons = Object.values(EntypoEnum).includes(name);
   const isMaterialCommunityIcons = Object.values(
     MaterialCommunityEnum
   ).includes(name);
@@ -152,6 +160,15 @@ export const AppIcon = (props: IconProps) => {
       {isIoniconsIcons && (
         <Ionicons
           name={name as IoniconsEnumType}
+          size={size}
+          color={themeColor[color]}
+          style={style}
+        />
+      )}
+
+      {isEntypoIcons && (
+        <Entypo
+          name={name as EntypoEnumType}
           size={size}
           color={themeColor[color]}
           style={style}

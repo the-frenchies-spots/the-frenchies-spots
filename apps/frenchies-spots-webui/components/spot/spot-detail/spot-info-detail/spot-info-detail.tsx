@@ -11,10 +11,19 @@ interface SpotInfoDetailProps {
   description: string;
   location: string;
   isUserOwner: boolean;
+  actionSectionDisabled?: boolean;
 }
 
 export const SpotInfoDetail = (props: SpotInfoDetailProps) => {
-  const { spotId, title, description, location, isUserOwner } = props;
+  const {
+    spotId,
+    title,
+    description,
+    location,
+    isUserOwner,
+    actionSectionDisabled = false,
+  } = props;
+
   const { t } = useTranslation();
 
   return (
@@ -34,7 +43,9 @@ export const SpotInfoDetail = (props: SpotInfoDetailProps) => {
       <Box>
         <BodyText>{description}</BodyText>
       </Box>
-      <SpotActionSection spotId={spotId} isUserOwner={isUserOwner} />
+      {!actionSectionDisabled && (
+        <SpotActionSection spotId={spotId} isUserOwner={isUserOwner} />
+      )}
     </VStack>
   );
 };

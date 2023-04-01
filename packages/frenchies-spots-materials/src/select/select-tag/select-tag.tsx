@@ -1,17 +1,20 @@
 import React, { useState } from "react";
+import { ViewStyle, TextStyle, ImageStyle } from "react-native";
 import { Box } from "../../box";
 import { Wrap } from "../../wrap";
 import { SelectTagItem, type TTagItem } from "./select-tag-item";
 import { styles } from "./select-tag-styles";
+type SxProps = ViewStyle | TextStyle | ImageStyle;
 
 interface SelectTagProps {
   list: TTagItem[];
   value: string[];
   onChange?: (value: string[]) => void;
+  style?: SxProps;
 }
 
 export const SelectTag = (props: SelectTagProps) => {
-  const { list, value = [], onChange } = props;
+  const { style = {}, list, value = [], onChange } = props;
   const [tags, setTags] = useState<string[]>(value);
 
   const handleChange = (tagId: string) => {
@@ -31,7 +34,7 @@ export const SelectTag = (props: SelectTagProps) => {
   };
 
   return (
-    <Wrap m={4} style={{}} justify="between" spacing={20}>
+    <Wrap m={4} style={style} justify="between" spacing={20}>
       {list.map((selectTagItem, index) => {
         const { id, name, tagPictureUrl, category } = selectTagItem;
         return (

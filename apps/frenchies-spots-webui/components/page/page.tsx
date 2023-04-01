@@ -12,6 +12,7 @@ interface PageProps {
   darkOpacity?: number;
   isNavBar?: boolean;
   isPadding?: boolean;
+  opaqueBackground?: boolean;
 }
 
 export const Page = (props: PageProps) => {
@@ -22,6 +23,7 @@ export const Page = (props: PageProps) => {
     isNavBar = true,
     opacity = 0,
     darkOpacity = 0,
+    opaqueBackground = false,
   } = props;
 
   const { isPhone } = useMediaQuery();
@@ -40,6 +42,7 @@ export const Page = (props: PageProps) => {
           )}
           {darkOpacity !== 0 && <Box style={style.darkOpacity} />}
           {opacity !== 0 && <Box style={style.opacity} />}
+          {opaqueBackground && <Box style={style.opaque} />}
         </Box>
         <Box style={style.body}>
           <Box style={style.mainContainer}>{children}</Box>

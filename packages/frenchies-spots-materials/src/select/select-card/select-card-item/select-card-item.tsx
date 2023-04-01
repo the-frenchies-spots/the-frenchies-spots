@@ -5,7 +5,11 @@ import { TouchableOpacity } from "react-native";
 import { HStack } from "../../../stack";
 import { styles } from "./select-card-item-style";
 
-export type TCardItem = { name: string; description: string; value: string };
+export type TCardItem = {
+  name: string;
+  description: string;
+  value: string | number | boolean;
+};
 
 export interface SelectCardItemProps extends Omit<TCardItem, "value"> {
   index: number;

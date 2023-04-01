@@ -9,9 +9,16 @@ import {
   TextInput,
   Checkbox,
   BodyText,
-  ImagePicker,
+  MultipleImagePicker,
   HStack,
+  SearchInput,
 } from "@frenchies-spots/materials";
+import {
+  LocationPicker,
+  SelectRegion,
+  SpotInfoDetail,
+  SpotPictureDetail,
+} from "../../../../components";
 
 interface PagesListParams {
   onSubmitForm: () => void;
@@ -127,41 +134,61 @@ const tagsDataList = [
   },
 ];
 
+const isHiddenMode: TCardItem[] = [
+  {
+    name: "Public",
+    description: "Tout le monde y aura accès",
+    value: false,
+  },
+  {
+    name: "Privée",
+    description: "Tu peux choisir qui y a accès",
+    value: true,
+  },
+];
+
 export const pagesList = (params: PagesListParams) => [
   {
     prevLabel: "",
     nextLabel: "Suivant",
     isNextDisable: false,
+    isPadding: true,
     onComfirm: () => params.goToNextIndex(),
     render: (
-      <Box style={{ marginTop: 100 }}>
-        <Title variant="h2" style={{ marginBottom: 20 }}>
+      <Box style={{ marginTop: 100, height: "100%" }}>
+        <Title variant="h2">
           A quelle catégorie associerais-tu ton spot ?{" "}
         </Title>
-        <SelectCard value="SPARE_TIME_SPOT" list={spotTypeList} />
+        <SelectCard
+          value="SPARE_TIME_SPOT"
+          list={spotTypeList}
+          style={{ marginTop: 20 }}
+        />
       </Box>
     ),
   },
   {
     prevLabel: "Retour",
-    nextLabel: "Valider",
+    nextLabel: "Suivant",
     onComfirm: () => params.goToNextIndex(),
+    isPadding: true,
     render: (
-      <Box style={{ marginTop: 100 }}>
-        <Title variant="h2" style={{ marginBottom: 20 }}>
+      <Box style={{ marginTop: 100, height: "100%" }}>
+        <Title variant="h2">
           Choisi les tags correspondant à ton spot aventure
         </Title>
-        <SelectTag value={[]} list={tagsDataList} />
+        <SelectTag style={{ marginTop: 20 }} value={[]} list={tagsDataList} />
       </Box>
     ),
   },
   {
     prevLabel: "Retour",
-    nextLabel: "Publier",
+    nextLabel: "Suivant",
+    isPadding: true,
     isNextDisable: false,
-    onComfirm: () => params.onSubmitForm(),
+    onComfirm: () => params.goToNextIndex(),
     render: (
-      <Box style={{ marginTop: 100 }}>
+      <Box style={{ marginTop: 100, height: "100%" }}>
         <Title variant="h2" style={{ marginBottom: 20 }}>
           Dis nous en plus sur ton spot !
         </Title>
@@ -184,10 +211,73 @@ export const pagesList = (params: PagesListParams) => [
           style={{ marginTop: 30, marginBottom: 20 }}
         />
 
-        <BodyText>Rajoute une image</BodyText>
-        <HStack justify="center" style={{ marginTop: 30 }}>
-          <ImagePicker />
-        </HStack>
+        <BodyText>Rajoute des images</BodyText>
+        <MultipleImagePicker style={{ marginTop: 30 }} />
+      </Box>
+    ),
+  },
+  {
+    prevLabel: "Retour",
+    nextLabel: "Suivant",
+    isNextDisable: false,
+    isPadding: true,
+    onComfirm: () => params.goToNextIndex(),
+    render: (
+      <Box style={{ marginTop: 100, height: "100%" }}>
+        <Title variant="h2" style={{ marginBottom: 20 }}>
+          Ou se situe ton spot ?
+        </Title>
+        <LocationPicker style={{ height: 500, marginVertical: 20 }} />
+        <SearchInput
+          variant="outlined"
+          label="Lieu du spot"
+          placeholder="Rechercher"
+          style={{ marginBottom: 20 }}
+        />
+        <SelectRegion />
+      </Box>
+    ),
+  },
+  {
+    prevLabel: "Retour",
+    nextLabel: "Valider",
+    isNextDisable: false,
+    isPadding: true,
+    onComfirm: () => params.goToNextIndex(),
+    render: (
+      <Box style={{ marginTop: 100, height: "100%" }}>
+        <Title variant="h2" style={{ marginBottom: 20 }}>
+          Dernier effort ! Quel statut préfères-tu pour ton spot ?
+        </Title>
+        <SelectCard
+          style={{ marginTop: 20 }}
+          value={true}
+          list={isHiddenMode}
+        />
+      </Box>
+    ),
+  },
+  {
+    prevLabel: "Retour",
+    nextLabel: "Publier",
+    isNextDisable: false,
+    isPadding: false,
+    onComfirm: () => params.goToNextIndex(),
+    render: (
+      <Box style={{ marginTop: 60, height: "100%" }}>
+        <SpotPictureDetail
+          goBackDisabled={true}
+          src="https://previews.123rf.com/images/marisha5/marisha51601/marisha5160100276/50703619-paysage-magnifique-for%C3%AAt-le-matin.jpg"
+        />
+        <SpotInfoDetail
+          spotId={"df5t7g48rh8dytsy"}
+          title="Mont Sarruma"
+          description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+  eiusmod tempor incididunt ut labore et dolore magna"
+          location="Blanquefort, France"
+          isUserOwner={false}
+          actionSectionDisabled={true}
+        />
       </Box>
     ),
   },

@@ -15,6 +15,7 @@ export interface SwiperLayoutProps {
   prevLabel?: string;
   nextLabel?: string;
   isPagination?: boolean;
+  paddingDisabled?: boolean;
 }
 
 export const SwiperLayout = (props: SwiperLayoutProps) => {
@@ -28,6 +29,7 @@ export const SwiperLayout = (props: SwiperLayoutProps) => {
     isNextDisable,
     lastIndex,
     isPagination = false,
+    paddingDisabled = false,
   } = props;
 
   const nextDisabled =
@@ -35,15 +37,25 @@ export const SwiperLayout = (props: SwiperLayoutProps) => {
       ? isNextDisable
       : swiperIndex === lastIndex;
 
+  const style = styles(paddingDisabled);
+
   return (
-    <Box style={styles.swiperLayout}>
+    <Box style={style.swiperLayout}>
       {isPagination && (
-        <HStack justify="end" style={styles.counter}>
+        <HStack justify="end" style={style.counter}>
           <PaginationCounter currentPage={swiperIndex} maxPage={lastIndex} />
         </HStack>
       )}
-      <Box style={styles.content}>{children}</Box>
-      <HStack style={styles.buttonBar} justify="between" items="center">
+      <Box style={style.content}>{children}</Box>
+      <HStack
+        style={{
+          ...style.buttonBar,
+          paddingHorizontal: paddingDisabled ? undefined : 20,
+          marginVertical: paddingDisabled ? undefined : 16,
+        }}
+        justify="between"
+        items="center"
+      >
         {goToPrevIndex && (
           <Box style={{ width: "50%", paddingRight: 10 }}>
             <TextButton

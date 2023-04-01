@@ -5,43 +5,54 @@ import { styles } from "./image-picker-style";
 import { Image } from "../image/image";
 import { Box } from "../box";
 import { Icon } from "../icon";
+import { useImagePicker } from "./use-image-picker";
+import { Text } from "../typography";
 
 interface ImagePickerProps {
+  index?: number;
   value?: string | null;
   style?: Record<string, string | number>;
   onImageChange?: (base64: string) => void;
+  onImageDelete?: (index: number) => void;
+  disablePreview?: boolean;
+  isCardMode?: boolean;
 }
 
 const PickerImage = (props: ImagePickerProps) => {
-  const { style: extStyle, onImageChange, value = null } = props;
+  const {
+    index,
+    onImageChange,
+    onImageDelete,
+    value = null,
+    disablePreview = false,
+    isCardMode = false,
+  } = props;
+  const { image, pickImage } = useImagePicker({ value, onImageChange });
 
-  const [image, setImage] = useState<string | null>(value);
-
-  const pickImage = async () => {
-    let result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.All,
-      allowsEditing: true,
-      aspect: [4, 3],
-      quality: 1,
-    });
-
-    if (!result.canceled) {
-      const base64 = result?.assets[0]?.uri;
-      setImage(null);
-      setImage(base64);
-      if (typeof onImageChange === "function") {
-        onImageChange(base64);
+  const handleImageDelete = () => {
+    if (typeof onImageDelete === "function") {
+      if (index !== undefined) {
+        onImageDelete(index);
       }
     }
   };
 
+  const style = styles(isCardMode);
   return (
     <TouchableOpacity onPress={pickImage}>
-      <Box style={styles.container}>
-        {image ? (
-          <Image style={styles.image} src={image} />
+      <Box style={style.container}>
+        {!disablePreview && image ? (
+          <Image style={style.image} src={image} />
         ) : (
           <Icon name="camera" size={40} color="bluePurple" />
+        )}
+        {isCardMode && (
+          <TouchableOpacity
+            onPress={handleImageDelete}
+            style={style.deleteContainer}
+          >
+            <Icon name="cross" size={16} color="white" />
+          </TouchableOpacity>
         )}
       </Box>
     </TouchableOpacity>

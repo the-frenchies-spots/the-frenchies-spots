@@ -44,7 +44,12 @@ export const MapPage = (props: MapPageProps) => {
   };
 
   return (
-    <Page isBackground={false} isPadding={false} opacity={1}>
+    <Page
+      isBackground={false}
+      isPadding={false}
+      opacity={1}
+      opaqueBackground={isOpen}
+    >
       <Box style={styles.mapMenuContainer}>
         <InfoBar displayLocation={isMapMode} />
         <FilterInput onSearchPress={handleToggleOpen} />
@@ -80,7 +85,11 @@ export const MapPage = (props: MapPageProps) => {
           </Box>
         )}
       </Box>
-      <Drawer isOpen={isOpen} onToggleOpen={handleToggleOpen} />
+      <Drawer
+        isOpen={isOpen}
+        heightMultiplier={0.8}
+        onToggleOpen={handleToggleOpen}
+      />
     </Page>
   );
 };
