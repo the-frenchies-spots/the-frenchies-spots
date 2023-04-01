@@ -12,7 +12,7 @@ interface SwiperProps {
 
 export const Swiper = (props: SwiperProps) => {
   const { swiperRef, items, disableGesture = false } = props;
-  const { width } = Dimensions.get("window");
+  const { width, height } = Dimensions.get("window");
   return (
     <Box style={{ width: "100%", height: "100%" }}>
       <SwiperFlatList
@@ -24,7 +24,7 @@ export const Swiper = (props: SwiperProps) => {
           <Box
             style={{
               width,
-              height: "100%",
+              height: height,
             }}
           >
             {item}

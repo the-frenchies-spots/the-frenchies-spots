@@ -59,7 +59,7 @@ export const AuthForm = (props: AuthFormProps) => {
       <Box style={styles.body}>
         <Swiper
           swiperRef={swiperRef}
-          disableGesture={true}
+          disableGesture={false}
           items={sections.map((page) => {
             const { render, prevLabel, nextLabel, onComfirm } = page;
             if (page.layoutDisabled) return <>{render}</>;
