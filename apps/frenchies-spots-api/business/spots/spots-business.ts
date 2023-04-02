@@ -38,37 +38,22 @@ const spotsBusiness = {
   },
 
   create: (
-    data: SpotDto & { pictures: SpotPicturesDto },
+    data: SpotDto & { spotPicture: SpotPicturesDto },
     profileId: string
   ): CreateSpotResult => {
-    const { pictures, itinaryIDs, tags, ...other } = data;
+    const { spotPicture, itinaryIDs, tags, ...other } = data;
     const spotData = { ...other };
-    return spotsRepository.create(spotData, pictures, tags, profileId);
+    return spotsRepository.create(spotData, spotPicture, tags, profileId);
   },
 
-  //  update: async (
-  //   data: UpdateSpotDto & { pictures: UpdateSpotPicturesDto },
-  //   currentProfileId: string
-  // ): Promise<UpdateSpotResult> => {
-  //   const { id: spotId, pictures, tags, ...other } = data;
-
-  //   await checkCreatedByCurrentUserOrThrow(spotId, currentProfileId);
-  //   console.log("je suis dans BUSINESS");
-  //   return spotsRepository.update(
-  //     data,
-  //     pictures,
-  //     tags
-  //   );
-  // },
-
   update: async (
-    data: UpdateSpotDto,
+    data: UpdateSpotDto & { spotPicture: UpdateSpotPicturesDto },
     currentProfileId: string
   ): UpdateExistingSpotResult => {
-    const { id: spotId, tags, ...other } = data;
+    const { id: spotId, tags, spotPicture, ...other } = data;
     const updateData = { tags, ...other };
     await checkCreatedByCurrentUserOrThrow(spotId, currentProfileId);
-    return spotsRepository.update(updateData, spotId, tags);
+    return spotsRepository.update(updateData, spotId, tags, spotPicture);
   },
 
   delete: async (

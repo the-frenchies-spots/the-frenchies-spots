@@ -13,7 +13,7 @@ const { UNAUTHENTICATED } = codeErrors;
 export const spotsMutation = {
   createSpot: (
     _: undefined,
-    data: SpotDto & { pictures: SpotPicturesDto },
+    data: SpotDto & { spotPicture: SpotPicturesDto },
     context: TContext
   ): CreateSpotResult => {
     const { user } = context;
@@ -24,7 +24,7 @@ export const spotsMutation = {
 
   updateSpot: (
     _: undefined,
-    data: UpdateSpotDto,
+    data: UpdateSpotDto  & { spotPicture: UpdateSpotPicturesDto },
     context: TContext
   ): UpdateExistingSpotResult => {
     const { user } = context;

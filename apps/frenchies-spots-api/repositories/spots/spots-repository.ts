@@ -1,5 +1,4 @@
 import {
-  UpdateSpotDto,
   type SpotDto,
   type SpotOrderDto,
   type SpotPaginationDto,
@@ -11,8 +10,6 @@ import {
   SpotFindByIdResult,
   type UpdateRatingAverageBySpotIdResult,
   type SpotFindManyResult,
-  UpdateSpotResult,
-  UpdateExistingSpotResult,
 } from "../../types";
 import { Spot, Profile } from "../../models";
 
@@ -100,97 +97,12 @@ const spotsRepository = {
     });
   },
 
-  // update: (
-  //   data: UpdateSpotDto,
-  //   pictures: UpdateSpotPicturesDto = [],
-  //   tags: {id: string}[]
-  // ): any => {
-  //   const spotPicture = {
-  //     upsert: pictures.map((picture) => {
-  //       const { id = undefined, url } = picture;
-  //       return { where: { id }, update: { url }, create: { url } };
-  //     }),
-  //   };
-
-    // const tagOnSpot = {
-    //   upsert: tags.map((tag) => {
-    //     const { id = undefined } = tag;
-    //     return { where: { id }, update: { id }, create: { id } };
-    //   }),
-    // };
-
-    // const tagsOnSpot = {
-    //   create: tags.map((tag) => {
-    //       console.log("---------je suis dedans ! ---------", tag);
-    //       return {
-    //         tag: {
-    //           connect: { id: tag.id }
-    //         }
-    //       }
-    //     })
-    // }
-
-    // const { id: spotId, ...other } = data;
-    // const updateData = { ...other };
-    // console.log( "je suis dans le REPO");
-    // return Spot.update({
-    //   where: {
-    //     id: spotId,
-    //   },
-      
-    //   data: {
-    //     ...updateData,
-    //     spotPicture: spotPicture
-    //   },
-      // data: pictures
-      //     ? {
-      //         ...data,
-      //         spotPicture,
-      //       }
-      //     : {
-      //         data,
-      //       },
-  //     include: { spotPicture: true, tags: { include: { tag: true }} },
-  //   });
-  // },
-
-// data: pictures 
-      //   ? { 
-      //     ...updateData,
-      //     spotPicture,
-      //     // tags: {
-      //     //   deleteMany: {},
-      //     // },
-      //     tags: {
-      //       deleteMany: {},
-      //       create: {
-      //         tag: {
-      //           connect: {
-      //             id: "coucou"
-      //           }
-      //         }
-      //       }
-      //     },
-      //     }
-      //   : {
-      //     data,
-      //   },
-      //   // spotPicture: spotPicture
-      // },
-
   update: (
     data: SpotDto,
     spotId: string,
     tags: { id: string }[],
-    // pictures: UpdateSpotPicturesDto = []
+    pictures: UpdateSpotPicturesDto = []
   ): any => {
-    // const spotPicture = {
-    //   upsert: pictures.map((picture) => {
-    //     const { id = undefined, url } = picture;
-    //     return { where: { id }, update: { url }, create: { url } };
-    //   })
-    // };
-
     return Spot.update({
       where: {
         id: spotId
@@ -208,12 +120,28 @@ const spotsRepository = {
             };
           }),
         },
-        // spotPicture: spotPicture,
+
+        spotPicture: {
+          deleteMany: {},
+          create: [...pictures],
+        },
+        // spotPicture: {
+        //   connectOrCreate: pictures.map((picture) => {
+        //     return {
+        //       where: {
+        //         id: picture.id
+        //       }, 
+        //       create: {
+        //         id: picture.id,
+        //         url: picture.url,
+        //       },
+        //     };
+        //   }),
+        // },
       },
 
-      // data: pictures ? { ...data, spotPicture } : data,
-      include: { tags: { include: { tag: true }} },
-});
+      include: { spotPicture: true, tags: { include: { tag: true }} },
+    });
   },
 
 
