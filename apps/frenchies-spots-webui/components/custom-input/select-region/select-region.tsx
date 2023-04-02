@@ -5,7 +5,7 @@ import { useGeocoding } from "../../../hooks";
 
 type RegionItem = { label: string; value: string };
 type SelectRegionProps = {
-  value?: any;
+  value?: string | undefined;
   onChange?: (region: string | undefined) => void;
   style?: Record<string, string | number>;
 };
@@ -13,7 +13,9 @@ type SelectRegionProps = {
 export const SelectRegion = (props: SelectRegionProps) => {
   const { value, onChange, style } = props;
 
-  const [selectedRegion, setSelectedRegion] = useState<string>(value);
+  const [selectedRegion, setSelectedRegion] = useState<string | undefined>(
+    value
+  );
   const { regions } = useGeocoding();
 
   const handleRegionChange = (codeRegion: number | string) => {
@@ -25,8 +27,13 @@ export const SelectRegion = (props: SelectRegionProps) => {
     }
   };
 
+  useEffect(() => {
+    setSelectedRegion(value)
+  }, [value])
+
   return (
     <Select
+    enabled={false}
       list={regions.map((region) => ({
         label: region.nom,
         value: region.code,

@@ -8,6 +8,5 @@ interface MarkerWebProps {
 
 export const MarkerWeb = (props: MarkerWebProps) => {
   const { lat, lng } = props;
-  console.log("je suis dans le marker");
   return <Marker latitude={lat} longitude={lng} />;
 };

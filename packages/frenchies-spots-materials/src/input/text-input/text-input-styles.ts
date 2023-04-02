@@ -32,6 +32,8 @@ export const styles = (variant: IVariant, variantBase: IVariant) => {
   return StyleSheet.create({
     input: {
       outlineStyle: "none",
+      borderWidth: 1,
+      borderColor: variantBase === "default" ? lightBluePurple : white,
       ...variantStyle[variant],
       backgroundColor: variantBase === "default" ? lightBluePurple : white,
       boxShadow: `0px 4px 8px #DBDBDB`,

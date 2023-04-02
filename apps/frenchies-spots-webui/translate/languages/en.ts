@@ -1,4 +1,5 @@
 import { authPageEn, SpotDetailPageEn } from "../../pages";
+import { editSpotFormEn } from "../../components";
 
 export const en = {
   translation: {
@@ -6,5 +7,6 @@ export const en = {
       auth: authPageEn,
       spot: SpotDetailPageEn,
     },
+    components: { spotEditForm: editSpotFormEn },
   },
 };

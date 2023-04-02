@@ -7,7 +7,7 @@ export const styles = StyleSheet.create({
   input: {
     color: "black",
     backgroundColor: white,
-    padding: 12,
+    padding: 9,
     borderRadius: 8,
     width: "100%",
     fontSize: 16,

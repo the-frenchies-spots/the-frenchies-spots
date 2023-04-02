@@ -10,10 +10,18 @@ const GOUV_API = Axios.create({
   baseURL: "https://geo.api.gouv.fr",
 });
 
+type searshPlace = {
+  data: {
+    features: { place_name: string }[]
+  }
+}
+
 interface TLocation {
-  place_name: string;
+  placeName: string;
   coordinates: { lat: number; lng: number };
 }
+const MAPBOX_API_KEY =
+  "pk.eyJ1IjoiZnJlbmNoaWVzcG90cyIsImEiOiJjbGZzbmZ3YjEwMDQwM25wZWM1bm96emc4In0.CrgJmxNyiLfQ4QUewh_jXg";
 
 export const useGeocoding = () => {
   const [location, setLocation] = useState<TLocation | undefined>(undefined);
@@ -25,36 +33,52 @@ export const useGeocoding = () => {
   }, []);
 
   const searchPlace = useCallback((keyWord: string) => {
-    MAPBOX_API.get(
-      `${keyWord}.json?limit=1&access_token=${process.env.REACT_APP_MAPBOX_API_KEY}`
+    return MAPBOX_API.get(
+      `${keyWord}.json?limit=1&access_token=${MAPBOX_API_KEY}`
     ).then((response) => {
       const { place_name, geometry } = response.data.features[0];
       const lng = geometry[0];
       const lat = geometry[1];
-      setLocation({
-        place_name,
+      const res = {
+        placeName: place_name,
         coordinates: { lat, lng },
-      });
+      };
+      setLocation(res);
+      return res;
+    });
+  }, []);
+
+  const getSearchAddress = useCallback((keyWord: string) => {
+    return MAPBOX_API.get(
+      `${keyWord}.json?limit=5&access_token=${MAPBOX_API_KEY}`
+    ).then((response: searshPlace) => {
+      return response.data.features.map((res) => res.place_name);
     });
   }, []);
 
   const getAllRegion = useCallback(() => {
-    GOUV_API.get(`/regions`).then((regions) => {
-      setRegions(regions.data as TRegion[]);
+    return GOUV_API.get(`/regions`).then((regions) => {
+      const res = regions.data as TRegion[]
+      setRegions(res);
+      return res;
     });
   }, []);
 
-  const getCodeRegionByCoordinate = useCallback((lat: number, lng: number) => {
-    GOUV_API.get(`/communes?lat=${lat}&lon=${lng}`).then((communes) => {
-      setCodeRegion(+communes.data[0].codeRegion);
+  const getCodeRegionByCoordinate = useCallback((lat: number, lng: number):Promise<number> => {
+    return GOUV_API.get(`/communes?lat=${lat}&lon=${lng}`).then((communes) => {
+      const res = +communes.data[0].codeRegion
+      setCodeRegion(res);
+      return res
     });
   }, []);
 
   return {
-    ...location,
     regions,
     codeRegion,
+    getAllRegion,
+    getSearchAddress,
     searchPlace,
     getCodeRegionByCoordinate,
+    ...location,
   };
 };

@@ -71,6 +71,7 @@ export const AuthForm = (props: AuthFormProps) => {
                 lastIndex={sections.length - 1}
                 isNextDisable={page?.isNextDisable}
                 isPagination={true}
+                paddingDisabled={true}
                 goToPrevIndex={goToPrevIndex}
                 onComfirm={onComfirm}
               >

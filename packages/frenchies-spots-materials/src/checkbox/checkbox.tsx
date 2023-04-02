@@ -11,7 +11,7 @@ import { Box } from "../box";
 import { ViewStyle, TextStyle, ImageStyle } from "react-native";
 type SxProps = ViewStyle | TextStyle | ImageStyle;
 
-interface CheckboxProps extends Omit<CheckboxPropsMaterial, "status"> {
+export interface CheckboxProps extends Omit<CheckboxPropsMaterial, "status"> {
   value?: boolean;
   onChange?: (value: boolean) => void;
   status?: "checked" | "unchecked" | "indeterminate";

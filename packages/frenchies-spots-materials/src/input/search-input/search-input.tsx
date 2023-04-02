@@ -7,7 +7,7 @@ import { BodyText } from "../../typography";
 import { TextInput, type TextInputProps } from "../text-input";
 import { styles } from "./search-input-styles";
 
-interface SearchInputProps extends TextInputProps {}
+export interface SearchInputProps extends TextInputProps {}
 
 export const SearchInput = (props: SearchInputProps) => {
   const { label, style, ...other } = props;

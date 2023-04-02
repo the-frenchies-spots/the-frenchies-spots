@@ -20,6 +20,7 @@ export interface TextInputProps extends TextInputPropsNative {
 
 export const TextInput = (props: TextInputProps) => {
   const {
+    value,
     style = {},
     contentStyle = {},
     label = null,
@@ -61,8 +62,11 @@ export const TextInput = (props: TextInputProps) => {
           <BodyText>{label}</BodyText>
         </Box>
       )}
+
+      
       <TextInputNative
         {...other}
+        value={value}
         onFocus={handleFocus}
         onBlur={handleBlur}
         style={{

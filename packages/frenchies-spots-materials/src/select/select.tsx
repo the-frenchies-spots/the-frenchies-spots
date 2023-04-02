@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   SelectBase,
   type SelectBaseProps,
@@ -31,6 +31,11 @@ export function Select<TValue>(props: SelectProps<TValue>) {
     }
     setCurrentValue(val);
   };
+
+  useEffect(() => {
+    setCurrentValue(value)
+  }, [value])
+
 
   return (
     <SelectBase

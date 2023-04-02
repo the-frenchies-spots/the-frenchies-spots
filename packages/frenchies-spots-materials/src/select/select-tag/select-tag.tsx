@@ -6,7 +6,7 @@ import { SelectTagItem, type TTagItem } from "./select-tag-item";
 import { styles } from "./select-tag-styles";
 type SxProps = ViewStyle | TextStyle | ImageStyle;
 
-interface SelectTagProps {
+export interface SelectTagProps {
   list: TTagItem[];
   value: string[];
   onChange?: (value: string[]) => void;

@@ -1,22 +1,27 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import { ViewStyle, TextStyle, ImageStyle } from "react-native";
 import { Box } from "../box";
 import { Wrap } from "../wrap";
 import ImagePicker from "./image-picker";
-import { remove } from "lodash";
 
 type SxProps = ViewStyle | TextStyle | ImageStyle;
 
-interface MultipleImagePickerProps {
+export interface MultipleImagePickerProps {
   value?: string[];
-  onImageListChange?: (base64List: string[]) => void;
+  onChange?: (base64List: string[]) => void;
   style?: SxProps;
 }
 
 export const MultipleImagePicker = (props: MultipleImagePickerProps) => {
-  const { style = {}, onImageListChange, value = [] } = props;
+  const { style = {}, onChange, value = [] } = props;
 
   const [base64List, setBase64List] = useState<string[]>(value);
+
+  useEffect(() => {
+    if (typeof onChange === "function") {
+      onChange(base64List);
+    }
+  }, [base64List]);
 
   const handleListChange = (base64: string, index: number) => {
     setBase64List((current) => {

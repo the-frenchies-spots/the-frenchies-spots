@@ -6,7 +6,7 @@ import { SelectCardItem, type TCardItem } from "./select-card-item";
 
 type SxProps = ViewStyle | TextStyle | ImageStyle;
 
-interface SelectCardProps {
+export interface SelectCardProps {
   value: TCardItem["value"];
   list: TCardItem[];
   onChange?: (value: TCardItem["value"]) => void;

@@ -1,5 +1,9 @@
-export { SelectCard, type TCardItem } from "./select-card";
-export { SelectTag, type TTagItem } from "./select-tag";
+export {
+  SelectCard,
+  type TCardItem,
+  type SelectCardProps,
+} from "./select-card";
+export { SelectTag, type SelectTagProps, type TTagItem } from "./select-tag";
 export {
   SelectBase,
   SelectBaseItem,
