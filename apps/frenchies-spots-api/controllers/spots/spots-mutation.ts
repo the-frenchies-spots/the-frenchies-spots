@@ -24,7 +24,7 @@ export const spotsMutation = {
 
   updateSpot: (
     _: undefined,
-    data: UpdateSpotDto & { pictures: UpdateSpotPicturesDto },
+    data: UpdateSpotDto,
     context: TContext
   ): UpdateExistingSpotResult => {
     const { user } = context;

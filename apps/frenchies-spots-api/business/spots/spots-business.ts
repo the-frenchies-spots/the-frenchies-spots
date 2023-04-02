@@ -6,6 +6,7 @@ import {
   CreateSpotResult,
   SpotFindByIdResult,
   SpotFindManyResult,
+  UpdateExistingSpotResult,
   UpdateSpotResult,
 } from "../../types";
 const { SPOT_ID_NOT_MATCH_PROFILE_ID, SPOT_NOT_FOUND } = codeErrors;
@@ -45,19 +46,29 @@ const spotsBusiness = {
     return spotsRepository.create(spotData, pictures, tags, profileId);
   },
 
-   update: async (
-    data: UpdateSpotDto & { pictures: UpdateSpotPicturesDto },
-    currentProfileId: string
-  ): Promise<UpdateSpotResult> => {
-    const { id: spotId, pictures, tags, ...other } = data;
+  //  update: async (
+  //   data: UpdateSpotDto & { pictures: UpdateSpotPicturesDto },
+  //   currentProfileId: string
+  // ): Promise<UpdateSpotResult> => {
+  //   const { id: spotId, pictures, tags, ...other } = data;
 
+  //   await checkCreatedByCurrentUserOrThrow(spotId, currentProfileId);
+  //   console.log("je suis dans BUSINESS");
+  //   return spotsRepository.update(
+  //     data,
+  //     pictures,
+  //     tags
+  //   );
+  // },
+
+  update: async (
+    data: UpdateSpotDto,
+    currentProfileId: string
+  ): UpdateExistingSpotResult => {
+    const { id: spotId, tags, ...other } = data;
+    const updateData = { tags, ...other };
     await checkCreatedByCurrentUserOrThrow(spotId, currentProfileId);
-    
-    return spotsRepository.update(
-      data,
-      pictures,
-      tags
-    );
+    return spotsRepository.update(updateData, spotId, tags);
   },
 
   delete: async (
