@@ -10,6 +10,7 @@ import {
   SpotFindByIdResult,
   type UpdateRatingAverageBySpotIdResult,
   type SpotFindManyResult,
+  UpdateExistingSpotResult,
 } from "../../types";
 import { Spot, Profile } from "../../models";
 
@@ -102,7 +103,7 @@ const spotsRepository = {
     spotId: string,
     tags: { id: string }[],
     pictures: UpdateSpotPicturesDto = []
-  ): any => {
+  ): UpdateExistingSpotResult => {
     return Spot.update({
       where: {
         id: spotId
