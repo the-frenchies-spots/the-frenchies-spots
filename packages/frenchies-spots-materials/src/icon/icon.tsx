@@ -2,12 +2,10 @@ import { View } from "react-native";
 import React from "react";
 import Icon from "@expo/vector-icons/MaterialCommunityIcons";
 import { ViewStyle, TextStyle, ImageStyle } from "react-native";
-import { theme } from "@frenchies-spots/theme";
+
+import { theme, type TColors } from "@frenchies-spots/theme";
 
 const themeColor = theme.TFS.colors;
-
-export type TColors = keyof typeof theme.TFS.colors;
-
 type SxProps = ViewStyle | TextStyle | ImageStyle;
 
 import {
@@ -16,10 +14,15 @@ import {
   FontAwesome5,
   AntDesign,
   Ionicons,
+  Entypo,
 } from "@expo/vector-icons";
 
 enum IoniconsEnum {
   "add",
+}
+
+enum EntypoEnum {
+  "cross",
 }
 
 enum AntDesignEnum {
@@ -52,6 +55,10 @@ enum MaterialIconsEnum {
   "payments",
   "add-circle-outline",
   "edit",
+  "star",
+  "chat",
+  "directions-run",
+  "local-parking",
 }
 enum ExpoIconsEnum {
   "eye",
@@ -77,6 +84,7 @@ type MaterialCommunityType = keyof typeof MaterialCommunityEnum;
 type FontAwesome5EnumType = keyof typeof FontAwesome5Enum;
 type AntDesignEnumType = keyof typeof AntDesignEnum;
 type IoniconsEnumType = keyof typeof IoniconsEnum;
+type EntypoEnumType = keyof typeof EntypoEnum;
 
 export type IconProps = {
   name?:
@@ -85,7 +93,8 @@ export type IconProps = {
     | MaterialCommunityType
     | FontAwesome5EnumType
     | AntDesignEnumType
-    | IoniconsEnumType;
+    | IoniconsEnumType
+    | EntypoEnumType;
   size?: number;
   color?: TColors;
   style?: SxProps;
@@ -99,6 +108,7 @@ export const AppIcon = (props: IconProps) => {
   const isFontAwesome5Icons = Object.values(FontAwesome5Enum).includes(name);
   const isAntDesignIcons = Object.values(AntDesignEnum).includes(name);
   const isIoniconsIcons = Object.values(IoniconsEnum).includes(name);
+  const isEntypoIcons = Object.values(EntypoEnum).includes(name);
   const isMaterialCommunityIcons = Object.values(
     MaterialCommunityEnum
   ).includes(name);
@@ -150,6 +160,15 @@ export const AppIcon = (props: IconProps) => {
       {isIoniconsIcons && (
         <Ionicons
           name={name as IoniconsEnumType}
+          size={size}
+          color={themeColor[color]}
+          style={style}
+        />
+      )}
+
+      {isEntypoIcons && (
+        <Entypo
+          name={name as EntypoEnumType}
           size={size}
           color={themeColor[color]}
           style={style}

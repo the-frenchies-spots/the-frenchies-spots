@@ -1,14 +1,16 @@
 import React from "react";
+
 import {
   Box,
   CornerBar,
   Swiper,
   useSwiper,
-  PaginationSwiper,
+  Stepper,
   SwiperLayout,
 } from "@frenchies-spots/materials";
 
 import { pagesList } from "./swiper/swiper-pages";
+import { Page } from "../../../components";
 
 export const CreateSpotPage = () => {
   const { swiperRef, currentIndex, goToNextIndex, goToPrevIndex, goToIndex } =
@@ -19,9 +21,9 @@ export const CreateSpotPage = () => {
   const swiperList = pagesList({ goToNextIndex, onSubmitForm: handleSubmit });
 
   return (
-    <Box style={{ width: "100%", height: "100%" }}>
+    <Page isPadding={false} opacity={1} isBackground={false} isNavBar={false}>
       <CornerBar mode="top">
-        <PaginationSwiper
+        <Stepper
           nb={swiperList.length}
           goToIndex={goToIndex}
           swiperIndex={currentIndex}
@@ -31,7 +33,7 @@ export const CreateSpotPage = () => {
       <Swiper
         swiperRef={swiperRef}
         items={swiperList.map((page) => {
-          const { render, prevLabel, nextLabel, onComfirm } = page;
+          const { render, prevLabel, nextLabel, isPadding, onComfirm } = page;
           return (
             <SwiperLayout
               prevLabel={prevLabel}
@@ -41,12 +43,13 @@ export const CreateSpotPage = () => {
               isNextDisable={page?.isNextDisable}
               goToPrevIndex={goToPrevIndex}
               onComfirm={onComfirm}
+              paddingDisabled={isPadding}
             >
               {render}
             </SwiperLayout>
           );
         })}
       />
-    </Box>
+    </Page>
   );
 };

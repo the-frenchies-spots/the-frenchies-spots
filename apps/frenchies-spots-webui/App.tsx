@@ -1,5 +1,8 @@
-import { StyleSheet, View } from "react-native";
+import React from "react";
 import "@expo/match-media";
+import "./translate";
+// import "core-js";
+import "setimmediate";
 import { StatusBar } from "expo-status-bar";
 import { RootNavigator } from "./navigation/root-navigator";
 import { NavigationContainer } from "@react-navigation/native";
@@ -13,7 +16,6 @@ const App = () => {
       <AppContainer>
         <NavigationContainer>
           <RootNavigator />
-
           <StatusBar hidden={true} />
         </NavigationContainer>
       </AppContainer>

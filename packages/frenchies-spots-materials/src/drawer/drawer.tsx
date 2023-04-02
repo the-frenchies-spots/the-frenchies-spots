@@ -10,10 +10,16 @@ interface DrawerProps {
   children?: ReactNode;
   isOpen?: boolean;
   onToggleOpen: () => void;
+  heightMultiplier?: number;
 }
 
 export const Drawer = (props: DrawerProps) => {
-  const { children, isOpen = true, onToggleOpen } = props;
+  const {
+    children,
+    isOpen = true,
+    heightMultiplier = 0.6,
+    onToggleOpen,
+  } = props;
 
   return (
     <Modal
@@ -22,7 +28,12 @@ export const Drawer = (props: DrawerProps) => {
       visible={isOpen}
       onRequestClose={onToggleOpen}
     >
-      <View style={[styles.bottomSheet, { height: windowHeight * 0.6 }]}>
+      <View
+        style={[
+          styles.bottomSheet,
+          { height: windowHeight * heightMultiplier },
+        ]}
+      >
         <TouchableOpacity
           style={styles.closeBarContainer}
           onPress={onToggleOpen}

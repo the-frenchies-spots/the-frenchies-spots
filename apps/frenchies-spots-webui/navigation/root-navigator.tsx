@@ -1,12 +1,15 @@
-import React from "react";
+import React, { useContext } from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { AuthContext } from "../context";
 import {
   HomePage,
+  MapPage,
   SpotFavoritePage,
   ShoppingPage,
   ProfilePage,
   CreateSpotPage,
   AuthPage,
+  SpotDetailPage,
 } from "../pages";
 
 export type RouteParams = {
@@ -16,6 +19,8 @@ export type RouteParams = {
   profile: undefined;
   createSpot: undefined;
   authPage: undefined;
+  map: undefined;
+  spot: { id: string };
 };
 
 const { Navigator, Group, Screen } = createNativeStackNavigator<RouteParams>();
@@ -33,17 +38,24 @@ const options = {
 };
 
 export const RootNavigator = () => {
-  // const { currentUser } = useContext(AuthContext);
+  const { currentUser } = useContext(AuthContext);
 
   return (
     <Navigator>
       <Group screenOptions={options}>
-        <Screen name="authPage" component={AuthPage} />
-        <Screen name="profile" component={ProfilePage} />
+        <Screen name="map" component={MapPage} />
+        {!currentUser ? (
+          <Screen name="profile" component={AuthPage} />
+        ) : (
+          <Screen name="profile" component={ProfilePage} />
+        )}
         <Screen name="createSpot" component={CreateSpotPage} />
+        <Screen name="spot" component={SpotDetailPage} />
+
+        <Screen name="spotFavorite" component={SpotFavoritePage} />
 
         <Screen name="home" component={HomePage} />
-        <Screen name="spotFavorite" component={SpotFavoritePage} />
+
         <Screen name="shopping" component={ShoppingPage} />
       </Group>
     </Navigator>

@@ -10,6 +10,9 @@ interface CornerBarProps {
   mode?: "top" | "bottom";
   cornerWidth?: number;
   cornerHeight?: number;
+  zIndex?: number;
+  contentStyle?: Record<string, string | number>;
+  disableContainer?: boolean;
 }
 
 export const CornerBar = (props: CornerBarProps) => {
@@ -19,14 +22,19 @@ export const CornerBar = (props: CornerBarProps) => {
     mode = "bottom",
     cornerWidth = 50,
     cornerHeight = 50,
+    zIndex = 5,
+    disableContainer = false,
+    contentStyle = {},
   } = props;
 
-  const style = styles(color, mode);
+  const style = styles(color, mode, zIndex);
 
-  const cornerbarContent = <Box style={style.cornerbarContent}>{children}</Box>;
+  const cornerbarContent = (
+    <Box style={{ ...style.cornerbarContent, ...contentStyle }}>{children}</Box>
+  );
 
   return (
-    <Box style={style.container}>
+    <Box style={disableContainer ? undefined : style.container}>
       <Box style={style.cornerbarContainer}>
         {mode === "top" && cornerbarContent}
 
