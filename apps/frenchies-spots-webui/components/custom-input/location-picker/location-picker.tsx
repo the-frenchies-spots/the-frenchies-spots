@@ -45,6 +45,10 @@ export const LocationPicker = (props: LocationPickerProps) => {
     }
   }, [coordinate]);
 
+  useEffect(() => {
+    setLocationValue(value)
+  }, [value])
+
   return (
     <Box style={{ ...styles.container, ...style }}>
       <MapBox

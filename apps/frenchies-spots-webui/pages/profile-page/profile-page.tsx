@@ -19,11 +19,13 @@ import {
 import { styles } from "./profile-page-styles";
 import { TouchableOpacity } from "react-native";
 import { AuthContext } from "../../context";
+import { useNavigation } from "../../hooks";
 
 export const ProfilePage = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   const { currentUser, processSignOut } = useContext(AuthContext);
+  const { navigateTo } = useNavigation();
 
   const handleLogoutClick = () => {
     setIsLoading(true);
@@ -55,7 +57,10 @@ export const ProfilePage = () => {
 
       <VStack spacing={15}>
         <Box>
-          <PrimaryButton contentStyle={styles.buttonContent}>
+          <PrimaryButton
+            contentStyle={styles.buttonContent}
+            onPress={() => navigateTo("createSpot")}
+          >
             <Icon name="map-marker-plus" color="white" />
             <Text style={{ marginLeft: 5 }}> CRÉER UN SPOT </Text>
           </PrimaryButton>
@@ -98,9 +103,11 @@ export const ProfilePage = () => {
             </BodyText>
           </Box>
 
-          <PrimaryButton fontSize={14} little>
-            Acheter des points
-          </PrimaryButton>
+          <Box>
+            <PrimaryButton fontSize={14} little>
+              Acheter des points
+            </PrimaryButton>
+          </Box>
         </VStack>
       </HStack>
     </Page>

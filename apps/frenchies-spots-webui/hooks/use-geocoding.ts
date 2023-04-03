@@ -37,8 +37,8 @@ export const useGeocoding = () => {
       `${keyWord}.json?limit=1&access_token=${MAPBOX_API_KEY}`
     ).then((response) => {
       const { place_name, geometry } = response.data.features[0];
-      const lng = geometry[0];
-      const lat = geometry[1];
+      const lng = geometry.coordinates[0];
+      const lat = geometry.coordinates[1];
       const res = {
         placeName: place_name,
         coordinates: { lat, lng },

@@ -5,12 +5,11 @@ import { TCoordinate } from "../../../types";
 export type SpotEditFormValues = {
   category: "RESOURCES_SPOT" | "SPARE_TIME_SPOT";
   tags: string[];
-  name: string;
+  tags,name: string;
   description: string;
   isCanPark: boolean;
   pictures: string[];
-  location: { coordinate: TCoordinate; codeRegion: number, placeName: string };
-  address: string;
+  location: { coordinate: TCoordinate; codeRegion: number, address: string; };
   isHidden: boolean;
 };
 

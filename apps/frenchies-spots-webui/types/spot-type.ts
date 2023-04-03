@@ -21,14 +21,14 @@ export type SpotType = {
 };
 
 export interface CreateSpotRequestParameters {
+  category: "SPARE_TIME_SPOT" | "RESOURCES_SPOT";
+  tags: { id: string }[];
   name: string;
   description: string;
+  isCanPark: boolean;
+  region: string;
   lat: number;
   lng: number;
-  isCanPark: boolean;
-  isCanVisit: boolean;
-  isTouristic: boolean;
-  region: string;
   pictures: SpotPicture[];
 }
 

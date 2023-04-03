@@ -158,7 +158,6 @@ const isHiddenMode: TCardItem[] = [
 interface SectionListParams {
   onSubmitForm: () => void;
   goToNextIndex: () => void;
-  onRegionChange: (region: string | undefined) => void;
   control: Control<FieldValues, any> | any;
   fields: TFields;
   errors: FieldErrors<SpotEditFormValues>;
@@ -167,7 +166,7 @@ interface SectionListParams {
 }
 
 export const spotEditSwipSection = (params: SectionListParams) => {
-  const { fields, control, errors, watch, t, onRegionChange } = params;
+  const { fields, control, errors, watch, t } = params;
   const { name, location, description } = watch();
 
   return [
@@ -278,12 +277,11 @@ export const spotEditSwipSection = (params: SectionListParams) => {
           <LocationPickerController
             control={control}
             name={fields.location.name}
-            style={{ height: 500, marginVertical: 20 }}
+            style={{ height: 400, marginVertical: 20 }}
           />
         
           <SelectRegion
             value={location.codeRegion.toString()}
-            onChange={onRegionChange}
           />
         </Box>
       ),
@@ -313,7 +311,7 @@ export const spotEditSwipSection = (params: SectionListParams) => {
       nextLabel: "Publier",
       isNextDisable: false,
       isPadding: false,
-      onComfirm: () => params.goToNextIndex(),
+      onComfirm: () => params.onSubmitForm(),
       render: (
         <Box style={{ marginTop: 60, height: "100%" }}>
           <SpotPictureDetail
@@ -324,7 +322,7 @@ export const spotEditSwipSection = (params: SectionListParams) => {
             spotId={"df5t7g48rh8dytsy"}
             title={name}
             description={description}
-            location="Blanquefort, France"
+            location={location.address}
             isUserOwner={false}
             actionSectionDisabled={true}
           />

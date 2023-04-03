@@ -1,30 +1,49 @@
 import { gql } from "@apollo/client";
 
 const CREATE_SPOT_MUTATION = gql`
-  mutation createSpot(
+  mutation Mutation(
     $name: String
     $description: String
     $lat: Float
     $lng: Float
     $isCanPark: Boolean
-    $isCanVisit: Boolean
-    $isTouristic: Boolean
+    $isHidden: Boolean
+    $category: CategoriesSpotAndTag
     $region: String
     $pictures: [PictureInput]
+    $tags: [TagInput]
   ) {
-    spot: createSpot(
+    createSpot(
       name: $name
       description: $description
       lat: $lat
       lng: $lng
       isCanPark: $isCanPark
-      isCanVisit: $isCanVisit
-      isTouristic: $isTouristic
+      isHidden: $isHidden
+      category: $category
       region: $region
       pictures: $pictures
+      tags: $tags
     ) {
+      category
+      description
       id
+      isCanPark
+      isHidden
+      lat
+      lng
       name
+      region
+      tags {
+        id
+        tagId
+        tag {
+          id
+          name
+          category
+          tagPictureUrl
+        }
+      }
       spotPicture {
         id
         url

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 import {
   CornerBar,
   Stepper,
@@ -12,7 +12,8 @@ import { useTranslation } from "react-i18next";
 import { SpotEditFormValues, spotField } from "./spot-edit-field";
 import { spotEditSwipSection } from "./spot-edit-swip-section";
 import { TestContext } from "yup";
-import { useGeocoding } from "../../../hooks";
+import { useCloudinary } from "../../../hooks";
+import { CreateSpotRequestParameters } from "../../../types";
 
 const defaultValues: SpotEditFormValues = {
   category: "SPARE_TIME_SPOT",
@@ -24,22 +25,21 @@ const defaultValues: SpotEditFormValues = {
     "https://media.routard.com/image/31/2/bretagne-cote-granit-rose.1494312.jpg",
   ],
   location: {
-    coordinate: { lat: 48.054906, lng: -2.429937},
-    codeRegion: 53,
-    address: "2 rue Poudelard" 
+    coordinate: { lat: 47.548576258422315, lng: 4.7177989956386455 },
+    codeRegion: 27,
+    address: "R 19, 21450 Billy-lès-Chanceaux, France",
   },
-  address: "2 rue Poudelard",
   isHidden: true,
 };
 
 interface SpotEditFormProps {
-  onSubmitForm: (data: SpotEditFormValues) => void;
+  onSubmitForm: (data: CreateSpotRequestParameters) => void;
 }
 
 export const SpotEditForm = (props: SpotEditFormProps) => {
   const { onSubmitForm } = props;
 
-  const { searchPlace } = useGeocoding();
+  const { uploadMultipleImage } = useCloudinary();
   const { swiperRef, currentIndex, goToNextIndex, goToPrevIndex, goToIndex } =
     useSwiper();
   const { t } = useTranslation();
@@ -50,12 +50,38 @@ export const SpotEditForm = (props: SpotEditFormProps) => {
     resolver: yupResolver(formField.fieldValidation),
     defaultValues: defaultValues,
   };
+
   const hookForm = useForm<SpotEditFormValues>(formParams);
   const { control, watch, handleSubmit, formState } = hookForm;
 
-  const handleRegionChange = (region: string | undefined) => {
-    console.log({ region });
-  };
+  const onSpotEditionFormSubmit = useCallback(
+    async (data: SpotEditFormValues) => {
+      const {
+        category,
+        tags,
+        name,
+        description,
+        isCanPark,
+        pictures,
+        location,
+        isHidden,
+      } = data;
+      const uploadesImages = await uploadMultipleImage(pictures);
+      const result: CreateSpotRequestParameters = {
+        category,
+        tags: tags.map((tag) => ({ id: tag })),
+        name,
+        description,
+        isCanPark,
+        pictures: uploadesImages.map((picture) => ({ url: picture })),
+        region: location.codeRegion.toString(),
+        lat: location.coordinate.lat,
+        lng: location.coordinate.lng,
+      };
+      onSubmitForm(result);
+    },
+    []
+  );
 
   const sections = spotEditSwipSection({
     fields: formField.fields,
@@ -64,8 +90,7 @@ export const SpotEditForm = (props: SpotEditFormProps) => {
     t,
     watch,
     goToNextIndex,
-    onRegionChange: handleRegionChange,
-    onSubmitForm: handleSubmit(onSubmitForm),
+    onSubmitForm: handleSubmit(onSpotEditionFormSubmit),
   });
 
   return (

@@ -16,7 +16,7 @@ export interface SearchAddressProps<T> extends Omit<AutocompleteInputProps<T>, "
 }
 
 export function SearchAddress<T>(props: SearchAddressProps<T>) {
-  const { style = {}, value: initValue = "", onChangeText, label, variant = "outlined", placeholder,...other } = props;
+  const { style = {}, value: initValue = "", onChangeText, label, variant = "outlined", placeholder, ...other } = props;
   const [value, setValue] = useState<TLocation | undefined>(initValue as TLocation);
   const [addresses, setAddresses] = useState<string[]>([]);
   const { getSearchAddress, searchPlace, getCodeRegionByCoordinate } = useGeocoding();
@@ -28,17 +28,18 @@ export function SearchAddress<T>(props: SearchAddressProps<T>) {
 
   const handleDebounceChange = useCallback(
     debounce((address: string) => {
-      console.log("debounce")
-    // searchPlace(address).then((location) => {
-    //   const { coordinates: coordinate } = location;
-    //   const {lat, lng } = coordinate
-    //   getCodeRegionByCoordinate(lat, lng).then((codeRegion) => {
-    //     setValue({ address, coordinate, codeRegion });
-    //     if(typeof onChangeText === "function") {
-    //       onChangeText({ address, coordinate, codeRegion } as TLocation);
-    //     }
-    //   });
-    // });
+      console.log("debounce");
+    searchPlace(address).then((location) => {
+      const { coordinates: coordinate } = location;
+      const {lat, lng } = coordinate
+      getCodeRegionByCoordinate(lat, lng).then((codeRegion) => {
+        setValue({ address, coordinate, codeRegion });
+        if(typeof onChangeText === "function") {
+          console.log({ address, coordinate, codeRegion })
+          onChangeText({ address, coordinate, codeRegion } as TLocation);
+        }
+      });
+    });
     }, 700),
     []
   );
