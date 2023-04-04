@@ -22,7 +22,7 @@ const CREATE_SPOT_MUTATION = gql`
       isHidden: $isHidden
       category: $category
       region: $region
-      pictures: $pictures
+      spotPicture: $pictures
       tags: $tags
     ) {
       category
