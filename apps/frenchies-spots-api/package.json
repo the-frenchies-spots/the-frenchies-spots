@@ -26,6 +26,7 @@
     "apollo-server-micro": "^3.11.1",
     "apollo-server-nextjs": "^3.10.3",
     "bcrypt": "^5.1.0",
+    "dotenv-cli": "7.1.0",
     "eslint": "8.30.0",
     "eslint-config-next": "13.0.7",
     "graphql": "^16.6.0",
