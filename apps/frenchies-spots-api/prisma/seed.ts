@@ -768,7 +768,8 @@ const userData: Prisma.UserCreateInput[] = [
 ];
 
 async function main() {
-  console.log(`Start seeding ...`);
+  console.log(`Start seeding...`);
+  console.log(`Deleting...`);
     await prisma.tag
       .deleteMany()
 
@@ -776,6 +777,8 @@ async function main() {
       await prisma.user
         .deleteMany()
     }
+
+    console.log(`Everything is deleted...`);
 
     await prisma.tag
       .createMany({

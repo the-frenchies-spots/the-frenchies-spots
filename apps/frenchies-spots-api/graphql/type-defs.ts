@@ -132,6 +132,7 @@ const typeDefs = gql`
 
   input TagInput {
     id: String
+    name: String
   }
 
   input UpdatePictureInput {
@@ -208,7 +209,7 @@ const typeDefs = gql`
       category: CategoriesSpotAndTag
       region: String
       averageRating: Float
-      pictures: [PictureInput]
+      spotPicture: [PictureInput]
       tags: [TagInput]
     ): Spot
 
@@ -222,7 +223,7 @@ const typeDefs = gql`
       isHidden: Boolean
       category: CategoriesSpotAndTag
       region: String
-      pictures: [UpdatePictureInput]
+      spotPicture: [UpdatePictureInput]
       averageRating: Float
       tags: [TagInput]
     ): Spot
@@ -238,7 +239,7 @@ const typeDefs = gql`
       category: CategoriesSpotAndTag
       region: String
       averageRating: Float
-      pictures: [PictureInput]
+      spotPicture: [PictureInput]
       tags: [TagInput]
     ): Boolean
 

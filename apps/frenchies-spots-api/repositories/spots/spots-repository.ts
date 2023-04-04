@@ -3,12 +3,14 @@ import {
   type SpotOrderDto,
   type SpotPaginationDto,
   type SpotPicturesDto,
+  type UpdateSpotPicturesDto,
 } from "../../dto";
 import {
   CreateSpotResult,
   SpotFindByIdResult,
   type UpdateRatingAverageBySpotIdResult,
   type SpotFindManyResult,
+  UpdateExistingSpotResult,
 } from "../../types";
 import { Spot, Profile } from "../../models";
 
@@ -58,7 +60,7 @@ const spotsRepository = {
       where: {
         id,
       },
-      include: { spotPicture: true, ratings: true, favorites: true },
+      include: { spotPicture: true, tags: { include: { tag: true }}, ratings: true, favorites: true },
     });
   },
 
@@ -92,30 +94,58 @@ const spotsRepository = {
           create: [...pictures],
         },
       },
-      include: { spotPicture: true, tags: true },
+      include: { spotPicture: true, tags: { include: { tag: true }} },
     });
   },
 
-  // update: (
-  //   data: SpotDto,
-  //   spotId: string,
-  //   pictures: UpdateSpotPicturesDto = []
-  // ): UpdateSpotResult => {
-  //   const spotPicture = {
-  //     upsert: pictures.map((picture) => {
-  //       const { id = undefined, url } = picture;
-  //       return { where: { id }, update: { url }, create: { url } };
-  //     })
-  //   };
+  update: (
+    data: SpotDto,
+    spotId: string,
+    tags: { id: string }[],
+    pictures: UpdateSpotPicturesDto = []
+  ): UpdateExistingSpotResult => {
+    return Spot.update({
+      where: {
+        id: spotId
+      },
 
-  //   return Spot.update({
-  //     where: {
-  //       id: spotId
-  //     },
-  //     data: pictures ? { ...data, spotPicture } : data,
-  //     include: { spotPicture: true }
-  //   });
-  // },
+      data: {
+        ...data,
+        tags: {
+          deleteMany: {},
+          create: tags.map((tag) => {
+            return {
+              tag: {
+                connect: { id: tag.id },
+              },
+            };
+          }),
+        },
+
+        spotPicture: {
+          deleteMany: {},
+          create: [...pictures],
+        },
+        // spotPicture: {
+        //   connectOrCreate: pictures.map((picture) => {
+        //     return {
+        //       where: {
+        //         id: picture.id
+        //       }, 
+        //       create: {
+        //         id: picture.id,
+        //         url: picture.url,
+        //       },
+        //     };
+        //   }),
+        // },
+      },
+
+      include: { spotPicture: true, tags: { include: { tag: true }} },
+    });
+  },
+
+
 
   /**
    * @param {string} profileId
@@ -137,6 +167,16 @@ const spotsRepository = {
       .then(() => true)
       .catch(() => false);
   },
+
+  getTagBySpotId: (id: string) => {
+    const spotFind = Spot.findUnique({
+      where: {
+        id,
+      },
+      include: { spotPicture: true, ratings: true, favorites: true },
+    });
+    return spotFind.tags;
+  }
 };
 
 export default spotsRepository;
