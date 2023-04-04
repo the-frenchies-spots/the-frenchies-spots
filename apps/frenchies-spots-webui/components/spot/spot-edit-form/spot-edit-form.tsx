@@ -13,7 +13,7 @@ import { SpotEditFormValues, spotField } from "./spot-edit-field";
 import { spotEditSwipSection } from "./spot-edit-swip-section";
 import { TestContext } from "yup";
 import { useCloudinary } from "../../../hooks";
-import { CreateSpotRequestParameters } from "../../../types";
+import { CreateSpotRequestParameters, SpotType } from "../../../types";
 
 const defaultValues: SpotEditFormValues = {
   category: "SPARE_TIME_SPOT",
@@ -33,11 +33,12 @@ const defaultValues: SpotEditFormValues = {
 };
 
 interface SpotEditFormProps {
+  data?: SpotEditFormValues;
   onSubmitForm: (data: CreateSpotRequestParameters) => void;
 }
 
 export const SpotEditForm = (props: SpotEditFormProps) => {
-  const { onSubmitForm } = props;
+  const { onSubmitForm, data = defaultValues } = props;
 
   const { uploadMultipleImage } = useCloudinary();
   const { swiperRef, currentIndex, goToNextIndex, goToPrevIndex, goToIndex } =
@@ -48,7 +49,7 @@ export const SpotEditForm = (props: SpotEditFormProps) => {
   const formParams: UseFormProps<SpotEditFormValues, TestContext> = {
     mode: "all",
     resolver: yupResolver(formField.fieldValidation),
-    defaultValues: defaultValues,
+    defaultValues: data,
   };
 
   const hookForm = useForm<SpotEditFormValues>(formParams);

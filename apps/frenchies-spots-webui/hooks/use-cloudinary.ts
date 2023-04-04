@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react";
 import Axios from "axios";
 
 const cloudinary = Axios.create({
@@ -6,28 +6,34 @@ const cloudinary = Axios.create({
 });
 
 export const useCloudinary = () => {
+  const uploadImage = async (
+    image: string,
+    uploadPreset: string = "traveler-spot"
+  ) => {
+    return new Promise<string>((resolve, reject) => {
+      const formData = new FormData();
+      formData.append("file", image);
+      formData.append("upload_preset", uploadPreset);
+      cloudinary
+        .post("/upload", formData)
+        .then((response) => resolve(response.data.url as string))
+        .catch((err) => reject(err));
+    });
+  };
 
-    const uploadImage = async (
-        image: string,
-        uploadPreset: string = "traveler-spot"
-    ) => {
-        return new Promise<string>((resolve, reject) => {
-            const formData = new FormData();
-            formData.append("file", image);
-            formData.append("upload_preset", uploadPreset);
-            cloudinary
-            .post("/upload", formData)
-            .then((response) => resolve(response.data.url as string))
-            .catch((err) => reject(err));
-        });
-    };
+  const uploadMultipleImage = async (
+    images: string[],
+    uploadPreset: string = "traveler-spot"
+  ): Promise<string[]> => {
+    const imagesList = images.filter((image) => image.charAt(0) === "d");
+    const result = await Promise.all(
+      imagesList.map((image) => {
+        return uploadImage(image, uploadPreset);
+      })
+    );
+    console.log({ result });
+    return [...result, ...images.filter((image) => image.charAt(0) !== "d")];
+  };
 
-    const uploadMultipleImage = async (images: string[], uploadPreset: string = "traveler-spot"): Promise<string[]> => {
-        return Promise.all(images.map((image) => {
-            return uploadImage(image, uploadPreset);
-        }));
-    }
-
-    return { uploadImage, uploadMultipleImage };
-}
-
+  return { uploadImage, uploadMultipleImage };
+};

@@ -8,6 +8,7 @@ interface SpotEditionProps {
 
 export const SpotEdition = (props: SpotEditionProps) => {
   const { spotId } = props;
+
   return (
     <HStack spacing={20}>
       <Box>

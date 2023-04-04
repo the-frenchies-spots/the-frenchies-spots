@@ -8,6 +8,7 @@ import {
   ShoppingPage,
   ProfilePage,
   CreateSpotPage,
+  UpdateSpotPage,
   AuthPage,
   SpotDetailPage,
 } from "../pages";
@@ -18,6 +19,7 @@ export type RouteParams = {
   shopping: undefined;
   profile: undefined;
   createSpot: undefined;
+  updateSpot: { id: string };
   authPage: undefined;
   map: undefined;
   spot: { id: string };
@@ -43,17 +45,18 @@ export const RootNavigator = () => {
   return (
     <Navigator>
       <Group screenOptions={options}>
-
         {!currentUser ? (
-            <Screen name="profile" component={AuthPage} />
-          ) : (
-            <Screen name="profile" component={ProfilePage} />
-         )}
+          <Screen name="profile" component={AuthPage} />
+        ) : (
+          <Screen name="profile" component={ProfilePage} />
+        )}
+
+        <Screen name="updateSpot" component={UpdateSpotPage} />
+        <Screen name="spot" component={SpotDetailPage} />
 
         <Screen name="createSpot" component={CreateSpotPage} />
 
         <Screen name="map" component={MapPage} />
-        <Screen name="spot" component={SpotDetailPage} />
 
         <Screen name="spotFavorite" component={SpotFavoritePage} />
 

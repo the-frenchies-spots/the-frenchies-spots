@@ -1,37 +1,57 @@
 import { gql } from "@apollo/client";
 
 const UPDATE_SPOT_MUTATION = gql`
-  mutation updateSpot(
+  mutation UpdateSpot(
     $id: String
     $name: String
     $description: String
     $lat: Float
     $lng: Float
     $isCanPark: Boolean
-    $isCanVisit: Boolean
-    $isTouristic: Boolean
+    $isHidden: Boolean
+    $category: CategoriesSpotAndTag
     $region: String
     $pictures: [UpdatePictureInput]
+    $averageRating: Float
+    $tags: [TagInput]
   ) {
-    spot: updateSpot(
+    updateSpot(
       id: $id
       name: $name
       description: $description
       lat: $lat
       lng: $lng
       isCanPark: $isCanPark
-      isCanVisit: $isCanVisit
-      isTouristic: $isTouristic
+      isHidden: $isHidden
+      category: $category
       region: $region
-      pictures: $pictures
+      spotPicture: $pictures
+      averageRating: $averageRating
+      tags: $tags
     ) {
       id
       name
+      description
+      category
+      isCanPark
+      isHidden
+      region
+      lat
+      lng
       spotPicture {
         id
         url
       }
-      profileId
+      tags {
+        id
+        tagId
+        tag {
+          id
+          name
+          category
+          tagPictureUrl
+        }
+      }
     }
   }
 `;

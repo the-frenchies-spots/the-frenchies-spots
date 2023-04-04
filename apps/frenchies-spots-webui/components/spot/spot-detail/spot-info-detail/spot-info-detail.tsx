@@ -7,8 +7,8 @@ import { useTranslation } from "react-i18next";
 
 interface SpotInfoDetailProps {
   spotId: string;
-  title: string;
-  description: string;
+  title?: string;
+  description?: string;
   location: string;
   isUserOwner: boolean;
   actionSectionDisabled?: boolean;
@@ -17,8 +17,8 @@ interface SpotInfoDetailProps {
 export const SpotInfoDetail = (props: SpotInfoDetailProps) => {
   const {
     spotId,
-    title,
-    description,
+    title = "",
+    description = "",
     location,
     isUserOwner,
     actionSectionDisabled = false,

@@ -6,10 +6,12 @@ import {
 } from "../../../components";
 import { useMutation } from "@apollo/client";
 import { CREATE_SPOT_MUTATION, READ_SPOT_QUERY } from "../../../graphql";
-import { useCloudinary } from "../../../hooks";
+import { useCloudinary, useNavigation } from "../../../hooks";
 import { CreateSpotRequestParameters } from "../../../types";
 
 export const CreateSpotPage = () => {
+  const { navigateTo } = useNavigation();
+
   const [createSpot, { loading }] = useMutation(CREATE_SPOT_MUTATION, {
     // refetchQueries: [{ query: READ_SPOT_QUERY }, "spots"],
   });
@@ -22,10 +24,8 @@ export const CreateSpotPage = () => {
     console.log("******************");
     createSpot({ variables })
       .then((result) => {
-        console.log("******************");
-        console.log("Félicitation le spot à bien été crée !");
-        console.log({ result });
-        console.log("******************");
+        const createId = result?.data?.createSpot?.id;
+        navigateTo("spot", { id: createId });
       })
       .catch(console.error);
   };

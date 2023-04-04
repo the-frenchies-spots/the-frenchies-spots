@@ -1,21 +1,26 @@
 import React from "react";
-import { TouchableOpacity } from "react-native";
+import { TouchableOpacity, type TouchableOpacityProps } from "react-native";
 import { Icon, type IconProps } from "../../icon";
 import { Loader } from "../../loader";
 import { styles } from "./card-button-styles";
 import type { TColors } from "@frenchies-spots/theme";
 
-interface CardButtonProps {
+export interface CardButtonProps extends TouchableOpacityProps {
   icon?: IconProps["name"];
   isLoading?: boolean;
   color?: TColors;
 }
 
 export const CardButton = (props: CardButtonProps) => {
-  const { icon = "heart", color = "yellow", isLoading = false } = props;
+  const {
+    icon = "heart",
+    color = "yellow",
+    isLoading = false,
+    ...other
+  } = props;
   const style = styles(color);
   return (
-    <TouchableOpacity style={style.cardButton}>
+    <TouchableOpacity style={style.cardButton} {...other}>
       {isLoading ? (
         <Loader color={color} size="small" />
       ) : (

@@ -5,19 +5,20 @@ export type SpotPicture = { url: string; id?: string };
 
 export type SpotType = {
   id: string;
+  profileId: string;
+  category: "SPARE_TIME_SPOT" | "RESOURCES_SPOT";
+  tags: { id: string }[];
   name: string;
   description: string;
   isCanPark: boolean;
-  isCanVisit: boolean;
-  isTouristic: boolean;
   region: string;
-  profileId: string;
-  spotPicture: SpotPicture[];
   lat: number;
   lng: number;
+  spotPicture: SpotPicture[];
   averageRating: number;
   ratings: Rating[];
   favorites: TFavorite[];
+  isHidden: boolean;
 };
 
 export interface CreateSpotRequestParameters {
@@ -48,5 +49,5 @@ export interface ReadAllSpotRequestResult {
 }
 
 export interface ReadOneSpotRequestResult {
-  spot: SpotType;
+  spot: Omit<SpotType, "tags"> & { tags: { tag: { id: string } }[] };
 }

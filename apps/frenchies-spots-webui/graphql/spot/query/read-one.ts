@@ -1,32 +1,32 @@
 import { gql } from "@apollo/client";
 
 const READ_SPOT_BY_ID_QUERY = gql`
-  query getSpotById($id: String) {
+  query GetById($id: String) {
     spot(id: $id) {
       id
       name
       description
       isCanPark
-      isCanVisit
-      isTouristic
+      isHidden
+      category
       region
+      averageRating
       profileId
       lat
       lng
-      averageRating
-      ratings {
-        id
-        rate
-        profileId
-      }
       spotPicture {
         id
         url
       }
-      favorites {
+      tags {
         id
-        profileId
-        spotId
+        tagId
+        tag {
+          id
+          name
+          category
+          tagPictureUrl
+        }
       }
     }
   }

@@ -1,11 +1,20 @@
 import React from "react";
-import { CardButton } from "@frenchies-spots/materials";
+import { CardButton, type CardButtonProps } from "@frenchies-spots/materials";
+import { useNavigation } from "../../../../hooks";
 
-interface EditButtonProps {
+interface EditButtonProps extends CardButtonProps {
   spotId: string;
 }
 
 export const EditButton = (props: EditButtonProps) => {
-  const { spotId } = props;
-  return <CardButton icon="edit" />;
+  const { spotId, ...other } = props;
+  const { navigateTo } = useNavigation();
+
+  return (
+    <CardButton
+      icon="edit"
+      onPress={() => navigateTo("updateSpot", { id: spotId })}
+      {...other}
+    />
+  );
 };

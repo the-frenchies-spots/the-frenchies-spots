@@ -1,1 +1,1 @@
-export * from "./update-spot-page";
+export { UpdateSpotPage } from "./update-spot-page";

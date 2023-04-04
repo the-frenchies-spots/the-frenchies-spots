@@ -60,7 +60,12 @@ const spotsRepository = {
       where: {
         id,
       },
-      include: { spotPicture: true, tags: { include: { tag: true }}, ratings: true, favorites: true },
+      include: {
+        spotPicture: true,
+        tags: { include: { tag: true } },
+        ratings: true,
+        favorites: true,
+      },
     });
   },
 
@@ -94,10 +99,11 @@ const spotsRepository = {
           create: [...pictures],
         },
       },
-      include: { spotPicture: true, tags: { include: { tag: true }} },
+      include: { spotPicture: true, tags: { include: { tag: true } } },
     });
   },
 
+  // TODO: https://github.com/prisma/prisma/issues/2255
   update: (
     data: SpotDto,
     spotId: string,
@@ -106,7 +112,7 @@ const spotsRepository = {
   ): UpdateExistingSpotResult => {
     return Spot.update({
       where: {
-        id: spotId
+        id: spotId,
       },
 
       data: {
@@ -131,7 +137,7 @@ const spotsRepository = {
         //     return {
         //       where: {
         //         id: picture.id
-        //       }, 
+        //       },
         //       create: {
         //         id: picture.id,
         //         url: picture.url,
@@ -141,11 +147,9 @@ const spotsRepository = {
         // },
       },
 
-      include: { spotPicture: true, tags: { include: { tag: true }} },
+      include: { spotPicture: true, tags: { include: { tag: true } } },
     });
   },
-
-
 
   /**
    * @param {string} profileId
@@ -176,7 +180,7 @@ const spotsRepository = {
       include: { spotPicture: true, ratings: true, favorites: true },
     });
     return spotFind.tags;
-  }
+  },
 };
 
 export default spotsRepository;
