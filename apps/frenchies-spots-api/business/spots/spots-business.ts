@@ -8,7 +8,7 @@ import {
   SpotFindManyResult,
   UpdateExistingSpotResult,
 } from "../../types";
-const { SPOT_ID_NOT_MATCH_PROFILE_ID, SPOT_NOT_FOUND, SPOT_CATEGORY_NOT_MATCH_TAG_CATEGORY, TAG_NOT_FOUND } = codeErrors;
+const { SPOT_ID_NOT_MATCH_PROFILE_ID, SPOT_NOT_FOUND, SPOT_CATEGORY_NOT_MATCH_TAG_CATEGORY, TAG_NOT_FOUND, TAG_IS_MANDATORY } = codeErrors;
 
 const spotsBusiness = {
   getAll: (data: ReadSpotDto): SpotFindManyResult => {
@@ -49,6 +49,10 @@ const spotsBusiness = {
     const { spotPicture, itinaryIDs, tags, ...other } = data;
     const spotData = { ...other };
 
+    if(tags === undefined || tags.length === 0) {
+      throw new GenericError(TAG_IS_MANDATORY);
+    }
+
     const { category: spotCategory } = data;
     await Promise.all(tags.map( async (tag) => {
       const tagData = await tagsRepository.getById(tag.id)
@@ -71,6 +75,10 @@ const spotsBusiness = {
     
     await checkCreatedByCurrentUserOrThrow(spotId, currentProfileId);
     
+    if(tags === undefined || tags.length === 0) {
+      throw new GenericError(TAG_IS_MANDATORY);
+    }
+
     const { category: spotCategory } = data;
     await Promise.all(tags.map( async (tag) => {
       const tagData = await tagsRepository.getById(tag.id)

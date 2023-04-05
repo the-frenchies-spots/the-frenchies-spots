@@ -6,10 +6,9 @@ import {
   UpdateSpotPicturesDto,
 } from "../../dto/spot-dto";
 import { TContext } from "../../graphql/context";
-import { tagsRepository } from "../../repositories";
 import { CreateSpotResult, UpdateExistingSpotResult } from "../../types";
 import { GenericError, codeErrors } from "../../utils";
-const { UNAUTHENTICATED, TAG_NOT_FOUND, SPOT_CATEGORY_NOT_MATCH_TAG_CATEGORY } = codeErrors;
+const { UNAUTHENTICATED } = codeErrors;
 
 export const spotsMutation = {
   createSpot: async (

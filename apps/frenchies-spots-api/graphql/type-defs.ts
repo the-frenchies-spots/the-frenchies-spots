@@ -132,7 +132,6 @@ const typeDefs = gql`
 
   input TagInput {
     id: String
-    name: String
   }
 
   input UpdatePictureInput {

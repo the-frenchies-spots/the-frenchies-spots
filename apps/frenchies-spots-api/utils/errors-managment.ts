@@ -21,6 +21,7 @@ export enum codeErrors {
   RATING_OUT_OF_RANGE = "RATING_OUT_OF_RANGE",
   SPOT_CATEGORY_NOT_MATCH_TAG_CATEGORY = "SPOT_CATEGORY_NOT_MATCH_TAG_CATEGORY",
   TAG_NOT_FOUND = "TAG_NOT_FOUND",
+  TAG_IS_MANDATORY = "TAG_IS_MANDATORY",
 }
 
 const errorsMessage: Record<keyof typeof codeErrors, TError> = {
@@ -84,6 +85,10 @@ const errorsMessage: Record<keyof typeof codeErrors, TError> = {
     statusCode: 404,
     errorMessage: { en: "No tag found with id: "}
   },
+  TAG_IS_MANDATORY: {
+    statusCode: 404,
+    errorMessage: { en: "Tag in spot is mandatory"}
+  }
 };
 
 class GenericError extends GraphQLError {
