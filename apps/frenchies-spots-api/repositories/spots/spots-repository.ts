@@ -55,7 +55,7 @@ const spotsRepository = {
     });
   },
 
-  getById: (id: string): SpotFindByIdResult => {
+  getById: (id: string, profileId: string | undefined): SpotFindByIdResult => {
     return Spot.findUnique({
       where: {
         id,
@@ -63,7 +63,14 @@ const spotsRepository = {
       include: {
         spotPicture: true,
         tags: { include: { tag: true } },
-        ratings: true,
+        _count: {
+          select: { ratings: true },
+        },
+        ratings: {
+          where: {
+            profileId,
+          },
+        },
         favorites: true,
       },
     });

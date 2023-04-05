@@ -1,10 +1,10 @@
-import { Rating, Spot } from '../../models';
+import { Rating, Spot } from "../../models";
 import {
   RatingAverageBySpotIdResult,
   RatingCreateOrUpdate,
   RatingFindByIdResult,
-  RatingFindManyResult
-} from '../../types';
+  RatingFindManyResult,
+} from "../../types";
 
 const ratingsRepository = {
   getAll: (): RatingFindManyResult => {
@@ -14,8 +14,8 @@ const ratingsRepository = {
   getById: (id: string): RatingFindByIdResult => {
     return Rating.findUnique({
       where: {
-        id
-      }
+        id,
+      },
     });
   },
 
@@ -23,11 +23,11 @@ const ratingsRepository = {
     return Rating.aggregate({
       where: { spotId },
       _avg: {
-        rate: true
+        rate: true,
       },
       _count: {
-        rate: true
-      }
+        rate: true,
+      },
     });
   },
 
@@ -43,10 +43,10 @@ const ratingsRepository = {
       create: {
         rate,
         profileId,
-        spotId
-      }
+        spotId,
+      },
     });
-  }
+  },
 };
 
 export default ratingsRepository;
