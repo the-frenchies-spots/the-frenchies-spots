@@ -12,15 +12,15 @@ const { SPOT_ID_NOT_MATCH_PROFILE_ID, SPOT_NOT_FOUND } = codeErrors;
 
 const spotsBusiness = {
   getAll: (data: ReadSpotDto): SpotFindManyResult => {
-    const { 
+    const {
       searchValue,
-      namesTag, 
-      orderBy, 
-      skip, 
-      take, 
-      itinaryIDs, 
-      tags, 
-      ...other 
+      namesTag,
+      orderBy,
+      skip,
+      take,
+      itinaryIDs,
+      tags,
+      ...other
     } = data;
     const filterData = { ...other };
     const paginationData = { take, skip };
@@ -30,12 +30,15 @@ const spotsBusiness = {
       paginationData,
       orderBy,
       searchValue,
-      namesTag,
+      namesTag
     );
   },
 
-  getById: (spotId: string): SpotFindByIdResult => {
-    return spotsRepository.getById(spotId);
+  getById: (
+    spotId: string,
+    profileId: string | undefined
+  ): SpotFindByIdResult => {
+    return spotsRepository.getById(spotId, profileId);
   },
 
   create: (

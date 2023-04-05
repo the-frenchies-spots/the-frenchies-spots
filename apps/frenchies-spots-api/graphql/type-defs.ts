@@ -140,6 +140,36 @@ const typeDefs = gql`
     url: String
   }
 
+  input TestInput {
+    id: String
+    url: String
+  }
+
+  type CountRating {
+    ratings: Int
+  }
+
+  type SpotByIdInput {
+    id: String
+    name: String
+    description: String
+    isCanPark: Boolean
+    isHidden: Boolean
+    category: CategoriesSpotAndTag
+    profile: Profile
+    profileId: String
+    itinaries: [Itinary]
+    spotPicture: [SpotPicture]
+    lat: Float
+    lng: Float
+    region: String
+    averageRating: Float
+    ratings: [Rating]
+    favorites: [Favorite]
+    tags: [TagsOnSpots]
+    _count: CountRating
+  }
+
   enum OrderByEnum {
     asc
     desc
@@ -163,7 +193,7 @@ const typeDefs = gql`
       tags: [TagInput]
     ): [Spot]
 
-    spot(id: String): Spot
+    spot(id: String): SpotByIdInput
     products: [Product]
     authByToken: User
     getBuyProductRequest(amount: Int): String
@@ -253,7 +283,7 @@ const typeDefs = gql`
     ): AverageRating
 
     toggleFavorite(spotId: String, id: String): Spot
-    
+
     createTag(
       name: String
       tagPictureUrl: String
@@ -261,14 +291,9 @@ const typeDefs = gql`
       spotId: String
     ): Tag
 
-    updateTag(
-      id: String
-      tagPictureUrl: String
-    ): Tag
+    updateTag(id: String, tagPictureUrl: String): Tag
 
-    deleteTag(
-      id: String
-    ): Boolean
+    deleteTag(id: String): Boolean
 
     createTagsList: [Tag]
 

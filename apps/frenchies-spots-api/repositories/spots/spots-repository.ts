@@ -37,7 +37,7 @@ const spotsRepository = {
     paginationData: SpotPaginationDto,
     orderBy: SpotOrderDto["orderBy"],
     searchValue: string,
-    namesTag: string[],
+    namesTag: string[]
   ): any => {
     return Spot.findMany({
       orderBy: {
@@ -54,21 +54,21 @@ const spotsRepository = {
             OR: namesTag.map((nameTag) => {
               return {
                 tag: {
-                  name: nameTag
+                  name: nameTag,
                 },
-              }
-            })
+              };
+            }),
           },
         },
       },
 
       ...paginationData,
 
-      include:  { spotPicture: true, tags: { include: { tag: true } } },
+      include: { spotPicture: true, tags: { include: { tag: true } } },
     });
   },
 
-  getById: (id: string): SpotFindByIdResult => {
+  getById: (id: string, profileId?: string | undefined): SpotFindByIdResult => {
     return Spot.findUnique({
       where: {
         id,
@@ -76,7 +76,14 @@ const spotsRepository = {
       include: {
         spotPicture: true,
         tags: { include: { tag: true } },
-        ratings: true,
+        _count: {
+          select: { ratings: true },
+        },
+        ratings: {
+          where: {
+            profileId,
+          },
+        },
         favorites: true,
       },
     });
