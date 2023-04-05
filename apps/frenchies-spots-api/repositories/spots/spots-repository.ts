@@ -37,8 +37,11 @@ const spotsRepository = {
     paginationData: SpotPaginationDto,
     orderBy: SpotOrderDto["orderBy"],
     searchValue: string,
-    namesTag: string[]
+    tagListId: string[],
+    profileId?: string | undefined
   ): any => {
+    console.log({ profileId });
+
     return Spot.findMany({
       orderBy: {
         averageRating: orderBy,
@@ -46,25 +49,42 @@ const spotsRepository = {
 
       where: {
         ...filterData,
+
         name: {
           contains: searchValue,
         },
-        tags: {
-          some: {
-            OR: namesTag.map((nameTag) => {
-              return {
-                tag: {
-                  name: nameTag,
+        ...(tagListId
+          ? {
+              tags: {
+                some: {
+                  OR: tagListId.map((tagId) => {
+                    return {
+                      tag: {
+                        id: tagId,
+                      },
+                    };
+                  }),
                 },
-              };
-            }),
-          },
-        },
+              },
+            }
+          : {}),
       },
 
       ...paginationData,
 
-      include: { spotPicture: true, tags: { include: { tag: true } } },
+      include: {
+        spotPicture: true,
+        tags: {
+          include: {
+            tag: true,
+          },
+        },
+        favorites: {
+          where: {
+            profileId,
+          },
+        },
+      },
     });
   },
 
@@ -84,7 +104,11 @@ const spotsRepository = {
             profileId,
           },
         },
-        favorites: true,
+        favorites: {
+          where: {
+            profileId,
+          },
+        },
       },
     });
   },
@@ -152,19 +176,6 @@ const spotsRepository = {
           deleteMany: {},
           create: [...pictures],
         },
-        // spotPicture: {
-        //   connectOrCreate: pictures.map((picture) => {
-        //     return {
-        //       where: {
-        //         id: picture.id
-        //       },
-        //       create: {
-        //         id: picture.id,
-        //         url: picture.url,
-        //       },
-        //     };
-        //   }),
-        // },
       },
 
       include: { spotPicture: true, tags: { include: { tag: true } } },

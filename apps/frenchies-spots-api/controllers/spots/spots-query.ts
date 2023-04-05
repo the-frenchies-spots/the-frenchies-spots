@@ -4,8 +4,14 @@ import { TContext } from "../../graphql/context";
 import { SpotFindByIdResult, SpotFindManyResult } from "../../types";
 
 export const spotsQuery = {
-  spots: (_: undefined, data: ReadSpotDto): SpotFindManyResult => {
-    return spotsBusiness.getAll(data);
+  spots: (
+    _: undefined,
+    data: ReadSpotDto,
+    context: TContext
+  ): SpotFindManyResult => {
+    const { user } = context;
+    const profileId = user?.profile?.id;
+    return spotsBusiness.getAll(data, profileId);
   },
 
   spot: (

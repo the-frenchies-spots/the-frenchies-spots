@@ -11,10 +11,11 @@ import {
 const { SPOT_ID_NOT_MATCH_PROFILE_ID, SPOT_NOT_FOUND } = codeErrors;
 
 const spotsBusiness = {
-  getAll: (data: ReadSpotDto): SpotFindManyResult => {
+  getAll: (data: ReadSpotDto, profileId?: string): SpotFindManyResult => {
+    console.log(data);
     const {
       searchValue,
-      namesTag,
+      tagListId,
       orderBy,
       skip,
       take,
@@ -30,14 +31,12 @@ const spotsBusiness = {
       paginationData,
       orderBy,
       searchValue,
-      namesTag
+      tagListId,
+      profileId
     );
   },
 
-  getById: (
-    spotId: string,
-    profileId: string | undefined
-  ): SpotFindByIdResult => {
+  getById: (spotId: string, profileId?: string): SpotFindByIdResult => {
     return spotsRepository.getById(spotId, profileId);
   },
 

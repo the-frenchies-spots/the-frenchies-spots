@@ -1,7 +1,10 @@
 import { Spot } from "@prisma/client";
 import { z } from "zod";
 
-export const CATEGORIES_SPOT_AND_TAG = ['SPARE_TIME_SPOT', 'RESOURCES_SPOT'] as const;
+export const CATEGORIES_SPOT_AND_TAG = [
+  "SPARE_TIME_SPOT",
+  "RESOURCES_SPOT",
+] as const;
 
 export interface ProfileSpotDto
   extends Pick<Spot, "name" | "description" | "lat" | "lng"> {
@@ -34,7 +37,7 @@ const spotDtoSchema = z.object({
   lng: z.number(),
   region: z.string(),
   averageRating: z.number(),
-  tags: z.array(z.object({ id: z.string()}))
+  tags: z.array(z.object({ id: z.string() })),
 });
 
 export type SpotDto = z.infer<typeof spotDtoSchema>;
@@ -51,12 +54,13 @@ const updateSpotDtoSchema = z.object({
   lng: z.number(),
   region: z.string(),
   averageRating: z.number(),
-  tags: z.array(z.object({ id: z.string()}))
+  tags: z.array(z.object({ id: z.string() })),
 });
 
 export type UpdateSpotDto = z.infer<typeof updateSpotDtoSchema>;
 
 const spotFilterDtoSchema = z.object({
+  id: z.string(),
   isCanPark: z.boolean(),
   isHidden: z.boolean(),
   category: z.enum(CATEGORIES_SPOT_AND_TAG),
@@ -66,7 +70,7 @@ const spotFilterDtoSchema = z.object({
   profileId: z.string(),
   region: z.string(),
   averageRating: z.number(),
-  tags: z.array(z.string())
+  tags: z.array(z.string()),
 });
 export type SpotFilterDto = z.infer<typeof spotFilterDtoSchema>;
 
@@ -82,6 +86,6 @@ export interface ReadSpotDto
   extends SpotFilterDto,
     SpotPaginationDto,
     SpotOrderDto {
-      searchValue: string;
-      namesTag: string[];
-    }
+  searchValue: string;
+  tagListId: string[];
+}
