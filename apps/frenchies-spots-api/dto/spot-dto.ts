@@ -82,5 +82,6 @@ export interface ReadSpotDto
   extends SpotFilterDto,
     SpotPaginationDto,
     SpotOrderDto {
-  searchValue: string;
-}
+      searchValue: string;
+      namesTag: string[];
+    }

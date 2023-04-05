@@ -7,14 +7,14 @@ import {
   SpotFindByIdResult,
   SpotFindManyResult,
   UpdateExistingSpotResult,
-  UpdateSpotResult,
 } from "../../types";
 const { SPOT_ID_NOT_MATCH_PROFILE_ID, SPOT_NOT_FOUND } = codeErrors;
 
 const spotsBusiness = {
   getAll: (data: ReadSpotDto): SpotFindManyResult => {
     const { 
-      searchValue, 
+      searchValue,
+      namesTag, 
       orderBy, 
       skip, 
       take, 
@@ -29,7 +29,8 @@ const spotsBusiness = {
       filterData,
       paginationData,
       orderBy,
-      searchValue
+      searchValue,
+      namesTag,
     );
   },
 

@@ -5,6 +5,7 @@ import {
   type SpotPicturesDto,
   type UpdateSpotPicturesDto,
 } from "../../dto";
+
 import {
   CreateSpotResult,
   SpotFindByIdResult,
@@ -12,8 +13,8 @@ import {
   type SpotFindManyResult,
   UpdateExistingSpotResult,
 } from "../../types";
-import { Spot, Profile } from "../../models";
 
+import { Spot, Profile } from "../../models";
 import { Prisma } from "@prisma/client";
 
 const spotsRepository = {
@@ -35,8 +36,9 @@ const spotsRepository = {
     filterData: Prisma.SpotWhereInput,
     paginationData: SpotPaginationDto,
     orderBy: SpotOrderDto["orderBy"],
-    nameContains: string
-  ): SpotFindManyResult => {
+    searchValue: string,
+    namesTag: string[],
+  ): any => {
     return Spot.findMany({
       orderBy: {
         averageRating: orderBy,
@@ -45,13 +47,20 @@ const spotsRepository = {
       where: {
         ...filterData,
         name: {
-          contains: nameContains,
+          contains: searchValue,
+        },
+        tags: {
+          every: {
+            tag: {
+              name: "montagne",
+            },
+          },
         },
       },
 
       ...paginationData,
 
-      include: { spotPicture: true, tags: { include: { tag: true } } },
+      include:  { spotPicture: true, tags: { include: { tag: true } } },
     });
   },
 
