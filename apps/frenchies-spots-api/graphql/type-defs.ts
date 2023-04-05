@@ -156,6 +156,7 @@ const typeDefs = gql`
       isHidden: Boolean
       category: CategoriesSpotAndTag
       searchValue: String
+      namesTag: [String]
       region: String
       skip: Int
       take: Int

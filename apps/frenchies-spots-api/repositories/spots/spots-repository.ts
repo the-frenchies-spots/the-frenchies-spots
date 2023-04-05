@@ -50,10 +50,14 @@ const spotsRepository = {
           contains: searchValue,
         },
         tags: {
-          every: {
-            tag: {
-              name: "montagne",
-            },
+          some: {
+            OR: namesTag.map((nameTag) => {
+              return {
+                tag: {
+                  name: nameTag
+                },
+              }
+            })
           },
         },
       },
