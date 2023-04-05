@@ -2,18 +2,25 @@ import Tag from "../../models/tag";
 import { TagDto, TagFilterDto, TagUpdateDto } from "../../dto";
 
 const tagsRepository = {
-  getAll: (filterData: TagFilterDto, searchValue: string) => {
-    const { category } = filterData;
+  getAll: (filterData?: TagFilterDto, searchValue?: string) => {
     return Tag.findMany({
       where: {
-        category,
+        category: filterData?.category,
         id: {
-          in: filterData.ids,
+          in: filterData?.ids,
         },
         name: {
           contains: searchValue,
         },
       },
+    });
+  },
+
+  getById: (id: string) => {
+    return Tag.findUnique({
+      where: {
+        id
+      }
     });
   },
 

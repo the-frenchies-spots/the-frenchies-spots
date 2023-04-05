@@ -6,31 +6,32 @@ import {
   UpdateSpotPicturesDto,
 } from "../../dto/spot-dto";
 import { TContext } from "../../graphql/context";
+import { tagsRepository } from "../../repositories";
 import { CreateSpotResult, UpdateExistingSpotResult } from "../../types";
 import { GenericError, codeErrors } from "../../utils";
-const { UNAUTHENTICATED } = codeErrors;
+const { UNAUTHENTICATED, TAG_NOT_FOUND, SPOT_CATEGORY_NOT_MATCH_TAG_CATEGORY } = codeErrors;
 
 export const spotsMutation = {
-  createSpot: (
+  createSpot: async (
     _: undefined,
     data: SpotDto & { spotPicture: SpotPicturesDto },
     context: TContext
-  ): CreateSpotResult => {
+  ): Promise<CreateSpotResult> => {
     const { user } = context;
     const profileId = user?.profile.id;
     if (!profileId) throw new GenericError(UNAUTHENTICATED);
-    return spotsBusiness.create(data, profileId);
+    return await spotsBusiness.create(data, profileId);
   },
 
-  updateSpot: (
+  updateSpot: async (
     _: undefined,
     data: UpdateSpotDto  & { spotPicture: UpdateSpotPicturesDto },
     context: TContext
-  ): UpdateExistingSpotResult => {
+  ): Promise<UpdateExistingSpotResult> => {
     const { user } = context;
     const profileId = user?.profile.id;
     if (!profileId) throw new GenericError(UNAUTHENTICATED);
-    return spotsBusiness.update(data, profileId);
+    return await spotsBusiness.update(data, profileId);
   },
 
   /**

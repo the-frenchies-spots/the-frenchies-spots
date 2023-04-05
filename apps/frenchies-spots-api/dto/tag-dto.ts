@@ -11,8 +11,8 @@ const tagDtoSchema = z.object({
 export type TagDto = z.infer<typeof tagDtoSchema>;
 
 const tagFilterDtoSchema = z.object({
-  ids: z.array(z.string()),
-  category: z.enum(CATEGORIES_SPOT_AND_TAG)
+  ids: z.array(z.string()).optional(),
+  category: z.enum(CATEGORIES_SPOT_AND_TAG).optional()
 });
 
 export type TagFilterDto = z.infer<typeof tagFilterDtoSchema>;

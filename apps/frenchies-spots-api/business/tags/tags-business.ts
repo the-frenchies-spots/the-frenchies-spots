@@ -9,6 +9,10 @@ const tagsBusiness = {
     return tagsRepository.getAll(filterData, searchValue);
   },
 
+  getById: (tagId: string) => {
+    return tagsRepository.getById(tagId);
+  },
+
   create: (data: TagDto) => {
     return tagsRepository.create(data);
   },

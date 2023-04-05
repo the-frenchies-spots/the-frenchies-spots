@@ -210,6 +210,8 @@ const typeDefs = gql`
       searchValue: String
       ids: [String]
     ): [Tag]
+
+    tag(id: String): Tag
   }
 
   type Mutation {

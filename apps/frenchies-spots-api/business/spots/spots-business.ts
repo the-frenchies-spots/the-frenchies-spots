@@ -1,5 +1,5 @@
-import { spotsRepository } from "../../repositories";
-import { ReadSpotDto, SpotDto, SpotPicturesDto } from "../../dto";
+import { spotsRepository, tagsRepository } from "../../repositories";
+import { ReadSpotDto, SpotDto, SpotPicturesDto, TagDto } from "../../dto";
 import { codeErrors, GenericError } from "../../utils";
 import { UpdateSpotDto, UpdateSpotPicturesDto } from "../../dto/spot-dto";
 import {
@@ -8,19 +8,19 @@ import {
   SpotFindManyResult,
   UpdateExistingSpotResult,
 } from "../../types";
-const { SPOT_ID_NOT_MATCH_PROFILE_ID, SPOT_NOT_FOUND } = codeErrors;
+const { SPOT_ID_NOT_MATCH_PROFILE_ID, SPOT_NOT_FOUND, SPOT_CATEGORY_NOT_MATCH_TAG_CATEGORY, TAG_NOT_FOUND } = codeErrors;
 
 const spotsBusiness = {
   getAll: (data: ReadSpotDto): SpotFindManyResult => {
-    const {
+    const { 
       searchValue,
-      namesTag,
-      orderBy,
-      skip,
-      take,
-      itinaryIDs,
-      tags,
-      ...other
+      namesTag, 
+      orderBy, 
+      skip, 
+      take, 
+      itinaryIDs, 
+      tags, 
+      ...other 
     } = data;
     const filterData = { ...other };
     const paginationData = { take, skip };
@@ -30,7 +30,7 @@ const spotsBusiness = {
       paginationData,
       orderBy,
       searchValue,
-      namesTag
+      namesTag,
     );
   },
 
@@ -41,13 +41,25 @@ const spotsBusiness = {
     return spotsRepository.getById(spotId, profileId);
   },
 
-  create: (
+
+  create: async (
     data: SpotDto & { spotPicture: SpotPicturesDto },
     profileId: string
-  ): CreateSpotResult => {
+  ): Promise<CreateSpotResult> => {
     const { spotPicture, itinaryIDs, tags, ...other } = data;
     const spotData = { ...other };
-    return spotsRepository.create(spotData, spotPicture, tags, profileId);
+
+    const { category: spotCategory } = data;
+    await Promise.all(tags.map( async (tag) => {
+      const tagData = await tagsRepository.getById(tag.id)
+      if (tagData === null) {
+        throw new GenericError(TAG_NOT_FOUND);
+      }
+      const tagCategory = tagData?.category
+      await checkSpotCategoryAndTagCategoryAreTheSame(spotCategory, tagCategory);
+    }));
+    
+    return await spotsRepository.create(spotData, spotPicture, tags, profileId);
   },
 
   update: async (
@@ -56,7 +68,19 @@ const spotsBusiness = {
   ): UpdateExistingSpotResult => {
     const { id: spotId, tags, spotPicture, ...other } = data;
     const updateData = { tags, ...other };
+    
     await checkCreatedByCurrentUserOrThrow(spotId, currentProfileId);
+    
+    const { category: spotCategory } = data;
+    await Promise.all(tags.map( async (tag) => {
+      const tagData = await tagsRepository.getById(tag.id)
+      if (tagData === null) {
+        throw new GenericError(TAG_NOT_FOUND);
+      }
+      const tagCategory = tagData?.category
+      await checkSpotCategoryAndTagCategoryAreTheSame(spotCategory, tagCategory);
+    }));
+    
     return spotsRepository.update(updateData, spotId, tags, spotPicture);
   },
 
@@ -78,6 +102,15 @@ async function checkCreatedByCurrentUserOrThrow(
   if (!spot) throw new GenericError(SPOT_NOT_FOUND, spotId);
   if (currentProfileId !== spot.profileId)
     throw new GenericError(SPOT_ID_NOT_MATCH_PROFILE_ID);
+}
+
+function checkSpotCategoryAndTagCategoryAreTheSame (
+  spotCategory: String,
+  tagCategory: String,
+): void {
+
+  if (tagCategory !== spotCategory)
+    throw new GenericError(SPOT_CATEGORY_NOT_MATCH_TAG_CATEGORY);
 }
 
 export default spotsBusiness;

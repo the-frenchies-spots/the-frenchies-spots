@@ -19,6 +19,8 @@ export enum codeErrors {
   RATING_NOT_FOUND = "RATING_NOT_FOUND",
   RATING_ID_NOT_MATCH_PROFILE_ID = "RATING_ID_NOT_MATCH_PROFILE_ID",
   RATING_OUT_OF_RANGE = "RATING_OUT_OF_RANGE",
+  SPOT_CATEGORY_NOT_MATCH_TAG_CATEGORY = "SPOT_CATEGORY_NOT_MATCH_TAG_CATEGORY",
+  TAG_NOT_FOUND = "TAG_NOT_FOUND",
 }
 
 const errorsMessage: Record<keyof typeof codeErrors, TError> = {
@@ -73,6 +75,14 @@ const errorsMessage: Record<keyof typeof codeErrors, TError> = {
   FAVORITE_ID_NOT_MATCH_PROFILE_ID: {
     statusCode: 404,
     errorMessage: { en: "Favorite profile id doesn't match already with the current profile id"}
+  },
+  SPOT_CATEGORY_NOT_MATCH_TAG_CATEGORY: {
+    statusCode: 404,
+    errorMessage: { en : "Spot category and tag category doesn't match." }
+  },
+  TAG_NOT_FOUND: {
+    statusCode: 404,
+    errorMessage: { en: "No tag found with id: "}
   },
 };
 
