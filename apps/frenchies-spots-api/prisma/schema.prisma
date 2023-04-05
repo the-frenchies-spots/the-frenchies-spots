@@ -91,9 +91,9 @@ model Spot {
 model TagsOnSpots {
   id     String @id @default(auto()) @map("_id") @db.ObjectId
   spot   Spot? @relation(fields: [spotId], references: [id], onUpdate: Cascade, onDelete: Cascade)
-  tag    Tag?  @relation(fields: [tagId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  tag    Tag  @relation(fields: [tagId], references: [id], onUpdate: Cascade, onDelete: Cascade)
   spotId String? @db.ObjectId
-  tagId  String? @db.ObjectId
+  tagId  String @db.ObjectId
 }
 
 

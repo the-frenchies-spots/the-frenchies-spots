@@ -73,21 +73,34 @@ const spotsBusiness = {
     const { id: spotId, tags, spotPicture, ...other } = data;
     const updateData = { tags, ...other };
     
-    await checkCreatedByCurrentUserOrThrow(spotId, currentProfileId);
+    if (
+      data.name !== undefined || 
+      data.isCanPark !== undefined || 
+      data.isHidden !== undefined || 
+      data.category !== undefined || 
+      data.lat !== undefined || 
+      data.lng !== undefined || 
+      data.region !== undefined || 
+      data.tags !== undefined
+    ) {
+      await checkCreatedByCurrentUserOrThrow(spotId, currentProfileId);
+    }
     
-    if(tags === undefined || tags.length === 0) {
+    if(tags !== undefined && tags.length === 0) {
       throw new GenericError(TAG_IS_MANDATORY);
     }
 
     const { category: spotCategory } = data;
-    await Promise.all(tags.map( async (tag) => {
-      const tagData = await tagsRepository.getById(tag.id)
-      if (tagData === null) {
-        throw new GenericError(TAG_NOT_FOUND);
-      }
-      const tagCategory = tagData?.category
-      await checkSpotCategoryAndTagCategoryAreTheSame(spotCategory, tagCategory);
-    }));
+    if(tags !== undefined) {
+      await Promise.all(tags.map( async (tag) => {
+        const tagData = await tagsRepository.getById(tag.id)
+        if (tagData === null) {
+          throw new GenericError(TAG_NOT_FOUND);
+        }
+        const tagCategory = tagData?.category
+        await checkSpotCategoryAndTagCategoryAreTheSame(spotCategory, tagCategory);
+      }));
+    }
     
     return spotsRepository.update(updateData, spotId, tags, spotPicture);
   },

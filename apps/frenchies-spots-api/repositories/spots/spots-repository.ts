@@ -139,7 +139,7 @@ const spotsRepository = {
         ...data,
         tags: {
           deleteMany: {},
-          create: tags.map((tag) => {
+          create: tags?.map((tag) => {
             return {
               tag: {
                 connect: { id: tag.id },

@@ -45,9 +45,9 @@ type Spot {
 type TagsOnSpots {
     id: String!
     spot: Spot
-    tag: Tag
+    tag: Tag!
     spotId: String
-    tagId: String
+    tagId: String!
 }
 
 type Tag {
@@ -829,7 +829,7 @@ input TagsOnSpotsOrderByInput {
 input TagsOnSpotsCreateInput {
     id: String!
     spot: TagsOnSpotsSpotCreateRelationInput
-    tag: TagsOnSpotsTagCreateRelationInput
+    tag: TagsOnSpotsTagCreateRelationInput!
 }
 
 input TagsOnSpotsCreateManyInput {
