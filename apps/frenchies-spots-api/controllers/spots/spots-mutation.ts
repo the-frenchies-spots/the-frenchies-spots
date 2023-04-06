@@ -8,6 +8,7 @@ import {
 import { TContext } from "../../graphql/context";
 import { CreateSpotResult, UpdateExistingSpotResult } from "../../types";
 import { GenericError, codeErrors } from "../../utils";
+import { z } from "zod";
 const { UNAUTHENTICATED } = codeErrors;
 
 export const spotsMutation = {
@@ -24,7 +25,7 @@ export const spotsMutation = {
 
   updateSpot: async (
     _: undefined,
-    data: UpdateSpotDto  & { spotPicture: UpdateSpotPicturesDto },
+    data: UpdateSpotDto & { spotPicture: UpdateSpotPicturesDto },
     context: TContext
   ): Promise<UpdateExistingSpotResult> => {
     const { user } = context;

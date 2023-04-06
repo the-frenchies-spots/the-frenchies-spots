@@ -13,7 +13,9 @@ export interface ProfileSpotDto
 
 const spotPictureDtoSchema = z.array(
   z.object({
-    url: z.string(),
+    url: z
+      .string({ invalid_type_error: "Url must be a string" })
+      .url({ message: "Invalid url" }),
   })
 );
 export type SpotPicturesDto = z.infer<typeof spotPictureDtoSchema>;
@@ -21,7 +23,9 @@ export type SpotPicturesDto = z.infer<typeof spotPictureDtoSchema>;
 const updateSpotPictureDtoSchema = z.array(
   z.object({
     id: z.string(),
-    url: z.string(),
+    url: z
+      .string({ invalid_type_error: "Url must be a string" })
+      .url({ message: "Invalid url" }),
   })
 );
 export type UpdateSpotPicturesDto = z.infer<typeof updateSpotPictureDtoSchema>;

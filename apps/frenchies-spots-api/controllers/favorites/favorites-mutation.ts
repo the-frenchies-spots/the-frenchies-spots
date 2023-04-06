@@ -1,8 +1,8 @@
-import { favoritesBusiness } from '../../business';
-import { UpdateFavoriteDto } from '../../dto';
-import { TContext } from '../../graphql/context';
-import { CreateDeleteFavoriteResult } from '../../types';
-import { codeErrors, GenericError } from '../../utils';
+import { favoritesBusiness } from "../../business";
+import { UpdateFavoriteDto, updateFavoriteDtoSchema } from "../../dto";
+import { TContext } from "../../graphql/context";
+import { CreateDeleteFavoriteResult } from "../../types";
+import { codeErrors, GenericError } from "../../utils";
 const { UNAUTHENTICATED } = codeErrors;
 
 export const favoritesMutation = {
@@ -11,6 +11,7 @@ export const favoritesMutation = {
     data: UpdateFavoriteDto,
     context: TContext
   ): CreateDeleteFavoriteResult => {
+    updateFavoriteDtoSchema.parse(data);
     const { user } = context;
     const profileId = user?.profile.id;
     if (!profileId) throw new GenericError(UNAUTHENTICATED);
@@ -18,5 +19,5 @@ export const favoritesMutation = {
     const { spotId, id: favoriteId } = data;
 
     return favoritesBusiness.createOrDelete(spotId, favoriteId, profileId);
-  }
+  },
 };
