@@ -1,54 +1,45 @@
 # Project
 
-Description of the project
+Notre objectif est de mettre à disposition une application mobile permettant aux voyageurs en véhicule aménagé de s’entraider, de partager leur mode de vie, les lieux qu’ils ont appréciés et de découvrir de nouvelles personnes.
 
 # start with the project
 
 ### generate project
+
 npx prisma generate
 
+### seed project
+
+npx prisma db seed
+
 ### start server
+
 pnpm api
 
 ### start webui
+
 pnpm webui
 
-### how to seed
-npx prisma db seed
+# Commit rules:
 
+- if the task isn't finish add wip to the description
+- for the PATH it's "nameProject-api" or "nameProject-front" we've to indicate if it's front or api, this will be usefull to go to a monorepo
+- to change the rule of the commit you've to go in the commitlint.config.js file (cf the example where we disable the length of the message which was 100 max)
 
-# Turborepo react-native starter
+- feat : is used when you add or continue to work on a fonctionnality
+- fix : is used when you fixed, correct a bug
+- docs : is used when you add or update the documentation of the project
+- build : initialization of the project
+- chore : work on ----- other than the build
+- pref : improve the performance
+- refactor : refatorisation of code
+- style : changement of
+- test : add or update code test
 
-This is an official starter Turborepo.
+- Example of a "good" commit
+  feat(path): "description what you did"
+  fix(path): "description what you fixed"
 
-## What's inside?
+# Need help ?
 
-This Turborepo includes the following packages/apps:
-
-### Apps and Packages
-
-- `native`: a [react-native](https://reactnative.dev/) app built with [expo](https://docs.expo.dev/)
-- `web`: a [Next.js](https://nextjs.org/) app built with [react-native-web](https://necolas.github.io/react-native-web/)
-- `ui`: a stub [react-native](https://reactnative.dev/) component library shared by both `web` and `native` applications
-- `tsconfig`: `tsconfig.json`s used throughout the monorepo
-
-Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
-
-### Utilities
-
-This Turborepo has some additional tools already setup for you:
-
-- [Expo](https://docs.expo.dev/) for native development
-- [TypeScript](https://www.typescriptlang.org/) for static type checking
-- [Prettier](https://prettier.io) for code formatting
-
-## Using this example
-
-Run the following command:
-
-```sh
-npx degit vercel/turbo/examples/with-react-native-web with-react-native-web
-cd with-react-native-web
-yarn install
-git init . && git add . && git commit -m "Init"
-```
+frenchies.spots@gmail.com
