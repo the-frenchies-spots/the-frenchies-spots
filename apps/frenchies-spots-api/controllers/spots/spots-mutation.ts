@@ -24,7 +24,7 @@ export const spotsMutation = {
 
   updateSpot: async (
     _: undefined,
-    data: UpdateSpotDto  & { spotPicture: UpdateSpotPicturesDto },
+    data: UpdateSpotDto & { spotPicture: UpdateSpotPicturesDto },
     context: TContext
   ): Promise<UpdateExistingSpotResult> => {
     const { user } = context;
