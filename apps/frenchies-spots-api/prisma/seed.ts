@@ -106,7 +106,7 @@ const userData: Prisma.UserCreateInput[] = [
               lat: 44.5889775,
               lng: -1.2142045,
               region: '75',
-              address: "Av. de Biscarrosse, 33115 La Teste-de-Buch",
+              address: "Av. de Biscarrosse, 33115 La Teste-de-Buch, France",
               spotPicture: {
                 create: [
                   {
@@ -136,7 +136,7 @@ const userData: Prisma.UserCreateInput[] = [
               lat: 43.30888,
               lng: -1.63507,
               region: '75',
-              address: "Col de Saint-Ignace, 64310 Sare",
+              address: "Col de Saint-Ignace, 64310 Sare, France",
               spotPicture: {
                 create: [
                   {
@@ -162,7 +162,7 @@ const userData: Prisma.UserCreateInput[] = [
               lat: 42.8962287902832,
               lng: -0.12042045593261719,
               region: '75',
-              address: "Pôle d’activités – Ferme d’Icart, 09240 Montels",
+              address: "Pôle d’activités – Ferme d’Icart, 09240 Montels, France",
               spotPicture: {
                 create: [
                   {
@@ -209,7 +209,7 @@ const userData: Prisma.UserCreateInput[] = [
               lat: 45.557484,
               lng: -0.956417,
               region: '75',
-              address: "81 Bd de la Falaise, 17132 Meschers-sur-Gironde",
+              address: "81 Bd de la Falaise, 17132 Meschers-sur-Gironde, France",
               spotPicture: {
                 create: [
                   {
@@ -241,7 +241,7 @@ const userData: Prisma.UserCreateInput[] = [
               lat: 45.76667,
               lng: 1.7,
               region: '75',
-              address: "19110 Bort les Orgues",
+              address: "Fôret Rue du Moulin, 19110 Bort-les-Orgues, France",
               spotPicture: {
                 create: [
                   {
@@ -267,7 +267,7 @@ const userData: Prisma.UserCreateInput[] = [
               lat: 43.9359823,
               lng: -0.9236623,
               region: '75',
-              address: "40000 Landes",
+              address: "70 Rue Jean-Charles de Borda, 40370 Rion-des-Landes, France",
               spotPicture: {
                 create: [
                   {
@@ -312,7 +312,7 @@ const userData: Prisma.UserCreateInput[] = [
               lat: 47.562968,
               lng: -2.769661,
               region: '53',
-              address: "8 bd Iles, 56000 Vannes",
+              address: "8 bd Iles, 56000 Vannes, France",
               spotPicture: {
                 create: [
                   {
@@ -338,7 +338,7 @@ const userData: Prisma.UserCreateInput[] = [
               lat: 44.179423,
               lng: 5.060538,
               region: '93',
-              address: "84190 Lafare",
+              address: "Rue de L'église, 84190 Lafare, France",
               spotPicture: {
                 create: [
                   {
@@ -364,7 +364,7 @@ const userData: Prisma.UserCreateInput[] = [
               lat: 44.202515,
               lng: 5.291937,
               region: '84',
-              address: "84340 Malaucène",
+              address: "Montée de l'Ancien Fort, 84340 Malaucène, France",
               spotPicture: {
                 create: [
                   {
@@ -393,7 +393,7 @@ const userData: Prisma.UserCreateInput[] = [
               lat: 48.030483,
               lng: -2.132837,
               region: '53',
-              address: "35380 Paimpont",
+              address: "Esplanade de Brocéliande, 35380 Paimpont, France",
               spotPicture: {
                 create: [
                   {
@@ -420,7 +420,7 @@ const userData: Prisma.UserCreateInput[] = [
               lat: 42.518597,
               lng: 2.455712,
               region: '75',
-              address: "66820 Castei",
+              address: "36 Avenue Clemenceau, 66820 Vernet-les-Bains, France",
               spotPicture: {
                 create: [
                   {
@@ -490,7 +490,7 @@ const userData: Prisma.UserCreateInput[] = [
               lat: 43.228732,
               lng: 5.40348,
               region: '93',
-              address: "Les Calanques De Marseille - Sites et circuits de tourisme, Mazan, 13009 Marseille",
+              address: "Al Fourqane la cayolle, Boulevard des Calanques, 13009 Marseille, France",
               spotPicture: {
                 create: [
                   {
@@ -516,7 +516,7 @@ const userData: Prisma.UserCreateInput[] = [
               lat: 44.5000426,
               lng: 6.3163021,
               region: '93',
-              address: "Lac de Serre Ponçon, 05160 Savines le Lac",
+              address: "Lac de Serre Ponçon, 05160 Savines le Lac, France",
               spotPicture: {
                 create: [
                   {
@@ -542,7 +542,7 @@ const userData: Prisma.UserCreateInput[] = [
               lat: 43.38871,
               lng: -1.66267,
               region: '75',
-              address: "Chem. de Lafitenia64500 Saint-Jean-de-Luz",
+              address: "Chem. de Lafitenia, 64500 Saint-Jean-de-Luz, France",
               spotPicture: {
                 create: [
                   {
@@ -571,7 +571,7 @@ const userData: Prisma.UserCreateInput[] = [
               lat: 43.423001,
               lng: -1.6062693,
               region: '75',
-              address: "Guéthary 64210",
+              address: "199 Rue Edouard Gélos, 64210 Guéthary, France",
               spotPicture: {
                 create: [
                   {
@@ -619,7 +619,7 @@ const userData: Prisma.UserCreateInput[] = [
               lat: 43.7496562,
               lng: 6.3285616,
               region: '93',
-              address: "Sainte-Croix-du-Verdon 04500",
+              address: "5685 Route de la Maline, 04120 La Palud-sur-Verdon, France",
               spotPicture: {
                 create: [
                   {
@@ -648,7 +648,7 @@ const userData: Prisma.UserCreateInput[] = [
               lat: 47.8006543,
               lng: 0.3771322,
               region: '76',
-              address: "Sault 84390",
+              address: "Route Forestière des Trembles, 72500 Jupilles, France",
               spotPicture: {
                 create: [
                   {
@@ -674,7 +674,7 @@ const userData: Prisma.UserCreateInput[] = [
               lat: 43.2727191,
               lng: 6.6405225,
               region: '93',
-              address: "2 place de l'Hôtel-de-Ville, BP 161 83990 Saint-Tropez",
+              address: "2 place de l'Hôtel-de-Ville, 83990 Saint-Tropez, France",
               spotPicture: {
                 create: [
                   {
@@ -700,7 +700,7 @@ const userData: Prisma.UserCreateInput[] = [
               lat: 43.1506968,
               lng: 6.3419285,
               region: '93',
-              address: "1 Place Saint-François. 83 230 Bormes les Mimosas",
+              address: "1 Place Saint-François, 83230 Bormes les Mimosas, France",
               spotPicture: {
                 create: [
                   {
@@ -744,7 +744,7 @@ const userData: Prisma.UserCreateInput[] = [
               lat: 48.6359541,
               lng: -1.51146,
               region: '28',
-              address: "La Caserne, 50170 le Mont Saint Michel",
+              address: "La Caserne, 50170 le Mont Saint Michel, France",
               spotPicture: {
                 create: [
                   {
@@ -773,7 +773,7 @@ const userData: Prisma.UserCreateInput[] = [
               lat: 43.74425,
               lng: 4.79607,
               region: '93',
-              address: "Grand Rue 13520 Les Baux-de-Provence",
+              address: "Grand Rue, 13520 Les Baux-de-Provence, France",
               spotPicture: {
                 create: [
                   {
@@ -802,7 +802,7 @@ const userData: Prisma.UserCreateInput[] = [
               lat: 46.5781239,
               lng: -1.8419225,
               region: '93',
-              address: "1528-1582 Rte de la Tête de Chien, 06320 La Turbie",
+              address: "Rte de la Tête de Chien, 06320 La Turbie, France",
               spotPicture: {
                 create: [
                   {
@@ -828,7 +828,7 @@ const userData: Prisma.UserCreateInput[] = [
               lat: 45.9250255,
               lng: 6.8727437,
               region: '84',
-              address: "100 Pl. de l'Aiguille du Midi, 74400 Chamonix-Mont-Blanc",
+              address: "100 Pl. de l'Aiguille du Midi, 74400 Chamonix-Mont-Blanc, France",
               spotPicture: {
                 create: [
                   {
@@ -855,7 +855,7 @@ const userData: Prisma.UserCreateInput[] = [
               lat: 49.36,
               lng: 0.0752778,
               region: '28',
-              address: "20 Rue Robert Fossorier, 14800 Deauville",
+              address: "20 Rue Robert Fossorier, 14800 Deauville, France",
               spotPicture: {
                 create: [
                   {
@@ -899,7 +899,7 @@ const userData: Prisma.UserCreateInput[] = [
               lat: 44.09109115600586,
               lng: 7.465714931488037,
               region: '93',
-              address: "Vallée des Merveilles, 06430 Tende",
+              address: "Vallée des Merveilles, 06430 Tende, France",
               spotPicture: {
                 create: [
                   {
@@ -925,7 +925,7 @@ const userData: Prisma.UserCreateInput[] = [
               lat: 49.7074621,
               lng: 0.2031905,
               region: '28',
-              address: "6 Rue Alphonse Karr, 76790 Étretat",
+              address: "6 Rue Alphonse Karr, 76790 Étretat, France",
               spotPicture: {
                 create: [
                   {
@@ -951,7 +951,7 @@ const userData: Prisma.UserCreateInput[] = [
               lat: 48.8317817,
               lng: -3.4844446,
               region: '53',
-              address: "Ploumanac'h 22700 Perros-Guirec",
+              address: "Ploumanac'h, 22700 Perros-Guirec, France",
               spotPicture: {
                 create: [
                   {
@@ -977,7 +977,7 @@ const userData: Prisma.UserCreateInput[] = [
               lat: 47.5836629,
               lng: -3.0794428,
               region: '53',
-              address: "5 Chem. de Pouldeve, 56340 Carnac",
+              address: "5 Chem. de Pouldeve, 56340 Carnac, France",
               spotPicture: {
                 create: [
                   {
@@ -1003,7 +1003,7 @@ const userData: Prisma.UserCreateInput[] = [
               lat: 48.0964125,
               lng: -2.0281004,
               region: '53',
-              address: "Étang de Trémelin 35750 Iffendic",
+              address: "Étang de Trémelin, 35750 Iffendic, France",
               spotPicture: {
                 create: [
                   {
@@ -1033,7 +1033,7 @@ const userData: Prisma.UserCreateInput[] = [
               lat: 44.13387079092109,
               lng: 6.24162281675221,
               region: '93',
-              address: "Le Clot de Jaline, Route du Clos de Jalines, 04420 Marcoux, France",
+              address: "Route du Clos de Jalines, 04420 Marcoux, France",
               spotPicture: {
                 create: [
                   {
@@ -1093,7 +1093,7 @@ const userData: Prisma.UserCreateInput[] = [
               lat: 43.6153093,
               lng: 1.4209587,
               region: '76',
-              address: "55 Bd de Suisse, 31200 Toulouse",
+              address: "55 Bd de Suisse, 31200 Toulouse, France",
               spotPicture: {
                 create: [
                   {
@@ -1153,7 +1153,7 @@ const userData: Prisma.UserCreateInput[] = [
               lat: 44.9812637,
               lng: -1.08014,
               region: '75',
-              address: "42 Av. de la Côté d'Argent, 33680 Lacanau",
+              address: "42 Av. de la Côté d'Argent, 33680 Lacanau, France",
               spotPicture: {
                 create: [
                   {
@@ -1180,7 +1180,7 @@ const userData: Prisma.UserCreateInput[] = [
               lat: 44.9672453,
               lng: -1.1434696,
               region: '75',
-              address: "Plage de la Grande Escoure All. du Club de Voile, 33680 Lacanau",
+              address: "Plage de la Grande Escoure All. du Club de Voile, 33680 Lacanau, France",
               spotPicture: {
                 create: [
                   {
@@ -1213,7 +1213,7 @@ const userData: Prisma.UserCreateInput[] = [
               lat: 45.1857,
               lng: -1.0572,
               region: '75',
-              address: "1/2, rue Cantelaude - Route de l´Esparre - D3, 33990 Hourtin",
+              address: "Route de l´Esparre, 33990 Hourtin, France",
               spotPicture: {
                 create: [
                   {
@@ -1240,7 +1240,7 @@ const userData: Prisma.UserCreateInput[] = [
               lat: 47.6174511,
               lng: -3.1664424,
               region: '53',
-              address: "Kerhillio 56410 Erdeven",
+              address: "Kerhillio, 56410 Erdeven, France",
               spotPicture: {
                 create: [
                   {
@@ -1267,7 +1267,7 @@ const userData: Prisma.UserCreateInput[] = [
               lat: 43.4087585,
               lng: 3.6968848,
               region: '76',
-              address: "10 Rue Voltaire, 34200 Sète",
+              address: "10 Rue Voltaire, 34200 Sète, France",
               spotPicture: {
                 create: [
                   {
@@ -1294,7 +1294,7 @@ const userData: Prisma.UserCreateInput[] = [
               lat: 44.92591094970703,
               lng: -0.6232532858848572,
               region: '75',
-              address: "71 Av. du 11 Novembre, 33290 Blanquefort",
+              address: "71 Av. du 11 Novembre, 33290 Blanquefort, France",
               spotPicture: {
                 create: [
                   {
