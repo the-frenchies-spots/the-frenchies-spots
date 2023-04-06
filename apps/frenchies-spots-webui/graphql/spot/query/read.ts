@@ -1,39 +1,59 @@
 import { gql } from "@apollo/client";
 
 const READ_SPOT_QUERY = gql`
-  query spots(
+  query Spots(
+    $id: String
     $profileId: String
-    $isCanPark: Boolean
-    $isCanVisit: Boolean
-    $isTouristic: Boolean
-    $region: String
-    $searchValue: String
     $orderBy: OrderByEnum
+    $isCanPark: Boolean
+    $isHidden: Boolean
+    $category: CategoriesSpotAndTag
+    $searchValue: String
+    $tagListId: [String]
+    $region: String
     $skip: Int
     $take: Int
+    $tags: [TagInput]
   ) {
     spots(
+      id: $id
       profileId: $profileId
-      isCanPark: $isCanPark
-      isCanVisit: $isCanVisit
-      isTouristic: $isTouristic
-      region: $region
-      searchValue: $searchValue
       orderBy: $orderBy
+      isCanPark: $isCanPark
+      isHidden: $isHidden
+      category: $category
+      searchValue: $searchValue
+      tagListId: $tagListId
+      region: $region
       skip: $skip
       take: $take
+      tags: $tags
     ) {
-      id
-      name
+      category
       description
+      id
       isCanPark
-      isCanVisit
-      isTouristic
+      isHidden
+      lat
+      lng
+      name
       region
-      profileId
-      averageRating
+      tags {
+        id
+        tagId
+        tag {
+          id
+          name
+          category
+          tagPictureUrl
+        }
+      }
       spotPicture {
+        id
         url
+      }
+      favorites {
+        id
       }
     }
   }

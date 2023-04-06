@@ -1,5 +1,10 @@
 import React from "react";
-import { Controller, type Control, type FieldValues } from "react-hook-form";
+import {
+  Controller,
+  type Control,
+  type FieldValues,
+  FieldPath,
+} from "react-hook-form";
 import {
   Box,
   VStack,
@@ -7,13 +12,15 @@ import {
   SelectTag,
   type SelectTagProps,
 } from "@frenchies-spots/materials";
+import { FormControllerProps } from "./form-controller-type";
 
-interface SelectTagControllerProps extends Omit<SelectTagProps, "value"> {
-  control: Control<FieldValues, any> | any;
-  name: string;
-}
-
-export const SelectTagController = (props: SelectTagControllerProps) => {
+export function SelectTagController<
+  TFieldValues extends FieldValues = FieldValues,
+  TFieldName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>
+>(
+  props: FormControllerProps<TFieldValues, TFieldName> &
+    Omit<SelectTagProps, "value">
+) {
   const { control, name, ...other } = props;
   return (
     <Controller
@@ -31,4 +38,4 @@ export const SelectTagController = (props: SelectTagControllerProps) => {
       }}
     />
   );
-};
+}

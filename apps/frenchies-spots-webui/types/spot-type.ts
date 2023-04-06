@@ -18,7 +18,11 @@ export type SpotType = {
   averageRating: number;
   ratings: Rating[];
   favorites: TFavorite[];
+
   isHidden: boolean;
+  _count: {
+    ratings: number;
+  };
 };
 
 export interface CreateSpotRequestParameters {

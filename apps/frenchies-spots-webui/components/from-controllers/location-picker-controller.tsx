@@ -1,17 +1,21 @@
 import React from "react";
-import { Controller, type Control, type FieldValues } from "react-hook-form";
+import {
+  Controller,
+  type Control,
+  type FieldValues,
+  FieldPath,
+} from "react-hook-form";
 import { Box, VStack, Caption } from "@frenchies-spots/materials";
 import { LocationPicker, LocationPickerProps } from "../custom-input";
+import { FormControllerProps } from "./form-controller-type";
 
-interface LocationPickerControllerProps
-  extends Omit<LocationPickerProps, "value"> {
-  control: Control<FieldValues, any> | any;
-  name: string;
-}
-
-export const LocationPickerController = (
-  props: LocationPickerControllerProps
-) => {
+export function LocationPickerController<
+  TFieldValues extends FieldValues = FieldValues,
+  TFieldName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>
+>(
+  props: FormControllerProps<TFieldValues, TFieldName> &
+    Omit<LocationPickerProps, "value">
+) {
   const { control, name, ...other } = props;
   return (
     <Controller
@@ -29,4 +33,4 @@ export const LocationPickerController = (
       }}
     />
   );
-};
+}

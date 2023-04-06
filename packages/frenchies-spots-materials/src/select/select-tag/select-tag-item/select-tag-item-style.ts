@@ -34,4 +34,9 @@ export const styles = (selected: boolean) =>
     label: {
       textAlign: "center",
     },
+    tagLabel: {
+      fontFamily: "Montserrat-Regular",
+      fontStyle: "normal",
+      fontSize: 10,
+    },
   });

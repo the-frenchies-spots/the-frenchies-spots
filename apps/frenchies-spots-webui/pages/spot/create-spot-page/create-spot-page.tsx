@@ -19,13 +19,10 @@ export const CreateSpotPage = () => {
   const handleCreateSpotSubmit = async (
     variables: CreateSpotRequestParameters
   ) => {
-    console.log("******************");
-    console.log(variables);
-    console.log("******************");
     createSpot({ variables })
       .then((result) => {
         const createId = result?.data?.createSpot?.id;
-        navigateTo("spot", { id: createId });
+        navigateTo("map", { id: createId });
       })
       .catch(console.error);
   };

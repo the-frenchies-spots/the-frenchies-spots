@@ -50,10 +50,9 @@ export const UpdateSpotPage = (props: UpdateSpotPageProps) => {
   const handleUpdateSpotSubmit = async (
     variables: CreateSpotRequestParameters
   ) => {
-    console.log({ variables: { ...variables, id } });
     updateSpot({ variables: { ...variables, id } })
       .then(() => {
-        navigateTo("spot", { id });
+        if (id) navigateTo("map", { id });
       })
       .catch(console.error);
   };

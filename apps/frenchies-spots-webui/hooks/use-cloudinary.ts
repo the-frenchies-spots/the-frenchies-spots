@@ -31,7 +31,6 @@ export const useCloudinary = () => {
         return uploadImage(image, uploadPreset);
       })
     );
-    console.log({ result });
     return [...result, ...images.filter((image) => image.charAt(0) !== "d")];
   };
 

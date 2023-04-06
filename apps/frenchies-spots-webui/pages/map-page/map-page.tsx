@@ -1,53 +1,54 @@
-import React, { useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { styles } from "./map-page-style";
-import { useMapBox } from "../../hooks";
 import {
   Page,
-  MapBox,
-  MapBoxMarker,
-  NotificationButton,
   InfoBar,
+  DisplayMode,
+  DisplayModeButton,
 } from "../../components";
-import {
-  Box,
-  Card,
-  Drawer,
-  HStack,
-  FilterInput,
-  FloatingButton,
-  CardButton,
-  PrimaryButton,
-  SubTitle,
-  Icon,
-  Title,
-} from "@frenchies-spots/materials";
-import { Touchable, TouchableOpacity } from "react-native";
+import { Box, Drawer, FilterInput } from "@frenchies-spots/materials";
+import { AuthContext } from "../../context";
+import { useQuery, useLazyQuery } from "@apollo/client";
+import { ReadAllSpotRequestResult } from "../../types";
+import { READ_SPOT_QUERY } from "../../graphql";
+import { useIsFocused } from "@react-navigation/native";
 
 interface MapPageProps {
-  route?: { params: { lat: number | undefined; lng: number | undefined } };
+  route?: {
+    params: {
+      lat?: number | undefined;
+      lng?: number | undefined;
+      id?: string | undefined;
+    };
+  };
 }
 
 export const MapPage = (props: MapPageProps) => {
   const lat = props?.route?.params?.lat;
   const lng = props?.route?.params?.lng;
+  const id = props?.route?.params?.id;
 
-  const { viewport, onViewportChange, onCoordinateClick } = useMapBox();
   const [isOpen, setIsOpen] = useState(false);
   const [isMapMode, setIsMapMode] = useState<boolean>(true);
+  const isFocused = useIsFocused();
+
+  const [getSpots, { data, loading }] =
+    useLazyQuery<ReadAllSpotRequestResult>(READ_SPOT_QUERY);
+
+  useEffect(() => {
+    console.log("use effetc");
+    getSpots({ variables: { id } });
+  }, [id, isFocused]);
 
   const handleToggleOpen = () => {
     setIsOpen((current) => !current);
   };
 
-  const handleToggleDisplayMode = () => {
-    setIsMapMode((current) => !current);
-  };
-
   return (
     <Page
-      isBackground={false}
-      isPadding={false}
       opacity={1}
+      isPadding={false}
+      isBackground={false}
       opaqueBackground={isOpen}
     >
       <Box style={styles.mapMenuContainer}>
@@ -55,36 +56,13 @@ export const MapPage = (props: MapPageProps) => {
         <FilterInput onSearchPress={handleToggleOpen} />
       </Box>
 
-      <Box style={styles.displayModeButtonContainer}>
-        <Box style={styles.displayModeButton}>
-          <FloatingButton icon="map" onPress={handleToggleDisplayMode}>
-            {isMapMode ? "Liste" : "Carte"}
-          </FloatingButton>
-        </Box>
-      </Box>
+      <DisplayMode
+        isMapMode={isMapMode}
+        spotList={data?.spots}
+        displayFirst={!!id}
+      />
+      <DisplayModeButton isMapMode={isMapMode} onChange={setIsMapMode} />
 
-      <Box style={styles.container}>
-        {isMapMode ? (
-          <MapBox
-            viewport={viewport}
-            onViewportChange={onViewportChange}
-            onCoordinateClick={onCoordinateClick}
-          >
-            {lat && lng && <MapBoxMarker lat={lat} lng={lng} />}
-          </MapBox>
-        ) : (
-          <Box style={styles.listContainer}>
-            <Card
-              name="Forêt Magique"
-              description="Lorem ipsum dolor sit amet amet..."
-              averageRating={4.7}
-              isCanPark={true}
-              picture="https://previews.123rf.com/images/marisha5/marisha51601/marisha5160100276/50703619-paysage-magnifique-for%C3%AAt-le-matin.jpg"
-              cardButton={<CardButton />}
-            />
-          </Box>
-        )}
-      </Box>
       <Drawer
         isOpen={isOpen}
         heightMultiplier={0.8}

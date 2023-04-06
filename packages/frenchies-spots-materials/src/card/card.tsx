@@ -1,5 +1,5 @@
 import React, { ReactNode } from "react";
-import { Touchable, TouchableOpacity } from "react-native";
+import { ViewStyle, TextStyle, ImageStyle } from "react-native";
 import { Box } from "../box";
 import { Icon } from "../icon";
 import { Image } from "../image";
@@ -7,6 +7,9 @@ import { VStack, HStack } from "../stack";
 import { Title, BodyText, Caption } from "../typography";
 import { styles } from "./card-styles";
 import { CardTag } from "./card-tag";
+import { CardInfo } from "./card-info";
+
+type SxProps = ViewStyle | TextStyle | ImageStyle;
 
 interface CardProps {
   cardButton?: ReactNode;
@@ -16,6 +19,7 @@ interface CardProps {
   isCanPark: boolean;
   category?: "RESOURCES_SPOT" | "SPARE_TIME_SPOT";
   picture?: string;
+  style?: SxProps;
 }
 
 export const Card = (props: CardProps) => {
@@ -27,10 +31,11 @@ export const Card = (props: CardProps) => {
     isCanPark,
     category = "SPARE_TIME_SPOT",
     picture,
+    style = {},
   } = props;
 
   return (
-    <Box style={styles.container}>
+    <Box style={{ ...styles.container, ...style }}>
       <VStack style={styles.tagContainer} spacing={10}>
         {isCanPark && (
           <Box>
@@ -50,26 +55,12 @@ export const Card = (props: CardProps) => {
 
       <Image style={styles.picture} src={picture} />
 
-      <Box>
-        {cardButton && <Box style={styles.cardButton}>{cardButton}</Box>}
-        <VStack spacing={5} style={styles.cardContent}>
-          <Box>
-            <Title variant="h3">{name}</Title>
-          </Box>
-
-          <HStack spacing={20}>
-            <HStack items="center" spacing={5}>
-              <Icon name="star" color="darkGrey" />
-              <Caption>{averageRating}</Caption>
-            </HStack>
-            <HStack items="center" spacing={5}>
-              <Icon name="chat" color="darkGrey" />
-              <Caption>200</Caption>
-            </HStack>
-          </HStack>
-          <BodyText>{description}</BodyText>
-        </VStack>
-      </Box>
+      <CardInfo
+        cardButton={cardButton}
+        name={name}
+        averageRating={averageRating}
+        description={description}
+      />
     </Box>
   );
 };

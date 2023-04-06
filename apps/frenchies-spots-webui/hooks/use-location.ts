@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import * as Location from "expo-location";
 import { TCoordinate } from "../types";
 import { getCodeRegionByCoordinate } from "../services";
+import { useGeocoding } from "./use-geocoding";
 
 type UseLocationProps = {
   lazy?: boolean;
@@ -10,8 +11,11 @@ type UseLocationProps = {
 export const useLocation = (props: UseLocationProps = { lazy: false }) => {
   const { lazy } = props;
 
-  const [location, setLocation] = useState<TCoordinate | null>(null);
-  const [error, setError] = useState<string | null>(null);
+  const [location, setLocation] = useState<TCoordinate | undefined>(undefined);
+  const [place, setPlace] = useState<string | undefined>(undefined);
+  const [error, setError] = useState<string | undefined>(undefined);
+
+  const { searchPlace } = useGeocoding();
 
   const loadLocation = async () => {
     let { status } = await Location.requestForegroundPermissionsAsync();
@@ -32,6 +36,14 @@ export const useLocation = (props: UseLocationProps = { lazy: false }) => {
     }
   }, []);
 
+  useEffect(() => {
+    if (!lazy && location) {
+      searchPlace(`${location.lng},${location.lat}`).then((address) => {
+        setPlace(address.placeName);
+      });
+    }
+  }, [location]);
+
   const getCurrentRegion = useCallback(
     async (coord = location) => {
       if (coord) {
@@ -45,5 +57,5 @@ export const useLocation = (props: UseLocationProps = { lazy: false }) => {
     [location]
   );
 
-  return { location, error, loadLocation, getCurrentRegion };
+  return { location, place, error, loadLocation, getCurrentRegion };
 };

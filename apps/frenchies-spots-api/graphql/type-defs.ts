@@ -179,13 +179,14 @@ const typeDefs = gql`
     itinaries: [Itinary]
 
     spots(
+      id: String
       profileId: String
       orderBy: OrderByEnum
       isCanPark: Boolean
       isHidden: Boolean
       category: CategoriesSpotAndTag
       searchValue: String
-      namesTag: [String]
+      tagListId: [String]
       region: String
       skip: Int
       take: Int

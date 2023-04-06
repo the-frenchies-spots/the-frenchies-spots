@@ -12,8 +12,18 @@ const READ_SPOT_BY_ID_QUERY = gql`
       region
       averageRating
       profileId
+      favorites {
+        id
+      }
       lat
       lng
+      _count {
+        ratings
+      }
+      ratings {
+        id
+        rate
+      }
       spotPicture {
         id
         url

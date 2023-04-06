@@ -4,6 +4,7 @@ import { styles } from "./spot-info-detail-style";
 import { SpotHeadSection } from "./spot-head-section";
 import { SpotActionSection } from "./spot-action-section";
 import { useTranslation } from "react-i18next";
+import { Rating } from "../../../../types";
 
 interface SpotInfoDetailProps {
   spotId: string;
@@ -12,6 +13,10 @@ interface SpotInfoDetailProps {
   location: string;
   isUserOwner: boolean;
   actionSectionDisabled?: boolean;
+  rate?: Rating;
+  averageRating?: number;
+  maxVote?: number;
+  favoriteId?: string;
 }
 
 export const SpotInfoDetail = (props: SpotInfoDetailProps) => {
@@ -22,6 +27,10 @@ export const SpotInfoDetail = (props: SpotInfoDetailProps) => {
     location,
     isUserOwner,
     actionSectionDisabled = false,
+    rate,
+    averageRating,
+    maxVote,
+    favoriteId = "",
   } = props;
 
   const { t } = useTranslation();
@@ -34,6 +43,9 @@ export const SpotInfoDetail = (props: SpotInfoDetailProps) => {
           title={title}
           isUserOwner={isUserOwner}
           location={location}
+          rate={rate}
+          averageRating={averageRating}
+          maxVote={maxVote}
         />
       </Box>
 
@@ -44,7 +56,11 @@ export const SpotInfoDetail = (props: SpotInfoDetailProps) => {
         <BodyText>{description}</BodyText>
       </Box>
       {!actionSectionDisabled && (
-        <SpotActionSection spotId={spotId} isUserOwner={isUserOwner} />
+        <SpotActionSection
+          spotId={spotId}
+          isUserOwner={isUserOwner}
+          favoriteId={favoriteId}
+        />
       )}
     </VStack>
   );

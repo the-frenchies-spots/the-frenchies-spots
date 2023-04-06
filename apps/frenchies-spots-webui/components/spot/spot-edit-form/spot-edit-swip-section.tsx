@@ -5,7 +5,6 @@ import {
   Box,
   SearchInput,
   TCardItem,
-  TextInputWeb,
   Title,
 } from "@frenchies-spots/materials";
 import {
@@ -158,7 +157,7 @@ const isHiddenMode: TCardItem[] = [
 interface SectionListParams {
   onSubmitForm: () => void;
   goToNextIndex: () => void;
-  control: Control<FieldValues, any> | any;
+  control: Control<SpotEditFormValues, any>;
   fields: TFields;
   errors: FieldErrors<SpotEditFormValues>;
   watch: UseFormWatch<SpotEditFormValues>;
@@ -167,7 +166,7 @@ interface SectionListParams {
 
 export const spotEditSwipSection = (params: SectionListParams) => {
   const { fields, control, errors, watch, t } = params;
-  const { name, location, description } = watch();
+  const { name, location, description, pictures } = watch();
 
   return [
     {
@@ -271,7 +270,7 @@ export const spotEditSwipSection = (params: SectionListParams) => {
             name={fields.location.name}
             variant="outlined"
             placeholder="Rechercher"
-            style={{  marginTop: 20 }}
+            style={{ marginTop: 20 }}
           />
 
           <LocationPickerController
@@ -279,10 +278,8 @@ export const spotEditSwipSection = (params: SectionListParams) => {
             name={fields.location.name}
             style={{ height: 400, marginVertical: 20 }}
           />
-        
-          <SelectRegion
-            value={location.codeRegion.toString()}
-          />
+
+          <SelectRegion value={location.codeRegion.toString()} />
         </Box>
       ),
     },
@@ -316,7 +313,7 @@ export const spotEditSwipSection = (params: SectionListParams) => {
         <Box style={{ marginTop: 60, height: "100%" }}>
           <SpotPictureDetail
             goBackDisabled={true}
-            src="https://previews.123rf.com/images/marisha5/marisha51601/marisha5160100276/50703619-paysage-magnifique-for%C3%AAt-le-matin.jpg"
+            src={pictures.map((url) => ({ url }))}
           />
           <SpotInfoDetail
             spotId={"df5t7g48rh8dytsy"}

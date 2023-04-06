@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { Page } from "../../components";
+import { InfoBar, Page } from "../../components";
 import { Image } from "react-native";
 import {
   Icon,
@@ -35,19 +35,8 @@ export const ProfilePage = () => {
   };
 
   return (
-    <Page isBackground={false}>
-      <HStack justify="between" items="center">
-        <Box>
-          <SubTitle variant="sub2">Actuellement à</SubTitle>
-          <HStack spacing={5} items="center">
-            <Icon name="map-marker" color="darkPurple" size={12} />
-            <Title variant="h5" color="darkPurple">
-              Blanquefort, France
-            </Title>
-          </HStack>
-        </Box>
-        <Icon name="bell" color="purple" size={22} />
-      </HStack>
+    <Page isBackground={false} opacity={1}>
+      <InfoBar displayLocation={false} style={{ marginTop: 5 }} />
 
       <VStack center spacing={15} style={styles.vstackProfile}>
         <Avatar />
@@ -67,7 +56,11 @@ export const ProfilePage = () => {
         </Box>
         <HStack justify="between">
           <Box style={{ width: "73%" }}>
-            <SecondaryButton contentStyle={styles.buttonContent} little>
+            <SecondaryButton
+              contentStyle={styles.buttonContent}
+              onPress={() => navigateTo("spotUser")}
+              little
+            >
               Voir mes spots
             </SecondaryButton>
           </Box>
