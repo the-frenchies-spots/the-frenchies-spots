@@ -7,5 +7,5 @@ export interface TFavorite {
 }
 
 export interface FavoriteRequestResult {
-  profile: { favorites: { spot: SpotType }[] };
+  profile: { favorites: { id: string; spot: SpotType }[] };
 }

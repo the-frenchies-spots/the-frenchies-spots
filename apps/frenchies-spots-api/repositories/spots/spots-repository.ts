@@ -3,64 +3,113 @@ import {
   type SpotOrderDto,
   type SpotPaginationDto,
   type SpotPicturesDto,
-  type UpdateSpotPicturesDto
-} from '../../dto';
+  type UpdateSpotPicturesDto,
+} from "../../dto";
+
 import {
   CreateSpotResult,
   SpotFindByIdResult,
-  UpdateSpotResult,
   type UpdateRatingAverageBySpotIdResult,
-  type SpotFindManyResult
-} from '../../types';
-import { Spot, Profile } from '../../models';
+  type SpotFindManyResult,
+  UpdateExistingSpotResult,
+} from "../../types";
 
-import { Prisma } from '@prisma/client';
+import { Spot, Profile } from "../../models";
+import { Prisma } from "@prisma/client";
 
 const spotsRepository = {
   updateAverageRatingBySpotId: (
     spotId: string,
-    avg: SpotDto['averageRating']
+    avg: SpotDto["averageRating"]
   ): UpdateRatingAverageBySpotIdResult => {
     return Spot.update({
       where: {
-        id: spotId
+        id: spotId,
       },
       data: {
-        averageRating: avg
-      }
+        averageRating: avg,
+      },
     });
   },
 
   getAll: (
     filterData: Prisma.SpotWhereInput,
     paginationData: SpotPaginationDto,
-    orderBy: SpotOrderDto['orderBy'],
-    nameContains: string
-  ): SpotFindManyResult => {
+    orderBy: SpotOrderDto["orderBy"],
+    searchValue: string,
+    tagListId: string[],
+    profileId?: string | undefined
+  ): any => {
+
+
     return Spot.findMany({
       orderBy: {
-        averageRating: orderBy
+        averageRating: orderBy,
       },
 
       where: {
         ...filterData,
+
         name: {
-          contains: nameContains
-        }
+          contains: searchValue,
+        },
+        ...(tagListId && tagListId.length
+          ? {
+              tags: {
+                some: {
+                  OR: tagListId.map((tagId) => {
+                    return {
+                      tag: {
+                        id: tagId,
+                      },
+                    };
+                  }),
+                },
+              },
+            }
+          : {}),
       },
 
       ...paginationData,
 
-      include: { spotPicture: true }
+      include: {
+        spotPicture: true,
+        tags: {
+          include: {
+            tag: true,
+          },
+        },
+        favorites: {
+          where: {
+            profileId,
+          },
+        },
+      },
     });
   },
 
-  getById: (id: string): SpotFindByIdResult => {
+  getById: (id: string, profileId?: string | undefined): SpotFindByIdResult => {
     return Spot.findUnique({
       where: {
-        id
+        id,
       },
-      include: { spotPicture: true, ratings: true, favorites: true }
+      include: {
+        spotPicture: true,
+        tags: { include: { tag: true } },
+        _count: {
+          select: { ratings: true },
+        },
+        ratings: {
+          where: {
+            profileId,
+          },
+        },
+        favorites: {
+          where: {
+            profileId,
+          },
+        },
+      },
     });
   },
 
@@ -70,42 +119,66 @@ const spotsRepository = {
    * @param {string} profileId
    */
   create: (
-    data: Omit<Prisma.SpotCreateInput, 'profile'>,
+    data: Omit<Prisma.SpotCreateInput, "profile">,
     pictures: SpotPicturesDto,
+    tags: { id: string }[],
     profileId: string
   ): CreateSpotResult => {
     return Spot.create({
       data: {
         ...data,
+        tags: {
+          create: tags.map((tag) => {
+            return {
+              tag: {
+                connect: { id: tag.id },
+              },
+            };
+          }),
+        },
         profile: {
-          connect: { id: profileId }
+          connect: { id: profileId },
         },
         spotPicture: {
-          create: [...pictures]
-        }
+          create: [...pictures],
+        },
       },
-      include: { spotPicture: true }
+      include: { spotPicture: true, tags: { include: { tag: true } } },
     });
   },
 
+  // TODO: https://github.com/prisma/prisma/issues/2255
   update: (
     data: SpotDto,
     spotId: string,
+    tags: { id: string }[],
     pictures: UpdateSpotPicturesDto = []
-  ): UpdateSpotResult => {
-    const spotPicture = {
-      upsert: pictures.map((picture) => {
-        const { id = undefined, url } = picture;
-        return { where: { id }, update: { url }, create: { url } };
-      })
-    };
-
+  ): UpdateExistingSpotResult => {
     return Spot.update({
       where: {
-        id: spotId
+        id: spotId,
       },
-      data: pictures ? { ...data, spotPicture } : data,
-      include: { spotPicture: true }
+
+      data: {
+        ...data,
+        tags: {
+          deleteMany: {},
+          create: tags?.map((tag) => {
+            return {
+              tag: {
+                connect: { id: tag.id },
+              },
+            };
+          }),
+        },
+
+        spotPicture: {
+          deleteMany: {},
+          create: [...pictures],
+        },
+      },
+
+      include: { spotPicture: true, tags: { include: { tag: true } } },
     });
   },
 
@@ -116,19 +189,29 @@ const spotsRepository = {
   delete: (profileId: string, spotId: string): Promise<boolean> => {
     return Profile.update({
       where: {
-        id: profileId
+        id: profileId,
       },
       data: {
         spots: {
           delete: {
-            id: spotId
-          }
-        }
-      }
+            id: spotId,
+          },
+        },
+      },
     })
       .then(() => true)
       .catch(() => false);
-  }
+  },
+
+  getTagBySpotId: (id: string) => {
+    const spotFind = Spot.findUnique({
+      where: {
+        id,
+      },
+      include: { spotPicture: true, ratings: true, favorites: true },
+    });
+    return spotFind.tags;
+  },
 };
 
 export default spotsRepository;

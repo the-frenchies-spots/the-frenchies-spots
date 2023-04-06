@@ -1,36 +1,36 @@
-import { spotsBusiness } from '../../business';
+import { spotsBusiness } from "../../business";
 import {
   SpotDto,
   UpdateSpotDto,
   SpotPicturesDto,
-  UpdateSpotPicturesDto
-} from '../../dto/spot-dto';
-import { TContext } from '../../graphql/context';
-import { CreateSpotResult, UpdateExistingSpotResult } from '../../types';
-import { GenericError, codeErrors } from '../../utils';
+  UpdateSpotPicturesDto,
+} from "../../dto/spot-dto";
+import { TContext } from "../../graphql/context";
+import { CreateSpotResult, UpdateExistingSpotResult } from "../../types";
+import { GenericError, codeErrors } from "../../utils";
 const { UNAUTHENTICATED } = codeErrors;
 
 export const spotsMutation = {
-  createSpot: (
+  createSpot: async (
     _: undefined,
-    data: SpotDto & { pictures: SpotPicturesDto },
+    data: SpotDto & { spotPicture: SpotPicturesDto },
     context: TContext
-  ): CreateSpotResult => {
+  ): Promise<CreateSpotResult> => {
     const { user } = context;
     const profileId = user?.profile.id;
     if (!profileId) throw new GenericError(UNAUTHENTICATED);
-    return spotsBusiness.create(data, profileId);
+    return await spotsBusiness.create(data, profileId);
   },
 
-  updateSpot: (
+  updateSpot: async (
     _: undefined,
-    data: UpdateSpotDto & { pictures: UpdateSpotPicturesDto },
+    data: UpdateSpotDto  & { spotPicture: UpdateSpotPicturesDto },
     context: TContext
-  ): UpdateExistingSpotResult => {
+  ): Promise<UpdateExistingSpotResult> => {
     const { user } = context;
     const profileId = user?.profile.id;
     if (!profileId) throw new GenericError(UNAUTHENTICATED);
-    return spotsBusiness.update(data, profileId);
+    return await spotsBusiness.update(data, profileId);
   },
 
   /**
@@ -46,5 +46,5 @@ export const spotsMutation = {
     const profileId = user?.profile.id;
     if (!profileId) throw new GenericError(UNAUTHENTICATED);
     return spotsBusiness.delete(data, profileId);
-  }
+  },
 };

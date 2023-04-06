@@ -1,62 +1,83 @@
-import { View } from 'react-native';
-import React from 'react';
-import Icon from '@expo/vector-icons/MaterialCommunityIcons';
+import { View } from "react-native";
+import React from "react";
+import Icon from "@expo/vector-icons/MaterialCommunityIcons";
+import { ViewStyle, TextStyle, ImageStyle } from "react-native";
+
+import { theme, type TColors } from "@frenchies-spots/theme";
+
+const themeColor = theme.TFS.colors;
+type SxProps = ViewStyle | TextStyle | ImageStyle;
+
 import {
   MaterialIcons,
   MaterialCommunityIcons,
   FontAwesome5,
   AntDesign,
-  Ionicons
-} from '@expo/vector-icons';
+  Ionicons,
+  Entypo,
+} from "@expo/vector-icons";
 
 enum IoniconsEnum {
-  'add'
+  "add",
+}
+
+enum EntypoEnum {
+  "cross",
 }
 
 enum AntDesignEnum {
-  'picture'
+  "picture",
 }
 
 enum FontAwesome5Enum {
-  'coins'
+  "coins",
+  "user-alt",
+  "user",
 }
 
 enum MaterialCommunityEnum {
-  'road-variant',
-  'sort-ascending',
-  'cards-heart-outline',
-  'map-search',
-  'close-circle-outline',
-  'trash-can-outline',
-  'heart'
+  "road-variant",
+  "sort-ascending",
+  "cards-heart-outline",
+  "map-search",
+  "map-marker-plus",
+  "close-circle-outline",
+  "trash-can-outline",
+  "heart",
+  "bell",
+  "trophy-award",
 }
 
 enum MaterialIconsEnum {
-  'landscape',
-  'search',
-  'arrow-back-ios',
-  'settings',
-  'payment',
-  'payments',
-  'add-circle-outline',
-  'edit'
+  "landscape",
+  "search",
+  "arrow-back-ios",
+  "settings",
+  "payment",
+  "payments",
+  "add-circle-outline",
+  "edit",
+  "star",
+  "chat",
+  "directions-run",
+  "local-parking",
 }
 enum ExpoIconsEnum {
-  'eye',
-  'login',
-  'account',
-  'account-circle',
-  'map-marker',
-  'picture-in-picture-bottom-right',
-  'picture-in-picture-bottom-right-outline',
-  'picture-in-picture-top-right',
-  'picture-in-picture-top-right-outline',
-  'camera',
-  'shopping',
-  'shopping-music',
-  'shopping-outline',
-  'shopping-search',
-  'road'
+  "eye",
+  "login",
+  "account",
+  "account-circle",
+  "map-marker",
+  "picture-in-picture-bottom-right",
+  "picture-in-picture-bottom-right-outline",
+  "picture-in-picture-top-right",
+  "picture-in-picture-top-right-outline",
+  "camera",
+  "shopping",
+  "shopping-music",
+  "shopping-outline",
+  "shopping-search",
+  "road",
 }
 
 type MaterialIconsType = keyof typeof MaterialIconsEnum;
@@ -65,6 +86,7 @@ type MaterialCommunityType = keyof typeof MaterialCommunityEnum;
 type FontAwesome5EnumType = keyof typeof FontAwesome5Enum;
 type AntDesignEnumType = keyof typeof AntDesignEnum;
 type IoniconsEnumType = keyof typeof IoniconsEnum;
+type EntypoEnumType = keyof typeof EntypoEnum;
 
 export type IconProps = {
   name?:
@@ -73,21 +95,22 @@ export type IconProps = {
     | MaterialCommunityType
     | FontAwesome5EnumType
     | AntDesignEnumType
-    | IoniconsEnumType;
+    | IoniconsEnumType
+    | EntypoEnumType;
   size?: number;
-  color?: string;
-  style?: Record<string, string | number>;
+  color?: TColors;
+  style?: SxProps;
 };
 
 export const AppIcon = (props: IconProps) => {
-  const { name = 'landscape', size = 16, color, style } = props;
+  const { name = "landscape", size = 16, color = "darkPurple", style } = props;
 
   const isExpoIcons = Object.values(ExpoIconsEnum).includes(name);
   const isMaterialIcons = Object.values(MaterialIconsEnum).includes(name);
-  const isFontAwesome5Icons =
-    Object.values(FontAwesome5Enum).includes(name);
+  const isFontAwesome5Icons = Object.values(FontAwesome5Enum).includes(name);
   const isAntDesignIcons = Object.values(AntDesignEnum).includes(name);
   const isIoniconsIcons = Object.values(IoniconsEnum).includes(name);
+  const isEntypoIcons = Object.values(EntypoEnum).includes(name);
   const isMaterialCommunityIcons = Object.values(
     MaterialCommunityEnum
   ).includes(name);
@@ -98,7 +121,7 @@ export const AppIcon = (props: IconProps) => {
         <Icon
           name={name as ExpoIconsType}
           size={size}
-          color={color}
+          color={themeColor[color]}
           style={style}
         />
       )}
@@ -106,7 +129,7 @@ export const AppIcon = (props: IconProps) => {
         <MaterialIcons
           name={name as MaterialIconsType}
           size={size}
-          color={color}
+          color={themeColor[color]}
           style={style}
         />
       )}
@@ -114,7 +137,7 @@ export const AppIcon = (props: IconProps) => {
         <MaterialCommunityIcons
           name={name as MaterialCommunityType}
           size={size}
-          color={color}
+          color={themeColor[color]}
           style={style}
         />
       )}
@@ -123,7 +146,7 @@ export const AppIcon = (props: IconProps) => {
         <FontAwesome5
           name={name as FontAwesome5EnumType}
           size={size}
-          color={color}
+          color={themeColor[color]}
           style={style}
         />
       )}
@@ -131,7 +154,7 @@ export const AppIcon = (props: IconProps) => {
         <AntDesign
           name={name as AntDesignEnumType}
           size={size}
-          color={color}
+          color={themeColor[color]}
           style={style}
         />
       )}
@@ -140,7 +163,16 @@ export const AppIcon = (props: IconProps) => {
         <Ionicons
           name={name as IoniconsEnumType}
           size={size}
-          color={color}
+          color={themeColor[color]}
+          style={style}
+        />
+      )}
+
+      {isEntypoIcons && (
+        <Entypo
+          name={name as EntypoEnumType}
+          size={size}
+          color={themeColor[color]}
           style={style}
         />
       )}

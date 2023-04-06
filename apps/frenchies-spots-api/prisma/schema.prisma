@@ -23,6 +23,16 @@ enum Level {
   Error
 }
 
+enum CategoriesSpotAndTag {
+  SPARE_TIME_SPOT
+  RESOURCES_SPOT
+}
+
+enum Role {
+  SIMPLE_USER
+  USER_ADMIN
+}
+
 model User {
   id       String   @id @default(auto()) @map("_id") @db.ObjectId
   email    String   @unique
@@ -31,12 +41,6 @@ model User {
   role     Role     @default(SIMPLE_USER)
   profile  Profile?
 }
-
-enum Role {
-  SIMPLE_USER
-  USER_ADMIN
-}
-
 
 model Profile {
   id        String    @id @default(auto()) @map("_id") @db.ObjectId
@@ -56,6 +60,84 @@ model Profile {
   favorites Favorite[]
 }
 
+model Spot {
+  id            String         @id @default(auto()) @map("_id") @db.ObjectId
+  name          String
+  description   String
+  isCanPark     Boolean        @default(false)
+  isHidden      Boolean        @default(false)
+  category      CategoriesSpotAndTag
+  // Relations one to many with profile
+  profile       Profile        @relation(fields: [profileId], references: [id], onDelete: Cascade)
+  profileId     String         @unique @db.ObjectId
+  // Implicit relations many to many with itinary
+  itinaryIDs  String[]   @db.ObjectId
+  itinaries     Itinary[] @relation(fields: [itinaryIDs], references: [id])
+  lat           Float
+  lng           Float
+  region        String
+  address       String
+  averageRating Float @default(0)
+  // Relation one to many with spot_pictures
+  spotPicture   SpotPicture[]
+  // Relation one to many with rating
+  ratings       Rating[]
+  // Relation one to many with favorite
+  favorites     Favorite[]
+  // Explicit relations many to many with tags
+  tags TagsOnSpots[]
+}
+
+// Explicit relations many to many
+model TagsOnSpots {
+  id     String @id @default(auto()) @map("_id") @db.ObjectId
+  spot   Spot? @relation(fields: [spotId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  tag    Tag  @relation(fields: [tagId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  spotId String? @db.ObjectId
+  tagId  String @db.ObjectId
+}
+
+
+model Tag {
+  id            String @id @default(auto()) @map("_id") @db.ObjectId
+  name          String @unique
+  tagPictureUrl String
+  category      CategoriesSpotAndTag
+  // Explicit relations many to many with itinary
+  spots TagsOnSpots[]
+}
+
+model SpotPicture {
+  id     String @id @default(auto()) @map("_id") @db.ObjectId
+  url    String
+  spot   Spot   @relation(fields: [spotId], references: [id], onDelete: Cascade)
+  spotId String @unique @db.ObjectId
+}
+
+model Rating {
+  id        String @id @default(auto()) @map("_id") @db.ObjectId
+  rate      Int
+  profile   Profile @relation(fields: [profileId], references: [id], onDelete: Cascade)
+  profileId String  @unique @db.ObjectId
+  spot      Spot    @relation(fields: [spotId], references: [id], onDelete: Cascade)
+  spotId    String  @unique @db.ObjectId
+}
+
+model Favorite {
+  id        String  @id @default(auto()) @map("_id") @db.ObjectId
+  profile   Profile @relation(fields: [profileId], references: [id], onDelete: Cascade)
+  profileId String  @unique @db.ObjectId
+  spot      Spot    @relation(fields: [spotId], references: [id], onDelete: Cascade)
+  spotId    String  @unique @db.ObjectId
+}
+
+model Product {
+  id  String @id @default(auto()) @map("_id") @db.ObjectId
+  photoUrl    String?
+  gamePoints Int
+  price Int
+}
+
 model Itinary {
   id          String    @id @default(auto()) @map("_id") @db.ObjectId
   name        String
@@ -68,61 +150,4 @@ model Itinary {
   // Implicit relations many to many with spot
   spotIDs  String[]   @db.ObjectId
   spots    Spot[]     @relation(fields: [spotIDs], references: [id])
-}
-
-model Spot {
-  id            String         @id @default(auto()) @map("_id") @db.ObjectId
-  name          String
-  description   String
-  isCanPark     Boolean        @default(false)
-  isCanVisit    Boolean        @default(false)
-  isTouristic   Boolean        @default(false)
-  // Relations one to many with profile
-  profile       Profile        @relation(fields: [profileId], references: [id], onDelete: Cascade)
-  profileId     String         @unique @db.ObjectId
-  // Implicit relations many to many with itinary
-  itinaryIDs  String[]   @db.ObjectId
-  itinaries     Itinary[] @relation(fields: [itinaryIDs], references: [id])
-  lat           Float
-  lng           Float
-  region        String
-  averageRating Float @default(0)
-  // Relations one to many with spot_pictures
-  spotPicture   SpotPicture[]
-  // Relations one to many with rating
-  ratings       Rating[]
-  // Relations one to many with favorite
-  favorites     Favorite[]
-}
-
-model SpotPicture {
-  id     String @id @default(auto()) @map("_id") @db.ObjectId
-  url    String
-  spot   Spot   @relation(fields: [spotId], references: [id], onDelete: Cascade)
-  spotId String @unique @db.ObjectId
-}
-
-model Product {
-  id  String @id @default(auto()) @map("_id") @db.ObjectId
-  photoUrl    String?
-  gamePoints Int
-  price Int
-}
-
-model Rating {
-  id        String @id @default(auto()) @map("_id") @db.ObjectId
-  rate      Int
-  profile   Profile @relation(fields: [profileId], references: [id], onDelete: Cascade)
-  profileId String  @unique @db.ObjectId
-  spot      Spot    @relation(fields: [spotId], references: [id], onDelete: Cascade)
-  spotId    String  @unique @db.ObjectId
-}
-
-
-model Favorite {
-  id        String  @id @default(auto()) @map("_id") @db.ObjectId
-  profile   Profile @relation(fields: [profileId], references: [id], onDelete: Cascade)
-  profileId String  @unique @db.ObjectId
-  spot      Spot    @relation(fields: [spotId], references: [id], onDelete: Cascade)
-  spotId    String  @unique @db.ObjectId
 }

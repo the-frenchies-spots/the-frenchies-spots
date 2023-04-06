@@ -16,6 +16,7 @@ import {
 } from "../graphql";
 import { TOKEN_STORAGE_KEY } from "../utils";
 import useStorage from "./use-storage";
+import Toast from "react-native-root-toast";
 
 type UseAuth = {
   token: string | undefined;
@@ -26,9 +27,8 @@ type UseAuth = {
   onSignOut: () => Promise<void>;
 };
 
-const useAuth = (): UseAuth => {
+export const useAuth = (): UseAuth => {
   const [user, setUser] = useState<User>();
-
   const [signUp] = useMutation<LoginRequestResult>(SIGN_UP_MUTATION);
   const [signIn] = useMutation<LoginRequestResult>(SIGN_IN_MUTATION);
   const [authByToken] = useLazyQuery<LoginRequestResult>(AUTH_BY_TOKEN_QUERY);
@@ -36,6 +36,7 @@ const useAuth = (): UseAuth => {
 
   const { value: tokenStorage, updateValue: updateToken } =
     useStorage(TOKEN_STORAGE_KEY);
+
   const authentification = (result: { data: LoginRequestResult }) => {
     const { data } = result;
     const id = data?.user?.id;
@@ -47,7 +48,10 @@ const useAuth = (): UseAuth => {
     if (id && profileId && token && pseudo && gamePoint !== undefined) {
       updateToken(token);
       setUser({ id, profileId, pseudo, photoUrl, gamePoint });
-      console.log("Successfully logged in");
+      Toast.show(`L'aventure n'attend que vous !`, {
+        position: Toast.positions.TOP,
+        duration: Toast.durations.LONG,
+      });
     }
   };
 
@@ -87,9 +91,16 @@ const useAuth = (): UseAuth => {
   };
 
   const handleSignOut = async (): Promise<void> => {
-    signOut();
-    updateToken("");
-    setUser(undefined);
+    signOut()
+      .then(() => {
+        setUser(undefined);
+        updateToken("");
+        Toast.show(`À bientôt`, {
+          position: Toast.positions.TOP,
+          duration: Toast.durations.LONG,
+        });
+      })
+      .catch(console.log);
   };
 
   return {
@@ -101,5 +112,3 @@ const useAuth = (): UseAuth => {
     onSignOut: handleSignOut,
   };
 };
-
-export default useAuth;

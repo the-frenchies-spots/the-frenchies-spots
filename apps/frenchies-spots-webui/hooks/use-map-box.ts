@@ -16,7 +16,7 @@ const franceViewPort = {
   zoom: 4.144539557736261,
 };
 
-const useMapBox = (defaultViewport = franceViewPort) => {
+export const useMapBox = (defaultViewport = franceViewPort) => {
   const [localePlace, setLocalePlace] = useState({});
   const [viewport, setViewport] = useState<TViewport>(defaultViewport);
   const [coordinate, setCoordinate] = useState<TCoordinate | undefined>(
@@ -47,5 +47,3 @@ const useMapBox = (defaultViewport = franceViewPort) => {
     onCoordinateClick: setCoordinate,
   };
 };
-
-export default useMapBox;

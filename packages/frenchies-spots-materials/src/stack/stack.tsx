@@ -6,9 +6,7 @@ import {
 
 export type StackProps = NativeStackProps;
 
-const Stack = (props: StackProps) => {
-  const { children } = props;
-  return <NativeStack {...props}>{children}</NativeStack>;
+export const Stack = (props: StackProps) => {
+  const { ...other } = props;
+  return <NativeStack {...other} />;
 };
-
-export default Stack;

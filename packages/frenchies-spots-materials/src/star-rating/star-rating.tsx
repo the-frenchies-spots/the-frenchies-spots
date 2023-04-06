@@ -23,7 +23,7 @@ type StarRatingProps = {
 };
 
 export const StarRating = (props: StarRatingProps) => {
-  const { onChange, max = 5, value = 1, init = false } = props;
+  const { onChange, max = 5, value = 0, init = false } = props;
   const [rating, setRating] = useState(value);
 
   const maxRating = useMemo<number[]>(

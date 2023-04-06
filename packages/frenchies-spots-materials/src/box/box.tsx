@@ -6,9 +6,7 @@ import {
 
 export type BoxProps = NativeBoxProps;
 
-const Box = (props: BoxProps) => {
+export const Box = (props: BoxProps) => {
   const { ...other } = props;
   return <NativeBox {...other} />;
 };
-
-export default Box;

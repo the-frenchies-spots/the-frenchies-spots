@@ -1,19 +1,25 @@
 import React from "react";
 import "@expo/match-media";
 import "./translate";
+// import "core-js";
+import "setimmediate";
+import { StatusBar } from "expo-status-bar";
 import { RootNavigator } from "./navigation/root-navigator";
 import { NavigationContainer } from "@react-navigation/native";
-import { StatusBar } from "expo-status-bar";
-import { Providers } from "./providers";
+
+import { Provider } from "./providers";
+import { AppContainer } from "./components";
 
 const App = () => {
   return (
-    <Providers>
-      <NavigationContainer>
-        <RootNavigator />
-        <StatusBar style="auto" />
-      </NavigationContainer>
-    </Providers>
+    <Provider>
+      <AppContainer>
+        <NavigationContainer>
+          <RootNavigator />
+          <StatusBar hidden={true} />
+        </NavigationContainer>
+      </AppContainer>
+    </Provider>
   );
 };
 

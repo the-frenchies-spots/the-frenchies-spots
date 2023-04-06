@@ -1,4 +1,3 @@
-import { UpdateFavoriteDto } from '../../dto';
 import { favoritesRepository, spotsRepository } from '../../repositories';
 import {
   CreateDeleteFavoriteResult,

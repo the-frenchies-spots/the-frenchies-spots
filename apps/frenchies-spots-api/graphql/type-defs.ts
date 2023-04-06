@@ -43,9 +43,9 @@ const typeDefs = gql`
     text: String
   }
 
-  enum Role {
-    SIMPLE_USER
-    USER_ADMIN
+  enum CategoriesSpotAndTag {
+    SPARE_TIME_SPOT
+    RESOURCES_SPOT
   }
 
   type Spot {
@@ -53,8 +53,8 @@ const typeDefs = gql`
     name: String
     description: String
     isCanPark: Boolean
-    isCanVisit: Boolean
-    isTouristic: Boolean
+    isHidden: Boolean
+    category: CategoriesSpotAndTag
     profile: Profile
     profileId: String
     itinaries: [Itinary]
@@ -62,9 +62,26 @@ const typeDefs = gql`
     lat: Float
     lng: Float
     region: String
+    address: String
     averageRating: Float
     ratings: [Rating]
     favorites: [Favorite]
+    tags: [TagsOnSpots]
+  }
+
+  type TagsOnSpots {
+    id: String
+    tag: Tag
+    spotId: String
+    tagId: String
+  }
+
+  type Tag {
+    id: String
+    name: String
+    category: CategoriesSpotAndTag
+    tagPictureUrl: String
+    spots: [Spot]
   }
 
   type SpotPicture {
@@ -103,20 +120,51 @@ const typeDefs = gql`
     maxVote: Int
   }
 
-  input SpotInput {
-    name: String
-    description: String
-    lat: Float
-    lng: Float
-  }
+  # AVEC LES ITINARIES
+  # input SpotInput {
+  #   name: String
+  #   description: String
+  #   lat: Float
+  #   lng: Float
+  # }
 
   input PictureInput {
     url: String
   }
 
+  input TagInput {
+    id: String
+  }
+
   input UpdatePictureInput {
     id: String
     url: String
+  }
+
+  type CountRating {
+    ratings: Int
+  }
+
+  type SpotByIdInput {
+    id: String
+    name: String
+    description: String
+    isCanPark: Boolean
+    isHidden: Boolean
+    category: CategoriesSpotAndTag
+    profile: Profile
+    profileId: String
+    itinaries: [Itinary]
+    spotPicture: [SpotPicture]
+    lat: Float
+    lng: Float
+    region: String
+    address: String
+    averageRating: Float
+    ratings: [Rating]
+    favorites: [Favorite]
+    tags: [TagsOnSpots]
+    _count: CountRating
   }
 
   enum OrderByEnum {
@@ -129,18 +177,22 @@ const typeDefs = gql`
     itinaries: [Itinary]
 
     spots(
+      id: String
       profileId: String
       orderBy: OrderByEnum
       isCanPark: Boolean
-      isCanVisit: Boolean
-      isTouristic: Boolean
+      isHidden: Boolean
+      category: CategoriesSpotAndTag
       searchValue: String
+      tagListId: [String]
       region: String
+      address: String
       skip: Int
       take: Int
+      tags: [TagInput]
     ): [Spot]
 
-    spot(id: String): Spot
+    spot(id: String): SpotByIdInput
     products: [Product]
     authByToken: User
     getBuyProductRequest(amount: Int): String
@@ -149,11 +201,21 @@ const typeDefs = gql`
     ratings: [Rating]
     rating(id: String): Rating
     ratingsAverage: Rating
+
+    tags(
+      name: String
+      tagPictureUrl: String
+      category: CategoriesSpotAndTag
+      searchValue: String
+      ids: [String]
+    ): [Tag]
+
+    tag(id: String): Tag
   }
 
   type Mutation {
     signIn(email: String, password: String): User
-    signUp(pseudo: String, email: String, password: String): User
+    signUp(pseudo: String, email: String, password: String, role: Role): User
     signOut: Boolean
 
     createProduct(photoUrl: String, gamePoints: Int, price: Int): Product
@@ -175,11 +237,13 @@ const typeDefs = gql`
       lat: Float
       lng: Float
       isCanPark: Boolean
-      isCanVisit: Boolean
-      isTouristic: Boolean
+      isHidden: Boolean
+      category: CategoriesSpotAndTag
       region: String
+      address: String
       averageRating: Float
-      pictures: [PictureInput]
+      spotPicture: [PictureInput]
+      tags: [TagInput]
     ): Spot
 
     updateSpot(
@@ -189,32 +253,18 @@ const typeDefs = gql`
       lat: Float
       lng: Float
       isCanPark: Boolean
-      isCanVisit: Boolean
-      isTouristic: Boolean
+      isHidden: Boolean
+      category: CategoriesSpotAndTag
       region: String
-      pictures: [UpdatePictureInput]
+      address: String
+      spotPicture: [UpdatePictureInput]
       averageRating: Float
+      tags: [TagInput]
     ): Spot
 
-    deleteSpot(
-      id: String
-      name: String
-      description: String
-      lat: Float
-      lng: Float
-      isCanPark: Boolean
-      isCanVisit: Boolean
-      isTouristic: Boolean
-      region: String
-      averageRating: Float
-      pictures: [PictureInput]
-    ): Boolean
+    deleteSpot(id: String): Boolean
 
-    # createItinary(
-    #   name: String
-    #   description: String
-    #   spots: [SpotInput]
-    # ): Itinary
+    addSpotPicture(url: String, spotId: String): SpotPicture
 
     createOrUpdateRating(
       ratingId: String
@@ -224,11 +274,28 @@ const typeDefs = gql`
 
     toggleFavorite(spotId: String, id: String): Spot
 
-    buysItinary(profileId: String, itinaryId: String): Profile
+    createTag(
+      name: String
+      tagPictureUrl: String
+      category: CategoriesSpotAndTag
+      spotId: String
+    ): Tag
+
+    updateTag(id: String, tagPictureUrl: String): Tag
+
+    deleteTag(id: String): Boolean
+
+    createTagsList: [Tag]
 
     createTest(text: String): Test
 
-    addSpotPicture(url: String, spotId: String): SpotPicture
+    buysItinary(profileId: String, itinaryId: String): Profile
+
+    # createItinary(
+    #   name: String
+    #   description: String
+    #   spots: [SpotInput]
+    # ): Itinary
   }
 `;
 

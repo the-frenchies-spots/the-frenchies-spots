@@ -6,7 +6,7 @@ import {
 } from "@react-navigation/native";
 import { RouteParams } from "../navigation/root-navigator";
 
-const useNavigation = () => {
+export const useNavigation = () => {
   const route = useRoute();
   const navigation =
     useReactNativeNavigation<NativeStackNavigationProp<RouteParams>>();
@@ -17,5 +17,3 @@ const useNavigation = () => {
 
   return { navigateTo, goBack, currentRoute };
 };
-
-export default useNavigation;

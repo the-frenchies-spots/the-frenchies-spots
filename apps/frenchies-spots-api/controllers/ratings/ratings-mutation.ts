@@ -1,8 +1,8 @@
-import { ratingsBusiness } from '../../business/ratings';
-import { UpdateRatingDto } from '../../dto/rating-dto';
-import { TContext } from '../../graphql/context';
-import { CreateOrUpdateRating } from '../../types';
-import { codeErrors, GenericError } from '../../utils';
+import { ratingsBusiness } from "../../business/ratings";
+import { UpdateRatingDto } from "../../dto/rating-dto";
+import { TContext } from "../../graphql/context";
+import { CreateOrUpdateRating } from "../../types";
+import { codeErrors, GenericError } from "../../utils";
 
 const { UNAUTHENTICATED } = codeErrors;
 
@@ -18,11 +18,6 @@ export const ratingsMutation = {
 
     const { spotId, ratingId, rate } = data;
 
-    return ratingsBusiness.createOrUpdate(
-      rate,
-      ratingId,
-      spotId,
-      profileId
-    );
-  }
+    return ratingsBusiness.createOrUpdate(rate, ratingId, spotId, profileId);
+  },
 };

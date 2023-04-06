@@ -1,14 +1,15 @@
-import { StyleSheet, Text, View } from 'react-native';
-import React from 'react';
+import React from "react";
+import { ActivityIndicator, type ActivityIndicatorProps } from "react-native";
 
-type Props = {};
+import { theme, type TColors } from "@frenchies-spots/theme";
 
-export const Loader = (props: Props) => {
-  return (
-    <View>
-      <Text>Loader</Text>
-    </View>
-  );
+const themeColor = theme.TFS.colors;
+
+interface LoaderProps extends Omit<ActivityIndicatorProps, "color"> {
+  color?: TColors;
+}
+
+export const Loader = (props: LoaderProps) => {
+  const { color = "yellow", ...other } = props;
+  return <ActivityIndicator color={themeColor[color]} {...other} />;
 };
-
-const styles = StyleSheet.create({});

@@ -1,4 +1,15 @@
-import { Product } from "@prisma/client";
+import { z } from 'zod';
 
-export type ProductDto = Pick<Product, "photoUrl" | "gamePoints" | "price">;
-export type ByProductDto = Pick<Product, "id">;
+const productDtoSchema = z.object({
+  photoUrl: z.string().optional(),
+  gamePoints: z.number(),
+  price: z.number()
+});
+
+export type ProductDto = z.infer<typeof productDtoSchema>;
+
+const byProductDtoSchema = z.object({
+  id: z.string()
+});
+
+export type ByProductDto = z.infer<typeof byProductDtoSchema>;

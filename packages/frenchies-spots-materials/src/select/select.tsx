@@ -1,20 +1,56 @@
-import React from 'react';
-import { Picker, PickerProps } from '@react-native-picker/picker';
-import { useTheme } from '@frenchies-spots/theme';
-import { styles } from './select-style';
+import React, { useEffect, useState } from "react";
+import {
+  SelectBase,
+  type SelectBaseProps,
+  SelectBaseItem,
+  type SelectBaseItemProps,
+} from "./select-base";
 
-interface SelectProps extends PickerProps {}
+interface LisValue {
+  label: string;
+  value: SelectBaseItemProps["value"];
+}
 
-export const Select = (props: SelectProps) => {
-  const { style: extStyle = {}, ...other } = props;
-  const style = useTheme(styles);
+interface SelectProps<TValue> extends SelectBaseProps {
+  list: LisValue[];
+  value?: SelectBaseItemProps["value"];
+  defaultValue?: SelectBaseItemProps["value"];
+  defaultLabel?: string;
+  onChange?: (value: TValue) => void;
+}
+
+export function Select<TValue>(props: SelectProps<TValue>) {
+  const { list, value, defaultValue, defaultLabel, onChange, ...other } = props;
+
+  const [currentValue, setCurrentValue] =
+    useState<SelectBaseItemProps["value"]>(value);
+
+  const handleChange = (val: SelectBaseItemProps["value"], index: number) => {
+    if (typeof onChange === "function") {
+      onChange(val as TValue);
+    }
+    setCurrentValue(val);
+  };
+
+  useEffect(() => {
+    setCurrentValue(value)
+  }, [value])
+
+
   return (
-    <Picker
+    <SelectBase
       {...other}
-      style={{
-        ...style.input,
-        ...(extStyle as Record<string, string | number>)
-      }}
-    />
+      selectedValue={currentValue}
+      onValueChange={handleChange}
+    >
+      {defaultLabel && defaultValue && (
+        <SelectBaseItem label={defaultLabel} value={defaultValue} />
+      )}
+
+      {list.map((region, index) => {
+        const { label, value } = region;
+        return <SelectBaseItem key={index} label={label} value={value} />;
+      })}
+    </SelectBase>
   );
-};
+}

@@ -4,17 +4,19 @@ const READ_ALL_FAVORITE_SPOT_QUERY = gql`
   query getProfileFavorites($profileId: String) {
     profile: favorites(profileId: $profileId) {
       favorites {
+        id
         spot {
-          id
-          name
+          category
           description
+          id
           isCanPark
-          isCanVisit
-          isTouristic
+          isHidden
+          lat
+          lng
+          name
           region
-          profileId
-          averageRating
           spotPicture {
+            id
             url
           }
         }

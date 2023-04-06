@@ -1,8 +1,20 @@
+import "react-native-get-random-values";
+import "expo/build/Expo.fx";
 import { registerRootComponent } from "expo";
-
+import { Platform } from "react-native";
+import { activateKeepAwake } from "expo-keep-awake";
+import { createRoot } from "react-dom/client";
 import App from "./App";
 
-// registerRootComponent calls AppRegistry.registerComponent('main', () => App);
-// It also ensures that whether you load the app in Expo Go or in a native build,
-// the environment is set up appropriately
-registerRootComponent(App);
+if (__DEV__) {
+  activateKeepAwake();
+}
+
+if (Platform.OS === "web") {
+  const root = createRoot(
+    document.getElementById("root") ?? document.getElementById("main")
+  );
+  root.render(<App />);
+} else {
+  registerRootComponent(App);
+}

@@ -1,10 +1,10 @@
-import { spotsRepository, ratingsRepository } from '../../repositories';
+import { spotsRepository, ratingsRepository } from "../../repositories";
 import {
   CreateOrUpdateRating,
   RatingFindByIdResult,
-  RatingFindManyResult
-} from '../../types';
-import { codeErrors, GenericError } from '../../utils';
+  RatingFindManyResult,
+} from "../../types";
+import { codeErrors, GenericError } from "../../utils";
 
 const { SPOT_NOT_FOUND, SPOT_ID_MATCH_PROFILE_ID, RATING_OUT_OF_RANGE } =
   codeErrors;
@@ -47,7 +47,7 @@ const ratingsBusiness = {
     await spotsRepository.updateAverageRatingBySpotId(spotId, newAverage);
 
     return { currentRating: userRating, avg: newAverage, maxVote };
-  }
+  },
 };
 
 export default ratingsBusiness;

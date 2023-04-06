@@ -1,46 +1,39 @@
-import React, { useState, useMemo, useContext, useCallback } from "react";
-import { useMediaQuery } from "../../hooks";
-import { Button, Typography, Container } from "../../materials";
-import { Controller, useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { authField } from "./auth-fields";
-import { PageLayout } from "../../layout";
-import { InputGroup } from "../../materials/input-group/InputGroup";
-import { styles } from "./auth-page-style";
+import React, { useCallback, useState, useContext } from "react";
 import { AuthContext } from "../../context";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { useForm } from "react-hook-form";
+import { authField } from "./auth-page-fields";
+import { Page, AuthForm } from "../../components";
+import { useTranslation } from "react-i18next";
 
-type FormValues = {
+export type AuthFormValues = {
   pseudo: string;
   email: string;
   password: string;
   confirmPassword: string;
 };
 
-type Props = {};
-
-const AuthPage = (props: Props) => {
-  const { processLogin, processSignUp } = useContext(AuthContext);
+export const AuthPage = () => {
   const [isLoginForm, setIsLoginForm] = useState<boolean>(true);
-  const [isLoading, setIsLoading] = useState(false);
+  const { processLogin, processSignUp } = useContext(AuthContext);
+  const { t } = useTranslation();
 
-  const { isPhone } = useMediaQuery();
-  const { fields, fieldValidation } = useMemo(
-    () => authField(isLoginForm),
-    [isLoginForm]
-  );
+  const [isLoading, setIsLoading] = useState(false);
+  const formField = authField(t, isLoginForm);
 
   const {
     control,
+    watch,
     handleSubmit,
     clearErrors,
     formState: { errors },
-  } = useForm<FormValues>({
-    mode: "onBlur",
-    resolver: yupResolver(fieldValidation),
+  } = useForm<AuthFormValues>({
+    mode: "all",
+    resolver: yupResolver(formField.fieldValidation),
   });
 
   const onAuthSubmit = useCallback(
-    (data: FormValues) => {
+    (data: AuthFormValues) => {
       clearErrors();
       setIsLoading(true);
       const { pseudo, email, password } = data;
@@ -58,61 +51,15 @@ const AuthPage = (props: Props) => {
   );
 
   return (
-    <PageLayout
-      h="100%"
-      pv={40}
-      ph={16}
-      isOpacity={true}
-      isScrollable={false}
-      center
-    >
-      <Container style={{ width: isPhone ? "100%" : 600 }}>
-        <Typography variant="h6" style={styles.title}>
-          {isLoginForm ? "Connexion" : "Création de compte"}
-        </Typography>
-        {fields.map((field) => {
-          const { label, name, placeholder, type, isPassword } = field;
-          return (
-            <Controller
-              key={name}
-              control={control}
-              name={name}
-              render={({
-                field: { onChange, value = "", onBlur },
-                fieldState: { error },
-              }) => (
-                <InputGroup
-                  label={label}
-                  value={value as string}
-                  placeholder={placeholder}
-                  type={type}
-                  onBlur={onBlur}
-                  error={!!error}
-                  errorDetails={error?.message}
-                  onChangeText={onChange}
-                  isPassword={isPassword}
-                  style={styles.inputGroup}
-                />
-              )}
-            />
-          );
-        })}
-
-        {errors && Object.keys(errors).length > 0 && (
-          <Typography>Veuillez remplir tous les champs obligatoires</Typography>
-        )}
-        <Button onPress={handleSubmit(onAuthSubmit)} isLoading={isLoading}>
-          {isLoginForm ? "Se connecter" : "Créer mon compte"}
-        </Button>
-        <Typography
-          style={styles.authLink}
-          onPress={() => setIsLoginForm((current) => !current)}
-        >
-          {isLoginForm ? "S'inscrire ?" : "Se Connecter"}
-        </Typography>
-      </Container>
-    </PageLayout>
+    <Page opacity={0.6} isNavBar={false} isPadding={false}>
+      <AuthForm
+        fields={formField.fields}
+        control={control}
+        errors={errors}
+        watch={watch}
+        onSubmitForm={handleSubmit(onAuthSubmit)}
+        setIsLoginForm={setIsLoginForm}
+      />
+    </Page>
   );
 };
-
-export default AuthPage;
