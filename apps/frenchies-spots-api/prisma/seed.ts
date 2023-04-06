@@ -87,7 +87,7 @@ const userData: Prisma.UserCreateInput[] = [
     email: 'alice@prisma.io',
     password: 'Alice',
     token: 'token',
-    role: 'USER_ADMIN',
+    role: 'SIMPLE_USER',
     profile: {
       create: {
         id: '640779bca1e1a3dc3fb33dc5',
@@ -117,10 +117,10 @@ const userData: Prisma.UserCreateInput[] = [
               tags: {
                 create: [
                   {
-                    tagId: "641dad0ae575f3177b56447b"
+                    tagId: "641dacefaa522e8ce4a447f6"
                   },
                   {
-                    tagId: "641dad01b6acd761acf471d5"
+                    tagId: "641dacf89b0c0cb9c0fcb737"
                   },
                 ]
               }
@@ -131,7 +131,7 @@ const userData: Prisma.UserCreateInput[] = [
               description: `Au Pays Basque, La Rhune protège jalousement la côte. Ce site est un lieu enchanteur parcouru de pistes pastorales, d’où s’y dégage une ambiance mystérieuse et secrète. On y découvre des cromlechs, ces blocs dressés en cercle orientés vers le soleil, on y entend de nombreuses légendes, on y rencontre des pottoks petits chevaux autochtones à demi sauvages. Et puis n’hésitez pas à emprunter le Petit Train de la Rhune, train à crémaillère : un trajet de 30 minutes à 8 km/h.`,
               isCanPark: false,
               isHidden: true,
-              category: "RESOURCES_SPOT",
+              category: "SPARE_TIME_SPOT",
               lat: 43.30888,
               lng: -1.63507,
               region: '75',
@@ -139,6 +139,13 @@ const userData: Prisma.UserCreateInput[] = [
                 create: [
                   {
                     url: 'https://res.cloudinary.com/db00tntyg/image/upload/v1674996742/travelerSpot/pic_de_la_rhune.png'
+                  }
+                ]
+              },
+              tags: {
+                create: [
+                  {
+                    tagId: "641dace3aa8cb5748dea534d"
                   }
                 ]
               }
@@ -157,6 +164,16 @@ const userData: Prisma.UserCreateInput[] = [
                 create: [
                   {
                     url: 'https://res.cloudinary.com/db00tntyg/image/upload/v1674997283/travelerSpot/parc_national_des_pyrenees.png'
+                  }
+                ]
+              }, 
+              tags: {
+                create: [
+                  {
+                    tagId: "641dace3aa8cb5748dea534d"
+                  },
+                  {
+                    tagId: "641dacf89b0c0cb9c0fcb737"
                   }
                 ]
               }
@@ -185,7 +202,7 @@ const userData: Prisma.UserCreateInput[] = [
               description: `Au sud de Royan, les falaises de Meschers-sur-Gironde longeant la « Côte de beauté » et faisant face au Médoc, surplombent le plus grand estuaire d’Europe à plus de 30 mètres de haut. Un patrimoine inestimable parcouru de grottes et d’habitations troglodytiques sur une distance de 1500 m. Les grottes du Régulus et de Matata sont aménagées et ouvertes au public. Le plus bel endroit, pour observer les falaises blanches de Meschers, se situe dans le magnifique village de Talmont-sur-Gironde.`,
               isCanPark: true,
               isHidden: false,
-              category: "RESOURCES_SPOT",
+              category: "SPARE_TIME_SPOT",
               lat: 45.557484,
               lng: -0.956417,
               region: '75',
@@ -194,6 +211,19 @@ const userData: Prisma.UserCreateInput[] = [
                   {
                     url: 'https://res.cloudinary.com/db00tntyg/image/upload/v1674997660/travelerSpot/falaises_meschers.png'
                   }
+                ]
+              },
+              tags: {
+                create: [
+                  {
+                    tagId: "641dace3aa8cb5748dea534d"
+                  },
+                  {
+                    tagId: "641dacf89b0c0cb9c0fcb737"
+                  },
+                  {
+                    tagId: "641dacefaa522e8ce4a447f6"
+                  },
                 ]
               }
             },
@@ -213,6 +243,13 @@ const userData: Prisma.UserCreateInput[] = [
                     url: 'https://res.cloudinary.com/db00tntyg/image/upload/v1674998074/travelerSpot/bort_en_limousin.png'
                   }
                 ]
+              },
+              tags: {
+                create: [
+                  {
+                    tagId: "641dacf89b0c0cb9c0fcb737"
+                  }
+                ]
               }
             },
             {
@@ -221,7 +258,7 @@ const userData: Prisma.UserCreateInput[] = [
               description: `La forêt des Landes de Gascogne est un massif forestier du sud-ouest de la France situé en Nouvelle-Aquitaine. D'une superficie de près d'un million d'hectares, elle est la plus grande forêt artificielle d'Europe occidentale conduite intensivement et majoritairement en une monoculture de pins maritimes. `,
               isCanPark: true,
               isHidden: true,
-              category: "RESOURCES_SPOT",
+              category: "SPARE_TIME_SPOT",
               lat: 43.9359823,
               lng: -0.9236623,
               region: '75',
@@ -232,7 +269,14 @@ const userData: Prisma.UserCreateInput[] = [
                   }
                 ]
               },
-              averageRating: 2.66
+              averageRating: 2.66,
+              tags: {
+                create: [
+                  {
+                    tagId: "641dacf89b0c0cb9c0fcb737"
+                  }
+                ]
+              }
             }
           ]
         }
@@ -268,6 +312,13 @@ const userData: Prisma.UserCreateInput[] = [
                     url: 'https://res.cloudinary.com/db00tntyg/image/upload/v1674999175/travelerSpot/golfe_du_morbihan.png'
                   }
                 ]
+              },
+              tags: {
+                create: [
+                  {
+                    tagId: "641dad123334351ea3562d2c"
+                  },
+                ]
               }
             },
             {
@@ -286,6 +337,13 @@ const userData: Prisma.UserCreateInput[] = [
                     url: 'https://res.cloudinary.com/db00tntyg/image/upload/v1674999260/travelerSpot/dentelles_de_montmirail.png'
                   }
                 ]
+              },
+              tags: {
+                create: [
+                  {
+                    tagId: "641dace3aa8cb5748dea534d"
+                  },
+                ]
               }
             },
             {
@@ -294,7 +352,7 @@ const userData: Prisma.UserCreateInput[] = [
               description: `Gorges boisées où randonner et patauger avec petites plages et bassins naturels au pied du mont Ventoux.`,
               isCanPark: false,
               isHidden: true,
-              category: "RESOURCES_SPOT",
+              category: "SPARE_TIME_SPOT",
               lat: 44.202515,
               lng: 5.291937,
               region: '84',
@@ -302,6 +360,16 @@ const userData: Prisma.UserCreateInput[] = [
                 create: [
                   {
                     url: 'https://res.cloudinary.com/db00tntyg/image/upload/v1674999639/travelerSpot/gorges_du_toulourenc.png'
+                  }
+                ]
+              },
+              tags: {
+                create: [
+                  {
+                    tagId: "641dacf89b0c0cb9c0fcb737"
+                  },
+                  {
+                    tagId: "641dad0ae575f3177b56447b"
                   }
                 ]
               }
@@ -323,7 +391,14 @@ const userData: Prisma.UserCreateInput[] = [
                   }
                 ]
               },
-              averageRating: 4.25
+              averageRating: 4.25,
+              tags: {
+                create: [
+                  {
+                    tagId: "641dacf89b0c0cb9c0fcb737"
+                  }
+                ]
+              }
             },
             {
               id: '640779bca1e1a3dc3fb33d17',
@@ -331,7 +406,7 @@ const userData: Prisma.UserCreateInput[] = [
               description: `Le pic du Canigou est le haut sommet oriental de la chaîne des Pyrénées, sur le massif du Canigou. Il est situé dans le Conflent, département des Pyrénées-Orientales, et culmine à 2 784 mètres d'altitude.`,
               isCanPark: true,
               isHidden: true,
-              category: "RESOURCES_SPOT",
+              category: "SPARE_TIME_SPOT",
               lat: 42.518597,
               lng: 2.455712,
               region: '75',
@@ -339,6 +414,13 @@ const userData: Prisma.UserCreateInput[] = [
                 create: [
                   {
                     url: 'https://res.cloudinary.com/db00tntyg/image/upload/v1675000410/travelerSpot/pic_du_canigou.png'
+                  }
+                ]
+              },
+              tags: {
+                create: [
+                  {
+                    tagId: "641dace3aa8cb5748dea534d"
                   }
                 ]
               }
@@ -352,7 +434,7 @@ const userData: Prisma.UserCreateInput[] = [
     email: '`brice`@prisma.io',
     password: 'Brice',
     token: 'token4',
-    role: 'USER_ADMIN',
+    role: 'SIMPLE_USER',
     profile: {
       create: {
         id: '640779bca1e1a3dc3fb33d18',
@@ -377,6 +459,13 @@ const userData: Prisma.UserCreateInput[] = [
                     url: 'https://res.cloudinary.com/db00tntyg/image/upload/v1675335702/travelerSpot/colorado_provencal.jpg'
                   }
                 ]
+              },
+              tags: {
+                create: [
+                  {
+                    tagId: "641dad01b6acd761acf471d5"
+                  }
+                ]
               }
             },
             {
@@ -385,7 +474,7 @@ const userData: Prisma.UserCreateInput[] = [
               description: `Les Calanques, connues aussi sous l'appellation calanques de Marseille ou calanques de Cassis ou encore massif des Calanques, sont constituées d'une succession d'anses et de criques s'étendant sur plus de vingt kilomètres de côtes sur la mer Méditerranée`,
               isCanPark: false,
               isHidden: true,
-              category: "RESOURCES_SPOT",
+              category: "SPARE_TIME_SPOT",
               lat: 43.228732,
               lng: 5.40348,
               region: '93',
@@ -393,6 +482,13 @@ const userData: Prisma.UserCreateInput[] = [
                 create: [
                   {
                     url: 'https://res.cloudinary.com/db00tntyg/image/upload/v1675336002/travelerSpot/calanques_de_marseille.jpg'
+                  }
+                ]
+              },
+              tags: {
+                create: [
+                  {
+                    tagId: "641dad123334351ea3562d2c"
                   }
                 ]
               }
@@ -413,6 +509,13 @@ const userData: Prisma.UserCreateInput[] = [
                     url: 'https://res.cloudinary.com/db00tntyg/image/upload/v1675336306/travelerSpot/lac_de%20_serre-poncon.jpg'
                   }
                 ]
+              },
+              tags: {
+                create: [
+                  {
+                    tagId: "641dad0ae575f3177b56447b"
+                  }
+                ]
               }
             },
             {
@@ -431,6 +534,16 @@ const userData: Prisma.UserCreateInput[] = [
                     url: 'https://res.cloudinary.com/db00tntyg/image/upload/v1675336550/travelerSpot/lafiteria_saint-jean_de_luz.jpg'
                   }
                 ]
+              },
+              tags: {
+                create: [
+                  {
+                    tagId: "641dad01b6acd761acf471d5"
+                  },
+                  {
+                    tagId: "641dacefaa522e8ce4a447f6"
+                  },
+                ]
               }
             },
             {
@@ -439,7 +552,7 @@ const userData: Prisma.UserCreateInput[] = [
               description: `Guéthary est un village typiquement basque, ancien port de pêche à la baleine`,
               isCanPark: true,
               isHidden: false,
-              category: "RESOURCES_SPOT",
+              category: "SPARE_TIME_SPOT",
               lat: 43.423001,
               lng: -1.6062693,
               region: '75',
@@ -450,7 +563,17 @@ const userData: Prisma.UserCreateInput[] = [
                   }
                 ]
               },
-              averageRating: 3.5
+              averageRating: 3.5,
+              tags: {
+                create: [
+                  {
+                    tagId: "641dad01b6acd761acf471d5"
+                  },
+                  {
+                    tagId: "641dacefaa522e8ce4a447f6"
+                  },
+                ]
+              }
             }
           ]
         }
@@ -461,7 +584,7 @@ const userData: Prisma.UserCreateInput[] = [
     email: 'Ludovic@prisma.io',
     password: 'Ludovic',
     token: 'token5',
-    role: 'USER_ADMIN',
+    role: 'SIMPLE_USER',
     profile: {
       create: {
         id: '640779bca1e1a3dc3fb33d24',
@@ -476,7 +599,7 @@ const userData: Prisma.UserCreateInput[] = [
               description: `Creusé par la rivière Verdon, au cœur des Alpes de Haute-Provence, le plus grand canyon d’Europe se dévoile avec ses falaises de calcaire majestueuses, son eau couleur émeraude et ses paysages alentours à couper le souffle.`,
               isCanPark: false,
               isHidden: true,
-              category: "RESOURCES_SPOT",
+              category: "SPARE_TIME_SPOT",
               lat: 43.7496562,
               lng: 6.3285616,
               region: '93',
@@ -485,6 +608,16 @@ const userData: Prisma.UserCreateInput[] = [
                   {
                     url: 'https://res.cloudinary.com/db00tntyg/image/upload/v1675337241/travelerSpot/gorges_du_verdon.jpg'
                   }
+                ]
+              },
+              tags: {
+                create: [
+                  {
+                    tagId: "641dad0ae575f3177b56447b"
+                  },
+                  {
+                    tagId: "641dacf89b0c0cb9c0fcb737"
+                  },
                 ]
               }
             },
@@ -502,6 +635,13 @@ const userData: Prisma.UserCreateInput[] = [
                 create: [
                   {
                     url: 'https://res.cloudinary.com/db00tntyg/image/upload/v1675338025/travelerSpot/pays_de_sault.jpg'
+                  }
+                ]
+              },
+              tags: {
+                create: [
+                  {
+                    tagId: "641dad01b6acd761acf471d5"
                   }
                 ]
               }
@@ -522,6 +662,13 @@ const userData: Prisma.UserCreateInput[] = [
                     url: 'https://res.cloudinary.com/db00tntyg/image/upload/v1675338220/travelerSpot/saint-tropez.jpg'
                   }
                 ]
+              },
+              tags: {
+                create: [
+                  {
+                    tagId: "641dad01b6acd761acf471d5"
+                  }
+                ]
               }
             },
             {
@@ -540,6 +687,13 @@ const userData: Prisma.UserCreateInput[] = [
                     url: 'https://res.cloudinary.com/db00tntyg/image/upload/v1675338575/travelerSpot/bormes-les-mimosas.jpg'
                   }
                 ]
+              },
+              tags: {
+                create: [
+                  {
+                    tagId: "641dad01b6acd761acf471d5"
+                  }
+                ]
               }
             }
           ]
@@ -551,7 +705,7 @@ const userData: Prisma.UserCreateInput[] = [
     email: 'godefroy@prisma.io',
     password: 'Godefroy',
     token: 'token6',
-    role: 'USER_ADMIN',
+    role: 'SIMPLE_USER',
     profile: {
       create: {
         id: '640779bca1e1a3dc3fb33d29',
@@ -576,6 +730,16 @@ const userData: Prisma.UserCreateInput[] = [
                     url: 'https://res.cloudinary.com/db00tntyg/image/upload/v1675339060/travelerSpot/mont_saint-michel.jpg'
                   }
                 ]
+              },
+              tags: {
+                create: [
+                  {
+                    tagId: "641dad01b6acd761acf471d5"
+                  },
+                  {
+                    tagId: "641dace3aa8cb5748dea534d"
+                  }
+                ]
               }
             },
             {
@@ -592,6 +756,16 @@ const userData: Prisma.UserCreateInput[] = [
                 create: [
                   {
                     url: 'https://res.cloudinary.com/db00tntyg/image/upload/v1675339378/travelerSpot/la_citadelle_des_baux-de-provence.jpg'
+                  }
+                ]
+              },
+              tags: {
+                create: [
+                  {
+                    tagId: "641dad01b6acd761acf471d5"
+                  },
+                  {
+                    tagId: "641dacf89b0c0cb9c0fcb737"
                   }
                 ]
               }
@@ -612,6 +786,13 @@ const userData: Prisma.UserCreateInput[] = [
                     url: 'https://res.cloudinary.com/db00tntyg/image/upload/v1675339696/travelerSpot/belvedere_de_la_tete_de_chien.jpg'
                   }
                 ]
+              },
+              tags: {
+                create: [
+                  {
+                    tagId: "641dacf89b0c0cb9c0fcb737"
+                  }
+                ]
               }
             },
             {
@@ -620,7 +801,7 @@ const userData: Prisma.UserCreateInput[] = [
               description: `Le mont Blanc, dans le massif du Mont-Blanc, est le point culminant de la chaîne des Alpes. Avec une altitude de 4 808 mètres, il est le plus haut sommet d'Europe occidentale et le sixième sur le plan continental.`,
               isCanPark: false,
               isHidden: true,
-              category: "RESOURCES_SPOT",
+              category: "SPARE_TIME_SPOT",
               lat: 45.9250255,
               lng: 6.8727437,
               region: '84',
@@ -631,7 +812,14 @@ const userData: Prisma.UserCreateInput[] = [
                   }
                 ]
               },
-              averageRating: 3.33
+              averageRating: 3.33,
+              tags: {
+                create: [
+                  {
+                    tagId: "641dace3aa8cb5748dea534d"
+                  }
+                ]
+              }
             },
             {
               id: '640779bca1e1a3dc3fb33d35',
@@ -649,6 +837,13 @@ const userData: Prisma.UserCreateInput[] = [
                     url: 'https://res.cloudinary.com/db00tntyg/image/upload/v1675340189/travelerSpot/deauville.jpg'
                   }
                 ]
+              },
+              tags: {
+                create: [
+                  {
+                    tagId: "641dad01b6acd761acf471d5"
+                  }
+                ]
               }
             }
           ]
@@ -660,7 +855,7 @@ const userData: Prisma.UserCreateInput[] = [
     email: 'merlin@prisma.io',
     password: 'Merlin',
     token: 'token7',
-    role: 'USER_ADMIN',
+    role: 'SIMPLE_USER',
     profile: {
       create: {
         id: '640779bca1e1a3dc3fb33d36',
@@ -675,7 +870,7 @@ const userData: Prisma.UserCreateInput[] = [
               description: `Observatoire cosmique pour certains, voyage initiatique pour d'autres, la Vallée des Merveilles interpelle avec ses 40 000 gravures rupestres pleines. Elle est également connue en italien sous le nom de Valle delle Meraviglie et fait partie du Parc National du Mercantour.`,
               isCanPark: false,
               isHidden: true,
-              category: "RESOURCES_SPOT",
+              category: "SPARE_TIME_SPOT",
               lat: 44.09109115600586,
               lng: 7.465714931488037,
               region: '93',
@@ -683,6 +878,13 @@ const userData: Prisma.UserCreateInput[] = [
                 create: [
                   {
                     url: 'https://res.cloudinary.com/db00tntyg/image/upload/v1675340496/travelerSpot/la_vallee_des_merveilles.jpg'
+                  }
+                ]
+              },
+              tags: {
+                create: [
+                  {
+                    tagId: "641dacf89b0c0cb9c0fcb737"
                   }
                 ]
               }
@@ -703,6 +905,13 @@ const userData: Prisma.UserCreateInput[] = [
                     url: 'https://res.cloudinary.com/db00tntyg/image/upload/v1675340731/travelerSpot/falaises_etretat.jpg'
                   }
                 ]
+              },
+              tags: {
+                create: [
+                  {
+                    tagId: "641dacefaa522e8ce4a447f6"
+                  }
+                ]
               }
             },
             {
@@ -719,6 +928,13 @@ const userData: Prisma.UserCreateInput[] = [
                 create: [
                   {
                     url: 'https://res.cloudinary.com/db00tntyg/image/upload/v1675341001/travelerSpot/cote_de_granit_rose.jpg'
+                  }
+                ]
+              },
+              tags: {
+                create: [
+                  {
+                    tagId: "641dacefaa522e8ce4a447f6"
                   }
                 ]
               }
@@ -739,6 +955,13 @@ const userData: Prisma.UserCreateInput[] = [
                     url: 'https://res.cloudinary.com/db00tntyg/image/upload/v1675341145/travelerSpot/menhir_de_carnac.jpg'
                   }
                 ]
+              },
+              tags: {
+                create: [
+                  {
+                    tagId: "641dacf89b0c0cb9c0fcb737"
+                  }
+                ]
               }
             },
             {
@@ -746,8 +969,8 @@ const userData: Prisma.UserCreateInput[] = [
               name: 'Etang de Trémelin',
               description: `Le « lac de Trémelin » est un superbe étang de près de 45 ha. Le plan d’eau et le domaine forestier forment un site naturel de 220 ha à la richesse écologique exceptionnelle. Le site, labellisé Station Verte, accueille de nombreuses activités de loisirs.`,
               isCanPark: false,
-              isHidden: true,
-              category: "RESOURCES_SPOT",
+              isHidden: false,
+              category: "SPARE_TIME_SPOT",
               lat: 48.0964125,
               lng: -2.0281004,
               region: '53',
@@ -758,7 +981,295 @@ const userData: Prisma.UserCreateInput[] = [
                   }
                 ]
               },
-              averageRating: 3.5
+              averageRating: 3.5,
+              tags: {
+                create: [
+                  {
+                    tagId: "641dacf89b0c0cb9c0fcb737"
+                  },
+                  {
+                    tagId: "641dad0ae575f3177b56447b"
+                  }
+                ]
+              }
+            },
+            {
+              id: '640779bca1e1a3dc3fb33d42',
+              name: 'Source de jouvence',
+              description: `Eau potable qui nous redonne un élan de jeunesse et le courage pour poursuivre notre chemin. Seul bémol vous ne pouvez vous garer qu'à seulement 2km ! `,
+              isCanPark: false,
+              isHidden: false,
+              category: "RESOURCES_SPOT",
+              lat: 40.0964125,
+              lng: -2.0281004,
+              region: '53',
+              spotPicture: {
+                create: [
+                  {
+                    url: 'https://res.cloudinary.com/db00tntyg/image/upload/v1680770042/xsynxzcu8qqkkf2dbiop.jpg'
+                  }
+                ]
+              },
+              averageRating: 3.5,
+              tags: {
+                create: [
+                  {
+                    tagId: "641dad195f6b8d0a81ee3db1"
+                  }
+                ]
+              }
+            },
+            {
+              id: '640779bca1e1a3dc3fb33d43',
+              name: 'Retour au propre',
+              description: `Trouver tout ce qui est nécessaire à une toilette quotidienne.`,
+              isCanPark: true,
+              isHidden: false,
+              category: "RESOURCES_SPOT",
+              lat: 38.0964125,
+              lng: -1.0281004,
+              region: '53',
+              spotPicture: {
+                create: [
+                  {
+                    url: 'https://res.cloudinary.com/db00tntyg/image/upload/v1680770068/retour_au_propre.jpg'
+                  }
+                ]
+              },
+              averageRating: 3.5,
+              tags: {
+                create: [
+                  {
+                    tagId: "641dad195f6b8d0a81ee3db1"
+                  },
+                  {
+                    tagId: "641dad383aa7777cc5a6aa07"
+                  },
+                  {
+                    tagId: "641dad308b90f8cb14c62e90"
+                  }
+                ]
+              }
+            },
+            {
+              id: '640779bca1e1a3dc3fb33d44',
+              name: 'Force pour votre fidèle compagnon',
+              description: `Vous cherchez de quoi donner à boire à votre partenaire roulant, foncez à cette station service.`,
+              isCanPark: false,
+              isHidden: false,
+              category: "RESOURCES_SPOT",
+              lat: 28.0964125,
+              lng: 8.0281004,
+              region: '53',
+              spotPicture: {
+                create: [
+                  {
+                    url: 'https://res.cloudinary.com/db00tntyg/image/upload/v1680770052/force_fidele_compagnon.jpg'
+                  }
+                ]
+              },
+              averageRating: 3.5,
+              tags: {
+                create: [
+                  {
+                    tagId: "641dad3f43b25ce5445ac002"
+                  },
+                  {
+                    tagId: "641dad477d3480f05227d8e3"
+                  },
+                  {
+                    tagId: "641dad308b90f8cb14c62e90"
+                  }
+                ]
+              }
+            },
+            {
+              id: '640779bca1e1a3dc3fb33d45',
+              name: 'Arrêtez vous belle au bois dormant',
+              description: `Faites attention à vous, vous vous sentez fatigués, rendez-vous ici pour vous reposer et reprendre la route plus sereinement.`,
+              isCanPark: true,
+              isHidden: false,
+              category: "RESOURCES_SPOT",
+              lat: 17.0964125,
+              lng: 0.0281004,
+              region: '53',
+              spotPicture: {
+                create: [
+                  {
+                    url: 'https://res.cloudinary.com/db00tntyg/image/upload/v1680770042/belle_au_bois_dormant.jpg'
+                  }
+                ]
+              },
+              averageRating: 3.5,
+              tags: {
+                create: [
+                  {
+                    tagId: "641dad22c7de24bec65eaca2"
+                  }
+                ]
+              }
+            },
+            {
+              id: '640779bca1e1a3dc3fb33d46',
+              name: 'La guerre aux tâches',
+              description: `Vous avez besoin de laver vos vêtements cette laverie est super et pas trop cher`,
+              isCanPark: true,
+              isHidden: false,
+              category: "RESOURCES_SPOT",
+              lat: 40.0964125,
+              lng: 2.0281004,
+              region: '53',
+              spotPicture: {
+                create: [
+                  {
+                    url: 'https://res.cloudinary.com/db00tntyg/image/upload/v1680770041/la_guerre_aux_taches.jpg'
+                  }
+                ]
+              },
+              averageRating: 3.5,
+              tags: {
+                create: [
+                  {
+                    tagId: "641dad297c5032d0440f3a00"
+                  }
+                ]
+              }
+            },
+            {
+              id: '640779bca1e1a3dc3fb33d47',
+              name: 'Nuit à la belle étoile',
+              description: `Vous avez besoin de vous reposer et de faire votre toilette soyez tranquille c'est l'endroit qu'il vous faut.`,
+              isCanPark: true,
+              isHidden: false,
+              category: "RESOURCES_SPOT",
+              lat: 40.0964125,
+              lng: 2.0281004,
+              region: '53',
+              spotPicture: {
+                create: [
+                  {
+                    url: 'https://res.cloudinary.com/db00tntyg/image/upload/v1680770042/nuit_belle_etoile.jpg'
+                  }
+                ]
+              },
+              averageRating: 3.5,
+              tags: {
+                create: [
+                  {
+                    tagId: "641dad22c7de24bec65eaca2"
+                  },
+                  {
+                    tagId: "641dad308b90f8cb14c62e90"
+                  },
+                  {
+                    tagId: "641dad383aa7777cc5a6aa07"
+                  }
+                ]
+              }
+            },
+            {
+              id: '640779bca1e1a3dc3fb33d48',
+              name: 'Boost gasoil',
+              description: `Trouvez votre or noir favori ! L'essence c'est la vie.`,
+              isCanPark: true,
+              isHidden: false,
+              category: "RESOURCES_SPOT",
+              lat: 44.0964125,
+              lng: 2.0281004,
+              region: '53',
+              spotPicture: {
+                create: [
+                  {
+                    url: 'https://res.cloudinary.com/db00tntyg/image/upload/v1680770040/boost_gazoil.jpg'
+                  }
+                ]
+              },
+              averageRating: 3.5,
+              tags: {
+                create: [
+                  {
+                    tagId: "641dad477d3480f05227d8e3"
+                  }
+                ]
+              }
+            },
+            {
+              id: '640779bca1e1a3dc3fb33d49',
+              name: 'Toilettes',
+              description: `Libérez-vous, ne vous retenez plus.`,
+              isCanPark: true,
+              isHidden: false,
+              category: "RESOURCES_SPOT",
+              lat: 43.0964125,
+              lng: -3.0281004,
+              region: '53',
+              spotPicture: {
+                create: [
+                  {
+                    url: 'https://res.cloudinary.com/db00tntyg/image/upload/v1680770050/toilettes.jpg'
+                  }
+                ]
+              },
+              averageRating: 3.5,
+              tags: {
+                create: [
+                  {
+                    tagId: "641dad308b90f8cb14c62e90"
+                  }
+                ]
+              }
+            },
+            {
+              id: '640779bca1e1a3dc3fb33d50',
+              name: 'Laverie Monsieur Lavande',
+              description: `Cette laverie est situé dans un village interdit où les véhicules aménagés n'ont pas le droit de stationner. Vous pouvez vous garez avant l'entrée du village et en profiter vous visiter ce charmant village `,
+              isCanPark: false,
+              isHidden: false,
+              category: "RESOURCES_SPOT",
+              lat: 36.0964125,
+              lng: -1.0281004,
+              region: '53',
+              spotPicture: {
+                create: [
+                  {
+                    url: 'https://res.cloudinary.com/db00tntyg/image/upload/v1680770041/laverie_mr_lavande.jpg'
+                  }
+                ]
+              },
+              averageRating: 3.5,
+              tags: {
+                create: [
+                  {
+                    tagId: "641dad297c5032d0440f3a00"
+                  }
+                ]
+              }
+            },
+            {
+              id: '640779bca1e1a3dc3fb33d51',
+              name: 'Le gaz pour vos talent de cuisinier',
+              description: `Vous cherchez LE gaz qui vous permettra de vous remettre aux fourneaux c'est par ici !`,
+              isCanPark: false,
+              isHidden: false,
+              category: "RESOURCES_SPOT",
+              lat: 36.0964125,
+              lng: 3.0281004,
+              region: '53',
+              spotPicture: {
+                create: [
+                  {
+                    url: 'https://res.cloudinary.com/db00tntyg/image/upload/v1680770043/gaz_cuisine.jpg'
+                  }
+                ]
+              },
+              averageRating: 3.5,
+              tags: {
+                create: [
+                  {
+                    tagId: "641dad3f43b25ce5445ac002"
+                  }
+                ]
+              }
             }
           ]
         }
