@@ -1,9 +1,10 @@
-import React, { ReactNode } from "react";
+import React, { ReactNode, useContext } from "react";
 import { Box } from "@frenchies-spots/materials";
 import { Image } from "react-native";
 import { styles } from "./page-styles";
 import { Navbar } from "../app/navbar";
 import { useMediaQuery } from "../../hooks";
+import { AuthContext } from "../../context";
 
 interface PageProps {
   isBackground?: boolean;
@@ -27,7 +28,7 @@ export const Page = (props: PageProps) => {
   } = props;
 
   const { isPhone } = useMediaQuery();
-
+  const { currentUser } = useContext(AuthContext);
   const style = styles(opacity, darkOpacity, isPadding);
 
   return (
@@ -48,7 +49,7 @@ export const Page = (props: PageProps) => {
           <Box style={style.mainContainer}>{children}</Box>
         </Box>
       </Box>
-      {isNavBar && <Navbar />}
+      {isNavBar && currentUser && <Navbar />}
     </>
   );
 };

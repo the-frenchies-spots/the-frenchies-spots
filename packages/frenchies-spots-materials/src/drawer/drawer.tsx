@@ -3,6 +3,7 @@ import { Modal, View, Dimensions, TouchableOpacity } from "react-native";
 import { styles } from "./drawer-styles";
 import { Text } from "../typography";
 import { Box } from "../box";
+import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 
 const windowHeight = Dimensions.get("window").height;
 
@@ -28,6 +29,9 @@ export const Drawer = (props: DrawerProps) => {
       visible={isOpen}
       onRequestClose={onToggleOpen}
     >
+      <TouchableWithoutFeedback onPress={onToggleOpen}>
+        <View style={{ ...styles.modalOverlay, height: windowHeight }} />
+      </TouchableWithoutFeedback>
       <View
         style={[
           styles.bottomSheet,

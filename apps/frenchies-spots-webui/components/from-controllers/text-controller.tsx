@@ -1,5 +1,5 @@
 import React from "react";
-import { Controller, type Control, type FieldValues } from "react-hook-form";
+import { Controller, type FieldValues, FieldPath } from "react-hook-form";
 import {
   Box,
   VStack,
@@ -7,13 +7,12 @@ import {
   Caption,
   type TextInputProps,
 } from "@frenchies-spots/materials";
+import { FormControllerProps } from "./form-controller-type";
 
-interface TextControllerProps extends TextInputProps {
-  control: Control<FieldValues, any> | any;
-  name: string;
-}
-
-export const TextController = (props: TextControllerProps) => {
+export function TextController<
+  TFieldValues extends FieldValues = FieldValues,
+  TFieldName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>
+>(props: FormControllerProps<TFieldValues, TFieldName> & TextInputProps) {
   const { control, name, ...other } = props;
   return (
     <Controller
@@ -40,4 +39,4 @@ export const TextController = (props: TextControllerProps) => {
       }}
     />
   );
-};
+}

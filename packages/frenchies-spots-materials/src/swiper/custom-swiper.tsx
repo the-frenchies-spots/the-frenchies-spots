@@ -23,7 +23,6 @@ export default () => {
 
   const onChangeIndex = (params: { index: number; prevIndex: number }) => {
     const { index, prevIndex } = params;
-    console.log({ index, prevIndex });
   };
 
   const goToIndex = (index: number) => {

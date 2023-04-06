@@ -11,6 +11,7 @@ import {
   UpdateSpotPage,
   AuthPage,
   SpotDetailPage,
+  SpotUserPage,
 } from "../pages";
 
 export type RouteParams = {
@@ -21,8 +22,9 @@ export type RouteParams = {
   createSpot: undefined;
   updateSpot: { id: string };
   authPage: undefined;
-  map: undefined;
+  map: { lat?: number; lng?: number; id?: string } | undefined;
   spot: { id: string };
+  spotUser: undefined;
 };
 
 const { Navigator, Group, Screen } = createNativeStackNavigator<RouteParams>();
@@ -45,20 +47,21 @@ export const RootNavigator = () => {
   return (
     <Navigator>
       <Group screenOptions={options}>
+        <Screen name="spotUser" component={SpotUserPage} />
+        <Screen name="map" component={MapPage} />
+
         {!currentUser ? (
           <Screen name="profile" component={AuthPage} />
         ) : (
           <Screen name="profile" component={ProfilePage} />
         )}
 
-        <Screen name="updateSpot" component={UpdateSpotPage} />
         <Screen name="spot" component={SpotDetailPage} />
 
         <Screen name="createSpot" component={CreateSpotPage} />
-
-        <Screen name="map" component={MapPage} />
-
         <Screen name="spotFavorite" component={SpotFavoritePage} />
+
+        <Screen name="updateSpot" component={UpdateSpotPage} />
 
         <Screen name="home" component={HomePage} />
 

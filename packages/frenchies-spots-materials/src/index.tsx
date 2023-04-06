@@ -22,3 +22,4 @@ export * from "./select";
 export * from "./wrap";
 export * from "./checkbox";
 export * from "./image-picker";
+export * from "./star-rating";

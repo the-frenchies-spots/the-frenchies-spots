@@ -1,5 +1,5 @@
 import React from "react";
-import { Controller, type Control, type FieldValues } from "react-hook-form";
+import { Controller, FieldPath, FieldValues } from "react-hook-form";
 import {
   Box,
   VStack,
@@ -7,13 +7,15 @@ import {
   Checkbox,
   type CheckboxProps,
 } from "@frenchies-spots/materials";
+import { FormControllerProps } from "./form-controller-type";
 
-interface CheckboxControllerProps extends Omit<CheckboxProps, "value"> {
-  control: Control<FieldValues, any> | any;
-  name: string;
-}
-
-export const CheckboxController = (props: CheckboxControllerProps) => {
+export function CheckboxController<
+  TFieldValues extends FieldValues = FieldValues,
+  TFieldName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>
+>(
+  props: FormControllerProps<TFieldValues, TFieldName> &
+    Omit<CheckboxProps, "value">
+) {
   const { control, name, ...other } = props;
   return (
     <Controller
@@ -31,4 +33,4 @@ export const CheckboxController = (props: CheckboxControllerProps) => {
       }}
     />
   );
-};
+}

@@ -33,7 +33,7 @@ export const editSpotFormFr = {
     },
   },
   location: {
-    title: "Ou se situe ton spot ?",
+    title: "Où se situe ton spot ?",
     search: {
       label: "Lieu du spot",
     },

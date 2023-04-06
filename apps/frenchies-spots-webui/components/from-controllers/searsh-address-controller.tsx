@@ -1,29 +1,27 @@
 import React from "react";
-import { Controller, type Control, type FieldValues } from "react-hook-form";
-import {
-  Box,
-  VStack,
-  Caption,
-} from "@frenchies-spots/materials";
-import { SearchAddress, type  SearchAddressProps} from "../custom-input";
+import { Controller, type FieldValues, FieldPath } from "react-hook-form";
+import { Box, VStack, Caption } from "@frenchies-spots/materials";
+import { SearchAddress, type SearchAddressProps } from "../custom-input";
+import { FormControllerProps } from "./form-controller-type";
 
-interface SearchAddressControllerProps<T> extends SearchAddressProps<T> {
-  control: Control<FieldValues, any> | any;
-  name: string;
-}
-
-export function SearchAddressController<T>(props: SearchAddressControllerProps<T>) {
+export function SearchAddressController<
+  T,
+  TFieldValues extends FieldValues = FieldValues,
+  TFieldName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>
+>(
+  props: FormControllerProps<TFieldValues, TFieldName> & SearchAddressProps<T>
+) {
   const { control, name, ...other } = props;
   return (
     <Controller
       control={control}
       name={name}
       render={({
-        field: { onChange, value = "", onBlur },
+        field: { onChange, value, onBlur },
         fieldState: { error },
       }) => {
         return (
-          <VStack spacing={5} style={{zIndex: 200}}>
+          <VStack spacing={5} style={{ zIndex: 200 }}>
             <Box>
               <SearchAddress
                 {...other}
@@ -39,4 +37,4 @@ export function SearchAddressController<T>(props: SearchAddressControllerProps<T
       }}
     />
   );
-};
+}

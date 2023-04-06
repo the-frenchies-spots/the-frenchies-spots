@@ -8,12 +8,12 @@ import { useQuery } from "@apollo/client";
 import { AuthContext } from "../../../context";
 
 interface SpotDetailPageProps {
-  route?: { params: { id: string } };
+  route: { params: { id: string } };
 }
 
 export const SpotDetailPage = (props: SpotDetailPageProps) => {
   const { route } = props;
-  const id = route?.params?.id;
+  const { id } = route.params;
 
   const { currentUser } = useContext(AuthContext);
   const { data, loading } = useQuery<ReadOneSpotRequestResult>(
@@ -26,17 +26,21 @@ export const SpotDetailPage = (props: SpotDetailPageProps) => {
     [data, currentUser]
   );
 
-  console.log(data);
-
   return (
     <Page opacity={1} isPadding={false}>
       <SpotPictureDetail src={data?.spot?.spotPicture} />
       <SpotInfoDetail
         spotId={id}
+        favoriteId={
+          (data?.spot?.favorites?.length && data?.spot?.favorites[0]?.id) || ""
+        }
         title={data?.spot?.name}
         description={data?.spot?.description}
         location="Blanquefort, France"
         isUserOwner={isUserOwner}
+        rate={data?.spot?.ratings[0] && data?.spot?.ratings[0]}
+        averageRating={data?.spot?.averageRating}
+        maxVote={data?.spot?._count.ratings}
       />
     </Page>
   );

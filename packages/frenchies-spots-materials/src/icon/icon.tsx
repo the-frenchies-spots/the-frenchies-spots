@@ -31,6 +31,8 @@ enum AntDesignEnum {
 
 enum FontAwesome5Enum {
   "coins",
+  "user-alt",
+  "user",
 }
 
 enum MaterialCommunityEnum {

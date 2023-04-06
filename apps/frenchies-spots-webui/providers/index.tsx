@@ -6,6 +6,7 @@ import {
 import AuthProvider from "./auth-provider";
 import GraphqlProvider from "./graphql-provider";
 import { RootSiblingParent } from "react-native-root-siblings";
+import AppProvider from "./app-provider";
 
 interface ProviderProps {
   children: ReactNode;
@@ -17,7 +18,9 @@ export const Provider = (props: ProviderProps) => {
     <GraphqlProvider>
       <MaterialsProvider>
         <AuthProvider>
-          <RootSiblingParent>{children}</RootSiblingParent>
+          <AppProvider>
+            <RootSiblingParent>{children}</RootSiblingParent>
+          </AppProvider>
         </AuthProvider>
       </MaterialsProvider>
     </GraphqlProvider>

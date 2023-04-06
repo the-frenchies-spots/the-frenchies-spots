@@ -1,5 +1,6 @@
 import React from "react";
-import { Controller, type Control, type FieldValues } from "react-hook-form";
+import { Controller, FieldPath, FieldValues } from "react-hook-form";
+import { FormControllerProps } from "./form-controller-type";
 import {
   Box,
   VStack,
@@ -8,15 +9,13 @@ import {
   type MultipleImagePickerProps,
 } from "@frenchies-spots/materials";
 
-interface MultipleImagePickerControllerProps
-  extends Omit<MultipleImagePickerProps, "value"> {
-  control: Control<FieldValues, any> | any;
-  name: string;
-}
-
-export const MultipleImagePickerController = (
-  props: MultipleImagePickerControllerProps
-) => {
+export function MultipleImagePickerController<
+  TFieldValues extends FieldValues = FieldValues,
+  TFieldName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>
+>(
+  props: FormControllerProps<TFieldValues, TFieldName> &
+    Omit<MultipleImagePickerProps, "value">
+) {
   const { control, name, ...other } = props;
   return (
     <Controller
@@ -38,4 +37,4 @@ export const MultipleImagePickerController = (
       }}
     />
   );
-};
+}

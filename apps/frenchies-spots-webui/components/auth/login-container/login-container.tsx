@@ -74,7 +74,7 @@ export const LoginContainer = (props: LoginContainerProps) => {
               onPress={onSubmit}
               disabled={isError}
             >
-              Se Connecter
+              Se connecter
             </PrimaryButton>
           </Box>
         </VStack>
@@ -84,7 +84,7 @@ export const LoginContainer = (props: LoginContainerProps) => {
             style={style.createAccountButton}
             onPress={onNext}
           >
-            Crée mon compte
+            Créer mon compte
           </TextButton>
         </HStack>
       </VStack>
