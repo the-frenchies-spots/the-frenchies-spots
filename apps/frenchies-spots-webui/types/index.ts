@@ -10,3 +10,4 @@ export * from "./coordinate-type";
 export * from "./viewport-type";
 export * from "./rating-type";
 export * from "./favorite-type";
+export * from "./tags-type";

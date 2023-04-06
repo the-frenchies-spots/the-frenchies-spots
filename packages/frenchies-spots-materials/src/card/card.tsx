@@ -1,5 +1,10 @@
 import React, { ReactNode } from "react";
-import { ViewStyle, TextStyle, ImageStyle } from "react-native";
+import {
+  ViewStyle,
+  TextStyle,
+  ImageStyle,
+  TouchableOpacity,
+} from "react-native";
 import { Box } from "../box";
 import { Icon } from "../icon";
 import { Image } from "../image";
@@ -20,6 +25,7 @@ interface CardProps {
   category?: "RESOURCES_SPOT" | "SPARE_TIME_SPOT";
   picture?: string;
   style?: SxProps;
+  onPress?: () => void;
 }
 
 export const Card = (props: CardProps) => {
@@ -32,35 +38,38 @@ export const Card = (props: CardProps) => {
     category = "SPARE_TIME_SPOT",
     picture,
     style = {},
+    onPress,
   } = props;
 
   return (
-    <Box style={{ ...styles.container, ...style }}>
-      <VStack style={styles.tagContainer} spacing={10}>
-        {isCanPark && (
+    <TouchableOpacity onPress={onPress}>
+      <Box style={{ ...styles.container, ...style }}>
+        <VStack style={styles.tagContainer} spacing={10}>
+          {isCanPark && (
+            <Box>
+              <CardTag icon="local-parking" />
+            </Box>
+          )}
           <Box>
-            <CardTag icon="local-parking" />
+            <CardTag
+              icon={
+                category === "SPARE_TIME_SPOT"
+                  ? "directions-run"
+                  : "directions-run"
+              }
+            />
           </Box>
-        )}
-        <Box>
-          <CardTag
-            icon={
-              category === "SPARE_TIME_SPOT"
-                ? "directions-run"
-                : "directions-run"
-            }
-          />
-        </Box>
-      </VStack>
+        </VStack>
 
-      <Image style={styles.picture} src={picture} />
+        <Image style={styles.picture} src={picture} />
 
-      <CardInfo
-        cardButton={cardButton}
-        name={name}
-        averageRating={averageRating}
-        description={description}
-      />
-    </Box>
+        <CardInfo
+          cardButton={cardButton}
+          name={name}
+          averageRating={averageRating}
+          description={description}
+        />
+      </Box>
+    </TouchableOpacity>
   );
 };

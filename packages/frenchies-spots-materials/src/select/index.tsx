@@ -11,3 +11,4 @@ export {
   type SelectBaseItemProps,
 } from "./select-base";
 export { Select } from "./select";
+export * from "./select-card-little";

@@ -47,8 +47,8 @@ export const RootNavigator = () => {
   return (
     <Navigator>
       <Group screenOptions={options}>
-        <Screen name="spotUser" component={SpotUserPage} />
         <Screen name="map" component={MapPage} />
+        <Screen name="spotUser" component={SpotUserPage} />
 
         {!currentUser ? (
           <Screen name="profile" component={AuthPage} />

@@ -9,7 +9,7 @@ import { AuthContext } from "../../../../../context";
 interface SpotHeadSectionProps {
   spotId: string;
   title: string;
-  location: string;
+  location?: string;
   isUserOwner: boolean;
   rate?: Rating;
   averageRating?: number;
@@ -19,6 +19,7 @@ interface SpotHeadSectionProps {
 export const SpotHeadSection = (props: SpotHeadSectionProps) => {
   const { spotId, title, location, isUserOwner, rate, averageRating, maxVote } =
     props;
+  const { currentUser } = useContext(AuthContext);
 
   return (
     <HStack justify="between">
@@ -26,7 +27,7 @@ export const SpotHeadSection = (props: SpotHeadSectionProps) => {
         <Box>
           <Title variant="h3">{title}</Title>
         </Box>
-        <Box>
+        <Box style={{ width: 250 }}>
           <AddressBlock mode="description" location={location} />
         </Box>
 
@@ -43,7 +44,7 @@ export const SpotHeadSection = (props: SpotHeadSectionProps) => {
         )}
       </VStack>
 
-      {isUserOwner && <SpotEdition spotId={spotId} />}
+      {currentUser && isUserOwner && <SpotEdition spotId={spotId} />}
     </HStack>
   );
 };

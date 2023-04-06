@@ -42,7 +42,7 @@ export const SpotMarkerList = (props: SpotMarkerListProps) => {
       })}
       <Drawer
         isOpen={!!selectedSpot}
-        heightMultiplier={0.3}
+        heightMultiplier={0.4}
         onToggleOpen={handleToggleOpen}
       >
         {selectedSpot && (

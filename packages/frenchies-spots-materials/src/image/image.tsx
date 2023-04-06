@@ -8,15 +8,16 @@ const empty =
 type ImageProps = {
   style?: Record<string, string | number>;
   src?: string;
+  reloadDesactivated?: boolean;
 };
 
 export const Image = (props: ImageProps) => {
-  const { style, src = empty } = props;
+  const { style, src = empty, reloadDesactivated = false } = props;
   const [uri, setUri] = useState(src);
 
   useEffect(() => {
     const isBase64 = src.charAt(0) === "d";
-    setUri(isBase64 ? src : `${src}?${uniqueId()}`);
+    setUri(isBase64 ? src : reloadDesactivated ? src : `${src}?${uniqueId()}`);
   }, [src]);
 
   return (

@@ -1,6 +1,8 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useEffect } from "react";
 import {
   CornerBar,
+  HStack,
+  Icon,
   Stepper,
   Swiper,
   SwiperLayout,
@@ -12,18 +14,17 @@ import { useTranslation } from "react-i18next";
 import { SpotEditFormValues, spotField } from "./spot-edit-field";
 import { spotEditSwipSection } from "./spot-edit-swip-section";
 import { TestContext } from "yup";
-import { useCloudinary } from "../../../hooks";
+import { useCloudinary, useNavigation } from "../../../hooks";
 import { CreateSpotRequestParameters, SpotType } from "../../../types";
+import { TouchableOpacity } from "react-native";
 
 const defaultValues: SpotEditFormValues = {
   category: "SPARE_TIME_SPOT",
-  tags: ["641dad308b90f8cb14c62e90"],
-  name: "MorganeMontaine",
-  description: "Une montagne ou il est interdit de boir du thé",
+  tags: [],
+  name: "",
+  description: "",
   isCanPark: true,
-  pictures: [
-    "https://media.routard.com/image/31/2/bretagne-cote-granit-rose.1494312.jpg",
-  ],
+  pictures: [],
   location: {
     coordinate: { lat: 47.548576258422315, lng: 4.7177989956386455 },
     codeRegion: 27,
@@ -45,6 +46,7 @@ export const SpotEditForm = (props: SpotEditFormProps) => {
     useSwiper();
   const { t } = useTranslation();
   const formField = spotField(t);
+  const { goBack } = useNavigation();
 
   const formParams: UseFormProps<SpotEditFormValues, TestContext> = {
     mode: "all",
@@ -53,7 +55,13 @@ export const SpotEditForm = (props: SpotEditFormProps) => {
   };
 
   const hookForm = useForm<SpotEditFormValues>(formParams);
-  const { control, watch, handleSubmit, formState } = hookForm;
+  const { control, watch, handleSubmit, formState, resetField } = hookForm;
+
+  const { category } = watch();
+
+  useEffect(() => {
+    resetField("tags");
+  }, [category]);
 
   const onSpotEditionFormSubmit = useCallback(
     async (data: SpotEditFormValues) => {
@@ -78,6 +86,7 @@ export const SpotEditForm = (props: SpotEditFormProps) => {
         region: location.codeRegion.toString(),
         lat: location.coordinate.lat,
         lng: location.coordinate.lng,
+        address: location.address,
       };
       onSubmitForm(result);
     },
@@ -97,6 +106,12 @@ export const SpotEditForm = (props: SpotEditFormProps) => {
   return (
     <>
       <CornerBar mode="top">
+        <TouchableOpacity onPress={() => goBack()}>
+          <HStack justify="end" style={{ paddingRight: 5 }}>
+            <Icon name="cross" size={40} color="white" />
+          </HStack>
+        </TouchableOpacity>
+
         <Stepper
           nb={sections.length}
           goToIndex={goToIndex}

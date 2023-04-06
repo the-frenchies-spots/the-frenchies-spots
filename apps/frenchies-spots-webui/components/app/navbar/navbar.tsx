@@ -31,11 +31,11 @@ export const Navbar = () => {
             isSelected={isSelectedRoute("spotFavorite")}
             onPress={() => navigateTo("spotFavorite")}
           />
-          <NavbarButton
+          {/* <NavbarButton
             name="shopping"
             isSelected={isSelectedRoute("shopping")}
             onPress={() => navigateTo("shopping")}
-          />
+          /> */}
           <NavbarButton
             name="account-circle"
             isSelected={isSelectedRoute("profile")}

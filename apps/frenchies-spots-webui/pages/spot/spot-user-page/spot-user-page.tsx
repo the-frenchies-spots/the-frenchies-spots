@@ -1,16 +1,26 @@
 import React, { useContext, useEffect, useState } from "react";
 import { InfoBar, Page, SpotList } from "../../../components";
-import { Box, FilterInput, Title } from "@frenchies-spots/materials";
+import {
+  Box,
+  FilterInput,
+  Icon,
+  Loader,
+  PrimaryButton,
+  Text,
+  Title,
+} from "@frenchies-spots/materials";
 import { useIsFocused } from "@react-navigation/native";
 import { useLazyQuery } from "@apollo/client";
 import { ReadAllSpotRequestResult } from "../../../types";
 import { READ_SPOT_QUERY } from "../../../graphql";
 import { AuthContext } from "../../../context";
 import { styles } from "./spot-user-page-styles";
+import { useNavigation } from "../../../hooks";
 
 export const SpotUserPage = () => {
-  const [isOpen, setIsOpen] = useState(false);
   const { currentUser } = useContext(AuthContext);
+  const { navigateTo } = useNavigation();
+
   const [getUserSpots, { data, loading }] =
     useLazyQuery<ReadAllSpotRequestResult>(READ_SPOT_QUERY);
 
@@ -23,21 +33,36 @@ export const SpotUserPage = () => {
     }
   }, [currentUser, isFocused]);
 
-  const handleToggleOpen = () => {
-    setIsOpen((current) => !current);
-  };
-
   return (
     <Page opacity={1} isPadding={false}>
       <Box style={styles.container}>
         <InfoBar displayLocation={false} />
-        <FilterInput onSearchPress={handleToggleOpen} />
+        <Box>
+          <PrimaryButton
+            contentStyle={{
+              height: 65,
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+            onPress={() => navigateTo("createSpot")}
+          >
+            <Icon name="map-marker-plus" color="white" />
+            <Text style={{ marginLeft: 5 }}> CRÉER UN SPOT </Text>
+          </PrimaryButton>
+        </Box>
         <Box style={styles.title}>
           <Title variant="h4">Mes spots</Title>
         </Box>
       </Box>
-
-      <SpotList spotList={data?.spots} isEdition />
+      {loading ? (
+        <Box style={{ padding: 100 }}>
+          <Loader />
+        </Box>
+      ) : (
+        <SpotList spotList={data?.spots} isEdition />
+      )}
     </Page>
   );
 };

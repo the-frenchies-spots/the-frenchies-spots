@@ -11,28 +11,40 @@ import { styles } from "./spot-list-styles";
 import { SpotType } from "../../../types";
 import { EditButton, FavoriteButton } from "../../app";
 import { AuthContext } from "../../../context";
+import { useNavigation } from "../../../hooks";
 type SxProps = ViewStyle | TextStyle | ImageStyle;
 
 interface SpotListProps {
   spotList?: SpotType[];
   style?: SxProps;
   isEdition?: boolean;
+  favoriteDisabled?: boolean;
+  favoriteEnabled?: boolean;
 }
 
 export const SpotList = (props: SpotListProps) => {
-  const { spotList, style, isEdition = false } = props;
+  const {
+    spotList,
+    style,
+    isEdition = false,
+    favoriteDisabled = false,
+    favoriteEnabled = false,
+  } = props;
+  const { navigateTo } = useNavigation();
   const { currentUser } = useContext(AuthContext);
 
   return (
     <Box style={{ ...styles.listContainer, ...style }}>
       <ScrollView
-        contentContainerStyle={{ flexGrow: 1 }}
+        contentContainerStyle={{ flexGrow: 1, marginBottom: 320 }}
         showsVerticalScrollIndicator={false}
       >
         {spotList?.map((spot, index) => {
+          const isUserOwner = spot.profileId === currentUser?.profileId;
           return (
             <Card
               key={index}
+              onPress={() => navigateTo("spot", { id: spot.id })}
               name={spot.name}
               description={spot.description}
               averageRating={spot.averageRating}
@@ -43,7 +55,7 @@ export const SpotList = (props: SpotListProps) => {
                   <EditButton spotId={spot.id} />
                 ) : (
                   <>
-                    {currentUser && (
+                    {currentUser && !favoriteDisabled && !isUserOwner && (
                       <FavoriteButton
                         spotId={spot.id}
                         favoriteId={spot.favorites[0]?.id || ""}

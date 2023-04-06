@@ -29,7 +29,6 @@ type UseAuth = {
 
 export const useAuth = (): UseAuth => {
   const [user, setUser] = useState<User>();
-
   const [signUp] = useMutation<LoginRequestResult>(SIGN_UP_MUTATION);
   const [signIn] = useMutation<LoginRequestResult>(SIGN_IN_MUTATION);
   const [authByToken] = useLazyQuery<LoginRequestResult>(AUTH_BY_TOKEN_QUERY);
@@ -37,6 +36,7 @@ export const useAuth = (): UseAuth => {
 
   const { value: tokenStorage, updateValue: updateToken } =
     useStorage(TOKEN_STORAGE_KEY);
+
   const authentification = (result: { data: LoginRequestResult }) => {
     const { data } = result;
     const id = data?.user?.id;
@@ -48,7 +48,6 @@ export const useAuth = (): UseAuth => {
     if (id && profileId && token && pseudo && gamePoint !== undefined) {
       updateToken(token);
       setUser({ id, profileId, pseudo, photoUrl, gamePoint });
-      console.log("Successfully logged in");
       Toast.show(`L'aventure n'attend que vous !`, {
         position: Toast.positions.TOP,
         duration: Toast.durations.LONG,

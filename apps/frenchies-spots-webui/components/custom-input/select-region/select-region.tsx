@@ -1,17 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { Select } from "@frenchies-spots/materials";
-import { getAllRegion } from "../../../services";
 import { useGeocoding } from "../../../hooks";
 
 type RegionItem = { label: string; value: string };
-type SelectRegionProps = {
+export type SelectRegionProps = {
   value?: string | undefined;
   onChange?: (region: string | undefined) => void;
   style?: Record<string, string | number>;
+  enabled?: boolean;
 };
 
 export const SelectRegion = (props: SelectRegionProps) => {
-  const { value, onChange, style } = props;
+  const { value = "noRegion", onChange, style, enabled = false } = props;
 
   const [selectedRegion, setSelectedRegion] = useState<string | undefined>(
     value
@@ -28,12 +28,12 @@ export const SelectRegion = (props: SelectRegionProps) => {
   };
 
   useEffect(() => {
-    setSelectedRegion(value)
-  }, [value])
+    setSelectedRegion(value);
+  }, [value]);
 
   return (
     <Select
-    enabled={false}
+      enabled={enabled}
       list={regions.map((region) => ({
         label: region.nom,
         value: region.code,

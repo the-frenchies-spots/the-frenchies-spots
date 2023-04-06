@@ -1,25 +1,15 @@
 import React from "react";
-import {
-  Controller,
-  type Control,
-  type FieldValues,
-  FieldPath,
-} from "react-hook-form";
-import {
-  Box,
-  VStack,
-  Caption,
-  SelectTag,
-  type SelectTagProps,
-} from "@frenchies-spots/materials";
+import { Controller, type FieldValues, FieldPath } from "react-hook-form";
+import { Box, VStack, Caption } from "@frenchies-spots/materials";
 import { FormControllerProps } from "./form-controller-type";
+import { SelectSpotTag, SelectSpotTagProps } from "../custom-input";
 
 export function SelectTagController<
   TFieldValues extends FieldValues = FieldValues,
   TFieldName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>
 >(
   props: FormControllerProps<TFieldValues, TFieldName> &
-    Omit<SelectTagProps, "value">
+    Omit<SelectSpotTagProps, "value">
 ) {
   const { control, name, ...other } = props;
   return (
@@ -30,7 +20,7 @@ export function SelectTagController<
         return (
           <VStack spacing={5}>
             <Box>
-              <SelectTag {...other} value={value} onChange={onChange} />
+              <SelectSpotTag {...other} value={value} onChange={onChange} />
             </Box>
             {!!error && <Caption color="error">{error.message}</Caption>}
           </VStack>

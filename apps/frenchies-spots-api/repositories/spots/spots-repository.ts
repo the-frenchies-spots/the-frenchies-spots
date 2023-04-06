@@ -40,7 +40,7 @@ const spotsRepository = {
     tagListId: string[],
     profileId?: string | undefined
   ): any => {
-    console.log({ profileId });
+
 
     return Spot.findMany({
       orderBy: {
@@ -53,7 +53,7 @@ const spotsRepository = {
         name: {
           contains: searchValue,
         },
-        ...(tagListId
+        ...(tagListId && tagListId.length
           ? {
               tags: {
                 some: {

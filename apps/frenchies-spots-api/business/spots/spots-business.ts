@@ -18,7 +18,6 @@ const {
 
 const spotsBusiness = {
   getAll: (data: ReadSpotDto, profileId?: string): SpotFindManyResult => {
-    console.log(data);
     const {
       searchValue,
       tagListId,

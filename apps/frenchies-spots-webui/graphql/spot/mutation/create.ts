@@ -12,6 +12,7 @@ const CREATE_SPOT_MUTATION = gql`
     $region: String
     $pictures: [PictureInput]
     $tags: [TagInput]
+    $address: String
   ) {
     createSpot(
       name: $name
@@ -24,6 +25,7 @@ const CREATE_SPOT_MUTATION = gql`
       region: $region
       spotPicture: $pictures
       tags: $tags
+      address: $address
     ) {
       category
       description

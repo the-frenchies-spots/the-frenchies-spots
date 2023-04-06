@@ -12,6 +12,7 @@ const READ_SPOT_BY_ID_QUERY = gql`
       region
       averageRating
       profileId
+      address
       favorites {
         id
       }

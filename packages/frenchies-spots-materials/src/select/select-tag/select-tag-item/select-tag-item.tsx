@@ -17,10 +17,19 @@ export type TTagItem = {
 export interface SelectTagItemProps extends TTagItem {
   selectedTags: string[];
   onChange: (tagId: string) => void;
+  disabled?: boolean;
 }
 
 export const SelectTagItem = (props: SelectTagItemProps) => {
-  const { id, name, tagPictureUrl, category, selectedTags, onChange } = props;
+  const {
+    id,
+    name,
+    tagPictureUrl,
+    category,
+    selectedTags,
+    onChange,
+    disabled = false,
+  } = props;
 
   const style = styles(selectedTags.indexOf(id) !== -1);
 
@@ -29,10 +38,17 @@ export const SelectTagItem = (props: SelectTagItemProps) => {
   };
 
   return (
-    <TouchableOpacity onPress={handleClick} style={style.touchableContainer}>
+    <TouchableOpacity
+      onPress={disabled ? undefined : handleClick}
+      style={style.touchableContainer}
+    >
       <VStack justify="center" items="center" spacing={5}>
         <Box style={style.container}>
-          <Image src={tagPictureUrl} style={style.picture} />
+          <Image
+            src={tagPictureUrl}
+            style={style.picture}
+            reloadDesactivated={true}
+          />
         </Box>
         <Text style={style.tagLabel}>{capitalize(name)}</Text>
       </VStack>

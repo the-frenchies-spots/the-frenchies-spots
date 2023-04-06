@@ -1,10 +1,4 @@
-import React, {
-  useState,
-  useEffect,
-  useMemo,
-  useCallback,
-  useContext,
-} from "react";
+import React, { useState, useCallback, useContext } from "react";
 import {
   Box,
   Caption,
@@ -18,6 +12,7 @@ import { useMutation } from "@apollo/client";
 import { CREATE_OR_UPDATE_RATING_MUTATION } from "../../../graphql";
 import { objectId } from "../../../utils";
 import { AuthContext } from "../../../context";
+import { useIsFocused } from "@react-navigation/native";
 
 type TRatingParams = {
   ratingId: string;
@@ -48,9 +43,7 @@ export const SpotRating = (props: SpotRatingProps) => {
     CREATE_OR_UPDATE_RATING_MUTATION
   );
 
-  useEffect(() => {
-    console.log(ratingParams);
-  }, [ratingParams]);
+  const isFocused = useIsFocused();
 
   const handleRatingChange = useCallback(
     (newRate: number) => {

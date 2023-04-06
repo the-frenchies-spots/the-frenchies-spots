@@ -166,7 +166,7 @@ interface SectionListParams {
 
 export const spotEditSwipSection = (params: SectionListParams) => {
   const { fields, control, errors, watch, t } = params;
-  const { name, location, description, pictures } = watch();
+  const { name, location, description, pictures, category, tags } = watch();
 
   return [
     {
@@ -176,7 +176,7 @@ export const spotEditSwipSection = (params: SectionListParams) => {
       isPadding: true,
       onComfirm: () => params.goToNextIndex(),
       render: (
-        <Box style={{ marginTop: 100, height: "100%" }}>
+        <Box style={{ marginTop: 130, height: "100%" }}>
           <Title variant="h2">
             A quelle catégorie associerais-tu ton spot ?{" "}
           </Title>
@@ -194,8 +194,9 @@ export const spotEditSwipSection = (params: SectionListParams) => {
       nextLabel: "Suivant",
       onComfirm: () => params.goToNextIndex(),
       isPadding: true,
+      isNextDisable: tags.length <= 0,
       render: (
-        <Box style={{ marginTop: 100, height: "100%" }}>
+        <Box style={{ marginTop: 130, height: "100%" }}>
           <Title variant="h2">
             Choisi les tags correspondant à ton spot aventure
           </Title>
@@ -204,6 +205,7 @@ export const spotEditSwipSection = (params: SectionListParams) => {
             name={fields.tags.name}
             style={{ marginTop: 20 }}
             list={tagsDataList}
+            category={category}
           />
         </Box>
       ),
@@ -212,10 +214,10 @@ export const spotEditSwipSection = (params: SectionListParams) => {
       prevLabel: "Retour",
       nextLabel: "Suivant",
       isPadding: true,
-      isNextDisable: false,
+      isNextDisable: name.length <= 0 || description.length <= 0,
       onComfirm: () => params.goToNextIndex(),
       render: (
-        <Box style={{ marginTop: 100, height: "100%" }}>
+        <Box style={{ marginTop: 130, height: "100%" }}>
           <Title variant="h2" style={{ marginBottom: 20 }}>
             Dis nous en plus sur ton spot !
           </Title>
@@ -260,9 +262,9 @@ export const spotEditSwipSection = (params: SectionListParams) => {
       isPadding: true,
       onComfirm: () => params.goToNextIndex(),
       render: (
-        <Box style={{ marginTop: 100, height: "100%" }}>
+        <Box style={{ marginTop: 130, height: "100%" }}>
           <Title variant="h2" style={{ marginBottom: 20 }}>
-            Ou se situe ton spot ?
+            Où se situe ton spot ?
           </Title>
 
           <SearchAddressController
@@ -279,7 +281,7 @@ export const spotEditSwipSection = (params: SectionListParams) => {
             style={{ height: 400, marginVertical: 20 }}
           />
 
-          <SelectRegion value={location.codeRegion.toString()} />
+          <SelectRegion value={location?.codeRegion.toString()} />
         </Box>
       ),
     },
@@ -290,7 +292,7 @@ export const spotEditSwipSection = (params: SectionListParams) => {
       isPadding: true,
       onComfirm: () => params.goToNextIndex(),
       render: (
-        <Box style={{ marginTop: 100, height: "100%" }}>
+        <Box style={{ marginTop: 130, height: "100%" }}>
           <Title variant="h2" style={{ marginBottom: 20 }}>
             Dernier effort ! Quel statut préfères-tu pour ton spot ?
           </Title>
@@ -310,7 +312,7 @@ export const spotEditSwipSection = (params: SectionListParams) => {
       isPadding: false,
       onComfirm: () => params.onSubmitForm(),
       render: (
-        <Box style={{ marginTop: 60, height: "100%" }}>
+        <Box style={{ marginTop: 80, height: "100%" }}>
           <SpotPictureDetail
             goBackDisabled={true}
             src={pictures.map((url) => ({ url }))}
@@ -319,7 +321,7 @@ export const spotEditSwipSection = (params: SectionListParams) => {
             spotId={"df5t7g48rh8dytsy"}
             title={name}
             description={description}
-            location={location.address}
+            location={location?.address || ""}
             isUserOwner={false}
             actionSectionDisabled={true}
           />

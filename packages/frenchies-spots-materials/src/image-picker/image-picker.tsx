@@ -42,7 +42,7 @@ const PickerImage = (props: ImagePickerProps) => {
     <TouchableOpacity onPress={pickImage}>
       <Box style={style.container}>
         {!disablePreview && image ? (
-          <Image style={style.image} src={image} />
+          <Image style={style.image} src={image} reloadDesactivated={true} />
         ) : (
           <Icon name="camera" size={40} color="bluePurple" />
         )}

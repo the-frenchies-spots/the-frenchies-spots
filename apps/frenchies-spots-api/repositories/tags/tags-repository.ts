@@ -19,8 +19,8 @@ const tagsRepository = {
   getById: (id: string) => {
     return Tag.findUnique({
       where: {
-        id
-      }
+        id,
+      },
     });
   },
 
@@ -51,7 +51,6 @@ const tagsRepository = {
     })
       .then(() => true)
       .catch((err) => {
-        console.log(err);
         return false;
       });
   },

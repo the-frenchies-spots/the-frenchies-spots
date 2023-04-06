@@ -37,6 +37,7 @@ const READ_SPOT_QUERY = gql`
       lat
       lng
       name
+      averageRating
       region
       tags {
         id

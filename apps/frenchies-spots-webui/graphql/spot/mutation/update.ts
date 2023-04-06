@@ -14,6 +14,7 @@ const UPDATE_SPOT_MUTATION = gql`
     $pictures: [UpdatePictureInput]
     $averageRating: Float
     $tags: [TagInput]
+    $address: String
   ) {
     updateSpot(
       id: $id
@@ -25,6 +26,7 @@ const UPDATE_SPOT_MUTATION = gql`
       isHidden: $isHidden
       category: $category
       region: $region
+      address: $address
       spotPicture: $pictures
       averageRating: $averageRating
       tags: $tags
