@@ -28,7 +28,7 @@ interface CardProps {
   onPress?: () => void;
 }
 
-export const Card = (props: CardProps) => {
+const Card = (props: CardProps) => {
   const {
     cardButton,
     name,
@@ -73,3 +73,5 @@ export const Card = (props: CardProps) => {
     </TouchableOpacity>
   );
 };
+
+export default Card;
