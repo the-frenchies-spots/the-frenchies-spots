@@ -90,6 +90,7 @@ const spotsBusiness = {
       data.lat !== undefined ||
       data.lng !== undefined ||
       data.region !== undefined ||
+      data.address !== undefined ||
       data.tags !== undefined
     ) {
       await checkCreatedByCurrentUserOrThrow(spotId, currentProfileId);

@@ -106,6 +106,7 @@ const userData: Prisma.UserCreateInput[] = [
               lat: 44.5889775,
               lng: -1.2142045,
               region: '75',
+              address: "Av. de Biscarrosse, 33115 La Teste-de-Buch",
               spotPicture: {
                 create: [
                   {
@@ -135,6 +136,7 @@ const userData: Prisma.UserCreateInput[] = [
               lat: 43.30888,
               lng: -1.63507,
               region: '75',
+              address: "Col de Saint-Ignace, 64310 Sare",
               spotPicture: {
                 create: [
                   {
@@ -160,6 +162,7 @@ const userData: Prisma.UserCreateInput[] = [
               lat: 42.8962287902832,
               lng: -0.12042045593261719,
               region: '75',
+              address: "Pôle d’activités – Ferme d’Icart, 09240 Montels",
               spotPicture: {
                 create: [
                   {
@@ -206,6 +209,7 @@ const userData: Prisma.UserCreateInput[] = [
               lat: 45.557484,
               lng: -0.956417,
               region: '75',
+              address: "81 Bd de la Falaise, 17132 Meschers-sur-Gironde",
               spotPicture: {
                 create: [
                   {
@@ -237,6 +241,7 @@ const userData: Prisma.UserCreateInput[] = [
               lat: 45.76667,
               lng: 1.7,
               region: '75',
+              address: "19110 Bort les Orgues",
               spotPicture: {
                 create: [
                   {
@@ -262,6 +267,7 @@ const userData: Prisma.UserCreateInput[] = [
               lat: 43.9359823,
               lng: -0.9236623,
               region: '75',
+              address: "40000 Landes",
               spotPicture: {
                 create: [
                   {
@@ -306,6 +312,7 @@ const userData: Prisma.UserCreateInput[] = [
               lat: 47.562968,
               lng: -2.769661,
               region: '53',
+              address: "8 bd Iles, 56000 Vannes",
               spotPicture: {
                 create: [
                   {
@@ -331,6 +338,7 @@ const userData: Prisma.UserCreateInput[] = [
               lat: 44.179423,
               lng: 5.060538,
               region: '93',
+              address: "84190 Lafare",
               spotPicture: {
                 create: [
                   {
@@ -356,6 +364,7 @@ const userData: Prisma.UserCreateInput[] = [
               lat: 44.202515,
               lng: 5.291937,
               region: '84',
+              address: "84340 Malaucène",
               spotPicture: {
                 create: [
                   {
@@ -384,6 +393,7 @@ const userData: Prisma.UserCreateInput[] = [
               lat: 48.030483,
               lng: -2.132837,
               region: '53',
+              address: "35380 Paimpont",
               spotPicture: {
                 create: [
                   {
@@ -410,6 +420,7 @@ const userData: Prisma.UserCreateInput[] = [
               lat: 42.518597,
               lng: 2.455712,
               region: '75',
+              address: "66820 Castei",
               spotPicture: {
                 create: [
                   {
@@ -453,6 +464,7 @@ const userData: Prisma.UserCreateInput[] = [
               lat: 43.9195564,
               lng: 5.5005963,
               region: '93',
+              address: "RD22 parking des mille couleurs RD22 parking des mille couleurs, 84400 Rustrel",
               spotPicture: {
                 create: [
                   {
@@ -478,6 +490,7 @@ const userData: Prisma.UserCreateInput[] = [
               lat: 43.228732,
               lng: 5.40348,
               region: '93',
+              address: "Les Calanques De Marseille - Sites et circuits de tourisme, Mazan, 13009 Marseille",
               spotPicture: {
                 create: [
                   {
@@ -503,6 +516,7 @@ const userData: Prisma.UserCreateInput[] = [
               lat: 44.5000426,
               lng: 6.3163021,
               region: '93',
+              address: "Lac de Serre Ponçon, 05160 Savines le Lac",
               spotPicture: {
                 create: [
                   {
@@ -520,7 +534,7 @@ const userData: Prisma.UserCreateInput[] = [
             },
             {
               id: '640779bca1e1a3dc3fb33d22',
-              name: 'Lafiteria - Saint-Jean de Luz',
+              name: 'Lafitenia - Saint-Jean de Luz',
               description: `Plage de sable et galets, elle se situe prés des campings du quartier d’Acotz. Cette plage est le coin préféré des surfeurs confirmés qui affronteront la vague gauche de rochers située un peu au large.`,
               isCanPark: true,
               isHidden: false,
@@ -528,6 +542,7 @@ const userData: Prisma.UserCreateInput[] = [
               lat: 43.38871,
               lng: -1.66267,
               region: '75',
+              address: "Chem. de Lafitenia64500 Saint-Jean-de-Luz",
               spotPicture: {
                 create: [
                   {
@@ -556,6 +571,7 @@ const userData: Prisma.UserCreateInput[] = [
               lat: 43.423001,
               lng: -1.6062693,
               region: '75',
+              address: "Guéthary 64210",
               spotPicture: {
                 create: [
                   {
@@ -603,6 +619,7 @@ const userData: Prisma.UserCreateInput[] = [
               lat: 43.7496562,
               lng: 6.3285616,
               region: '93',
+              address: "Sainte-Croix-du-Verdon 04500",
               spotPicture: {
                 create: [
                   {
@@ -631,6 +648,7 @@ const userData: Prisma.UserCreateInput[] = [
               lat: 47.8006543,
               lng: 0.3771322,
               region: '76',
+              address: "Sault 84390",
               spotPicture: {
                 create: [
                   {
@@ -656,6 +674,7 @@ const userData: Prisma.UserCreateInput[] = [
               lat: 43.2727191,
               lng: 6.6405225,
               region: '93',
+              address: "2 place de l'Hôtel-de-Ville, BP 161 83990 Saint-Tropez",
               spotPicture: {
                 create: [
                   {
@@ -681,6 +700,7 @@ const userData: Prisma.UserCreateInput[] = [
               lat: 43.1506968,
               lng: 6.3419285,
               region: '93',
+              address: "1 Place Saint-François. 83 230 Bormes les Mimosas",
               spotPicture: {
                 create: [
                   {
@@ -724,6 +744,7 @@ const userData: Prisma.UserCreateInput[] = [
               lat: 48.6359541,
               lng: -1.51146,
               region: '28',
+              address: "La Caserne, 50170 le Mont Saint Michel",
               spotPicture: {
                 create: [
                   {
@@ -752,6 +773,7 @@ const userData: Prisma.UserCreateInput[] = [
               lat: 43.74425,
               lng: 4.79607,
               region: '93',
+              address: "Grand Rue 13520 Les Baux-de-Provence",
               spotPicture: {
                 create: [
                   {
@@ -780,6 +802,7 @@ const userData: Prisma.UserCreateInput[] = [
               lat: 46.5781239,
               lng: -1.8419225,
               region: '93',
+              address: "1528-1582 Rte de la Tête de Chien, 06320 La Turbie",
               spotPicture: {
                 create: [
                   {
@@ -805,6 +828,7 @@ const userData: Prisma.UserCreateInput[] = [
               lat: 45.9250255,
               lng: 6.8727437,
               region: '84',
+              address: "100 Pl. de l'Aiguille du Midi, 74400 Chamonix-Mont-Blanc",
               spotPicture: {
                 create: [
                   {
@@ -831,6 +855,7 @@ const userData: Prisma.UserCreateInput[] = [
               lat: 49.36,
               lng: 0.0752778,
               region: '28',
+              address: "20 Rue Robert Fossorier, 14800 Deauville",
               spotPicture: {
                 create: [
                   {
@@ -874,6 +899,7 @@ const userData: Prisma.UserCreateInput[] = [
               lat: 44.09109115600586,
               lng: 7.465714931488037,
               region: '93',
+              address: "Vallée des Merveilles, 06430 Tende",
               spotPicture: {
                 create: [
                   {
@@ -899,6 +925,7 @@ const userData: Prisma.UserCreateInput[] = [
               lat: 49.7074621,
               lng: 0.2031905,
               region: '28',
+              address: "6 Rue Alphonse Karr, 76790 Étretat",
               spotPicture: {
                 create: [
                   {
@@ -924,6 +951,7 @@ const userData: Prisma.UserCreateInput[] = [
               lat: 48.8317817,
               lng: -3.4844446,
               region: '53',
+              address: "Ploumanac'h 22700 Perros-Guirec",
               spotPicture: {
                 create: [
                   {
@@ -949,6 +977,7 @@ const userData: Prisma.UserCreateInput[] = [
               lat: 47.5836629,
               lng: -3.0794428,
               region: '53',
+              address: "5 Chem. de Pouldeve, 56340 Carnac",
               spotPicture: {
                 create: [
                   {
@@ -974,6 +1003,7 @@ const userData: Prisma.UserCreateInput[] = [
               lat: 48.0964125,
               lng: -2.0281004,
               region: '53',
+              address: "Étang de Trémelin 35750 Iffendic",
               spotPicture: {
                 create: [
                   {
@@ -1000,9 +1030,10 @@ const userData: Prisma.UserCreateInput[] = [
               isCanPark: false,
               isHidden: false,
               category: "RESOURCES_SPOT",
-              lat: 40.0964125,
-              lng: -2.0281004,
-              region: '53',
+              lat: 44.13387079092109,
+              lng: 6.24162281675221,
+              region: '93',
+              address: "Le Clot de Jaline, Route du Clos de Jalines, 04420 Marcoux, France",
               spotPicture: {
                 create: [
                   {
@@ -1026,9 +1057,10 @@ const userData: Prisma.UserCreateInput[] = [
               isCanPark: true,
               isHidden: false,
               category: "RESOURCES_SPOT",
-              lat: 38.0964125,
-              lng: -1.0281004,
-              region: '53',
+              lat: 44.82106082769287,
+              lng: 4.341849718899424,
+              region: '84',
+              address: "Route du Cheylard, 07530 Mézilhac, France",
               spotPicture: {
                 create: [
                   {
@@ -1058,9 +1090,10 @@ const userData: Prisma.UserCreateInput[] = [
               isCanPark: false,
               isHidden: false,
               category: "RESOURCES_SPOT",
-              lat: 28.0964125,
-              lng: 8.0281004,
-              region: '53',
+              lat: 43.6153093,
+              lng: 1.4209587,
+              region: '76',
+              address: "55 Bd de Suisse, 31200 Toulouse",
               spotPicture: {
                 create: [
                   {
@@ -1090,9 +1123,10 @@ const userData: Prisma.UserCreateInput[] = [
               isCanPark: true,
               isHidden: false,
               category: "RESOURCES_SPOT",
-              lat: 17.0964125,
-              lng: 0.0281004,
-              region: '53',
+              lat: 43.54902124776626,
+              lng: 5.547799188391234,
+              region: '93',
+              address: "Descente des Jardins, 13100 Saint-Marc-Jaumegarde, France",
               spotPicture: {
                 create: [
                   {
@@ -1116,9 +1150,10 @@ const userData: Prisma.UserCreateInput[] = [
               isCanPark: true,
               isHidden: false,
               category: "RESOURCES_SPOT",
-              lat: 40.0964125,
-              lng: 2.0281004,
-              region: '53',
+              lat: 44.9812637,
+              lng: -1.08014,
+              region: '75',
+              address: "42 Av. de la Côté d'Argent, 33680 Lacanau",
               spotPicture: {
                 create: [
                   {
@@ -1142,9 +1177,10 @@ const userData: Prisma.UserCreateInput[] = [
               isCanPark: true,
               isHidden: false,
               category: "RESOURCES_SPOT",
-              lat: 40.0964125,
-              lng: 2.0281004,
-              region: '53',
+              lat: 44.9672453,
+              lng: -1.1434696,
+              region: '75',
+              address: "Plage de la Grande Escoure All. du Club de Voile, 33680 Lacanau",
               spotPicture: {
                 create: [
                   {
@@ -1174,9 +1210,10 @@ const userData: Prisma.UserCreateInput[] = [
               isCanPark: true,
               isHidden: false,
               category: "RESOURCES_SPOT",
-              lat: 44.0964125,
-              lng: 2.0281004,
-              region: '53',
+              lat: 45.1857,
+              lng: -1.0572,
+              region: '75',
+              address: "1/2, rue Cantelaude - Route de l´Esparre - D3, 33990 Hourtin",
               spotPicture: {
                 create: [
                   {
@@ -1200,9 +1237,10 @@ const userData: Prisma.UserCreateInput[] = [
               isCanPark: true,
               isHidden: false,
               category: "RESOURCES_SPOT",
-              lat: 43.0964125,
-              lng: -3.0281004,
+              lat: 47.6174511,
+              lng: -3.1664424,
               region: '53',
+              address: "Kerhillio 56410 Erdeven",
               spotPicture: {
                 create: [
                   {
@@ -1226,9 +1264,10 @@ const userData: Prisma.UserCreateInput[] = [
               isCanPark: false,
               isHidden: false,
               category: "RESOURCES_SPOT",
-              lat: 36.0964125,
-              lng: -1.0281004,
-              region: '53',
+              lat: 43.4087585,
+              lng: 3.6968848,
+              region: '76',
+              address: "10 Rue Voltaire, 34200 Sète",
               spotPicture: {
                 create: [
                   {
@@ -1249,12 +1288,13 @@ const userData: Prisma.UserCreateInput[] = [
               id: '640779bca1e1a3dc3fb33d51',
               name: 'Le gaz pour vos talent de cuisinier',
               description: `Vous cherchez LE gaz qui vous permettra de vous remettre aux fourneaux c'est par ici !`,
-              isCanPark: false,
+              isCanPark: true,
               isHidden: false,
               category: "RESOURCES_SPOT",
-              lat: 36.0964125,
-              lng: 3.0281004,
-              region: '53',
+              lat: 44.92591094970703,
+              lng: -0.6232532858848572,
+              region: '75',
+              address: "71 Av. du 11 Novembre, 33290 Blanquefort",
               spotPicture: {
                 create: [
                   {

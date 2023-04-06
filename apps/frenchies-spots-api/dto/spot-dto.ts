@@ -36,6 +36,7 @@ const spotDtoSchema = z.object({
   lat: z.number(),
   lng: z.number(),
   region: z.string(),
+  address: z.string(),
   averageRating: z.number(),
   tags: z.array(z.object({ id: z.string() })),
 });
@@ -53,6 +54,7 @@ const updateSpotDtoSchema = z.object({
   lat: z.number(),
   lng: z.number(),
   region: z.string(),
+  address: z.string(),
   averageRating: z.number(),
   tags: z.array(z.object({ id: z.string() })),
 });
@@ -69,6 +71,7 @@ const spotFilterDtoSchema = z.object({
   lng: z.number(),
   profileId: z.string(),
   region: z.string(),
+  address: z.string(),
   averageRating: z.number(),
   tags: z.array(z.string()),
 });

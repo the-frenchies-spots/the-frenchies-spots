@@ -76,6 +76,7 @@ model Spot {
   lat           Float
   lng           Float
   region        String
+  address       String
   averageRating Float @default(0)
   // Relation one to many with spot_pictures
   spotPicture   SpotPicture[]

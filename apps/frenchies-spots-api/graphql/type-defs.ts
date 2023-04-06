@@ -62,6 +62,7 @@ const typeDefs = gql`
     lat: Float
     lng: Float
     region: String
+    address: String
     averageRating: Float
     ratings: [Rating]
     favorites: [Favorite]
@@ -119,12 +120,13 @@ const typeDefs = gql`
     maxVote: Int
   }
 
-  input SpotInput {
-    name: String
-    description: String
-    lat: Float
-    lng: Float
-  }
+  # AVEC LES ITINARIES
+  # input SpotInput {
+  #   name: String
+  #   description: String
+  #   lat: Float
+  #   lng: Float
+  # }
 
   input PictureInput {
     url: String
@@ -135,11 +137,6 @@ const typeDefs = gql`
   }
 
   input UpdatePictureInput {
-    id: String
-    url: String
-  }
-
-  input TestInput {
     id: String
     url: String
   }
@@ -162,6 +159,7 @@ const typeDefs = gql`
     lat: Float
     lng: Float
     region: String
+    address: String
     averageRating: Float
     ratings: [Rating]
     favorites: [Favorite]
@@ -188,6 +186,7 @@ const typeDefs = gql`
       searchValue: String
       tagListId: [String]
       region: String
+      address: String
       skip: Int
       take: Int
       tags: [TagInput]
@@ -241,6 +240,7 @@ const typeDefs = gql`
       isHidden: Boolean
       category: CategoriesSpotAndTag
       region: String
+      address: String
       averageRating: Float
       spotPicture: [PictureInput]
       tags: [TagInput]
@@ -256,25 +256,13 @@ const typeDefs = gql`
       isHidden: Boolean
       category: CategoriesSpotAndTag
       region: String
+      address: String
       spotPicture: [UpdatePictureInput]
       averageRating: Float
       tags: [TagInput]
     ): Spot
 
-    deleteSpot(
-      id: String
-      name: String
-      description: String
-      lat: Float
-      lng: Float
-      isCanPark: Boolean
-      isHidden: Boolean
-      category: CategoriesSpotAndTag
-      region: String
-      averageRating: Float
-      spotPicture: [PictureInput]
-      tags: [TagInput]
-    ): Boolean
+    deleteSpot(id: String): Boolean
 
     addSpotPicture(url: String, spotId: String): SpotPicture
 

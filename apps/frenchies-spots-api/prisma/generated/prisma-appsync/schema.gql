@@ -35,6 +35,7 @@ type Spot {
     lat: Float!
     lng: Float!
     region: String!
+    address: String!
     averageRating: Float!
     spotPicture: [SpotPicture]
     ratings: [Rating]
@@ -532,6 +533,7 @@ input SpotWhereInput {
     lat: FloatFilter
     lng: FloatFilter
     region: StringFilter
+    address: StringFilter
     averageRating: FloatFilter
     spotPicture: SpotPictureFilter
     ratings: RatingFilter
@@ -561,6 +563,7 @@ input SpotExtendedWhereUniqueInput {
     lat: FloatFilter
     lng: FloatFilter
     region: StringFilter
+    address: StringFilter
     averageRating: FloatFilter
     spotPicture: SpotPictureFilter
     ratings: RatingFilter
@@ -582,6 +585,7 @@ input SpotOrderByInput {
     lat: OrderByArg
     lng: OrderByArg
     region: OrderByArg
+    address: OrderByArg
     averageRating: OrderByArg
     spotPicture: SpotPictureOrderByInput
     ratings: RatingOrderByInput
@@ -601,6 +605,7 @@ input SpotCreateInput {
     lat: Float!
     lng: Float!
     region: String!
+    address: String!
     averageRating: Float!
     spotPicture: SpotSpotPictureCreateRelationInput
     ratings: SpotRatingsCreateRelationInput
@@ -618,6 +623,7 @@ input SpotCreateManyInput {
     lat: Float!
     lng: Float!
     region: String!
+    address: String!
     averageRating: Float!
 }
 
@@ -633,6 +639,7 @@ input SpotUpdateInput {
     lat: Float
     lng: Float
     region: String
+    address: String
     averageRating: Float
     spotPicture: SpotSpotPictureUpdateRelationsInput
     ratings: SpotRatingsUpdateRelationsInput
