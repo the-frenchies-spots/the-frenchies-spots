@@ -1,4 +1,4 @@
-import { Profile as ProfileDto } from '@prisma/client';
+import { Profile as ProfileDto, Role } from '@prisma/client';
 import { UserDto } from '../../dto/users-dto';
 import { Profile, User } from '../../models';
 import {
@@ -30,13 +30,15 @@ const usersRepository = {
     pseudo: string,
     email: string,
     password: string,
-    token: string
+    token: string, 
+    role: Role,
   ): CreateUserResult => {
     return User.create({
       data: {
         email,
         password,
         token,
+        role,
         profile: { create: { pseudo } }
       },
       include: { profile: true }

@@ -215,7 +215,7 @@ const typeDefs = gql`
 
   type Mutation {
     signIn(email: String, password: String): User
-    signUp(pseudo: String, email: String, password: String): User
+    signUp(pseudo: String, email: String, password: String, role: Role): User
     signOut: Boolean
 
     createProduct(photoUrl: String, gamePoints: Int, price: Int): Product

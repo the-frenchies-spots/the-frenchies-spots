@@ -39,7 +39,7 @@ const usersBusiness = {
   },
 
   signUp: async (data: SignInDto): CreateVerifiedUserResult => {
-    const { pseudo, email, password } = data;
+    const { pseudo, email, password, role } = data;
 
     // See if an old user exists with email attemting to register
     const oldUser = await usersRepository.getOne(email);
@@ -60,7 +60,7 @@ const usersBusiness = {
       }
     );
 
-    return usersRepository.create(pseudo, email, hashPassword, token);
+    return usersRepository.create(pseudo, email, hashPassword, token, role);
   },
 
   signIn: async (data: SignInDto): SignInResult => {

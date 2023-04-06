@@ -22,12 +22,17 @@ export enum codeErrors {
   SPOT_CATEGORY_NOT_MATCH_TAG_CATEGORY = "SPOT_CATEGORY_NOT_MATCH_TAG_CATEGORY",
   TAG_NOT_FOUND = "TAG_NOT_FOUND",
   TAG_IS_MANDATORY = "TAG_IS_MANDATORY",
+  USER_DONT_HAVE_THE_PERMISSION = "USER_DONT_HAVE_THE_PERMISSION",
 }
 
 const errorsMessage: Record<keyof typeof codeErrors, TError> = {
   USER_ALREADY_EXISTS: {
     statusCode: 412,
-    errorMessage: { en: "A user is already registred with the email: " },
+    errorMessage: { en: "This user is already registred with the email: " },
+  },
+  USER_DONT_HAVE_THE_PERMISSION: {
+    statusCode: 404,
+    errorMessage: { en: "User don't have the permission to access to this functionnality" },
   },
   UNAUTHENTICATED: {
     statusCode: 401,

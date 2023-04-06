@@ -1006,7 +1006,7 @@ const userData: Prisma.UserCreateInput[] = [
               spotPicture: {
                 create: [
                   {
-                    url: 'https://res.cloudinary.com/db00tntyg/image/upload/v1680770042/xsynxzcu8qqkkf2dbiop.jpg'
+                    url: 'https://res.cloudinary.com/db00tntyg/image/upload/v1680770042/source_de_jouvence.jpg'
                   }
                 ]
               },
