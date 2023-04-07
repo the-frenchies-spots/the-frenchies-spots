@@ -13,7 +13,7 @@ import Constants from "expo-constants";
 // } from "@env";
 
 // const API_URL = "https://frenchies-spot-api.vercel.app/api/graphql";
-const API_URL = "http://localhost:3000/api/graphql";
+const API_URL = "https://the-frenchies-spots-webui.vercel.app/api/graphql";
 
 const MAPBOX_API_KEY =
   "pk.eyJ1IjoibW9yZ2FuZWR1bHVjIiwiYSI6ImNrdnc1MGRyejA3NDcyb3A0ZDBvZnJoOHIifQ.oKbJN0xnJQvYgfOfcSZzyw";
