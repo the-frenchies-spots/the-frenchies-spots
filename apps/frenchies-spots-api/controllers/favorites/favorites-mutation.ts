@@ -15,6 +15,7 @@ export const favoritesMutation = {
     const profileId = user?.profile.id;
     if (!profileId) throw new GenericError(UNAUTHENTICATED);
     const { spotId, id: favoriteId } = data;
+
     return favoritesBusiness.createOrDelete(spotId, favoriteId, profileId);
   },
 };
