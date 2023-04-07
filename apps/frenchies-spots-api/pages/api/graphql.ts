@@ -16,10 +16,13 @@ const startServer = apolloServer.start();
 
 export default cors(async function handler(req, res) {
   res.setHeader("Access-Control-Allow-Credentials", "true");
-  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader(
+    "Access-Control-Allow-Origin",
+    "https://the-frenchies-spots-webui.vercel.app/"
+  );
   res.setHeader(
     "Access-Control-Allow-Headers",
-    "*"
+    "https://the-frenchies-spots-webui.vercel.app/"
     // "Origin, X-Requested-With, Content-Type, Accept"
   );
 
