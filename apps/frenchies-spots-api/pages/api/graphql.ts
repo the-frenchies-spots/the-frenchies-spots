@@ -18,10 +18,7 @@ export default cors(async function handler(req, res) {
   res.setHeader("Content-Type", "application/json");
   res.setHeader("Accept", "application/json");
   res.setHeader("Access-Control-Allow-Credentials", "true");
-  res.setHeader(
-    "Access-Control-Allow-Origin",
-    "http://localhost:3000/api/graphql"
-  );
+  res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader(
     "Access-Control-Allow-Methods",
     "GET, POST, PUT, DELETE, OPTIONS"
