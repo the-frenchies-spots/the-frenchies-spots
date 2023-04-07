@@ -20,7 +20,7 @@ export default cors(async function handler(req, res) {
   res.setHeader("Access-Control-Allow-Credentials", "true");
   res.setHeader(
     "Access-Control-Allow-Origin",
-    "https://the-frenchies-spots-webui-64lonvva3-hello-traveler.vercel.app"
+    "http://localhost:3000/api/graphql"
   );
   res.setHeader(
     "Access-Control-Allow-Methods",
