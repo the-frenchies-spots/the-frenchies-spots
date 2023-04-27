@@ -1,19 +1,19 @@
-import { usersRepository } from '../../repositories';
-import { SignInDto } from '../../dto';
-import { GenericError, codeErrors } from '../../utils';
-import bcrypt, { hash } from 'bcrypt';
-import jwt from 'jsonwebtoken';
-import { UserDto } from '../../dto/users-dto';
+import { usersRepository } from "../../repositories";
+import { SignInDto } from "../../dto";
+import { GenericError, codeErrors } from "../../utils";
+import bcrypt, { hash } from "bcryptjs";
+import jwt from "jsonwebtoken";
+
+import { UserDto } from "../../dto/users-dto";
 import {
   AuthByTockenResult,
   CreateVerifiedUserResult,
   SignInResult,
   UpdateUserResult,
-  UserFindManyResult
-} from '../../types';
+  UserFindManyResult,
+} from "../../types";
 
-const { USER_ALREADY_EXISTS, USER_NOT_FOUND, INCORRECT_PASSWORD } =
-  codeErrors;
+const { USER_ALREADY_EXISTS, USER_NOT_FOUND, INCORRECT_PASSWORD } = codeErrors;
 const secretKey = process.env.SECRET_KEY;
 
 const usersBusiness = {
@@ -29,9 +29,7 @@ const usersBusiness = {
   },
 
   delete: async (userId: string, profileId: string): Promise<boolean> => {
-    const isProfileDeleted = await usersRepository.deleteProfile(
-      profileId
-    );
+    const isProfileDeleted = await usersRepository.deleteProfile(profileId);
     const isUserDeleted = await usersRepository.deleteUser(userId);
 
     if (isProfileDeleted && isUserDeleted) return true;
@@ -52,13 +50,9 @@ const usersBusiness = {
     const hashPassword = await hash(password, 10);
 
     // Create our token
-    const token = jwt.sign(
-      { email, password: hashPassword },
-      `${secretKey}`,
-      {
-        expiresIn: '48h'
-      }
-    );
+    const token = jwt.sign({ email, password: hashPassword }, `${secretKey}`, {
+      expiresIn: "48h",
+    });
 
     return usersRepository.create(pseudo, email, hashPassword, token, role);
   },
@@ -83,7 +77,7 @@ const usersBusiness = {
         { email, password: hashPassword },
         `${secretKey}`,
         {
-          expiresIn: '48h'
+          expiresIn: "48h",
         }
       );
 
@@ -99,7 +93,7 @@ const usersBusiness = {
 
   signOut: async (token: string): Promise<boolean> => {
     return await usersRepository.logout(token);
-  }
+  },
 };
 
 export default usersBusiness;

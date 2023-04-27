@@ -1,13 +1,13 @@
-import { usersBusiness } from '../../business';
-import { TContext } from '../../graphql/context';
-import { SignInDto } from '../../dto';
-import { GenericError, codeErrors } from '../../utils';
-import { UserDto } from '../../dto/users-dto';
+import { usersBusiness } from "../../business";
+import { TContext } from "../../graphql/context";
+import { SignInDto } from "../../dto";
+import { GenericError, codeErrors } from "../../utils";
+import { UserDto } from "../../dto/users-dto";
 import {
   CreateVerifiedUserResult,
   SignInResult,
-  UpdateUserResult
-} from '../../types';
+  UpdateUserResult,
+} from "../../types";
 const { UNAUTHENTICATED } = codeErrors;
 
 export const usersMutation = {
@@ -22,11 +22,7 @@ export const usersMutation = {
    * @param {SignInDto} data
    * @param {TContext} context
    */
-  signIn: (
-    _: undefined,
-    data: SignInDto,
-    context: TContext
-  ): SignInResult => {
+  signIn: (_: undefined, data: SignInDto, context: TContext): SignInResult => {
     return usersBusiness.signIn(data);
   },
 
@@ -39,9 +35,10 @@ export const usersMutation = {
     context: TContext
   ): Promise<boolean> => {
     const { user } = context;
-    if (!user) throw new GenericError(UNAUTHENTICATED);
-    const { token } = user;
-    return usersBusiness.signOut(token);
+    if (user && user?.token) {
+      return usersBusiness.signOut(user.token);
+    }
+    throw new GenericError(UNAUTHENTICATED);
   },
 
   updateUser: (
@@ -66,5 +63,5 @@ export const usersMutation = {
 
     if (!userId || !profileId) throw new GenericError(UNAUTHENTICATED);
     return usersBusiness.delete(userId, profileId);
-  }
+  },
 };

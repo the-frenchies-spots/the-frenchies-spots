@@ -50,7 +50,7 @@ const tagsRepository = {
       },
     })
       .then(() => true)
-      .catch((err) => {
+      .catch(() => {
         return false;
       });
   },

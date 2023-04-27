@@ -8,7 +8,8 @@
     "dev": "dotenv -- turbo run dev",
     "webui": " dotenv -- turbo run dev --filter frenchies-spots-webui --no-daemon",
     "api": " dotenv -- turbo run dev --filter frenchies-spots-api --no-daemon",
-    "build": "turbo run build",
+    "build": "dotenv -- turbo run build",
+    "buildApi": "dotenv -- turbo run build --filter frenchies-spots-api --no-daemon",
     "clean": "turbo run clean && rm -rf node_modules",
     "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,md}\" --ignore-path .gitignore"
   },
