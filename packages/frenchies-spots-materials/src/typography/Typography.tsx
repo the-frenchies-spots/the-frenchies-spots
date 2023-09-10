@@ -1,5 +1,6 @@
 import React, { ReactNode } from "react";
-import { Sx, Text } from "@mantine/core";
+import { Sx } from "@mantine/core";
+
 import Title from "./Title/Title";
 import { defaultColor } from "../utils";
 
@@ -25,32 +26,34 @@ interface TypographyProps {
 export const Typography = (props: TypographyProps) => {
   const { children, color, variant = "body", sx } = props;
 
-  let Component: React.FC<{
-    children: ReactNode;
-    sx?: Sx;
-    variant?: keyof typeof TypographyVariants;
-    color?: keyof typeof defaultColor & string;
-  }>;
+  // let Component: React.FC<{
+  //   children: ReactNode;
+  //   sx?: Sx;
+  //   variant?: keyof typeof TypographyVariants;
+  //   color?: keyof typeof defaultColor & string;
+  // }>;
 
-  switch (variant) {
-    case "h1":
-      Component = Title;
-      break;
-    // case TypographyVariants.H1:
-    //   Component = Text;
-    //   break;
-    // case TypographyVariants.H1:
-    //   Component = Text;
-    //   break;
-    default:
-      Component = Title;
-  }
+  // switch (variant) {
+  //   case "h1":
+  //     Component = Title;
+  //     break;
+  //   // case TypographyVariants.H1:
+  //   //   Component = Text;
+  //   //   break;
+  //   // case TypographyVariants.H1:
+  //   //   Component = Text;
+  //   //   break;
+  //   default:
+  //     Component = Title;
+  // }
 
-  return (
-    <Component sx={sx} variant={variant} color={color}>
-      {children}
-    </Component>
-  );
+  // return (
+  //   <Component sx={sx} variant={variant} color={color}>
+  //     {children}
+  //   </Component>
+  // );
+
+  return <p>{children}</p>;
 };
 
 Typography.displayName = "@frenchies-spots/material/Typography/Typography";
