@@ -15,6 +15,7 @@ export interface SpotCardProps {
   children?: (params: {
     spotId: string;
     favoriteId: string | undefined;
+    profileId: string;
   }) => ReactNode;
   onClick?: (id: string) => void;
 }
@@ -59,7 +60,7 @@ const SpotCard = (props: SpotCardProps) => {
         />
         {children && (
           <Box className={classes.spotButton}>
-            {children({ spotId: id, favoriteId: favorite?.id })}
+            {children({ spotId: id, favoriteId: favorite?.id, profileId })}
           </Box>
         )}
       </Card.Section>

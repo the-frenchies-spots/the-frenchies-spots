@@ -61,6 +61,9 @@ export class FavoriteBusiness {
 
       return { isFavorite: !validated };
     }
+    console.log('=======================================');
+    console.log({ profileId, favoriteProfileId: favorite?.profileId });
+    console.log('=======================================');
 
     throw new ErrorService(ACCESS_DENIED);
   }

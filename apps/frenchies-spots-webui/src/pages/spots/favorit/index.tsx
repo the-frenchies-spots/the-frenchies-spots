@@ -11,7 +11,7 @@ import SpotList from "../../../components/Spots/SpotList/SpotList";
 import FavoriteButton from "../../../components/Spots/SpotButton/FavoriteButton/FavoriteButton";
 
 const FavoritPage = () => {
-  const { data, loading } = useQuery<{
+  const { data, loading, refetch } = useQuery<{
     spotsFavorite: SpotEntity[];
   }>(queries.spotsFavorite);
 
@@ -20,7 +20,11 @@ const FavoritPage = () => {
       <LoadingOverlay visible={loading} overlayBlur={2} />
       <SpotList list={data?.spotsFavorite}>
         {({ spotId, favoriteId }) => (
-          <FavoriteButton favorite={{ spotId, favoriteId }} withComfirm />
+          <FavoriteButton
+            favorite={{ spotId, favoriteId }}
+            onClick={refetch}
+            withComfirm
+          />
         )}
       </SpotList>
     </>

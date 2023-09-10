@@ -6,6 +6,9 @@ import { SPOTS_DISPLAY_MODE } from "@/enum/spots-display-mode.enum";
 
 import SpotsMapUi from "./SpotsMapUi/SpotsMapUi";
 import SpotList from "../Spots/SpotList/SpotList";
+import FavoriteButton from "../Spots/SpotButton/FavoriteButton/FavoriteButton";
+import { useAuth } from "../../hooks/use-auth";
+import { Text } from "@frenchies-spots/material";
 
 interface SpotsUi {
   spotList: SpotEntity[] | undefined;
@@ -14,9 +17,27 @@ interface SpotsUi {
 }
 
 const SpotsUi = ({ spotList, userPosition, mode }: SpotsUi) => {
+  const { user } = useAuth();
+
   switch (mode) {
     case SPOTS_DISPLAY_MODE.SPOTS_MODE:
-      return <SpotList list={spotList} mt={140} />;
+      return (
+        <SpotList list={spotList} mt={140}>
+          {({ spotId, favoriteId, profileId }) => (
+            <>
+              {user?.profile?.id && (
+                <>
+                  {user.profile.id !== profileId ? (
+                    <FavoriteButton favorite={{ spotId, favoriteId }} />
+                  ) : (
+                    <Text>Yours</Text>
+                  )}
+                </>
+              )}
+            </>
+          )}
+        </SpotList>
+      );
     case SPOTS_DISPLAY_MODE.MAP_MODE:
       return <SpotsMapUi list={spotList} userPosition={userPosition} />;
     case SPOTS_DISPLAY_MODE.COOPERATION_MODE:
