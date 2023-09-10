@@ -12,7 +12,9 @@ import { Rating, Group, Text, Log, Loader } from "@frenchies-spots/material";
 type SpotRatingProps = Pick<SpotByIdResponse, "rating" | "id">;
 
 const SpotRating = ({ id: spotId, rating: initRating }: SpotRatingProps) => {
-  const [rating, setRating] = useState<RatingResponse>(initRating);
+  const [rating, setRating] = useState<RatingResponse>(
+    initRating || { currentRating: undefined, avg: 0, maxVote: 0 }
+  );
 
   const [insertRate, { loading }] = useMutation<
     { createOrUpdateRating: RatingResponse },

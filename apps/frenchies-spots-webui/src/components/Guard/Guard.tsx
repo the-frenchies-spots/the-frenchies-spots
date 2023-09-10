@@ -16,7 +16,7 @@ export const Guard = ({ children, excludedRoutes }: GuardProps) => {
 
   const router = useRouter();
 
-  const handleRedirect = (authentificated) => {
+  const handleRedirect = (authentificated: boolean) => {
     if (!authentificated && excludedRoutes?.includes(router.pathname)) {
       router.push("/sign-in");
     }
