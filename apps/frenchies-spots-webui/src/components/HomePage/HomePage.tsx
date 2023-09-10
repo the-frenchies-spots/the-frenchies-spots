@@ -1,12 +1,5 @@
 import React from "react";
-import {
-  Box,
-  Button,
-  Container,
-  Flex,
-  Stack,
-  Typography,
-} from "@frenchies-spots/material";
+import { Box, Button, Container, Flex, Stack } from "@frenchies-spots/material";
 import { useRouter } from "next/router";
 
 export const HomePage = () => {
@@ -27,13 +20,9 @@ export const HomePage = () => {
       }}
     >
       <Stack mt="xl" pt="xl" sx={{ flexGrow: 1 }}>
-        <Typography variant="h1">Entraide</Typography>
-        <Typography variant="h1" color="superLightGrey">
-          Partage
-        </Typography>
-        <Typography variant="h1" color="superLightGrey">
-          Voyage
-        </Typography>
+        <p>Entraide</p>
+        <p>Partage</p>
+        <p>Voyage</p>
       </Stack>
 
       <Flex h={100}>
