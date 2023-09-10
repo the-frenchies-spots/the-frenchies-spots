@@ -23,7 +23,7 @@ interface TypographyProps {
   color?: keyof typeof defaultColor;
 }
 
-export const Typography = (props: TypographyProps) => {
+const Typography = (props: TypographyProps) => {
   const { children, color, variant = "body", sx } = props;
 
   // let Component: React.FC<{
@@ -57,3 +57,5 @@ export const Typography = (props: TypographyProps) => {
 };
 
 Typography.displayName = "@frenchies-spots/material/Typography/Typography";
+
+export default Typography;
