@@ -24,3 +24,5 @@ const Title = (props: TitleProps) => {
 };
 
 export default Title;
+
+Title.displayName = "@frenchies-spots/material/Title/Title";

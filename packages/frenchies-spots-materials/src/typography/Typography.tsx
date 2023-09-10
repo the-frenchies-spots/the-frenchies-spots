@@ -52,3 +52,5 @@ export const Typography = (props: TypographyProps) => {
     </Component>
   );
 };
+
+Typography.displayName = "@frenchies-spots/material/Typography/Typography";
