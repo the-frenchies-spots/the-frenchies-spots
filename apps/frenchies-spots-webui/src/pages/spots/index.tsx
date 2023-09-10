@@ -10,6 +10,8 @@ import { SPOTS_DISPLAY_MODE } from "@/enum/spots-display-mode.enum";
 import { PageLayout } from "./../../components/Layout/PageLayout/PageLayout";
 import NavigationLayout from "../../components/Layout/NavigationLayout/NavigationLayout";
 import SpotMenu from "../../components/SpotsUi/SpotMenu/SpotMenu";
+import { useDisclosure } from "@frenchies-spots/hooks";
+import SpotFilter from "../../components/SpotsUi/SpotFilter/SpotFilter";
 
 export const useStyles = createStyles((theme) => ({
   container: { position: "relative" },
@@ -24,6 +26,8 @@ export const useStyles = createStyles((theme) => ({
 }));
 
 const SpotsPage = () => {
+  const [filterOpened, { open, close }] = useDisclosure(false);
+
   const [displayMode, setDisplayMode] = useState<SPOTS_DISPLAY_MODE>(
     SPOTS_DISPLAY_MODE.MAP_MODE
   );
@@ -40,12 +44,17 @@ const SpotsPage = () => {
 
   return (
     <Box w="100%" h="100%">
-      <SpotMenu className={classes.spotMenu} onChange={setDisplayMode} />
+      <SpotMenu
+        className={classes.spotMenu}
+        onChange={setDisplayMode}
+        onOpenFilter={open}
+      />
       <SpotsUi
         mode={displayMode}
         userPosition={userPosition}
         spotList={data?.spots}
       />
+      <SpotFilter opened={filterOpened} onClose={close} />
     </Box>
   );
 };
