@@ -1,0 +1,259 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type DeleteResponse {
+  deleted: Boolean!
+}
+
+type FavoriteEntity {
+  createdAt: DateTime!
+  id: String!
+  profile: ProfileEntity!
+  profileId: String!
+  spot: SpotEntity!
+  spotId: String!
+  updatedAt: DateTime!
+}
+
+input FavoriteInput {
+  favoriteId: String
+  spotId: String!
+}
+
+"""
+The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf).
+"""
+scalar JSON
+
+type LogoutResponse {
+  loggedOut: Boolean!
+}
+
+type Mutation {
+  createOrUpdateRating(ratingInput: RatingInput!): RatingResponse!
+  deleteSpot(id: String!): DeleteResponse!
+  deleteTag(id: String!): DeleteResponse!
+  getNewTokens: NewTokensResponse!
+  insertSpot(insertSpotInput: SpotInput!): SpotEntity!
+  insertTag(tagInsertInput: TagInsertInput!): TagEntity!
+  logout: LogoutResponse!
+  signIn(signInInput: SignInInput!): SignResponse!
+  signUp(signUpInput: SignUpInput!): SignResponse!
+  toggleFavorite(favoriteInput: FavoriteInput!): ToggleFavoriteResponse!
+  updateSpot(updateSpotInput: SpotInput!): SpotEntity!
+  updateTag(tagUpdateInput: TagUpdateInput!): TagEntity!
+}
+
+type NewTokensResponse {
+  accessToken: String!
+  refreshToken: String!
+}
+
+type ProfileEntity {
+  createdAt: DateTime!
+  favorites: [FavoriteEntity!]
+  gamePoint: Float!
+  id: String!
+  photoUrl: String
+  pseudo: String!
+  ratings: [RatingEntity!]
+  spots: [SpotEntity!]
+  updatedAt: DateTime!
+  user: UserEntity!
+  userId: String!
+}
+
+type Query {
+  getLoginUser: UserEntity!
+  spotByPk(id: String!): SpotByIdResponse!
+  spots(spotsInput: SpotsInput!): [SpotEntity!]!
+  spotsFavorite: [SpotEntity!]!
+  tagByPk(id: String!): TagEntity!
+  tags(tagListInput: TagListInput!): [TagEntity!]!
+}
+
+type RatingEntity {
+  createdAt: DateTime!
+  id: String!
+  profile: ProfileEntity!
+  profileId: String!
+  rate: Float!
+  spot: SpotEntity!
+  spotId: String!
+  updatedAt: DateTime!
+}
+
+input RatingInput {
+  rate: Float!
+  ratingId: String
+  spotId: String!
+}
+
+type RatingResponse {
+  avg: Float!
+  currentRating: RatingEntity
+  maxVote: Float!
+}
+
+input SignInInput {
+  email: String!
+  password: String!
+}
+
+type SignResponse {
+  accessToken: String!
+  refreshToken: String!
+  user: UserEntity!
+}
+
+input SignUpInput {
+  email: String!
+  password: String!
+  pseudo: String!
+}
+
+type SpotByIdResponse {
+  address: String!
+  averageRating: Float!
+  category: String!
+  createdAt: DateTime!
+  description: String!
+  favorites: [FavoriteEntity!]
+  id: String!
+  isCanPark: Boolean!
+  isHidden: Boolean!
+  location: JSON
+  name: String!
+  profile: ProfileEntity!
+  profileId: String!
+  rating: RatingResponse
+  ratings: [RatingEntity!]
+  region: String!
+  spotPicture: [SpotPictureEntity!]
+  tags: [TagOnSpotEntity!]
+  updatedAt: DateTime!
+}
+
+type SpotEntity {
+  address: String!
+  averageRating: Float!
+  category: String!
+  createdAt: DateTime!
+  description: String!
+  favorites: [FavoriteEntity!]
+  id: String!
+  isCanPark: Boolean!
+  isHidden: Boolean!
+  location: JSON
+  name: String!
+  profile: ProfileEntity!
+  profileId: String!
+  ratings: [RatingEntity!]
+  region: String!
+  spotPicture: [SpotPictureEntity!]
+  tags: [TagOnSpotEntity!]
+  updatedAt: DateTime!
+}
+
+input SpotInput {
+  address: String!
+  category: String!
+  description: String!
+  id: String
+  isCanPark: Boolean!
+  isHidden: Boolean!
+  location: JSON
+  name: String!
+  pictures: [SpotPictureInput!]
+  region: String!
+  tags: [String!]
+}
+
+type SpotPictureEntity {
+  createdAt: DateTime!
+  hostId: String!
+  id: String!
+  spot: SpotEntity!
+  spotId: String!
+  updatedAt: DateTime!
+  url: String!
+}
+
+input SpotPictureInput {
+  hostId: String!
+  url: String!
+}
+
+input SpotsInput {
+  address: String
+  category: String
+  id: String
+  isCanPark: Boolean
+  isHidden: Boolean
+  orderBy: String
+  point: JSON
+  profileId: String
+  region: String
+  searchValue: String
+  skip: Float
+  tagListId: [String!]
+  take: Float
+}
+
+type TagEntity {
+  category: String!
+  createdAt: DateTime!
+  id: String!
+  name: String!
+  spots: [SpotEntity!]
+  tagPictureUrl: String!
+  updatedAt: DateTime!
+}
+
+input TagInsertInput {
+  category: String
+  name: String
+  tagPictureUrl: String
+}
+
+input TagListInput {
+  category: String
+  ids: [String!]
+  searchValue: String
+}
+
+type TagOnSpotEntity {
+  createdAt: DateTime!
+  id: String!
+  spotId: String!
+  tag: TagEntity!
+  tagId: String!
+  updatedAt: DateTime!
+}
+
+input TagUpdateInput {
+  id: String
+  tagPictureUrl: String
+}
+
+type ToggleFavoriteResponse {
+  favoriteId: String
+  isFavorite: Boolean!
+}
+
+type UserEntity {
+  createdAt: DateTime!
+  email: String!
+  hashedPassword: String!
+  hashedRefreshToken: String
+  id: String!
+  profile: ProfileEntity
+  role: String!
+  updatedAt: DateTime!
+}

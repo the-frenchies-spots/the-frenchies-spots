@@ -1,28 +1,26 @@
 import React from "react";
-import { Text, type TextProps } from "../text";
-import { styles } from "./title-styles";
-import { theme } from "@frenchies-spots/theme";
 
-export type TColors = keyof typeof theme.TFS.colors;
+import {
+  Title as MantineTitle,
+  TitleProps as MantineTitleProps,
+} from "@mantine/core";
+import { useStyles } from "./Title.styles";
+import { TypographyVariants } from "../Typography";
+import { defaultColor } from "../../utils";
 
-export type TVariant = "h1" | "h2" | "h3" | "h4" | "h5";
-
-export interface TitleProps extends TextProps {
-  variant?: TVariant;
-  color?: TColors;
+interface TitleProps extends Omit<MantineTitleProps, "variant" | "color"> {
+  variant?: keyof typeof TypographyVariants;
+  color?: keyof typeof defaultColor;
 }
 
-export const Title = (props: TitleProps) => {
-  const { variant = "h1", style, color, ...other } = props;
+const Title = (props: TitleProps) => {
+  const { variant = "body", color, className, ...titleProps } = props;
+
+  const { classes, cx } = useStyles({ variant, color });
+
   return (
-    <Text
-      {...other}
-      style={{
-        // ...(style as Object),
-        ...(color
-          ? { ...styles[variant], color: theme.TFS.colors[color] }
-          : styles[variant]),
-      }}
-    />
+    <MantineTitle className={cx(classes.title, className)} {...titleProps} />
   );
 };
+
+export default Title;

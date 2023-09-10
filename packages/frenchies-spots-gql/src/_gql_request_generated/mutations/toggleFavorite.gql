@@ -1,0 +1,6 @@
+mutation toggleFavorite($favoriteInput: FavoriteInput!){
+    toggleFavorite(favoriteInput: $favoriteInput){
+        favoriteId
+        isFavorite
+    }
+}

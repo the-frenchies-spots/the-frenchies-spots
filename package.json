@@ -1,4 +1,9 @@
 {
+  "name": "frenchies-spots",
+  "version": "1.0.0",
+  "engines": {
+    "node": "18.16.1"
+  },
   "private": true,
   "workspaces": [
     "apps/*",
@@ -8,14 +13,17 @@
     "dev": "dotenv -- turbo run dev",
     "webui": " dotenv -- turbo run dev --filter frenchies-spots-webui --no-daemon",
     "api": " dotenv -- turbo run dev --filter frenchies-spots-api --no-daemon",
-    "build": "turbo run build",
+    "build": "dotenv -- turbo run build",
+    "seed": "dotenv -- turbo run seed --filter frenchies-spots-api",
+    "start": "dotenv -- turbo run start",
     "clean": "turbo run clean && rm -rf node_modules",
     "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,md}\" --ignore-path .gitignore"
   },
   "devDependencies": {
     "prettier": "^2.7.1",
     "turbo": "latest",
-    "dotenv-cli": "latest"
+    "dotenv-cli": "latest",
+    "tsconfig": "workspace:*"
   },
   "packageManager": "pnpm@7.0.0"
 }

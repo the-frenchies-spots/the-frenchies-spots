@@ -24,6 +24,7 @@ pnpm webui
 
 - if the task isn't finish add wip to the description
 - for the PATH it's "nameProject-api" or "nameProject-front" we've to indicate if it's front or api, this will be usefull to go to a monorepo
+
 - to change the rule of the commit you've to go in the commitlint.config.js file (cf the example where we disable the length of the message which was 100 max)
 
 - feat : is used when you add or continue to work on a fonctionnality
@@ -40,6 +41,6 @@ pnpm webui
   feat(path): "description what you did"
   fix(path): "description what you fixed"
 
-# Need help ?
+#### Need help ?
 
 frenchies.spots@gmail.com
