@@ -2,9 +2,7 @@ import { createStyles } from "@mantine/core";
 
 export const useStyles = createStyles((theme, isCardMode: boolean) => ({
   container: {
-    height: 95,
-    width: 95,
-    borderRadius: isCardMode ? 16 : 50,
+    borderRadius: isCardMode ? 16 : 100,
     backgroundColor: "#E3E3FA",
     boxShadow: `0px 4px 8px  #DBDBDB`,
     overflow: "hidden",

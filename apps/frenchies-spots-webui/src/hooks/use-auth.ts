@@ -35,6 +35,7 @@ export const useInitAuth = () => {
   const [getLoginUser] = useLazyQuery<{
     getLoginUser: UserEntity;
   }>(queries.getLoginUser);
+
   const [signOut, { loading: signoutLoading }] = useMutation<LogoutResponse>(
     mutations.logout
   );
@@ -150,6 +151,7 @@ export const useAuth = () => {
 
   return {
     user: currentUser,
+    profile: currentUser?.profile,
     loading,
     refresh: handleRefresh,
     onSignUp: handleSignUp,

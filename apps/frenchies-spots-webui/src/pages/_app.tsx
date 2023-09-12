@@ -17,7 +17,7 @@ export default function App({ Component, pageProps }: Props) {
   const layout = React.isValidElement(Layout) ? Layout : <>{Layout}</>;
   return (
     <AppProvider>
-      <Guard excludedRoutes={["/spots/favorit", "/spots/edition"]}>
+      <Guard excludedRoutes={["/spots/favorit", "/spots/edition", "/profile"]}>
         <>
           {layout}
           <Toaster />
