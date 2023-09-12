@@ -1,39 +1,57 @@
-import React, { useState } from "react";
+import React from "react";
 
 import {
   Stack,
-  TextInput,
   Group,
   Button,
   Container,
-  Loader,
   Box,
   ActionIcon,
   Flex,
 } from "@frenchies-spots/material";
 import type { ContainerProps } from "@frenchies-spots/material";
 
-import type { TSpotFilterForm } from "../../../types";
-import { AutocompleteAddress, type TLocation } from "@frenchies-spots/map";
+import { AutocompleteAddress, useGeocoding } from "@frenchies-spots/map";
 import { IconSearch, IconSortDescending } from "@frenchies-spots/icon";
+import { useSpotUi } from "../../../hooks/use-spot-ui";
+import toast from "react-hot-toast";
 
-interface SpotMenuProps extends Omit<ContainerProps, "onChange"> {
-  onOpenFilter?: () => void;
-  form: TSpotFilterForm;
-  placeName: string;
-  onPlaceNameChange: (newPlaceName: string) => void;
-  onSearchPlaceName: () => void;
-}
+interface SpotMenuProps extends Omit<ContainerProps, "onChange"> {}
 
 const SpotMenu = (props: SpotMenuProps) => {
+  const { ...other } = props;
+
+  const { searchPlace } = useGeocoding();
   const {
     form,
     placeName,
-    onSearchPlaceName,
-    onOpenFilter,
-    onPlaceNameChange,
-    ...other
-  } = props;
+    setPlaceName,
+    openFilter,
+    setCoordPoint,
+    setViewPort,
+  } = useSpotUi();
+
+  const handleSearchPlaceName = () => {
+    searchPlace(placeName).then((address) => {
+      if (!address.placeName) {
+        toast.error("L'address saisie est incorrecte !");
+      } else {
+        setPlaceName(address.placeName);
+        setCoordPoint(address.coordinates);
+        setViewPort((current) => ({
+          ...current,
+          latitude: address.coordinates.lat,
+          longitude: address.coordinates.lng,
+          zoom: 12,
+        }));
+        const point = {
+          coordinates: [address.coordinates.lng, address.coordinates.lat],
+          maxDistance: 10000,
+        };
+        form.setValues((prev) => ({ ...prev, point }));
+      }
+    });
+  };
 
   return (
     <Container size="md" mt="xl" {...other}>
@@ -42,7 +60,7 @@ const SpotMenu = (props: SpotMenuProps) => {
           <AutocompleteAddress
             placeholder="search address"
             value={placeName}
-            onTextChange={onPlaceNameChange}
+            onTextChange={setPlaceName}
             sx={{ position: "relative" }}
             rightSection={
               <Flex
@@ -57,7 +75,7 @@ const SpotMenu = (props: SpotMenuProps) => {
                 <ActionIcon
                   w="100%"
                   h="100%"
-                  onClick={onOpenFilter}
+                  onClick={openFilter}
                   sx={{ borderRadius: 0, borderLeft: "1px solid grey" }}
                 >
                   <IconSortDescending size={16} />
@@ -82,7 +100,7 @@ const SpotMenu = (props: SpotMenuProps) => {
               w="100%"
               h="80%"
               sx={{ backgroundColor: "white" }}
-              onClick={onSearchPlaceName}
+              onClick={handleSearchPlaceName}
             >
               <IconSearch size={16} />
             </ActionIcon>

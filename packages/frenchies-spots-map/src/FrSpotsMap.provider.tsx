@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import FrSpotsMapContext from "./FrSpotsMap.ctx";
+import { FrSpotsMapContext } from "./FrSpotsMap.ctx";
 import { TLocation, useGeocoding, useGeoloc } from "./hooks";
 
 interface FrSpotsMapProviderProps {

@@ -10,6 +10,5 @@ const defaultContext: FrSpotsMapContextData = {
   location: null,
 };
 
-const FrSpotsMapContext = createContext<FrSpotsMapContextData>(defaultContext);
-
-export default FrSpotsMapContext;
+export const FrSpotsMapContext =
+  createContext<FrSpotsMapContextData>(defaultContext);

@@ -1,6 +1,6 @@
 import { useContext } from "react";
 
-import FrSpotsMapContext from "../../FrSpotsMap.ctx";
+import { FrSpotsMapContext } from "../../FrSpotsMap.ctx";
 
 export const useFrSpotsMapContext = () => {
   const ctx = useContext(FrSpotsMapContext);

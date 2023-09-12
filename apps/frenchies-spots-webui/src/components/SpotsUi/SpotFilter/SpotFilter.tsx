@@ -9,25 +9,30 @@ import {
   Checkbox,
   Slider,
   TextInput,
-  Log,
   Switch,
   Box,
 } from "@frenchies-spots/material";
-import { useForm, useMediaQuery } from "@frenchies-spots/hooks";
+import { useMediaQuery } from "@frenchies-spots/hooks";
 import { HSegmentControl, SelectTag } from "../../InputCustom";
-import { CategoriesSpotAndTag, SpotsInput } from "@frenchies-spots/gql";
+import { CategoriesSpotAndTag } from "@frenchies-spots/gql";
 import { tagsDataList } from "@frenchies-spots/utils";
-import type { TSpotFilterForm } from "../../../types";
+import { useSpotUi } from "../../../hooks/use-spot-ui";
+import { formatPoint } from "../../../utils/format-point";
 
-interface SpotFilterProps extends DrawerProps {
-  form: TSpotFilterForm;
-  isRayon: boolean;
-  onRayonChange: (isRayon: boolean) => void;
-  onSearchClick: () => void;
-}
+interface SpotFilterProps extends Omit<DrawerProps, "opened" | "onClose"> {}
 
 const SpotFilter = (props: SpotFilterProps) => {
-  const { form, isRayon, onRayonChange, onSearchClick, ...drawerProps } = props;
+  const { ...drawerProps } = props;
+
+  const {
+    onFilterSpot,
+    filterOpened,
+    closeFilter,
+    form,
+    setIsRayon,
+    viewport,
+    isRayon,
+  } = useSpotUi();
 
   const isSmallScreen = useMediaQuery("(max-width: 768px)");
 
@@ -35,11 +40,29 @@ const SpotFilter = (props: SpotFilterProps) => {
     form.reset();
   };
 
+  const handleSearchClick = () => {
+    closeFilter();
+    onFilterSpot(form.values);
+  };
+
+  const handleRayonChange = (newIsRayon: boolean) => {
+    setIsRayon(newIsRayon);
+    if (newIsRayon) {
+      const { latitude, longitude } = viewport;
+      const point = formatPoint({ lat: latitude, lng: longitude, m: 10000 });
+      form.setValues((prev) => ({ ...prev, point }));
+    } else {
+      form.setValues((prev) => ({ ...prev, point: undefined }));
+    }
+  };
+
   return (
     <Drawer
       {...drawerProps}
       position={isSmallScreen ? "bottom" : "right"}
       padding={0}
+      opened={filterOpened}
+      onClose={closeFilter}
     >
       <Stack spacing="xl" p="md">
         <TextInput
@@ -92,7 +115,7 @@ const SpotFilter = (props: SpotFilterProps) => {
           <Text>Localisation</Text>
           <Switch
             checked={isRayon}
-            onChange={(event) => onRayonChange(event.currentTarget.checked)}
+            onChange={(event) => handleRayonChange(event.currentTarget.checked)}
           />
         </Group>
         <Box h={50}>
@@ -128,7 +151,7 @@ const SpotFilter = (props: SpotFilterProps) => {
         p="md"
       >
         <Button onClick={handleResetFilter}>Réinitialiser</Button>
-        <Button variant="outline" onClick={onSearchClick}>
+        <Button variant="outline" onClick={handleSearchClick}>
           Filtrer
         </Button>
       </Group>

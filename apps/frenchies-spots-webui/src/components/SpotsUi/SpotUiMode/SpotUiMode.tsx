@@ -1,56 +1,31 @@
-import React, { Dispatch } from "react";
+import React from "react";
 
 import { SpotEntity } from "@frenchies-spots/gql";
-import type { TCoordinate, TLocation, TViewport } from "@frenchies-spots/map";
 
 import SpotsMapUi from "../SpotsMapUi/SpotsMapUi";
 import SpotList from "../../Spots/SpotList/SpotList";
 import FavoriteButton from "../../Spots/SpotButton/FavoriteButton/FavoriteButton";
 import { useAuth } from "../../../hooks/use-auth";
 import { Text } from "@frenchies-spots/material";
-import { TSpotFilterForm } from "../../../types";
+import { useSpotUi } from "../../../hooks/use-spot-ui";
 
 interface SpotUiModeProps {
-  spotList: SpotEntity[] | undefined;
-  userPosition: TCoordinate | null;
-  isMapMode: boolean;
-  form: TSpotFilterForm;
-  viewport: TViewport;
-  isRayon: boolean;
-  coordPoint: TLocation["coordinates"] | null;
-  onViewportChange: Dispatch<React.SetStateAction<TViewport>>;
+  list: SpotEntity[] | undefined;
 }
 
 const SpotUiMode = (props: SpotUiModeProps) => {
-  const {
-    onViewportChange,
-    viewport,
-    spotList,
-    userPosition,
-    isMapMode,
-    isRayon,
-    form,
-    coordPoint,
-  } = props;
+  const { list } = props;
+
   const { user } = useAuth();
+  const { isMapMode } = useSpotUi();
 
   const authProfileId = user?.profile?.id;
 
   if (isMapMode) {
-    return (
-      <SpotsMapUi
-        list={spotList}
-        coordPoint={coordPoint}
-        userPosition={userPosition}
-        form={form}
-        isRayon={isRayon}
-        viewport={viewport}
-        onViewportChange={onViewportChange}
-      />
-    );
+    return <SpotsMapUi list={list} />;
   }
   return (
-    <SpotList list={spotList} mt={140}>
+    <SpotList list={list} mt={140}>
       {({ spotId, favoriteId, profileId }) => (
         <>
           {authProfileId !== profileId ? (
