@@ -1,53 +1,98 @@
-import React from "react";
+import React, { useState } from "react";
+
 import {
   Stack,
   TextInput,
   Group,
   Button,
   Container,
+  Loader,
+  Box,
+  ActionIcon,
+  Flex,
 } from "@frenchies-spots/material";
 import type { ContainerProps } from "@frenchies-spots/material";
 
-import { SPOTS_DISPLAY_MODE } from "@/enum/spots-display-mode.enum";
+import type { TSpotFilterForm } from "../../../types";
+import { AutocompleteAddress, type TLocation } from "@frenchies-spots/map";
+import { IconSearch, IconSortDescending } from "@frenchies-spots/icon";
 
 interface SpotMenuProps extends Omit<ContainerProps, "onChange"> {
-  onChange?: (displayMode: SPOTS_DISPLAY_MODE) => void;
   onOpenFilter?: () => void;
+  form: TSpotFilterForm;
+  placeName: string;
+  onPlaceNameChange: (newPlaceName: string) => void;
+  onSearchPlaceName: () => void;
 }
 
 const SpotMenu = (props: SpotMenuProps) => {
-  const { onOpenFilter, onChange, ...other } = props;
-
-  const handleModeClick = (displayMode: SPOTS_DISPLAY_MODE) => {
-    if (typeof onChange === "function") {
-      onChange(displayMode);
-    }
-  };
+  const {
+    form,
+    placeName,
+    onSearchPlaceName,
+    onOpenFilter,
+    onPlaceNameChange,
+    ...other
+  } = props;
 
   return (
     <Container size="md" mt="xl" {...other}>
       <Stack>
-        <Group grow>
-          <TextInput />
-          <Button w={20} onClick={onOpenFilter}>
-            Filtre
-          </Button>
-        </Group>
+        <Box sx={{ position: "relative" }}>
+          <AutocompleteAddress
+            placeholder="search address"
+            value={placeName}
+            onTextChange={onPlaceNameChange}
+            sx={{ position: "relative" }}
+            rightSection={
+              <Flex
+                sx={{
+                  position: "absolute",
+                  right: 0,
+                  backgroundColor: "white",
+                }}
+                justify="center"
+                w={50}
+              >
+                <ActionIcon
+                  w="100%"
+                  h="100%"
+                  onClick={onOpenFilter}
+                  sx={{ borderRadius: 0, borderLeft: "1px solid grey" }}
+                >
+                  <IconSortDescending size={16} />
+                </ActionIcon>
+              </Flex>
+            }
+            icon={<IconSearch size={16} />}
+          />
+          <Flex
+            h="100%"
+            sx={{
+              position: "absolute",
+              left: 2,
+              top: 0,
+              zIndex: 100,
+            }}
+            justify="center"
+            align="center"
+            w={35}
+          >
+            <ActionIcon
+              w="100%"
+              h="80%"
+              sx={{ backgroundColor: "white" }}
+              onClick={onSearchPlaceName}
+            >
+              <IconSearch size={16} />
+            </ActionIcon>
+          </Flex>
+        </Box>
 
         <Group grow>
-          <Button onClick={() => handleModeClick(SPOTS_DISPLAY_MODE.MAP_MODE)}>
-            Tout
-          </Button>
-          <Button
-            onClick={() => handleModeClick(SPOTS_DISPLAY_MODE.SPOTS_MODE)}
-          >
-            Spots
-          </Button>
-          <Button
-            onClick={() => handleModeClick(SPOTS_DISPLAY_MODE.SPOTS_MODE)}
-          >
-            Entraide
-          </Button>
+          <Button onClick={() => null}>Tout</Button>
+          <Button onClick={() => null}>Spots</Button>
+          <Button onClick={() => null}>Entraide</Button>
         </Group>
       </Stack>
     </Container>

@@ -1,4 +1,5 @@
-import React, { useEffect } from "react";
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { Dispatch, useEffect } from "react";
 
 import {
   Map,
@@ -8,43 +9,53 @@ import {
   useMap,
 } from "@frenchies-spots/map";
 import { SpotEntity } from "@frenchies-spots/gql";
-import type { TCoordinate } from "@frenchies-spots/map";
+import type { TCoordinate, TLocation, TViewport } from "@frenchies-spots/map";
+import { TSpotFilterForm } from "../../../types";
+import { Log } from "@frenchies-spots/material";
+import { IconFlag } from "@frenchies-spots/icon";
+import PinMarker from "@frenchies-spots/map/src/components/Marker/PinMarker/PinMarker";
 
 interface SpotsMapUiProps {
   list: SpotEntity[] | undefined;
   userPosition: TCoordinate | null;
+  form: TSpotFilterForm;
+  viewport: TViewport;
+  isRayon: boolean;
+  coordPoint: TLocation["coordinates"] | null;
+  onViewportChange: Dispatch<React.SetStateAction<TViewport>>;
 }
 
-const SpotsMapUi = ({ list, userPosition }: SpotsMapUiProps) => {
-  const { viewport, onViewportChange, onCoordinateClick } = useMap();
+const SpotsMapUi = (props: SpotsMapUiProps) => {
+  const {
+    viewport,
+    coordPoint,
+    isRayon,
+    onViewportChange,
+    list,
+    userPosition,
+    form,
+  } = props;
 
-  useEffect(() => {
-    if (userPosition) {
-      onViewportChange((current) => ({
-        ...current,
-        latitude: userPosition.lat,
-        longitude: userPosition.lng,
-        zoom: 12,
-      }));
-    }
-  }, [userPosition]);
+  const isCurrentUserPosition =
+    coordPoint?.lat === userPosition?.lat &&
+    coordPoint?.lng === userPosition?.lng;
 
   return (
-    <Map
-      viewport={viewport}
-      onViewportChange={onViewportChange}
-      onCoordinateClick={onCoordinateClick}
-    >
-      {userPosition && (
+    <Map viewport={viewport} onViewportChange={onViewportChange}>
+      {isRayon && coordPoint && (
         <MapPerimeter
-          lat={userPosition.lat}
-          lng={userPosition.lng}
-          radius={5}
+          lat={coordPoint.lat}
+          lng={coordPoint.lng}
+          radius={form.values.point.maxDistance / 1000}
         />
       )}
 
       {userPosition && (
         <CurrentLocationMarker lat={userPosition.lat} lng={userPosition.lng} />
+      )}
+
+      {!isCurrentUserPosition && coordPoint && (
+        <PinMarker lat={coordPoint.lat} lng={coordPoint.lng} />
       )}
 
       {list?.map((spot) => {

@@ -1,12 +1,19 @@
 import { useState, useEffect } from "react";
+
 import { TCoordinate } from "../../types";
 
-export const useGeoloc = () => {
+interface useGeolocParams {
+  autoStart?: boolean;
+}
+
+export const useGeoloc = (params?: useGeolocParams) => {
   const [userPosition, setUserPosition] = useState<TCoordinate | null>(null);
+  const [loading, setLoading] = useState<boolean>(true);
 
   const getLocation = () => {
+    setLoading(true);
     if (navigator.geolocation) {
-      const watchId = navigator.geolocation.watchPosition(
+      navigator.geolocation.getCurrentPosition(
         (position) => {
           setUserPosition({
             lat: position.coords.latitude,
@@ -17,28 +24,16 @@ export const useGeoloc = () => {
           console.error(error);
         }
       );
-      return watchId;
-    } else {
-      console.error(
-        "La géolocalisation n'est pas prise en charge par votre navigateur."
-      );
-      return null;
     }
+    setLoading(false);
+    return null;
   };
 
   useEffect(() => {
-    getLocation();
+    if (params?.autoStart) {
+      getLocation();
+    }
   }, []);
 
-  // useEffect(() => {
-  //   const watchId: any = getLocation();
-  //   // Nettoyage de l'écouteur lors du démontage du composant
-  //   return () => {
-  //     if (watchId) {
-  //       navigator.geolocation.clearWatch(watchId);
-  //     }
-  //   };
-  // }, []);
-
-  return { userPosition, getLocation };
+  return { loading, userPosition, getLocation };
 };

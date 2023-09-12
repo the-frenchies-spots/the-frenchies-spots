@@ -1,20 +1,27 @@
 import React, { useCallback, useEffect, useState } from "react";
 
 import { debounce, cloneDeep } from "lodash";
-import { Autocomplete } from "@frenchies-spots/material";
+import {
+  Autocomplete,
+  type AutocompleteProps,
+} from "@frenchies-spots/material";
 import {
   TLocation,
   useGeocoding,
 } from "./../../../hooks/use-geocoding/use-geocoding";
 
-interface AutocompleteAddressProps {
+interface AutocompleteAddressProps
+  extends Omit<AutocompleteProps, "value" | "onChange" | "data"> {
   value?: string;
+  onTextChange?: (value: string) => void;
   onChange?: (newLocation: TLocation) => void;
 }
 
 export const AutocompleteAddress = ({
   value: initValue = "",
   onChange,
+  onTextChange,
+  ...autoCompleteProps
 }: AutocompleteAddressProps) => {
   const [addresses, setAddresses] = useState<TLocation[]>([]);
   const [value, setValue] = useState(initValue);
@@ -27,7 +34,9 @@ export const AutocompleteAddress = ({
 
   const handleTextChange = (newValue: string) => {
     setValue(newValue);
-    setAddresses([]);
+    if (typeof onTextChange === "function") {
+      onTextChange(newValue);
+    }
     handleDebounceChange(newValue);
   };
 
@@ -47,16 +56,13 @@ export const AutocompleteAddress = ({
   };
 
   return (
-    <>
-      <Autocomplete
-        value={value}
-        onChange={handleTextChange}
-        onItemSubmit={handleItemSubmit}
-        label="Address"
-        placeholder="search address"
-        data={addresses}
-      />
-    </>
+    <Autocomplete
+      value={value}
+      onChange={handleTextChange}
+      onItemSubmit={handleItemSubmit}
+      {...autoCompleteProps}
+      data={addresses}
+    />
   );
 };
 

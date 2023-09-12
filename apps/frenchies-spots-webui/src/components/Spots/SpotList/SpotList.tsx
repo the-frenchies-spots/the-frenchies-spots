@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import { SpotEntity } from "@frenchies-spots/gql";
 
 import SpotCard, { SpotCardProps } from "../SpotCard/SpotCard";
-import { Container, Grid, Group } from "@frenchies-spots/material";
+import { Container, Grid, Group, ScrollArea } from "@frenchies-spots/material";
 
 import type { GridProps } from "@frenchies-spots/material";
 
@@ -24,16 +24,18 @@ const SpotList = (props: SpotListProps) => {
 
   if (!list) return null;
   return (
-    <Container size="md">
-      <Grid {...gridProps}>
-        {list.map((spot) => (
-          <Grid.Col key={spot.id} md={4} sm={6} xs={12}>
-            <SpotCard spot={spot} onClick={handleDetailClick}>
-              {children}
-            </SpotCard>
-          </Grid.Col>
-        ))}
-      </Grid>
+    <Container size="md" h="100%">
+      <ScrollArea h="100%" p={0} m={0}>
+        <Grid {...gridProps}>
+          {list.map((spot) => (
+            <Grid.Col key={spot.id} md={4} sm={6} xs={12}>
+              <SpotCard spot={spot} onClick={handleDetailClick}>
+                {children}
+              </SpotCard>
+            </Grid.Col>
+          ))}
+        </Grid>
+      </ScrollArea>
     </Container>
   );
 };

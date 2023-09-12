@@ -1,2 +1,2 @@
-export * from "./SelectCardLittle";
+export * from "./HSegmentControl";
 export type { TSelectCardLittle } from "./SelectCardLittleItem";

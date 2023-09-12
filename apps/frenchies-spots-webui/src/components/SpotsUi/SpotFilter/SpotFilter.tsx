@@ -8,18 +8,32 @@ import {
   Button,
   Checkbox,
   Slider,
+  TextInput,
+  Log,
+  Switch,
+  Box,
 } from "@frenchies-spots/material";
-import { useMediaQuery } from "@frenchies-spots/hooks";
-import { SelectCard, SelectCardLittle, SelectTag } from "../../InputCustom";
-import { CategoriesSpotAndTag } from "@frenchies-spots/gql";
+import { useForm, useMediaQuery } from "@frenchies-spots/hooks";
+import { HSegmentControl, SelectTag } from "../../InputCustom";
+import { CategoriesSpotAndTag, SpotsInput } from "@frenchies-spots/gql";
 import { tagsDataList } from "@frenchies-spots/utils";
+import type { TSpotFilterForm } from "../../../types";
 
-interface SpotFilterProps extends DrawerProps {}
+interface SpotFilterProps extends DrawerProps {
+  form: TSpotFilterForm;
+  isRayon: boolean;
+  onRayonChange: (isRayon: boolean) => void;
+  onSearchClick: () => void;
+}
 
 const SpotFilter = (props: SpotFilterProps) => {
-  const { ...drawerProps } = props;
+  const { form, isRayon, onRayonChange, onSearchClick, ...drawerProps } = props;
 
   const isSmallScreen = useMediaQuery("(max-width: 768px)");
+
+  const handleResetFilter = () => {
+    form.reset();
+  };
 
   return (
     <Drawer
@@ -28,46 +42,77 @@ const SpotFilter = (props: SpotFilterProps) => {
       padding={0}
     >
       <Stack spacing="xl" p="md">
+        <TextInput
+          placeholder="spot name"
+          {...form.getInputProps("searchValue")}
+        />
+
         <Text>Types de spot</Text>
-        <SelectCardLittle
-          value="ressource"
+        <HSegmentControl
           list={[
-            { name: "Tout", value: "" },
+            { name: "Tout", value: undefined },
             { name: "Avanture", value: CategoriesSpotAndTag.SPARE_TIME_SPOT },
             { name: "Ressources", value: CategoriesSpotAndTag.RESOURCES_SPOT },
           ]}
+          {...form.getInputProps("category")}
         />
 
         <Text>Spot aventure</Text>
         <SelectTag
           position="left"
-          value={[]}
           list={tagsDataList.filter(
             (tag) => tag.category === CategoriesSpotAndTag.SPARE_TIME_SPOT
           )}
+          {...form.getInputProps("tagListId")}
         />
 
         <Text>Spot ressource</Text>
         <SelectTag
           position="left"
-          value={[]}
           list={tagsDataList.filter(
             (tag) => tag.category === CategoriesSpotAndTag.RESOURCES_SPOT
           )}
+          {...form.getInputProps("tagListId")}
         />
-        <Checkbox label="Afficher les spots où je peux me garer" checked />
-        <Checkbox label="Afficher les spots les mieux notés" checked />
+        <Checkbox
+          label="Afficher les spots où je peux me garer"
+          checked={form.getInputProps("isCanPark").value}
+          onChange={(event) =>
+            form
+              .getInputProps("isCanPark")
+              .onChange(event.currentTarget.checked)
+          }
+        />
+        {/* <Checkbox
+          label="Afficher les spots les mieux notés"
+          
+        /> */}
 
-        <Text>Localisation</Text>
-        <Slider
-          pb="xl"
-          mb="xl"
-          marks={[
-            { value: 20, label: "20km" },
-            { value: 50, label: "5km" },
-            { value: 80, label: "80km" },
-          ]}
-        />
+        <Group>
+          <Text>Localisation</Text>
+          <Switch
+            checked={isRayon}
+            onChange={(event) => onRayonChange(event.currentTarget.checked)}
+          />
+        </Group>
+        <Box h={50}>
+          {isRayon && (
+            <Slider
+              pb="xl"
+              mb="xl"
+              marks={[
+                { value: 20, label: "20 km" },
+                { value: 50, label: "50 km" },
+                { value: 80, label: "80 km" },
+              ]}
+              value={form.getInputProps("point.maxDistance").value / 1000}
+              onChange={(value) => {
+                form.getInputProps("point.maxDistance").onChange(value * 1000);
+              }}
+              labelAlwaysOn
+            />
+          )}
+        </Box>
       </Stack>
 
       <Group
@@ -82,8 +127,10 @@ const SpotFilter = (props: SpotFilterProps) => {
         w="100%"
         p="md"
       >
-        <Button>Réinitialiser</Button>
-        <Button variant="outline">Filtrer</Button>
+        <Button onClick={handleResetFilter}>Réinitialiser</Button>
+        <Button variant="outline" onClick={onSearchClick}>
+          Filtrer
+        </Button>
       </Group>
     </Drawer>
   );

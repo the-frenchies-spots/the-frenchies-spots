@@ -1,3 +1,3 @@
 export * from "./SelectCardItem";
-export { SelectCard, type SelectCardProps } from "./SelectCard";
+export { VSegmentControl, type VSegmentControlProps } from "./VSegmentControl";
 export type { TCardItem } from "./SelectCardItem";

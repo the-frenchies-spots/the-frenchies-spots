@@ -36,7 +36,10 @@ export class SpotBusiness {
         const ids = spotAround.length
           ? spotAround.map((spot) => spot._id.toHexString())
           : undefined;
-        return this.spotRepository.getAll(fields, ids, profileId);
+        if (ids.length) {
+          return this.spotRepository.getAll(fields, ids, profileId);
+        }
+        return [];
       });
     }
     return this.spotRepository.getAll(fields, undefined, profileId);

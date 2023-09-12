@@ -1,3 +1,3 @@
 export * from "./SelectTag";
-export * from "./SelectCard";
-export * from "./SelectCardLittle";
+export * from "./VSegmentControl";
+export * from "./HSegmentControl";

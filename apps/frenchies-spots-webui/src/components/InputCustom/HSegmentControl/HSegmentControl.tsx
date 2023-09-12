@@ -6,13 +6,13 @@ import {
 } from "./SelectCardLittleItem";
 import { Box, Group, type GroupProps } from "@frenchies-spots/material";
 
-export interface SelectCardLittleProps extends Omit<GroupProps, "onChange"> {
+export interface HSegmentControlProps extends Omit<GroupProps, "onChange"> {
   value: TSelectCardLittle["value"];
   list: TSelectCardLittle[];
   onChange?: (value: TSelectCardLittle["value"]) => void;
 }
 
-export const SelectCardLittle = (props: SelectCardLittleProps) => {
+export const HSegmentControl = (props: HSegmentControlProps) => {
   const { value, list, onChange, ...groupProps } = props;
 
   const initItem = useMemo(() => list.find((item) => item.value === value), []);

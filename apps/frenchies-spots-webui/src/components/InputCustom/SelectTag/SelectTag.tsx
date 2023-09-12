@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 
 import { Group, Box, type GroupProps } from "@frenchies-spots/material";
 
@@ -27,9 +27,9 @@ export const SelectTag = (props: SelectTagProps) => {
 
   const [tags, setTags] = useState<string[]>(value);
 
-  // useEffect(() => {
-  //   if (!disabled) setTags(value);
-  // }, [value, disabled]);
+  useEffect(() => {
+    if (!disabled) setTags(value);
+  }, [value, disabled]);
 
   const handleChange = useCallback(
     (tagId: string) => {

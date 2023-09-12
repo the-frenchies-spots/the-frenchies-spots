@@ -1,15 +1,16 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useMemo } from "react";
 
 import { SelectCardItem, type TCardItem } from "./SelectCardItem";
 import { Stack, Box, StackProps } from "@frenchies-spots/material";
 
-export interface SelectCardProps extends Omit<StackProps, "onChange"> {
+export interface VSegmentControlProps extends Omit<StackProps, "onChange"> {
   value: TCardItem["value"];
   list: TCardItem[];
   onChange?: (value: TCardItem["value"]) => void;
 }
 
-export const SelectCard = (props: SelectCardProps) => {
+export const VSegmentControl = (props: VSegmentControlProps) => {
   const { value, list, onChange, ...stackProps } = props;
 
   const initItem = useMemo(() => list.find((item) => item.value === value), []);
@@ -26,8 +27,8 @@ export const SelectCard = (props: SelectCardProps) => {
 
   return (
     <Stack spacing={20} {...stackProps}>
-      {list.map((selectCardItem, index) => {
-        const { name, description } = selectCardItem;
+      {list.map((VSegmentControlItem, index) => {
+        const { name, description } = VSegmentControlItem;
         return (
           <Box key={index}>
             <SelectCardItem
