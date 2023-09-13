@@ -38,6 +38,10 @@ export const spotByPk = gql`
           tagPictureUrl
         }
       }
+      favorites {
+        id
+        spotId
+      }
     }
   }
 `;

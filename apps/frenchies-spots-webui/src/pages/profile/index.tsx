@@ -45,7 +45,11 @@ const Profile = () => {
           Créer un spot
         </Button>
         <Flex gap="md" h={50}>
-          <Button h="100%" sx={{ flexGrow: 1 }}>
+          <Button
+            h="100%"
+            sx={{ flexGrow: 1 }}
+            onClick={() => router.push("/profile/spots")}
+          >
             Voir mes spots
           </Button>
           <ActionIcon

@@ -26,10 +26,16 @@ const SpotMenu = (props: SpotMenuProps) => {
     form,
     placeName,
     setPlaceName,
-    openFilter,
+    openDrawer,
     setCoordPoint,
     setViewPort,
+    setIsFilter,
   } = useSpotUi();
+
+  const handleOpenDrawer = () => {
+    setIsFilter(true);
+    openDrawer();
+  };
 
   const handleSearchPlaceName = () => {
     searchPlace(placeName).then((address) => {
@@ -75,7 +81,7 @@ const SpotMenu = (props: SpotMenuProps) => {
                 <ActionIcon
                   w="100%"
                   h="100%"
-                  onClick={openFilter}
+                  onClick={handleOpenDrawer}
                   sx={{ borderRadius: 0, borderLeft: "1px solid grey" }}
                 >
                   <IconSortDescending size={16} />

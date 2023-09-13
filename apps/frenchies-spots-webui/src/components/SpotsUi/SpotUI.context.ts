@@ -38,12 +38,18 @@ export interface SpotUiContextData {
   setIsMapMode: Dispatch<React.SetStateAction<boolean>> | null;
   viewport: TViewport;
   onViewportChange: Dispatch<React.SetStateAction<TViewport>> | null;
-  filterOpened: boolean;
-  openFilter: (() => void) | null;
+  drawerOpened: boolean;
+  openDrawer: (() => void) | null;
   closeFilter: (() => void) | null;
+  currentSpotId: string | null;
+  setCurrentSpotId: Dispatch<React.SetStateAction<string | null>> | null;
+  isFilter: boolean;
+  setIsFilter: Dispatch<React.SetStateAction<boolean>> | null;
 }
 
 const defaultContext: SpotUiContextData = {
+  currentSpotId: null,
+  setCurrentSpotId: null,
   getFilterSpots: null,
   form: null,
   coordPoint: null,
@@ -56,9 +62,11 @@ const defaultContext: SpotUiContextData = {
   setIsMapMode: null,
   viewport: franceViewPort,
   onViewportChange: null,
-  filterOpened: false,
-  openFilter: null,
+  drawerOpened: false,
+  openDrawer: null,
   closeFilter: null,
+  isFilter: false,
+  setIsFilter: null,
 };
 
 export const SpotUiContext = createContext<SpotUiContextData>(defaultContext);

@@ -8,6 +8,7 @@ import {
 } from "@frenchies-spots/gql";
 import { useMutation } from "@apollo/client";
 import { Rating, Group, Text, Log, Loader } from "@frenchies-spots/material";
+import SpotRatingStat from "./SpotRatingStat";
 
 type SpotRatingProps = Pick<SpotByIdResponse, "rating" | "id">;
 
@@ -52,14 +53,7 @@ const SpotRating = ({ id: spotId, rating: initRating }: SpotRatingProps) => {
         color="lime"
         size="lg"
       />
-      {loading ? (
-        <Loader size="sm" />
-      ) : (
-        <Text>
-          Note: {+(rating?.avg?.toFixed(2) || 0)}/5 - ({rating?.maxVote || 0}{" "}
-          votes)
-        </Text>
-      )}
+      {loading ? <Loader size="sm" /> : <SpotRatingStat rating={rating} />}
     </Group>
   );
 };

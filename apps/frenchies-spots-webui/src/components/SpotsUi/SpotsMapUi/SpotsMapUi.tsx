@@ -19,11 +19,24 @@ const SpotsMapUi = (props: SpotsMapUiProps) => {
   const { list } = props;
 
   const { location: userPosition } = useLocationCtx();
-  const { form, viewport, setViewPort, coordPoint, isRayon } = useSpotUi();
+  const {
+    form,
+    viewport,
+    setViewPort,
+    coordPoint,
+    isRayon,
+    setCurrentSpotId,
+    openDrawer,
+  } = useSpotUi();
 
   const isCurrentUserPosition =
     coordPoint?.lat === userPosition?.coordinates?.lat &&
     coordPoint?.lng === userPosition?.coordinates?.lng;
+
+  const handleSpotClick = (id: string) => {
+    setCurrentSpotId(id);
+    openDrawer();
+  };
 
   return (
     <Map viewport={viewport} onViewportChange={setViewPort}>
@@ -49,7 +62,14 @@ const SpotsMapUi = (props: SpotsMapUiProps) => {
       {list?.map((spot) => {
         const { id, location } = spot;
         const [lng, lat] = location.coordinates;
-        return <MapMarker key={id} lat={lat} lng={lng} />;
+        return (
+          <MapMarker
+            key={id}
+            lat={lat}
+            lng={lng}
+            onClick={() => handleSpotClick(id)}
+          />
+        );
       })}
     </Map>
   );

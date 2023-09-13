@@ -21,15 +21,19 @@ export const useSpotUi = () => {
     isRayon,
     placeName,
     viewport,
-    openFilter,
+    openDrawer,
     closeFilter,
-    filterOpened,
+    drawerOpened,
     getFilterSpots,
     setCoordPoint,
     setIsMapMode,
     setIsRayon,
     setPlaceName,
     onViewportChange,
+    currentSpotId,
+    setCurrentSpotId,
+    isFilter,
+    setIsFilter,
   } = useSpotUiContext();
 
   const handleFilterSpot = (spotsInput: SpotsInput) => {
@@ -37,21 +41,35 @@ export const useSpotUi = () => {
     return onFilterSpot({ variables: { spotsInput } });
   };
 
+  const handleCurrentSpotIdChange = getFuncOrThrow(setCurrentSpotId);
+  const handleSetIsFilter = getFuncOrThrow(setIsFilter);
+
+  const handleCloseFilter = () => {
+    const close = getFuncOrThrow(closeFilter);
+    close();
+    handleCurrentSpotIdChange(null);
+    handleSetIsFilter(false);
+  };
+
   return {
+    isFilter,
     isRayon,
     viewport,
     isMapMode,
     placeName,
     coordPoint,
-    filterOpened,
+    drawerOpened,
+    currentSpotId,
+    setIsFilter: handleSetIsFilter,
     onFilterSpot: handleFilterSpot,
+    closeFilter: handleCloseFilter,
     form: getValueOrThrow<TForm>(form),
     setIsRayon: getFuncOrThrow(setIsRayon),
-    setViewPort: getFuncOrThrow(onViewportChange),
-    openFilter: getFuncOrThrow(openFilter),
-    closeFilter: getFuncOrThrow(closeFilter),
+    openDrawer: getFuncOrThrow(openDrawer),
+    setCurrentSpotId: handleCurrentSpotIdChange,
     setPlaceName: getFuncOrThrow(setPlaceName),
     setIsMapMode: getFuncOrThrow(setIsMapMode),
     setCoordPoint: getFuncOrThrow(setCoordPoint),
+    setViewPort: getFuncOrThrow(onViewportChange),
   };
 };

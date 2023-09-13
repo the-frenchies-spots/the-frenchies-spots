@@ -1,8 +1,6 @@
 import React from "react";
 import {
-  Drawer,
   Stack,
-  type DrawerProps,
   Text,
   Group,
   Button,
@@ -12,29 +10,17 @@ import {
   Switch,
   Box,
 } from "@frenchies-spots/material";
-import { useMediaQuery } from "@frenchies-spots/hooks";
 import { HSegmentControl, SelectTag } from "../../InputCustom";
 import { CategoriesSpotAndTag } from "@frenchies-spots/gql";
 import { tagsDataList } from "@frenchies-spots/utils";
 import { useSpotUi } from "../../../hooks/use-spot-ui";
 import { formatPoint } from "../../../utils/format-point";
 
-interface SpotFilterProps extends Omit<DrawerProps, "opened" | "onClose"> {}
+interface SpotFilterProps {}
 
 const SpotFilter = (props: SpotFilterProps) => {
-  const { ...drawerProps } = props;
-
-  const {
-    onFilterSpot,
-    filterOpened,
-    closeFilter,
-    form,
-    setIsRayon,
-    viewport,
-    isRayon,
-  } = useSpotUi();
-
-  const isSmallScreen = useMediaQuery("(max-width: 768px)");
+  const { onFilterSpot, closeFilter, form, setIsRayon, viewport, isRayon } =
+    useSpotUi();
 
   const handleResetFilter = () => {
     form.reset();
@@ -57,13 +43,7 @@ const SpotFilter = (props: SpotFilterProps) => {
   };
 
   return (
-    <Drawer
-      {...drawerProps}
-      position={isSmallScreen ? "bottom" : "right"}
-      padding={0}
-      opened={filterOpened}
-      onClose={closeFilter}
-    >
+    <>
       <Stack spacing="xl" p="md">
         <TextInput
           placeholder="spot name"
@@ -75,7 +55,10 @@ const SpotFilter = (props: SpotFilterProps) => {
           list={[
             { name: "Tout", value: undefined },
             { name: "Avanture", value: CategoriesSpotAndTag.SPARE_TIME_SPOT },
-            { name: "Ressources", value: CategoriesSpotAndTag.RESOURCES_SPOT },
+            {
+              name: "Ressources",
+              value: CategoriesSpotAndTag.RESOURCES_SPOT,
+            },
           ]}
           {...form.getInputProps("category")}
         />
@@ -155,7 +138,7 @@ const SpotFilter = (props: SpotFilterProps) => {
           Filtrer
         </Button>
       </Group>
-    </Drawer>
+    </>
   );
 };
 

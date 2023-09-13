@@ -1,20 +1,11 @@
-import React, { MouseEventHandler, useEffect, useState } from "react";
+import React from "react";
 
 import { IconPencil } from "@frenchies-spots/icon";
 
 import type { SpotButtonBaseProps } from "../SpotButtonBase/SpotButtonBase";
 
-import { useMutation } from "@apollo/client";
-
-import {
-  FavoriteEntity,
-  MutationToggleFavoriteArgs,
-  SpotEntity,
-  ToggleFavoriteResponse,
-  mutations,
-} from "@frenchies-spots/gql";
-
 import SpotButtonBase from "../SpotButtonBase/SpotButtonBase";
+import { useRouter } from "next/router";
 
 interface EditButtonProps extends Omit<SpotButtonBaseProps, "children"> {
   spotId: string;
@@ -23,12 +14,15 @@ interface EditButtonProps extends Omit<SpotButtonBaseProps, "children"> {
 const EditButton = (props: EditButtonProps) => {
   const { spotId, ...other } = props;
 
-  const loading = false;
+  const router = useRouter();
 
-  const handleDeleteClick = () => {};
+  const handleClick: React.MouseEventHandler<HTMLDivElement> = (e) => {
+    e.stopPropagation();
+    router.push(`/spots/edition/${spotId}`);
+  };
 
   return (
-    <SpotButtonBase {...other} onClick={handleDeleteClick} loading={loading}>
+    <SpotButtonBase {...other} onClick={handleClick}>
       <IconPencil />
     </SpotButtonBase>
   );
