@@ -4,7 +4,6 @@ import type { Page } from "../types/page";
 
 import { AppProvider } from "@/provider";
 import { Guard } from "@/components";
-import LogoutButton from "@/components/LogoutButton/LogoutButton";
 import { Toaster } from "react-hot-toast";
 
 type Props = AppProps & {
@@ -17,7 +16,7 @@ export default function App({ Component, pageProps }: Props) {
   const layout = React.isValidElement(Layout) ? Layout : <>{Layout}</>;
   return (
     <AppProvider>
-      <Guard excludedRoutes={["/spots/favorit"]}>
+      <Guard excludedRoutes={["/spots/favorit", "/spots/edition", "/profile"]}>
         <>
           {layout}
           <Toaster />

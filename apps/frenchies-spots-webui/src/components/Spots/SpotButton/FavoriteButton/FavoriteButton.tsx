@@ -1,4 +1,4 @@
-import React, { MouseEventHandler, useEffect, useState } from "react";
+import React, { useState } from "react";
 
 import { IconHeart, IconHeartFilled } from "@frenchies-spots/icon";
 
@@ -9,11 +9,13 @@ import {
   SpotEntity,
   ToggleFavoriteResponse,
   mutations,
+  queries,
 } from "@frenchies-spots/gql";
 import SpotButtonBase, {
   SpotButtonBaseProps,
 } from "../SpotButtonBase/SpotButtonBase";
 import ModalComfirm from "../../../Popup/ModalComfirm/ModalComfirm";
+import { client } from "../../../../utils/client.gql";
 
 export type TFavorite = { favoriteId: string | undefined; spotId: string };
 
@@ -34,21 +36,27 @@ const FavoriteButton = (props: FavoriteButtonProps) => {
   const [favorite, setFavorite] = useState<TFavorite>(initFavorite);
 
   const [toggleFavorite, { loading }] = useMutation<
-    { toggleFavorite: ToggleFavoriteResponse },
+    {
+      toggleFavorite: ToggleFavoriteResponse;
+    },
     MutationToggleFavoriteArgs
-  >(mutations.toggleFavorite);
+  >(mutations.toggleFavorite, {
+    refetchQueries: [queries.spots, queries.spotsFavorite],
+  });
 
-  const handleFavoriteClick: MouseEventHandler<HTMLDivElement> = (e) => {
-    e.stopPropagation();
-
+  const handleFavoriteClick = () => {
     const { favoriteId, spotId } = favorite;
-
     toggleFavorite({
       variables: { favoriteInput: { favoriteId, spotId } },
     }).then((result) => {
+      if (favoriteId) {
+        client.cache.evict({ id: `FavoriteEntity:${favoriteId}` });
+      }
       const id = result?.data?.toggleFavorite?.favoriteId || undefined;
-
       setFavorite((prev) => ({ ...prev, favoriteId: id }));
+      if (typeof onClick === "function") {
+        onClick();
+      }
     });
   };
 
@@ -57,7 +65,10 @@ const FavoriteButton = (props: FavoriteButtonProps) => {
       {(open) => (
         <SpotButtonBase
           {...other}
-          onClick={withComfirm ? open : handleFavoriteClick}
+          onClick={(e) => {
+            e.stopPropagation();
+            withComfirm ? open() : handleFavoriteClick();
+          }}
           loading={loading}
         >
           {favorite?.favoriteId ? <IconHeartFilled /> : <IconHeart />}

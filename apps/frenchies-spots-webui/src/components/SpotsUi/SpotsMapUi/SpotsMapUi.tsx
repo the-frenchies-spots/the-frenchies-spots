@@ -1,56 +1,75 @@
-import React, { useEffect } from "react";
+import React from "react";
 
 import {
   Map,
   MapMarker,
   CurrentLocationMarker,
   MapPerimeter,
-  useMap,
+  useLocationCtx,
 } from "@frenchies-spots/map";
 import { SpotEntity } from "@frenchies-spots/gql";
-import type { TCoordinate } from "@frenchies-spots/map";
+import PinMarker from "@frenchies-spots/map/src/components/Marker/PinMarker/PinMarker";
+import { useSpotUi } from "../../../hooks/use-spot-ui";
 
 interface SpotsMapUiProps {
   list: SpotEntity[] | undefined;
-  userPosition: TCoordinate | null;
 }
 
-const SpotsMapUi = ({ list, userPosition }: SpotsMapUiProps) => {
-  const { viewport, onViewportChange, onCoordinateClick } = useMap();
+const SpotsMapUi = (props: SpotsMapUiProps) => {
+  const { list } = props;
 
-  useEffect(() => {
-    if (userPosition) {
-      onViewportChange((current) => ({
-        ...current,
-        latitude: userPosition.lat,
-        longitude: userPosition.lng,
-        zoom: 12,
-      }));
-    }
-  }, [userPosition]);
+  const { location: userPosition } = useLocationCtx();
+  const {
+    form,
+    viewport,
+    setViewPort,
+    coordPoint,
+    isRayon,
+    setCurrentSpotId,
+    openDrawer,
+  } = useSpotUi();
+
+  const isCurrentUserPosition =
+    coordPoint?.lat === userPosition?.coordinates?.lat &&
+    coordPoint?.lng === userPosition?.coordinates?.lng;
+
+  const handleSpotClick = (id: string) => {
+    setCurrentSpotId(id);
+    openDrawer();
+  };
 
   return (
-    <Map
-      viewport={viewport}
-      onViewportChange={onViewportChange}
-      onCoordinateClick={onCoordinateClick}
-    >
-      {userPosition && (
+    <Map viewport={viewport} onViewportChange={setViewPort}>
+      {isRayon && coordPoint && (
         <MapPerimeter
-          lat={userPosition.lat}
-          lng={userPosition.lng}
-          radius={5}
+          lat={coordPoint.lat}
+          lng={coordPoint.lng}
+          radius={form.values.point.maxDistance / 1000}
         />
       )}
 
       {userPosition && (
-        <CurrentLocationMarker lat={userPosition.lat} lng={userPosition.lng} />
+        <CurrentLocationMarker
+          lat={userPosition?.coordinates?.lat}
+          lng={userPosition?.coordinates?.lng}
+        />
+      )}
+
+      {!isCurrentUserPosition && coordPoint && (
+        <PinMarker lat={coordPoint.lat} lng={coordPoint.lng} />
       )}
 
       {list?.map((spot) => {
         const { id, location } = spot;
         const [lng, lat] = location.coordinates;
-        return <MapMarker key={id} lat={lat} lng={lng} />;
+        return (
+          <MapMarker
+            key={id}
+            lat={lat}
+            lng={lng}
+            onClick={() => handleSpotClick(id)}
+          />
+        );
       })}
     </Map>
   );

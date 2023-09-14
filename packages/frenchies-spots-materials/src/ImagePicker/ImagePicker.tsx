@@ -1,11 +1,12 @@
-import React, { useRef, useState } from "react";
-import { IconCameraFilled, IconCamera, IconX } from "@frenchies-spots/icon";
+import React, { useEffect, useState } from "react";
+
+import { IconCameraFilled, IconX } from "@frenchies-spots/icon";
 import { useStyles } from "./ImagePicker.styles";
-import { Box, Image, Text } from "@mantine/core";
+import { Box, BoxProps, FileButton, BackgroundImage } from "@mantine/core";
 
 export type PictureValue = { url: string; hostId?: string };
 
-interface ImagePickerProps {
+interface ImagePickerProps extends Omit<BoxProps, "onChange"> {
   index?: number;
   value?: PictureValue | null;
   style?: Record<string, string | number>;
@@ -23,46 +24,34 @@ export const ImagePicker = (props: ImagePickerProps) => {
     value = null,
     disablePreview = false,
     isCardMode = false,
+    h = 95,
+    w = 95,
+    ...other
   } = props;
 
   const [selectedImage, setSelectedImage] = useState<PictureValue | null>(
     value
   );
 
-  const fileInputRef = useRef<HTMLInputElement>(null);
-
-  const handleImageClick = () => {
-    if (fileInputRef?.current) {
-      fileInputRef.current.click();
-    }
-  };
   const { classes } = useStyles(isCardMode);
 
-  const handleImageChange: React.ChangeEventHandler<HTMLInputElement> = async (
-    e
-  ) => {
-    if (e?.target?.files) {
-      const file = e.target.files[0];
+  useEffect(() => {
+    setSelectedImage(value);
+  }, [value]);
 
-      if (file) {
-        if (file.size > 400 * 1024) {
-          alert(
-            "Image trop lourde ! Le poid de votre image est supérieur à 400 KB."
-          );
-        } else {
-          const blob = await file.arrayBuffer();
-          const base64 = `data:${file.type};base64,${btoa(
-            new Uint8Array(blob).reduce(
-              (data, byte) => data + String.fromCharCode(byte),
-              ""
-            )
-          )}`;
+  const handleImageChange = async (file: File | null) => {
+    if (file) {
+      const blob = await file.arrayBuffer();
+      const base64 = `data:${file.type};base64,${btoa(
+        new Uint8Array(blob).reduce(
+          (data, byte) => data + String.fromCharCode(byte),
+          ""
+        )
+      )}`;
 
-          setSelectedImage({ url: base64 });
-          if (typeof onImageChange === "function") {
-            onImageChange({ url: base64 });
-          }
-        }
+      setSelectedImage({ url: base64 });
+      if (typeof onImageChange === "function") {
+        onImageChange({ url: base64 });
       }
     }
   };
@@ -77,26 +66,24 @@ export const ImagePicker = (props: ImagePickerProps) => {
   };
 
   return (
-    <Box>
-      <Box onClick={handleImageClick} className={classes.container}>
-        {!disablePreview && selectedImage ? (
-          <Image className={classes.image} src={selectedImage.url} />
-        ) : (
-          <IconCameraFilled size={40} style={{ color: "#8F8FD9" }} />
-        )}
-        {isCardMode && (
-          <Box onClick={handleImageDelete} className={classes.deleteContainer}>
-            <IconX size={16} color="white" />
-          </Box>
-        )}
-      </Box>
-      <input
-        type="file"
-        accept="image/*"
-        onChange={handleImageChange}
-        style={{ display: "none" }}
-        ref={fileInputRef}
-      />
-    </Box>
+    <FileButton onChange={handleImageChange} accept="image/*">
+      {(props) => (
+        <Box {...props} className={classes.container} h={h} w={w} {...other}>
+          {!disablePreview && selectedImage ? (
+            <BackgroundImage src={selectedImage.url} w="100%" h="100%" />
+          ) : (
+            <IconCameraFilled size={40} style={{ color: "#8F8FD9" }} />
+          )}
+          {isCardMode && (
+            <Box
+              onClick={handleImageDelete}
+              className={classes.deleteContainer}
+            >
+              <IconX size={16} color="white" />
+            </Box>
+          )}
+        </Box>
+      )}
+    </FileButton>
   );
 };

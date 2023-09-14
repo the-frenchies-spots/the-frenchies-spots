@@ -43,8 +43,6 @@ mutation updateTag($tagUpdateInput: TagUpdateInput!){
                         id
                         isCanPark
                         isHidden
-                        lat
-                        lng
                         location
                         name
                         profileId
@@ -80,8 +78,6 @@ mutation updateTag($tagUpdateInput: TagUpdateInput!){
                     id
                     isCanPark
                     isHidden
-                    lat
-                    lng
                     location
                     name
                     profile{
@@ -105,17 +101,17 @@ mutation updateTag($tagUpdateInput: TagUpdateInput!){
                     region
                     spotPicture{
                         createdAt
+                        hostId
                         id
                         spotId
                         updatedAt
                         url
                     }
                     tags{
-                        category
                         createdAt
                         id
-                        name
-                        tagPictureUrl
+                        spotId
+                        tagId
                         updatedAt
                     }
                     updatedAt
@@ -126,8 +122,6 @@ mutation updateTag($tagUpdateInput: TagUpdateInput!){
             id
             isCanPark
             isHidden
-            lat
-            lng
             location
             name
             profile{
@@ -163,8 +157,6 @@ mutation updateTag($tagUpdateInput: TagUpdateInput!){
                     id
                     isCanPark
                     isHidden
-                    lat
-                    lng
                     location
                     name
                     profileId
@@ -177,6 +169,7 @@ mutation updateTag($tagUpdateInput: TagUpdateInput!){
             region
             spotPicture{
                 createdAt
+                hostId
                 id
                 spot{
                     address
@@ -187,8 +180,6 @@ mutation updateTag($tagUpdateInput: TagUpdateInput!){
                     id
                     isCanPark
                     isHidden
-                    lat
-                    lng
                     location
                     name
                     profileId
@@ -200,28 +191,33 @@ mutation updateTag($tagUpdateInput: TagUpdateInput!){
                 url
             }
             tags{
-                category
                 createdAt
                 id
-                name
-                spots{
-                    address
-                    averageRating
+                spotId
+                tag{
                     category
                     createdAt
-                    description
                     id
-                    isCanPark
-                    isHidden
-                    lat
-                    lng
-                    location
                     name
-                    profileId
-                    region
+                    spots{
+                        address
+                        averageRating
+                        category
+                        createdAt
+                        description
+                        id
+                        isCanPark
+                        isHidden
+                        location
+                        name
+                        profileId
+                        region
+                        updatedAt
+                    }
+                    tagPictureUrl
                     updatedAt
                 }
-                tagPictureUrl
+                tagId
                 updatedAt
             }
             updatedAt

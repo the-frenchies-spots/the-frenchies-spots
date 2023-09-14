@@ -3,6 +3,7 @@ import React, { FormEventHandler } from "react";
 import {
   Checkbox,
   LoadingOverlay,
+  Log,
   MultipleImagePicker,
   SegmentedControl,
   Stack,
@@ -24,6 +25,7 @@ import { SwiperForm } from "@/components/SwiperForm/SwiperForm";
 import { SwiperSlide } from "swiper/react";
 import { useCloudinary } from "../../../hooks/use-cloudinary";
 import { useAuth } from "./../../../hooks/use-auth";
+import { VSegmentControl } from "../../InputCustom/VSegmentControl";
 
 interface SpotEditionFormProps {
   initialValues: SpotInput;
@@ -93,15 +95,19 @@ export const SpotEditionForm = (props: SpotEditionFormProps) => {
           <SwiperFrame prevLabel="">
             <Stack>
               <Text>A quelle catégorie associerais-tu ton spot ?</Text>
-              <SegmentedControl
-                data={[
+              <VSegmentControl
+                list={[
                   {
-                    label: "Ressources",
-                    value: CategoriesSpotAndTag.RESOURCES_SPOT,
+                    name: "Avanture",
+                    description:
+                      "spot dans lequel tu y vas pour te faire plaisir, découvrir de nouveaux paysages français",
+                    value: CategoriesSpotAndTag.SPARE_TIME_SPOT,
                   },
                   {
-                    label: "Avanture",
-                    value: CategoriesSpotAndTag.SPARE_TIME_SPOT,
+                    name: "Ressources",
+                    description:
+                      "spot pour ressencer les lieux utiles pour les tâches quotidiennes comme laver son ligne, jeter ses toilettes chimiques...",
+                    value: CategoriesSpotAndTag.RESOURCES_SPOT,
                   },
                 ]}
                 {...form.getInputProps("category")}
@@ -192,17 +198,20 @@ export const SpotEditionForm = (props: SpotEditionFormProps) => {
                 Dernier effort ! Quel statut préfères-tu pour ton spot ?
               </Text>
 
-              <SegmentedControl
-                data={[
+              <VSegmentControl
+                list={[
                   {
-                    label: "Public",
-                    value: "public",
+                    name: "Public",
+                    description: "Tout le monde y aura accès",
+                    value: false,
                   },
                   {
-                    label: "Privée",
-                    value: "private",
+                    name: "Privée",
+                    description: "Tu peux choisir qui y a accès",
+                    value: true,
                   },
                 ]}
+                {...form.getInputProps("isHidden")}
               />
             </Stack>
           </SwiperFrame>

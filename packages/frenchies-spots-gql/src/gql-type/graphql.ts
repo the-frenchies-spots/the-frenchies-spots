@@ -19,6 +19,11 @@ export type Scalars = {
   JSON: { input: any; output: any; }
 };
 
+export type BuyPointInput = {
+  amount: Scalars['Float']['input'];
+  paymentId: Scalars['String']['input'];
+};
+
 export type DeleteResponse = {
   __typename?: 'DeleteResponse';
   deleted: Scalars['Boolean']['output'];
@@ -47,6 +52,7 @@ export type LogoutResponse = {
 
 export type Mutation = {
   __typename?: 'Mutation';
+  buyPoint: UserEntity;
   createOrUpdateRating: RatingResponse;
   deleteSpot: DeleteResponse;
   deleteTag: DeleteResponse;
@@ -59,6 +65,11 @@ export type Mutation = {
   toggleFavorite: ToggleFavoriteResponse;
   updateSpot: SpotEntity;
   updateTag: TagEntity;
+};
+
+
+export type MutationBuyPointArgs = {
+  buyPoint: BuyPointInput;
 };
 
 

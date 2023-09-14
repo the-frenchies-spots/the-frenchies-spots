@@ -18,6 +18,7 @@ const TOKEN_STORAGE_KEY = process.env.NEXT_PUBLIC_TOKEN_STORAGE_KEY || "";
 
 import useStorage from "./use-storage";
 import { AuthContext } from "@/context";
+import { getFuncOrThrow } from "../utils/get-func-or-throw";
 
 export const useInitAuth = () => {
   const [user, setUser] = useState<UserEntity>();
@@ -35,6 +36,7 @@ export const useInitAuth = () => {
   const [getLoginUser] = useLazyQuery<{
     getLoginUser: UserEntity;
   }>(queries.getLoginUser);
+
   const [signOut, { loading: signoutLoading }] = useMutation<LogoutResponse>(
     mutations.logout
   );
@@ -98,6 +100,7 @@ export const useInitAuth = () => {
     token: tokenStorage,
     user,
     loading: signupLoading || signinLoading || signoutLoading,
+    setUser,
     onSignUp: handleSignUp,
     onSignIn: handleSignIn,
     refresh: handleAuthByToken,
@@ -121,25 +124,8 @@ export const useAuth = () => {
     processSignIn,
     processSignOut,
     refresh,
+    setUser,
   } = useAuthContext();
-
-  const handleSignUp = (signUpInput: SignUpInput) => {
-    if (typeof processSignUp === "function") {
-      processSignUp(signUpInput);
-    }
-  };
-
-  const handleSignIn = (signInInput: SignInInput) => {
-    if (typeof processSignIn === "function") {
-      processSignIn(signInInput);
-    }
-  };
-
-  const handleSignOut = () => {
-    if (typeof processSignOut === "function") {
-      processSignOut();
-    }
-  };
 
   const handleRefresh = async (): Promise<boolean> => {
     if (typeof refresh === "function") {
@@ -150,10 +136,12 @@ export const useAuth = () => {
 
   return {
     user: currentUser,
+    profile: currentUser?.profile,
     loading,
     refresh: handleRefresh,
-    onSignUp: handleSignUp,
-    onSignIn: handleSignIn,
-    onSignOut: handleSignOut,
+    setUser: getFuncOrThrow(setUser),
+    onSignUp: getFuncOrThrow(processSignUp),
+    onSignIn: getFuncOrThrow(processSignIn),
+    onSignOut: getFuncOrThrow(processSignOut),
   };
 };

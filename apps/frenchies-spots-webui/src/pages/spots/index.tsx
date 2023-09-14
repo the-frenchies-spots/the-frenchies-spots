@@ -1,52 +1,63 @@
-import React, { ReactElement, useState } from "react";
+import React, { ReactElement, useEffect, useState } from "react";
 
-import { useQuery } from "@apollo/client";
-import { Box, Button, Log, createStyles } from "@frenchies-spots/material";
+import { useLazyQuery } from "@apollo/client";
+import { useForm } from "@frenchies-spots/hooks";
+import { LoadingOverlay } from "@frenchies-spots/material";
 import { queries, SpotEntity, SpotsInput } from "@frenchies-spots/gql";
-import { useGeoloc } from "@frenchies-spots/map";
 
-import SpotsUi from "@/components/SpotsUi/SpotsUi";
-import { SPOTS_DISPLAY_MODE } from "@/enum/spots-display-mode.enum";
+import SpotsUi from "../../components/SpotsUi/SpotsUi";
+import { SpotUiProvider } from "../../components/SpotsUi/SpotUI.provider";
 import { PageLayout } from "./../../components/Layout/PageLayout/PageLayout";
 import NavigationLayout from "../../components/Layout/NavigationLayout/NavigationLayout";
-import SpotMenu from "../../components/SpotsUi/SpotMenu/SpotMenu";
-
-export const useStyles = createStyles((theme) => ({
-  container: { position: "relative" },
-  spotMenu: {
-    zIndex: 1,
-    position: "absolute",
-    width: "100%",
-    top: 0,
-    left: 0,
-    right: 0,
-  },
-}));
+import { useRouter } from "next/router";
+import { getCoordinates } from "../../utils/get-coordinates";
 
 const SpotsPage = () => {
-  const [displayMode, setDisplayMode] = useState<SPOTS_DISPLAY_MODE>(
-    SPOTS_DISPLAY_MODE.MAP_MODE
-  );
+  const [pageLoading, isPageLoading] = useState<boolean>(true);
 
-  const { classes } = useStyles();
-  const { userPosition } = useGeoloc();
+  const router = useRouter();
+  const { lat, lng, spotId } = router.query;
 
-  const { data } = useQuery<
+  const [getFilterSpots, { data, loading }] = useLazyQuery<
     { spots: SpotEntity[] },
     { spotsInput: SpotsInput }
-  >(queries.spots, {
-    variables: { spotsInput: { searchValue: "" } },
+  >(queries.spots, { variables: { spotsInput: { searchValue: "" } } });
+
+  const form = useForm<SpotsInput>({
+    initialValues: {
+      address: undefined,
+      category: undefined,
+      isCanPark: undefined,
+      isHidden: undefined,
+      orderBy: "asc",
+      point: undefined,
+      searchValue: "",
+      skip: 0,
+      tagListId: [],
+      take: 100,
+    },
   });
 
+  useEffect(() => {
+    setTimeout(() => {
+      isPageLoading(false);
+    }, 500);
+  }, []);
+
+  const coordinates = getCoordinates(lat as string, lng as string);
+
+  if (pageLoading)
+    return <LoadingOverlay visible={pageLoading} overlayBlur={2} />;
   return (
-    <Box w="100%" h="100%">
-      <SpotMenu className={classes.spotMenu} onChange={setDisplayMode} />
-      <SpotsUi
-        mode={displayMode}
-        userPosition={userPosition}
-        spotList={data?.spots}
-      />
-    </Box>
+    <SpotUiProvider
+      spotId={typeof spotId === "string" ? spotId : null}
+      form={form}
+      getFilterSpots={getFilterSpots}
+      coordinates={coordinates}
+    >
+      <LoadingOverlay visible={loading} overlayBlur={2} />
+      <SpotsUi list={data?.spots} />
+    </SpotUiProvider>
   );
 };
 

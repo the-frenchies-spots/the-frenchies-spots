@@ -15,7 +15,7 @@ interface ModalComfirmProps
   label?: string;
   comfirmLabel?: string;
   cancelLabel?: string;
-  onComfirm?: MouseEventHandler<HTMLDivElement>;
+  onComfirm?: () => void;
   onCancel?: () => void;
 }
 
@@ -32,15 +32,16 @@ const ModalComfirm = (props: ModalComfirmProps) => {
 
   const [opened, { open, close }] = useDisclosure(false);
 
-  const handleComfirm: MouseEventHandler<HTMLButtonElement> = (e) => {
+  const handleComfirm: React.MouseEventHandler<HTMLButtonElement> = (e) => {
     e.stopPropagation();
     if (typeof onComfirm === "function") {
-      onComfirm(e as any);
+      onComfirm();
     }
     close();
   };
 
-  const handleCancel = () => {
+  const handleCancel: React.MouseEventHandler<HTMLButtonElement> = (e) => {
+    e.stopPropagation();
     if (typeof onCancel === "function") {
       onCancel();
     }
@@ -49,7 +50,12 @@ const ModalComfirm = (props: ModalComfirmProps) => {
 
   return (
     <>
-      <Modal {...modalProps} opened={opened} onClose={close}>
+      <Modal
+        {...modalProps}
+        opened={opened}
+        onClose={close}
+        onClick={(e) => e.stopPropagation()}
+      >
         <Text>{label || "Êtes-vous sûr de cette action ?"}</Text>
         <Group position="right" mt="md">
           <Button onClick={handleComfirm}>{comfirmLabel || "Oui"}</Button>

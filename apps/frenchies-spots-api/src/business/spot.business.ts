@@ -4,13 +4,11 @@ import { SpotEntity } from 'src/entity/spot.entity';
 import ErrorService from 'src/service/error.service';
 import { codeErrors } from 'src/enum/code-errors.enum';
 import { SpotInput } from 'src/dto/input/spot/spot-input';
+import { SpotByIdResponse } from 'src/dto/spotByIdResponse';
 import { SpotsInput } from 'src/dto/input/spot/spots-input';
 import { SpotRepository } from 'src/repository/spot.repository';
 import { DeleteResponse } from 'src/dto/response/delete.response';
-import { CloudinaryService } from 'src/service/cloudinary.service';
 import { SpotGeospatialService } from 'src/service/spot-geospatial.service';
-import { SpotPictureEntity } from 'src/entity/spot-picture.entity';
-import { SpotByIdResponse } from 'src/dto/spotByIdResponse';
 
 const { SPOT_NOT_FOUND, SPOT_ID_NOT_MATCH_PROFILE_ID } = codeErrors;
 
@@ -19,7 +17,6 @@ export class SpotBusiness {
   constructor(
     private spotRepository: SpotRepository,
     private geoService: SpotGeospatialService,
-    private cloudinaryService: CloudinaryService,
   ) {}
 
   async getById(
@@ -39,7 +36,10 @@ export class SpotBusiness {
         const ids = spotAround.length
           ? spotAround.map((spot) => spot._id.toHexString())
           : undefined;
-        return this.spotRepository.getAll(fields, ids, profileId);
+        if (ids.length) {
+          return this.spotRepository.getAll(fields, ids, profileId);
+        }
+        return [];
       });
     }
     return this.spotRepository.getAll(fields, undefined, profileId);

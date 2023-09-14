@@ -28,8 +28,6 @@ mutation createOrUpdateRating($ratingInput: RatingInput!){
                         id
                         isCanPark
                         isHidden
-                        lat
-                        lng
                         location
                         name
                         profileId
@@ -66,8 +64,6 @@ mutation createOrUpdateRating($ratingInput: RatingInput!){
                         id
                         isCanPark
                         isHidden
-                        lat
-                        lng
                         location
                         name
                         profileId
@@ -93,8 +89,6 @@ mutation createOrUpdateRating($ratingInput: RatingInput!){
                     id
                     isCanPark
                     isHidden
-                    lat
-                    lng
                     location
                     name
                     profile{
@@ -118,17 +112,17 @@ mutation createOrUpdateRating($ratingInput: RatingInput!){
                     region
                     spotPicture{
                         createdAt
+                        hostId
                         id
                         spotId
                         updatedAt
                         url
                     }
                     tags{
-                        category
                         createdAt
                         id
-                        name
-                        tagPictureUrl
+                        spotId
+                        tagId
                         updatedAt
                     }
                     updatedAt
@@ -172,8 +166,6 @@ mutation createOrUpdateRating($ratingInput: RatingInput!){
                 id
                 isCanPark
                 isHidden
-                lat
-                lng
                 location
                 name
                 profile{
@@ -197,6 +189,7 @@ mutation createOrUpdateRating($ratingInput: RatingInput!){
                 region
                 spotPicture{
                     createdAt
+                    hostId
                     id
                     spot{
                         address
@@ -207,8 +200,6 @@ mutation createOrUpdateRating($ratingInput: RatingInput!){
                         id
                         isCanPark
                         isHidden
-                        lat
-                        lng
                         location
                         name
                         profileId
@@ -220,28 +211,18 @@ mutation createOrUpdateRating($ratingInput: RatingInput!){
                     url
                 }
                 tags{
-                    category
                     createdAt
                     id
-                    name
-                    spots{
-                        address
-                        averageRating
+                    spotId
+                    tag{
                         category
                         createdAt
-                        description
                         id
-                        isCanPark
-                        isHidden
-                        lat
-                        lng
-                        location
                         name
-                        profileId
-                        region
+                        tagPictureUrl
                         updatedAt
                     }
-                    tagPictureUrl
+                    tagId
                     updatedAt
                 }
                 updatedAt

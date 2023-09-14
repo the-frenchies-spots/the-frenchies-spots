@@ -14,7 +14,7 @@ export const PageLayout = ({ children, ...style }: PageLayoutProps) => {
   return (
     <Box className={classes.container}>
       <Image
-        src="/images/frenchies-spot-background.webp"
+        src="/images/FRENCHIES_BACK_GROUND.svg"
         alt="frenchies-spot-background"
         layout="fill"
         objectFit="cover"

@@ -3,7 +3,7 @@ import React, { ReactElement, useEffect, useMemo } from "react";
 
 import { useRouter } from "next/router";
 import { useLazyQuery, useMutation } from "@apollo/client";
-import { Container, LoadingOverlay, Log } from "@frenchies-spots/material";
+import { Container, LoadingOverlay } from "@frenchies-spots/material";
 import {
   CategoriesSpotAndTag,
   MutationUpdateSpotArgs,
@@ -15,6 +15,7 @@ import {
 } from "@frenchies-spots/gql";
 
 import { PageLayout, SpotEditionForm } from "../../../components";
+import toast from "react-hot-toast";
 
 const SpotUpdatePage = () => {
   const router = useRouter();
@@ -33,10 +34,10 @@ const SpotUpdatePage = () => {
     }
   }, [spotId]);
 
-  const [updateSpot, { data: updatedata, loading: updateLoading }] =
-    useMutation<{ updateSpot: SpotEntity }, MutationUpdateSpotArgs>(
-      mutations.updateSpot
-    );
+  const [updateSpot] = useMutation<
+    { updateSpot: SpotEntity },
+    MutationUpdateSpotArgs
+  >(mutations.updateSpot);
 
   const initialValues: SpotInput | undefined = useMemo(
     () =>
@@ -67,9 +68,16 @@ const SpotUpdatePage = () => {
   );
 
   const handleSubmit = (updateSpotInput: SpotInput) => {
-    updateSpot({ variables: { updateSpotInput } }).then((result) => {
-      router.push("/spots");
-    });
+    toast.promise(
+      updateSpot({ variables: { updateSpotInput } }).then((result) => {
+        router.push("/spots");
+      }),
+      {
+        loading: "Mise à jour...",
+        success: <b>Spot mis à jour avec succès.</b>,
+        error: <b>La mise à jour à échoué.</b>,
+      }
+    );
   };
 
   return (

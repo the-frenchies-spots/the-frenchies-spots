@@ -1,29 +1,47 @@
 import React from "react";
 
+import { Box, Log } from "@frenchies-spots/material";
 import { SpotEntity } from "@frenchies-spots/gql";
-import { TCoordinate } from "@frenchies-spots/map";
-import { SPOTS_DISPLAY_MODE } from "@/enum/spots-display-mode.enum";
 
-import SpotsMapUi from "./SpotsMapUi/SpotsMapUi";
-import SpotList from "../Spots/SpotList/SpotList";
+import SpotMenu from "./SpotMenu/SpotMenu";
+import { useStyles } from "./SpotsUi.styles";
+import SpotFilter from "./SpotFilter/SpotFilter";
+import SpotUiMode from "./SpotUiMode/SpotUiMode";
+import SpotModeButton from "./SpotModeButton/SpotModeButton";
+import SpotDrawer from "./SpotDrawer/SpotDrawer";
+import { useSpotUi } from "../../hooks/use-spot-ui";
+import { getListElement } from "../../utils";
+import SpotPreview from "./Preview/SpotPreview/SpotPreview";
 
-interface SpotsUi {
-  spotList: SpotEntity[] | undefined;
-  mode: SPOTS_DISPLAY_MODE;
-  userPosition: TCoordinate | null;
+interface SpotsUiProps {
+  list: SpotEntity[] | undefined;
 }
 
-const SpotsUi = ({ spotList, userPosition, mode }: SpotsUi) => {
-  switch (mode) {
-    case SPOTS_DISPLAY_MODE.SPOTS_MODE:
-      return <SpotList list={spotList} mt={140} />;
-    case SPOTS_DISPLAY_MODE.MAP_MODE:
-      return <SpotsMapUi list={spotList} userPosition={userPosition} />;
-    case SPOTS_DISPLAY_MODE.COOPERATION_MODE:
-      return <SpotsMapUi list={spotList} userPosition={userPosition} />;
-    default:
-      return <p>Error</p>;
-  }
+const SpotsUi = (props: SpotsUiProps) => {
+  const { list } = props;
+
+  const { classes } = useStyles();
+
+  const { currentSpotId } = useSpotUi();
+  const currentSpot = getListElement<SpotEntity>(
+    list || [],
+    `${currentSpotId}`
+  );
+
+  return (
+    <Box w="100%" h="100%" className={classes.container}>
+      <SpotMenu className={classes.spotMenu} />
+      <SpotUiMode list={list} />
+      <SpotModeButton className={classes.buttonMode} />
+      <SpotDrawer>
+        {currentSpot ? (
+          <SpotPreview spot={currentSpot} h={250} />
+        ) : (
+          <SpotFilter />
+        )}
+      </SpotDrawer>
+    </Box>
+  );
 };
 
 export default SpotsUi;

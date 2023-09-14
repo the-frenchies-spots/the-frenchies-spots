@@ -4,17 +4,22 @@ import { useRouter } from "next/router";
 import { SpotEntity } from "@frenchies-spots/gql";
 
 import SpotCard, { SpotCardProps } from "../SpotCard/SpotCard";
-import { Container, Grid, Group } from "@frenchies-spots/material";
+import {
+  Container,
+  Grid,
+  type ContainerProps,
+  ScrollArea,
+} from "@frenchies-spots/material";
 
 import type { GridProps } from "@frenchies-spots/material";
 
-interface SpotListProps extends Omit<GridProps, "children"> {
+interface SpotListProps extends Omit<ContainerProps, "children"> {
   list: SpotEntity[] | undefined;
   children?: SpotCardProps["children"];
 }
 
 const SpotList = (props: SpotListProps) => {
-  const { list, children, ...gridProps } = props;
+  const { list, children, ...containerProps } = props;
 
   const router = useRouter();
 
@@ -24,16 +29,18 @@ const SpotList = (props: SpotListProps) => {
 
   if (!list) return null;
   return (
-    <Container size="md">
-      <Grid {...gridProps}>
-        {list.map((spot) => (
-          <Grid.Col key={spot.id} md={4} sm={6} xs={12}>
-            <SpotCard spot={spot} onClick={handleDetailClick}>
-              {children}
-            </SpotCard>
-          </Grid.Col>
-        ))}
-      </Grid>
+    <Container size="md" h="100%" {...containerProps}>
+      <ScrollArea h="100%" p={0} m={0}>
+        <Grid>
+          {list.map((spot) => (
+            <Grid.Col key={spot.id} md={4} sm={6} xs={12}>
+              <SpotCard spot={spot} onClick={handleDetailClick}>
+                {children}
+              </SpotCard>
+            </Grid.Col>
+          ))}
+        </Grid>
+      </ScrollArea>
     </Container>
   );
 };

@@ -1,9 +1,11 @@
 import React, { useCallback, useEffect, useState } from "react";
-import { SelectTagItem, type TTagItem } from "./select-tag-item";
-import { useStyles } from "./SelectTag.styles";
-import { Group, Box } from "@frenchies-spots/material";
 
-export interface SelectTagProps {
+import { Group, Box, type GroupProps } from "@frenchies-spots/material";
+
+import { useStyles } from "./SelectTag.styles";
+import { SelectTagItem, type TTagItem } from "./select-tag-item";
+
+export interface SelectTagProps extends Omit<GroupProps, "onChange"> {
   list?: TTagItem[];
   value: string[];
   onChange?: (value: string[]) => void;
@@ -18,15 +20,16 @@ export const SelectTag = (props: SelectTagProps) => {
     value = [],
     onChange,
     disabled = false,
+    ...groupProps
   } = props;
 
   const { classes } = useStyles();
 
   const [tags, setTags] = useState<string[]>(value);
 
-  // useEffect(() => {
-  //   if (!disabled) setTags(value);
-  // }, [value, disabled]);
+  useEffect(() => {
+    if (!disabled) setTags(value);
+  }, [value, disabled]);
 
   const handleChange = useCallback(
     (tagId: string) => {
@@ -48,7 +51,7 @@ export const SelectTag = (props: SelectTagProps) => {
   );
 
   return (
-    <Group position="center">
+    <Group position="center" {...groupProps}>
       {list.map((selectTagItem, index) => {
         const { id, name, tagPictureUrl, category } = selectTagItem;
         return (

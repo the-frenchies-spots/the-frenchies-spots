@@ -13,6 +13,7 @@ import { useAuth } from "@/hooks";
 import { PageLayout } from "../components";
 
 import { signIn, useSession } from "next-auth/react";
+import LogoutButton from "@/components/LogoutButton/LogoutButton";
 
 const SignIn = () => {
   const { user, onSignIn } = useAuth();
@@ -39,6 +40,7 @@ const SignIn = () => {
 
   return (
     <Container size="sm">
+      <LogoutButton />
       <Log value={{ user }} />
       <Paper p="lg" shadow="xs" style={{ maxWidth: 400, margin: "0 auto" }}>
         <form onSubmit={handleSubmit}>

@@ -10,6 +10,7 @@ import {
 } from "@frenchies-spots/gql";
 import { useMutation } from "@apollo/client";
 import { useRouter } from "next/router";
+import toast from "react-hot-toast";
 
 const initialValues: SpotInput = {
   name: "",
@@ -36,9 +37,16 @@ const SpotInsertPage = () => {
   >(mutations.insertSpot);
 
   const handleSubmit = (insertSpotInput: SpotInput) => {
-    insertSpot({ variables: { insertSpotInput } }).then((result) => {
-      router.push("/spots");
-    });
+    toast.promise(
+      insertSpot({ variables: { insertSpotInput } }).then(() => {
+        router.push("/spots");
+      }),
+      {
+        loading: "Création...",
+        success: <b>Spot crée avec succès.</b>,
+        error: <b>La Création à échoué.</b>,
+      }
+    );
   };
 
   return (

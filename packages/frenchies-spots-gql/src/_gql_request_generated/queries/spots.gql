@@ -23,8 +23,6 @@ query spots($spotsInput: SpotsInput!){
                         id
                         isCanPark
                         isHidden
-                        lat
-                        lng
                         location
                         name
                         profileId
@@ -61,8 +59,6 @@ query spots($spotsInput: SpotsInput!){
                         id
                         isCanPark
                         isHidden
-                        lat
-                        lng
                         location
                         name
                         profileId
@@ -81,8 +77,6 @@ query spots($spotsInput: SpotsInput!){
                     id
                     isCanPark
                     isHidden
-                    lat
-                    lng
                     location
                     name
                     profile{
@@ -106,17 +100,17 @@ query spots($spotsInput: SpotsInput!){
                     region
                     spotPicture{
                         createdAt
+                        hostId
                         id
                         spotId
                         updatedAt
                         url
                     }
                     tags{
-                        category
                         createdAt
                         id
-                        name
-                        tagPictureUrl
+                        spotId
+                        tagId
                         updatedAt
                     }
                     updatedAt
@@ -149,8 +143,6 @@ query spots($spotsInput: SpotsInput!){
         id
         isCanPark
         isHidden
-        lat
-        lng
         location
         name
         profileId
