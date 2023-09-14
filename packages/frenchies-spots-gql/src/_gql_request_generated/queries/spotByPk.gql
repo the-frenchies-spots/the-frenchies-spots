@@ -23,8 +23,6 @@ query spotByPk($id: String!){
                         id
                         isCanPark
                         isHidden
-                        lat
-                        lng
                         location
                         name
                         profileId
@@ -61,8 +59,6 @@ query spotByPk($id: String!){
                         id
                         isCanPark
                         isHidden
-                        lat
-                        lng
                         location
                         name
                         profileId
@@ -88,8 +84,6 @@ query spotByPk($id: String!){
                     id
                     isCanPark
                     isHidden
-                    lat
-                    lng
                     location
                     name
                     profile{
@@ -113,17 +107,17 @@ query spotByPk($id: String!){
                     region
                     spotPicture{
                         createdAt
+                        hostId
                         id
                         spotId
                         updatedAt
                         url
                     }
                     tags{
-                        category
                         createdAt
                         id
-                        name
-                        tagPictureUrl
+                        spotId
+                        tagId
                         updatedAt
                     }
                     updatedAt
@@ -156,8 +150,6 @@ query spotByPk($id: String!){
         id
         isCanPark
         isHidden
-        lat
-        lng
         location
         name
         profile{
@@ -170,6 +162,81 @@ query spotByPk($id: String!){
             userId
         }
         profileId
+        rating{
+            avg
+            currentRating{
+                createdAt
+                id
+                profile{
+                    createdAt
+                    gamePoint
+                    id
+                    photoUrl
+                    pseudo
+                    updatedAt
+                    userId
+                }
+                profileId
+                rate
+                spot{
+                    address
+                    averageRating
+                    category
+                    createdAt
+                    description
+                    favorites{
+                        createdAt
+                        id
+                        profileId
+                        spotId
+                        updatedAt
+                    }
+                    id
+                    isCanPark
+                    isHidden
+                    location
+                    name
+                    profile{
+                        createdAt
+                        gamePoint
+                        id
+                        photoUrl
+                        pseudo
+                        updatedAt
+                        userId
+                    }
+                    profileId
+                    ratings{
+                        createdAt
+                        id
+                        profileId
+                        rate
+                        spotId
+                        updatedAt
+                    }
+                    region
+                    spotPicture{
+                        createdAt
+                        hostId
+                        id
+                        spotId
+                        updatedAt
+                        url
+                    }
+                    tags{
+                        createdAt
+                        id
+                        spotId
+                        tagId
+                        updatedAt
+                    }
+                    updatedAt
+                }
+                spotId
+                updatedAt
+            }
+            maxVote
+        }
         ratings{
             createdAt
             id
@@ -181,6 +248,7 @@ query spotByPk($id: String!){
         region
         spotPicture{
             createdAt
+            hostId
             id
             spot{
                 address
@@ -188,71 +256,13 @@ query spotByPk($id: String!){
                 category
                 createdAt
                 description
-                favorites{
-                    createdAt
-                    id
-                    profileId
-                    spotId
-                    updatedAt
-                }
                 id
                 isCanPark
                 isHidden
-                lat
-                lng
                 location
                 name
-                profile{
-                    createdAt
-                    gamePoint
-                    id
-                    photoUrl
-                    pseudo
-                    updatedAt
-                    userId
-                }
                 profileId
-                ratings{
-                    createdAt
-                    id
-                    profileId
-                    rate
-                    spotId
-                    updatedAt
-                }
                 region
-                spotPicture{
-                    createdAt
-                    id
-                    spotId
-                    updatedAt
-                    url
-                }
-                tags{
-                    category
-                    createdAt
-                    id
-                    name
-                    spots{
-                        address
-                        averageRating
-                        category
-                        createdAt
-                        description
-                        id
-                        isCanPark
-                        isHidden
-                        lat
-                        lng
-                        location
-                        name
-                        profileId
-                        region
-                        updatedAt
-                    }
-                    tagPictureUrl
-                    updatedAt
-                }
                 updatedAt
             }
             spotId
@@ -260,11 +270,33 @@ query spotByPk($id: String!){
             url
         }
         tags{
-            category
             createdAt
             id
-            name
-            tagPictureUrl
+            spotId
+            tag{
+                category
+                createdAt
+                id
+                name
+                spots{
+                    address
+                    averageRating
+                    category
+                    createdAt
+                    description
+                    id
+                    isCanPark
+                    isHidden
+                    location
+                    name
+                    profileId
+                    region
+                    updatedAt
+                }
+                tagPictureUrl
+                updatedAt
+            }
+            tagId
             updatedAt
         }
         updatedAt

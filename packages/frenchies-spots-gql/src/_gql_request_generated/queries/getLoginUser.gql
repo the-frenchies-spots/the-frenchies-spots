@@ -33,8 +33,6 @@ query getLoginUser{
                         id
                         isCanPark
                         isHidden
-                        lat
-                        lng
                         location
                         name
                         profileId
@@ -70,8 +68,6 @@ query getLoginUser{
                     id
                     isCanPark
                     isHidden
-                    lat
-                    lng
                     location
                     name
                     profile{
@@ -95,17 +91,17 @@ query getLoginUser{
                     region
                     spotPicture{
                         createdAt
+                        hostId
                         id
                         spotId
                         updatedAt
                         url
                     }
                     tags{
-                        category
                         createdAt
                         id
-                        name
-                        tagPictureUrl
+                        spotId
+                        tagId
                         updatedAt
                     }
                     updatedAt

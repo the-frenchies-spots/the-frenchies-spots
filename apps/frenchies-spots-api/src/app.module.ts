@@ -1,5 +1,5 @@
 import { join } from 'path';
-import { MiddlewareConsumer, Module } from '@nestjs/common';
+import { Module } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
@@ -12,6 +12,7 @@ import { ConfigModule } from '@nestjs/config';
 import { RatingModule } from './module/rating.module';
 import { FavoriteModule } from './module/favorite.module';
 import { TagModule } from './module/tag.module';
+import { ProfileModule } from './module/profile.module';
 
 @Module({
   imports: [
@@ -26,6 +27,7 @@ import { TagModule } from './module/tag.module';
     SpotModule,
     UserModule,
     TagModule,
+    ProfileModule,
     RatingModule,
     FavoriteModule,
   ],

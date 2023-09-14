@@ -23,8 +23,6 @@ mutation updateSpot($updateSpotInput: SpotInput!){
                         id
                         isCanPark
                         isHidden
-                        lat
-                        lng
                         location
                         name
                         profileId
@@ -61,8 +59,6 @@ mutation updateSpot($updateSpotInput: SpotInput!){
                         id
                         isCanPark
                         isHidden
-                        lat
-                        lng
                         location
                         name
                         profileId
@@ -88,8 +84,6 @@ mutation updateSpot($updateSpotInput: SpotInput!){
                     id
                     isCanPark
                     isHidden
-                    lat
-                    lng
                     location
                     name
                     profile{
@@ -113,17 +107,17 @@ mutation updateSpot($updateSpotInput: SpotInput!){
                     region
                     spotPicture{
                         createdAt
+                        hostId
                         id
                         spotId
                         updatedAt
                         url
                     }
                     tags{
-                        category
                         createdAt
                         id
-                        name
-                        tagPictureUrl
+                        spotId
+                        tagId
                         updatedAt
                     }
                     updatedAt
@@ -156,8 +150,6 @@ mutation updateSpot($updateSpotInput: SpotInput!){
         id
         isCanPark
         isHidden
-        lat
-        lng
         location
         name
         profile{
@@ -181,6 +173,7 @@ mutation updateSpot($updateSpotInput: SpotInput!){
         region
         spotPicture{
             createdAt
+            hostId
             id
             spot{
                 address
@@ -198,8 +191,6 @@ mutation updateSpot($updateSpotInput: SpotInput!){
                 id
                 isCanPark
                 isHidden
-                lat
-                lng
                 location
                 name
                 profile{
@@ -223,34 +214,25 @@ mutation updateSpot($updateSpotInput: SpotInput!){
                 region
                 spotPicture{
                     createdAt
+                    hostId
                     id
                     spotId
                     updatedAt
                     url
                 }
                 tags{
-                    category
                     createdAt
                     id
-                    name
-                    spots{
-                        address
-                        averageRating
+                    spotId
+                    tag{
                         category
                         createdAt
-                        description
                         id
-                        isCanPark
-                        isHidden
-                        lat
-                        lng
-                        location
                         name
-                        profileId
-                        region
+                        tagPictureUrl
                         updatedAt
                     }
-                    tagPictureUrl
+                    tagId
                     updatedAt
                 }
                 updatedAt
@@ -260,11 +242,10 @@ mutation updateSpot($updateSpotInput: SpotInput!){
             url
         }
         tags{
-            category
             createdAt
             id
-            name
-            tagPictureUrl
+            spotId
+            tagId
             updatedAt
         }
         updatedAt

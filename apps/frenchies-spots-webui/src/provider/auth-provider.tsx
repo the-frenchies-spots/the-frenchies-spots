@@ -2,8 +2,6 @@ import React, { useEffect } from "react";
 import { AuthContext } from "@/context";
 import { useInitAuth } from "@/hooks";
 
-
-
 interface AuthProviderProps {
   children: React.ReactNode;
 }
@@ -11,8 +9,16 @@ interface AuthProviderProps {
 export const AuthProvider = (props: AuthProviderProps) => {
   const { children } = props;
 
-  const { token, user, loading, onSignUp, onSignIn, refresh, onSignOut } =
-    useInitAuth();
+  const {
+    token,
+    user,
+    loading,
+    onSignUp,
+    onSignIn,
+    refresh,
+    onSignOut,
+    setUser,
+  } = useInitAuth();
 
   return (
     <AuthContext.Provider
@@ -24,6 +30,7 @@ export const AuthProvider = (props: AuthProviderProps) => {
         processSignIn: onSignIn,
         processSignUp: onSignUp,
         processSignOut: onSignOut,
+        setUser,
       }}
     >
       {children}

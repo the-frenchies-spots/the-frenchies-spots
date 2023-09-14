@@ -1,4 +1,4 @@
-import { createContext } from "react";
+import { Dispatch, SetStateAction, createContext } from "react";
 
 import type {
   UserEntity,
@@ -14,6 +14,7 @@ interface AuthContextData {
   processSignIn: ((variables: SignInInput) => Promise<void>) | undefined;
   processSignUp: ((signUpInput: SignUpInput) => Promise<void>) | undefined;
   processSignOut: (() => Promise<void>) | undefined;
+  setUser: Dispatch<SetStateAction<UserEntity | undefined>> | undefined;
 }
 
 const defaultContext: AuthContextData = {
@@ -24,6 +25,7 @@ const defaultContext: AuthContextData = {
   processSignIn: undefined,
   processSignUp: undefined,
   processSignOut: undefined,
+  setUser: undefined,
 };
 
 const AuthContext = createContext<AuthContextData>(defaultContext);

@@ -1,6 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 
+module.exports.buyPoint = fs.readFileSync(path.join(__dirname, 'buyPoint.gql'), 'utf8');
 module.exports.createOrUpdateRating = fs.readFileSync(path.join(__dirname, 'createOrUpdateRating.gql'), 'utf8');
 module.exports.deleteSpot = fs.readFileSync(path.join(__dirname, 'deleteSpot.gql'), 'utf8');
 module.exports.deleteTag = fs.readFileSync(path.join(__dirname, 'deleteTag.gql'), 'utf8');

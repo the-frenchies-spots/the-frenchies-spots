@@ -11,7 +11,6 @@ import {
   Flex,
   Group,
   Image,
-  ImagePicker,
   Stack,
   Text,
 } from "@frenchies-spots/material";
@@ -72,8 +71,10 @@ const Profile = () => {
           />
           <Stack>
             <Text>Jeune avanturier</Text>
-            <Text>1500 points</Text>
-            <Button>Acheter des points</Button>
+            <Text>{profile?.gamePoint} points</Text>
+            <Button onClick={() => router.push("/shop")}>
+              Acheter des points
+            </Button>
           </Stack>
         </Group>
       </Stack>

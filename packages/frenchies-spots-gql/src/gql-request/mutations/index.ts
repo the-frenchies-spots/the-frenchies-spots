@@ -11,6 +11,7 @@ import { signUp } from "./signUp";
 import { toggleFavorite } from "./toggleFavorite";
 import { updateSpot } from "./updateSpot";
 import { updateTag } from "./updateTag";
+import { buyPoint } from "./buyPoint";
 
 export const mutations: Record<string, DocumentNode> = {
   createOrUpdateRating,
@@ -24,4 +25,5 @@ export const mutations: Record<string, DocumentNode> = {
   toggleFavorite,
   updateSpot,
   updateTag,
+  buyPoint,
 };

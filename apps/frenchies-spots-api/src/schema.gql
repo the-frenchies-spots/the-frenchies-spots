@@ -2,6 +2,11 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+input BuyPointInput {
+  amount: Float!
+  paymentId: String!
+}
+
 """
 A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
 """
@@ -36,6 +41,7 @@ type LogoutResponse {
 }
 
 type Mutation {
+  buyPoint(buyPoint: BuyPointInput!): UserEntity!
   createOrUpdateRating(ratingInput: RatingInput!): RatingResponse!
   deleteSpot(id: String!): DeleteResponse!
   deleteTag(id: String!): DeleteResponse!

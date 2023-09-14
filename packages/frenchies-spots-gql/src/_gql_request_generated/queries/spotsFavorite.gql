@@ -1,27 +1,18 @@
-mutation signUp($signUpInput: SignUpInput!){
-    signUp(signUpInput: $signUpInput){
-        accessToken
-        refreshToken
-        user{
+query spotsFavorite{
+    spotsFavorite{
+        address
+        averageRating
+        category
+        createdAt
+        description
+        favorites{
             createdAt
-            email
-            hashedPassword
-            hashedRefreshToken
             id
             profile{
                 createdAt
                 favorites{
                     createdAt
                     id
-                    profile{
-                        createdAt
-                        gamePoint
-                        id
-                        photoUrl
-                        pseudo
-                        updatedAt
-                        userId
-                    }
                     profileId
                     spot{
                         address
@@ -138,13 +129,125 @@ mutation signUp($signUpInput: SignUpInput!){
                     hashedPassword
                     hashedRefreshToken
                     id
+                    profile{
+                        createdAt
+                        gamePoint
+                        id
+                        photoUrl
+                        pseudo
+                        updatedAt
+                        userId
+                    }
                     role
                     updatedAt
                 }
                 userId
             }
-            role
+            profileId
+            spotId
             updatedAt
         }
+        id
+        isCanPark
+        isHidden
+        location
+        name
+        profile{
+            createdAt
+            gamePoint
+            id
+            photoUrl
+            pseudo
+            updatedAt
+            userId
+        }
+        profileId
+        ratings{
+            createdAt
+            id
+            profileId
+            rate
+            spotId
+            updatedAt
+        }
+        region
+        spotPicture{
+            createdAt
+            hostId
+            id
+            spot{
+                address
+                averageRating
+                category
+                createdAt
+                description
+                favorites{
+                    createdAt
+                    id
+                    profileId
+                    spotId
+                    updatedAt
+                }
+                id
+                isCanPark
+                isHidden
+                location
+                name
+                profile{
+                    createdAt
+                    gamePoint
+                    id
+                    photoUrl
+                    pseudo
+                    updatedAt
+                    userId
+                }
+                profileId
+                ratings{
+                    createdAt
+                    id
+                    profileId
+                    rate
+                    spotId
+                    updatedAt
+                }
+                region
+                spotPicture{
+                    createdAt
+                    hostId
+                    id
+                    spotId
+                    updatedAt
+                    url
+                }
+                tags{
+                    createdAt
+                    id
+                    spotId
+                    tag{
+                        category
+                        createdAt
+                        id
+                        name
+                        tagPictureUrl
+                        updatedAt
+                    }
+                    tagId
+                    updatedAt
+                }
+                updatedAt
+            }
+            spotId
+            updatedAt
+            url
+        }
+        tags{
+            createdAt
+            id
+            spotId
+            tagId
+            updatedAt
+        }
+        updatedAt
     }
 }

@@ -1,7 +1,9 @@
-import { useMediaQuery } from "@frenchies-spots/hooks";
-import { Drawer, DrawerProps } from "@frenchies-spots/material";
 import React, { ReactNode } from "react";
+
 import { useSpotUi } from "../../../hooks/use-spot-ui";
+import { DrawerProps } from "@frenchies-spots/material";
+
+import CustomDrawer from "../../CustomDrawer/CustomDrawer";
 
 interface SpotDrawerProps extends Omit<DrawerProps, "opened" | "onClose"> {
   children: ReactNode;
@@ -10,33 +12,20 @@ interface SpotDrawerProps extends Omit<DrawerProps, "opened" | "onClose"> {
 const SpotDrawer = (props: SpotDrawerProps) => {
   const { children, ...drawerProps } = props;
 
-  const isSmallScreen = useMediaQuery("(max-width: 768px)");
   const { drawerOpened, closeFilter, isFilter } = useSpotUi();
 
   const phoneSize = isFilter ? 600 : 300;
 
   return (
-    <Drawer
+    <CustomDrawer
       {...drawerProps}
-      position={isSmallScreen ? "bottom" : "right"}
       padding={0}
       opened={drawerOpened}
       onClose={closeFilter}
-      size={isSmallScreen ? phoneSize : undefined}
-      overlayProps={{ opacity: isFilter ? 0.5 : 0 }}
-      sx={
-        isSmallScreen
-          ? {
-              "	.mantine-Drawer-content": {
-                borderTopLeftRadius: 50,
-                borderTopRightRadius: 50,
-              },
-            }
-          : {}
-      }
+      phoneSize={phoneSize}
     >
       {children}
-    </Drawer>
+    </CustomDrawer>
   );
 };
 

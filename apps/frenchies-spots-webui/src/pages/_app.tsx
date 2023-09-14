@@ -4,7 +4,6 @@ import type { Page } from "../types/page";
 
 import { AppProvider } from "@/provider";
 import { Guard } from "@/components";
-import LogoutButton from "@/components/LogoutButton/LogoutButton";
 import { Toaster } from "react-hot-toast";
 
 type Props = AppProps & {
