@@ -1,11 +1,11 @@
 import { Injectable } from '@nestjs/common';
 
-import { TagEntity } from 'src/entity/tag.entity';
-import { PrismaService } from 'src/service/prisma.service';
-import { plainToClassMany, plainToClass } from 'src/utils/plain-to-class';
-import { TagListInput } from 'src/dto/input/tag/tag-list-input';
-import { TagInsertInput } from 'src/dto/input/tag/tag-insert.input';
-import { TagUpdateInput } from 'src/dto/input/tag/tag-update.input';
+import { TagEntity } from '../entity/tag.entity';
+import { PrismaService } from '../service/prisma.service';
+import { plainToClassMany, plainToClass } from '../utils/plain-to-class';
+import { TagListInput } from '../dto/input/tag/tag-list-input';
+import { TagInsertInput } from '../dto/input/tag/tag-insert.input';
+import { TagUpdateInput } from '../dto/input/tag/tag-update.input';
 
 @Injectable()
 export class TagRepository {

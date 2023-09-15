@@ -1,5 +1,5 @@
 import { Field, InputType } from '@nestjs/graphql';
-import { CategoriesSpotAndTag } from 'src/entity/categories-spot-and-tag.enum';
+import { CategoriesSpotAndTag } from '../../../entity/categories-spot-and-tag.enum';
 
 @InputType()
 export class TagListInput {

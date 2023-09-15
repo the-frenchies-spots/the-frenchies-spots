@@ -1,12 +1,12 @@
 import { ObjectId } from 'mongodb';
 import { Injectable } from '@nestjs/common';
 
-import { RatingInput } from 'src/dto/input/rating/rating-input';
-import { TagListInput } from 'src/dto/input/tag/tag-list-input';
-import { RatingEntity } from 'src/entity/rating.entity';
-import { PrismaService } from 'src/service/prisma.service';
-import { TAverageResponse } from 'src/type/average-response';
-import { plainToClass } from 'src/utils/plain-to-class';
+import { RatingInput } from '../dto/input/rating/rating-input';
+import { TagListInput } from '../dto/input/tag/tag-list-input';
+import { RatingEntity } from '../entity/rating.entity';
+import { PrismaService } from '../service/prisma.service';
+import { TAverageResponse } from '../type/average-response';
+import { plainToClass } from '../utils/plain-to-class';
 
 @Injectable()
 export class RatingRepository {

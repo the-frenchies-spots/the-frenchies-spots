@@ -1,14 +1,14 @@
 import { Injectable } from '@nestjs/common';
 
-import { SpotEntity } from 'src/entity/spot.entity';
-import ErrorService from 'src/service/error.service';
-import { codeErrors } from 'src/enum/code-errors.enum';
-import { SpotInput } from 'src/dto/input/spot/spot-input';
-import { SpotByIdResponse } from 'src/dto/spotByIdResponse';
-import { SpotsInput } from 'src/dto/input/spot/spots-input';
-import { SpotRepository } from 'src/repository/spot.repository';
-import { DeleteResponse } from 'src/dto/response/delete.response';
-import { SpotGeospatialService } from 'src/service/spot-geospatial.service';
+import { SpotEntity } from '../entity/spot.entity';
+import ErrorService from '../service/error.service';
+import { codeErrors } from '../enum/code-errors.enum';
+import { SpotInput } from '../dto/input/spot/spot-input';
+import { SpotByIdResponse } from '../dto/spotByIdResponse';
+import { SpotsInput } from '../dto/input/spot/spots-input';
+import { SpotRepository } from '../repository/spot.repository';
+import { DeleteResponse } from '../dto/response/delete.response';
+import { SpotGeospatialService } from '../service/spot-geospatial.service';
 
 const { SPOT_NOT_FOUND, SPOT_ID_NOT_MATCH_PROFILE_ID } = codeErrors;
 

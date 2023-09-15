@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 
-import { UserEntity } from 'src/entity/user.entity';
-import { PrismaService } from 'src/service/prisma.service';
-import { plainToClass } from 'src/utils/plain-to-class';
+import { UserEntity } from '../entity/user.entity';
+import { PrismaService } from '../service/prisma.service';
+import { plainToClass } from '../utils/plain-to-class';
 
 @Injectable()
 export class AuthRepository {

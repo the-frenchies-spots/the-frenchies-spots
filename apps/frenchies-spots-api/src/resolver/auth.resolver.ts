@@ -6,12 +6,12 @@ import { SignInInput } from '../dto/signin-input';
 import { SignResponse } from '../dto/sign-response';
 import { Public } from '../decorator/public.decorator';
 import { AuthBusiness } from '../business/auth.business';
-import { LogoutResponse } from 'src/dto/logout-response';
+import { LogoutResponse } from '../dto/logout-response';
 import { UseGuards } from '@nestjs/common';
-import { CurrentUserId } from 'src/decorator/currentUserId.decorator';
-import { CurrentUser } from 'src/decorator/currentUser.decorator';
-import { RefreshTokenGuard } from 'src/guard/refreshToken.guard';
-import { NewTokensResponse } from 'src/dto/newTokensResponse';
+import { CurrentUserId } from '../decorator/currentUserId.decorator';
+import { CurrentUser } from '../decorator/currentUser.decorator';
+import { RefreshTokenGuard } from '../guard/refreshToken.guard';
+import { NewTokensResponse } from '../dto/newTokensResponse';
 
 @Resolver(() => UserEntity)
 export class AuthResolver {

@@ -4,8 +4,8 @@ import { Column } from 'typeorm';
 import { SpotPictureInput } from '../spot-picture/spot-picture-input';
 import { TagInput } from '../tag/tag.input';
 import GraphQLJSON from 'graphql-type-json';
-import { Location } from 'src/entity/spot.entity';
-import { CategoriesSpotAndTag } from 'src/enum/categories-spot-and-tag.enum';
+import { Location } from '../../../entity/spot.entity';
+import { CategoriesSpotAndTag } from '../../../enum/categories-spot-and-tag.enum';
 
 @InputType()
 export class SpotInput {

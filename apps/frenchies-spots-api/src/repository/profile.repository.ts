@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 
-import { UserEntity } from 'src/entity/user.entity';
-import { plainToClass } from 'src/utils/plain-to-class';
-import { PrismaService } from 'src/service/prisma.service';
+import { UserEntity } from '../entity/user.entity';
+import { plainToClass } from '../utils/plain-to-class';
+import { PrismaService } from '../service/prisma.service';
 
 @Injectable()
 export class ProfileRepository {
