@@ -12,6 +12,8 @@ import { UserEntity } from './user.entity';
 import { SpotEntity } from './spot.entity';
 import { RatingEntity } from './rating.entity';
 import { FavoriteEntity } from './favorite.entity';
+import { ContactEntity } from './contact.entity';
+import { ProfileChatEntity } from './profile-chat.entity';
 
 @ObjectType()
 @Entity('Profile')
@@ -53,6 +55,18 @@ export class ProfileEntity implements Profile {
     cascade: true,
   })
   favorites: FavoriteEntity[];
+
+  @Field(() => [ContactEntity])
+  @OneToMany(() => ContactEntity, (contact) => contact.profile, {
+    cascade: true,
+  })
+  contacts: ContactEntity[];
+
+  @Field(() => [ProfileChatEntity])
+  @OneToMany(() => ProfileChatEntity, (profileChat) => profileChat.profile, {
+    cascade: true,
+  })
+  profileChats: ProfileChatEntity[];
 
   @Field()
   @Column({ default: () => 'CURRENT_TIMESTAMP' })

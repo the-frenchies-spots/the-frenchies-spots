@@ -52,8 +52,49 @@ model Profile {
   spots          Spot[]
   ratings        Rating[]
   favorites      Favorite[]
+  contacts       Contact[]
+  profileChats   ProfileChat[]
   createdAt      DateTime @default(now())
   updatedAt      DateTime @default(now())
+}
+
+model ProfileChat {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  profile     Profile  @relation(fields: [profileId], references: [id])
+  profileId   String   @db.ObjectId
+  chat        Chat     @relation(fields: [chatId], references: [id])
+  chatId      String   @db.ObjectId
+  chatMessages ChatMessage[]
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @default(now())
+  @@unique([profileId, chatId])
+}
+
+model Chat {
+  id            String   @id @default(auto()) @map("_id") @db.ObjectId
+  participants  ProfileChat[]
+  chatMessages  ChatMessage[]
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @default(now())
+}
+
+model ChatMessage {
+  id            String   @id @default(auto()) @map("_id") @db.ObjectId
+  chat       Chat  @relation(fields: [chatId], references: [id], onDelete: Cascade)
+  chatId     String   @unique @db.ObjectId
+  profileChat     ProfileChat  @relation(fields: [profileChatId], references: [id])
+  profileChatId   String   @db.ObjectId
+  crfgtyikeatedAt     DateTime @default(now())
+  updatedAt     DateTime @default(now())
+}
+
+model Contact {
+  id            String   @id @default(auto()) @map("_id") @db.ObjectId
+  profile       Profile  @relation(fields: [profileId], references: [id], onDelete: Cascade)
+  profileId     String   @unique @db.ObjectId
+  authorization Boolean  @default(true)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @default(now())
 }
 
 enum GeoJSONPoint {

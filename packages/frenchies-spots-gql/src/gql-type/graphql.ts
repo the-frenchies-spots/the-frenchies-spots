@@ -24,6 +24,36 @@ export type BuyPointInput = {
   paymentId: Scalars['String']['input'];
 };
 
+export type ChatEntity = {
+  __typename?: 'ChatEntity';
+  chatMessages: Array<ChatMessageEntity>;
+  createdAt: Scalars['DateTime']['output'];
+  id: Scalars['String']['output'];
+  participants: Array<ProfileChatEntity>;
+  updatedAt: Scalars['DateTime']['output'];
+};
+
+export type ChatMessageEntity = {
+  __typename?: 'ChatMessageEntity';
+  chat: ChatEntity;
+  chatId: Scalars['String']['output'];
+  createdAt: Scalars['DateTime']['output'];
+  id: Scalars['String']['output'];
+  profileChat: ProfileChatEntity;
+  profileChatId: Scalars['String']['output'];
+  updatedAt: Scalars['DateTime']['output'];
+};
+
+export type ContactEntity = {
+  __typename?: 'ContactEntity';
+  authorization: Scalars['Boolean']['output'];
+  createdAt: Scalars['DateTime']['output'];
+  id: Scalars['String']['output'];
+  profile: ProfileEntity;
+  profileId: Scalars['String']['output'];
+  updatedAt: Scalars['DateTime']['output'];
+};
+
 export type DeleteResponse = {
   __typename?: 'DeleteResponse';
   deleted: Scalars['Boolean']['output'];
@@ -45,6 +75,10 @@ export type FavoriteInput = {
   spotId: Scalars['String']['input'];
 };
 
+export type InserChatInput = {
+  participantIds: Array<Scalars['String']['input']>;
+};
+
 export type LogoutResponse = {
   __typename?: 'LogoutResponse';
   loggedOut: Scalars['Boolean']['output'];
@@ -57,6 +91,7 @@ export type Mutation = {
   deleteSpot: DeleteResponse;
   deleteTag: DeleteResponse;
   getNewTokens: NewTokensResponse;
+  insertChat: ChatEntity;
   insertSpot: SpotEntity;
   insertTag: TagEntity;
   logout: LogoutResponse;
@@ -85,6 +120,11 @@ export type MutationDeleteSpotArgs = {
 
 export type MutationDeleteTagArgs = {
   id: Scalars['String']['input'];
+};
+
+
+export type MutationInsertChatArgs = {
+  inserChatInput: InserChatInput;
 };
 
 
@@ -128,13 +168,27 @@ export type NewTokensResponse = {
   refreshToken: Scalars['String']['output'];
 };
 
+export type ProfileChatEntity = {
+  __typename?: 'ProfileChatEntity';
+  chat: ChatEntity;
+  chatId: Scalars['String']['output'];
+  chatMessages: Array<ChatMessageEntity>;
+  createdAt: Scalars['DateTime']['output'];
+  id: Scalars['String']['output'];
+  profile: ProfileEntity;
+  profileId: Scalars['String']['output'];
+  updatedAt: Scalars['DateTime']['output'];
+};
+
 export type ProfileEntity = {
   __typename?: 'ProfileEntity';
+  contacts: Array<ContactEntity>;
   createdAt: Scalars['DateTime']['output'];
   favorites?: Maybe<Array<FavoriteEntity>>;
   gamePoint: Scalars['Float']['output'];
   id: Scalars['String']['output'];
   photoUrl?: Maybe<Scalars['String']['output']>;
+  profileChats: Array<ProfileChatEntity>;
   pseudo: Scalars['String']['output'];
   ratings?: Maybe<Array<RatingEntity>>;
   spots?: Maybe<Array<SpotEntity>>;
