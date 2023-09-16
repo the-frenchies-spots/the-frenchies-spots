@@ -61,6 +61,10 @@ input FavoriteInput {
   spotId: String!
 }
 
+input InserChatInput {
+  participantIds: [String!]!
+}
+
 """
 The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf).
 """
@@ -76,6 +80,7 @@ type Mutation {
   deleteSpot(id: String!): DeleteResponse!
   deleteTag(id: String!): DeleteResponse!
   getNewTokens: NewTokensResponse!
+  insertChat(inserChatInput: InserChatInput!): ChatEntity!
   insertSpot(insertSpotInput: SpotInput!): SpotEntity!
   insertTag(tagInsertInput: TagInsertInput!): TagEntity!
   logout: LogoutResponse!
@@ -134,6 +139,7 @@ input ProfilesInput {
 }
 
 type Query {
+  chatByPk(chatId: String!): ChatEntity!
   getLoginUser: UserEntity!
   profiles(profilesInput: ProfilesInput!): [ProfileEntity!]!
   spotByPk(id: String!): SpotByIdResponse!
