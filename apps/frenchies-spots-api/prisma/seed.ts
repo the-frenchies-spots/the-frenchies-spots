@@ -13,8 +13,12 @@ const clearDatabase = async () => {
   await prisma.spotPicture.deleteMany({});
   await prisma.tagsOnSpots.deleteMany({});
   await prisma.tag.deleteMany({});
-  await prisma.profile.deleteMany({});
+  await prisma.chatMessage.deleteMany({});
+  await prisma.contact.deleteMany({});
+  await prisma.profileChat.deleteMany({});
+  await prisma.chat.deleteMany({});
   await prisma.user.deleteMany({});
+  await prisma.profile.deleteMany({});
   console.log('--------------------------');
   console.log('Suppression terminée');
 };
