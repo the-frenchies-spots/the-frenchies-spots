@@ -5,7 +5,6 @@ import { plainToClass, plainToClassMany } from '../utils/plain-to-class';
 import { PrismaService } from '../service/prisma.service';
 import { ProfileInput } from '../dto/input/profile/profile.input';
 import { ProfileEntity } from '../entity/profile.entity';
-import { ProfilesInput } from '../dto/input/profile/profiles.input';
 
 @Injectable()
 export class ProfileRepository {
