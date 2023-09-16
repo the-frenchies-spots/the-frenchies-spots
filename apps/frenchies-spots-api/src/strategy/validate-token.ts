@@ -1,4 +1,4 @@
-import { JwtPayload, JwtPayloadWithRefreshToken } from 'src/types';
+import { JwtPayload, JwtPayloadWithRefreshToken } from '../types';
 import { Request } from 'express';
 
 export const validateToken = async (

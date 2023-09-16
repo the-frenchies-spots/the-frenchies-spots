@@ -1,11 +1,11 @@
 import { Injectable } from '@nestjs/common';
 
-import ErrorService from 'src/service/error.service';
-import { codeErrors } from 'src/enum/code-errors.enum';
-import { RatingInput } from 'src/dto/input/rating/rating-input';
-import { RatingRepository } from 'src/repository/rating.repository';
-import { SpotRepository } from 'src/repository/spot.repository';
-import { RatingResponse } from 'src/dto/response/rating-response';
+import ErrorService from '../service/error.service';
+import { codeErrors } from '../enum/code-errors.enum';
+import { RatingInput } from '../dto/input/rating/rating-input';
+import { RatingRepository } from '../repository/rating.repository';
+import { SpotRepository } from '../repository/spot.repository';
+import { RatingResponse } from '../dto/response/rating-response';
 
 const {
   RATING_OUT_OF_RANGE,

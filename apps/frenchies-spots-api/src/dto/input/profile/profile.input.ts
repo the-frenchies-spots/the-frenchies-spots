@@ -1,6 +1,6 @@
 import { Field, InputType } from '@nestjs/graphql';
 import GraphQLJSON from 'graphql-type-json';
-import { LocationEntity } from 'src/entity/location.entity';
+import { LocationEntity } from '../../../entity/location.entity';
 
 @InputType()
 export class ProfileInput {

@@ -1,5 +1,5 @@
 import { Field, ObjectType } from '@nestjs/graphql';
-import { SpotEntity } from 'src/entity/spot.entity';
+import { SpotEntity } from '../entity/spot.entity';
 import { RatingResponse } from './response/rating-response';
 
 @ObjectType()

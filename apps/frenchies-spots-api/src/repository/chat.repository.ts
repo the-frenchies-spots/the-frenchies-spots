@@ -1,10 +1,10 @@
 import { Injectable } from '@nestjs/common';
 
-import { PrismaService } from 'src/service/prisma.service';
-import { plainToClass } from 'src/utils/plain-to-class';
-import { ChatEntity } from 'src/entity/chat.entity';
-import { SendChatMessageInput } from 'src/dto/input/chat/send-chat-message.input';
-import { ChatMessageEntity } from 'src/entity/chat-message.entity';
+import { PrismaService } from '../service/prisma.service';
+import { plainToClass } from '../utils/plain-to-class';
+import { ChatEntity } from '../entity/chat.entity';
+import { SendChatMessageInput } from '../dto/input/chat/send-chat-message.input';
+import { ChatMessageEntity } from '../entity/chat-message.entity';
 
 @Injectable()
 export class ChatRepository {

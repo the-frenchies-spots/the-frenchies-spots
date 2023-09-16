@@ -1,13 +1,13 @@
 import { Injectable } from '@nestjs/common';
-import { SpotPictureInput } from 'src/dto/input/spot-picture/spot-picture-input';
-import { SpotInput } from 'src/dto/input/spot/spot-input';
-import { SpotsInput } from 'src/dto/input/spot/spots-input';
-import { RatingResponse } from 'src/dto/response/rating-response';
-import { SpotByIdResponse } from 'src/dto/spotByIdResponse';
-import { SpotPictureEntity } from 'src/entity/spot-picture.entity';
-import { SpotEntity } from 'src/entity/spot.entity';
-import { PrismaService } from 'src/service/prisma.service';
-import { plainToClass, plainToClassMany } from 'src/utils/plain-to-class';
+import { SpotPictureInput } from '../dto/input/spot-picture/spot-picture-input';
+import { SpotInput } from '../dto/input/spot/spot-input';
+import { SpotsInput } from '../dto/input/spot/spots-input';
+import { RatingResponse } from '../dto/response/rating-response';
+import { SpotByIdResponse } from '../dto/spotByIdResponse';
+import { SpotPictureEntity } from '../entity/spot-picture.entity';
+import { SpotEntity } from '../entity/spot.entity';
+import { PrismaService } from '../service/prisma.service';
+import { plainToClass, plainToClassMany } from '../utils/plain-to-class';
 
 export type spotPaginationInput = {
   take: number;

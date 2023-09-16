@@ -1,11 +1,11 @@
 import { Injectable } from '@nestjs/common';
 
-import { UserEntity } from 'src/entity/user.entity';
-import { plainToClass, plainToClassMany } from 'src/utils/plain-to-class';
-import { PrismaService } from 'src/service/prisma.service';
-import { ProfileInput } from 'src/dto/input/profile/profile.input';
-import { ProfileEntity } from 'src/entity/profile.entity';
-import { ProfilesInput } from 'src/dto/input/profile/profiles.input';
+import { UserEntity } from '../entity/user.entity';
+import { plainToClass, plainToClassMany } from '../utils/plain-to-class';
+import { PrismaService } from '../service/prisma.service';
+import { ProfileInput } from '../dto/input/profile/profile.input';
+import { ProfileEntity } from '../entity/profile.entity';
+import { ProfilesInput } from '../dto/input/profile/profiles.input';
 
 @Injectable()
 export class ProfileRepository {

@@ -4,8 +4,8 @@ import {
   WebSocketGateway,
   WebSocketServer,
 } from '@nestjs/websockets';
-import { ChatBusiness } from 'src/business/chat.business';
-import { SendChatMessageInput } from 'src/dto/input/chat/send-chat-message.input';
+import { ChatBusiness } from '../business/chat.business';
+import { SendChatMessageInput } from '../dto/input/chat/send-chat-message.input';
 
 @WebSocketGateway(+process.env.SOCKET_PORT_URL, { cors: '*:*' })
 export class ChatGateway {

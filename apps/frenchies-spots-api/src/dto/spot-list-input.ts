@@ -1,6 +1,6 @@
 import { Field, InputType } from '@nestjs/graphql';
 import { IsArray, IsEnum, IsInt, IsString } from 'class-validator';
-import { SpotEntity } from 'src/entity/spot.entity';
+import { SpotEntity } from '../entity/spot.entity';
 import { OrderByEnum } from './order-by.enum';
 
 @InputType()

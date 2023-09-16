@@ -1,18 +1,18 @@
 import { Module } from '@nestjs/common';
 import { JwtModule, JwtService } from '@nestjs/jwt';
 
-import { PrismaService } from 'src/service/prisma.service';
-import { TokenService } from 'src/service/token.service';
-import { AuthResolver } from 'src/resolver/auth.resolver';
-import { AuthBusiness } from 'src/business/auth.business';
-import { AuthRepository } from 'src/repository/auth.repository';
+import { PrismaService } from '../service/prisma.service';
+import { TokenService } from '../service/token.service';
+import { AuthResolver } from '../resolver/auth.resolver';
+import { AuthBusiness } from '../business/auth.business';
+import { AuthRepository } from '../repository/auth.repository';
 
 import { PublicTokenStrategy } from '../strategy/publicToken.strategy';
 import { RefreshTokenStrategy } from '../strategy/refreshToken.strategy';
-import { PublicTokenGuard } from 'src/guard/publicToken.guard';
+import { PublicTokenGuard } from '../guard/publicToken.guard';
 import { PassportModule } from '@nestjs/passport';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { RefreshTokenGuard } from 'src/guard/refreshToken.guard';
+import { RefreshTokenGuard } from '../guard/refreshToken.guard';
 
 @Module({
   imports: [

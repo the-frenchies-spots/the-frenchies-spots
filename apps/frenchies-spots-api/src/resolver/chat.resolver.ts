@@ -1,12 +1,12 @@
 import { Resolver, Mutation, Args, Query } from '@nestjs/graphql';
 
 import { UseGuards } from '@nestjs/common';
-import { RefreshTokenGuard } from 'src/guard/refreshToken.guard';
-import { ChatBusiness } from 'src/business/chat.business';
-import { ChatEntity } from 'src/entity/chat.entity';
-import { CurrentProfileId } from 'src/decorator/currentProfileId.decorator.';
+import { RefreshTokenGuard } from '../guard/refreshToken.guard';
+import { ChatBusiness } from '../business/chat.business';
+import { ChatEntity } from '../entity/chat.entity';
+import { CurrentProfileId } from '../decorator/currentProfileId.decorator.';
 
-import { InserChatInput } from 'src/dto/input/chat/insert-chat.input';
+import { InserChatInput } from '../dto/input/chat/insert-chat.input';
 
 @Resolver(() => ChatEntity)
 export class ChatResolver {

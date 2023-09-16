@@ -1,12 +1,12 @@
 import { Injectable } from '@nestjs/common';
 
-import ErrorService from 'src/service/error.service';
-import { codeErrors } from 'src/enum/code-errors.enum';
-import { SpotRepository } from 'src/repository/spot.repository';
-import { FavoriteInput } from 'src/dto/input/favorite/favorite-input';
-import { FavoriteRepository } from 'src/repository/favorite.repository';
-import { ToggleFavoriteResponse } from 'src/dto/response/toggle-favorite-response';
-import { SpotEntity } from 'src/entity/spot.entity';
+import ErrorService from '../service/error.service';
+import { codeErrors } from '../enum/code-errors.enum';
+import { SpotRepository } from '../repository/spot.repository';
+import { FavoriteInput } from '../dto/input/favorite/favorite-input';
+import { FavoriteRepository } from '../repository/favorite.repository';
+import { ToggleFavoriteResponse } from '../dto/response/toggle-favorite-response';
+import { SpotEntity } from '../entity/spot.entity';
 
 const {
   ACCESS_DENIED,

@@ -1,6 +1,6 @@
 import Stripe from 'stripe';
 import { Injectable } from '@nestjs/common';
-import { StripeChargeResponse } from 'src/dto/response/stripe-charge.response';
+import { StripeChargeResponse } from '../dto/response/stripe-charge.response';
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
   apiVersion: '2023-08-16',

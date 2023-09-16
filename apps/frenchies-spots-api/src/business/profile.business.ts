@@ -1,17 +1,17 @@
 import { Injectable } from '@nestjs/common';
 
-import { UserEntity } from 'src/entity/user.entity';
-import ErrorService from 'src/service/error.service';
-import { codeErrors } from 'src/enum/code-errors.enum';
+import { UserEntity } from '../entity/user.entity';
+import ErrorService from '../service/error.service';
+import { codeErrors } from '../enum/code-errors.enum';
 
-import { StripeService } from 'src/service/stripe.service';
-import { AuthRepository } from 'src/repository/auth.repository';
-import { ProfileRepository } from 'src/repository/Profile.repository';
-import { BuyPointInput } from 'src/dto/input/buy-point/buy-point-input';
-import { ProfileInput } from 'src/dto/input/profile/profile.input';
-import { ProfileEntity } from 'src/entity/profile.entity';
-import { ProfilesInput } from 'src/dto/input/profile/profiles.input';
-import { GeospatialService } from 'src/service/spot-geospatial.service';
+import { StripeService } from '../service/stripe.service';
+import { AuthRepository } from '../repository/auth.repository';
+import { ProfileRepository } from '../repository/Profile.repository';
+import { BuyPointInput } from '../dto/input/buy-point/buy-point-input';
+import { ProfileInput } from '../dto/input/profile/profile.input';
+import { ProfileEntity } from '../entity/profile.entity';
+import { ProfilesInput } from '../dto/input/profile/profiles.input';
+import { GeospatialService } from '../service/spot-geospatial.service';
 
 const { INTERNAL_SERVER_ERROR, USER_NOT_FOUND } = codeErrors;
 

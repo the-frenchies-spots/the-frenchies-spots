@@ -1,16 +1,16 @@
 import { Resolver, Mutation, Query, Args } from '@nestjs/graphql';
 
 import { Public } from '../decorator/public.decorator';
-import { SpotEntity } from 'src/entity/spot.entity';
+import { SpotEntity } from '../entity/spot.entity';
 import { SpotBusiness } from './../business/spot.business';
-import { SpotInput } from 'src/dto/input/spot/spot-input';
-import { CurrentProfileId } from 'src/decorator/currentProfileId.decorator.';
+import { SpotInput } from '../dto/input/spot/spot-input';
+import { CurrentProfileId } from '../decorator/currentProfileId.decorator.';
 import { UseGuards } from '@nestjs/common';
-import { RefreshTokenGuard } from 'src/guard/refreshToken.guard';
-import { SpotsInput } from 'src/dto/input/spot/spots-input';
-import { PublicTokenGuard } from 'src/guard/publicToken.guard';
-import { DeleteResponse } from 'src/dto/response/delete.response';
-import { SpotByIdResponse } from 'src/dto/spotByIdResponse';
+import { RefreshTokenGuard } from '../guard/refreshToken.guard';
+import { SpotsInput } from '../dto/input/spot/spots-input';
+import { PublicTokenGuard } from '../guard/publicToken.guard';
+import { DeleteResponse } from '../dto/response/delete.response';
+import { SpotByIdResponse } from '../dto/spotByIdResponse';
 
 @Resolver(() => SpotEntity)
 export class SpotResolver {

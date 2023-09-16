@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 
-import { plainToClass } from 'src/utils/plain-to-class';
-import { ProfileEntity } from 'src/entity/profile.entity';
-import { PrismaService } from 'src/service/prisma.service';
+import { plainToClass } from '../utils/plain-to-class';
+import { ProfileEntity } from '../entity/profile.entity';
+import { PrismaService } from '../service/prisma.service';
 
 @Injectable()
 export class FavoriteRepository {

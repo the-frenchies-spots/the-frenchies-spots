@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { GraphQLError } from 'graphql';
 
-import { codeErrors } from 'src/enum/code-errors.enum';
-import { errorsMessage } from 'src/utils/errors-message';
+import { codeErrors } from '../enum/code-errors.enum';
+import { errorsMessage } from '../utils/errors-message';
 
 @Injectable()
 class ErrorService extends GraphQLError {

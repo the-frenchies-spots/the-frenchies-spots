@@ -1,5 +1,5 @@
 import { Field, ObjectType } from '@nestjs/graphql';
-import { RatingEntity } from 'src/entity/rating.entity';
+import { RatingEntity } from '../../entity/rating.entity';
 
 @ObjectType()
 export class RatingResponse {
