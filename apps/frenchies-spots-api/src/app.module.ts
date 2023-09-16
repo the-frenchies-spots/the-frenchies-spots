@@ -18,18 +18,10 @@ import { ChatModule } from './module/chat.module';
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
-    GraphQLModule.forRoot({
+    GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
       autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
       sortSchema: true,
-      installSubscriptionHandlers: true,
-      context: ({ req }) => {
-        return { req };
-      },
-      cors: {
-        credentials: true,
-        origin: process.env.FRONT_PROD_URL,
-      },
     }),
     MongooseModule.forRoot(process.env.DATABASE_URL),
     AuthModule,
@@ -39,7 +31,7 @@ import { ChatModule } from './module/chat.module';
     ProfileModule,
     RatingModule,
     FavoriteModule,
-    // ChatModule,
+    ChatModule,
   ],
   providers: [PrismaService],
 })
