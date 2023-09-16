@@ -31,7 +31,7 @@ import { ChatModule } from './module/chat.module';
     ProfileModule,
     RatingModule,
     FavoriteModule,
-    ChatModule,
+    //ChatModule,
   ],
   providers: [PrismaService],
 })
