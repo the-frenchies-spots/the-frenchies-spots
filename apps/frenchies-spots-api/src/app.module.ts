@@ -22,10 +22,10 @@ import { ChatModule } from './module/chat.module';
       driver: ApolloDriver,
       autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
       sortSchema: true,
-      cors: {
-        origine: 'https://the-frenchies-spots-webui.vercel.app',
-        credentials: true,
-      },
+      // cors: {
+      //   origine: '*',
+      //   credentials: true,
+      // },
     }),
     MongooseModule.forRoot(process.env.DATABASE_URL),
     AuthModule,
