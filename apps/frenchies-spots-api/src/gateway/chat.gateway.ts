@@ -14,18 +14,9 @@ export class ChatGateway {
   // constructor(private readonly chatBusiness: ChatBusiness) {}
   // @WebSocketServer()
   // server: Server;
-  // handleConnextion(client: Socket) {
-  //   const { request } = client;
-  //   const socketUrl = request.headers.referer; // Obtenez l'URL du client
-  //   console.log('==================== CONNECT =========================');
-  //   console.log('Socket URL:', socketUrl);
-  //   console.log({ client });
-  //   console.log('=============================================');
-  // }
-  // handleDisconnect(client: Socket) {
-  //   console.log('==================== DISCONNECT =========================');
-  //   console.log({ client });
-  //   console.log('=============================================');
+  // afterInit() {
+  //   // Désactiver perMessageDeflate
+  //   this.server.engine.ws.perMessageDeflate = false;
   // }
   // @SubscribeMessage('chat')
   // async handleChatMessage(

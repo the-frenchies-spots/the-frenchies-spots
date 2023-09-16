@@ -18,10 +18,14 @@ import { ChatModule } from './module/chat.module';
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
-    GraphQLModule.forRoot<ApolloDriverConfig>({
+    GraphQLModule.forRoot({
       driver: ApolloDriver,
       autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
       sortSchema: true,
+      cors: {
+        origine: 'https://the-frenchies-spots-webui.vercel.app',
+        credentials: true,
+      },
     }),
     MongooseModule.forRoot(process.env.DATABASE_URL),
     AuthModule,
