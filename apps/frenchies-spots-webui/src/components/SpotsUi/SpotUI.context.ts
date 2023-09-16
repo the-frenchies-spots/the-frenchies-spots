@@ -1,6 +1,11 @@
 import { Dispatch, createContext } from "react";
 
-import type { SpotEntity, SpotsInput } from "@frenchies-spots/gql";
+import type {
+  ProfileEntity,
+  QueryProfilesArgs,
+  SpotEntity,
+  SpotsInput,
+} from "@frenchies-spots/gql";
 import { LazyQueryExecFunction } from "@apollo/client";
 import { UseFormReturnType } from "@frenchies-spots/hooks";
 import type { TCoordinate, TViewport } from "@frenchies-spots/map";
@@ -27,6 +32,12 @@ export interface SpotUiContextData {
       spotsInput: SpotsInput;
     }
   > | null;
+  getPeoples: LazyQueryExecFunction<
+    {
+      profiles: ProfileEntity[];
+    },
+    QueryProfilesArgs
+  > | null;
   form: TForm | null;
   coordPoint: TCoordinate | null;
   setCoordPoint: Dispatch<React.SetStateAction<TCoordinate | null>> | null;
@@ -43,6 +54,8 @@ export interface SpotUiContextData {
   closeFilter: (() => void) | null;
   currentSpotId: string | null;
   setCurrentSpotId: Dispatch<React.SetStateAction<string | null>> | null;
+  currentProfileId: string | null;
+  setCurrentProfileId: Dispatch<React.SetStateAction<string | null>> | null;
   isFilter: boolean;
   setIsFilter: Dispatch<React.SetStateAction<boolean>> | null;
 }
@@ -51,6 +64,7 @@ const defaultContext: SpotUiContextData = {
   currentSpotId: null,
   setCurrentSpotId: null,
   getFilterSpots: null,
+  getPeoples: null,
   form: null,
   coordPoint: null,
   setCoordPoint: null,
@@ -67,6 +81,8 @@ const defaultContext: SpotUiContextData = {
   closeFilter: null,
   isFilter: false,
   setIsFilter: null,
+  currentProfileId: null,
+  setCurrentProfileId: null,
 };
 
 export const SpotUiContext = createContext<SpotUiContextData>(defaultContext);

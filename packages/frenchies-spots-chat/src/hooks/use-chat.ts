@@ -1,17 +1,25 @@
 import React, { useEffect, useState } from "react";
+
+import { ChatEntity, ChatMessageEntity } from "@frenchies-spots/gql";
 import io, { type Socket } from "socket.io-client";
 
 interface UseChatParams {
   event: string;
 }
+export interface ChatMessageInput {
+  chatId: ChatEntity["id"];
+  profileChatId: ChatMessageEntity["profileChatId"];
+  message: ChatMessageEntity["message"];
+}
 
-export const useChat = (params: UseChatParams = { event: "message" }) => {
+export const useChat = (params: UseChatParams = { event: "chat" }) => {
   const { event } = params;
 
+  const [chatId, setChatId] = useState<string>("");
   const [socket, setSocket] = useState<Socket>();
-  const [messages, setMessages] = useState<string[]>([]);
+  const [messages, setMessages] = useState<ChatMessageInput[]>([]);
 
-  const send = (value: string) => {
+  const send = (value: ChatMessageInput) => {
     socket?.emit(event, value);
   };
 
@@ -20,16 +28,16 @@ export const useChat = (params: UseChatParams = { event: "message" }) => {
     setSocket(newSocket);
   }, [setSocket]);
 
-  const messageListener = (message: string) => {
-    setMessages((prev) => [...prev, message]);
+  const messageListener = (value: ChatMessageInput) => {
+    setMessages((prev) => [...prev, value]);
   };
 
   useEffect(() => {
-    socket?.on(event, messageListener);
+    socket?.on(`${event}:${chatId}`, messageListener);
     return () => {
-      socket?.off(event, messageListener);
+      socket?.off(`${event}:${chatId}`, messageListener);
     };
-  }, [messageListener]);
+  }, [chatId]);
 
-  return { messages, send };
+  return { messages, setMessages, send, setChatId };
 };

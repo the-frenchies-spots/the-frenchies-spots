@@ -19,6 +19,9 @@ export class ContactEntity {
   authorization: boolean;
 
   @Field()
+  isFriend: boolean;
+
+  @Field()
   createdAt: Date;
 
   @Field()

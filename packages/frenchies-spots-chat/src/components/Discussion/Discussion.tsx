@@ -1,6 +1,5 @@
 import React, { useEffect, useRef } from "react";
 
-import { ChatEntity } from "@frenchies-spots/gql";
 import {
   Flex,
   ScrollArea,
@@ -9,14 +8,15 @@ import {
 } from "@frenchies-spots/material";
 
 import { BubbleChat } from "../BubbleChat/BubbleChat";
-import { Avatar } from "../Avatar/Avatar";
+import { ChatMessageInput } from "../../hooks";
 
 export interface DiscussionProps extends StackProps {
-  messages: string[];
+  messages: ChatMessageInput[];
+  currentProfileId: string;
 }
 
 export const Discussion = (props: DiscussionProps) => {
-  const { messages, ...stackProps } = props;
+  const { messages, currentProfileId, ...stackProps } = props;
 
   const viewport = useRef<HTMLDivElement>(null);
 
@@ -34,19 +34,20 @@ export const Discussion = (props: DiscussionProps) => {
     <ScrollArea h="100%" viewportRef={viewport}>
       <Stack h="100%" pt="md" {...stackProps}>
         {messages.map((message, index) => {
+          const isParticipant = currentProfileId !== message.profileChatId;
           return (
-            <Flex key={index} gap="md" direction="row">
-              {!!(index % 2) && <Avatar />}
+            <Flex
+              key={index}
+              gap="md"
+              direction="row"
+              w="100%"
+              justify={isParticipant ? "start" : "end"}
+            >
               <BubbleChat
+                w="70%"
+                isParticipant={isParticipant}
                 message={message}
-                position={index % 2 ? "left" : "right"}
-                sx={{
-                  flexGrow: 1,
-                  background: index % 2 ? "white" : "#B68973",
-                  color: index % 2 ? "purple" : "white",
-                }}
               />
-              {!(index % 2) && <Avatar />}
             </Flex>
           );
         })}

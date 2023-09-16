@@ -4,16 +4,20 @@ import {
   WebSocketGateway,
   WebSocketServer,
 } from '@nestjs/websockets';
+import { ChatBusiness } from 'src/business/chat.business';
+import { SendChatMessageInput } from 'src/dto/input/chat/send-chat-message.input';
 
-@WebSocketGateway(8001, { cors: '*:*' })
+@WebSocketGateway(+process.env.SOCKET_PORT_URL, { cors: '*:*' })
 export class ChatGateway {
+  constructor(private readonly chatBusiness: ChatBusiness) {}
+
   @WebSocketServer()
   server;
-  @SubscribeMessage('message')
-  handleMessage(@MessageBody() message: string): void {
-    console.log('===========================');
-    console.log({ message });
-    console.log('===========================');
-    this.server.emit('message', message);
+  @SubscribeMessage('chat')
+  async handleChatMessage(
+    @MessageBody() payload: SendChatMessageInput,
+  ): Promise<void> {
+    this.server.emit(`chat:${payload.chatId}`, payload);
+    this.chatBusiness.sendMessage(payload);
   }
 }

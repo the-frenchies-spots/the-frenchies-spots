@@ -12,10 +12,16 @@ import { SpotRepository } from 'src/repository/spot.repository';
 import { CloudinaryService } from 'src/service/cloudinary.service';
 import { PublicTokenStrategy } from 'src/strategy/publicToken.strategy';
 import { RefreshTokenStrategy } from 'src/strategy/refreshToken.strategy';
-import { SpotGeospatialService } from 'src/service/spot-geospatial.service';
+import { GeospatialService } from 'src/service/spot-geospatial.service';
+import { ProfileSchema } from 'src/schema/profile.shema';
 
 @Module({
-  imports: [MongooseModule.forFeature([{ name: 'Spot', schema: SpotSchema }])],
+  imports: [
+    MongooseModule.forFeature([
+      { name: 'Spot', schema: SpotSchema },
+      { name: 'Profile', schema: ProfileSchema },
+    ]),
+  ],
   providers: [
     SpotResolver,
     SpotBusiness,
@@ -24,7 +30,7 @@ import { SpotGeospatialService } from 'src/service/spot-geospatial.service';
     TokenService,
     PrismaService,
     CloudinaryService,
-    SpotGeospatialService,
+    GeospatialService,
     PublicTokenGuard,
     PublicTokenStrategy,
     RefreshTokenStrategy,

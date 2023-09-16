@@ -14,6 +14,8 @@ import { RatingEntity } from './rating.entity';
 import { FavoriteEntity } from './favorite.entity';
 import { ContactEntity } from './contact.entity';
 import { ProfileChatEntity } from './profile-chat.entity';
+import GraphQLJSON from 'graphql-type-json';
+import { LocationEntity } from './location.entity';
 
 @ObjectType()
 @Entity('Profile')
@@ -29,6 +31,10 @@ export class ProfileEntity implements Profile {
   @Field({ nullable: true })
   @Column({ nullable: true })
   photoUrl: string;
+
+  @Field({ nullable: true })
+  @Column({ nullable: true })
+  avatarUrl: string;
 
   @Field()
   @Column({ default: 0 })
@@ -67,6 +73,10 @@ export class ProfileEntity implements Profile {
     cascade: true,
   })
   profileChats: ProfileChatEntity[];
+
+  @Field(() => GraphQLJSON, { nullable: true })
+  @Column('json')
+  location: LocationEntity;
 
   @Field()
   @Column({ default: () => 'CURRENT_TIMESTAMP' })

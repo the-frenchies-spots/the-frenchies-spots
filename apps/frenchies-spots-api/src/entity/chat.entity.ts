@@ -17,6 +17,9 @@ export class ChatEntity {
   chatMessages: ChatMessageEntity[];
 
   @Field()
+  isTemporary: boolean;
+
+  @Field()
   createdAt: Date;
 
   @Field()

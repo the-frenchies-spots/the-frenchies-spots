@@ -2,10 +2,9 @@ import { Field, InputType } from '@nestjs/graphql';
 
 import { Column } from 'typeorm';
 import { SpotPictureInput } from '../spot-picture/spot-picture-input';
-import { TagInput } from '../tag/tag.input';
 import GraphQLJSON from 'graphql-type-json';
-import { Location } from 'src/entity/spot.entity';
 import { CategoriesSpotAndTag } from 'src/enum/categories-spot-and-tag.enum';
+import { LocationEntity } from 'src/entity/location.entity';
 
 @InputType()
 export class SpotInput {
@@ -39,7 +38,7 @@ export class SpotInput {
 
   @Field(() => GraphQLJSON, { nullable: true })
   @Column('json')
-  location: Location;
+  location: LocationEntity;
 
   @Field()
   @Column()

@@ -18,8 +18,8 @@ const Chat = () => {
       </Text>
       <Tabs defaultValue="contact" h="80%" pt="md">
         <Tabs.List grow>
-          <Tabs.Tab value="contact">Contact</Tabs.Tab>
-          <Tabs.Tab value="history">Historique</Tabs.Tab>
+          <Tabs.Tab value="contact">Chat</Tabs.Tab>
+          <Tabs.Tab value="history">Rencontre</Tabs.Tab>
         </Tabs.List>
 
         <Tabs.Panel value="contact" pt="xs" h="100%">

@@ -17,6 +17,7 @@
     "@emotion/server": "^11.10.0",
     "@emotion/styled": "11.10.5",
     "@frenchies-spots/material": "workspace:*",
+    "@frenchies-spots/icon": "workspace:*",
     "@mantine/core": "6.0.10",
     "@mantine/hooks": "6.0.10",
     "@types/jest": "^29.4.0",

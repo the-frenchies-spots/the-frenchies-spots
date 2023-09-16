@@ -5,14 +5,36 @@ mutation createOrUpdateRating($ratingInput: RatingInput!){
             createdAt
             id
             profile{
+                avatarUrl
+                contacts{
+                    authorization
+                    createdAt
+                    id
+                    isFriend
+                    profile{
+                        avatarUrl
+                        createdAt
+                        gamePoint
+                        id
+                        location
+                        photoUrl
+                        pseudo
+                        updatedAt
+                        userId
+                    }
+                    profileId
+                    updatedAt
+                }
                 createdAt
                 favorites{
                     createdAt
                     id
                     profile{
+                        avatarUrl
                         createdAt
                         gamePoint
                         id
+                        location
                         photoUrl
                         pseudo
                         updatedAt
@@ -39,15 +61,50 @@ mutation createOrUpdateRating($ratingInput: RatingInput!){
                 }
                 gamePoint
                 id
+                location
                 photoUrl
+                profileChats{
+                    chat{
+                        createdAt
+                        id
+                        isTemporary
+                        updatedAt
+                    }
+                    chatId
+                    chatMessages{
+                        chatId
+                        createdAt
+                        id
+                        message
+                        profileChatId
+                        updatedAt
+                    }
+                    createdAt
+                    id
+                    profile{
+                        avatarUrl
+                        createdAt
+                        gamePoint
+                        id
+                        location
+                        photoUrl
+                        pseudo
+                        updatedAt
+                        userId
+                    }
+                    profileId
+                    updatedAt
+                }
                 pseudo
                 ratings{
                     createdAt
                     id
                     profile{
+                        avatarUrl
                         createdAt
                         gamePoint
                         id
+                        location
                         photoUrl
                         pseudo
                         updatedAt
@@ -92,9 +149,11 @@ mutation createOrUpdateRating($ratingInput: RatingInput!){
                     location
                     name
                     profile{
+                        avatarUrl
                         createdAt
                         gamePoint
                         id
+                        location
                         photoUrl
                         pseudo
                         updatedAt
@@ -135,9 +194,11 @@ mutation createOrUpdateRating($ratingInput: RatingInput!){
                     hashedRefreshToken
                     id
                     profile{
+                        avatarUrl
                         createdAt
                         gamePoint
                         id
+                        location
                         photoUrl
                         pseudo
                         updatedAt
@@ -169,9 +230,11 @@ mutation createOrUpdateRating($ratingInput: RatingInput!){
                 location
                 name
                 profile{
+                    avatarUrl
                     createdAt
                     gamePoint
                     id
+                    location
                     photoUrl
                     pseudo
                     updatedAt

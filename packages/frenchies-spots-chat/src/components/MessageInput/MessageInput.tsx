@@ -6,6 +6,7 @@ import {
   type FlexProps,
   TextInput,
 } from "@frenchies-spots/material";
+import { ChatMessageInput } from "../../hooks";
 
 interface MessageInputProps extends FlexProps {
   send: (val: string) => void;

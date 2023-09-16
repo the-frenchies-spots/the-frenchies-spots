@@ -23,6 +23,9 @@ export class ChatMessageEntity {
   profileChatId: string;
 
   @Field()
+  message: string;
+
+  @Field()
   createdAt: Date;
 
   @Field()
