@@ -1,21 +1,21 @@
 import { Module } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 
-import { TokenService } from 'src/service/token.service';
-import { PrismaService } from 'src/service/prisma.service';
-import { StripeService } from 'src/service/stripe.service';
-import { PublicTokenGuard } from 'src/guard/publicToken.guard';
-import { ProfileResolver } from 'src/resolver/Profile.resolver';
+import { TokenService } from '../service/token.service';
+import { PrismaService } from '../service/prisma.service';
+import { StripeService } from '../service/stripe.service';
+import { PublicTokenGuard } from '../guard/publicToken.guard';
+import { ProfileResolver } from '../resolver/Profile.resolver';
 
-import { AuthRepository } from 'src/repository/auth.repository';
-import { ProfileBusiness } from 'src/business/profile.business';
-import { ProfileRepository } from 'src/repository/Profile.repository';
-import { PublicTokenStrategy } from 'src/strategy/publicToken.strategy';
-import { RefreshTokenStrategy } from 'src/strategy/refreshToken.strategy';
-import { GeospatialService } from 'src/service/spot-geospatial.service';
+import { AuthRepository } from '../repository/auth.repository';
+import { ProfileBusiness } from '../business/profile.business';
+import { ProfileRepository } from '../repository/Profile.repository';
+import { PublicTokenStrategy } from '../strategy/publicToken.strategy';
+import { RefreshTokenStrategy } from '../strategy/refreshToken.strategy';
+import { GeospatialService } from '../service/spot-geospatial.service';
 import { MongooseModule } from '@nestjs/mongoose';
-import { SpotSchema } from 'src/schema/spot.shema';
-import { ProfileSchema } from 'src/schema/profile.shema';
+import { SpotSchema } from '../schema/spot.shema';
+import { ProfileSchema } from '../schema/profile.shema';
 
 @Module({
   imports: [

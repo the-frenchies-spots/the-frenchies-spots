@@ -3,8 +3,8 @@ import { Field, InputType } from '@nestjs/graphql';
 import { Column } from 'typeorm';
 import { SpotPictureInput } from '../spot-picture/spot-picture-input';
 import GraphQLJSON from 'graphql-type-json';
-import { CategoriesSpotAndTag } from 'src/enum/categories-spot-and-tag.enum';
-import { LocationEntity } from 'src/entity/location.entity';
+import { CategoriesSpotAndTag } from '../../../enum/categories-spot-and-tag.enum';
+import { LocationEntity } from '../../../entity/location.entity';
 
 @InputType()
 export class SpotInput {

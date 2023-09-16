@@ -1,14 +1,14 @@
 import { Injectable } from '@nestjs/common';
-import { InserChatInput } from 'src/dto/input/chat/insert-chat.input';
-import { ChatEntity } from 'src/entity/chat.entity';
+import { InserChatInput } from '../dto/input/chat/insert-chat.input';
+import { ChatEntity } from '../entity/chat.entity';
 
-import { ChatRepository } from 'src/repository/chat.repository';
-import { extractArray } from 'src/utils/extract-array';
+import { ChatRepository } from '../repository/chat.repository';
+import { extractArray } from '../utils/extract-array';
 import { ContactRepository } from '../repository/contact.repository';
-import ErrorService from 'src/service/error.service';
-import { codeErrors } from 'src/enum/code-errors.enum';
-import { SendChatMessageInput } from 'src/dto/input/chat/send-chat-message.input';
-import { ChatMessageEntity } from 'src/entity/chat-message.entity';
+import ErrorService from '../service/error.service';
+import { codeErrors } from '../enum/code-errors.enum';
+import { SendChatMessageInput } from '../dto/input/chat/send-chat-message.input';
+import { ChatMessageEntity } from '../entity/chat-message.entity';
 
 const { ACCESS_DENIED, INTERNAL_SERVER_ERROR } = codeErrors;
 

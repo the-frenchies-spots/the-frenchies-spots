@@ -5,9 +5,9 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 
 import { PrismaService } from './service/prisma.service';
-import { AuthModule } from 'src/module/auth.module';
-import { UserModule } from 'src/module/user.module';
-import { SpotModule } from 'src/module/spot.module';
+import { AuthModule } from './module/auth.module';
+import { UserModule } from './module/user.module';
+import { SpotModule } from './module/spot.module';
 import { ConfigModule } from '@nestjs/config';
 import { RatingModule } from './module/rating.module';
 import { FavoriteModule } from './module/favorite.module';

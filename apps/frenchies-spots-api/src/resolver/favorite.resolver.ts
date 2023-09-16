@@ -1,13 +1,13 @@
 import { UseGuards } from '@nestjs/common';
 import { Resolver, Query, Mutation, Args } from '@nestjs/graphql';
 
-import { FavoriteEntity } from 'src/entity/favorite.entity';
-import { RefreshTokenGuard } from 'src/guard/refreshToken.guard';
-import { FavoriteBusiness } from 'src/business/favorite.business';
-import { FavoriteInput } from 'src/dto/input/favorite/favorite-input';
-import { CurrentProfileId } from 'src/decorator/currentProfileId.decorator.';
-import { ToggleFavoriteResponse } from 'src/dto/response/toggle-favorite-response';
-import { SpotEntity } from 'src/entity/spot.entity';
+import { FavoriteEntity } from '../entity/favorite.entity';
+import { RefreshTokenGuard } from '../guard/refreshToken.guard';
+import { FavoriteBusiness } from '../business/favorite.business';
+import { FavoriteInput } from '../dto/input/favorite/favorite-input';
+import { CurrentProfileId } from '../decorator/currentProfileId.decorator.';
+import { ToggleFavoriteResponse } from '../dto/response/toggle-favorite-response';
+import { SpotEntity } from '../entity/spot.entity';
 
 @Resolver(() => FavoriteEntity)
 export class FavoriteResolver {

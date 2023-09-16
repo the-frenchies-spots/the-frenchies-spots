@@ -2,17 +2,17 @@ import { UseGuards } from '@nestjs/common';
 import { Resolver, Query, Args, Mutation } from '@nestjs/graphql';
 
 import { Public } from '../decorator/public.decorator';
-import { CurrentProfileId } from 'src/decorator/currentProfileId.decorator.';
-import { RefreshTokenGuard } from 'src/guard/refreshToken.guard';
-import { RatingInput } from 'src/dto/input/rating/rating-input';
-import { RatingResponse } from 'src/dto/response/rating-response';
-import { TagEntity } from 'src/entity/tag.entity';
-import { TagBusiness } from 'src/business/tag.business';
-import { TagListInput } from 'src/dto/input/tag/tag-list-input';
-import { TagInsertInput } from 'src/dto/input/tag/tag-insert.input';
-import { TagUpdateInput } from 'src/dto/input/tag/tag-update.input';
-import { DeleteResponse } from 'src/dto/response/delete.response';
-import { Admin } from 'src/decorator/admin.decorator';
+import { CurrentProfileId } from '../decorator/currentProfileId.decorator.';
+import { RefreshTokenGuard } from '../guard/refreshToken.guard';
+import { RatingInput } from '../dto/input/rating/rating-input';
+import { RatingResponse } from '../dto/response/rating-response';
+import { TagEntity } from '../entity/tag.entity';
+import { TagBusiness } from '../business/tag.business';
+import { TagListInput } from '../dto/input/tag/tag-list-input';
+import { TagInsertInput } from '../dto/input/tag/tag-insert.input';
+import { TagUpdateInput } from '../dto/input/tag/tag-update.input';
+import { DeleteResponse } from '../dto/response/delete.response';
+import { Admin } from '../decorator/admin.decorator';
 
 @Resolver(() => TagEntity)
 export class TagResolver {

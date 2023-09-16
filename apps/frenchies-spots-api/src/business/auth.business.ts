@@ -1,15 +1,15 @@
 import { hash, compare } from 'bcryptjs';
 import { Injectable } from '@nestjs/common';
 
-import { SignUpInput } from 'src/dto/signup-input';
-import { SignInInput } from 'src/dto/signin-input';
-import { UserEntity } from 'src/entity/user.entity';
-import { SignResponse } from 'src/dto/sign-response';
-import ErrorService from 'src/service/error.service';
-import { codeErrors } from 'src/enum/code-errors.enum';
-import { LogoutResponse } from 'src/dto/logout-response';
-import { TokenService } from 'src/service/token.service';
-import { AuthRepository } from 'src/repository/auth.repository';
+import { SignUpInput } from '../dto/signup-input';
+import { SignInInput } from '../dto/signin-input';
+import { UserEntity } from '../entity/user.entity';
+import { SignResponse } from '../dto/sign-response';
+import ErrorService from '../service/error.service';
+import { codeErrors } from '../enum/code-errors.enum';
+import { LogoutResponse } from '../dto/logout-response';
+import { TokenService } from '../service/token.service';
+import { AuthRepository } from '../repository/auth.repository';
 
 const { USER_ALREADY_EXISTS, ACCESS_DENIED, AUTHENTICATION_DENIED } =
   codeErrors;
