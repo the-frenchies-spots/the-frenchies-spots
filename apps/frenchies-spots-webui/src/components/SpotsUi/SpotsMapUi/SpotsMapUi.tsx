@@ -6,17 +6,19 @@ import {
   CurrentLocationMarker,
   MapPerimeter,
   useLocationCtx,
+  PeopleMarker,
 } from "@frenchies-spots/map";
-import { SpotEntity } from "@frenchies-spots/gql";
+import { ProfileEntity, SpotEntity } from "@frenchies-spots/gql";
 import PinMarker from "@frenchies-spots/map/src/components/Marker/PinMarker/PinMarker";
 import { useSpotUi } from "../../../hooks/use-spot-ui";
 
 interface SpotsMapUiProps {
-  list: SpotEntity[] | undefined;
+  spotList: SpotEntity[] | undefined;
+  peopleList: ProfileEntity[] | undefined;
 }
 
 const SpotsMapUi = (props: SpotsMapUiProps) => {
-  const { list } = props;
+  const { spotList, peopleList } = props;
 
   const { location: userPosition } = useLocationCtx();
   const {
@@ -26,6 +28,7 @@ const SpotsMapUi = (props: SpotsMapUiProps) => {
     coordPoint,
     isRayon,
     setCurrentSpotId,
+    setCurrentProfileId,
     openDrawer,
   } = useSpotUi();
 
@@ -35,6 +38,11 @@ const SpotsMapUi = (props: SpotsMapUiProps) => {
 
   const handleSpotClick = (id: string) => {
     setCurrentSpotId(id);
+    openDrawer();
+  };
+
+  const handleProfileClick = (id: string) => {
+    setCurrentProfileId(id);
     openDrawer();
   };
 
@@ -59,7 +67,7 @@ const SpotsMapUi = (props: SpotsMapUiProps) => {
         <PinMarker lat={coordPoint.lat} lng={coordPoint.lng} />
       )}
 
-      {list?.map((spot) => {
+      {spotList?.map((spot) => {
         const { id, location } = spot;
         const [lng, lat] = location.coordinates;
         return (
@@ -68,6 +76,21 @@ const SpotsMapUi = (props: SpotsMapUiProps) => {
             lat={lat}
             lng={lng}
             onClick={() => handleSpotClick(id)}
+          />
+        );
+      })}
+
+      {peopleList?.map((profile) => {
+        const { id, location, avatarUrl } = profile;
+        const [lng, lat] = location.coordinates;
+        return (
+          <PeopleMarker
+            zoom={viewport.zoom}
+            key={id}
+            lat={lat}
+            lng={lng}
+            src={`${avatarUrl}`}
+            onClick={() => handleProfileClick(id)}
           />
         );
       })}

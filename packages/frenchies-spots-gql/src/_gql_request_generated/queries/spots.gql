@@ -9,6 +9,26 @@ query spots($spotsInput: SpotsInput!){
             createdAt
             id
             profile{
+                avatarUrl
+                contacts{
+                    authorization
+                    createdAt
+                    id
+                    isFriend
+                    profile{
+                        avatarUrl
+                        createdAt
+                        gamePoint
+                        id
+                        location
+                        photoUrl
+                        pseudo
+                        updatedAt
+                        userId
+                    }
+                    profileId
+                    updatedAt
+                }
                 createdAt
                 favorites{
                     createdAt
@@ -34,15 +54,50 @@ query spots($spotsInput: SpotsInput!){
                 }
                 gamePoint
                 id
+                location
                 photoUrl
+                profileChats{
+                    chat{
+                        createdAt
+                        id
+                        isTemporary
+                        updatedAt
+                    }
+                    chatId
+                    chatMessages{
+                        chatId
+                        createdAt
+                        id
+                        message
+                        profileChatId
+                        updatedAt
+                    }
+                    createdAt
+                    id
+                    profile{
+                        avatarUrl
+                        createdAt
+                        gamePoint
+                        id
+                        location
+                        photoUrl
+                        pseudo
+                        updatedAt
+                        userId
+                    }
+                    profileId
+                    updatedAt
+                }
                 pseudo
                 ratings{
                     createdAt
                     id
                     profile{
+                        avatarUrl
                         createdAt
                         gamePoint
                         id
+                        location
                         photoUrl
                         pseudo
                         updatedAt
@@ -80,9 +135,11 @@ query spots($spotsInput: SpotsInput!){
                     location
                     name
                     profile{
+                        avatarUrl
                         createdAt
                         gamePoint
                         id
+                        location
                         photoUrl
                         pseudo
                         updatedAt
@@ -123,9 +180,11 @@ query spots($spotsInput: SpotsInput!){
                     hashedRefreshToken
                     id
                     profile{
+                        avatarUrl
                         createdAt
                         gamePoint
                         id
+                        location
                         photoUrl
                         pseudo
                         updatedAt

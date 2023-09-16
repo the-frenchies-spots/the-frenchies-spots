@@ -7,6 +7,36 @@ input BuyPointInput {
   paymentId: String!
 }
 
+type ChatEntity {
+  chatMessages: [ChatMessageEntity!]!
+  createdAt: DateTime!
+  id: String!
+  isTemporary: Boolean!
+  participants: [ProfileChatEntity!]!
+  updatedAt: DateTime!
+}
+
+type ChatMessageEntity {
+  chat: ChatEntity!
+  chatId: String!
+  createdAt: DateTime!
+  id: String!
+  message: String!
+  profileChat: ProfileChatEntity!
+  profileChatId: String!
+  updatedAt: DateTime!
+}
+
+type ContactEntity {
+  authorization: Boolean!
+  createdAt: DateTime!
+  id: String!
+  isFriend: Boolean!
+  profile: ProfileEntity!
+  profileId: String!
+  updatedAt: DateTime!
+}
+
 """
 A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
 """
@@ -31,6 +61,10 @@ input FavoriteInput {
   spotId: String!
 }
 
+input InserChatInput {
+  participantIds: [String!]!
+}
+
 """
 The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf).
 """
@@ -46,12 +80,14 @@ type Mutation {
   deleteSpot(id: String!): DeleteResponse!
   deleteTag(id: String!): DeleteResponse!
   getNewTokens: NewTokensResponse!
+  insertChat(inserChatInput: InserChatInput!): ChatEntity!
   insertSpot(insertSpotInput: SpotInput!): SpotEntity!
   insertTag(tagInsertInput: TagInsertInput!): TagEntity!
   logout: LogoutResponse!
   signIn(signInInput: SignInInput!): SignResponse!
   signUp(signUpInput: SignUpInput!): SignResponse!
   toggleFavorite(favoriteInput: FavoriteInput!): ToggleFavoriteResponse!
+  updateProfile(profileInput: ProfileInput!): UserEntity!
   updateSpot(updateSpotInput: SpotInput!): SpotEntity!
   updateTag(tagUpdateInput: TagUpdateInput!): TagEntity!
 }
@@ -61,12 +97,27 @@ type NewTokensResponse {
   refreshToken: String!
 }
 
+type ProfileChatEntity {
+  chat: ChatEntity!
+  chatId: String!
+  chatMessages: [ChatMessageEntity!]!
+  createdAt: DateTime!
+  id: String!
+  profile: ProfileEntity!
+  profileId: String!
+  updatedAt: DateTime!
+}
+
 type ProfileEntity {
+  avatarUrl: String
+  contacts: [ContactEntity!]!
   createdAt: DateTime!
   favorites: [FavoriteEntity!]
   gamePoint: Float!
   id: String!
+  location: JSON
   photoUrl: String
+  profileChats: [ProfileChatEntity!]!
   pseudo: String!
   ratings: [RatingEntity!]
   spots: [SpotEntity!]
@@ -75,8 +126,22 @@ type ProfileEntity {
   userId: String!
 }
 
+input ProfileInput {
+  avatarUrl: String
+  gamePoint: Float
+  location: JSON
+  photoUrl: String
+  pseudo: String
+}
+
+input ProfilesInput {
+  point: JSON
+}
+
 type Query {
+  chatByPk(chatId: String!): ChatEntity!
   getLoginUser: UserEntity!
+  profiles(profilesInput: ProfilesInput!): [ProfileEntity!]!
   spotByPk(id: String!): SpotByIdResponse!
   spots(spotsInput: SpotsInput!): [SpotEntity!]!
   spotsFavorite: [SpotEntity!]!

@@ -9,6 +9,26 @@ mutation insertSpot($insertSpotInput: SpotInput!){
             createdAt
             id
             profile{
+                avatarUrl
+                contacts{
+                    authorization
+                    createdAt
+                    id
+                    isFriend
+                    profile{
+                        avatarUrl
+                        createdAt
+                        gamePoint
+                        id
+                        location
+                        photoUrl
+                        pseudo
+                        updatedAt
+                        userId
+                    }
+                    profileId
+                    updatedAt
+                }
                 createdAt
                 favorites{
                     createdAt
@@ -34,15 +54,50 @@ mutation insertSpot($insertSpotInput: SpotInput!){
                 }
                 gamePoint
                 id
+                location
                 photoUrl
+                profileChats{
+                    chat{
+                        createdAt
+                        id
+                        isTemporary
+                        updatedAt
+                    }
+                    chatId
+                    chatMessages{
+                        chatId
+                        createdAt
+                        id
+                        message
+                        profileChatId
+                        updatedAt
+                    }
+                    createdAt
+                    id
+                    profile{
+                        avatarUrl
+                        createdAt
+                        gamePoint
+                        id
+                        location
+                        photoUrl
+                        pseudo
+                        updatedAt
+                        userId
+                    }
+                    profileId
+                    updatedAt
+                }
                 pseudo
                 ratings{
                     createdAt
                     id
                     profile{
+                        avatarUrl
                         createdAt
                         gamePoint
                         id
+                        location
                         photoUrl
                         pseudo
                         updatedAt
@@ -87,9 +142,11 @@ mutation insertSpot($insertSpotInput: SpotInput!){
                     location
                     name
                     profile{
+                        avatarUrl
                         createdAt
                         gamePoint
                         id
+                        location
                         photoUrl
                         pseudo
                         updatedAt
@@ -130,9 +187,11 @@ mutation insertSpot($insertSpotInput: SpotInput!){
                     hashedRefreshToken
                     id
                     profile{
+                        avatarUrl
                         createdAt
                         gamePoint
                         id
+                        location
                         photoUrl
                         pseudo
                         updatedAt
@@ -153,9 +212,11 @@ mutation insertSpot($insertSpotInput: SpotInput!){
         location
         name
         profile{
+            avatarUrl
             createdAt
             gamePoint
             id
+            location
             photoUrl
             pseudo
             updatedAt
@@ -194,9 +255,11 @@ mutation insertSpot($insertSpotInput: SpotInput!){
                 location
                 name
                 profile{
+                    avatarUrl
                     createdAt
                     gamePoint
                     id
+                    location
                     photoUrl
                     pseudo
                     updatedAt

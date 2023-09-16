@@ -15,6 +15,7 @@ import { AutocompleteAddress, useGeocoding } from "@frenchies-spots/map";
 import { IconSearch, IconSortDescending } from "@frenchies-spots/icon";
 import { useSpotUi } from "../../../hooks/use-spot-ui";
 import toast from "react-hot-toast";
+import StatusBar from "../../StatusBar/StatusBar";
 
 interface SpotMenuProps extends Omit<ContainerProps, "onChange"> {}
 
@@ -30,6 +31,7 @@ const SpotMenu = (props: SpotMenuProps) => {
     setCoordPoint,
     setViewPort,
     setIsFilter,
+    isMapMode,
   } = useSpotUi();
 
   const handleOpenDrawer = () => {
@@ -60,8 +62,9 @@ const SpotMenu = (props: SpotMenuProps) => {
   };
 
   return (
-    <Container size="md" mt="xl" {...other}>
+    <Container size="md" mt="md" {...other}>
       <Stack>
+        <StatusBar isMapMode={isMapMode} />
         <Box sx={{ position: "relative" }}>
           <AutocompleteAddress
             placeholder="search address"

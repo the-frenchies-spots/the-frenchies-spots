@@ -8,7 +8,7 @@ import { SpotByIdResponse } from 'src/dto/spotByIdResponse';
 import { SpotsInput } from 'src/dto/input/spot/spots-input';
 import { SpotRepository } from 'src/repository/spot.repository';
 import { DeleteResponse } from 'src/dto/response/delete.response';
-import { SpotGeospatialService } from 'src/service/spot-geospatial.service';
+import { GeospatialService } from 'src/service/spot-geospatial.service';
 
 const { SPOT_NOT_FOUND, SPOT_ID_NOT_MATCH_PROFILE_ID } = codeErrors;
 
@@ -16,7 +16,7 @@ const { SPOT_NOT_FOUND, SPOT_ID_NOT_MATCH_PROFILE_ID } = codeErrors;
 export class SpotBusiness {
   constructor(
     private spotRepository: SpotRepository,
-    private geoService: SpotGeospatialService,
+    private geoService: GeospatialService,
   ) {}
 
   async getById(
@@ -34,9 +34,9 @@ export class SpotBusiness {
     if (point) {
       return this.geoService.searchArround(point).then((spotAround) => {
         const ids = spotAround.length
-          ? spotAround.map((spot) => spot._id.toHexString())
+          ? spotAround.map((spot) => spot._id)
           : undefined;
-        if (ids.length) {
+        if (ids?.length) {
           return this.spotRepository.getAll(fields, ids, profileId);
         }
         return [];

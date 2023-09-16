@@ -14,6 +14,15 @@ query tags($tagListInput: TagListInput!){
                 createdAt
                 id
                 profile{
+                    avatarUrl
+                    contacts{
+                        authorization
+                        createdAt
+                        id
+                        isFriend
+                        profileId
+                        updatedAt
+                    }
                     createdAt
                     favorites{
                         createdAt
@@ -24,7 +33,15 @@ query tags($tagListInput: TagListInput!){
                     }
                     gamePoint
                     id
+                    location
                     photoUrl
+                    profileChats{
+                        chatId
+                        createdAt
+                        id
+                        profileId
+                        updatedAt
+                    }
                     pseudo
                     ratings{
                         createdAt
@@ -81,9 +98,11 @@ query tags($tagListInput: TagListInput!){
                     location
                     name
                     profile{
+                        avatarUrl
                         createdAt
                         gamePoint
                         id
+                        location
                         photoUrl
                         pseudo
                         updatedAt
@@ -125,9 +144,11 @@ query tags($tagListInput: TagListInput!){
             location
             name
             profile{
+                avatarUrl
                 createdAt
                 gamePoint
                 id
+                location
                 photoUrl
                 pseudo
                 updatedAt
@@ -138,9 +159,11 @@ query tags($tagListInput: TagListInput!){
                 createdAt
                 id
                 profile{
+                    avatarUrl
                     createdAt
                     gamePoint
                     id
+                    location
                     photoUrl
                     pseudo
                     updatedAt

@@ -13,6 +13,7 @@ import { RatingModule } from './module/rating.module';
 import { FavoriteModule } from './module/favorite.module';
 import { TagModule } from './module/tag.module';
 import { ProfileModule } from './module/profile.module';
+import { ChatModule } from './module/chat.module';
 
 @Module({
   imports: [
@@ -30,6 +31,7 @@ import { ProfileModule } from './module/profile.module';
     ProfileModule,
     RatingModule,
     FavoriteModule,
+    ChatModule,
   ],
   providers: [PrismaService],
 })

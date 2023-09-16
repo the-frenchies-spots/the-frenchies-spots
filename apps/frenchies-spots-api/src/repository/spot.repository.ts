@@ -138,7 +138,6 @@ export class SpotRepository {
         ...values,
         tags: {
           create: tags.map((tagId) => {
-            console.log({ tagId });
             return {
               tag: {
                 connect: { id: tagId },

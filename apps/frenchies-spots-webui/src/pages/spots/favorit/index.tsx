@@ -5,10 +5,11 @@ import NavigationLayout from "../../../components/Layout/NavigationLayout/Naviga
 
 import { useQuery } from "@apollo/client";
 import { SpotEntity, queries } from "@frenchies-spots/gql";
-import { Button, LoadingOverlay } from "@frenchies-spots/material";
+import { Button, Container, LoadingOverlay } from "@frenchies-spots/material";
 
 import SpotList from "../../../components/Spots/SpotList/SpotList";
 import FavoriteButton from "../../../components/Spots/SpotButton/FavoriteButton/FavoriteButton";
+import StatusBar from "../../../components/StatusBar/StatusBar";
 
 const FavoritPage = () => {
   const { data, loading, refetch } = useQuery<{
@@ -18,6 +19,9 @@ const FavoritPage = () => {
   return (
     <>
       <LoadingOverlay visible={loading} overlayBlur={2} />
+      <Container size="md" mt="md">
+        <StatusBar />
+      </Container>
       <SpotList list={data?.spotsFavorite}>
         {({ spotId, favoriteId }) => (
           <FavoriteButton

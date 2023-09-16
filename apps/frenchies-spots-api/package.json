@@ -36,6 +36,8 @@
     "@nestjs/mongoose": "^10.0.1",
     "@nestjs/passport": "^10.0.0",
     "@nestjs/platform-express": "^10.0.0",
+    "@nestjs/platform-socket.io": "^10.2.5",
+    "@nestjs/websockets": "^10.2.5",
     "@prisma/client": "4.16.2",
     "@stripe/stripe-js": "^2.1.5",
     "@types/bcrypt": "^5.0.0",
