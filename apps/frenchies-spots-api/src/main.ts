@@ -11,6 +11,8 @@ async function bootstrap() {
       process.env.FRONT_DEV_URL,
       process.env.FRONT_PROD_URL + '/',
       process.env.FRONT_DEV_URL + '/',
+      process.env.FRONT_PROD_URL + '/*',
+      process.env.FRONT_DEV_URL + '/*',
     ],
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: true,
