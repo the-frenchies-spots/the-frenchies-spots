@@ -28,7 +28,7 @@ import { ChatModule } from './module/chat.module';
       },
       cors: {
         credentials: true,
-        origin: '*',
+        origin: process.env.FRONT_PROD_URL,
       },
     }),
     MongooseModule.forRoot(process.env.DATABASE_URL),
