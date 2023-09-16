@@ -31,7 +31,7 @@ const useContact = (params: useContactParams) => {
     const contact = loginProfile?.contacts?.filter(
       (contact) => contact.profileId === profile.id
     );
-    const isContact = contact?.length > 0;
+    const isContact = contact ? contact?.length > 0 : undefined;
     if (!isContact) {
       insertChat({
         variables: { inserChatInput: { participantIds: [profile.id] } },
