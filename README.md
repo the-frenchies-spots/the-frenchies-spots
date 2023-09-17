@@ -16,9 +16,10 @@ npx prisma db seed
 
 pnpm api
 
-### start webui
+#### start webui
 
 pnpm webui
+
 # Commit rules:
 
 - if the task isn't finish add wip to the description
