@@ -2,13 +2,15 @@ import { createContext } from "react";
 
 import type { TLocation } from "./hooks";
 
-interface FrSpotsMapContextData {
+export interface FrSpotsMapContextData {
   location: TLocation | null;
 }
 
-const defaultContext: FrSpotsMapContextData = {
+export const defaultContext: FrSpotsMapContextData = {
   location: null,
 };
 
 export const FrSpotsMapContext =
   createContext<FrSpotsMapContextData>(defaultContext);
+
+FrSpotsMapContext.displayName = "@frenchies-spots/map/FrSpotsMapContext";
