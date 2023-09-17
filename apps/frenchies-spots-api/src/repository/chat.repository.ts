@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 
 import { PrismaService } from '../service/prisma.service';
-import { plainToClass } from '../utils/plain-to-class';
+import { plainToClass, plainToClassMany } from '../utils/plain-to-class';
 import { ChatEntity } from '../entity/chat.entity';
 import { SendChatMessageInput } from '../dto/input/chat/send-chat-message.input';
 import { ChatMessageEntity } from '../entity/chat-message.entity';
@@ -9,6 +9,25 @@ import { ChatMessageEntity } from '../entity/chat-message.entity';
 @Injectable()
 export class ChatRepository {
   constructor(private prisma: PrismaService) {}
+
+  async getAll(userId: string): Promise<ChatEntity[]> {
+    const chat = await this.prisma.chat.findMany({
+      where: {
+        participants: {
+          some: {
+            profile: {
+              userId,
+            },
+          },
+        },
+      },
+      include: {
+        participants: { include: { profile: true } },
+        chatMessages: true,
+      },
+    });
+    return plainToClassMany(chat, ChatEntity);
+  }
 
   async getById(chatId: string): Promise<ChatEntity> {
     const chat = await this.prisma.chat.findUnique({

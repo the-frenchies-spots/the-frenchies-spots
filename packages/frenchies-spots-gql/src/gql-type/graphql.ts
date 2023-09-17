@@ -223,6 +223,7 @@ export type ProfilesInput = {
 export type Query = {
   __typename?: 'Query';
   chatByPk: ChatEntity;
+  chats: Array<ChatEntity>;
   getLoginUser: UserEntity;
   profiles: Array<ProfileEntity>;
   spotByPk: SpotByIdResponse;

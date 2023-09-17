@@ -8,6 +8,7 @@ import { tagByPk } from "./tagByPk";
 import { tags } from "./tags";
 import { profiles } from "./profiles";
 import { chatByPk } from "./chatByPk";
+import { chats } from "./chats";
 
 export const queries: Record<string, DocumentNode> = {
   getLoginUser,
@@ -18,4 +19,5 @@ export const queries: Record<string, DocumentNode> = {
   profiles,
   tags,
   chatByPk,
+  chats,
 };

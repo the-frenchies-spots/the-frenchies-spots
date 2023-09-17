@@ -140,6 +140,7 @@ input ProfilesInput {
 
 type Query {
   chatByPk(chatId: String!): ChatEntity!
+  chats: [ChatEntity!]!
   getLoginUser: UserEntity!
   profiles(profilesInput: ProfilesInput!): [ProfileEntity!]!
   spotByPk(id: String!): SpotByIdResponse!

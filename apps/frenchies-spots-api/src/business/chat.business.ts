@@ -19,6 +19,10 @@ export class ChatBusiness {
     private contactRepository: ContactRepository,
   ) {}
 
+  async chats(userId: string): Promise<ChatEntity[]> {
+    return this.chatRepository.getAll(userId);
+  }
+
   async sendMessage(
     sendChatMessageInput: SendChatMessageInput,
   ): Promise<ChatMessageEntity> {

@@ -27,7 +27,7 @@ interface ProfilePreviewProps extends StackProps {
 
 const ProfilePreview = (props: ProfilePreviewProps) => {
   const { profile, ...stackProps } = props;
-  const { onContactClick } = useContact({ profile });
+  const { onContactClick } = useContact();
 
   return (
     <Stack h={300} p="md" justify="space-between" {...stackProps}>
@@ -57,7 +57,7 @@ const ProfilePreview = (props: ProfilePreviewProps) => {
       <Button
         variant="outline"
         leftIcon={<IconMessages />}
-        onClick={onContactClick}
+        onClick={() => onContactClick(profile)}
       >
         Contacter
       </Button>

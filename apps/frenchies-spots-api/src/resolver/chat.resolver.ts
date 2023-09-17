@@ -7,10 +7,17 @@ import { ChatEntity } from '../entity/chat.entity';
 import { CurrentProfileId } from '../decorator/currentProfileId.decorator.';
 
 import { InserChatInput } from '../dto/input/chat/insert-chat.input';
+import { CurrentUserId } from 'src/decorator/currentUserId.decorator';
 
 @Resolver(() => ChatEntity)
 export class ChatResolver {
   constructor(private readonly chatBusiness: ChatBusiness) {}
+
+  @UseGuards(RefreshTokenGuard)
+  @Query(() => [ChatEntity])
+  chats(@CurrentUserId() userId: string): Promise<ChatEntity[]> {
+    return this.chatBusiness.chats(userId);
+  }
 
   @UseGuards(RefreshTokenGuard)
   @Query(() => ChatEntity)

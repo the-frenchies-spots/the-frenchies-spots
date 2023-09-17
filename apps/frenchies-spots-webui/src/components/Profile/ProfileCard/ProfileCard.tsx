@@ -1,7 +1,6 @@
-import React from "react";
+import React, { ReactNode } from "react";
 
 import {
-  ActionIcon,
   Avatar,
   Card,
   type CardProps,
@@ -11,20 +10,18 @@ import {
 } from "@frenchies-spots/material";
 import { ProfileEntity } from "@frenchies-spots/gql";
 import { useStyles } from "./ProfileCard.styles";
-import { IconMessages, IconUserPlus } from "@frenchies-spots/icon";
-import useContact from "../../../hooks/use-contact";
 
 export interface ProfileCardProps extends Omit<CardProps, "children"> {
   profile: ProfileEntity;
+  children: ReactNode;
   onClick?: (id: string) => void;
 }
 
 const ProfileCard = (props: ProfileCardProps) => {
-  const { profile, onClick, ...cardProps } = props;
+  const { children, profile, onClick, ...cardProps } = props;
   const { id, pseudo, avatarUrl, photoUrl } = profile;
 
   const { classes } = useStyles();
-  const { onContactClick } = useContact({ profile });
 
   const handleClick = () => {
     if (typeof onClick === "function") {
@@ -49,14 +46,7 @@ const ProfileCard = (props: ProfileCardProps) => {
         <Stack>
           <Text>{pseudo}</Text>
         </Stack>
-        <Stack>
-          <ActionIcon>
-            <IconUserPlus />
-          </ActionIcon>
-          <ActionIcon onClick={onContactClick}>
-            <IconMessages />
-          </ActionIcon>
-        </Stack>
+        <Stack>{children}</Stack>
       </Group>
     </Card>
   );

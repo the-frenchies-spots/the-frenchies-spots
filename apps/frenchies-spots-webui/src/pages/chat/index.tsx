@@ -8,6 +8,7 @@ import {
   Text,
   TextInput,
 } from "@frenchies-spots/material";
+import ChatList from "../../components/Chat/ChatList/ChatList";
 
 const Chat = () => {
   return (
@@ -25,6 +26,7 @@ const Chat = () => {
         <Tabs.Panel value="contact" pt="xs" h="100%">
           <Stack pt="md" h="100%">
             <TextInput placeholder="Rechercher" />
+            <ChatList />
           </Stack>
         </Tabs.Panel>
 

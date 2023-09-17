@@ -11,13 +11,7 @@ import { useMutation } from "@apollo/client";
 import { useAuth } from "./use-auth";
 import { useRouter } from "next/router";
 
-interface useContactParams {
-  profile: ProfileEntity;
-}
-
-const useContact = (params: useContactParams) => {
-  const { profile } = params;
-
+const useContact = () => {
   const router = useRouter();
 
   const [insertChat] = useMutation<
@@ -27,7 +21,7 @@ const useContact = (params: useContactParams) => {
 
   const { profile: loginProfile } = useAuth();
 
-  const handleContactClick = () => {
+  const handleContactClick = (profile: ProfileEntity) => {
     const contact = loginProfile?.contacts?.filter(
       (contact) => contact.profileId === profile.id
     );
