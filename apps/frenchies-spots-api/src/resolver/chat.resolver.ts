@@ -7,7 +7,7 @@ import { ChatEntity } from '../entity/chat.entity';
 import { CurrentProfileId } from '../decorator/currentProfileId.decorator.';
 
 import { InserChatInput } from '../dto/input/chat/insert-chat.input';
-import { CurrentUserId } from 'src/decorator/currentUserId.decorator';
+import { CurrentUserId } from '../decorator/currentUserId.decorator';
 
 @Resolver(() => ChatEntity)
 export class ChatResolver {

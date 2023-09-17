@@ -11,7 +11,7 @@ import { chatByPk } from "./chatByPk";
 import { chats } from "./chats";
 import { contacts } from "./contacts";
 
-export const queries: Record<string, DocumentNode> = {
+export const queries = {
   getLoginUser,
   spotByPk,
   spots,
@@ -21,5 +21,5 @@ export const queries: Record<string, DocumentNode> = {
   tags,
   chatByPk,
   chats,
-  contacts,
-};
+  contacts
+} satisfies Record<string, DocumentNode>;

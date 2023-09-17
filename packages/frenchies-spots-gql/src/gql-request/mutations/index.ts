@@ -16,7 +16,7 @@ import { updateProfile } from "./updateProfile";
 import { insertChat } from "./insertChat";
 import { upload } from "./upload";
 
-export const mutations: Record<string, DocumentNode> = {
+export const mutations = {
   createOrUpdateRating,
   deleteSpot,
   deleteTag,
@@ -32,4 +32,4 @@ export const mutations: Record<string, DocumentNode> = {
   buyPoint,
   insertChat,
   updateProfile,
-};
+} satisfies Record<string, DocumentNode>;

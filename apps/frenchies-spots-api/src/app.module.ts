@@ -24,10 +24,10 @@ import { PictureModule } from './module/picture.module';
       driver: ApolloDriver,
       autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
       sortSchema: true,
-      // cors: {
-      //   origine: '*',
-      //   credentials: true,
-      // },
+     // cors: {
+     //   credentials: true,
+     //   origin: true,
+    // },
     }),
     MongooseModule.forRoot(process.env.DATABASE_URL),
     AuthModule,

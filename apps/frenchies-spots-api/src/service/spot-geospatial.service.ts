@@ -3,16 +3,14 @@ import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 
 import { Spot } from '../schema/spot.shema';
-import { Profile } from '../schema/profile.shema';
 import { GeoPointInput } from '../dto/input/geo-point/geo-point-input';
-import { ObjectId } from 'mongodb';
 import { ProfileEntity } from '../entity/profile.entity';
 
 @Injectable()
 export class GeospatialService {
   constructor(
     @InjectModel('Spot') private spotModel: mongoose.Model<Spot>,
-    @InjectModel('Profile') private profileModel: mongoose.Model<Profile>,
+    @InjectModel('Profile') private profileModel: mongoose.Model<ProfileEntity>,
   ) {}
 
   async searchPeopleArround(

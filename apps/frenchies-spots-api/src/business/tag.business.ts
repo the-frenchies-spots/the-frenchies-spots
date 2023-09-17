@@ -7,6 +7,7 @@ import { TagInsertInput } from '../dto/input/tag/tag-insert.input';
 import { TagUpdateInput } from '../dto/input/tag/tag-update.input';
 import { DeleteResponse } from '../dto/response/delete.response';
 
+
 @Injectable()
 export class TagBusiness {
   constructor(private tagRepository: TagRepository) {}
