@@ -45,16 +45,16 @@ const ChatCard = (props: ChatCardProps) => {
     >
       <Group position="apart">
         <Stack>
-          {participantsFilter.map((participant) => {
+          {participantsFilter.map((participant, index) => {
             const photoUrl = participant?.profile?.photoUrl;
             const avatarUrl = participant?.profile?.avatarUrl;
-            return <Avatar key={participant.id} src={photoUrl || avatarUrl} />;
+            return <Avatar key={index} src={photoUrl || avatarUrl} />;
           })}
         </Stack>
         <Stack>
-          {participantsFilter.map((participant) => {
+          {participantsFilter.map((participant, index) => {
             const pseudo = participant?.profile?.pseudo;
-            return <Text key={participant?.profile?.id}>{pseudo}</Text>;
+            return <Text key={index}>{pseudo}</Text>;
           })}
         </Stack>
       </Group>

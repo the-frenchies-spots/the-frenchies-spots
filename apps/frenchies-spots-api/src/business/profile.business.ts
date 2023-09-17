@@ -24,20 +24,23 @@ export class ProfileBusiness {
     private geoService: GeospatialService,
   ) {}
 
-  async getAll(profilesInput: ProfilesInput): Promise<ProfileEntity[]> {
+  async getAll(
+    profilesInput: ProfilesInput,
+    profileId: string | undefined,
+  ): Promise<ProfileEntity[]> {
     const { point } = profilesInput;
     if (point) {
       return this.geoService.searchPeopleArround(point).then((profiles) => {
-        const result = profiles?.length
-          ? profiles.map((profile) => ({
-              ...profile._doc,
-              id: profile._doc._id,
-            }))
+        const ids = profiles?.length
+          ? profiles.map((profile) => profile._doc._id)
           : [];
-        return result;
+        if (ids?.length) {
+          return this.profileRepository.getAll(profileId, ids);
+        }
+        return [];
       });
     }
-    return this.profileRepository.getAll();
+    return this.profileRepository.getAll(profileId);
   }
 
   async getUserOrThrow(userId: string): Promise<UserEntity> {

@@ -86,7 +86,7 @@ model Chat {
   id            String   @id @default(auto()) @map("_id") @db.ObjectId
   participants  ProfileChat[]
   chatMessages  ChatMessage[]
-  isTemporary   Boolean  @default(false)
+  isTemporary   Boolean  @default(true)
   createdAt     DateTime @default(now())
   updatedAt     DateTime @default(now())
 }

@@ -11,6 +11,7 @@ import { Container, Group, LoadingOverlay } from "@frenchies-spots/material";
 import EditButton from "./../../../components/Spots/SpotButton/EditButton/EditButton";
 import DeleteButton from "./../../../components/Spots/SpotButton/DeleteButton/DeleteButton";
 import StatusBar from "../../../components/StatusBar/StatusBar";
+import { GuardLayout } from "../../../components/Layout/GuardLayout/GuardLayout";
 
 const ProfileSpots = () => {
   const { profile } = useAuth();
@@ -50,7 +51,9 @@ export default ProfileSpots;
 ProfileSpots.getLayout = function getLayout(page: ReactElement) {
   return (
     <PageLayout>
-      <NavigationLayout>{page}</NavigationLayout>
+      <GuardLayout isProtected>
+        <NavigationLayout>{page}</NavigationLayout>
+      </GuardLayout>
     </PageLayout>
   );
 };

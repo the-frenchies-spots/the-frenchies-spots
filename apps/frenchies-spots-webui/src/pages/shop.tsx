@@ -24,6 +24,7 @@ import { useAuth } from "../hooks/use-auth";
 import toast from "react-hot-toast";
 import ShopBuyPoints from "../components/Shop/ShopBuyPoints/ShopBuyPoints";
 import StatusBar from "../components/StatusBar/StatusBar";
+import { GuardLayout } from "../components/Layout/GuardLayout/GuardLayout";
 
 // Carte de test
 // 4242 4242 4242 4242
@@ -62,7 +63,9 @@ export default Shop;
 Shop.getLayout = function getLayout(page: ReactElement) {
   return (
     <PageLayout>
-      <NavigationLayout>{page}</NavigationLayout>
+      <GuardLayout isProtected>
+        <NavigationLayout>{page}</NavigationLayout>
+      </GuardLayout>
     </PageLayout>
   );
 };

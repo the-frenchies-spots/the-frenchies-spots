@@ -1,4 +1,5 @@
 /* eslint-disable */
+import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/core';
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
@@ -49,12 +50,19 @@ export type ChatMessageEntity = {
 export type ContactEntity = {
   __typename?: 'ContactEntity';
   authorization: Scalars['Boolean']['output'];
+  contact: ProfileEntity;
+  contactId: Scalars['String']['output'];
   createdAt: Scalars['DateTime']['output'];
   id: Scalars['String']['output'];
   isFriend: Scalars['Boolean']['output'];
   profile: ProfileEntity;
   profileId: Scalars['String']['output'];
   updatedAt: Scalars['DateTime']['output'];
+};
+
+export type ContactsInput = {
+  authorization?: InputMaybe<Scalars['Boolean']['input']>;
+  isFriend?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 export type DeleteResponse = {
@@ -104,6 +112,7 @@ export type Mutation = {
   updateProfile: UserEntity;
   updateSpot: SpotEntity;
   updateTag: TagEntity;
+  upload: Array<PictureEntity>;
 };
 
 
@@ -171,10 +180,29 @@ export type MutationUpdateTagArgs = {
   tagUpdateInput: TagUpdateInput;
 };
 
+
+export type MutationUploadArgs = {
+  pictureInput: PictureInput;
+};
+
 export type NewTokensResponse = {
   __typename?: 'NewTokensResponse';
   accessToken: Scalars['String']['output'];
   refreshToken: Scalars['String']['output'];
+};
+
+export type PictureEntity = {
+  __typename?: 'PictureEntity';
+  height: Scalars['Float']['output'];
+  public_id: Scalars['String']['output'];
+  secure_url: Scalars['String']['output'];
+  url: Scalars['String']['output'];
+  width: Scalars['Float']['output'];
+};
+
+export type PictureInput = {
+  files: Array<Scalars['String']['input']>;
+  folder: Scalars['String']['input'];
 };
 
 export type ProfileChatEntity = {
@@ -224,6 +252,7 @@ export type Query = {
   __typename?: 'Query';
   chatByPk: ChatEntity;
   chats: Array<ChatEntity>;
+  contacts: Array<ContactEntity>;
   getLoginUser: UserEntity;
   profiles: Array<ProfileEntity>;
   spotByPk: SpotByIdResponse;
@@ -236,6 +265,11 @@ export type Query = {
 
 export type QueryChatByPkArgs = {
   chatId: Scalars['String']['input'];
+};
+
+
+export type QueryContactsArgs = {
+  contactsInput: ContactsInput;
 };
 
 
@@ -452,3 +486,11 @@ export type UserEntity = {
   role: Scalars['String']['output'];
   updatedAt: Scalars['DateTime']['output'];
 };
+
+export type ChatsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type ChatsQuery = { __typename?: 'Query', chats: Array<{ __typename?: 'ChatEntity', createdAt: any, id: string, isTemporary: boolean, updatedAt: any, participants: Array<{ __typename?: 'ProfileChatEntity', chatId: string, createdAt: any, id: string, profileId: string, updatedAt: any, profile: { __typename?: 'ProfileEntity', pseudo: string, photoUrl?: string | null, avatarUrl?: string | null } }> }> };
+
+
+export const ChatsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"chats"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"chats"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"isTemporary"}},{"kind":"Field","name":{"kind":"Name","value":"participants"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"chatId"}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"profileId"}},{"kind":"Field","name":{"kind":"Name","value":"updatedAt"}},{"kind":"Field","name":{"kind":"Name","value":"profile"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"pseudo"}},{"kind":"Field","name":{"kind":"Name","value":"photoUrl"}},{"kind":"Field","name":{"kind":"Name","value":"avatarUrl"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"updatedAt"}}]}}]}}]} as unknown as DocumentNode<ChatsQuery, ChatsQueryVariables>;

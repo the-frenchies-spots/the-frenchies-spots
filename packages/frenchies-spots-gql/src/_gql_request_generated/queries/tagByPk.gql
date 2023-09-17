@@ -17,6 +17,7 @@ query tagByPk($id: String!){
                     avatarUrl
                     contacts{
                         authorization
+                        contactId
                         createdAt
                         id
                         isFriend

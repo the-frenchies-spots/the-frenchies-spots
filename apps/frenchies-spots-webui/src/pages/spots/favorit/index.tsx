@@ -10,6 +10,7 @@ import { Button, Container, LoadingOverlay } from "@frenchies-spots/material";
 import SpotList from "../../../components/Spots/SpotList/SpotList";
 import FavoriteButton from "../../../components/Spots/SpotButton/FavoriteButton/FavoriteButton";
 import StatusBar from "../../../components/StatusBar/StatusBar";
+import { GuardLayout } from "../../../components/Layout/GuardLayout/GuardLayout";
 
 const FavoritPage = () => {
   const { data, loading, refetch } = useQuery<{
@@ -40,7 +41,9 @@ export default FavoritPage;
 FavoritPage.getLayout = function getLayout(page: ReactElement) {
   return (
     <PageLayout>
-      <NavigationLayout>{page}</NavigationLayout>
+      <GuardLayout isProtected>
+        <NavigationLayout>{page}</NavigationLayout>
+      </GuardLayout>
     </PageLayout>
   );
 };

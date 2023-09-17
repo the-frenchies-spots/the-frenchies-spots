@@ -12,6 +12,18 @@ mutation signIn($signInInput: SignInInput!){
                 avatarUrl
                 contacts{
                     authorization
+                    contact{
+                        avatarUrl
+                        createdAt
+                        gamePoint
+                        id
+                        location
+                        photoUrl
+                        pseudo
+                        updatedAt
+                        userId
+                    }
+                    contactId
                     createdAt
                     id
                     isFriend

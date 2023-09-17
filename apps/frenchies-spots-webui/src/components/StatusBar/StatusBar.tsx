@@ -1,4 +1,8 @@
-import { IconBellFilled, IconMapPinFilled } from "@frenchies-spots/icon";
+import {
+  IconBellFilled,
+  IconMapPinFilled,
+  IconUserSquareRounded,
+} from "@frenchies-spots/icon";
 import {
   Group,
   type GroupProps,
@@ -12,6 +16,8 @@ import { useStyles } from "./StatusBar.styles";
 import { useLocationCtx } from "@frenchies-spots/map";
 import { useSpotUi } from "../../hooks/use-spot-ui";
 import { truncate } from "@frenchies-spots/utils";
+import { useAuth } from "../../hooks/use-auth";
+import { useRouter } from "next/router";
 
 interface StatusBarProps extends GroupProps {
   isMapMode?: boolean;
@@ -20,8 +26,10 @@ interface StatusBarProps extends GroupProps {
 const StatusBar = (props: StatusBarProps) => {
   const { isMapMode = false, ...groupProps } = props;
 
+  const router = useRouter();
   const { location } = useLocationCtx();
   const { classes } = useStyles(isMapMode);
+  const { user } = useAuth();
 
   return (
     <Group
@@ -44,9 +52,20 @@ const StatusBar = (props: StatusBarProps) => {
         </Stack>
       )}
 
-      <ActionIcon className={classes.actionIcon}>
-        <IconBellFilled />
-      </ActionIcon>
+      {user && (
+        <ActionIcon className={classes.actionIcon}>
+          <IconBellFilled />
+        </ActionIcon>
+      )}
+
+      {!user && (
+        <ActionIcon
+          className={classes.actionIcon}
+          onClick={() => router.push("/sign-in")}
+        >
+          <IconUserSquareRounded />
+        </ActionIcon>
+      )}
     </Group>
   );
 };

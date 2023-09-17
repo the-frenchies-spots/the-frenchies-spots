@@ -17,6 +17,7 @@ query tags($tagListInput: TagListInput!){
                     avatarUrl
                     contacts{
                         authorization
+                        contactId
                         createdAt
                         id
                         isFriend

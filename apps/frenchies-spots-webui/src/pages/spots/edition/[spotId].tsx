@@ -16,6 +16,7 @@ import {
 
 import { PageLayout, SpotEditionForm } from "../../../components";
 import toast from "react-hot-toast";
+import { GuardLayout } from "../../../components/Layout/GuardLayout/GuardLayout";
 
 const SpotUpdatePage = () => {
   const router = useRouter();
@@ -70,7 +71,10 @@ const SpotUpdatePage = () => {
   const handleSubmit = (updateSpotInput: SpotInput) => {
     toast.promise(
       updateSpot({ variables: { updateSpotInput } }).then((result) => {
-        router.push("/spots");
+        const lat = result?.data?.updateSpot?.location?.coordinates[1];
+        const lng = result?.data?.updateSpot?.location?.coordinates[0];
+        const id = result?.data?.updateSpot?.id;
+        router.push(`/spots?lat=${lat}&lng=${lng}&spotId=${id}`);
       }),
       {
         loading: "Mise à jour...",
@@ -98,5 +102,9 @@ const SpotUpdatePage = () => {
 export default SpotUpdatePage;
 
 SpotUpdatePage.getLayout = function getLayout(page: ReactElement) {
-  return <PageLayout>{page}</PageLayout>;
+  return (
+    <PageLayout>
+      <GuardLayout isProtected>{page}</GuardLayout>
+    </PageLayout>
+  );
 };

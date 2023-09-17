@@ -1,4 +1,6 @@
 import React, { ReactElement } from "react";
+import { useAuth } from "../../hooks/use-auth";
+import ChatList from "../../components/Chat/ChatList/ChatList";
 import { PageLayout } from "../../components/Layout/PageLayout/PageLayout";
 import NavigationLayout from "../../components/Layout/NavigationLayout/NavigationLayout";
 import {
@@ -8,9 +10,11 @@ import {
   Text,
   TextInput,
 } from "@frenchies-spots/material";
-import ChatList from "../../components/Chat/ChatList/ChatList";
+import MeetingList from "../../components/Meeting/MeetingList/MeetingList";
+import { GuardLayout } from "../../components/Layout/GuardLayout/GuardLayout";
 
 const Chat = () => {
+  const { profile } = useAuth();
   return (
     <Container size="md" h="100%" pt="md">
       <Text>Chat</Text>
@@ -31,7 +35,7 @@ const Chat = () => {
         </Tabs.Panel>
 
         <Tabs.Panel value="history" pt="xs" h="100%">
-          Historique
+          <MeetingList />
         </Tabs.Panel>
       </Tabs>
     </Container>
@@ -41,7 +45,9 @@ const Chat = () => {
 Chat.getLayout = function getLayout(page: ReactElement) {
   return (
     <PageLayout>
-      <NavigationLayout>{page}</NavigationLayout>
+      <GuardLayout isProtected>
+        <NavigationLayout>{page}</NavigationLayout>
+      </GuardLayout>
     </PageLayout>
   );
 };

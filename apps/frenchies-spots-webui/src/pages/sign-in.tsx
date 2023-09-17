@@ -14,6 +14,7 @@ import { PageLayout } from "../components";
 
 import { signIn, useSession } from "next-auth/react";
 import LogoutButton from "@/components/LogoutButton/LogoutButton";
+import { GuardLayout } from "../components/Layout/GuardLayout/GuardLayout";
 
 const SignIn = () => {
   const { user, onSignIn } = useAuth();
@@ -73,5 +74,9 @@ const SignIn = () => {
 export default SignIn;
 
 SignIn.getLayout = function getLayout(page: ReactElement) {
-  return <PageLayout>{page}</PageLayout>;
+  return (
+    <PageLayout>
+      <GuardLayout>{page}</GuardLayout>
+    </PageLayout>
+  );
 };

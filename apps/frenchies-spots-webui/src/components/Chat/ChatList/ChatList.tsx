@@ -23,9 +23,9 @@ const ChatList = (props: ChatListProps) => {
     return <LoadingOverlay visible={true} overlayBlur={2} />;
   return (
     <Stack>
-      {data?.chats.map((chat) => (
+      {data?.chats.map((chat, index) => (
         <ChatCard
-          key={chat.id}
+          key={index}
           chat={chat}
           profileId={profile.id}
           onClick={handleChatClick}

@@ -1,5 +1,4 @@
 import { Injectable } from '@nestjs/common';
-// import { cloudinary } from '../utils/cloudinary.config';
 
 import { v2 as cloudinary, UploadApiResponse } from 'cloudinary';
 
@@ -11,9 +10,12 @@ cloudinary.config({
 
 @Injectable()
 export class CloudinaryService {
-  async uploadImage(files: string[]): Promise<UploadApiResponse[]> {
+  async uploadImage(
+    files: string[],
+    folder: string,
+  ): Promise<UploadApiResponse[]> {
     const uploadPromises = files.map(async (file) => {
-      const result = await cloudinary.uploader.upload(file);
+      const result = await cloudinary.uploader.upload(file, { folder });
       return result;
     });
     return Promise.all(uploadPromises);

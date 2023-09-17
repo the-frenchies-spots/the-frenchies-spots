@@ -12,6 +12,7 @@ import {
 import { SignUpInput } from "@frenchies-spots/gql";
 import { useAuth } from "@/hooks";
 import { PageLayout } from "../components";
+import { GuardLayout } from "../components/Layout/GuardLayout/GuardLayout";
 
 const SignUp = () => {
   const { user, loading, onSignUp } = useAuth();
@@ -80,5 +81,9 @@ const SignUp = () => {
 export default SignUp;
 
 SignUp.getLayout = function getLayout(page: ReactElement) {
-  return <PageLayout>{page}</PageLayout>;
+  return (
+    <PageLayout>
+      <GuardLayout>{page}</GuardLayout>
+    </PageLayout>
+  );
 };

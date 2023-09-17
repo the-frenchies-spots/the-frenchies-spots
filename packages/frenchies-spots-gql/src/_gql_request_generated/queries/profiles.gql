@@ -3,16 +3,25 @@ query profiles($profilesInput: ProfilesInput!){
         avatarUrl
         contacts{
             authorization
-            createdAt
-            id
-            isFriend
-            profile{
+            contact{
                 avatarUrl
                 contacts{
                     authorization
+                    contactId
                     createdAt
                     id
                     isFriend
+                    profile{
+                        avatarUrl
+                        createdAt
+                        gamePoint
+                        id
+                        location
+                        photoUrl
+                        pseudo
+                        updatedAt
+                        userId
+                    }
                     profileId
                     updatedAt
                 }
@@ -200,6 +209,10 @@ query profiles($profilesInput: ProfilesInput!){
                 }
                 userId
             }
+            contactId
+            createdAt
+            id
+            isFriend
             profileId
             updatedAt
         }

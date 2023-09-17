@@ -9,6 +9,7 @@ import { useRouter } from "next/router";
 import { useLazyQuery } from "@apollo/client";
 import { ChatEntity, QueryChatByPkArgs, queries } from "@frenchies-spots/gql";
 import { useAuth } from "./../../hooks/use-auth";
+import { GuardLayout } from "../../components/Layout/GuardLayout/GuardLayout";
 
 const ChatId = () => {
   const router = useRouter();
@@ -76,5 +77,9 @@ const ChatId = () => {
 export default ChatId;
 
 ChatId.getLayout = function getLayout(page: ReactElement) {
-  return <PageLayout opacity={0.6}>{page}</PageLayout>;
+  return (
+    <GuardLayout isProtected>
+      <PageLayout opacity={0.6}>{page}</PageLayout>
+    </GuardLayout>
+  );
 };

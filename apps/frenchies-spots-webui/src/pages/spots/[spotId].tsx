@@ -31,6 +31,7 @@ import DeleteButton from "../../components/Spots/SpotButton/DeleteButton/DeleteB
 import { SelectTag } from "../../components/InputCustom";
 import { tagsDataList } from "@frenchies-spots/utils";
 import { DisplayTag } from "../../components/Spots/DisplayTag";
+import { GuardLayout } from "../../components/Layout/GuardLayout/GuardLayout";
 
 const SpotDetailPage = () => {
   const router = useRouter();
@@ -115,5 +116,9 @@ const SpotDetailPage = () => {
 export default SpotDetailPage;
 
 SpotDetailPage.getLayout = function getLayout(page: ReactElement) {
-  return <PageLayout>{page}</PageLayout>;
+  return (
+    <PageLayout>
+      <GuardLayout>{page}</GuardLayout>
+    </PageLayout>
+  );
 };
