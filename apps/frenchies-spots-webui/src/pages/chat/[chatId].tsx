@@ -16,11 +16,15 @@ const ChatId = () => {
   const { chatId } = router.query;
   const { profile } = useAuth();
 
-  const { messages, setMessages, send, setChatId } = useChat({ event: "chat" });
-  const [getChat, { data, loading }] = useLazyQuery<
+  const [getChat, { data, loading, refetch }] = useLazyQuery<
     { chatByPk: ChatEntity },
     QueryChatByPkArgs
   >(queries.chatByPk);
+
+  const { messages, setMessages, send, setChatId } = useChat({
+    event: "chat",
+    onChange: refetch,
+  });
 
   useEffect(() => {
     if (typeof chatId === "string") {
@@ -52,10 +56,11 @@ const ChatId = () => {
             chatId: data?.chatByPk?.id,
             profileChatId: participant?.id,
           });
+          refetch();
         }
       }
     },
-    [data, send, profile]
+    [data, send, profile, refetch]
   );
 
   return (

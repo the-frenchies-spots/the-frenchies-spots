@@ -9,8 +9,11 @@ import { RefreshTokenStrategy } from '../strategy/refreshToken.strategy';
 import { ChatBusiness } from '../business/chat.business';
 import { ChatResolver } from '../resolver/chat.resolver';
 import { ChatRepository } from '../repository/chat.repository';
-import { ChatGateway } from '../gateway/chat.gateway';
+import { SocketGateway } from '../gateway/socket.gateway';
 import { ContactRepository } from '../repository/contact.repository';
+import { NotificationBusiness } from '../business/notification.business';
+import { NotificationRepository } from '../repository/notification.repository';
+import { NotificationResolver } from '../resolver/notification.resolver';
 
 @Module({
   providers: [
@@ -18,7 +21,10 @@ import { ContactRepository } from '../repository/contact.repository';
     ChatBusiness,
     ChatRepository,
     ContactRepository,
-    ChatGateway,
+    NotificationBusiness,
+    NotificationRepository,
+    NotificationResolver,
+    SocketGateway,
     JwtService,
     TokenService,
     PrismaService,
@@ -27,4 +33,4 @@ import { ContactRepository } from '../repository/contact.repository';
     RefreshTokenStrategy,
   ],
 })
-export class ChatModule {}
+export class SocketModule {}

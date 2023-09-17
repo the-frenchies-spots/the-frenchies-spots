@@ -3,14 +3,13 @@ import { gql } from "@apollo/client";
 export const tags = gql`
   query tags($tagListInput: TagListInput!) {
     tags(tagListInput: $tagListInput) {
-      category
       createdAt
       id
       name
       spots {
         address
         averageRating
-        category
+
         createdAt
         description
         favorites {
@@ -40,14 +39,13 @@ export const tags = gql`
             spots {
               address
               averageRating
-              category
+
               createdAt
               description
               id
               isCanPark
               isHidden
-              lat
-              lng
+
               location
               name
               profileId
@@ -70,7 +68,7 @@ export const tags = gql`
           spot {
             address
             averageRating
-            category
+
             createdAt
             description
             favorites {
@@ -83,8 +81,7 @@ export const tags = gql`
             id
             isCanPark
             isHidden
-            lat
-            lng
+
             location
             name
             profile {
@@ -114,7 +111,6 @@ export const tags = gql`
               url
             }
             tags {
-              category
               createdAt
               id
               name
@@ -129,8 +125,7 @@ export const tags = gql`
         id
         isCanPark
         isHidden
-        lat
-        lng
+
         location
         name
         profile {
@@ -160,14 +155,13 @@ export const tags = gql`
           spot {
             address
             averageRating
-            category
+
             createdAt
             description
             id
             isCanPark
             isHidden
-            lat
-            lng
+
             location
             name
             profileId
@@ -184,14 +178,13 @@ export const tags = gql`
           spot {
             address
             averageRating
-            category
+
             createdAt
             description
             id
             isCanPark
             isHidden
-            lat
-            lng
+
             location
             name
             profileId
@@ -203,7 +196,6 @@ export const tags = gql`
           url
         }
         tags {
-          category
           createdAt
           id
           name

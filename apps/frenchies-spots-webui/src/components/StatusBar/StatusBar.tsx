@@ -18,6 +18,7 @@ import { useSpotUi } from "../../hooks/use-spot-ui";
 import { truncate } from "@frenchies-spots/utils";
 import { useAuth } from "../../hooks/use-auth";
 import { useRouter } from "next/router";
+import Notifiction from "../Notification/Notifiction";
 
 interface StatusBarProps extends GroupProps {
   isMapMode?: boolean;
@@ -52,11 +53,7 @@ const StatusBar = (props: StatusBarProps) => {
         </Stack>
       )}
 
-      {user && (
-        <ActionIcon className={classes.actionIcon}>
-          <IconBellFilled />
-        </ActionIcon>
-      )}
+      {user && <Notifiction isMapMode={isMapMode} />}
 
       {!user && (
         <ActionIcon

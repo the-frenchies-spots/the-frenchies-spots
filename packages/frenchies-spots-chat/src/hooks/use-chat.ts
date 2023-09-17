@@ -5,6 +5,7 @@ import io, { type Socket } from "socket.io-client";
 
 interface UseChatParams {
   event: string;
+  onChange?: () => void;
 }
 export interface ChatMessageInput {
   chatId: ChatEntity["id"];
@@ -13,7 +14,7 @@ export interface ChatMessageInput {
 }
 
 export const useChat = (params: UseChatParams = { event: "chat" }) => {
-  const { event } = params;
+  const { event, onChange } = params;
 
   const [chatId, setChatId] = useState<string>("");
   const [socket, setSocket] = useState<Socket>();
@@ -30,10 +31,15 @@ export const useChat = (params: UseChatParams = { event: "chat" }) => {
 
   const messageListener = (value: ChatMessageInput) => {
     setMessages((prev) => [...prev, value]);
+    if (typeof onChange === "function") {
+      onChange();
+    }
   };
 
   useEffect(() => {
-    socket?.on(`${event}:${chatId}`, messageListener);
+    if (chatId) {
+      socket?.on(`${event}:${chatId}`, messageListener);
+    }
     return () => {
       socket?.off(`${event}:${chatId}`, messageListener);
     };

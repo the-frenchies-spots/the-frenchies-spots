@@ -1,5 +1,4 @@
 /* eslint-disable */
-import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/core';
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
@@ -109,6 +108,7 @@ export type Mutation = {
   signIn: SignResponse;
   signUp: SignResponse;
   toggleFavorite: ToggleFavoriteResponse;
+  updateNotifStatus: Array<Scalars['Boolean']['output']>;
   updateProfile: UserEntity;
   updateSpot: SpotEntity;
   updateTag: TagEntity;
@@ -191,6 +191,16 @@ export type NewTokensResponse = {
   refreshToken: Scalars['String']['output'];
 };
 
+export type NotificationEntity = {
+  __typename?: 'NotificationEntity';
+  content?: Maybe<Scalars['JSON']['output']>;
+  id: Scalars['String']['output'];
+  isRead: Scalars['Boolean']['output'];
+  profile: ProfileEntity;
+  profileId: Scalars['String']['output'];
+  type: Scalars['String']['output'];
+};
+
 export type PictureEntity = {
   __typename?: 'PictureEntity';
   height: Scalars['Float']['output'];
@@ -227,7 +237,7 @@ export type ProfileEntity = {
   id: Scalars['String']['output'];
   location?: Maybe<Scalars['JSON']['output']>;
   photoUrl?: Maybe<Scalars['String']['output']>;
-  profileChats: Array<ProfileChatEntity>;
+  profileChats?: Maybe<Array<ProfileChatEntity>>;
   pseudo: Scalars['String']['output'];
   ratings?: Maybe<Array<RatingEntity>>;
   spots?: Maybe<Array<SpotEntity>>;
@@ -254,6 +264,7 @@ export type Query = {
   chats: Array<ChatEntity>;
   contacts: Array<ContactEntity>;
   getLoginUser: UserEntity;
+  notifications: Array<NotificationEntity>;
   profiles: Array<ProfileEntity>;
   spotByPk: SpotByIdResponse;
   spots: Array<SpotEntity>;
@@ -486,11 +497,3 @@ export type UserEntity = {
   role: Scalars['String']['output'];
   updatedAt: Scalars['DateTime']['output'];
 };
-
-export type ChatsQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type ChatsQuery = { __typename?: 'Query', chats: Array<{ __typename?: 'ChatEntity', createdAt: any, id: string, isTemporary: boolean, updatedAt: any, participants: Array<{ __typename?: 'ProfileChatEntity', chatId: string, createdAt: any, id: string, profileId: string, updatedAt: any, profile: { __typename?: 'ProfileEntity', pseudo: string, photoUrl?: string | null, avatarUrl?: string | null } }> }> };
-
-
-export const ChatsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"chats"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"chats"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"isTemporary"}},{"kind":"Field","name":{"kind":"Name","value":"participants"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"chatId"}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"profileId"}},{"kind":"Field","name":{"kind":"Name","value":"updatedAt"}},{"kind":"Field","name":{"kind":"Name","value":"profile"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"pseudo"}},{"kind":"Field","name":{"kind":"Name","value":"photoUrl"}},{"kind":"Field","name":{"kind":"Name","value":"avatarUrl"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"updatedAt"}}]}}]}}]} as unknown as DocumentNode<ChatsQuery, ChatsQueryVariables>;

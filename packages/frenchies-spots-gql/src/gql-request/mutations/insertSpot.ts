@@ -5,7 +5,6 @@ export const insertSpot = gql`
     insertSpot(insertSpotInput: $insertSpotInput) {
       address
       averageRating
-      category
       createdAt
       description
       id
@@ -21,7 +20,6 @@ export const insertSpot = gql`
       }
       tags {
         tag {
-          category
           id
           name
           tagPictureUrl

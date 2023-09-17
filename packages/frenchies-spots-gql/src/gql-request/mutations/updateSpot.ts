@@ -5,7 +5,6 @@ export const updateSpot = gql`
     updateSpot(updateSpotInput: $updateSpotInput) {
       address
       averageRating
-      category
       description
       id
       isCanPark
@@ -21,7 +20,6 @@ export const updateSpot = gql`
       }
       tags {
         tag {
-          category
           id
           name
           tagPictureUrl

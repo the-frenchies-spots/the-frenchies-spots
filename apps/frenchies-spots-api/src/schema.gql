@@ -94,6 +94,7 @@ type Mutation {
   signIn(signInInput: SignInInput!): SignResponse!
   signUp(signUpInput: SignUpInput!): SignResponse!
   toggleFavorite(favoriteInput: FavoriteInput!): ToggleFavoriteResponse!
+  updateNotifStatus: [Boolean!]!
   updateProfile(profileInput: ProfileInput!): UserEntity!
   updateSpot(updateSpotInput: SpotInput!): SpotEntity!
   updateTag(tagUpdateInput: TagUpdateInput!): TagEntity!
@@ -103,6 +104,15 @@ type Mutation {
 type NewTokensResponse {
   accessToken: String!
   refreshToken: String!
+}
+
+type NotificationEntity {
+  content: JSON
+  id: String!
+  isRead: Boolean!
+  profile: ProfileEntity!
+  profileId: String!
+  type: String!
 }
 
 type PictureEntity {
@@ -164,6 +174,7 @@ type Query {
   chats: [ChatEntity!]!
   contacts(contactsInput: ContactsInput!): [ContactEntity!]!
   getLoginUser: UserEntity!
+  notifications: [NotificationEntity!]!
   profiles(profilesInput: ProfilesInput!): [ProfileEntity!]!
   spotByPk(id: String!): SpotByIdResponse!
   spots(spotsInput: SpotsInput!): [SpotEntity!]!

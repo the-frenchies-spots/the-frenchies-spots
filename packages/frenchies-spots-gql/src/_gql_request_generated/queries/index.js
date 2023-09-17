@@ -5,6 +5,7 @@ module.exports.chatByPk = fs.readFileSync(path.join(__dirname, 'chatByPk.gql'), 
 module.exports.chats = fs.readFileSync(path.join(__dirname, 'chats.gql'), 'utf8');
 module.exports.contacts = fs.readFileSync(path.join(__dirname, 'contacts.gql'), 'utf8');
 module.exports.getLoginUser = fs.readFileSync(path.join(__dirname, 'getLoginUser.gql'), 'utf8');
+module.exports.notifications = fs.readFileSync(path.join(__dirname, 'notifications.gql'), 'utf8');
 module.exports.profiles = fs.readFileSync(path.join(__dirname, 'profiles.gql'), 'utf8');
 module.exports.spotByPk = fs.readFileSync(path.join(__dirname, 'spotByPk.gql'), 'utf8');
 module.exports.spots = fs.readFileSync(path.join(__dirname, 'spots.gql'), 'utf8');

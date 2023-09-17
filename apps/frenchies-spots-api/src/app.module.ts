@@ -13,7 +13,7 @@ import { RatingModule } from './module/rating.module';
 import { FavoriteModule } from './module/favorite.module';
 import { TagModule } from './module/tag.module';
 import { ProfileModule } from './module/profile.module';
-import { ChatModule } from './module/chat.module';
+import { SocketModule } from './module/socket.module';
 import { ContactModule } from './module/contact.module';
 import { PictureModule } from './module/picture.module';
 
@@ -24,10 +24,10 @@ import { PictureModule } from './module/picture.module';
       driver: ApolloDriver,
       autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
       sortSchema: true,
-     // cors: {
-     //   credentials: true,
-     //   origin: true,
-    // },
+      // cors: {
+      //   credentials: true,
+      //   origin: true,
+      // },
     }),
     MongooseModule.forRoot(process.env.DATABASE_URL),
     AuthModule,
@@ -37,7 +37,7 @@ import { PictureModule } from './module/picture.module';
     ProfileModule,
     RatingModule,
     FavoriteModule,
-    ChatModule,
+    SocketModule,
     ContactModule,
     PictureModule,
   ],

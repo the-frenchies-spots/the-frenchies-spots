@@ -13,6 +13,7 @@ module.exports.logout = fs.readFileSync(path.join(__dirname, 'logout.gql'), 'utf
 module.exports.signIn = fs.readFileSync(path.join(__dirname, 'signIn.gql'), 'utf8');
 module.exports.signUp = fs.readFileSync(path.join(__dirname, 'signUp.gql'), 'utf8');
 module.exports.toggleFavorite = fs.readFileSync(path.join(__dirname, 'toggleFavorite.gql'), 'utf8');
+module.exports.updateNotifStatus = fs.readFileSync(path.join(__dirname, 'updateNotifStatus.gql'), 'utf8');
 module.exports.updateProfile = fs.readFileSync(path.join(__dirname, 'updateProfile.gql'), 'utf8');
 module.exports.updateSpot = fs.readFileSync(path.join(__dirname, 'updateSpot.gql'), 'utf8');
 module.exports.updateTag = fs.readFileSync(path.join(__dirname, 'updateTag.gql'), 'utf8');
