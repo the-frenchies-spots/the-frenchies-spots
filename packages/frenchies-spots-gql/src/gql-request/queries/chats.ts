@@ -12,6 +12,11 @@ export const chats = gql`
         id
         profileId
         updatedAt
+        profile {
+          pseudo
+          photoUrl
+          avatarUrl
+        }
       }
       updatedAt
     }

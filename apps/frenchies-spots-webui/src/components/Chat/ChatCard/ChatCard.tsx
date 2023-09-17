@@ -7,6 +7,7 @@ import {
   Stack,
   Avatar,
   Text,
+  Log,
 } from "@frenchies-spots/material";
 import { ChatEntity } from "@frenchies-spots/gql";
 import { useStyles } from "./ChatCard.styles";
@@ -45,15 +46,15 @@ const ChatCard = (props: ChatCardProps) => {
       <Group position="apart">
         <Stack>
           {participantsFilter.map((participant) => {
-            const photoUrl = participant.profile.photoUrl;
-            const avatarUrl = participant.profile.avatarUrl;
+            const photoUrl = participant?.profile?.photoUrl;
+            const avatarUrl = participant?.profile?.avatarUrl;
             return <Avatar key={participant.id} src={photoUrl || avatarUrl} />;
           })}
         </Stack>
         <Stack>
           {participantsFilter.map((participant) => {
-            const pseudo = participant.profile.pseudo;
-            return <Text key={participant.profile.id}>{pseudo}</Text>;
+            const pseudo = participant?.profile?.pseudo;
+            return <Text key={participant?.profile?.id}>{pseudo}</Text>;
           })}
         </Stack>
       </Group>

@@ -9,14 +9,16 @@ import { useAuth } from "../../../hooks/use-auth";
 import { Box, Text } from "@frenchies-spots/material";
 import { useSpotUi } from "../../../hooks/use-spot-ui";
 import ProfileList from "../../Profile/ProfileList/ProfileList";
+import { filterListMode } from "../../../enum";
 
 interface SpotUiModeProps {
   spotList: SpotEntity[] | undefined;
   peopleList: ProfileEntity[] | undefined;
+  uiMode: filterListMode;
 }
 
 const SpotUiMode = (props: SpotUiModeProps) => {
-  const { spotList, peopleList } = props;
+  const { spotList, peopleList, uiMode } = props;
 
   const { user } = useAuth();
   const { isMapMode } = useSpotUi();
@@ -28,18 +30,22 @@ const SpotUiMode = (props: SpotUiModeProps) => {
   }
   return (
     <Box pt={200} h="100%">
-      {peopleList && <ProfileList profileList={peopleList} />}
-      {/* <SpotList list={spotList}>
-        {({ spotId, favoriteId, profileId }) => (
-          <>
-            {authProfileId !== profileId ? (
-              <FavoriteButton favorite={{ spotId, favoriteId }} />
-            ) : (
-              <Text>Yours</Text>
-            )}
-          </>
-        )}
-      </SpotList> */}
+      {uiMode === filterListMode.PEOPLE && peopleList && (
+        <ProfileList profileList={peopleList} />
+      )}
+      {uiMode === filterListMode.SPOT && (
+        <SpotList list={spotList}>
+          {({ spotId, favoriteId, profileId }) => (
+            <>
+              {authProfileId !== profileId ? (
+                <FavoriteButton favorite={{ spotId, favoriteId }} />
+              ) : (
+                <Text>Yours</Text>
+              )}
+            </>
+          )}
+        </SpotList>
+      )}
     </Box>
   );
 };

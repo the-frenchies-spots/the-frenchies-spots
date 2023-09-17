@@ -17,10 +17,14 @@ import { useSpotUi } from "../../../hooks/use-spot-ui";
 import toast from "react-hot-toast";
 import StatusBar from "../../StatusBar/StatusBar";
 
-interface SpotMenuProps extends Omit<ContainerProps, "onChange"> {}
+import { filterListMode } from "../../../enum";
+
+interface SpotMenuProps extends Omit<ContainerProps, "onChange"> {
+  onUiModeChange: (newUiMode: filterListMode) => void;
+}
 
 const SpotMenu = (props: SpotMenuProps) => {
-  const { ...other } = props;
+  const { onUiModeChange, ...other } = props;
 
   const { searchPlace } = useGeocoding();
   const {
@@ -117,9 +121,13 @@ const SpotMenu = (props: SpotMenuProps) => {
         </Box>
 
         <Group grow>
-          <Button onClick={() => null}>Tout</Button>
-          <Button onClick={() => null}>Spots</Button>
-          <Button onClick={() => null}>Entraide</Button>
+          {isMapMode && <Button onClick={() => null}>Tout</Button>}
+          <Button onClick={() => onUiModeChange(filterListMode.SPOT)}>
+            Spots
+          </Button>
+          <Button onClick={() => onUiModeChange(filterListMode.PEOPLE)}>
+            Entraide
+          </Button>
         </Group>
       </Stack>
     </Container>
