@@ -22,10 +22,10 @@ import { ChatModule } from './module/chat.module';
       driver: ApolloDriver,
       autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
       sortSchema: true,
-      cors: {
-        credentials: true,
-        origin: true,
-      },
+     // cors: {
+     //   credentials: true,
+     //   origin: true,
+    // },
     }),
     MongooseModule.forRoot(process.env.DATABASE_URL),
     AuthModule,
