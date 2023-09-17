@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { CloudinaryService } from 'src/service/cloudinary.service';
+import { CloudinaryService } from '../service/cloudinary.service';
 import { PictureEntity } from '../entity/picture.entity';
 import { PictureInput } from '../dto/input/picture/picture.input';
 

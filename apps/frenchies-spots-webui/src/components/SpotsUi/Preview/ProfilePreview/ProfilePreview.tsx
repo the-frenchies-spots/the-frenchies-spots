@@ -1,11 +1,7 @@
 import React from "react";
 
 import { ProfileEntity } from "@frenchies-spots/gql";
-import {
-  IconMessages,
-  IconStarFilled,
-  IconUserPlus,
-} from "@frenchies-spots/icon";
+import { IconMessages, IconUserPlus } from "@frenchies-spots/icon";
 import {
   Button,
   Group,
@@ -15,10 +11,7 @@ import {
   ActionIcon,
 } from "@frenchies-spots/material";
 
-import SpotPicture from "../../../Spots/SpotPicture/SpotPicture";
-import { useRouter } from "next/router";
 import Image from "next/image";
-import { useAuth } from "../../../../hooks/use-auth";
 import useContact from "../../../../hooks/use-contact";
 
 interface ProfilePreviewProps extends StackProps {

@@ -20,17 +20,25 @@ export class ProfileRepository {
           in: ids,
         },
       },
-      include: {
-        ...(profileId
-          ? {
-              contacts: {
-                where: {
-                  contactId: profileId,
+      ...(profileId
+        ? {
+            include: {
+              profileChats: {
+                include: {
+                  chat: {
+                    include: {
+                      participants: {
+                        where: {
+                          profileId,
+                        },
+                      },
+                    },
+                  },
                 },
               },
-            }
-          : {}),
-      },
+            },
+          }
+        : {}),
     });
     return plainToClassMany(profiles, ProfileEntity);
   }

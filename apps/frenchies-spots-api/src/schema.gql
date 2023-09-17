@@ -138,7 +138,7 @@ type ProfileEntity {
   id: String!
   location: JSON
   photoUrl: String
-  profileChats: [ProfileChatEntity!]!
+  profileChats: [ProfileChatEntity!]
   pseudo: String!
   ratings: [RatingEntity!]
   spots: [SpotEntity!]

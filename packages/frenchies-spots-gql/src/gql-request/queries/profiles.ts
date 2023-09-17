@@ -12,6 +12,9 @@ export const profiles = gql`
       pseudo
       updatedAt
       userId
+      profileChats {
+        chatId
+      }
     }
   }
 `;

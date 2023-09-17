@@ -10,8 +10,8 @@ import { ProfileInput } from '../dto/input/profile/profile.input';
 import { CurrentUserId } from '../decorator/currentUserId.decorator';
 import { BuyPointInput } from '../dto/input/buy-point/buy-point-input';
 import { ProfilesInput } from '../dto/input/profile/profiles.input';
-import { PublicTokenGuard } from 'src/guard/publicToken.guard';
-import { CurrentProfileId } from 'src/decorator/currentProfileId.decorator.';
+import { PublicTokenGuard } from '../guard/publicToken.guard';
+import { CurrentProfileId } from '../decorator/currentProfileId.decorator.';
 
 @Resolver(() => UserEntity)
 export class ProfileResolver {

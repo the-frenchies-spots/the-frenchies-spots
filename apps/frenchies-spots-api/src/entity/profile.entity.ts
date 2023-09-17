@@ -68,11 +68,11 @@ export class ProfileEntity implements Profile {
   })
   contacts: ContactEntity[];
 
-  @Field(() => [ProfileChatEntity])
+  @Field(() => [ProfileChatEntity], { nullable: true })
   @OneToMany(() => ProfileChatEntity, (profileChat) => profileChat.profile, {
     cascade: true,
   })
-  profileChats: ProfileChatEntity[];
+  profileChats?: ProfileChatEntity[];
 
   @Field(() => GraphQLJSON, { nullable: true })
   @Column('json')
