@@ -13,7 +13,7 @@ import { updateSpot } from "./updateSpot";
 import { updateTag } from "./updateTag";
 import { buyPoint } from "./buyPoint";
 
-export const mutations: Record<string, DocumentNode> = {
+export const mutations = {
   createOrUpdateRating,
   deleteSpot,
   deleteTag,
@@ -26,4 +26,4 @@ export const mutations: Record<string, DocumentNode> = {
   updateSpot,
   updateTag,
   buyPoint,
-};
+} satisfies Record<string, DocumentNode>;

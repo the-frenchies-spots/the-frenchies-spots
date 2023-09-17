@@ -26,6 +26,7 @@
   },
   "dependencies": {
     "@apollo/server": "^4.7.5",
+    "@frenchies-spots/gql": "workspace:^",
     "@frenchies-spots/utils": "workspace:*",
     "@nestjs/apollo": "^12.0.7",
     "@nestjs/common": "^10.0.0",
