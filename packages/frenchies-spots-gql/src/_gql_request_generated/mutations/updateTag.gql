@@ -14,6 +14,15 @@ mutation updateTag($tagUpdateInput: TagUpdateInput!){
                 createdAt
                 id
                 profile{
+                    avatarUrl
+                    contacts{
+                        authorization
+                        createdAt
+                        id
+                        isFriend
+                        profileId
+                        updatedAt
+                    }
                     createdAt
                     favorites{
                         createdAt
@@ -24,7 +33,15 @@ mutation updateTag($tagUpdateInput: TagUpdateInput!){
                     }
                     gamePoint
                     id
+                    location
                     photoUrl
+                    profileChats{
+                        chatId
+                        createdAt
+                        id
+                        profileId
+                        updatedAt
+                    }
                     pseudo
                     ratings{
                         createdAt
@@ -81,9 +98,11 @@ mutation updateTag($tagUpdateInput: TagUpdateInput!){
                     location
                     name
                     profile{
+                        avatarUrl
                         createdAt
                         gamePoint
                         id
+                        location
                         photoUrl
                         pseudo
                         updatedAt
@@ -125,9 +144,11 @@ mutation updateTag($tagUpdateInput: TagUpdateInput!){
             location
             name
             profile{
+                avatarUrl
                 createdAt
                 gamePoint
                 id
+                location
                 photoUrl
                 pseudo
                 updatedAt
@@ -138,9 +159,11 @@ mutation updateTag($tagUpdateInput: TagUpdateInput!){
                 createdAt
                 id
                 profile{
+                    avatarUrl
                     createdAt
                     gamePoint
                     id
+                    location
                     photoUrl
                     pseudo
                     updatedAt

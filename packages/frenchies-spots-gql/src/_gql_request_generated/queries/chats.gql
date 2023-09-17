@@ -1,0 +1,15 @@
+query chats {
+  chats {
+    createdAt
+    id
+    isTemporary
+    participants {
+      chatId
+      createdAt
+      id
+      profileId
+      updatedAt
+    }
+    updatedAt
+  }
+}

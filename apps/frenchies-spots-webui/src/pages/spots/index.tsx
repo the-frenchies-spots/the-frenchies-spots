@@ -3,7 +3,13 @@ import React, { ReactElement, useEffect, useState } from "react";
 import { useLazyQuery } from "@apollo/client";
 import { useForm } from "@frenchies-spots/hooks";
 import { LoadingOverlay } from "@frenchies-spots/material";
-import { queries, SpotEntity, SpotsInput } from "@frenchies-spots/gql";
+import {
+  ProfileEntity,
+  queries,
+  QueryProfilesArgs,
+  SpotEntity,
+  SpotsInput,
+} from "@frenchies-spots/gql";
 
 import SpotsUi from "../../components/SpotsUi/SpotsUi";
 import { SpotUiProvider } from "../../components/SpotsUi/SpotUI.provider";
@@ -22,6 +28,11 @@ const SpotsPage = () => {
     { spots: SpotEntity[] },
     { spotsInput: SpotsInput }
   >(queries.spots, { variables: { spotsInput: { searchValue: "" } } });
+
+  const [getPeoples, { data: peoplesData, loading: peoplesLoading }] =
+    useLazyQuery<{ profiles: ProfileEntity[] }, QueryProfilesArgs>(
+      queries.profiles
+    );
 
   const form = useForm<SpotsInput>({
     initialValues: {
@@ -53,10 +64,11 @@ const SpotsPage = () => {
       spotId={typeof spotId === "string" ? spotId : null}
       form={form}
       getFilterSpots={getFilterSpots}
+      getPeoples={getPeoples}
       coordinates={coordinates}
     >
-      <LoadingOverlay visible={loading} overlayBlur={2} />
-      <SpotsUi list={data?.spots} />
+      <LoadingOverlay visible={loading || peoplesLoading} overlayBlur={2} />
+      <SpotsUi spotList={data?.spots} peopleList={peoplesData?.profiles} />
     </SpotUiProvider>
   );
 };

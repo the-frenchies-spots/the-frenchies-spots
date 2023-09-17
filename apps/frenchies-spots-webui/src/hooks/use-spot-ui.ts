@@ -34,6 +34,8 @@ export const useSpotUi = () => {
     setCurrentSpotId,
     isFilter,
     setIsFilter,
+    currentProfileId,
+    setCurrentProfileId,
   } = useSpotUiContext();
 
   const handleFilterSpot = (spotsInput: SpotsInput) => {
@@ -42,12 +44,14 @@ export const useSpotUi = () => {
   };
 
   const handleCurrentSpotIdChange = getFuncOrThrow(setCurrentSpotId);
+  const handleCurrentProfileIdChange = getFuncOrThrow(setCurrentProfileId);
   const handleSetIsFilter = getFuncOrThrow(setIsFilter);
 
   const handleCloseFilter = () => {
     const close = getFuncOrThrow(closeFilter);
     close();
     handleCurrentSpotIdChange(null);
+    handleCurrentProfileIdChange(null);
     handleSetIsFilter(false);
   };
 
@@ -60,6 +64,7 @@ export const useSpotUi = () => {
     coordPoint,
     drawerOpened,
     currentSpotId,
+    currentProfileId,
     setIsFilter: handleSetIsFilter,
     onFilterSpot: handleFilterSpot,
     closeFilter: handleCloseFilter,
@@ -71,5 +76,6 @@ export const useSpotUi = () => {
     setIsMapMode: getFuncOrThrow(setIsMapMode),
     setCoordPoint: getFuncOrThrow(setCoordPoint),
     setViewPort: getFuncOrThrow(onViewportChange),
+    setCurrentProfileId: handleCurrentProfileIdChange,
   };
 };

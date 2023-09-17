@@ -23,6 +23,7 @@ import PriceInput from "../components/InputCustom/PriceInput/PriceInput";
 import { useAuth } from "../hooks/use-auth";
 import toast from "react-hot-toast";
 import ShopBuyPoints from "../components/Shop/ShopBuyPoints/ShopBuyPoints";
+import StatusBar from "../components/StatusBar/StatusBar";
 
 // Carte de test
 // 4242 4242 4242 4242
@@ -34,6 +35,7 @@ const Shop = () => {
   return (
     <Container size="md" h="100%">
       <Stack mt="md" mb="md">
+        <StatusBar />
         <Text>Espace boutique</Text>
         <Text>tu as {profile?.gamePoint} points</Text>
       </Stack>
@@ -43,11 +45,11 @@ const Shop = () => {
           <Tabs.Tab value="buy_points">Acheter des points</Tabs.Tab>
         </Tabs.List>
 
-        <Tabs.Panel value="personalization" pt="xs" h="100%">
+        <Tabs.Panel value="personalization" pt="xs" h="80%">
           Personnalisation
         </Tabs.Panel>
 
-        <Tabs.Panel value="buy_points" pt="xs" h="100%">
+        <Tabs.Panel value="buy_points" pt="xs" h="80%">
           <ShopBuyPoints />
         </Tabs.Panel>
       </Tabs>

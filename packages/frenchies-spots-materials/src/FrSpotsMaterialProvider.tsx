@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 
-import { colors, defaultColor, initColors } from "./utils";
+import { colors, initColors } from "./utils";
 
 import {
   ButtonStylesParams,
@@ -21,12 +21,10 @@ const customTheme: MantineThemeOverride = {
         const currentColor: string = params.color;
         let bgColor = initColors["yellow"][0];
         let hoverColor = initColors["yellow"][1];
-
         if (currentColor in initColors) {
           bgColor = initColors[currentColor as keyof typeof initColors][0];
           hoverColor = initColors[currentColor as keyof typeof initColors][1];
         }
-
         return {
           root: {
             backgroundColor: variant === "filled" ? bgColor : undefined,

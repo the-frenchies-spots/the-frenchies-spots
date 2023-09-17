@@ -1,4 +1,4 @@
-import { gql, DocumentNode } from "@apollo/client";
+import { DocumentNode } from "@apollo/client";
 
 import { createOrUpdateRating } from "./createOrUpdateRating";
 import { deleteSpot } from "./deleteSpot";
@@ -12,6 +12,8 @@ import { toggleFavorite } from "./toggleFavorite";
 import { updateSpot } from "./updateSpot";
 import { updateTag } from "./updateTag";
 import { buyPoint } from "./buyPoint";
+import { updateProfile } from "./updateProfile";
+import { insertChat } from "./insertChat";
 
 export const mutations = {
   createOrUpdateRating,
@@ -26,4 +28,6 @@ export const mutations = {
   updateSpot,
   updateTag,
   buyPoint,
+  insertChat,
+  updateProfile,
 } satisfies Record<string, DocumentNode>;

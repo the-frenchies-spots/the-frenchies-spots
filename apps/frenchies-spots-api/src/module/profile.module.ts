@@ -8,12 +8,22 @@ import { PublicTokenGuard } from '../guard/publicToken.guard';
 import { ProfileResolver } from '../resolver/profile.resolver';
 
 import { AuthRepository } from '../repository/auth.repository';
+import { ProfileBusiness } from '../business/profile.business';
 import { ProfileRepository } from '../repository/profile.repository';
 import { PublicTokenStrategy } from '../strategy/publicToken.strategy';
 import { RefreshTokenStrategy } from '../strategy/refreshToken.strategy';
-import { ProfileBusiness } from '../business/profile.business';
+import { GeospatialService } from '../service/spot-geospatial.service';
+import { MongooseModule } from '@nestjs/mongoose';
+import { SpotSchema } from '../schema/spot.shema';
+import { ProfileSchema } from '../schema/profile.shema';
 
 @Module({
+  imports: [
+    MongooseModule.forFeature([
+      { name: 'Spot', schema: SpotSchema },
+      { name: 'Profile', schema: ProfileSchema },
+    ]),
+  ],
   providers: [
     ProfileResolver,
     ProfileRepository,
@@ -26,6 +36,7 @@ import { ProfileBusiness } from '../business/profile.business';
     PublicTokenGuard,
     PublicTokenStrategy,
     RefreshTokenStrategy,
+    GeospatialService,
   ],
 })
 export class ProfileModule {}

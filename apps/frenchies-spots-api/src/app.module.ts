@@ -13,14 +13,19 @@ import { RatingModule } from './module/rating.module';
 import { FavoriteModule } from './module/favorite.module';
 import { TagModule } from './module/tag.module';
 import { ProfileModule } from './module/profile.module';
+import { ChatModule } from './module/chat.module';
 
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
-    GraphQLModule.forRoot<ApolloDriverConfig>({
+    GraphQLModule.forRoot({
       driver: ApolloDriver,
       autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
       sortSchema: true,
+     // cors: {
+     //   credentials: true,
+     //   origin: true,
+    // },
     }),
     MongooseModule.forRoot(process.env.DATABASE_URL),
     AuthModule,
@@ -30,6 +35,7 @@ import { ProfileModule } from './module/profile.module';
     ProfileModule,
     RatingModule,
     FavoriteModule,
+    ChatModule,
   ],
   providers: [PrismaService],
 })

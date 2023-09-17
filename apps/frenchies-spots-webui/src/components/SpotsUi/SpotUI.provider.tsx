@@ -12,7 +12,7 @@ import { formatPoint } from "../../utils/format-point";
 import { useDisclosure } from "@frenchies-spots/hooks";
 
 interface SpotUiProviderProps
-  extends Pick<SpotUiContextData, "getFilterSpots" | "form"> {
+  extends Pick<SpotUiContextData, "getFilterSpots" | "form" | "getPeoples"> {
   children: React.ReactNode;
   coordinates?: TCoordinate;
   spotId: string | null;
@@ -25,6 +25,7 @@ export const SpotUiProvider = (props: SpotUiProviderProps) => {
     coordinates,
     form,
     spotId = null,
+    getPeoples,
     ...values
   } = props;
 
@@ -34,6 +35,9 @@ export const SpotUiProvider = (props: SpotUiProviderProps) => {
   const [drawerOpened, { open, close }] = useDisclosure(false);
 
   const [currentSpotId, setCurrentSpotId] = useState<string | null>(spotId);
+  const [currentProfileId, setCurrentProfileId] = useState<string | null>(
+    spotId
+  );
   const [placeName, setPlaceName] = useState<string>("");
   const [isRayon, setIsRayon] = useState<boolean>(false);
   const [isMapMode, setIsMapMode] = useState<boolean>(true);
@@ -42,6 +46,7 @@ export const SpotUiProvider = (props: SpotUiProviderProps) => {
 
   const initViewPortMap = (coordinates: TCoordinate) => {
     const initFilterSpot = getFuncOrThrow(getFilterSpots);
+    const initFilterPeople = getFuncOrThrow(getPeoples);
     const { lat, lng } = coordinates;
     const point = formatPoint({ lat, lng, m: 5000 });
     setIsRayon(true);
@@ -61,6 +66,7 @@ export const SpotUiProvider = (props: SpotUiProviderProps) => {
         },
       },
     });
+    initFilterPeople({ variables: { profilesInput: { point } } });
   };
 
   const openPreviewSpot = () => {
@@ -111,6 +117,9 @@ export const SpotUiProvider = (props: SpotUiProviderProps) => {
         setCurrentSpotId,
         isFilter,
         setIsFilter,
+        getPeoples,
+        currentProfileId,
+        setCurrentProfileId,
       }}
     >
       {children}

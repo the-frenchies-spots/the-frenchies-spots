@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@apollo/client": "^3.7.10",
+    "@frenchies-spots/chat": "workspace:*",
     "@frenchies-spots/gql": "workspace:*",
     "@frenchies-spots/hooks": "workspace:*",
     "@frenchies-spots/icon": "workspace:*",
@@ -23,6 +24,7 @@
     "@types/react": "18.2.21",
     "@types/react-dom": "18.2.7",
     "axios": "^1.5.0",
+    "bufferutil": "^4.0.7",
     "cloudinary": "^1.40.0",
     "eslint": "8.48.0",
     "eslint-config-next": "13.4.19",
@@ -36,7 +38,8 @@
     "react-dom": "18.2.0",
     "react-hot-toast": "^2.4.1",
     "swiper": "^10.2.0",
-    "typescript": "5.2.2"
+    "typescript": "5.2.2",
+    "utf-8-validate": "^6.0.3"
   },
   "browser": {
     "fs": false,

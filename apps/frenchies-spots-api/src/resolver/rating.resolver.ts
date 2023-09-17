@@ -5,8 +5,8 @@ import { UseGuards } from '@nestjs/common';
 import { RefreshTokenGuard } from '../guard/refreshToken.guard';
 import { RatingInput } from '../dto/input/rating/rating-input';
 import { RatingBusiness } from '../business/rating.business';
-import { RatingEntity } from '../entity/rating.entity';
 import { RatingResponse } from '../dto/response/rating-response';
+import { RatingEntity } from '../entity/rating.entity';
 
 @Resolver(() => RatingEntity)
 export class RatingResolver {

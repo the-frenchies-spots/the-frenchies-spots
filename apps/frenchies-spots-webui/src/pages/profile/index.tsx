@@ -18,6 +18,7 @@ import LogoutButton from "../../components/LogoutButton/LogoutButton";
 import { IconMapPinPlus, IconSettingsFilled } from "@frenchies-spots/icon";
 import { useRouter } from "next/router";
 import ProfilePhoto from "../../components/Profile/ProfilePhoto";
+import StatusBar from "../../components/StatusBar/StatusBar";
 
 const Profile = () => {
   const { profile } = useAuth();
@@ -27,6 +28,7 @@ const Profile = () => {
   return (
     <Container size="md">
       <Stack pt="md">
+        <StatusBar />
         <Flex justify="center">
           <ProfilePhoto />
         </Flex>

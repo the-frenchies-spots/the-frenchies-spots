@@ -9,14 +9,36 @@ mutation signIn($signInInput: SignInInput!){
             hashedRefreshToken
             id
             profile{
+                avatarUrl
+                contacts{
+                    authorization
+                    createdAt
+                    id
+                    isFriend
+                    profile{
+                        avatarUrl
+                        createdAt
+                        gamePoint
+                        id
+                        location
+                        photoUrl
+                        pseudo
+                        updatedAt
+                        userId
+                    }
+                    profileId
+                    updatedAt
+                }
                 createdAt
                 favorites{
                     createdAt
                     id
                     profile{
+                        avatarUrl
                         createdAt
                         gamePoint
                         id
+                        location
                         photoUrl
                         pseudo
                         updatedAt
@@ -43,15 +65,50 @@ mutation signIn($signInInput: SignInInput!){
                 }
                 gamePoint
                 id
+                location
                 photoUrl
+                profileChats{
+                    chat{
+                        createdAt
+                        id
+                        isTemporary
+                        updatedAt
+                    }
+                    chatId
+                    chatMessages{
+                        chatId
+                        createdAt
+                        id
+                        message
+                        profileChatId
+                        updatedAt
+                    }
+                    createdAt
+                    id
+                    profile{
+                        avatarUrl
+                        createdAt
+                        gamePoint
+                        id
+                        location
+                        photoUrl
+                        pseudo
+                        updatedAt
+                        userId
+                    }
+                    profileId
+                    updatedAt
+                }
                 pseudo
                 ratings{
                     createdAt
                     id
                     profile{
+                        avatarUrl
                         createdAt
                         gamePoint
                         id
+                        location
                         photoUrl
                         pseudo
                         updatedAt
@@ -96,9 +153,11 @@ mutation signIn($signInInput: SignInInput!){
                     location
                     name
                     profile{
+                        avatarUrl
                         createdAt
                         gamePoint
                         id
+                        location
                         photoUrl
                         pseudo
                         updatedAt

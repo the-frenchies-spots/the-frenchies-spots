@@ -24,6 +24,39 @@ export type BuyPointInput = {
   paymentId: Scalars['String']['input'];
 };
 
+export type ChatEntity = {
+  __typename?: 'ChatEntity';
+  chatMessages: Array<ChatMessageEntity>;
+  createdAt: Scalars['DateTime']['output'];
+  id: Scalars['String']['output'];
+  isTemporary: Scalars['Boolean']['output'];
+  participants: Array<ProfileChatEntity>;
+  updatedAt: Scalars['DateTime']['output'];
+};
+
+export type ChatMessageEntity = {
+  __typename?: 'ChatMessageEntity';
+  chat: ChatEntity;
+  chatId: Scalars['String']['output'];
+  createdAt: Scalars['DateTime']['output'];
+  id: Scalars['String']['output'];
+  message: Scalars['String']['output'];
+  profileChat: ProfileChatEntity;
+  profileChatId: Scalars['String']['output'];
+  updatedAt: Scalars['DateTime']['output'];
+};
+
+export type ContactEntity = {
+  __typename?: 'ContactEntity';
+  authorization: Scalars['Boolean']['output'];
+  createdAt: Scalars['DateTime']['output'];
+  id: Scalars['String']['output'];
+  isFriend: Scalars['Boolean']['output'];
+  profile: ProfileEntity;
+  profileId: Scalars['String']['output'];
+  updatedAt: Scalars['DateTime']['output'];
+};
+
 export type DeleteResponse = {
   __typename?: 'DeleteResponse';
   deleted: Scalars['Boolean']['output'];
@@ -45,6 +78,10 @@ export type FavoriteInput = {
   spotId: Scalars['String']['input'];
 };
 
+export type InserChatInput = {
+  participantIds: Array<Scalars['String']['input']>;
+};
+
 export type LogoutResponse = {
   __typename?: 'LogoutResponse';
   loggedOut: Scalars['Boolean']['output'];
@@ -57,12 +94,14 @@ export type Mutation = {
   deleteSpot: DeleteResponse;
   deleteTag: DeleteResponse;
   getNewTokens: NewTokensResponse;
+  insertChat: ChatEntity;
   insertSpot: SpotEntity;
   insertTag: TagEntity;
   logout: LogoutResponse;
   signIn: SignResponse;
   signUp: SignResponse;
   toggleFavorite: ToggleFavoriteResponse;
+  updateProfile: UserEntity;
   updateSpot: SpotEntity;
   updateTag: TagEntity;
 };
@@ -85,6 +124,11 @@ export type MutationDeleteSpotArgs = {
 
 export type MutationDeleteTagArgs = {
   id: Scalars['String']['input'];
+};
+
+
+export type MutationInsertChatArgs = {
+  inserChatInput: InserChatInput;
 };
 
 
@@ -113,6 +157,11 @@ export type MutationToggleFavoriteArgs = {
 };
 
 
+export type MutationUpdateProfileArgs = {
+  profileInput: ProfileInput;
+};
+
+
 export type MutationUpdateSpotArgs = {
   updateSpotInput: SpotInput;
 };
@@ -128,13 +177,29 @@ export type NewTokensResponse = {
   refreshToken: Scalars['String']['output'];
 };
 
+export type ProfileChatEntity = {
+  __typename?: 'ProfileChatEntity';
+  chat: ChatEntity;
+  chatId: Scalars['String']['output'];
+  chatMessages: Array<ChatMessageEntity>;
+  createdAt: Scalars['DateTime']['output'];
+  id: Scalars['String']['output'];
+  profile: ProfileEntity;
+  profileId: Scalars['String']['output'];
+  updatedAt: Scalars['DateTime']['output'];
+};
+
 export type ProfileEntity = {
   __typename?: 'ProfileEntity';
+  avatarUrl?: Maybe<Scalars['String']['output']>;
+  contacts: Array<ContactEntity>;
   createdAt: Scalars['DateTime']['output'];
   favorites?: Maybe<Array<FavoriteEntity>>;
   gamePoint: Scalars['Float']['output'];
   id: Scalars['String']['output'];
+  location?: Maybe<Scalars['JSON']['output']>;
   photoUrl?: Maybe<Scalars['String']['output']>;
+  profileChats: Array<ProfileChatEntity>;
   pseudo: Scalars['String']['output'];
   ratings?: Maybe<Array<RatingEntity>>;
   spots?: Maybe<Array<SpotEntity>>;
@@ -143,14 +208,39 @@ export type ProfileEntity = {
   userId: Scalars['String']['output'];
 };
 
+export type ProfileInput = {
+  avatarUrl?: InputMaybe<Scalars['String']['input']>;
+  gamePoint?: InputMaybe<Scalars['Float']['input']>;
+  location?: InputMaybe<Scalars['JSON']['input']>;
+  photoUrl?: InputMaybe<Scalars['String']['input']>;
+  pseudo?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type ProfilesInput = {
+  point?: InputMaybe<Scalars['JSON']['input']>;
+};
+
 export type Query = {
   __typename?: 'Query';
+  chatByPk: ChatEntity;
+  chats: Array<ChatEntity>;
   getLoginUser: UserEntity;
+  profiles: Array<ProfileEntity>;
   spotByPk: SpotByIdResponse;
   spots: Array<SpotEntity>;
   spotsFavorite: Array<SpotEntity>;
   tagByPk: TagEntity;
   tags: Array<TagEntity>;
+};
+
+
+export type QueryChatByPkArgs = {
+  chatId: Scalars['String']['input'];
+};
+
+
+export type QueryProfilesArgs = {
+  profilesInput: ProfilesInput;
 };
 
 

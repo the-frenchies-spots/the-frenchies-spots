@@ -6,15 +6,33 @@ query getLoginUser{
         hashedRefreshToken
         id
         profile{
-            createdAt
-            favorites{
+            avatarUrl
+            contacts{
+                authorization
                 createdAt
                 id
+                isFriend
                 profile{
+                    avatarUrl
                     createdAt
+                    favorites{
+                        createdAt
+                        id
+                        profileId
+                        spotId
+                        updatedAt
+                    }
                     gamePoint
                     id
+                    location
                     photoUrl
+                    profileChats{
+                        chatId
+                        createdAt
+                        id
+                        profileId
+                        updatedAt
+                    }
                     pseudo
                     ratings{
                         createdAt
@@ -52,65 +70,12 @@ query getLoginUser{
                     userId
                 }
                 profileId
-                spot{
-                    address
-                    averageRating
-                    category
-                    createdAt
-                    description
-                    favorites{
-                        createdAt
-                        id
-                        profileId
-                        spotId
-                        updatedAt
-                    }
-                    id
-                    isCanPark
-                    isHidden
-                    location
-                    name
-                    profile{
-                        createdAt
-                        gamePoint
-                        id
-                        photoUrl
-                        pseudo
-                        updatedAt
-                        userId
-                    }
-                    profileId
-                    ratings{
-                        createdAt
-                        id
-                        profileId
-                        rate
-                        spotId
-                        updatedAt
-                    }
-                    region
-                    spotPicture{
-                        createdAt
-                        hostId
-                        id
-                        spotId
-                        updatedAt
-                        url
-                    }
-                    tags{
-                        createdAt
-                        id
-                        spotId
-                        tagId
-                        updatedAt
-                    }
-                    updatedAt
-                }
-                spotId
                 updatedAt
             }
+            createdAt
             gamePoint
             id
+            location
             photoUrl
             pseudo
             updatedAt

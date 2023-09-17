@@ -2,8 +2,8 @@ import { GqlExecutionContext } from '@nestjs/graphql';
 import { ExecutionContext, createParamDecorator } from '@nestjs/common';
 
 import { JwtPayload } from '../types';
-import { codeErrors } from '../enum/code-errors.enum';
 import ErrorService from '../service/error.service';
+import { codeErrors } from '../enum/code-errors.enum';
 
 const { ACCESS_DENIED } = codeErrors;
 
