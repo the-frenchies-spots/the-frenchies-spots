@@ -1,0 +1,9 @@
+mutation upload($pictureInput: PictureInput!){
+    upload(pictureInput: $pictureInput){
+        height
+        public_id
+        secure_url
+        url
+        width
+    }
+}

@@ -29,12 +29,19 @@ type ChatMessageEntity {
 
 type ContactEntity {
   authorization: Boolean!
+  contact: ProfileEntity!
+  contactId: String!
   createdAt: DateTime!
   id: String!
   isFriend: Boolean!
   profile: ProfileEntity!
   profileId: String!
   updatedAt: DateTime!
+}
+
+input ContactsInput {
+  authorization: Boolean
+  isFriend: Boolean
 }
 
 """
@@ -90,11 +97,25 @@ type Mutation {
   updateProfile(profileInput: ProfileInput!): UserEntity!
   updateSpot(updateSpotInput: SpotInput!): SpotEntity!
   updateTag(tagUpdateInput: TagUpdateInput!): TagEntity!
+  upload(pictureInput: PictureInput!): [PictureEntity!]!
 }
 
 type NewTokensResponse {
   accessToken: String!
   refreshToken: String!
+}
+
+type PictureEntity {
+  height: Float!
+  public_id: String!
+  secure_url: String!
+  url: String!
+  width: Float!
+}
+
+input PictureInput {
+  files: [String!]!
+  folder: String!
 }
 
 type ProfileChatEntity {
@@ -141,6 +162,7 @@ input ProfilesInput {
 type Query {
   chatByPk(chatId: String!): ChatEntity!
   chats: [ChatEntity!]!
+  contacts(contactsInput: ContactsInput!): [ContactEntity!]!
   getLoginUser: UserEntity!
   profiles(profilesInput: ProfilesInput!): [ProfileEntity!]!
   spotByPk(id: String!): SpotByIdResponse!

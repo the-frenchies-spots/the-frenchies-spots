@@ -10,12 +10,26 @@ import { ProfileEntity } from '../entity/profile.entity';
 export class ProfileRepository {
   constructor(private prisma: PrismaService) {}
 
-  async getAll(ids?: string[] | undefined): Promise<ProfileEntity[]> {
+  async getAll(
+    profileId: string | undefined,
+    ids?: string[] | undefined,
+  ): Promise<ProfileEntity[]> {
     const profiles = await this.prisma.profile.findMany({
       where: {
         id: {
           in: ids,
         },
+      },
+      include: {
+        ...(profileId
+          ? {
+              contacts: {
+                where: {
+                  contactId: profileId,
+                },
+              },
+            }
+          : {}),
       },
     });
     return plainToClassMany(profiles, ProfileEntity);

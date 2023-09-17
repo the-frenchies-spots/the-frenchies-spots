@@ -15,10 +15,15 @@ import {
   Text,
 } from "@frenchies-spots/material";
 import LogoutButton from "../../components/LogoutButton/LogoutButton";
-import { IconMapPinPlus, IconSettingsFilled } from "@frenchies-spots/icon";
+import {
+  IconMapPinPlus,
+  IconSettingsFilled,
+  IconUsers,
+} from "@frenchies-spots/icon";
 import { useRouter } from "next/router";
 import ProfilePhoto from "../../components/Profile/ProfilePhoto";
 import StatusBar from "../../components/StatusBar/StatusBar";
+import { GuardLayout } from "../../components/Layout/GuardLayout/GuardLayout";
 
 const Profile = () => {
   const { profile } = useAuth();
@@ -64,6 +69,14 @@ const Profile = () => {
           </ActionIcon>
         </Flex>
 
+        <Button
+          h={50}
+          leftIcon={<IconUsers />}
+          onClick={() => router.push("/profile/friends")}
+        >
+          Mes Amis
+        </Button>
+
         <Divider my={32} />
 
         <Group grow>
@@ -89,7 +102,9 @@ export default Profile;
 Profile.getLayout = function getLayout(page: ReactElement) {
   return (
     <PageLayout>
-      <NavigationLayout>{page}</NavigationLayout>
+      <GuardLayout isProtected>
+        <NavigationLayout>{page}</NavigationLayout>
+      </GuardLayout>
     </PageLayout>
   );
 };

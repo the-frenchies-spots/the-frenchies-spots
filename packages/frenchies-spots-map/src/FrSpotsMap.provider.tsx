@@ -33,3 +33,5 @@ export const FrSpotsMapProvider = (props: FrSpotsMapProviderProps) => {
     </FrSpotsMapContext.Provider>
   );
 };
+
+FrSpotsMapProvider.displayName = "@frenchies-spots/map/FrSpotsMapProvider";

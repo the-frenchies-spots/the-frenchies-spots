@@ -17,6 +17,7 @@ import { PageLayout } from "./../../components/Layout/PageLayout/PageLayout";
 import NavigationLayout from "../../components/Layout/NavigationLayout/NavigationLayout";
 import { useRouter } from "next/router";
 import { getCoordinates } from "../../utils/get-coordinates";
+import { GuardLayout } from "../../components/Layout/GuardLayout/GuardLayout";
 
 const SpotsPage = () => {
   const [pageLoading, isPageLoading] = useState<boolean>(true);
@@ -76,7 +77,12 @@ const SpotsPage = () => {
 SpotsPage.getLayout = function getLayout(page: ReactElement) {
   return (
     <PageLayout>
-      <NavigationLayout>{page}</NavigationLayout>
+      <GuardLayout>
+        {(connected) => {
+          if (connected) return <NavigationLayout>{page}</NavigationLayout>;
+          return <>{page}</>;
+        }}
+      </GuardLayout>
     </PageLayout>
   );
 };

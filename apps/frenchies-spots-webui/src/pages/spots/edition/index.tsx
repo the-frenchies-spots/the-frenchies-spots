@@ -11,6 +11,7 @@ import {
 import { useMutation } from "@apollo/client";
 import { useRouter } from "next/router";
 import toast from "react-hot-toast";
+import { GuardLayout } from "../../../components/Layout/GuardLayout/GuardLayout";
 
 const initialValues: SpotInput = {
   name: "",
@@ -31,15 +32,18 @@ const initialValues: SpotInput = {
 const SpotInsertPage = () => {
   const router = useRouter();
 
-  const [insertSpot, { data, loading, error }] = useMutation<
+  const [insertSpot, { loading }] = useMutation<
     { insertSpot: SpotEntity },
     MutationInsertSpotArgs
   >(mutations.insertSpot);
 
   const handleSubmit = (insertSpotInput: SpotInput) => {
     toast.promise(
-      insertSpot({ variables: { insertSpotInput } }).then(() => {
-        router.push("/spots");
+      insertSpot({ variables: { insertSpotInput } }).then((result) => {
+        const lat = result?.data?.insertSpot?.location?.coordinates[1];
+        const lng = result?.data?.insertSpot?.location?.coordinates[0];
+        const id = result?.data?.insertSpot?.id;
+        router.push(`/spots?lat=${lat}&lng=${lng}&spotId=${id}`);
       }),
       {
         loading: "Création...",
@@ -63,5 +67,9 @@ const SpotInsertPage = () => {
 export default SpotInsertPage;
 
 SpotInsertPage.getLayout = function getLayout(page: ReactElement) {
-  return <PageLayout>{page}</PageLayout>;
+  return (
+    <PageLayout>
+      <GuardLayout isProtected>{page}</GuardLayout>
+    </PageLayout>
+  );
 };

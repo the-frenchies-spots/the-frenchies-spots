@@ -14,6 +14,7 @@ import { updateTag } from "./updateTag";
 import { buyPoint } from "./buyPoint";
 import { updateProfile } from "./updateProfile";
 import { insertChat } from "./insertChat";
+import { upload } from "./upload";
 
 export const mutations = {
   createOrUpdateRating,
@@ -26,6 +27,7 @@ export const mutations = {
   signUp,
   toggleFavorite,
   updateSpot,
+  upload,
   updateTag,
   buyPoint,
   insertChat,

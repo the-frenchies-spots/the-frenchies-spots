@@ -17,6 +17,7 @@ mutation updateTag($tagUpdateInput: TagUpdateInput!){
                     avatarUrl
                     contacts{
                         authorization
+                        contactId
                         createdAt
                         id
                         isFriend

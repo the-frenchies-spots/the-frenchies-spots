@@ -21,6 +21,12 @@ export class ContactEntity {
   @Field()
   isFriend: boolean;
 
+  @Field(() => ProfileEntity)
+  contact: ProfileEntity;
+
+  @Field()
+  contactId: string;
+
   @Field()
   createdAt: Date;
 

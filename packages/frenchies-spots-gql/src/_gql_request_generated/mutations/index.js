@@ -16,3 +16,4 @@ module.exports.toggleFavorite = fs.readFileSync(path.join(__dirname, 'toggleFavo
 module.exports.updateProfile = fs.readFileSync(path.join(__dirname, 'updateProfile.gql'), 'utf8');
 module.exports.updateSpot = fs.readFileSync(path.join(__dirname, 'updateSpot.gql'), 'utf8');
 module.exports.updateTag = fs.readFileSync(path.join(__dirname, 'updateTag.gql'), 'utf8');
+module.exports.upload = fs.readFileSync(path.join(__dirname, 'upload.gql'), 'utf8');
