@@ -22,26 +22,28 @@ const useContact = () => {
   });
 
   const handleContactClick = (profile: ProfileEntity) => {
-    const chatId = profile?.profileChats[0]?.chatId;
+    if (profile?.profileChats) {
+      const chatId = profile?.profileChats[0]?.chatId;
 
-    if (!chatId) {
-      toast.promise(
-        insertChat({
-          variables: { inserChatInput: { participantIds: [profile.id] } },
-        }).then((response) => {
-          const id = response?.data?.insertChat?.id;
-          if (id) {
-            router.push(`/chat/${id}`);
+      if (!chatId) {
+        toast.promise(
+          insertChat({
+            variables: { inserChatInput: { participantIds: [profile.id] } },
+          }).then((response) => {
+            const id = response?.data?.insertChat?.id;
+            if (id) {
+              router.push(`/chat/${id}`);
+            }
+          }),
+          {
+            loading: "Mise en relation avec votre partenaire...",
+            success: <b>Bonne discussion !</b>,
+            error: <b>Nous avons pas réussi à joindre cette utilisateur.</b>,
           }
-        }),
-        {
-          loading: "Mise en relation avec votre partenaire...",
-          success: <b>Bonne discussion !</b>,
-          error: <b>Nous avons pas réussi à joindre cette utilisateur.</b>,
-        }
-      );
-    } else {
-      router.push(`/chat/${chatId}`);
+        );
+      } else {
+        router.push(`/chat/${chatId}`);
+      }
     }
   };
 
