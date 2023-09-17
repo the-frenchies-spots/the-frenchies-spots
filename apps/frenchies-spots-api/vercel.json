@@ -1,15 +1,5 @@
 {
   "version": 2,
-  "env": {
-    "SOCKET_PORT_URL": "@socket_port_url",
-    "DATABASE_URL": "@database_url",
-    "SHADOW_DATABASE_URL": "@shadow_database_url",
-    "ACCESS_TOKEN_SECRET": "@access_token_secret",
-    "REFRESH_TOKEN_SECRET": "@refresh_token_secret",
-    "CLOUDINARY_API_SECRET": "@cloudinary_api_secret",
-    "CLOUDINARY_API_KEY": "@cloudinary_api_secret",
-    "STRIPE_SECRET_KEY": "@stripe_secret_key"
-  },
   "builds": [
     {
       "src": "src/main.ts",
