@@ -3,8 +3,7 @@
   "builds": [
     {
       "src": "src/main.ts",
-      "use": "@vercel/node",
-      "command": "pnpmi && pnpm build"
+      "use": "@vercel/node"
     }
   ],
   "routes": [
@@ -13,5 +12,6 @@
       "dest": "src/main.ts",
       "methods": ["GET", "POST", "PUT", "DELETE"]
     }
-  ]
+  ],
+  "command": "pnpm i && pnpm build"
 }
