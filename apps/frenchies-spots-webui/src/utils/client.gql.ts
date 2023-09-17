@@ -8,7 +8,7 @@ const TOKEN_STORAGE_KEY = process.env.NEXT_PUBLIC_TOKEN_STORAGE_KEY || "";
 
 const httpLink = createHttpLink({
   uri: `${API_URL}/graphql`,
-  credentials: "same-origin",
+  // credentials: "same-origin",
 });
 
 const authLink = setContext((_, { headers }) => {
