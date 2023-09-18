@@ -91,6 +91,9 @@ type Mutation {
   insertSpot(insertSpotInput: SpotInput!): SpotEntity!
   insertTag(tagInsertInput: TagInsertInput!): TagEntity!
   logout: LogoutResponse!
+  sendChatMessage(
+    sendChatMessageInput: SendChatMessageInput!
+  ): ChatMessageEntity!
   signIn(signInInput: SignInInput!): SignResponse!
   signUp(signUpInput: SignUpInput!): SignResponse!
   toggleFavorite(favoriteInput: FavoriteInput!): ToggleFavoriteResponse!
@@ -204,6 +207,12 @@ type RatingResponse {
   avg: Float!
   currentRating: RatingEntity
   maxVote: Float!
+}
+
+input SendChatMessageInput {
+  chatId: String!
+  message: String!
+  profileChatId: String!
 }
 
 input SignInInput {
