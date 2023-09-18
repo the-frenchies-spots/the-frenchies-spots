@@ -16,6 +16,7 @@ import { updateProfile } from "./updateProfile";
 import { insertChat } from "./insertChat";
 import { upload } from "./upload";
 import { updateNotifStatus } from "./updateNotifStatus";
+import { sendChatMessage } from "./sendChatMessage";
 
 export const mutations = {
   createOrUpdateRating,
@@ -33,5 +34,6 @@ export const mutations = {
   buyPoint,
   insertChat,
   updateProfile,
+  sendChatMessage,
   updateNotifStatus,
 } satisfies Record<string, DocumentNode>;

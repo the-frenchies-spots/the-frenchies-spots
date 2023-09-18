@@ -1,0 +1,10 @@
+mutation sendChatMessage($sendChatMessageInput: SendChatMessageInput!) {
+  sendChatMessage(sendChatMessageInput: $sendChatMessageInput) {
+    chatId
+    createdAt
+    id
+    message
+    profileChatId
+    updatedAt
+  }
+}

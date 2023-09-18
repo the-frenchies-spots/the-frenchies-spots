@@ -9,7 +9,7 @@
     "dev": "tsup src/index.ts --format esm,cjs --watch --dts --external react",
     "clean": "rm -rf dist",
     "codegen": "graphql-codegen -watch",
-    "generate": "gqlg --schemaFilePath ../../apps/frenchies-spots-api/src/schema.gql --destDirPath ./src/_gql_request_generated --depthLimit 5"
+    "generate": "gqlg --schemaFilePath ../../../SAFE_API/src/schema.gql --destDirPath ./src/_gql_request_generated --depthLimit 5"
   },
   "devDependencies": {
     "tsconfig": "workspace:*",

@@ -105,6 +105,7 @@ export type Mutation = {
   insertSpot: SpotEntity;
   insertTag: TagEntity;
   logout: LogoutResponse;
+  sendChatMessage: ChatMessageEntity;
   signIn: SignResponse;
   signUp: SignResponse;
   toggleFavorite: ToggleFavoriteResponse;
@@ -148,6 +149,11 @@ export type MutationInsertSpotArgs = {
 
 export type MutationInsertTagArgs = {
   tagInsertInput: TagInsertInput;
+};
+
+
+export type MutationSendChatMessageArgs = {
+  sendChatMessageInput: SendChatMessageInput;
 };
 
 
@@ -331,6 +337,12 @@ export type RatingResponse = {
   avg: Scalars['Float']['output'];
   currentRating?: Maybe<RatingEntity>;
   maxVote: Scalars['Float']['output'];
+};
+
+export type SendChatMessageInput = {
+  chatId: Scalars['String']['input'];
+  message: Scalars['String']['input'];
+  profileChatId: Scalars['String']['input'];
 };
 
 export type SignInInput = {
