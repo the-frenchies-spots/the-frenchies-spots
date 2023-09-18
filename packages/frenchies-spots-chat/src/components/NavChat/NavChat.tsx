@@ -1,8 +1,9 @@
 import React from "react";
 
-import { IconChevronLeft, IconInfoCircleFilled } from "@frenchies-spots/icon";
+import { IconInfoCircleFilled } from "@frenchies-spots/icon";
 import {
   ActionIcon,
+  BackButton,
   Flex,
   Group,
   Stack,
@@ -29,15 +30,7 @@ const NavChat = (props: NavChatProps) => {
       align="center"
       gap="md"
     >
-      <ActionIcon
-        h={40}
-        w={40}
-        variant="filled"
-        sx={{ backgroundColor: "#B299BC", borderRadius: 8 }}
-        onClick={onCancel}
-      >
-        <IconChevronLeft size={24} />
-      </ActionIcon>
+      <BackButton onClick={onCancel} />
       <Group sx={{ flexGrow: 1 }} position="apart">
         <Stack spacing={2}>
           <Text>

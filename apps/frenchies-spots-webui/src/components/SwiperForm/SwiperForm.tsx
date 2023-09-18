@@ -23,7 +23,7 @@ export const SwiperForm = ({ children, onSubmit }: SwiperFormProps) => {
         pagination={{ clickable: true }}
         scrollbar={{ draggable: true }}
         onTouchMove={(_, e) => e.preventDefault()}
-        style={{ border: "1px solid", height: "80vh" }}
+        style={{ height: "100vh" }}
       >
         {children}
       </Swiper>

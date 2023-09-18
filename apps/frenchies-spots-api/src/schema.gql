@@ -91,9 +91,7 @@ type Mutation {
   insertSpot(insertSpotInput: SpotInput!): SpotEntity!
   insertTag(tagInsertInput: TagInsertInput!): TagEntity!
   logout: LogoutResponse!
-  sendChatMessage(
-    sendChatMessageInput: SendChatMessageInput!
-  ): ChatMessageEntity!
+  sendChatMessage(sendChatMessageInput: SendChatMessageInput!): ChatMessageEntity!
   signIn(signInInput: SignInInput!): SignResponse!
   signUp(signUpInput: SignUpInput!): SignResponse!
   toggleFavorite(favoriteInput: FavoriteInput!): ToggleFavoriteResponse!

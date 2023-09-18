@@ -54,10 +54,7 @@ export const SpotEditionForm = (props: SpotEditionFormProps) => {
 
   const handleSubmit: FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault();
-    //TODO: CLOUDINARY
-
     const { pictures, ...spotsParams } = form.values;
-
     const uploadPictures = (await (pictures
       ? uploadMultipleImage({
           files: pictures,
