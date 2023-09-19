@@ -48,18 +48,18 @@ const SpotsMapUi = (props: SpotsMapUiProps) => {
 
   return (
     <Map viewport={viewport} onViewportChange={setViewPort}>
+      {userPosition && (
+        <CurrentLocationMarker
+          lat={userPosition?.coordinates?.lat}
+          lng={userPosition?.coordinates?.lng}
+        />
+      )}
+
       {isRayon && coordPoint && (
         <MapPerimeter
           lat={coordPoint.lat}
           lng={coordPoint.lng}
           radius={form.values.point.maxDistance / 1000}
-        />
-      )}
-
-      {userPosition && (
-        <CurrentLocationMarker
-          lat={userPosition?.coordinates?.lat}
-          lng={userPosition?.coordinates?.lng}
         />
       )}
 

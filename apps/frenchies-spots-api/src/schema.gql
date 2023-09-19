@@ -8,12 +8,12 @@ input BuyPointInput {
 }
 
 type ChatEntity {
-  chatMessages: [ChatMessageEntity!]!
-  createdAt: DateTime!
-  id: String!
-  isTemporary: Boolean!
-  participants: [ProfileChatEntity!]!
-  updatedAt: DateTime!
+  chatMessages: [ChatMessageEntity!]
+  createdAt: DateTime
+  id: String
+  isTemporary: Boolean
+  participants: [ProfileChatEntity!]
+  updatedAt: DateTime
 }
 
 type ChatMessageEntity {
@@ -130,14 +130,14 @@ input PictureInput {
 }
 
 type ProfileChatEntity {
-  chat: ChatEntity!
-  chatId: String!
-  chatMessages: [ChatMessageEntity!]!
-  createdAt: DateTime!
-  id: String!
-  profile: ProfileEntity!
-  profileId: String!
-  updatedAt: DateTime!
+  chat: ChatEntity
+  chatId: String
+  chatMessages: [ChatMessageEntity!]
+  createdAt: DateTime
+  id: String
+  profile: ProfileEntity
+  profileId: String
+  updatedAt: DateTime
 }
 
 type ProfileEntity {

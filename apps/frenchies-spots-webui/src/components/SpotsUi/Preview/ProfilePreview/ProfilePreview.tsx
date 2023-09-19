@@ -1,7 +1,11 @@
 import React from "react";
 
 import { ProfileEntity } from "@frenchies-spots/gql";
-import { IconMessages, IconUserPlus } from "@frenchies-spots/icon";
+import {
+  IconMessages,
+  IconUserPlus,
+  IconUserSquareRounded,
+} from "@frenchies-spots/icon";
 import {
   Button,
   Group,
@@ -13,14 +17,18 @@ import {
 
 import Image from "next/image";
 import useContact from "../../../../hooks/use-contact";
+import { useRouter } from "next/router";
 
 interface ProfilePreviewProps extends StackProps {
   profile: ProfileEntity;
+  currentProfile?: ProfileEntity | undefined;
 }
 
 const ProfilePreview = (props: ProfilePreviewProps) => {
-  const { profile, ...stackProps } = props;
+  const { profile, currentProfile, ...stackProps } = props;
   const { onContactClick } = useContact();
+
+  const router = useRouter();
 
   return (
     <Stack h={300} p="md" justify="space-between" {...stackProps}>
@@ -35,25 +43,37 @@ const ProfilePreview = (props: ProfilePreviewProps) => {
           />
         )}
         <Text>{profile.pseudo}</Text>
-        <ActionIcon
-          sx={{
-            border: "1px solid orange",
-            borderRadius: 50,
-            height: 40,
-            width: 40,
-          }}
-        >
-          <IconUserPlus color="orange" />
-        </ActionIcon>
+
+        {currentProfile && (
+          <ActionIcon
+            sx={{
+              border: "1px solid orange",
+              borderRadius: 50,
+              height: 40,
+              width: 40,
+            }}
+          >
+            <IconUserPlus color="orange" />
+          </ActionIcon>
+        )}
       </Group>
 
-      <Button
-        variant="outline"
-        leftIcon={<IconMessages />}
-        onClick={() => onContactClick(profile)}
-      >
-        Contacter
-      </Button>
+      {currentProfile ? (
+        <Button
+          variant="outline"
+          leftIcon={<IconMessages />}
+          onClick={() => onContactClick(profile)}
+        >
+          Contacter
+        </Button>
+      ) : (
+        <Button
+          leftIcon={<IconUserSquareRounded />}
+          onClick={() => router.push("/sign-in")}
+        >
+          Connecter vous pour chatter
+        </Button>
+      )}
     </Stack>
   );
 };

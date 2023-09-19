@@ -6,30 +6,30 @@ import { ChatMessageEntity } from './chat-message.entity';
 
 @ObjectType()
 export class ProfileChatEntity {
-  @Field()
+  @Field({ nullable: true })
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Field(() => ProfileEntity)
+  @Field(() => ProfileEntity, { nullable: true })
   profile: ProfileEntity;
 
-  @Field()
+  @Field({ nullable: true })
   profileId: string;
 
-  @Field(() => ChatEntity)
+  @Field(() => ChatEntity, { nullable: true })
   chat: ChatEntity;
 
-  @Field()
+  @Field({ nullable: true })
   chatId: string;
 
   // Assuming ChatMessage type is defined similarly
 
-  @Field(() => [ChatMessageEntity])
+  @Field(() => [ChatMessageEntity], { nullable: true })
   chatMessages: ChatMessageEntity[];
 
-  @Field()
+  @Field({ nullable: true })
   createdAt: Date;
 
-  @Field()
+  @Field({ nullable: true })
   updatedAt: Date;
 }

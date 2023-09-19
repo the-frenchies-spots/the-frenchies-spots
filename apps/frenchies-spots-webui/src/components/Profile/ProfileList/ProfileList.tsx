@@ -1,11 +1,12 @@
 import { ProfileEntity } from "@frenchies-spots/gql";
-import React from "react";
+import React, { Fragment } from "react";
 import ProfileCard from "../ProfileCard/ProfileCard";
 import {
   Container,
   ScrollArea,
   type ContainerProps,
   ActionIcon,
+  Log,
 } from "@frenchies-spots/material";
 import { IconMessages, IconUserPlus } from "@frenchies-spots/icon";
 import useContact from "./../../../hooks/use-contact";
@@ -22,15 +23,19 @@ const ProfileList = (props: ProfileListProps) => {
   return (
     <Container size="md" h="100%" {...containerProps}>
       <ScrollArea h="100%" p={0} m={0}>
-        {profileList.map((profile) => (
-          <ProfileCard key={profile.id} profile={profile} mb="md">
-            <ActionIcon>
-              <IconUserPlus />
-            </ActionIcon>
-            <ActionIcon onClick={() => onContactClick(profile)}>
-              <IconMessages />
-            </ActionIcon>
-          </ProfileCard>
+        {profileList.map((profile, index) => (
+          <Fragment key={index}>
+            <Log value={{ profile }} />
+
+            <ProfileCard key={profile.id} profile={profile} mb="md">
+              <ActionIcon>
+                <IconUserPlus />
+              </ActionIcon>
+              <ActionIcon onClick={() => onContactClick(profile)}>
+                <IconMessages />
+              </ActionIcon>
+            </ProfileCard>
+          </Fragment>
         ))}
       </ScrollArea>
     </Container>

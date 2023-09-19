@@ -1,5 +1,5 @@
-import React, { useCallback } from "react";
-import { ChatUi } from "@frenchies-spots/chat";
+import React, { useCallback, useEffect, useState } from "react";
+import { ChatMessageInput, ChatUi } from "@frenchies-spots/chat";
 import {
   ChatEntity,
   ChatMessageEntity,
@@ -22,6 +22,7 @@ const ChatPage = (props: ChatPageProps) => {
   const { chatId, profile } = props;
 
   const router = useRouter();
+  const [messages, setMessages] = useState<ChatMessageInput[]>([]);
 
   const { data, loading, refetch } = useQuery<
     { chatByPk: ChatEntity },
@@ -43,21 +44,29 @@ const ChatPage = (props: ChatPageProps) => {
           (participant) => participant?.profile?.id === profile?.id
         );
         if (participant) {
-          send({
-            variables: {
-              sendChatMessageInput: {
-                message: val,
-                chatId: data?.chatByPk?.id,
-                profileChatId: participant?.id,
-              },
-            },
-          });
+          const sendChatMessageInput = {
+            message: val,
+            chatId: data?.chatByPk?.id,
+            profileChatId: participant?.id,
+          };
+          send({ variables: { sendChatMessageInput } });
+          setMessages((prev) => [...prev, sendChatMessageInput]);
           refetch();
         }
       }
     },
     [data, send, profile, refetch]
   );
+
+  useEffect(() => {
+    setMessages(
+      data?.chatByPk.chatMessages.map((chatMessage) => ({
+        chatId: chatMessage.chatId,
+        profileChatId: chatMessage.profileChatId,
+        message: chatMessage.message,
+      })) || []
+    );
+  }, [data?.chatByPk.chatMessages]);
 
   return (
     <Container size="md" h="100%">
@@ -66,13 +75,9 @@ const ChatPage = (props: ChatPageProps) => {
         <ChatUi
           send={handleSend}
           currentProfileId={profile.id}
-          participants={data.chatByPk.participants}
-          messages={data?.chatByPk.chatMessages.map((chatMessage) => ({
-            chatId: chatMessage.chatId,
-            profileChatId: chatMessage.profileChatId,
-            message: chatMessage.message,
-          }))}
           onCancel={() => router.back()}
+          participants={data.chatByPk.participants}
+          messages={messages}
         />
       )}
     </Container>
