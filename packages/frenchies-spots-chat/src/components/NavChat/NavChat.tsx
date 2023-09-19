@@ -35,7 +35,7 @@ const NavChat = (props: NavChatProps) => {
         <Stack spacing={2}>
           <Text>
             {participants
-              .map((participant) => participant.profile.pseudo)
+              .map((participant) => participant?.profile?.pseudo)
               .join(" ")}
           </Text>
           <Text>En ligne il y a 20 min</Text>
