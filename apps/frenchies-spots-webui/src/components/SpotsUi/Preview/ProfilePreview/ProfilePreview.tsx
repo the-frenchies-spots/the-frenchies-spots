@@ -1,6 +1,6 @@
 import React from "react";
 
-import { ProfileEntity } from "@frenchies-spots/gql";
+import { Maybe, ProfileEntity } from "@frenchies-spots/gql";
 import {
   IconMessages,
   IconUserPlus,
@@ -21,7 +21,7 @@ import { useRouter } from "next/router";
 
 interface ProfilePreviewProps extends StackProps {
   profile: ProfileEntity;
-  currentProfile?: ProfileEntity | undefined;
+  currentProfile?: Maybe<ProfileEntity> | ProfileEntity | undefined;
 }
 
 const ProfilePreview = (props: ProfilePreviewProps) => {
