@@ -1,5 +1,4 @@
 import React, { ReactElement } from "react";
-import { useAuth } from "../../hooks/use-auth";
 import ChatList from "../../components/Chat/ChatList/ChatList";
 import { PageLayout } from "../../components/Layout/PageLayout/PageLayout";
 import NavigationLayout from "../../components/Layout/NavigationLayout/NavigationLayout";
@@ -13,8 +12,7 @@ import {
 import MeetingList from "../../components/Meeting/MeetingList/MeetingList";
 import { GuardLayout } from "../../components/Layout/GuardLayout/GuardLayout";
 
-const Chat = () => {
-  const { profile } = useAuth();
+const ChatPage = () => {
   return (
     <Container size="md" h="100%" pt="md">
       <Text>Chat</Text>
@@ -42,7 +40,7 @@ const Chat = () => {
   );
 };
 
-Chat.getLayout = function getLayout(page: ReactElement) {
+ChatPage.getLayout = function getLayout(page: ReactElement) {
   return (
     <PageLayout>
       <GuardLayout isProtected>
@@ -52,4 +50,4 @@ Chat.getLayout = function getLayout(page: ReactElement) {
   );
 };
 
-export default Chat;
+export default ChatPage;

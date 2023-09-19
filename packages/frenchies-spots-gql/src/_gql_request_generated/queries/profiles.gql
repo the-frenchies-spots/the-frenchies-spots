@@ -75,6 +75,7 @@ query profiles($profilesInput: ProfilesInput!){
                         chatId
                         createdAt
                         id
+                        isRead
                         message
                         profileChatId
                         updatedAt

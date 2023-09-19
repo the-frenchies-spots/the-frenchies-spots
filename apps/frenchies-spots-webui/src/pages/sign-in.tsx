@@ -40,14 +40,7 @@ const SignIn = () => {
   ) => {
     event.preventDefault();
     if (form.isValid()) {
-      toast.promise(
-        onSignIn(form.values).then(() => router.push("/spots")),
-        {
-          loading: "Connexion...",
-          success: <b>{`Bon retour parmis nous !`}</b>,
-          error: <b>Une erreur est survenue !</b>,
-        }
-      );
+      onSignIn(form.values);
     }
   };
 

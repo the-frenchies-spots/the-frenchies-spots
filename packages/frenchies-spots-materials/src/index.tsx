@@ -5,3 +5,4 @@ export * from "./utils";
 export * from "./FrSpotsMaterialProvider";
 // export { default as Typography } from "./Typography/Typography";
 export * from "./BackButton/BackButton";
+export * from "./BadgeIcon/BadgeIcon";

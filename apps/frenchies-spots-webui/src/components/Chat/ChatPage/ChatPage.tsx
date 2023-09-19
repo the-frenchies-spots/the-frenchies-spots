@@ -24,6 +24,11 @@ const ChatPage = (props: ChatPageProps) => {
   const router = useRouter();
   const [messages, setMessages] = useState<ChatMessageInput[]>([]);
 
+  const [markAsRead] = useMutation(mutations.markChatMessageAsRead, {
+    variables: { chatId },
+    refetchQueries: [queries.chats, queries.chatMessagesNotRead],
+  });
+
   const { data, loading, refetch } = useQuery<
     { chatByPk: ChatEntity },
     QueryChatByPkArgs
@@ -43,11 +48,11 @@ const ChatPage = (props: ChatPageProps) => {
         const participant = data?.chatByPk?.participants?.find(
           (participant) => participant?.profile?.id === profile?.id
         );
-        if (participant) {
+        if (participant && data?.chatByPk?.id && participant?.id) {
           const sendChatMessageInput = {
             message: val,
-            chatId: data?.chatByPk?.id,
-            profileChatId: participant?.id,
+            chatId: data.chatByPk.id,
+            profileChatId: participant.id,
           };
           send({ variables: { sendChatMessageInput } });
           setMessages((prev) => [...prev, sendChatMessageInput]);
@@ -59,14 +64,17 @@ const ChatPage = (props: ChatPageProps) => {
   );
 
   useEffect(() => {
-    setMessages(
-      data?.chatByPk.chatMessages.map((chatMessage) => ({
-        chatId: chatMessage.chatId,
-        profileChatId: chatMessage.profileChatId,
-        message: chatMessage.message,
-      })) || []
-    );
-  }, [data?.chatByPk.chatMessages]);
+    if (data?.chatByPk?.chatMessages) {
+      markAsRead();
+      setMessages(
+        data?.chatByPk?.chatMessages.map((chatMessage) => ({
+          chatId: chatMessage.chatId,
+          profileChatId: chatMessage.profileChatId,
+          message: chatMessage.message,
+        })) || []
+      );
+    }
+  }, [data?.chatByPk.chatMessages, markAsRead]);
 
   return (
     <Container size="md" h="100%">

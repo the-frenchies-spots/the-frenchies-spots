@@ -9,6 +9,7 @@ import ErrorService from '../service/error.service';
 import { codeErrors } from '../enum/code-errors.enum';
 import { SendChatMessageInput } from '../dto/input/chat/send-chat-message.input';
 import { ChatMessageEntity } from '../entity/chat-message.entity';
+import { UserChatResponse } from '../dto/response/chat/user-chat.response';
 
 const { ACCESS_DENIED, INTERNAL_SERVER_ERROR } = codeErrors;
 
@@ -19,14 +20,22 @@ export class ChatBusiness {
     private contactRepository: ContactRepository,
   ) {}
 
-  async chats(userId: string): Promise<ChatEntity[]> {
+  async chats(userId: string): Promise<UserChatResponse[]> {
     return this.chatRepository.getAll(userId);
+  }
+
+  async messagesNotRead(userId: string): Promise<number> {
+    return this.chatRepository.countMessagesNotRead(userId);
   }
 
   async sendMessage(
     sendChatMessageInput: SendChatMessageInput,
   ): Promise<ChatMessageEntity> {
     return this.chatRepository.sendMessage(sendChatMessageInput);
+  }
+
+  async markMessageAsRead(userId: string, chatId: string): Promise<boolean> {
+    return this.chatRepository.markMessageAsRead(userId, chatId);
   }
 
   async getByPk(chatId: string, profileId: string): Promise<ChatEntity> {

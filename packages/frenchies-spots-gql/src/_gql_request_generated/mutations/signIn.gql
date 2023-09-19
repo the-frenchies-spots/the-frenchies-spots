@@ -91,6 +91,7 @@ mutation signIn($signInInput: SignInInput!){
                         chatId
                         createdAt
                         id
+                        isRead
                         message
                         profileChatId
                         updatedAt

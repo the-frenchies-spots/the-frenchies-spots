@@ -91,6 +91,7 @@ mutation signUp($signUpInput: SignUpInput!){
                         chatId
                         createdAt
                         id
+                        isRead
                         message
                         profileChatId
                         updatedAt

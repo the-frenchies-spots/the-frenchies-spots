@@ -80,6 +80,7 @@ query spotsFavorite{
                         chatId
                         createdAt
                         id
+                        isRead
                         message
                         profileChatId
                         updatedAt

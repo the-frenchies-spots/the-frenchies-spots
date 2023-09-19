@@ -18,7 +18,7 @@ const useContact = () => {
     { insertChat: ChatEntity },
     MutationInsertChatArgs
   >(mutations.insertChat, {
-    refetchQueries: [queries.profiles],
+    refetchQueries: [queries.profiles, queries.chats],
   });
 
   const handleContactClick = (profile: ProfileEntity) => {

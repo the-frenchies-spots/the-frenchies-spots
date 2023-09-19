@@ -25,8 +25,6 @@ const ProfileList = (props: ProfileListProps) => {
       <ScrollArea h="100%" p={0} m={0}>
         {profileList.map((profile, index) => (
           <Fragment key={index}>
-            <Log value={{ profile }} />
-
             <ProfileCard key={profile.id} profile={profile} mb="md">
               <ActionIcon>
                 <IconUserPlus />

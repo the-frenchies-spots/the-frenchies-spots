@@ -1,4 +1,4 @@
-import { Resolver, Mutation, Args, Query } from '@nestjs/graphql';
+import { Resolver, Mutation, Args, Query, Int } from '@nestjs/graphql';
 
 import { UseGuards } from '@nestjs/common';
 import { RefreshTokenGuard } from '../guard/refreshToken.guard';
@@ -11,14 +11,15 @@ import { CurrentUserId } from '../decorator/currentUserId.decorator';
 
 import { ChatMessageEntity } from '../entity/chat-message.entity';
 import { SendChatMessageInput } from '../dto/input/chat/send-chat-message.input';
+import { UserChatResponse } from '../dto/response/chat/user-chat.response';
 
 @Resolver(() => ChatEntity)
 export class ChatResolver {
   constructor(private readonly chatBusiness: ChatBusiness) {}
 
   @UseGuards(RefreshTokenGuard)
-  @Query(() => [ChatEntity])
-  chats(@CurrentUserId() userId: string): Promise<ChatEntity[]> {
+  @Query(() => [UserChatResponse])
+  chats(@CurrentUserId() userId: string): Promise<UserChatResponse[]> {
     return this.chatBusiness.chats(userId);
   }
 
@@ -29,6 +30,12 @@ export class ChatResolver {
     @CurrentProfileId() profileId: string,
   ): Promise<ChatEntity> {
     return this.chatBusiness.getByPk(chatId, profileId);
+  }
+
+  @UseGuards(RefreshTokenGuard)
+  @Query(() => Int)
+  chatMessagesNotRead(@CurrentUserId() userId: string): Promise<number> {
+    return this.chatBusiness.messagesNotRead(userId);
   }
 
   @UseGuards(RefreshTokenGuard)
@@ -46,5 +53,14 @@ export class ChatResolver {
     @Args('sendChatMessageInput') sendChatMessageInput: SendChatMessageInput,
   ): Promise<ChatMessageEntity> {
     return this.chatBusiness.sendMessage(sendChatMessageInput);
+  }
+
+  @UseGuards(RefreshTokenGuard)
+  @Mutation(() => Boolean)
+  markChatMessageAsRead(
+    @CurrentUserId() userId: string,
+    @Args('chatId') chatId: string,
+  ): Promise<boolean> {
+    return this.chatBusiness.markMessageAsRead(userId, chatId);
   }
 }

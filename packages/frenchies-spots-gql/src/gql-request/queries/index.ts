@@ -11,6 +11,7 @@ import { chatByPk } from "./chatByPk";
 import { chats } from "./chats";
 import { contacts } from "./contacts";
 import { notifications } from "./notifications";
+import { chatMessagesNotRead } from "./chatMessagesNotRead";
 
 export const queries = {
   getLoginUser,
@@ -24,4 +25,5 @@ export const queries = {
   chats,
   contacts,
   notifications,
+  chatMessagesNotRead,
 } satisfies Record<string, DocumentNode>;

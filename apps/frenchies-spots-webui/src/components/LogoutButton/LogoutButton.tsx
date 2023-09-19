@@ -11,7 +11,7 @@ const LogoutButton = () => {
 
   const handleLogoutClick = () => {
     toast.promise(
-      onSignOut().then(() => router.push("/spots")),
+      onSignOut().then(() => router.push("/sign-in")),
       {
         loading: "Déconnexion...",
         success: <b>À bientôt !</b>,

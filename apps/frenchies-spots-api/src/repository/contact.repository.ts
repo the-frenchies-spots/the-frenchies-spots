@@ -21,9 +21,6 @@ export class ContactRepository {
       },
       include: { contact: true, profile: true },
     });
-    console.log('==============================');
-    console.log(contacts);
-    console.log('==============================');
     return plainToClassMany(contacts, ContactEntity);
   }
 

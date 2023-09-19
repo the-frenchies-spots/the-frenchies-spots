@@ -1,76 +1,79 @@
-mutation insertChat($inserChatInput: InserChatInput!){
-    insertChat(inserChatInput: $inserChatInput){
-        chatMessages{
-            chat{
-                chatMessages{
-                    chatId
-                    createdAt
-                    id
-                    message
-                    profileChat{
-                        chatId
-                        createdAt
-                        id
-                        profileId
-                        updatedAt
-                    }
-                    profileChatId
-                    updatedAt
-                }
-                createdAt
-                id
-                isTemporary
-                participants{
-                    chat{
-                        createdAt
-                        id
-                        isTemporary
-                        updatedAt
-                    }
-                    chatId
-                    chatMessages{
-                        chatId
-                        createdAt
-                        id
-                        message
-                        profileChatId
-                        updatedAt
-                    }
-                    createdAt
-                    id
-                    profile{
-                        avatarUrl
-                        createdAt
-                        gamePoint
-                        id
-                        location
-                        photoUrl
-                        pseudo
-                        updatedAt
-                        userId
-                    }
-                    profileId
-                    updatedAt
-                }
-                updatedAt
-            }
-            chatId
-            createdAt
-            id
-            message
-            profileChatId
-            updatedAt
-        }
-        createdAt
-        id
-        isTemporary
-        participants{
+mutation insertChat($inserChatInput: InserChatInput!) {
+  insertChat(inserChatInput: $inserChatInput) {
+    chatMessages {
+      chat {
+        chatMessages {
+          chatId
+          createdAt
+          id
+          isRead
+          message
+          profileChat {
             chatId
             createdAt
             id
             profileId
             updatedAt
+          }
+          profileChatId
+          updatedAt
+        }
+        createdAt
+        id
+        isTemporary
+        participants {
+          chat {
+            createdAt
+            id
+            isTemporary
+            updatedAt
+          }
+          chatId
+          chatMessages {
+            chatId
+            createdAt
+            id
+            isRead
+            message
+            profileChatId
+            updatedAt
+          }
+          createdAt
+          id
+          profile {
+            avatarUrl
+            createdAt
+            gamePoint
+            id
+            location
+            photoUrl
+            pseudo
+            updatedAt
+            userId
+          }
+          profileId
+          updatedAt
         }
         updatedAt
+      }
+      chatId
+      createdAt
+      id
+      isRead
+      message
+      profileChatId
+      updatedAt
     }
+    createdAt
+    id
+    isTemporary
+    participants {
+      chatId
+      createdAt
+      id
+      profileId
+      updatedAt
+    }
+    updatedAt
+  }
 }

@@ -80,6 +80,7 @@ mutation updateSpot($updateSpotInput: SpotInput!){
                         chatId
                         createdAt
                         id
+                        isRead
                         message
                         profileChatId
                         updatedAt

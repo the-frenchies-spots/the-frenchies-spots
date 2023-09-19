@@ -10,6 +10,7 @@ module.exports.insertChat = fs.readFileSync(path.join(__dirname, 'insertChat.gql
 module.exports.insertSpot = fs.readFileSync(path.join(__dirname, 'insertSpot.gql'), 'utf8');
 module.exports.insertTag = fs.readFileSync(path.join(__dirname, 'insertTag.gql'), 'utf8');
 module.exports.logout = fs.readFileSync(path.join(__dirname, 'logout.gql'), 'utf8');
+module.exports.markChatMessageAsRead = fs.readFileSync(path.join(__dirname, 'markChatMessageAsRead.gql'), 'utf8');
 module.exports.sendChatMessage = fs.readFileSync(path.join(__dirname, 'sendChatMessage.gql'), 'utf8');
 module.exports.signIn = fs.readFileSync(path.join(__dirname, 'signIn.gql'), 'utf8');
 module.exports.signUp = fs.readFileSync(path.join(__dirname, 'signUp.gql'), 'utf8');

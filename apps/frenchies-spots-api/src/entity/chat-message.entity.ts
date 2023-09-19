@@ -23,6 +23,9 @@ export class ChatMessageEntity {
   profileChatId: string;
 
   @Field()
+  isRead: boolean;
+
+  @Field()
   message: string;
 
   @Field()
