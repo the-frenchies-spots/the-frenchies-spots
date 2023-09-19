@@ -9,10 +9,11 @@ import {
 
 import { BubbleChat } from "../BubbleChat/BubbleChat";
 import { ChatMessageInput } from "../../hooks";
+import { Maybe } from "@frenchies-spots/gql";
 
 export interface DiscussionProps extends StackProps {
   messages: ChatMessageInput[];
-  currentProfileId: string;
+  currentProfileId: Maybe<string> | string | undefined;
 }
 
 export const Discussion = (props: DiscussionProps) => {

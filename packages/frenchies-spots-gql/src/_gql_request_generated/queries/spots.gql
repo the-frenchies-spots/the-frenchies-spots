@@ -80,6 +80,7 @@ query spots($spotsInput: SpotsInput!){
                         chatId
                         createdAt
                         id
+                        isRead
                         message
                         profileChatId
                         updatedAt

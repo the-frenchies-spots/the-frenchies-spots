@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import React, { useContext, useState } from "react";
 
 import { mutations, queries } from "@frenchies-spots/gql";
 import { useMutation, useLazyQuery } from "@apollo/client";
@@ -19,9 +19,13 @@ const TOKEN_STORAGE_KEY = process.env.NEXT_PUBLIC_TOKEN_STORAGE_KEY || "";
 import useStorage from "./use-storage";
 import { AuthContext } from "@/context";
 import { getFuncOrThrow } from "../utils/get-func-or-throw";
+import toast from "react-hot-toast";
+import { useRouter } from "next/router";
 
 export const useInitAuth = () => {
   const [user, setUser] = useState<UserEntity>();
+
+  const router = useRouter();
 
   const [signUp, { loading: signupLoading }] = useMutation<
     { signUp: SignResponse },
@@ -50,29 +54,53 @@ export const useInitAuth = () => {
   };
 
   const handleSignUp = async (signUpInput: SignUpInput): Promise<void> => {
-    signUp({ variables: { signUpInput } })
-      .then((signResponse) => {
-        authentification(
-          signResponse?.data?.signUp?.user,
-          signResponse?.data?.signUp?.refreshToken
-        );
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+    const signUpPromess = new Promise((resolve, reject) => {
+      signUp({ variables: { signUpInput } })
+        .then((signResponse) => {
+          authentification(
+            signResponse?.data?.signUp?.user,
+            signResponse?.data?.signUp?.refreshToken
+          );
+          resolve(signResponse);
+          router.push("/spots");
+        })
+        .catch((error) => {
+          reject(error);
+          console.error(error);
+        });
+    });
+
+    toast.promise(signUpPromess, {
+      loading: "Connexion...",
+      success: (
+        <b>{`Bienvenue ${signUpInput.pseudo}, l'aventure vous attends !`}</b>
+      ),
+      error: <b>Une erreur est survenue !</b>,
+    });
   };
 
   const handleSignIn = async (signInInput: SignInInput): Promise<void> => {
-    signIn({ variables: { signInInput } })
-      .then((signResponse) => {
-        authentification(
-          signResponse?.data?.signIn?.user,
-          signResponse?.data?.signIn?.refreshToken
-        );
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+    const signInPromess = new Promise((resolve, reject) => {
+      signIn({ variables: { signInInput } })
+        .then((signResponse) => {
+          authentification(
+            signResponse?.data?.signIn?.user,
+            signResponse?.data?.signIn?.refreshToken
+          );
+          resolve(signResponse);
+          router.push("/spots");
+        })
+        .catch((error) => {
+          reject(error);
+          console.error(error);
+        });
+    });
+
+    toast.promise(signInPromess, {
+      loading: "Connexion...",
+      success: <b>{`Bon retour parmis nous !`}</b>,
+      error: <b>Email ou mot de passe incorrect !</b>,
+    });
   };
 
   const handleAuthByToken = async (): Promise<boolean> => {

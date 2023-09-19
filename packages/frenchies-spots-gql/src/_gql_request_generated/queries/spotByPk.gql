@@ -80,6 +80,7 @@ query spotByPk($id: String!){
                         chatId
                         createdAt
                         id
+                        isRead
                         message
                         profileChatId
                         updatedAt

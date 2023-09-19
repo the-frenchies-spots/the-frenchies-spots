@@ -18,12 +18,14 @@ const useContact = () => {
     { insertChat: ChatEntity },
     MutationInsertChatArgs
   >(mutations.insertChat, {
-    refetchQueries: [queries.profiles],
+    refetchQueries: [queries.profiles, queries.chats],
   });
 
   const handleContactClick = (profile: ProfileEntity) => {
-    if (profile?.profileChats) {
-      const chatId = profile?.profileChats[0]?.chatId;
+    if (profile) {
+      const chatId = profile?.profileChats
+        ? profile?.profileChats[0]?.chatId
+        : undefined;
 
       if (!chatId) {
         toast.promise(

@@ -3,10 +3,7 @@ import React, { ReactElement, useEffect, useState } from "react";
 import { useForm } from "@frenchies-spots/hooks";
 import {
   Container,
-  Paper,
   TextInput,
-  Button,
-  Log,
   LoadingOverlay,
   Flex,
   Stack,
@@ -21,13 +18,11 @@ import { SwiperSlide } from "swiper/react";
 import { SwiperForm } from "./../components/SwiperForm/SwiperForm";
 import { Avatar, BubbleChat } from "@frenchies-spots/chat";
 import Bubble from "@frenchies-spots/chat/src/components/Bubble/Bubble";
-import toast from "react-hot-toast";
 import { useRouter } from "next/router";
 
 const SignUp = () => {
   const { loading, onSignUp } = useAuth();
 
-  const router = useRouter();
   const [isEmail, setIsEmail] = useState<boolean>(false);
 
   const form = useForm<SignUpInput & { comfirmPassword: string }>({
@@ -47,20 +42,11 @@ const SignUp = () => {
   const handleSubmit: React.FormEventHandler<HTMLFormElement> = (event) => {
     event.preventDefault();
     if (form.isValid()) {
-      toast.promise(
-        onSignUp({
-          pseudo: form.values.pseudo,
-          email: form.values.email,
-          password: form.values.password,
-        }).then(() => router.push("/spots")),
-        {
-          loading: "Connexion...",
-          success: (
-            <b>{`Bienvenue ${form.values.pseudo}, l'aventure vous attends !`}</b>
-          ),
-          error: <b>Une erreur est survenue !</b>,
-        }
-      );
+      onSignUp({
+        pseudo: form.values.pseudo,
+        email: form.values.email,
+        password: form.values.password,
+      });
     }
   };
 

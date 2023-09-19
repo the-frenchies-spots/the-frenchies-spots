@@ -8,30 +8,33 @@ import {
   Avatar,
   Text,
   Log,
+  BadgeIcon,
 } from "@frenchies-spots/material";
-import { ChatEntity } from "@frenchies-spots/gql";
+import { UserChatResponse } from "@frenchies-spots/gql";
 import { useStyles } from "./ChatCard.styles";
 import { getOtherParticipant } from "./../../../utils/get-other-participant";
 
 export interface ChatCardProps extends Omit<CardProps, "children"> {
-  chat: ChatEntity;
+  chat: UserChatResponse;
   profileId: string;
   onClick?: (id: string) => void;
 }
 
 const ChatCard = (props: ChatCardProps) => {
   const { chat, profileId, onClick, ...cardProps } = props;
-  const { id, participants } = chat;
 
   const { classes } = useStyles();
 
   const handleClick = () => {
-    if (typeof onClick === "function") {
-      onClick(id);
+    if (typeof onClick === "function" && chat?.id) {
+      onClick(chat?.id);
     }
   };
 
-  const participantsFilter = getOtherParticipant(participants, profileId);
+  const participantsFilter = getOtherParticipant(
+    chat?.participants || [],
+    profileId
+  );
 
   return (
     <Card
@@ -48,7 +51,11 @@ const ChatCard = (props: ChatCardProps) => {
           {participantsFilter.map((participant, index) => {
             const photoUrl = participant?.profile?.photoUrl;
             const avatarUrl = participant?.profile?.avatarUrl;
-            return <Avatar key={index} src={photoUrl || avatarUrl} />;
+            return (
+              <BadgeIcon content={chat?._count?.chatMessages || 0} key={index}>
+                <Avatar src={photoUrl || avatarUrl} />
+              </BadgeIcon>
+            );
           })}
         </Stack>
         <Stack>

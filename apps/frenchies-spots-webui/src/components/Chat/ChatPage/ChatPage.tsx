@@ -1,5 +1,5 @@
-import React, { useCallback } from "react";
-import { ChatUi } from "@frenchies-spots/chat";
+import React, { useCallback, useEffect, useState } from "react";
+import { ChatMessageInput, ChatUi } from "@frenchies-spots/chat";
 import {
   ChatEntity,
   ChatMessageEntity,
@@ -22,6 +22,12 @@ const ChatPage = (props: ChatPageProps) => {
   const { chatId, profile } = props;
 
   const router = useRouter();
+  const [messages, setMessages] = useState<ChatMessageInput[]>([]);
+
+  const [markAsRead] = useMutation(mutations.markChatMessageAsRead, {
+    variables: { chatId },
+    refetchQueries: [queries.chats, queries.chatMessagesNotRead],
+  });
 
   const { data, loading, refetch } = useQuery<
     { chatByPk: ChatEntity },
@@ -42,22 +48,33 @@ const ChatPage = (props: ChatPageProps) => {
         const participant = data?.chatByPk?.participants?.find(
           (participant) => participant?.profile?.id === profile?.id
         );
-        if (participant) {
-          send({
-            variables: {
-              sendChatMessageInput: {
-                message: val,
-                chatId: data?.chatByPk?.id,
-                profileChatId: participant?.id,
-              },
-            },
-          });
+        if (participant && data?.chatByPk?.id && participant?.id) {
+          const sendChatMessageInput = {
+            message: val,
+            chatId: data.chatByPk.id,
+            profileChatId: participant.id,
+          };
+          send({ variables: { sendChatMessageInput } });
+          setMessages((prev) => [...prev, sendChatMessageInput]);
           refetch();
         }
       }
     },
     [data, send, profile, refetch]
   );
+
+  useEffect(() => {
+    if (data?.chatByPk?.chatMessages) {
+      markAsRead();
+      setMessages(
+        data?.chatByPk?.chatMessages.map((chatMessage) => ({
+          chatId: chatMessage.chatId,
+          profileChatId: chatMessage.profileChatId,
+          message: chatMessage.message,
+        })) || []
+      );
+    }
+  }, [data?.chatByPk.chatMessages, markAsRead]);
 
   return (
     <Container size="md" h="100%">
@@ -66,13 +83,9 @@ const ChatPage = (props: ChatPageProps) => {
         <ChatUi
           send={handleSend}
           currentProfileId={profile.id}
-          participants={data.chatByPk.participants}
-          messages={data?.chatByPk.chatMessages.map((chatMessage) => ({
-            chatId: chatMessage.chatId,
-            profileChatId: chatMessage.profileChatId,
-            message: chatMessage.message,
-          }))}
           onCancel={() => router.back()}
+          participants={data.chatByPk.participants}
+          messages={messages}
         />
       )}
     </Container>

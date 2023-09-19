@@ -12,7 +12,7 @@ export interface BubbleChatProps extends Omit<BoxProps, "position"> {
 }
 
 export const BubbleChat = (props: BubbleChatProps) => {
-  const { message: chatMessage, isParticipant, className, ...other } = props;
+  const { message: chatMessage, isParticipant, ...other } = props;
 
   return (
     <>
@@ -20,7 +20,7 @@ export const BubbleChat = (props: BubbleChatProps) => {
       <Bubble
         message={chatMessage.message}
         isParticipant={isParticipant}
-        className={className}
+        {...other}
       />
       {!isParticipant && <Avatar />}
     </>

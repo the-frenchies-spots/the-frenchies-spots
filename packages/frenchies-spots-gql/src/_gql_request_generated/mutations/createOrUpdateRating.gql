@@ -87,6 +87,7 @@ mutation createOrUpdateRating($ratingInput: RatingInput!){
                         chatId
                         createdAt
                         id
+                        isRead
                         message
                         profileChatId
                         updatedAt

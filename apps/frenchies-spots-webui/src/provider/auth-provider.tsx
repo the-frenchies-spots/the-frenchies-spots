@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { AuthContext } from "@/context";
 import { useInitAuth } from "@/hooks";
 

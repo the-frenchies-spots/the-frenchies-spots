@@ -3,6 +3,9 @@ import { gql } from "@apollo/client";
 export const chats = gql`
   query chats {
     chats {
+      _count {
+        chatMessages
+      }
       createdAt
       id
       isTemporary

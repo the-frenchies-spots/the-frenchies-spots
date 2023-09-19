@@ -8,13 +8,28 @@ import {
   IconUserCircle,
 } from "@frenchies-spots/icon";
 import { useStyles } from "./NavBar.styles";
-import { ActionIcon, Box, Container, Group } from "@frenchies-spots/material";
+import {
+  ActionIcon,
+  BadgeIcon,
+  Box,
+  Container,
+  Group,
+} from "@frenchies-spots/material";
 import { useRouter } from "next/router";
+import { useQuery } from "@apollo/client";
+import { queries } from "@frenchies-spots/gql";
 
 const Navbar = () => {
   const router = useRouter();
 
   const { classes } = useStyles();
+
+  const { data } = useQuery<{ chatMessagesNotRead: number }>(
+    queries.chatMessagesNotRead,
+    { pollInterval: 2000 }
+  );
+
+  const messageNotRead = data?.chatMessagesNotRead || 0;
 
   const onNavigateClick = (route: string) => {
     router.push(`/${route}`);
@@ -33,7 +48,9 @@ const Navbar = () => {
           </ActionIcon>
 
           <ActionIcon onClick={() => onNavigateClick("chat")}>
-            <IconMessageCircle2Filled />
+            <BadgeIcon content={messageNotRead}>
+              <IconMessageCircle2Filled />
+            </BadgeIcon>
           </ActionIcon>
 
           <ActionIcon onClick={() => onNavigateClick("shop")}>

@@ -14,6 +14,7 @@ import { getListElement } from "../../utils";
 import SpotPreview from "./Preview/SpotPreview/SpotPreview";
 import ProfilePreview from "./Preview/ProfilePreview/ProfilePreview";
 import { filterListMode } from "../../enum";
+import { useAuth } from "../../hooks/use-auth";
 
 interface SpotsUiProps {
   spotList: SpotEntity[] | undefined;
@@ -24,6 +25,7 @@ const SpotsUi = (props: SpotsUiProps) => {
   const { spotList, peopleList } = props;
 
   const { classes } = useStyles();
+  const { profile } = useAuth();
 
   const [uiMode, setUiMode] = useState<filterListMode>(filterListMode.SPOT);
 
@@ -47,7 +49,11 @@ const SpotsUi = (props: SpotsUiProps) => {
         {currentSpot ? (
           <SpotPreview spot={currentSpot} h={250} />
         ) : currentProfile ? (
-          <ProfilePreview profile={currentProfile} h={250} />
+          <ProfilePreview
+            profile={currentProfile}
+            currentProfile={profile}
+            h={250}
+          />
         ) : (
           <SpotFilter />
         )}

@@ -1,6 +1,6 @@
 import React from "react";
 
-import { ChatEntity, queries } from "@frenchies-spots/gql";
+import { UserChatResponse, queries } from "@frenchies-spots/gql";
 import ChatCard from "../ChatCard/ChatCard";
 import { useAuth } from "../../../hooks/use-auth";
 import { LoadingOverlay, Stack } from "@frenchies-spots/material";
@@ -13,7 +13,9 @@ const ChatList = (props: ChatListProps) => {
   const router = useRouter();
   const { profile } = useAuth();
 
-  const { data, loading } = useQuery<{ chats: ChatEntity[] }>(queries.chats);
+  const { data, loading } = useQuery<{ chats: UserChatResponse[] }>(
+    queries.chats
+  );
 
   const handleChatClick = (chatId: string) => {
     router.push(`/chat/${chatId}`);

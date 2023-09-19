@@ -17,24 +17,23 @@ export class ProfileRepository {
     const profiles = await this.prisma.profile.findMany({
       where: {
         id: {
-          in: ids,
+          in: ids?.filter((_profileId) => _profileId !== profileId),
         },
       },
       ...(profileId
         ? {
             include: {
               profileChats: {
-                include: {
+                where: {
                   chat: {
-                    include: {
-                      participants: {
-                        where: {
-                          profileId,
-                        },
+                    participants: {
+                      some: {
+                        profileId,
                       },
                     },
                   },
                 },
+                include: { chat: { include: { participants: true } } },
               },
             },
           }

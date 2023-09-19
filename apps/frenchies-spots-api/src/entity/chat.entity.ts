@@ -6,22 +6,22 @@ import { Entity, PrimaryGeneratedColumn } from 'typeorm';
 @ObjectType()
 @Entity('Chat')
 export class ChatEntity {
-  @Field()
+  @Field({ nullable: true })
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Field(() => [ProfileChatEntity])
+  @Field(() => [ProfileChatEntity], { nullable: true })
   participants: ProfileChatEntity[];
 
-  @Field(() => [ChatMessageEntity])
+  @Field(() => [ChatMessageEntity], { nullable: true })
   chatMessages: ChatMessageEntity[];
 
-  @Field()
+  @Field({ nullable: true })
   isTemporary: boolean;
 
-  @Field()
+  @Field({ nullable: true })
   createdAt: Date;
 
-  @Field()
+  @Field({ nullable: true })
   updatedAt: Date;
 }

@@ -26,12 +26,12 @@ export type BuyPointInput = {
 
 export type ChatEntity = {
   __typename?: 'ChatEntity';
-  chatMessages: Array<ChatMessageEntity>;
-  createdAt: Scalars['DateTime']['output'];
-  id: Scalars['String']['output'];
-  isTemporary: Scalars['Boolean']['output'];
-  participants: Array<ProfileChatEntity>;
-  updatedAt: Scalars['DateTime']['output'];
+  chatMessages?: Maybe<Array<ChatMessageEntity>>;
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  id?: Maybe<Scalars['String']['output']>;
+  isTemporary?: Maybe<Scalars['Boolean']['output']>;
+  participants?: Maybe<Array<ProfileChatEntity>>;
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
 };
 
 export type ChatMessageEntity = {
@@ -40,10 +40,16 @@ export type ChatMessageEntity = {
   chatId: Scalars['String']['output'];
   createdAt: Scalars['DateTime']['output'];
   id: Scalars['String']['output'];
+  isRead: Scalars['Boolean']['output'];
   message: Scalars['String']['output'];
   profileChat: ProfileChatEntity;
   profileChatId: Scalars['String']['output'];
   updatedAt: Scalars['DateTime']['output'];
+};
+
+export type ContChatMessage = {
+  __typename?: 'ContChatMessage';
+  chatMessages: Scalars['Float']['output'];
 };
 
 export type ContactEntity = {
@@ -105,6 +111,7 @@ export type Mutation = {
   insertSpot: SpotEntity;
   insertTag: TagEntity;
   logout: LogoutResponse;
+  markChatMessageAsRead: Scalars['Boolean']['output'];
   sendChatMessage: ChatMessageEntity;
   signIn: SignResponse;
   signUp: SignResponse;
@@ -149,6 +156,11 @@ export type MutationInsertSpotArgs = {
 
 export type MutationInsertTagArgs = {
   tagInsertInput: TagInsertInput;
+};
+
+
+export type MutationMarkChatMessageAsReadArgs = {
+  chatId: Scalars['String']['input'];
 };
 
 
@@ -223,14 +235,14 @@ export type PictureInput = {
 
 export type ProfileChatEntity = {
   __typename?: 'ProfileChatEntity';
-  chat: ChatEntity;
-  chatId: Scalars['String']['output'];
-  chatMessages: Array<ChatMessageEntity>;
-  createdAt: Scalars['DateTime']['output'];
-  id: Scalars['String']['output'];
-  profile: ProfileEntity;
-  profileId: Scalars['String']['output'];
-  updatedAt: Scalars['DateTime']['output'];
+  chat?: Maybe<ChatEntity>;
+  chatId?: Maybe<Scalars['String']['output']>;
+  chatMessages?: Maybe<Array<ChatMessageEntity>>;
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  id?: Maybe<Scalars['String']['output']>;
+  profile?: Maybe<ProfileEntity>;
+  profileId?: Maybe<Scalars['String']['output']>;
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
 };
 
 export type ProfileEntity = {
@@ -267,7 +279,8 @@ export type ProfilesInput = {
 export type Query = {
   __typename?: 'Query';
   chatByPk: ChatEntity;
-  chats: Array<ChatEntity>;
+  chatMessagesNotRead: Scalars['Int']['output'];
+  chats: Array<UserChatResponse>;
   contacts: Array<ContactEntity>;
   getLoginUser: UserEntity;
   notifications: Array<NotificationEntity>;
@@ -496,6 +509,17 @@ export type ToggleFavoriteResponse = {
   __typename?: 'ToggleFavoriteResponse';
   favoriteId?: Maybe<Scalars['String']['output']>;
   isFavorite: Scalars['Boolean']['output'];
+};
+
+export type UserChatResponse = {
+  __typename?: 'UserChatResponse';
+  _count: ContChatMessage;
+  chatMessages?: Maybe<Array<ChatMessageEntity>>;
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  id?: Maybe<Scalars['String']['output']>;
+  isTemporary?: Maybe<Scalars['Boolean']['output']>;
+  participants?: Maybe<Array<ProfileChatEntity>>;
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
 };
 
 export type UserEntity = {

@@ -17,6 +17,7 @@ import { insertChat } from "./insertChat";
 import { upload } from "./upload";
 import { updateNotifStatus } from "./updateNotifStatus";
 import { sendChatMessage } from "./sendChatMessage";
+import { markChatMessageAsRead } from "./markChatMessageAsRead";
 
 export const mutations = {
   createOrUpdateRating,
@@ -36,4 +37,5 @@ export const mutations = {
   updateProfile,
   sendChatMessage,
   updateNotifStatus,
+  markChatMessageAsRead,
 } satisfies Record<string, DocumentNode>;
