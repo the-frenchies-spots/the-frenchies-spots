@@ -1,15 +1,15 @@
 import React from "react";
 
 import { Text, TextProps } from "@mantine/core";
-import { useStyles } from "./Typography.styles";
+import { useStyles } from "./Font.styles";
 import { getColor } from "../utils/get-color";
 import { TColor } from "../type";
 
-interface TypographyProps extends TextProps {
+interface FontProps extends TextProps {
   color?: TColor;
 }
 
-const Typography = (props: TypographyProps) => {
+export const Font = (props: FontProps) => {
   const { color, className, ...textProps } = props;
   const { cx, classes } = useStyles(getColor(color));
   return (
@@ -17,6 +17,4 @@ const Typography = (props: TypographyProps) => {
   );
 };
 
-Typography.displayName = "@frenchies-spots/material/Typography/Typography";
-
-export default Typography;
+Font.displayName = "@frenchies-spots/material/Font/Font";
