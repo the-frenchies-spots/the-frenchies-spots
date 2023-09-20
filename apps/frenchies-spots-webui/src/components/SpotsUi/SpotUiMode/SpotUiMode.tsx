@@ -6,7 +6,7 @@ import SpotsMapUi from "../SpotsMapUi/SpotsMapUi";
 import SpotList from "../../Spots/SpotList/SpotList";
 import FavoriteButton from "../../Spots/SpotButton/FavoriteButton/FavoriteButton";
 import { useAuth } from "../../../hooks/use-auth";
-import { Box, Text } from "@frenchies-spots/material";
+import { Box, ScrollArea, Text } from "@frenchies-spots/material";
 import { useSpotUi } from "../../../hooks/use-spot-ui";
 import ProfileList from "../../Profile/ProfileList/ProfileList";
 import { filterListMode } from "../../../enum";
@@ -28,8 +28,9 @@ const SpotUiMode = (props: SpotUiModeProps) => {
   if (isMapMode) {
     return <SpotsMapUi spotList={spotList} peopleList={peopleList} />;
   }
+
   return (
-    <Box pt={200} h="100%">
+    <ScrollArea h="100%" sx={{ boxSizing: "border-box" }} pt={200}>
       {uiMode === filterListMode.PEOPLE && peopleList && (
         <ProfileList profileList={peopleList} />
       )}
@@ -46,7 +47,7 @@ const SpotUiMode = (props: SpotUiModeProps) => {
           )}
         </SpotList>
       )}
-    </Box>
+    </ScrollArea>
   );
 };
 

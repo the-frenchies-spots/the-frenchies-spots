@@ -7,6 +7,7 @@ import {
   type ContainerProps,
   ActionIcon,
   Log,
+  Text,
 } from "@frenchies-spots/material";
 import { IconMessages, IconUserPlus } from "@frenchies-spots/icon";
 import useContact from "./../../../hooks/use-contact";
@@ -21,21 +22,22 @@ const ProfileList = (props: ProfileListProps) => {
   const { onContactClick } = useContact();
 
   return (
-    <Container size="md" h="100%" {...containerProps}>
-      <ScrollArea h="100%" p={0} m={0}>
-        {profileList.map((profile, index) => (
-          <Fragment key={index}>
-            <ProfileCard key={profile.id} profile={profile} mb="md">
-              <ActionIcon>
-                <IconUserPlus />
-              </ActionIcon>
-              <ActionIcon onClick={() => onContactClick(profile)}>
-                <IconMessages />
-              </ActionIcon>
-            </ProfileCard>
-          </Fragment>
-        ))}
-      </ScrollArea>
+    <Container
+      size="md"
+      h="100%"
+      {...containerProps}
+      sx={{ boxSizing: "border-box" }}
+    >
+      {profileList.map((profile, index) => (
+        <ProfileCard key={profile.id} profile={profile} mb="md">
+          <ActionIcon>
+            <IconUserPlus />
+          </ActionIcon>
+          <ActionIcon onClick={() => onContactClick(profile)}>
+            <IconMessages />
+          </ActionIcon>
+        </ProfileCard>
+      ))}
     </Container>
   );
 };
