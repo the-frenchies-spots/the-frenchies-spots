@@ -4,9 +4,7 @@ import { IconHeart, IconHeartFilled } from "@frenchies-spots/icon";
 
 import { useMutation } from "@apollo/client";
 import {
-  FavoriteEntity,
   MutationToggleFavoriteArgs,
-  SpotEntity,
   ToggleFavoriteResponse,
   mutations,
   queries,
@@ -71,7 +69,11 @@ const FavoriteButton = (props: FavoriteButtonProps) => {
           }}
           loading={loading}
         >
-          {favorite?.favoriteId ? <IconHeartFilled /> : <IconHeart />}
+          {favorite?.favoriteId ? (
+            <IconHeartFilled style={{ color: "#EBA701" }} />
+          ) : (
+            <IconHeart style={{ color: "#EBA701" }} />
+          )}
         </SpotButtonBase>
       )}
     </ModalComfirm>

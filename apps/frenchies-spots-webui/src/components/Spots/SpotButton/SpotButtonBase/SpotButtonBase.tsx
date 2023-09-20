@@ -18,7 +18,11 @@ const SpotButtonBase = (props: SpotButtonBaseProps) => {
       align="center"
       {...other}
     >
-      {loading ? <Loader /> : children}
+      {loading ? (
+        <Loader sx={(theme) => ({ color: theme.colors.yellow[0] })} />
+      ) : (
+        children
+      )}
     </Flex>
   );
 };

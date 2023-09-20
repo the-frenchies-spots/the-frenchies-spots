@@ -1,5 +1,5 @@
 import { useMediaQuery } from "@frenchies-spots/hooks";
-import { Drawer, DrawerProps } from "@frenchies-spots/material";
+import { Box, Drawer, DrawerProps, Group } from "@frenchies-spots/material";
 import React, { ReactNode } from "react";
 import { useStyles } from "./CustomDrawer.styles";
 
@@ -23,6 +23,9 @@ const CustomDrawer = (props: CustomDrawerProps) => {
       size={isSmallScreen ? phoneSize : undefined}
       className={classes.drawer}
     >
+      <Group position="center">
+        <Box className={classes.bar} />
+      </Group>
       {children}
     </Drawer>
   );

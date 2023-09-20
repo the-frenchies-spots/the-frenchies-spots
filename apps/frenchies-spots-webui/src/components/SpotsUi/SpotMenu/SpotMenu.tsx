@@ -8,6 +8,7 @@ import {
   Box,
   ActionIcon,
   Flex,
+  SecondaryButton,
 } from "@frenchies-spots/material";
 import type { ContainerProps } from "@frenchies-spots/material";
 
@@ -20,11 +21,12 @@ import StatusBar from "../../StatusBar/StatusBar";
 import { filterListMode } from "../../../enum";
 
 interface SpotMenuProps extends Omit<ContainerProps, "onChange"> {
+  uiMode: filterListMode;
   onUiModeChange: (newUiMode: filterListMode) => void;
 }
 
 const SpotMenu = (props: SpotMenuProps) => {
-  const { onUiModeChange, ...other } = props;
+  const { uiMode, onUiModeChange, ...other } = props;
 
   const { searchPlace } = useGeocoding();
   const {
@@ -121,13 +123,29 @@ const SpotMenu = (props: SpotMenuProps) => {
         </Box>
 
         <Group grow>
-          {isMapMode && <Button onClick={() => null}>Tout</Button>}
-          <Button onClick={() => onUiModeChange(filterListMode.SPOT)}>
+          {isMapMode && (
+            <SecondaryButton
+              selected={uiMode === filterListMode.ALL}
+              onClick={() => onUiModeChange(filterListMode.ALL)}
+            >
+              Tout
+            </SecondaryButton>
+          )}
+          <SecondaryButton
+            onClick={() => onUiModeChange(filterListMode.SPOT)}
+            selected={
+              uiMode === filterListMode.SPOT ||
+              (!isMapMode && uiMode === filterListMode.ALL)
+            }
+          >
             Spots
-          </Button>
-          <Button onClick={() => onUiModeChange(filterListMode.PEOPLE)}>
+          </SecondaryButton>
+          <SecondaryButton
+            selected={uiMode === filterListMode.PEOPLE}
+            onClick={() => onUiModeChange(filterListMode.PEOPLE)}
+          >
             Entraide
-          </Button>
+          </SecondaryButton>
         </Group>
       </Stack>
     </Container>

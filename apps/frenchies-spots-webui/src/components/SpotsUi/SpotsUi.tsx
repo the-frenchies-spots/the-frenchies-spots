@@ -29,7 +29,7 @@ const SpotsUi = (props: SpotsUiProps) => {
 
   const [uiMode, setUiMode] = useState<filterListMode>(filterListMode.SPOT);
 
-  const { currentSpotId, currentProfileId } = useSpotUi();
+  const { isFilter, currentSpotId, currentProfileId } = useSpotUi();
   const currentSpot = getListElement<SpotEntity>(
     spotList || [],
     `${currentSpotId}`
@@ -42,21 +42,23 @@ const SpotsUi = (props: SpotsUiProps) => {
 
   return (
     <Box w="100%" h="100%" className={classes.container}>
-      <SpotMenu className={classes.spotMenu} onUiModeChange={setUiMode} />
+      <SpotMenu
+        className={classes.spotMenu}
+        uiMode={uiMode}
+        onUiModeChange={setUiMode}
+      />
       <SpotUiMode spotList={spotList} peopleList={peopleList} uiMode={uiMode} />
       <SpotModeButton className={classes.buttonMode} />
       <SpotDrawer>
-        {currentSpot ? (
-          <SpotPreview spot={currentSpot} h={250} />
-        ) : currentProfile ? (
+        {currentSpot && <SpotPreview spot={currentSpot} h={250} />}
+        {currentProfile && (
           <ProfilePreview
             profile={currentProfile}
             currentProfile={profile}
             h={250}
           />
-        ) : (
-          <SpotFilter />
         )}
+        {isFilter && <SpotFilter />}
       </SpotDrawer>
     </Box>
   );

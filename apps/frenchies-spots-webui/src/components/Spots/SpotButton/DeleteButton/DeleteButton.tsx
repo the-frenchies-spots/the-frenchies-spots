@@ -58,7 +58,7 @@ const DeleteButton = (props: DeleteButtonProps) => {
           }}
           loading={loading}
         >
-          <IconTrash />
+          <IconTrash style={{ color: "#df2020" }} />
         </SpotButtonBase>
       )}
     </ModalComfirm>

@@ -54,7 +54,7 @@ const SpotInsertPage = () => {
   };
 
   return (
-    <Container size="md" p="md" sx={{ border: "1px solid" }}>
+    <Container size="md">
       <SpotEditionForm
         initialValues={initialValues}
         onSubmit={handleSubmit}

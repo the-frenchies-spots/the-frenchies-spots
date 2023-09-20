@@ -11,8 +11,13 @@ import {
   Flex,
   Group,
   Image,
+  PrimaryButton,
+  PrimaryButtonLittle,
+  createStyles,
+  SecondaryButton,
   Stack,
   Text,
+  Font,
 } from "@frenchies-spots/material";
 import LogoutButton from "../../components/LogoutButton/LogoutButton";
 import {
@@ -25,8 +30,14 @@ import ProfilePhoto from "../../components/Profile/ProfilePhoto";
 import StatusBar from "../../components/StatusBar/StatusBar";
 import { GuardLayout } from "../../components/Layout/GuardLayout/GuardLayout";
 
+export const useStyles = createStyles((theme) => ({
+  button: {},
+}));
+
 const Profile = () => {
   const { profile } = useAuth();
+
+  const { classes } = useStyles();
 
   const router = useRouter();
 
@@ -38,44 +49,47 @@ const Profile = () => {
           <ProfilePhoto />
         </Flex>
 
-        <Text ta="center" w="100%">
+        <Font variant="h3" ta="center" w="100%">
           {profile?.pseudo}
-        </Text>
+        </Font>
         <LogoutButton />
 
-        <Button
-          h={50}
+        <PrimaryButton
+          h={70}
           leftIcon={<IconMapPinPlus />}
           onClick={() => router.push("/spots/edition")}
+          className={classes.button}
         >
           Créer un spot
-        </Button>
-        <Flex gap="md" h={50}>
-          <Button
+        </PrimaryButton>
+        <Flex gap="md" h={70}>
+          <SecondaryButton
             h="100%"
             sx={{ flexGrow: 1 }}
             onClick={() => router.push("/profile/spots")}
+            className={classes.button}
           >
             Voir mes spots
-          </Button>
+          </SecondaryButton>
           <ActionIcon
-            sx={{ backgroundColor: "grey", color: "white" }}
+            sx={{ backgroundColor: "#A480A6", color: "white", borderRadius: 8 }}
             h="100%"
             m={0}
             py={5}
-            w={50}
+            w={70}
           >
             <IconSettingsFilled />
           </ActionIcon>
         </Flex>
 
-        <Button
-          h={50}
+        <PrimaryButtonLittle
+          h={70}
           leftIcon={<IconUsers />}
           onClick={() => router.push("/profile/friends")}
+          className={classes.button}
         >
           Mes Amis
-        </Button>
+        </PrimaryButtonLittle>
 
         <Divider my={32} />
 
@@ -85,11 +99,19 @@ const Profile = () => {
             alt="avatar"
           />
           <Stack>
-            <Text>Jeune avanturier</Text>
-            <Text>{profile?.gamePoint} points</Text>
-            <Button onClick={() => router.push("/shop")}>
+            <Stack spacing={2}>
+              <Font variant="subtitle2">Statut</Font>
+              <Font>Jeune avanturier</Font>
+            </Stack>
+
+            <Stack spacing={2}>
+              <Font variant="subtitle2">Points</Font>
+              <Font>{profile?.gamePoint}</Font>
+            </Stack>
+
+            <PrimaryButtonLittle onClick={() => router.push("/shop")}>
               Acheter des points
-            </Button>
+            </PrimaryButtonLittle>
           </Stack>
         </Group>
       </Stack>

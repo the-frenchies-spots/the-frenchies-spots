@@ -12,6 +12,7 @@ import {
   ActionIcon,
   BadgeIcon,
   Box,
+  type BoxProps,
   Container,
   Group,
 } from "@frenchies-spots/material";
@@ -19,14 +20,20 @@ import { useRouter } from "next/router";
 import { useQuery } from "@apollo/client";
 import { queries } from "@frenchies-spots/gql";
 
-const Navbar = () => {
+interface NavbarProps extends Omit<BoxProps, "children"> {}
+
+const Navbar = (props: NavbarProps) => {
+  const { className, ...boxProps } = props;
+
   const router = useRouter();
 
-  const { classes } = useStyles();
+  const { cx, classes } = useStyles();
 
   const { data } = useQuery<{ chatMessagesNotRead: number }>(
     queries.chatMessagesNotRead,
-    { pollInterval: 2000 }
+    {
+      pollInterval: 2000,
+    }
   );
 
   const messageNotRead = data?.chatMessagesNotRead || 0;
@@ -36,7 +43,7 @@ const Navbar = () => {
   };
 
   return (
-    <Box className={classes.navbar}>
+    <Box className={cx(classes.navbar, className)} {...boxProps}>
       <Container h={80} w="100%" size="md">
         <Group position="apart" h="100%" w="100%" p="md">
           <ActionIcon onClick={() => onNavigateClick("spots")}>

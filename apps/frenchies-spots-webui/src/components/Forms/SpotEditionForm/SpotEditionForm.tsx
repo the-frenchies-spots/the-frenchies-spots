@@ -1,11 +1,12 @@
 import React, { FormEventHandler } from "react";
 
 import {
+  Box,
   Checkbox,
+  Flex,
+  Font,
   LoadingOverlay,
-  Log,
   MultipleImagePicker,
-  SegmentedControl,
   Stack,
   Text,
   TextInput,
@@ -17,8 +18,10 @@ import { tagsDataList } from "@frenchies-spots/utils";
 import {
   CategoriesSpotAndTag,
   InputMaybe,
+  SpotByIdResponse,
   SpotInput,
   SpotPictureInput,
+  TagOnSpotEntity,
 } from "@frenchies-spots/gql";
 import { SelectTag } from "../../InputCustom";
 import { SwiperForm } from "@/components/SwiperForm/SwiperForm";
@@ -26,6 +29,7 @@ import { SwiperSlide } from "swiper/react";
 import { useCloudinary } from "../../../hooks/use-cloudinary";
 import { useAuth } from "./../../../hooks/use-auth";
 import { VSegmentControl } from "../../InputCustom/VSegmentControl";
+import SpotDetail from "../../SpotDetail/SpotDetail";
 
 interface SpotEditionFormProps {
   initialValues: SpotInput;
@@ -37,7 +41,7 @@ export const SpotEditionForm = (props: SpotEditionFormProps) => {
   const { initialValues, onSubmit, loading = false } = props;
 
   const { loading: uploadLoading, uploadMultipleImage } = useCloudinary();
-  const { user } = useAuth();
+  const { user, profile } = useAuth();
 
   const form = useForm<SpotInput>({
     initialValues,
@@ -90,12 +94,14 @@ export const SpotEditionForm = (props: SpotEditionFormProps) => {
         {/* SPOT CATEGORY */}
         <SwiperSlide>
           <SwiperFrame prevLabel="">
-            <Stack>
-              <Text>A quelle catégorie associerais-tu ton spot ?</Text>
+            <Stack mt="md">
+              <Font variant="h2">
+                A quelle catégorie associerais-tu ton spot ?
+              </Font>
               <VSegmentControl
                 list={[
                   {
-                    name: "Avanture",
+                    name: "Aventure",
                     description:
                       "spot dans lequel tu y vas pour te faire plaisir, découvrir de nouveaux paysages français",
                     value: CategoriesSpotAndTag.SPARE_TIME_SPOT,
@@ -115,7 +121,8 @@ export const SpotEditionForm = (props: SpotEditionFormProps) => {
         {/* SPOT TAG */}
         <SwiperSlide>
           <SwiperFrame disabled={!form.isValid("tags")}>
-            <Stack>
+            <Stack mt="md">
+              <Font variant="h2">{`Quels tags correspondent à ton spot ?`}</Font>
               <SelectTag
                 list={tagsDataList.filter(
                   (tag) => tag.category === form.values.category
@@ -130,8 +137,8 @@ export const SpotEditionForm = (props: SpotEditionFormProps) => {
           <SwiperFrame
             disabled={!(form.isValid("name") && form.isValid("description"))}
           >
-            <Stack>
-              <Text>Dis nous en plus sur ton spot !</Text>
+            <Stack mt="md">
+              <Font variant="h2">Dis nous en plus sur ton spot !</Font>
               <TextInput
                 label="Nom du spot"
                 placeholder=""
@@ -172,28 +179,35 @@ export const SpotEditionForm = (props: SpotEditionFormProps) => {
               )
             }
           >
-            <LocationManager
-              value={{
-                location: {
-                  value: form.values.address,
-                  coordinates: {
-                    lat: form.values.location?.coordinates[1],
-                    lng: form.values.location?.coordinates[0],
-                  },
-                },
-                codeRegion: form.values.region,
-              }}
-              onChange={handleLocationChange}
-            />
+            <Flex h="100%" pt="md" direction="column">
+              <Font variant="h2" mb="md">
+                Où se situe ton spot ?
+              </Font>
+              <Box sx={{ flexGrow: 1 }} mb="xl">
+                <LocationManager
+                  value={{
+                    location: {
+                      value: form.values.address,
+                      coordinates: {
+                        lat: form.values.location?.coordinates[1],
+                        lng: form.values.location?.coordinates[0],
+                      },
+                    },
+                    codeRegion: form.values.region,
+                  }}
+                  onChange={handleLocationChange}
+                />
+              </Box>
+            </Flex>
           </SwiperFrame>
         </SwiperSlide>
         {/* PUBLIC || PRIVATE */}
         <SwiperSlide>
           <SwiperFrame nextLabel="Valider">
-            <Stack>
-              <Text>
+            <Stack pt="md">
+              <Font variant="h2">
                 Dernier effort ! Quel statut préfères-tu pour ton spot ?
-              </Text>
+              </Font>
 
               <VSegmentControl
                 list={[
@@ -216,9 +230,34 @@ export const SpotEditionForm = (props: SpotEditionFormProps) => {
         {/* PREVIEW */}
         <SwiperSlide>
           <SwiperFrame type="submit" nextLabel="Publier">
-            <Stack>
-              <Text>Preview</Text>
-            </Stack>
+            {profile && (
+              <SpotDetail
+                spot={{
+                  __typename: "SpotByIdResponse",
+                  address: form.values.address,
+                  averageRating: 0,
+                  category: form.values.category,
+                  createdAt: "2023-09-20T12:00:00Z",
+                  description: form.values.description,
+                  favorites: [],
+                  profile,
+                  id: "1",
+                  isCanPark: form.values.isCanPark,
+                  isHidden: form.values.isHidden,
+                  location: {},
+                  name: form.values.name,
+                  profileId: "profile1",
+                  region: form.values.region,
+                  spotPicture: [],
+                  tags:
+                    (form.values.tags?.map((tagId) => ({
+                      tag: { id: tagId },
+                    })) as TagOnSpotEntity[]) || [],
+                  updatedAt: "2023-09-20T13:00:00Z",
+                }}
+                isPreviewMode
+              />
+            )}
           </SwiperFrame>
         </SwiperSlide>
       </SwiperForm>
