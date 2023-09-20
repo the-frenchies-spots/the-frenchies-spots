@@ -8,6 +8,7 @@ import {
   type GroupProps,
   Stack,
   Text,
+  PrimaryButton,
 } from "@frenchies-spots/material";
 
 import SpotPicture from "../../../Spots/SpotPicture/SpotPicture";
@@ -38,9 +39,9 @@ const SpotPreview = (props: SpotPreviewProps) => {
           <Text>{spot.description}</Text>
         </Stack>
 
-        <Button onClick={() => router.push(`/spots/${spot.id}`)}>
+        <PrimaryButton onClick={() => router.push(`/spots/${spot.id}`)}>
           Voir le spot
-        </Button>
+        </PrimaryButton>
       </Stack>
     </Group>
   );

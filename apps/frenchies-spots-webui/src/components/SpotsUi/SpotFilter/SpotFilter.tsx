@@ -3,12 +3,13 @@ import {
   Stack,
   Text,
   Group,
-  Button,
   Checkbox,
   Slider,
   TextInput,
   Switch,
   Box,
+  SecondaryButton,
+  Font,
 } from "@frenchies-spots/material";
 import { HSegmentControl, SelectTag } from "../../InputCustom";
 import { CategoriesSpotAndTag } from "@frenchies-spots/gql";
@@ -50,39 +51,47 @@ const SpotFilter = (props: SpotFilterProps) => {
           {...form.getInputProps("searchValue")}
         />
 
-        <Text>Types de spot</Text>
-        <HSegmentControl
-          list={[
-            { name: "Tout", value: undefined },
-            { name: "Avanture", value: CategoriesSpotAndTag.SPARE_TIME_SPOT },
-            {
-              name: "Ressources",
-              value: CategoriesSpotAndTag.RESOURCES_SPOT,
-            },
-          ]}
-          {...form.getInputProps("category")}
-        />
+        <Box>
+          <Font variant="h4">Types de spot</Font>
+          <HSegmentControl
+            list={[
+              { name: "Tout", value: undefined },
+              { name: "Avanture", value: CategoriesSpotAndTag.SPARE_TIME_SPOT },
+              {
+                name: "Ressources",
+                value: CategoriesSpotAndTag.RESOURCES_SPOT,
+              },
+            ]}
+            {...form.getInputProps("category")}
+          />
+        </Box>
 
-        <Text>Spot aventure</Text>
-        <SelectTag
-          position="left"
-          list={tagsDataList.filter(
-            (tag) => tag.category === CategoriesSpotAndTag.SPARE_TIME_SPOT
-          )}
-          {...form.getInputProps("tagListId")}
-        />
+        <Box>
+          <Font variant="h4">Spot aventure</Font>
+          <SelectTag
+            position="left"
+            list={tagsDataList.filter(
+              (tag) => tag.category === CategoriesSpotAndTag.SPARE_TIME_SPOT
+            )}
+            {...form.getInputProps("tagListId")}
+          />
+        </Box>
 
-        <Text>Spot ressource</Text>
-        <SelectTag
-          position="left"
-          list={tagsDataList.filter(
-            (tag) => tag.category === CategoriesSpotAndTag.RESOURCES_SPOT
-          )}
-          {...form.getInputProps("tagListId")}
-        />
+        <Box>
+          <Font variant="h4">Spot ressource</Font>
+          <SelectTag
+            position="left"
+            list={tagsDataList.filter(
+              (tag) => tag.category === CategoriesSpotAndTag.RESOURCES_SPOT
+            )}
+            {...form.getInputProps("tagListId")}
+          />
+        </Box>
+
         <Checkbox
           label="Afficher les spots où je peux me garer"
           checked={form.getInputProps("isCanPark").value}
+          sx={{}}
           onChange={(event) =>
             form
               .getInputProps("isCanPark")
@@ -95,7 +104,7 @@ const SpotFilter = (props: SpotFilterProps) => {
         /> */}
 
         <Group>
-          <Text>Localisation</Text>
+          <Font variant="h4">Localisation</Font>
           <Switch
             checked={isRayon}
             onChange={(event) => handleRayonChange(event.currentTarget.checked)}
@@ -133,10 +142,14 @@ const SpotFilter = (props: SpotFilterProps) => {
         w="100%"
         p="md"
       >
-        <Button onClick={handleResetFilter}>Réinitialiser</Button>
-        <Button variant="outline" onClick={handleSearchClick}>
-          Filtrer
-        </Button>
+        <SecondaryButton
+          variant="outline"
+          color="purple"
+          onClick={handleResetFilter}
+        >
+          Réinitialiser
+        </SecondaryButton>
+        <SecondaryButton onClick={handleSearchClick}>Filtrer</SecondaryButton>
       </Group>
     </>
   );

@@ -13,6 +13,7 @@ import {
   Stack,
   Text,
   ActionIcon,
+  PrimaryButton,
 } from "@frenchies-spots/material";
 
 import Image from "next/image";
@@ -59,13 +60,12 @@ const ProfilePreview = (props: ProfilePreviewProps) => {
       </Group>
 
       {currentProfile ? (
-        <Button
-          variant="outline"
+        <PrimaryButton
           leftIcon={<IconMessages />}
           onClick={() => onContactClick(profile)}
         >
           Contacter
-        </Button>
+        </PrimaryButton>
       ) : (
         <Button
           leftIcon={<IconUserSquareRounded />}

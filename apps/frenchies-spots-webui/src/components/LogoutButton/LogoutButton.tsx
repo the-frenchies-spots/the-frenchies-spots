@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Button } from "@frenchies-spots/material";
+import { Button, PrimaryButton } from "@frenchies-spots/material";
 import { useAuth } from "@/hooks";
 import { useRouter } from "next/router";
 import toast from "react-hot-toast";
@@ -23,9 +23,13 @@ const LogoutButton = () => {
 
   if (!user) return null;
   return (
-    <Button variant="subtle" onClick={handleLogoutClick} loading={loading}>
+    <PrimaryButton
+      variant="subtle"
+      onClick={handleLogoutClick}
+      loading={loading}
+    >
       Déconnexion
-    </Button>
+    </PrimaryButton>
   );
 };
 

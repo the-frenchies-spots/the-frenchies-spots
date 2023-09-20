@@ -1,9 +1,10 @@
 import { createStyles } from "@frenchies-spots/material";
 
 export const useStyles = createStyles((theme) => ({
-  button: {
-    borderRadius: 50,
-    width: 170,
-    height: 42,
+  container: {
+    height: 400,
+    width: "100%",
+    borderBottomLeftRadius: 40,
+    borderBottomRightRadius: 40,
   },
 }));

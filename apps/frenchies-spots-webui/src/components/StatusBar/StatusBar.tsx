@@ -10,6 +10,7 @@ import {
   ActionIcon,
   Text,
   Loader,
+  Font,
 } from "@frenchies-spots/material";
 import React from "react";
 import { useStyles } from "./StatusBar.styles";
@@ -41,11 +42,13 @@ const StatusBar = (props: StatusBarProps) => {
     >
       {!isMapMode && (
         <Stack spacing={5}>
-          <Text sx={{ visibility: "visible" }}>Actuellement à</Text>
+          <Font variant="subtitle2">Actuellement à</Font>
           <Group align="center">
-            <IconMapPinFilled size="16" />
+            <IconMapPinFilled size="16" style={{ color: "#3F3979" }} />
             {location ? (
-              <Text truncate="end">{truncate(location?.value, 30)}</Text>
+              <Font variant="h5" truncate="end">
+                {truncate(location?.value, 30)}
+              </Font>
             ) : (
               <Loader />
             )}

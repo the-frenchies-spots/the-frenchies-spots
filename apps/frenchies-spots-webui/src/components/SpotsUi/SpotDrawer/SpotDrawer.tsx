@@ -23,6 +23,9 @@ const SpotDrawer = (props: SpotDrawerProps) => {
       opened={drawerOpened}
       onClose={closeFilter}
       phoneSize={phoneSize}
+      overlayProps={{
+        opacity: isFilter ? undefined : 0,
+      }}
     >
       {children}
     </CustomDrawer>

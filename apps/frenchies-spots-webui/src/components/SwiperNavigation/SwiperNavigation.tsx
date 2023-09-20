@@ -1,6 +1,11 @@
 import React from "react";
 
-import { Group, Button, ButtonProps } from "@frenchies-spots/material";
+import {
+  Group,
+  Button,
+  ButtonProps,
+  SecondaryButton,
+} from "@frenchies-spots/material";
 import type { Swiper } from "swiper/types";
 
 export interface SwiperNavigationProps {
@@ -21,16 +26,20 @@ const SwiperNavigation = (props: SwiperNavigationProps) => {
   } = props;
   return (
     <Group grow>
-      <Button variant="text" onClick={() => swiper.slidePrev()}>
+      <SecondaryButton
+        variant="subtle"
+        color="purple"
+        onClick={() => swiper.slidePrev()}
+      >
         {prevLabel}
-      </Button>
-      <Button
+      </SecondaryButton>
+      <SecondaryButton
         type={type}
         onClick={() => swiper.slideNext()}
         disabled={disabled}
       >
         {nextLabel}
-      </Button>
+      </SecondaryButton>
     </Group>
   );
 };

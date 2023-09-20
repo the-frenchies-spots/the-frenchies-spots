@@ -6,3 +6,4 @@ export * from "./FrSpotsMaterialProvider";
 export * from "./Font/Font";
 export * from "./BackButton/BackButton";
 export * from "./BadgeIcon/BadgeIcon";
+export * from "./ActionButton";

@@ -32,7 +32,7 @@ const Navbar = (props: NavbarProps) => {
   const { data } = useQuery<{ chatMessagesNotRead: number }>(
     queries.chatMessagesNotRead,
     {
-      // pollInterval: 2000
+      pollInterval: 2000,
     }
   );
 

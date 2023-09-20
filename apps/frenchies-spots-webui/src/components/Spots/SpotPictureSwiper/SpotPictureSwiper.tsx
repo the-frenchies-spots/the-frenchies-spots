@@ -11,6 +11,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
+import { useStyles } from "./SpotPictureSwiper.styles";
 
 interface SpotPictureSwiperProps {
   pictures: SpotEntity["spotPicture"];
@@ -19,15 +20,10 @@ interface SpotPictureSwiperProps {
 const SpotPictureSwiper = (props: SpotPictureSwiperProps) => {
   const { pictures } = props;
 
+  const { classes } = useStyles();
+
   return (
-    <Box
-      sx={{
-        height: 400,
-        width: "100%",
-        borderBottomLeftRadius: 40,
-        borderBottomRightRadius: 40,
-      }}
-    >
+    <Box className={classes.container}>
       {pictures?.length && pictures?.length > 1 ? (
         <Swiper
           modules={[Navigation, Pagination, Scrollbar, A11y]}
@@ -36,12 +32,7 @@ const SpotPictureSwiper = (props: SpotPictureSwiperProps) => {
           navigation
           pagination={{ clickable: true }}
           scrollbar={{ draggable: true }}
-          style={{
-            height: 400,
-            width: "100%",
-            borderBottomLeftRadius: 40,
-            borderBottomRightRadius: 40,
-          }}
+          className={classes.container}
         >
           {pictures.map((picture) => (
             <SwiperSlide key={picture.id}>
@@ -52,7 +43,11 @@ const SpotPictureSwiper = (props: SpotPictureSwiperProps) => {
           ))}
         </Swiper>
       ) : (
-        <SpotPicture src={pictures ? pictures[0]?.url : undefined} h="100%" />
+        <SpotPicture
+          h="100%"
+          src={pictures ? pictures[0]?.url : undefined}
+          className={classes.container}
+        />
       )}
     </Box>
   );

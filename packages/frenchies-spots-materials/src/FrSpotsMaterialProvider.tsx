@@ -16,26 +16,26 @@ const customTheme: MantineThemeOverride = {
     xl: "5px 5px 3px rgba(0, 0, 0, .25)",
   },
   components: {
-    Button: {
-      styles: (theme, params: ButtonStylesParams, { variant }) => {
-        const currentColor: string = params.color;
-        let bgColor = initColors["yellow"][0];
-        let hoverColor = initColors["yellow"][1];
-        if (currentColor in initColors) {
-          bgColor = initColors[currentColor as keyof typeof initColors][0];
-          hoverColor = initColors[currentColor as keyof typeof initColors][1];
-        }
-        return {
-          root: {
-            backgroundColor: variant === "filled" ? bgColor : undefined,
-            transition: "background-color 0.3s ease",
-            "&:hover": {
-              backgroundColor: variant === "filled" ? hoverColor : undefined,
-            },
-          },
-        };
-      },
-    },
+    // Button: {
+    //   styles: (theme, params: ButtonStylesParams, { variant }) => {
+    //     const currentColor: string = params.color;
+    //     let bgColor = initColors["yellow"][0];
+    //     let hoverColor = initColors["yellow"][1];
+    //     if (currentColor in initColors) {
+    //       bgColor = initColors[currentColor as keyof typeof initColors][0];
+    //       hoverColor = initColors[currentColor as keyof typeof initColors][1];
+    //     }
+    //     return {
+    //       root: {
+    //         backgroundColor: variant === "filled" ? bgColor : undefined,
+    //         transition: "background-color 0.3s ease",
+    //         "&:hover": {
+    //           backgroundColor: variant === "filled" ? hoverColor : undefined,
+    //         },
+    //       },
+    //     };
+    //   },
+    // },
   },
 };
 
