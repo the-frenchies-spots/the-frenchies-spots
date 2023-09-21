@@ -1,5 +1,5 @@
 import { ObjectType, Field } from '@nestjs/graphql';
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { ProfileEntity } from './profile.entity';
 import GraphQLJSON from 'graphql-type-json';
 
@@ -7,11 +7,12 @@ import GraphQLJSON from 'graphql-type-json';
 @Entity('Notification')
 export class NotificationEntity {
   @Field()
+  @Column()
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Field(() => ProfileEntity)
-  @Column()
+  @Column({ type: 'uuid' }) // Assuming 'uuid' is the correct column type
+  @ManyToOne(() => ProfileEntity, (profile) => profile.notifications)
   profile: ProfileEntity;
 
   @Field()
@@ -19,7 +20,8 @@ export class NotificationEntity {
   profileId: string;
 
   @Field(() => ProfileEntity)
-  @Column()
+  @Column({ type: 'uuid' })
+  @ManyToOne(() => ProfileEntity, (profile) => profile.profileSender)
   profileSender: ProfileEntity;
 
   @Field()

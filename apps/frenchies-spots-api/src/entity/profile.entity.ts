@@ -16,11 +16,13 @@ import { ContactEntity } from './contact.entity';
 import { ProfileChatEntity } from './profile-chat.entity';
 import GraphQLJSON from 'graphql-type-json';
 import { LocationEntity } from './location.entity';
+import { NotificationEntity } from './notification.entity';
 
 @ObjectType()
 @Entity('Profile')
 export class ProfileEntity implements Profile {
   @Field()
+  @Column()
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
@@ -45,30 +47,54 @@ export class ProfileEntity implements Profile {
   userId: string;
 
   @Field(() => UserEntity)
+  @Column({ type: 'uuid' })
   @ManyToOne(() => UserEntity, (user) => user.profile)
   user: UserEntity;
 
   @Field(() => [SpotEntity], { nullable: true })
+  @Column()
   @OneToMany(() => SpotEntity, (spot) => spot.profile, { cascade: true })
   spots: SpotEntity[];
 
+  @Field(() => [NotificationEntity], { nullable: true })
+  @Column()
+  @OneToMany(() => NotificationEntity, (notification) => notification.profile, {
+    cascade: true,
+  })
+  notifications: NotificationEntity[];
+
+  @Field(() => [NotificationEntity], { nullable: true })
+  @Column()
+  @OneToMany(
+    () => NotificationEntity,
+    (notification) => notification.profileSender,
+    {
+      cascade: true,
+    },
+  )
+  profileSender: NotificationEntity[];
+
   @Field(() => [RatingEntity], { nullable: true })
+  @Column()
   @OneToMany(() => RatingEntity, (rating) => rating.profile, { cascade: true })
   ratings: RatingEntity[];
 
   @Field(() => [FavoriteEntity], { nullable: true })
+  @Column()
   @OneToMany(() => FavoriteEntity, (favorite) => favorite.profile, {
     cascade: true,
   })
   favorites: FavoriteEntity[];
 
   @Field(() => [ContactEntity])
+  @Column()
   @OneToMany(() => ContactEntity, (contact) => contact.profile, {
     cascade: true,
   })
   contacts: ContactEntity[];
 
   @Field(() => [ProfileChatEntity], { nullable: true })
+  @Column()
   @OneToMany(() => ProfileChatEntity, (profileChat) => profileChat.profile, {
     cascade: true,
   })

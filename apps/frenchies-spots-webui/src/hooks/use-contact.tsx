@@ -17,7 +17,7 @@ const useContact = () => {
   const [friendRequest] = useMutation<
     { friendRequest: boolean },
     { friendId: string }
-  >(mutations.friendRequest);
+  >(mutations.friendRequest, { refetchQueries: [queries.profiles] });
 
   const [insertChat] = useMutation<
     { insertChat: ChatEntity },

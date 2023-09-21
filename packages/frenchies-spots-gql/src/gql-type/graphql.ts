@@ -250,7 +250,6 @@ export type NotificationEntity = {
   content?: Maybe<Scalars['JSON']['output']>;
   id: Scalars['String']['output'];
   isRead: Scalars['Boolean']['output'];
-  profile: ProfileEntity;
   profileId: Scalars['String']['output'];
   profileSender: ProfileEntity;
   profileSenderId: Scalars['String']['output'];
@@ -292,8 +291,10 @@ export type ProfileEntity = {
   gamePoint: Scalars['Float']['output'];
   id: Scalars['String']['output'];
   location?: Maybe<Scalars['JSON']['output']>;
+  notifications?: Maybe<Array<NotificationEntity>>;
   photoUrl?: Maybe<Scalars['String']['output']>;
   profileChats?: Maybe<Array<ProfileChatEntity>>;
+  profileSender?: Maybe<Array<NotificationEntity>>;
   pseudo: Scalars['String']['output'];
   ratings?: Maybe<Array<RatingEntity>>;
   spots?: Maybe<Array<SpotEntity>>;

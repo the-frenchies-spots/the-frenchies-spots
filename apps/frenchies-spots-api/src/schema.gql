@@ -128,7 +128,6 @@ type NotificationEntity {
   content: JSON
   id: String!
   isRead: Boolean!
-  profile: ProfileEntity!
   profileId: String!
   profileSender: ProfileEntity!
   profileSenderId: String!
@@ -167,8 +166,10 @@ type ProfileEntity {
   gamePoint: Float!
   id: String!
   location: JSON
+  notifications: [NotificationEntity!]
   photoUrl: String
   profileChats: [ProfileChatEntity!]
+  profileSender: [NotificationEntity!]
   pseudo: String!
   ratings: [RatingEntity!]
   spots: [SpotEntity!]

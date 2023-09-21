@@ -23,6 +23,11 @@ export class ProfileRepository {
       ...(profileId
         ? {
             include: {
+              notifications: {
+                where: {
+                  profileSenderId: profileId,
+                },
+              },
               profileChats: {
                 where: {
                   chat: {
@@ -33,12 +38,15 @@ export class ProfileRepository {
                     },
                   },
                 },
-                include: { chat: { include: { participants: true } } },
+                include: {
+                  chat: { include: { participants: true } },
+                },
               },
             },
           }
         : {}),
     });
+    console.log({ profiles });
     return plainToClassMany(profiles, ProfileEntity);
   }
 
