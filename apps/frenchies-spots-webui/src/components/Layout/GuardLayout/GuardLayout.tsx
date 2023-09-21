@@ -3,7 +3,7 @@ import React, { ReactNode, useEffect } from "react";
 
 import { useAuth } from "@/hooks";
 import { useRouter } from "next/router";
-import { LoadingOverlay } from "@frenchies-spots/material";
+import LoadingOverlay from "../../LoadingOverlay/LoadingOverlay";
 
 const TOKEN_STORAGE_KEY = process.env.NEXT_PUBLIC_TOKEN_STORAGE_KEY || "";
 

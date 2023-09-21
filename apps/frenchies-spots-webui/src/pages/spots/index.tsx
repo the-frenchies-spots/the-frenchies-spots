@@ -2,7 +2,6 @@ import React, { ReactElement, useEffect, useState } from "react";
 
 import { useLazyQuery } from "@apollo/client";
 import { useForm } from "@frenchies-spots/hooks";
-import { LoadingOverlay } from "@frenchies-spots/material";
 import {
   ProfileEntity,
   queries,
@@ -18,6 +17,7 @@ import NavigationLayout from "../../components/Layout/NavigationLayout/Navigatio
 import { useRouter } from "next/router";
 import { getCoordinates } from "../../utils/get-coordinates";
 import { GuardLayout } from "../../components/Layout/GuardLayout/GuardLayout";
+import LoadingOverlay from "../../components/LoadingOverlay/LoadingOverlay";
 
 const SpotsPage = () => {
   const [pageLoading, isPageLoading] = useState<boolean>(true);

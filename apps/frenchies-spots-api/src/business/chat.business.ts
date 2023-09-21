@@ -10,14 +10,15 @@ import { codeErrors } from '../enum/code-errors.enum';
 import { SendChatMessageInput } from '../dto/input/chat/send-chat-message.input';
 import { ChatMessageEntity } from '../entity/chat-message.entity';
 import { UserChatResponse } from '../dto/response/chat/user-chat.response';
+import { ContactBusiness } from './contact.business';
 
 const { ACCESS_DENIED, INTERNAL_SERVER_ERROR } = codeErrors;
 
 @Injectable()
 export class ChatBusiness {
   constructor(
+    private contactBusiness: ContactBusiness,
     private chatRepository: ChatRepository,
-    private contactRepository: ContactRepository,
   ) {}
 
   async chats(userId: string): Promise<UserChatResponse[]> {
@@ -48,19 +49,6 @@ export class ChatBusiness {
     return chat;
   }
 
-  async connectAllContacts(profileIds: string[]): Promise<boolean> {
-    profileIds.forEach(async (currentId) => {
-      const currentParticipantIds = extractArray(currentId, profileIds);
-      const contactConnected = await this.contactRepository.connectContacts(
-        currentId,
-        currentParticipantIds,
-      );
-      if (!contactConnected) throw new ErrorService(INTERNAL_SERVER_ERROR);
-    });
-
-    return true;
-  }
-
   async insertChat(
     profileId: string,
     inserChatInput: InserChatInput,
@@ -68,7 +56,7 @@ export class ChatBusiness {
     const { participantIds } = inserChatInput;
 
     const profileIds = [profileId, ...participantIds];
-    await this.connectAllContacts(profileIds);
+    await this.contactBusiness.connectAllContacts(profileIds);
     return this.chatRepository.createChat(profileId, participantIds);
   }
 }

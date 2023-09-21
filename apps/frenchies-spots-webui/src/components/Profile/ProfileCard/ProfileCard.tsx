@@ -7,13 +7,14 @@ import {
   Group,
   Stack,
   Text,
+  Font,
 } from "@frenchies-spots/material";
 import { ProfileEntity } from "@frenchies-spots/gql";
 import { useStyles } from "./ProfileCard.styles";
 
 export interface ProfileCardProps extends Omit<CardProps, "children"> {
   profile: ProfileEntity;
-  children: ReactNode;
+  children?: ReactNode;
   onClick?: (id: string) => void;
 }
 
@@ -44,9 +45,9 @@ const ProfileCard = (props: ProfileCardProps) => {
       <Group position="apart">
         <Avatar src={src} />
         <Stack>
-          <Text>{pseudo}</Text>
+          <Font>{pseudo}</Font>
         </Stack>
-        <Stack>{children}</Stack>
+        {children && <Stack>{children}</Stack>}
       </Group>
     </Card>
   );

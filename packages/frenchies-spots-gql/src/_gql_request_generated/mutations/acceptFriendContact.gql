@@ -1,0 +1,3 @@
+mutation acceptFriendContact($contactId: String!){
+    acceptFriendContact(contactId: $contactId)
+}

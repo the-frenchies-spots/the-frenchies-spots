@@ -27,7 +27,7 @@ interface ProfilePreviewProps extends StackProps {
 
 const ProfilePreview = (props: ProfilePreviewProps) => {
   const { profile, currentProfile, ...stackProps } = props;
-  const { onContactClick } = useContact();
+  const { onContactClick, onFriendRequestClick } = useContact();
 
   const router = useRouter();
 
@@ -47,6 +47,7 @@ const ProfilePreview = (props: ProfilePreviewProps) => {
 
         {currentProfile && (
           <ActionIcon
+            onClick={() => onFriendRequestClick(profile)}
             sx={{
               border: "1px solid orange",
               borderRadius: 50,

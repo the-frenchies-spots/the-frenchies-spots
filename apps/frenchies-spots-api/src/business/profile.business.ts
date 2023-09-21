@@ -12,12 +12,17 @@ import { ProfileInput } from '../dto/input/profile/profile.input';
 import { ProfileEntity } from '../entity/profile.entity';
 import { ProfilesInput } from '../dto/input/profile/profiles.input';
 import { GeospatialService } from '../service/spot-geospatial.service';
+import { ContactBusiness } from './contact.business';
+import { NotificationRepository } from '../repository/notification.repository';
+import { ENotif } from '../enum/notif.enum';
 
 const { INTERNAL_SERVER_ERROR, USER_NOT_FOUND } = codeErrors;
 
 @Injectable()
 export class ProfileBusiness {
   constructor(
+    private contactBusiness: ContactBusiness,
+    private notificationRepository: NotificationRepository,
     private profileRepository: ProfileRepository,
     private stripeService: StripeService,
     private authRepository: AuthRepository,
@@ -71,5 +76,19 @@ export class ProfileBusiness {
   ): Promise<UserEntity> {
     await this.getUserOrThrow(userId);
     return this.profileRepository.update(profileInput, userId);
+  }
+
+  async friendRequest(profileId: string, friendId: string): Promise<boolean> {
+    const connected = await this.contactBusiness.connectAllContacts([
+      profileId,
+      friendId,
+    ]);
+    if (!connected) throw new ErrorService(INTERNAL_SERVER_ERROR);
+    await this.notificationRepository.sendNotif({
+      profileId: friendId,
+      type: ENotif.FRIEND_REQUEST,
+      profileSenderId: profileId,
+    });
+    return true;
   }
 }

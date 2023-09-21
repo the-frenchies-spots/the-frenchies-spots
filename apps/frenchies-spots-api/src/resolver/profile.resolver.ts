@@ -44,4 +44,13 @@ export class ProfileResolver {
   ): Promise<UserEntity> {
     return this.profileBusiness.updateProfile(profileInput, userId);
   }
+
+  @UseGuards(RefreshTokenGuard)
+  @Mutation(() => Boolean)
+  friendRequest(
+    @Args('friendId') friendId: string,
+    @CurrentProfileId() profileId: string,
+  ): Promise<boolean> {
+    return this.profileBusiness.friendRequest(profileId, friendId);
+  }
 }

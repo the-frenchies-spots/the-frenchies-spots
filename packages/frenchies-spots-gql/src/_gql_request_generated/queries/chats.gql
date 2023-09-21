@@ -1,5 +1,8 @@
 query chats{
     chats{
+        _count{
+            chatMessages
+        }
         chatMessages{
             chat{
                 chatMessages{

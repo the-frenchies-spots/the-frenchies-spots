@@ -10,7 +10,6 @@ import type {
   SignUpInput,
   LogoutResponse,
   MutationSignUpArgs,
-  Mutation,
   MutationSignInArgs,
 } from "@frenchies-spots/gql";
 

@@ -1,0 +1,5 @@
+mutation deleteNotif($notifId: String!){
+    deleteNotif(notifId: $notifId){
+        deleted
+    }
+}

@@ -1,0 +1,3 @@
+mutation friendRequest($friendId: String!){
+    friendRequest(friendId: $friendId)
+}

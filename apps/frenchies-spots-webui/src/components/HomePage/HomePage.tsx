@@ -1,6 +1,15 @@
 import React from "react";
-import { Box, Button, Container, Flex, Stack } from "@frenchies-spots/material";
+import {
+  Box,
+  Button,
+  Container,
+  Flex,
+  Font,
+  PrimaryButton,
+  Stack,
+} from "@frenchies-spots/material";
 import { useRouter } from "next/router";
+import AppTitle from "./../AppTitle/AppTitle";
 
 export const HomePage = () => {
   const router = useRouter();
@@ -19,14 +28,10 @@ export const HomePage = () => {
         flexDirection: "column",
       }}
     >
-      <Stack mt="xl" pt="xl" sx={{ flexGrow: 1 }}>
-        <p>Entraide</p>
-        <p>Partage</p>
-        <p>Voyage</p>
-      </Stack>
+      <AppTitle mt="xl" pt="xl" sx={{ flexGrow: 1 }} />
 
       <Flex h={100}>
-        <Button sx={{ width: "100%" }}>EXPLORE</Button>
+        <PrimaryButton sx={{ width: "100%" }}>EXPLORE</PrimaryButton>
       </Flex>
     </Container>
   );

@@ -3,15 +3,7 @@ import React, { useState } from "react";
 import toast from "react-hot-toast";
 import { useMutation } from "@apollo/client";
 import { amountPoints, formatStripeEuro } from "@frenchies-spots/utils";
-import {
-  Box,
-  Button,
-  Flex,
-  Group,
-  LoadingOverlay,
-  Stack,
-  Text,
-} from "@frenchies-spots/material";
+import { Box, Button, Group, Stack, Text } from "@frenchies-spots/material";
 import {
   MutationBuyPointArgs,
   UserEntity,
@@ -24,6 +16,7 @@ import StripeContainer from "../../Stripe/StripeContainer/StripeContainer";
 import CustomDrawer from "../../CustomDrawer/CustomDrawer";
 import { useDisclosure } from "@frenchies-spots/hooks";
 import Image from "next/image";
+import LoadingOverlay from "../../LoadingOverlay/LoadingOverlay";
 
 const ShopBuyPoints = () => {
   const [opened, { open, close }] = useDisclosure(false);

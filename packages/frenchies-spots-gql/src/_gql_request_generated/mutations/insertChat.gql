@@ -1,35 +1,61 @@
-mutation insertChat($inserChatInput: InserChatInput!) {
-  insertChat(inserChatInput: $inserChatInput) {
-    chatMessages {
-      chat {
-        chatMessages {
-          chatId
-          createdAt
-          id
-          isRead
-          message
-          profileChat {
-            chatId
-            createdAt
-            id
-            profileId
-            updatedAt
-          }
-          profileChatId
-          updatedAt
-        }
-        createdAt
-        id
-        isTemporary
-        participants {
-          chat {
-            createdAt
-            id
-            isTemporary
-            updatedAt
-          }
-          chatId
-          chatMessages {
+mutation insertChat($inserChatInput: InserChatInput!){
+    insertChat(inserChatInput: $inserChatInput){
+        chatMessages{
+            chat{
+                chatMessages{
+                    chatId
+                    createdAt
+                    id
+                    isRead
+                    message
+                    profileChat{
+                        chatId
+                        createdAt
+                        id
+                        profileId
+                        updatedAt
+                    }
+                    profileChatId
+                    updatedAt
+                }
+                createdAt
+                id
+                isTemporary
+                participants{
+                    chat{
+                        createdAt
+                        id
+                        isTemporary
+                        updatedAt
+                    }
+                    chatId
+                    chatMessages{
+                        chatId
+                        createdAt
+                        id
+                        isRead
+                        message
+                        profileChatId
+                        updatedAt
+                    }
+                    createdAt
+                    id
+                    profile{
+                        avatarUrl
+                        createdAt
+                        gamePoint
+                        id
+                        location
+                        photoUrl
+                        pseudo
+                        updatedAt
+                        userId
+                    }
+                    profileId
+                    updatedAt
+                }
+                updatedAt
+            }
             chatId
             createdAt
             id
@@ -37,43 +63,17 @@ mutation insertChat($inserChatInput: InserChatInput!) {
             message
             profileChatId
             updatedAt
-          }
-          createdAt
-          id
-          profile {
-            avatarUrl
+        }
+        createdAt
+        id
+        isTemporary
+        participants{
+            chatId
             createdAt
-            gamePoint
             id
-            location
-            photoUrl
-            pseudo
+            profileId
             updatedAt
-            userId
-          }
-          profileId
-          updatedAt
         }
         updatedAt
-      }
-      chatId
-      createdAt
-      id
-      isRead
-      message
-      profileChatId
-      updatedAt
     }
-    createdAt
-    id
-    isTemporary
-    participants {
-      chatId
-      createdAt
-      id
-      profileId
-      updatedAt
-    }
-    updatedAt
-  }
 }

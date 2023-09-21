@@ -16,6 +16,10 @@ import { GeospatialService } from '../service/spot-geospatial.service';
 import { MongooseModule } from '@nestjs/mongoose';
 import { SpotSchema } from '../schema/spot.shema';
 import { ProfileSchema } from '../schema/profile.shema';
+import { ContactBusiness } from '../business/contact.business';
+import { ContactRepository } from '../repository/contact.repository';
+import { NotificationBusiness } from '../business/notification.business';
+import { NotificationRepository } from '../repository/notification.repository';
 
 @Module({
   imports: [
@@ -28,6 +32,10 @@ import { ProfileSchema } from '../schema/profile.shema';
     ProfileResolver,
     ProfileRepository,
     ProfileBusiness,
+    ContactBusiness,
+    ContactRepository,
+    NotificationBusiness,
+    NotificationRepository,
     AuthRepository,
     JwtService,
     TokenService,

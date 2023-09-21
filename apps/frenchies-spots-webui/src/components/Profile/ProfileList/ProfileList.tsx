@@ -19,18 +19,19 @@ interface ProfileListProps extends ContainerProps {
 const ProfileList = (props: ProfileListProps) => {
   const { profileList, ...containerProps } = props;
 
-  const { onContactClick } = useContact();
+  const { onContactClick, onFriendRequestClick } = useContact();
 
   return (
     <Container
       size="md"
+      mb={150}
       h="100%"
       {...containerProps}
       sx={{ boxSizing: "border-box" }}
     >
       {profileList.map((profile, index) => (
         <ProfileCard key={profile.id} profile={profile} mb="md">
-          <ActionIcon>
+          <ActionIcon onClick={() => onFriendRequestClick(profile)}>
             <IconUserPlus />
           </ActionIcon>
           <ActionIcon onClick={() => onContactClick(profile)}>

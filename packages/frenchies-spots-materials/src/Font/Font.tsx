@@ -16,7 +16,7 @@ enum ETitle {
 type TitleKeys = keyof typeof ETitle;
 
 interface FontProps extends TextProps {
-  color?: TColor & string;
+  color?: TColor | string;
   variant?: TitleKeys | "body" | "subtitle1" | "subtitle2" | "caption";
 }
 

@@ -8,7 +8,6 @@ import {
   Flex,
   Font,
   Group,
-  LoadingOverlay,
   PrimaryButton,
   Stack,
 } from "@frenchies-spots/material";
@@ -23,6 +22,7 @@ import EditButton from "../../components/Spots/SpotButton/EditButton/EditButton"
 import DeleteButton from "../../components/Spots/SpotButton/DeleteButton/DeleteButton";
 import { tagsDataList } from "@frenchies-spots/utils";
 import { DisplayTag } from "../../components/Spots/DisplayTag";
+import LoadingOverlay from "../LoadingOverlay/LoadingOverlay";
 
 interface SpotDetailProps {
   spot: SpotByIdResponse | undefined;

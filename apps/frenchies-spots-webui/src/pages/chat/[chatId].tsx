@@ -1,13 +1,7 @@
-import React, { ReactElement, useCallback, useEffect } from "react";
-
-import { Container, LoadingOverlay, Log } from "@frenchies-spots/material";
-import { ChatUi, useChat } from "@frenchies-spots/chat";
-
+import React, { ReactElement } from "react";
+import { Log } from "@frenchies-spots/material";
 import { PageLayout } from "../../components/Layout/PageLayout/PageLayout";
 import { useRouter } from "next/router";
-
-import { useLazyQuery } from "@apollo/client";
-import { ChatEntity, QueryChatByPkArgs, queries } from "@frenchies-spots/gql";
 import { useAuth } from "./../../hooks/use-auth";
 import { GuardLayout } from "../../components/Layout/GuardLayout/GuardLayout";
 import ChatPage from "../../components/Chat/ChatPage/ChatPage";

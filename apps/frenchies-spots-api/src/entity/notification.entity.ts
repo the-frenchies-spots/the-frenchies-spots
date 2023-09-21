@@ -18,13 +18,21 @@ export class NotificationEntity {
   @Column()
   profileId: string;
 
+  @Field(() => ProfileEntity)
+  @Column()
+  profileSender: ProfileEntity;
+
+  @Field()
+  @Column()
+  profileSenderId: string;
+
   @Field()
   @Column()
   isRead: boolean;
 
   @Field(() => GraphQLJSON, { nullable: true })
   @Column('json')
-  content: Record<string, unknown>;
+  content?: Record<string, unknown>;
 
   @Field()
   @Column()

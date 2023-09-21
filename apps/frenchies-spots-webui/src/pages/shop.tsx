@@ -1,27 +1,10 @@
-import React, { ReactElement, useState } from "react";
+import React, { ReactElement } from "react";
 
-import { useMutation } from "@apollo/client";
-import {
-  MutationBuyPointArgs,
-  UserEntity,
-  mutations,
-} from "@frenchies-spots/gql";
-import {
-  Button,
-  Container,
-  LoadingOverlay,
-  Stack,
-  Tabs,
-  Text,
-} from "@frenchies-spots/material";
+import { Container, Stack, Tabs, Text } from "@frenchies-spots/material";
 
 import { PageLayout } from "../components";
-import StripeContainer from "../components/Stripe/StripeContainer/StripeContainer";
 import NavigationLayout from "../components/Layout/NavigationLayout/NavigationLayout";
-import { amountPoints, formatStripeEuro } from "@frenchies-spots/utils";
-import PriceInput from "../components/InputCustom/PriceInput/PriceInput";
 import { useAuth } from "../hooks/use-auth";
-import toast from "react-hot-toast";
 import ShopBuyPoints from "../components/Shop/ShopBuyPoints/ShopBuyPoints";
 import StatusBar from "../components/StatusBar/StatusBar";
 import { GuardLayout } from "../components/Layout/GuardLayout/GuardLayout";
