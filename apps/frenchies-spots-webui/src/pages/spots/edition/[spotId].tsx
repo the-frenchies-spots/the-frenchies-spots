@@ -3,7 +3,7 @@ import React, { ReactElement, useEffect, useMemo } from "react";
 
 import { useRouter } from "next/router";
 import { useLazyQuery, useMutation } from "@apollo/client";
-import { Container, LoadingOverlay } from "@frenchies-spots/material";
+import { Container } from "@frenchies-spots/material";
 import {
   CategoriesSpotAndTag,
   MutationUpdateSpotArgs,
@@ -17,6 +17,7 @@ import {
 import { PageLayout, SpotEditionForm } from "../../../components";
 import toast from "react-hot-toast";
 import { GuardLayout } from "../../../components/Layout/GuardLayout/GuardLayout";
+import LoadingOverlay from "../../../components/LoadingOverlay/LoadingOverlay";
 
 const SpotUpdatePage = () => {
   const router = useRouter();

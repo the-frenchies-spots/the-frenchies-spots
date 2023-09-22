@@ -1,16 +1,11 @@
+import React from "react";
+
 import { ProfileEntity } from "@frenchies-spots/gql";
-import React, { Fragment } from "react";
+import { Container, type ContainerProps } from "@frenchies-spots/material";
+
 import ProfileCard from "../ProfileCard/ProfileCard";
-import {
-  Container,
-  ScrollArea,
-  type ContainerProps,
-  ActionIcon,
-  Log,
-  Text,
-} from "@frenchies-spots/material";
-import { IconMessages, IconUserPlus } from "@frenchies-spots/icon";
-import useContact from "./../../../hooks/use-contact";
+import ContactButton from "../ContactButton/ContactButton";
+import FriendRequestButton from "../FriendRequestButton/FriendRequestButton";
 
 interface ProfileListProps extends ContainerProps {
   profileList: ProfileEntity[];
@@ -19,23 +14,18 @@ interface ProfileListProps extends ContainerProps {
 const ProfileList = (props: ProfileListProps) => {
   const { profileList, ...containerProps } = props;
 
-  const { onContactClick } = useContact();
-
   return (
     <Container
       size="md"
+      mb={150}
       h="100%"
       {...containerProps}
       sx={{ boxSizing: "border-box" }}
     >
-      {profileList.map((profile, index) => (
+      {profileList.map((profile) => (
         <ProfileCard key={profile.id} profile={profile} mb="md">
-          <ActionIcon>
-            <IconUserPlus />
-          </ActionIcon>
-          <ActionIcon onClick={() => onContactClick(profile)}>
-            <IconMessages />
-          </ActionIcon>
+          <ContactButton profile={profile} isSmallMode />
+          <FriendRequestButton profile={profile} />
         </ProfileCard>
       ))}
     </Container>

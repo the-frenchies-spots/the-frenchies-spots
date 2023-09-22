@@ -5,7 +5,6 @@ import {
   Checkbox,
   Flex,
   Font,
-  LoadingOverlay,
   MultipleImagePicker,
   Stack,
   Text,
@@ -30,6 +29,7 @@ import { useCloudinary } from "../../../hooks/use-cloudinary";
 import { useAuth } from "./../../../hooks/use-auth";
 import { VSegmentControl } from "../../InputCustom/VSegmentControl";
 import SpotDetail from "../../SpotDetail/SpotDetail";
+import LoadingOverlay from "../../LoadingOverlay/LoadingOverlay";
 
 interface SpotEditionFormProps {
   initialValues: SpotInput;

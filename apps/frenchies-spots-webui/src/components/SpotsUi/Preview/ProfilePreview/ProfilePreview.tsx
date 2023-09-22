@@ -1,24 +1,21 @@
 import React from "react";
 
-import { Maybe, ProfileEntity } from "@frenchies-spots/gql";
-import {
-  IconMessages,
-  IconUserPlus,
-  IconUserSquareRounded,
-} from "@frenchies-spots/icon";
+import Image from "next/image";
 import {
   Button,
   Group,
   type StackProps,
   Stack,
   Text,
-  ActionIcon,
   PrimaryButton,
 } from "@frenchies-spots/material";
-
-import Image from "next/image";
-import useContact from "../../../../hooks/use-contact";
 import { useRouter } from "next/router";
+import { Maybe, ProfileEntity } from "@frenchies-spots/gql";
+import { IconMessages, IconUserSquareRounded } from "@frenchies-spots/icon";
+
+import useContact from "../../../../hooks/use-contact";
+import FriendRequestButton from "../../../Profile/FriendRequestButton/FriendRequestButton";
+import ContactButton from "./../../../Profile/ContactButton/ContactButton";
 
 interface ProfilePreviewProps extends StackProps {
   profile: ProfileEntity;
@@ -45,34 +42,18 @@ const ProfilePreview = (props: ProfilePreviewProps) => {
         )}
         <Text>{profile.pseudo}</Text>
 
-        {currentProfile && (
-          <ActionIcon
-            sx={{
-              border: "1px solid orange",
-              borderRadius: 50,
-              height: 40,
-              width: 40,
-            }}
-          >
-            <IconUserPlus color="orange" />
-          </ActionIcon>
-        )}
+        {currentProfile && <FriendRequestButton profile={profile} />}
       </Group>
 
       {currentProfile ? (
-        <PrimaryButton
-          leftIcon={<IconMessages />}
-          onClick={() => onContactClick(profile)}
-        >
-          Contacter
-        </PrimaryButton>
+        <ContactButton profile={profile} />
       ) : (
-        <Button
+        <PrimaryButton
           leftIcon={<IconUserSquareRounded />}
           onClick={() => router.push("/sign-in")}
         >
           Connecter vous pour chatter
-        </Button>
+        </PrimaryButton>
       )}
     </Stack>
   );

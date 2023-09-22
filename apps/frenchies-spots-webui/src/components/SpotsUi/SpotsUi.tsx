@@ -27,7 +27,7 @@ const SpotsUi = (props: SpotsUiProps) => {
   const { classes } = useStyles();
   const { profile } = useAuth();
 
-  const [uiMode, setUiMode] = useState<filterListMode>(filterListMode.SPOT);
+  const [uiMode, setUiMode] = useState<filterListMode>(filterListMode.ALL);
 
   const { isFilter, currentSpotId, currentProfileId } = useSpotUi();
   const currentSpot = getListElement<SpotEntity>(

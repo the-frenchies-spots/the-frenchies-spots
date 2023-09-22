@@ -67,6 +67,25 @@ mutation insertSpot($insertSpotInput: SpotInput!){
                 gamePoint
                 id
                 location
+                notifications{
+                    content
+                    id
+                    isRead
+                    profileId
+                    profileSender{
+                        avatarUrl
+                        createdAt
+                        gamePoint
+                        id
+                        location
+                        photoUrl
+                        pseudo
+                        updatedAt
+                        userId
+                    }
+                    profileSenderId
+                    type
+                }
                 photoUrl
                 profileChats{
                     chat{
@@ -100,6 +119,25 @@ mutation insertSpot($insertSpotInput: SpotInput!){
                     }
                     profileId
                     updatedAt
+                }
+                profileSender{
+                    content
+                    id
+                    isRead
+                    profileId
+                    profileSender{
+                        avatarUrl
+                        createdAt
+                        gamePoint
+                        id
+                        location
+                        photoUrl
+                        pseudo
+                        updatedAt
+                        userId
+                    }
+                    profileSenderId
+                    type
                 }
                 pseudo
                 ratings{

@@ -27,6 +27,15 @@ export class ProfileResolver {
     return this.profileBusiness.getAll(profilesInput, profileId);
   }
 
+  @Query(() => ProfileEntity)
+  @UseGuards(RefreshTokenGuard)
+  friendByPk(
+    @Args('friendId') friendId: string,
+    @CurrentProfileId() profileId: string,
+  ): Promise<ProfileEntity> {
+    return this.profileBusiness.getFriendById(profileId, friendId);
+  }
+
   @UseGuards(RefreshTokenGuard)
   @Mutation(() => UserEntity)
   buyPoint(
@@ -43,5 +52,14 @@ export class ProfileResolver {
     @CurrentUserId() userId: string,
   ): Promise<UserEntity> {
     return this.profileBusiness.updateProfile(profileInput, userId);
+  }
+
+  @UseGuards(RefreshTokenGuard)
+  @Mutation(() => Boolean)
+  friendRequest(
+    @Args('friendId') friendId: string,
+    @CurrentProfileId() profileId: string,
+  ): Promise<boolean> {
+    return this.profileBusiness.friendRequest(profileId, friendId);
   }
 }

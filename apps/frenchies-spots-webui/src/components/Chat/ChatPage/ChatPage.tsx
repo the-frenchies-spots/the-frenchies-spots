@@ -10,8 +10,9 @@ import {
   queries,
 } from "@frenchies-spots/gql";
 import { useQuery, useMutation } from "@apollo/client";
-import { Container, LoadingOverlay } from "@frenchies-spots/material";
+import { Container } from "@frenchies-spots/material";
 import { useRouter } from "next/router";
+import LoadingOverlay from "../../LoadingOverlay/LoadingOverlay";
 
 interface ChatPageProps {
   chatId: string;

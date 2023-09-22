@@ -1,7 +1,6 @@
 import React from "react";
 import {
   Stack,
-  Text,
   Group,
   Checkbox,
   Slider,
@@ -10,18 +9,29 @@ import {
   Box,
   SecondaryButton,
   Font,
+  Log,
 } from "@frenchies-spots/material";
 import { HSegmentControl, SelectTag } from "../../InputCustom";
 import { CategoriesSpotAndTag } from "@frenchies-spots/gql";
 import { tagsDataList } from "@frenchies-spots/utils";
 import { useSpotUi } from "../../../hooks/use-spot-ui";
 import { formatPoint } from "../../../utils/format-point";
+import { getZoomByRadius } from "../../../utils/get-zoom-by-radius";
 
 interface SpotFilterProps {}
 
 const SpotFilter = (props: SpotFilterProps) => {
-  const { onFilterSpot, closeFilter, form, setIsRayon, viewport, isRayon } =
-    useSpotUi();
+  const {
+    onFilterSpot,
+    onFilterPeople,
+    closeFilter,
+    form,
+    setIsRayon,
+    viewport,
+    isRayon,
+    setViewPort,
+    coordPoint,
+  } = useSpotUi();
 
   const handleResetFilter = () => {
     form.reset();
@@ -30,6 +40,7 @@ const SpotFilter = (props: SpotFilterProps) => {
   const handleSearchClick = () => {
     closeFilter();
     onFilterSpot(form.values);
+    onFilterPeople({ point: form.values.point });
   };
 
   const handleRayonChange = (newIsRayon: boolean) => {
@@ -41,6 +52,23 @@ const SpotFilter = (props: SpotFilterProps) => {
     } else {
       form.setValues((prev) => ({ ...prev, point: undefined }));
     }
+  };
+
+  const handleRadiusChange = (value: number) => {
+    const maxDistance = value * 1000;
+    form.getInputProps("point.maxDistance").onChange(maxDistance);
+    const zoom = getZoomByRadius(maxDistance);
+    setViewPort((prev) => {
+      if (coordPoint) {
+        return {
+          ...prev,
+          zoom,
+          latitude: coordPoint.lat,
+          longitude: coordPoint.lng,
+        };
+      }
+      return { ...prev, zoom };
+    });
   };
 
   return (
@@ -121,9 +149,7 @@ const SpotFilter = (props: SpotFilterProps) => {
                 { value: 80, label: "80 km" },
               ]}
               value={form.getInputProps("point.maxDistance").value / 1000}
-              onChange={(value) => {
-                form.getInputProps("point.maxDistance").onChange(value * 1000);
-              }}
+              onChange={handleRadiusChange}
               labelAlwaysOn
             />
           )}

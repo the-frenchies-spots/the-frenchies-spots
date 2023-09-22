@@ -56,7 +56,7 @@ export const SpotUiProvider = (props: SpotUiProviderProps) => {
       ...current,
       latitude: lat,
       longitude: lng,
-      zoom: 12,
+      zoom: 11,
     }));
     initFilterSpot({
       variables: {

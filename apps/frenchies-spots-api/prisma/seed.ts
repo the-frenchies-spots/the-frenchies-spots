@@ -11,6 +11,7 @@ const clearDatabase = async () => {
   await prisma.favorite.deleteMany({});
   await prisma.rating.deleteMany({});
   await prisma.spotPicture.deleteMany({});
+  await prisma.notification.deleteMany({});
   await prisma.tagsOnSpots.deleteMany({});
   await prisma.tag.deleteMany({});
   await prisma.chatMessage.deleteMany({});

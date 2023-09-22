@@ -10,6 +10,40 @@ import { ProfileEntity } from '../entity/profile.entity';
 export class ProfileRepository {
   constructor(private prisma: PrismaService) {}
 
+  async getById(profileId: string, friendId: string): Promise<ProfileEntity> {
+    const profile = await this.prisma.profile.findUnique({
+      where: { id: friendId },
+      include: {
+        contacts: {
+          where: {
+            contactId: profileId,
+          },
+        },
+        notifications: {
+          where: {
+            profileSenderId: profileId,
+          },
+        },
+        profileChats: {
+          where: {
+            chat: {
+              participants: {
+                some: {
+                  profileId,
+                },
+              },
+            },
+          },
+          include: {
+            chat: { include: { participants: true } },
+          },
+        },
+      },
+    });
+
+    return plainToClass(profile, ProfileEntity);
+  }
+
   async getAll(
     profileId: string | undefined,
     ids?: string[] | undefined,
@@ -23,6 +57,16 @@ export class ProfileRepository {
       ...(profileId
         ? {
             include: {
+              contacts: {
+                where: {
+                  contactId: profileId,
+                },
+              },
+              notifications: {
+                where: {
+                  profileSenderId: profileId,
+                },
+              },
               profileChats: {
                 where: {
                   chat: {
@@ -33,7 +77,9 @@ export class ProfileRepository {
                     },
                   },
                 },
-                include: { chat: { include: { participants: true } } },
+                include: {
+                  chat: { include: { participants: true } },
+                },
               },
             },
           }

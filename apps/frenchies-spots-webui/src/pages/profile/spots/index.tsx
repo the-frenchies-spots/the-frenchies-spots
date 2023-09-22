@@ -7,11 +7,12 @@ import { SpotEntity, SpotsInput, queries } from "@frenchies-spots/gql";
 import { useLazyQuery } from "@apollo/client";
 import { useAuth } from "../../../hooks/use-auth";
 import SpotList from "../../../components/Spots/SpotList/SpotList";
-import { Container, Group, LoadingOverlay } from "@frenchies-spots/material";
+import { Container, Group } from "@frenchies-spots/material";
 import EditButton from "./../../../components/Spots/SpotButton/EditButton/EditButton";
 import DeleteButton from "./../../../components/Spots/SpotButton/DeleteButton/DeleteButton";
 import StatusBar from "../../../components/StatusBar/StatusBar";
 import { GuardLayout } from "../../../components/Layout/GuardLayout/GuardLayout";
+import LoadingOverlay from "../../../components/LoadingOverlay/LoadingOverlay";
 
 const ProfileSpots = () => {
   const { profile } = useAuth();

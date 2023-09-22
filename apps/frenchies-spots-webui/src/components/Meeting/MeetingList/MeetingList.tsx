@@ -16,12 +16,12 @@ interface MeetingListProps {}
 const MeetingList = (props: MeetingListProps) => {
   const {} = props;
 
-  const { data, loading } = useQuery<
-    { contacts: ContactEntity[] },
-    QueryContactsArgs
-  >(queries.contacts, {
-    variables: { contactsInput: {} },
-  });
+  const { data } = useQuery<{ contacts: ContactEntity[] }, QueryContactsArgs>(
+    queries.contacts,
+    {
+      variables: { contactsInput: {} },
+    }
+  );
 
   const handleAddFriendClick = (firend: ProfileEntity) => {};
 

@@ -14,12 +14,34 @@ import toast from "react-hot-toast";
 const useContact = () => {
   const router = useRouter();
 
+  const [friendRequest] = useMutation<
+    { friendRequest: boolean },
+    { friendId: string }
+  >(mutations.friendRequest, {
+    refetchQueries: [queries.profiles, queries.contacts],
+  });
+
   const [insertChat] = useMutation<
     { insertChat: ChatEntity },
     MutationInsertChatArgs
   >(mutations.insertChat, {
-    refetchQueries: [queries.profiles, queries.chats],
+    refetchQueries: [
+      queries.profiles,
+      queries.chats,
+      queries.friendByPk,
+      queries.contacts,
+    ],
   });
+
+  const handleFriendRequestClick = (profile: ProfileEntity) => {
+    if (profile) {
+      toast.promise(friendRequest({ variables: { friendId: profile.id } }), {
+        loading: "Demande en cours d'envoie...",
+        success: <b>Demande envoyé !</b>,
+        error: <b>Nous avons pas réussi à joindre cette utilisateur.</b>,
+      });
+    }
+  };
 
   const handleContactClick = (profile: ProfileEntity) => {
     if (profile) {
@@ -49,7 +71,10 @@ const useContact = () => {
     }
   };
 
-  return { onContactClick: handleContactClick };
+  return {
+    onContactClick: handleContactClick,
+    onFriendRequestClick: handleFriendRequestClick,
+  };
 };
 
 export default useContact;

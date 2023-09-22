@@ -1,19 +1,16 @@
 import React from "react";
 
 import { ContactEntity, ProfileEntity } from "@frenchies-spots/gql";
-import {
-  ActionIcon,
-  Card,
-  type CardProps,
-  Group,
-  Text,
-} from "@frenchies-spots/material";
-import { IconHandStop, IconUserPlus } from "@frenchies-spots/icon";
+import { Card, type CardProps, Group, Text } from "@frenchies-spots/material";
+
+import BlockButton from "../../Profile/BlockButton/BlockButton";
+import FriendRequestButton from "../../Profile/FriendRequestButton/FriendRequestButton";
 
 interface MeetingCardProps extends Omit<CardProps, "children"> {
   contact: ContactEntity;
   onAddFriendClick: (profile: ProfileEntity) => void;
 }
+
 const MeetingCard = (props: MeetingCardProps) => {
   const { contact, onAddFriendClick, ...cardProps } = props;
 
@@ -22,14 +19,8 @@ const MeetingCard = (props: MeetingCardProps) => {
       <Group position="apart">
         <Text>{contact?.contact?.pseudo}</Text>
         <Group>
-          {!contact?.isFriend && (
-            <ActionIcon onClick={() => onAddFriendClick(contact?.contact)}>
-              <IconUserPlus />
-            </ActionIcon>
-          )}
-          <ActionIcon>
-            <IconHandStop />
-          </ActionIcon>
+          <FriendRequestButton profile={contact?.contact} />
+          <BlockButton />
         </Group>
       </Group>
     </Card>

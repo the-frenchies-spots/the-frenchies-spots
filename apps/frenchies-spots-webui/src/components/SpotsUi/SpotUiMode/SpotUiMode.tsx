@@ -26,7 +26,9 @@ const SpotUiMode = (props: SpotUiModeProps) => {
   const authProfileId = user?.profile?.id;
 
   if (isMapMode) {
-    return <SpotsMapUi spotList={spotList} peopleList={peopleList} />;
+    return (
+      <SpotsMapUi uiMode={uiMode} spotList={spotList} peopleList={peopleList} />
+    );
   }
 
   return (

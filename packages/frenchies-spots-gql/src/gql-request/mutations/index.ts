@@ -18,6 +18,11 @@ import { upload } from "./upload";
 import { updateNotifStatus } from "./updateNotifStatus";
 import { sendChatMessage } from "./sendChatMessage";
 import { markChatMessageAsRead } from "./markChatMessageAsRead";
+import { sendNotif } from "./sendNotif";
+import { friendRequest } from "./friendRequest";
+import { acceptFriendContact } from "./acceptFriendContact";
+import { updateContact } from "./updateContact";
+import { deleteNotif } from "./deleteNotif";
 
 export const mutations = {
   createOrUpdateRating,
@@ -30,12 +35,17 @@ export const mutations = {
   signUp,
   toggleFavorite,
   updateSpot,
+  friendRequest,
+  updateContact,
+  deleteNotif,
   upload,
+  sendNotif,
   updateTag,
   buyPoint,
   insertChat,
   updateProfile,
   sendChatMessage,
   updateNotifStatus,
+  acceptFriendContact,
   markChatMessageAsRead,
 } satisfies Record<string, DocumentNode>;

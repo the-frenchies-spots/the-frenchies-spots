@@ -4,7 +4,6 @@ import { useForm } from "@frenchies-spots/hooks";
 import {
   Container,
   TextInput,
-  LoadingOverlay,
   Flex,
   Stack,
   ScrollArea,
@@ -19,6 +18,7 @@ import { SwiperForm } from "./../components/SwiperForm/SwiperForm";
 import { Avatar, BubbleChat } from "@frenchies-spots/chat";
 import Bubble from "@frenchies-spots/chat/src/components/Bubble/Bubble";
 import { useRouter } from "next/router";
+import LoadingOverlay from "../components/LoadingOverlay/LoadingOverlay";
 
 const SignUp = () => {
   const { loading, onSignUp } = useAuth();

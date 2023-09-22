@@ -15,6 +15,13 @@ export const profiles = gql`
       profileChats {
         chatId
       }
+      notifications {
+        id
+      }
+      contacts {
+        id
+        isFriend
+      }
     }
   }
 `;

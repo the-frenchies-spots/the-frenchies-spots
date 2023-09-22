@@ -65,6 +65,12 @@ export type ContactEntity = {
   updatedAt: Scalars['DateTime']['output'];
 };
 
+export type ContactInput = {
+  authorization?: InputMaybe<Scalars['Boolean']['input']>;
+  id: Scalars['String']['input'];
+  isFriend?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
 export type ContactsInput = {
   authorization?: InputMaybe<Scalars['Boolean']['input']>;
   isFriend?: InputMaybe<Scalars['Boolean']['input']>;
@@ -102,10 +108,13 @@ export type LogoutResponse = {
 
 export type Mutation = {
   __typename?: 'Mutation';
+  acceptFriendContact: Scalars['Boolean']['output'];
   buyPoint: UserEntity;
   createOrUpdateRating: RatingResponse;
+  deleteNotif: DeleteResponse;
   deleteSpot: DeleteResponse;
   deleteTag: DeleteResponse;
+  friendRequest: Scalars['Boolean']['output'];
   getNewTokens: NewTokensResponse;
   insertChat: ChatEntity;
   insertSpot: SpotEntity;
@@ -113,14 +122,21 @@ export type Mutation = {
   logout: LogoutResponse;
   markChatMessageAsRead: Scalars['Boolean']['output'];
   sendChatMessage: ChatMessageEntity;
+  sendNotif: NotificationEntity;
   signIn: SignResponse;
   signUp: SignResponse;
   toggleFavorite: ToggleFavoriteResponse;
-  updateNotifStatus: Array<Scalars['Boolean']['output']>;
+  updateContact: ContactEntity;
+  updateNotifStatus: Scalars['Boolean']['output'];
   updateProfile: UserEntity;
   updateSpot: SpotEntity;
   updateTag: TagEntity;
   upload: Array<PictureEntity>;
+};
+
+
+export type MutationAcceptFriendContactArgs = {
+  contactId: Scalars['String']['input'];
 };
 
 
@@ -134,6 +150,11 @@ export type MutationCreateOrUpdateRatingArgs = {
 };
 
 
+export type MutationDeleteNotifArgs = {
+  notifId: Scalars['String']['input'];
+};
+
+
 export type MutationDeleteSpotArgs = {
   id: Scalars['String']['input'];
 };
@@ -141,6 +162,11 @@ export type MutationDeleteSpotArgs = {
 
 export type MutationDeleteTagArgs = {
   id: Scalars['String']['input'];
+};
+
+
+export type MutationFriendRequestArgs = {
+  friendId: Scalars['String']['input'];
 };
 
 
@@ -169,6 +195,11 @@ export type MutationSendChatMessageArgs = {
 };
 
 
+export type MutationSendNotifArgs = {
+  sendNotifInput: SendNotifInput;
+};
+
+
 export type MutationSignInArgs = {
   signInInput: SignInInput;
 };
@@ -181,6 +212,11 @@ export type MutationSignUpArgs = {
 
 export type MutationToggleFavoriteArgs = {
   favoriteInput: FavoriteInput;
+};
+
+
+export type MutationUpdateContactArgs = {
+  contactsInput: ContactInput;
 };
 
 
@@ -214,8 +250,9 @@ export type NotificationEntity = {
   content?: Maybe<Scalars['JSON']['output']>;
   id: Scalars['String']['output'];
   isRead: Scalars['Boolean']['output'];
-  profile: ProfileEntity;
   profileId: Scalars['String']['output'];
+  profileSender: ProfileEntity;
+  profileSenderId: Scalars['String']['output'];
   type: Scalars['String']['output'];
 };
 
@@ -254,8 +291,10 @@ export type ProfileEntity = {
   gamePoint: Scalars['Float']['output'];
   id: Scalars['String']['output'];
   location?: Maybe<Scalars['JSON']['output']>;
+  notifications?: Maybe<Array<NotificationEntity>>;
   photoUrl?: Maybe<Scalars['String']['output']>;
   profileChats?: Maybe<Array<ProfileChatEntity>>;
+  profileSender?: Maybe<Array<NotificationEntity>>;
   pseudo: Scalars['String']['output'];
   ratings?: Maybe<Array<RatingEntity>>;
   spots?: Maybe<Array<SpotEntity>>;
@@ -282,7 +321,9 @@ export type Query = {
   chatMessagesNotRead: Scalars['Int']['output'];
   chats: Array<UserChatResponse>;
   contacts: Array<ContactEntity>;
+  friendByPk: ProfileEntity;
   getLoginUser: UserEntity;
+  notificationByPk: NotificationEntity;
   notifications: Array<NotificationEntity>;
   profiles: Array<ProfileEntity>;
   spotByPk: SpotByIdResponse;
@@ -300,6 +341,16 @@ export type QueryChatByPkArgs = {
 
 export type QueryContactsArgs = {
   contactsInput: ContactsInput;
+};
+
+
+export type QueryFriendByPkArgs = {
+  friendId: Scalars['String']['input'];
+};
+
+
+export type QueryNotificationByPkArgs = {
+  notifId: Scalars['String']['input'];
 };
 
 
@@ -356,6 +407,13 @@ export type SendChatMessageInput = {
   chatId: Scalars['String']['input'];
   message: Scalars['String']['input'];
   profileChatId: Scalars['String']['input'];
+};
+
+export type SendNotifInput = {
+  content?: InputMaybe<Scalars['JSON']['input']>;
+  profileId: Scalars['String']['input'];
+  profileSenderId: Scalars['String']['input'];
+  type: Scalars['String']['input'];
 };
 
 export type SignInInput = {

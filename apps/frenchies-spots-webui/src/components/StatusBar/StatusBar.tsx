@@ -15,7 +15,6 @@ import {
 import React from "react";
 import { useStyles } from "./StatusBar.styles";
 import { useLocationCtx } from "@frenchies-spots/map";
-import { useSpotUi } from "../../hooks/use-spot-ui";
 import { truncate } from "@frenchies-spots/utils";
 import { useAuth } from "../../hooks/use-auth";
 import { useRouter } from "next/router";

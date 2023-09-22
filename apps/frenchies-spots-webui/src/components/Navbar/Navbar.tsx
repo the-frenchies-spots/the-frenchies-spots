@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import {
   IconHeartFilled,
@@ -19,6 +19,8 @@ import {
 import { useRouter } from "next/router";
 import { useQuery } from "@apollo/client";
 import { queries } from "@frenchies-spots/gql";
+import { client } from "../../utils/client.gql";
+import { useNotif } from "../../hooks/use-notif";
 
 interface NavbarProps extends Omit<BoxProps, "children"> {}
 
@@ -29,14 +31,7 @@ const Navbar = (props: NavbarProps) => {
 
   const { cx, classes } = useStyles();
 
-  const { data } = useQuery<{ chatMessagesNotRead: number }>(
-    queries.chatMessagesNotRead,
-    {
-      pollInterval: 2000,
-    }
-  );
-
-  const messageNotRead = data?.chatMessagesNotRead || 0;
+  const { messageNotRead } = useNotif();
 
   const onNavigateClick = (route: string) => {
     router.push(`/${route}`);

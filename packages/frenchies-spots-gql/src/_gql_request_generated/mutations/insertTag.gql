@@ -35,6 +35,14 @@ mutation insertTag($tagInsertInput: TagInsertInput!){
                     gamePoint
                     id
                     location
+                    notifications{
+                        content
+                        id
+                        isRead
+                        profileId
+                        profileSenderId
+                        type
+                    }
                     photoUrl
                     profileChats{
                         chatId
@@ -42,6 +50,14 @@ mutation insertTag($tagInsertInput: TagInsertInput!){
                         id
                         profileId
                         updatedAt
+                    }
+                    profileSender{
+                        content
+                        id
+                        isRead
+                        profileId
+                        profileSenderId
+                        type
                     }
                     pseudo
                     ratings{

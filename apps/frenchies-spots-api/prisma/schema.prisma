@@ -41,7 +41,7 @@ type Location {
 }
 
 type Content {
-  value Json
+  value Json?
 }
 
 model User {
@@ -73,6 +73,7 @@ model Profile {
   createdAt      DateTime @default(now())
   updatedAt      DateTime @default(now())
   contact        Contact[] @relation(name: "Contact")
+  profileSender Notification[] @relation(name: "Sender")
 }
 
 model Notification {
@@ -80,9 +81,11 @@ model Notification {
   profile     Profile  @relation(fields: [profileId], references: [id])
   profileId   String   @db.ObjectId
   isRead      Boolean  @default(false)
-  content     Content
-  subject     String
+  content     Content?
+  profileSender       Profile  @relation(name: "Sender", fields: [profileSenderId], references: [id])
+  profileSenderId     String   @unique @db.ObjectId
   type        String
+  @@unique([profileId, profileSenderId]) 
 }
 
 model ProfileChat {
@@ -128,7 +131,7 @@ model Contact {
   authorization Boolean  @default(true)
   createdAt     DateTime @default(now())
   updatedAt     DateTime @default(now())
-  @@unique([profileId, contactId]) // Assure l'unicité des relations entre profils
+  @@unique([profileId, contactId]) 
 }
 
 model Spot {

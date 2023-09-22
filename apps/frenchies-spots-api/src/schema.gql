@@ -44,6 +44,12 @@ type ContactEntity {
   updatedAt: DateTime!
 }
 
+input ContactInput {
+  authorization: Boolean
+  id: String!
+  isFriend: Boolean
+}
+
 input ContactsInput {
   authorization: Boolean
   isFriend: Boolean
@@ -87,10 +93,13 @@ type LogoutResponse {
 }
 
 type Mutation {
+  acceptFriendContact(contactId: String!): Boolean!
   buyPoint(buyPoint: BuyPointInput!): UserEntity!
   createOrUpdateRating(ratingInput: RatingInput!): RatingResponse!
+  deleteNotif(notifId: String!): DeleteResponse!
   deleteSpot(id: String!): DeleteResponse!
   deleteTag(id: String!): DeleteResponse!
+  friendRequest(friendId: String!): Boolean!
   getNewTokens: NewTokensResponse!
   insertChat(inserChatInput: InserChatInput!): ChatEntity!
   insertSpot(insertSpotInput: SpotInput!): SpotEntity!
@@ -98,10 +107,12 @@ type Mutation {
   logout: LogoutResponse!
   markChatMessageAsRead(chatId: String!): Boolean!
   sendChatMessage(sendChatMessageInput: SendChatMessageInput!): ChatMessageEntity!
+  sendNotif(sendNotifInput: SendNotifInput!): NotificationEntity!
   signIn(signInInput: SignInInput!): SignResponse!
   signUp(signUpInput: SignUpInput!): SignResponse!
   toggleFavorite(favoriteInput: FavoriteInput!): ToggleFavoriteResponse!
-  updateNotifStatus: [Boolean!]!
+  updateContact(contactsInput: ContactInput!): ContactEntity!
+  updateNotifStatus: Boolean!
   updateProfile(profileInput: ProfileInput!): UserEntity!
   updateSpot(updateSpotInput: SpotInput!): SpotEntity!
   updateTag(tagUpdateInput: TagUpdateInput!): TagEntity!
@@ -117,8 +128,9 @@ type NotificationEntity {
   content: JSON
   id: String!
   isRead: Boolean!
-  profile: ProfileEntity!
   profileId: String!
+  profileSender: ProfileEntity!
+  profileSenderId: String!
   type: String!
 }
 
@@ -154,8 +166,10 @@ type ProfileEntity {
   gamePoint: Float!
   id: String!
   location: JSON
+  notifications: [NotificationEntity!]
   photoUrl: String
   profileChats: [ProfileChatEntity!]
+  profileSender: [NotificationEntity!]
   pseudo: String!
   ratings: [RatingEntity!]
   spots: [SpotEntity!]
@@ -181,7 +195,9 @@ type Query {
   chatMessagesNotRead: Int!
   chats: [UserChatResponse!]!
   contacts(contactsInput: ContactsInput!): [ContactEntity!]!
+  friendByPk(friendId: String!): ProfileEntity!
   getLoginUser: UserEntity!
+  notificationByPk(notifId: String!): NotificationEntity!
   notifications: [NotificationEntity!]!
   profiles(profilesInput: ProfilesInput!): [ProfileEntity!]!
   spotByPk(id: String!): SpotByIdResponse!
@@ -218,6 +234,13 @@ input SendChatMessageInput {
   chatId: String!
   message: String!
   profileChatId: String!
+}
+
+input SendNotifInput {
+  content: JSON
+  profileId: String!
+  profileSenderId: String!
+  type: String!
 }
 
 input SignInInput {

@@ -18,6 +18,7 @@ import { PageLayout } from "../components";
 import { GuardLayout } from "../components/Layout/GuardLayout/GuardLayout";
 import { useRouter } from "next/router";
 import toast from "react-hot-toast";
+import AppTitle from "../components/AppTitle/AppTitle";
 
 const SignIn = () => {
   const { onSignIn } = useAuth();
@@ -49,11 +50,7 @@ const SignIn = () => {
       <Flex direction="column" h="100%">
         <Stack sx={{ flexGrow: 1 }} p="xl">
           <BackButton onClick={() => router.push("/spots")} />
-          <Stack>
-            <Text>Entraide</Text>
-            <Text>Partage</Text>
-            <Text>Voyage</Text>
-          </Stack>
+          <AppTitle />
         </Stack>
 
         <form onSubmit={handleSubmit} style={{ height: 400 }}>

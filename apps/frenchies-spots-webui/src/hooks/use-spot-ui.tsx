@@ -3,7 +3,7 @@ import { useContext } from "react";
 import { SpotUiContext, TForm } from "../components/SpotsUi/SpotUI.context";
 import { getFuncOrThrow } from "../utils/get-func-or-throw";
 import { getValueOrThrow } from "../utils/get-value-or-throw";
-import { SpotsInput } from "@frenchies-spots/gql";
+import { ProfilesInput, SpotsInput } from "@frenchies-spots/gql";
 
 export const useSpotUiContext = () => {
   const ctx = useContext(SpotUiContext);
@@ -25,6 +25,7 @@ export const useSpotUi = () => {
     closeFilter,
     drawerOpened,
     getFilterSpots,
+    getPeoples,
     setCoordPoint,
     setIsMapMode,
     setIsRayon,
@@ -41,6 +42,11 @@ export const useSpotUi = () => {
   const handleFilterSpot = (spotsInput: SpotsInput) => {
     const onFilterSpot = getFuncOrThrow(getFilterSpots);
     return onFilterSpot({ variables: { spotsInput } });
+  };
+
+  const handleFilterPeople = (profilesInput: ProfilesInput) => {
+    const onFilterPeople = getFuncOrThrow(getPeoples);
+    return onFilterPeople({ variables: { profilesInput } });
   };
 
   const handleCurrentSpotIdChange = getFuncOrThrow(setCurrentSpotId);
@@ -67,6 +73,7 @@ export const useSpotUi = () => {
     currentProfileId,
     setIsFilter: handleSetIsFilter,
     onFilterSpot: handleFilterSpot,
+    onFilterPeople: handleFilterPeople,
     closeFilter: handleCloseFilter,
     form: getValueOrThrow<TForm>(form),
     setIsRayon: getFuncOrThrow(setIsRayon),

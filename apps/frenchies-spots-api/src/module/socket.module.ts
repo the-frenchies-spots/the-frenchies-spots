@@ -13,6 +13,7 @@ import { ContactRepository } from '../repository/contact.repository';
 import { NotificationBusiness } from '../business/notification.business';
 import { NotificationRepository } from '../repository/notification.repository';
 import { NotificationResolver } from '../resolver/notification.resolver';
+import { ContactBusiness } from '../business/contact.business';
 
 @Module({
   providers: [
@@ -20,6 +21,7 @@ import { NotificationResolver } from '../resolver/notification.resolver';
     ChatBusiness,
     ChatRepository,
     ContactRepository,
+    ContactBusiness,
     NotificationBusiness,
     NotificationRepository,
     NotificationResolver,

@@ -14,6 +14,16 @@ export const contacts = gql`
         pseudo
         updatedAt
         userId
+        profileChats {
+          chatId
+        }
+        notifications {
+          id
+        }
+        contacts {
+          id
+          isFriend
+        }
       }
       contactId
       createdAt

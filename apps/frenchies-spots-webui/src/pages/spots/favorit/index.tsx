@@ -5,12 +5,13 @@ import NavigationLayout from "../../../components/Layout/NavigationLayout/Naviga
 
 import { useQuery } from "@apollo/client";
 import { SpotEntity, queries } from "@frenchies-spots/gql";
-import { Button, Container, LoadingOverlay } from "@frenchies-spots/material";
+import { Container } from "@frenchies-spots/material";
 
 import SpotList from "../../../components/Spots/SpotList/SpotList";
 import FavoriteButton from "../../../components/Spots/SpotButton/FavoriteButton/FavoriteButton";
 import StatusBar from "../../../components/StatusBar/StatusBar";
 import { GuardLayout } from "../../../components/Layout/GuardLayout/GuardLayout";
+import LoadingOverlay from "../../../components/LoadingOverlay/LoadingOverlay";
 
 const FavoritPage = () => {
   const { data, loading, refetch } = useQuery<{
