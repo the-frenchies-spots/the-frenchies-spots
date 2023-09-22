@@ -1,8 +1,8 @@
 import { gql } from "@apollo/client";
 
-export const profiles = gql`
-  query profiles($profilesInput: ProfilesInput!) {
-    profiles(profilesInput: $profilesInput) {
+export const friendByPk = gql`
+  query friendByPk($friendId: String!) {
+    friendByPk(friendId: $friendId) {
       avatarUrl
       createdAt
       gamePoint

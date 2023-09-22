@@ -195,6 +195,7 @@ type Query {
   chatMessagesNotRead: Int!
   chats: [UserChatResponse!]!
   contacts(contactsInput: ContactsInput!): [ContactEntity!]!
+  friendByPk(friendId: String!): ProfileEntity!
   getLoginUser: UserEntity!
   notificationByPk(notifId: String!): NotificationEntity!
   notifications: [NotificationEntity!]!

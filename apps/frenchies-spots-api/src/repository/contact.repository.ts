@@ -15,7 +15,7 @@ export class ContactRepository {
     profileId: string,
     contactId: string,
   ): Promise<ContactEntity> {
-    const contact = await this.prisma.contact.findUnique({
+    const contact = await this.prisma.contact.findFirst({
       where: {
         profileId,
         contactId,
@@ -34,7 +34,37 @@ export class ContactRepository {
         isFriend: contactsInput?.isFriend,
         authorization: contactsInput?.authorization,
       },
-      include: { contact: true, profile: true },
+      include: {
+        contact: {
+          include: {
+            contacts: {
+              where: {
+                contactId: profileId,
+              },
+            },
+            notifications: {
+              where: {
+                profileSenderId: profileId,
+              },
+            },
+            profileChats: {
+              where: {
+                chat: {
+                  participants: {
+                    some: {
+                      profileId,
+                    },
+                  },
+                },
+              },
+              include: {
+                chat: { include: { participants: true } },
+              },
+            },
+          },
+        },
+        profile: true,
+      },
     });
     return plainToClassMany(contacts, ContactEntity);
   }
@@ -77,13 +107,12 @@ export class ContactRepository {
     }
   }
 
-  async updateByContact(
-    profileId: string,
+  async updateById(
     contactId: string,
     contactInput: ContactsInput,
   ): Promise<ContactEntity> {
     const contact = await this.prisma.contact.update({
-      where: { profileId, contactId },
+      where: { id: contactId },
       data: contactInput,
     });
     return plainToClass(contact, ContactEntity);

@@ -110,9 +110,7 @@ export class ChatRepository {
         },
         data: { isRead: true },
       })
-      .then((res) => {
-        console.log('---------------------------');
-        console.log({ res });
+      .then(() => {
         return true;
       })
       .catch((err) => {

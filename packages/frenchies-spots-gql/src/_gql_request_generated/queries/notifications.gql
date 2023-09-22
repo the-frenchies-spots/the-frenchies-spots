@@ -3,7 +3,8 @@ query notifications{
         content
         id
         isRead
-        profile{
+        profileId
+        profileSender{
             avatarUrl
             contacts{
                 authorization
@@ -29,6 +30,14 @@ query notifications{
                     gamePoint
                     id
                     location
+                    notifications{
+                        content
+                        id
+                        isRead
+                        profileId
+                        profileSenderId
+                        type
+                    }
                     photoUrl
                     profileChats{
                         chatId
@@ -36,6 +45,14 @@ query notifications{
                         id
                         profileId
                         updatedAt
+                    }
+                    profileSender{
+                        content
+                        id
+                        isRead
+                        profileId
+                        profileSenderId
+                        type
                     }
                     pseudo
                     ratings{
@@ -79,6 +96,15 @@ query notifications{
                 isFriend
                 profile{
                     avatarUrl
+                    contacts{
+                        authorization
+                        contactId
+                        createdAt
+                        id
+                        isFriend
+                        profileId
+                        updatedAt
+                    }
                     createdAt
                     favorites{
                         createdAt
@@ -90,6 +116,14 @@ query notifications{
                     gamePoint
                     id
                     location
+                    notifications{
+                        content
+                        id
+                        isRead
+                        profileId
+                        profileSenderId
+                        type
+                    }
                     photoUrl
                     profileChats{
                         chatId
@@ -97,6 +131,14 @@ query notifications{
                         id
                         profileId
                         updatedAt
+                    }
+                    profileSender{
+                        content
+                        id
+                        isRead
+                        profileId
+                        profileSenderId
+                        type
                     }
                     pseudo
                     ratings{
@@ -134,27 +176,6 @@ query notifications{
                     }
                     userId
                 }
-                profileId
-                updatedAt
-            }
-            createdAt
-            gamePoint
-            id
-            location
-            photoUrl
-            pseudo
-            updatedAt
-            userId
-        }
-        profileId
-        profileSender{
-            avatarUrl
-            contacts{
-                authorization
-                contactId
-                createdAt
-                id
-                isFriend
                 profileId
                 updatedAt
             }
@@ -236,6 +257,14 @@ query notifications{
             gamePoint
             id
             location
+            notifications{
+                content
+                id
+                isRead
+                profileId
+                profileSenderId
+                type
+            }
             photoUrl
             profileChats{
                 chat{
@@ -298,6 +327,14 @@ query notifications{
                 }
                 profileId
                 updatedAt
+            }
+            profileSender{
+                content
+                id
+                isRead
+                profileId
+                profileSenderId
+                type
             }
             pseudo
             ratings{

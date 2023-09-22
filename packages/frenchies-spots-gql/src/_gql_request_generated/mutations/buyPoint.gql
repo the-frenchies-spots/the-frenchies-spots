@@ -31,6 +31,14 @@ mutation buyPoint($buyPoint: BuyPointInput!){
                     gamePoint
                     id
                     location
+                    notifications{
+                        content
+                        id
+                        isRead
+                        profileId
+                        profileSenderId
+                        type
+                    }
                     photoUrl
                     profileChats{
                         chatId
@@ -38,6 +46,14 @@ mutation buyPoint($buyPoint: BuyPointInput!){
                         id
                         profileId
                         updatedAt
+                    }
+                    profileSender{
+                        content
+                        id
+                        isRead
+                        profileId
+                        profileSenderId
+                        type
                     }
                     pseudo
                     ratings{
@@ -92,6 +108,14 @@ mutation buyPoint($buyPoint: BuyPointInput!){
                     gamePoint
                     id
                     location
+                    notifications{
+                        content
+                        id
+                        isRead
+                        profileId
+                        profileSenderId
+                        type
+                    }
                     photoUrl
                     profileChats{
                         chatId
@@ -99,6 +123,14 @@ mutation buyPoint($buyPoint: BuyPointInput!){
                         id
                         profileId
                         updatedAt
+                    }
+                    profileSender{
+                        content
+                        id
+                        isRead
+                        profileId
+                        profileSenderId
+                        type
                     }
                     pseudo
                     ratings{

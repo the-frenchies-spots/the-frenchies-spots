@@ -11,14 +11,17 @@ import {
 import { ProfileEntity, SpotEntity } from "@frenchies-spots/gql";
 import PinMarker from "@frenchies-spots/map/src/components/Marker/PinMarker/PinMarker";
 import { useSpotUi } from "../../../hooks/use-spot-ui";
+import { filterListMode } from "../../../enum";
+import { Log } from "@frenchies-spots/material";
 
 interface SpotsMapUiProps {
   spotList: SpotEntity[] | undefined;
   peopleList: ProfileEntity[] | undefined;
+  uiMode: filterListMode;
 }
 
 const SpotsMapUi = (props: SpotsMapUiProps) => {
-  const { spotList, peopleList } = props;
+  const { spotList, peopleList, uiMode } = props;
 
   const { location: userPosition } = useLocationCtx();
   const {
@@ -47,54 +50,58 @@ const SpotsMapUi = (props: SpotsMapUiProps) => {
   };
 
   return (
-    <Map viewport={viewport} onViewportChange={setViewPort}>
-      {userPosition && (
-        <CurrentLocationMarker
-          lat={userPosition?.coordinates?.lat}
-          lng={userPosition?.coordinates?.lng}
-        />
-      )}
-
-      {isRayon && coordPoint && (
-        <MapPerimeter
-          lat={coordPoint.lat}
-          lng={coordPoint.lng}
-          radius={form.values.point.maxDistance / 1000}
-        />
-      )}
-
-      {!isCurrentUserPosition && coordPoint && (
-        <PinMarker lat={coordPoint.lat} lng={coordPoint.lng} />
-      )}
-
-      {spotList?.map((spot) => {
-        const { id, location } = spot;
-        const [lng, lat] = location.coordinates;
-        return (
-          <MapMarker
-            key={id}
-            lat={lat}
-            lng={lng}
-            onClick={() => handleSpotClick(id)}
+    <>
+      <Map viewport={viewport} onViewportChange={setViewPort}>
+        {userPosition && (
+          <CurrentLocationMarker
+            lat={userPosition?.coordinates?.lat}
+            lng={userPosition?.coordinates?.lng}
           />
-        );
-      })}
+        )}
 
-      {peopleList?.map((profile) => {
-        const { id, location, avatarUrl } = profile;
-        const [lng, lat] = location.coordinates;
-        return (
-          <PeopleMarker
-            zoom={viewport.zoom}
-            key={id}
-            lat={lat}
-            lng={lng}
-            src={`${avatarUrl}`}
-            onClick={() => handleProfileClick(id)}
+        {isRayon && coordPoint && (
+          <MapPerimeter
+            lat={coordPoint.lat}
+            lng={coordPoint.lng}
+            radius={form.values.point.maxDistance / 1000}
           />
-        );
-      })}
-    </Map>
+        )}
+
+        {!isCurrentUserPosition && coordPoint && (
+          <PinMarker lat={coordPoint.lat} lng={coordPoint.lng} />
+        )}
+
+        {(uiMode === filterListMode.SPOT || uiMode === filterListMode.ALL) &&
+          spotList?.map((spot) => {
+            const { id, location } = spot;
+            const [lng, lat] = location.coordinates;
+            return (
+              <MapMarker
+                key={id}
+                lat={lat}
+                lng={lng}
+                onClick={() => handleSpotClick(id)}
+              />
+            );
+          })}
+
+        {(uiMode === filterListMode.PEOPLE || uiMode === filterListMode.ALL) &&
+          peopleList?.map((profile) => {
+            const { id, location, avatarUrl } = profile;
+            const [lng, lat] = location.coordinates;
+            return (
+              <PeopleMarker
+                zoom={viewport.zoom}
+                key={id}
+                lat={lat}
+                lng={lng}
+                src={`${avatarUrl}`}
+                onClick={() => handleProfileClick(id)}
+              />
+            );
+          })}
+      </Map>
+    </>
   );
 };
 

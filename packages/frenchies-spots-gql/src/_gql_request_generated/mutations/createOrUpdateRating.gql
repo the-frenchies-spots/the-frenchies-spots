@@ -74,6 +74,25 @@ mutation createOrUpdateRating($ratingInput: RatingInput!){
                 gamePoint
                 id
                 location
+                notifications{
+                    content
+                    id
+                    isRead
+                    profileId
+                    profileSender{
+                        avatarUrl
+                        createdAt
+                        gamePoint
+                        id
+                        location
+                        photoUrl
+                        pseudo
+                        updatedAt
+                        userId
+                    }
+                    profileSenderId
+                    type
+                }
                 photoUrl
                 profileChats{
                     chat{
@@ -107,6 +126,25 @@ mutation createOrUpdateRating($ratingInput: RatingInput!){
                     }
                     profileId
                     updatedAt
+                }
+                profileSender{
+                    content
+                    id
+                    isRead
+                    profileId
+                    profileSender{
+                        avatarUrl
+                        createdAt
+                        gamePoint
+                        id
+                        location
+                        photoUrl
+                        pseudo
+                        updatedAt
+                        userId
+                    }
+                    profileSenderId
+                    type
                 }
                 pseudo
                 ratings{

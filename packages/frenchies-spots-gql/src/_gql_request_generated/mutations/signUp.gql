@@ -78,6 +78,25 @@ mutation signUp($signUpInput: SignUpInput!){
                 gamePoint
                 id
                 location
+                notifications{
+                    content
+                    id
+                    isRead
+                    profileId
+                    profileSender{
+                        avatarUrl
+                        createdAt
+                        gamePoint
+                        id
+                        location
+                        photoUrl
+                        pseudo
+                        updatedAt
+                        userId
+                    }
+                    profileSenderId
+                    type
+                }
                 photoUrl
                 profileChats{
                     chat{
@@ -111,6 +130,25 @@ mutation signUp($signUpInput: SignUpInput!){
                     }
                     profileId
                     updatedAt
+                }
+                profileSender{
+                    content
+                    id
+                    isRead
+                    profileId
+                    profileSender{
+                        avatarUrl
+                        createdAt
+                        gamePoint
+                        id
+                        location
+                        photoUrl
+                        pseudo
+                        updatedAt
+                        userId
+                    }
+                    profileSenderId
+                    type
                 }
                 pseudo
                 ratings{

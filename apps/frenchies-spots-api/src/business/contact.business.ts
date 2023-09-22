@@ -39,17 +39,27 @@ export class ContactBusiness {
   }
 
   async acceptFriend(profileId: string, contactId: string): Promise<boolean> {
-    const isContactFriend = await this.contactRepository.updateByContact(
+    const contact1 = await this.contactRepository.getByContactId(
       profileId,
       contactId,
+    );
+    if (!contact1) throw new ErrorService(INTERNAL_SERVER_ERROR);
+    const isContactFriend = await this.contactRepository.updateById(
+      contact1.id,
       { isFriend: true },
     );
+    if (!isContactFriend) throw new ErrorService(INTERNAL_SERVER_ERROR);
 
-    const isProfileFriend = await this.contactRepository.updateByContact(
+    const contact2 = await this.contactRepository.getByContactId(
       contactId,
       profileId,
+    );
+    if (!contact2) throw new ErrorService(INTERNAL_SERVER_ERROR);
+    const isProfileFriend = await this.contactRepository.updateById(
+      contact2.id,
       { isFriend: true },
     );
+    if (!isProfileFriend) throw new ErrorService(INTERNAL_SERVER_ERROR);
 
     return !!isContactFriend && !!isProfileFriend;
   }

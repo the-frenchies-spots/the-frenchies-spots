@@ -3,7 +3,8 @@ mutation sendNotif($sendNotifInput: SendNotifInput!){
         content
         id
         isRead
-        profile{
+        profileId
+        profileSender{
             avatarUrl
             contacts{
                 authorization
@@ -29,6 +30,14 @@ mutation sendNotif($sendNotifInput: SendNotifInput!){
                     gamePoint
                     id
                     location
+                    notifications{
+                        content
+                        id
+                        isRead
+                        profileId
+                        profileSenderId
+                        type
+                    }
                     photoUrl
                     profileChats{
                         chatId
@@ -36,6 +45,14 @@ mutation sendNotif($sendNotifInput: SendNotifInput!){
                         id
                         profileId
                         updatedAt
+                    }
+                    profileSender{
+                        content
+                        id
+                        isRead
+                        profileId
+                        profileSenderId
+                        type
                     }
                     pseudo
                     ratings{
@@ -79,6 +96,15 @@ mutation sendNotif($sendNotifInput: SendNotifInput!){
                 isFriend
                 profile{
                     avatarUrl
+                    contacts{
+                        authorization
+                        contactId
+                        createdAt
+                        id
+                        isFriend
+                        profileId
+                        updatedAt
+                    }
                     createdAt
                     favorites{
                         createdAt
@@ -90,6 +116,14 @@ mutation sendNotif($sendNotifInput: SendNotifInput!){
                     gamePoint
                     id
                     location
+                    notifications{
+                        content
+                        id
+                        isRead
+                        profileId
+                        profileSenderId
+                        type
+                    }
                     photoUrl
                     profileChats{
                         chatId
@@ -97,6 +131,14 @@ mutation sendNotif($sendNotifInput: SendNotifInput!){
                         id
                         profileId
                         updatedAt
+                    }
+                    profileSender{
+                        content
+                        id
+                        isRead
+                        profileId
+                        profileSenderId
+                        type
                     }
                     pseudo
                     ratings{
@@ -134,27 +176,6 @@ mutation sendNotif($sendNotifInput: SendNotifInput!){
                     }
                     userId
                 }
-                profileId
-                updatedAt
-            }
-            createdAt
-            gamePoint
-            id
-            location
-            photoUrl
-            pseudo
-            updatedAt
-            userId
-        }
-        profileId
-        profileSender{
-            avatarUrl
-            contacts{
-                authorization
-                contactId
-                createdAt
-                id
-                isFriend
                 profileId
                 updatedAt
             }
@@ -236,148 +257,43 @@ mutation sendNotif($sendNotifInput: SendNotifInput!){
             gamePoint
             id
             location
-            photoUrl
-            profileChats{
-                chat{
-                    chatMessages{
+            notifications{
+                content
+                id
+                isRead
+                profileId
+                profileSender{
+                    avatarUrl
+                    createdAt
+                    gamePoint
+                    id
+                    location
+                    photoUrl
+                    profileChats{
                         chatId
                         createdAt
+                        id
+                        profileId
+                        updatedAt
+                    }
+                    profileSender{
+                        content
                         id
                         isRead
-                        message
-                        profileChatId
-                        updatedAt
+                        profileId
+                        profileSenderId
+                        type
                     }
-                    createdAt
-                    id
-                    isTemporary
-                    participants{
-                        chatId
+                    pseudo
+                    ratings{
                         createdAt
                         id
                         profileId
+                        rate
+                        spotId
                         updatedAt
                     }
-                    updatedAt
-                }
-                chatId
-                chatMessages{
-                    chat{
-                        createdAt
-                        id
-                        isTemporary
-                        updatedAt
-                    }
-                    chatId
-                    createdAt
-                    id
-                    isRead
-                    message
-                    profileChat{
-                        chatId
-                        createdAt
-                        id
-                        profileId
-                        updatedAt
-                    }
-                    profileChatId
-                    updatedAt
-                }
-                createdAt
-                id
-                profile{
-                    avatarUrl
-                    createdAt
-                    gamePoint
-                    id
-                    location
-                    photoUrl
-                    pseudo
-                    updatedAt
-                    userId
-                }
-                profileId
-                updatedAt
-            }
-            pseudo
-            ratings{
-                createdAt
-                id
-                profile{
-                    avatarUrl
-                    createdAt
-                    gamePoint
-                    id
-                    location
-                    photoUrl
-                    pseudo
-                    updatedAt
-                    userId
-                }
-                profileId
-                rate
-                spot{
-                    address
-                    averageRating
-                    category
-                    createdAt
-                    description
-                    id
-                    isCanPark
-                    isHidden
-                    location
-                    name
-                    profileId
-                    region
-                    updatedAt
-                }
-                spotId
-                updatedAt
-            }
-            spots{
-                address
-                averageRating
-                category
-                createdAt
-                description
-                favorites{
-                    createdAt
-                    id
-                    profileId
-                    spotId
-                    updatedAt
-                }
-                id
-                isCanPark
-                isHidden
-                location
-                name
-                profile{
-                    avatarUrl
-                    createdAt
-                    gamePoint
-                    id
-                    location
-                    photoUrl
-                    pseudo
-                    updatedAt
-                    userId
-                }
-                profileId
-                ratings{
-                    createdAt
-                    id
-                    profileId
-                    rate
-                    spotId
-                    updatedAt
-                }
-                region
-                spotPicture{
-                    createdAt
-                    hostId
-                    id
-                    spot{
+                    spots{
                         address
                         averageRating
                         category
@@ -392,48 +308,24 @@ mutation sendNotif($sendNotifInput: SendNotifInput!){
                         region
                         updatedAt
                     }
-                    spotId
                     updatedAt
-                    url
-                }
-                tags{
-                    createdAt
-                    id
-                    spotId
-                    tag{
-                        category
+                    user{
                         createdAt
+                        email
+                        hashedPassword
+                        hashedRefreshToken
                         id
-                        name
-                        tagPictureUrl
+                        role
                         updatedAt
                     }
-                    tagId
-                    updatedAt
-                }
-                updatedAt
-            }
-            updatedAt
-            user{
-                createdAt
-                email
-                hashedPassword
-                hashedRefreshToken
-                id
-                profile{
-                    avatarUrl
-                    createdAt
-                    gamePoint
-                    id
-                    location
-                    photoUrl
-                    pseudo
-                    updatedAt
                     userId
                 }
-                role
-                updatedAt
+                profileSenderId
+                type
             }
+            photoUrl
+            pseudo
+            updatedAt
             userId
         }
         profileSenderId

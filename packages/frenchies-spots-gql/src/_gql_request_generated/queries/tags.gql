@@ -35,6 +35,14 @@ query tags($tagListInput: TagListInput!){
                     gamePoint
                     id
                     location
+                    notifications{
+                        content
+                        id
+                        isRead
+                        profileId
+                        profileSenderId
+                        type
+                    }
                     photoUrl
                     profileChats{
                         chatId
@@ -42,6 +50,14 @@ query tags($tagListInput: TagListInput!){
                         id
                         profileId
                         updatedAt
+                    }
+                    profileSender{
+                        content
+                        id
+                        isRead
+                        profileId
+                        profileSenderId
+                        type
                     }
                     pseudo
                     ratings{

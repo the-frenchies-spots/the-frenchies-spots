@@ -17,13 +17,20 @@ const useContact = () => {
   const [friendRequest] = useMutation<
     { friendRequest: boolean },
     { friendId: string }
-  >(mutations.friendRequest, { refetchQueries: [queries.profiles] });
+  >(mutations.friendRequest, {
+    refetchQueries: [queries.profiles, queries.contacts],
+  });
 
   const [insertChat] = useMutation<
     { insertChat: ChatEntity },
     MutationInsertChatArgs
   >(mutations.insertChat, {
-    refetchQueries: [queries.profiles, queries.chats],
+    refetchQueries: [
+      queries.profiles,
+      queries.chats,
+      queries.friendByPk,
+      queries.contacts,
+    ],
   });
 
   const handleFriendRequestClick = (profile: ProfileEntity) => {

@@ -321,6 +321,7 @@ export type Query = {
   chatMessagesNotRead: Scalars['Int']['output'];
   chats: Array<UserChatResponse>;
   contacts: Array<ContactEntity>;
+  friendByPk: ProfileEntity;
   getLoginUser: UserEntity;
   notificationByPk: NotificationEntity;
   notifications: Array<NotificationEntity>;
@@ -340,6 +341,11 @@ export type QueryChatByPkArgs = {
 
 export type QueryContactsArgs = {
   contactsInput: ContactsInput;
+};
+
+
+export type QueryFriendByPkArgs = {
+  friendId: Scalars['String']['input'];
 };
 
 

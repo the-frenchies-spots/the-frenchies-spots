@@ -4,10 +4,7 @@ import { IconBellFilled } from "@frenchies-spots/icon";
 import {
   ActionIcon,
   Popover,
-  Text,
   BadgeIcon,
-  Button,
-  Log,
   Font,
   Box,
 } from "@frenchies-spots/material";

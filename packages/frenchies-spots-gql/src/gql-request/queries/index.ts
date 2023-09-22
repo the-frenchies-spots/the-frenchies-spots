@@ -14,6 +14,7 @@ import { notifications } from "./notifications";
 import { chatMessagesNotRead } from "./chatMessagesNotRead";
 import { appNotification } from "./appNotification";
 import { notificationByPk } from "./notificationByPk";
+import { friendByPk } from "./friendByPk";
 
 export const queries = {
   getLoginUser,
@@ -24,6 +25,7 @@ export const queries = {
   profiles,
   appNotification,
   tags,
+  friendByPk,
   chatByPk,
   notificationByPk,
   chats,
