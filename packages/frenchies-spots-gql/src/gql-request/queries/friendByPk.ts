@@ -8,6 +8,8 @@ export const friendByPk = gql`
       gamePoint
       id
       location
+      slogan
+      isLocated
       photoUrl
       pseudo
       updatedAt

@@ -26,7 +26,8 @@ export class AuthBusiness {
   }
 
   async signup(signUpInput: SignUpInput): Promise<SignResponse> {
-    const { pseudo, password, email } = signUpInput;
+    const { pseudo, password, email, photoUrl, avatarUrl, isLocated } =
+      signUpInput;
     const hashedPassword = await hash(password, 10);
 
     const userAlreadyExist = await this.authRepository.getOneByEmail(email);
@@ -38,6 +39,9 @@ export class AuthBusiness {
       pseudo,
       hashedPassword,
       email,
+      photoUrl,
+      avatarUrl,
+      isLocated,
     );
 
     return this.refreshAuthAccess(user);

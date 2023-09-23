@@ -5,7 +5,6 @@ import { PageLayout } from "../../components/Layout/PageLayout/PageLayout";
 import NavigationLayout from "../../components/Layout/NavigationLayout/NavigationLayout";
 import {
   ActionIcon,
-  Button,
   Container,
   Divider,
   Flex,
@@ -13,10 +12,8 @@ import {
   Image,
   PrimaryButton,
   PrimaryButtonLittle,
-  createStyles,
   SecondaryButton,
   Stack,
-  Text,
   Font,
 } from "@frenchies-spots/material";
 import LogoutButton from "../../components/LogoutButton/LogoutButton";
@@ -30,14 +27,8 @@ import ProfilePhoto from "../../components/Profile/ProfilePhoto";
 import StatusBar from "../../components/StatusBar/StatusBar";
 import { GuardLayout } from "../../components/Layout/GuardLayout/GuardLayout";
 
-export const useStyles = createStyles((theme) => ({
-  button: {},
-}));
-
 const Profile = () => {
   const { profile } = useAuth();
-
-  const { classes } = useStyles();
 
   const router = useRouter();
 
@@ -46,7 +37,7 @@ const Profile = () => {
       <Stack pt="md">
         <StatusBar />
         <Flex justify="center">
-          <ProfilePhoto />
+          {profile && <ProfilePhoto profile={profile} />}
         </Flex>
 
         <Font variant="h3" ta="center" w="100%">
@@ -58,7 +49,6 @@ const Profile = () => {
           h={70}
           leftIcon={<IconMapPinPlus />}
           onClick={() => router.push("/spots/edition")}
-          className={classes.button}
         >
           Créer un spot
         </PrimaryButton>
@@ -67,12 +57,27 @@ const Profile = () => {
             h="100%"
             sx={{ flexGrow: 1 }}
             onClick={() => router.push("/profile/spots")}
-            className={classes.button}
           >
             Voir mes spots
           </SecondaryButton>
           <ActionIcon
             sx={{ backgroundColor: "#A480A6", color: "white", borderRadius: 8 }}
+            onClick={() => router.push("/profile/friends")}
+            h="100%"
+            m={0}
+            py={5}
+            w={70}
+          >
+            <IconUsers />
+          </ActionIcon>
+          <ActionIcon
+            sx={{
+              backgroundColor: "white",
+              color: "#A480A6",
+              border: `1px solid #A480A6`,
+              borderRadius: 8,
+            }}
+            onClick={() => router.push("/profile/config")}
             h="100%"
             m={0}
             py={5}
@@ -82,22 +87,18 @@ const Profile = () => {
           </ActionIcon>
         </Flex>
 
-        <PrimaryButtonLittle
+        {/* <PrimaryButtonLittle
           h={70}
           leftIcon={<IconUsers />}
           onClick={() => router.push("/profile/friends")}
-          className={classes.button}
         >
           Mes Amis
-        </PrimaryButtonLittle>
+        </PrimaryButtonLittle> */}
 
         <Divider my={32} />
 
         <Group grow>
-          <Image
-            src="https://res.cloudinary.com/dw2hb8vmu/image/upload/v1694521996/avatar-game-diablotin_1_mwav1s.png"
-            alt="avatar"
-          />
+          <Image src={profile?.avatarUrl} alt="avatar" />
           <Stack>
             <Stack spacing={2}>
               <Font variant="subtitle2">Statut</Font>
@@ -119,8 +120,6 @@ const Profile = () => {
   );
 };
 
-export default Profile;
-
 Profile.getLayout = function getLayout(page: ReactElement) {
   return (
     <PageLayout>
@@ -130,3 +129,5 @@ Profile.getLayout = function getLayout(page: ReactElement) {
     </PageLayout>
   );
 };
+
+export default Profile;

@@ -54,7 +54,7 @@ export class ProfileBusiness {
     profileId: string,
     friendId: string,
   ): Promise<ProfileEntity> {
-    const friend = await this.profileRepository.getById(profileId, friendId);
+    const friend = await this.profileRepository.getById(friendId, profileId);
     if (!friend?.contacts[0]?.isFriend) {
       throw new ErrorService(ACCESS_DENIED);
     }
@@ -92,7 +92,7 @@ export class ProfileBusiness {
   }
 
   async friendRequest(profileId: string, friendId: string): Promise<boolean> {
-    const contactExist = this.contactRepository.getByContactId(
+    const contactExist = await this.contactRepository.getByContactId(
       profileId,
       friendId,
     );

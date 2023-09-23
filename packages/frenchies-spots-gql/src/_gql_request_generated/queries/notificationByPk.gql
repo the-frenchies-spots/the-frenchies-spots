@@ -6,10 +6,35 @@ query notificationByPk($notifId: String!){
         profileId
         profileSender{
             avatarUrl
-            contacts{
-                authorization
-                contact{
+            avatars{
+                avatar{
                     avatarUrl
+                    id
+                    isPublic
+                    pointsRequire
+                    profiles{
+                        avatarUrl
+                        createdAt
+                        gamePoint
+                        id
+                        isLocated
+                        location
+                        photoUrl
+                        pseudo
+                        slogan
+                        updatedAt
+                        userId
+                    }
+                }
+                avatarId
+                id
+                profile{
+                    avatarUrl
+                    avatars{
+                        avatarId
+                        id
+                        profileId
+                    }
                     contacts{
                         authorization
                         contactId
@@ -29,6 +54,7 @@ query notificationByPk($notifId: String!){
                     }
                     gamePoint
                     id
+                    isLocated
                     location
                     notifications{
                         content
@@ -63,6 +89,100 @@ query notificationByPk($notifId: String!){
                         spotId
                         updatedAt
                     }
+                    slogan
+                    spots{
+                        address
+                        averageRating
+                        category
+                        createdAt
+                        description
+                        id
+                        isCanPark
+                        isHidden
+                        location
+                        name
+                        profileId
+                        region
+                        updatedAt
+                    }
+                    updatedAt
+                    user{
+                        createdAt
+                        email
+                        hashedPassword
+                        hashedRefreshToken
+                        id
+                        role
+                        updatedAt
+                    }
+                    userId
+                }
+                profileId
+            }
+            contacts{
+                authorization
+                contact{
+                    avatarUrl
+                    avatars{
+                        avatarId
+                        id
+                        profileId
+                    }
+                    contacts{
+                        authorization
+                        contactId
+                        createdAt
+                        id
+                        isFriend
+                        profileId
+                        updatedAt
+                    }
+                    createdAt
+                    favorites{
+                        createdAt
+                        id
+                        profileId
+                        spotId
+                        updatedAt
+                    }
+                    gamePoint
+                    id
+                    isLocated
+                    location
+                    notifications{
+                        content
+                        id
+                        isRead
+                        profileId
+                        profileSenderId
+                        type
+                    }
+                    photoUrl
+                    profileChats{
+                        chatId
+                        createdAt
+                        id
+                        profileId
+                        updatedAt
+                    }
+                    profileSender{
+                        content
+                        id
+                        isRead
+                        profileId
+                        profileSenderId
+                        type
+                    }
+                    pseudo
+                    ratings{
+                        createdAt
+                        id
+                        profileId
+                        rate
+                        spotId
+                        updatedAt
+                    }
+                    slogan
                     spots{
                         address
                         averageRating
@@ -96,84 +216,15 @@ query notificationByPk($notifId: String!){
                 isFriend
                 profile{
                     avatarUrl
-                    contacts{
-                        authorization
-                        contactId
-                        createdAt
-                        id
-                        isFriend
-                        profileId
-                        updatedAt
-                    }
                     createdAt
-                    favorites{
-                        createdAt
-                        id
-                        profileId
-                        spotId
-                        updatedAt
-                    }
                     gamePoint
                     id
+                    isLocated
                     location
-                    notifications{
-                        content
-                        id
-                        isRead
-                        profileId
-                        profileSenderId
-                        type
-                    }
                     photoUrl
-                    profileChats{
-                        chatId
-                        createdAt
-                        id
-                        profileId
-                        updatedAt
-                    }
-                    profileSender{
-                        content
-                        id
-                        isRead
-                        profileId
-                        profileSenderId
-                        type
-                    }
                     pseudo
-                    ratings{
-                        createdAt
-                        id
-                        profileId
-                        rate
-                        spotId
-                        updatedAt
-                    }
-                    spots{
-                        address
-                        averageRating
-                        category
-                        createdAt
-                        description
-                        id
-                        isCanPark
-                        isHidden
-                        location
-                        name
-                        profileId
-                        region
-                        updatedAt
-                    }
+                    slogan
                     updatedAt
-                    user{
-                        createdAt
-                        email
-                        hashedPassword
-                        hashedRefreshToken
-                        id
-                        role
-                        updatedAt
-                    }
                     userId
                 }
                 profileId
@@ -188,9 +239,11 @@ query notificationByPk($notifId: String!){
                     createdAt
                     gamePoint
                     id
+                    isLocated
                     location
                     photoUrl
                     pseudo
+                    slogan
                     updatedAt
                     userId
                 }
@@ -218,9 +271,11 @@ query notificationByPk($notifId: String!){
                         createdAt
                         gamePoint
                         id
+                        isLocated
                         location
                         photoUrl
                         pseudo
+                        slogan
                         updatedAt
                         userId
                     }
@@ -256,6 +311,7 @@ query notificationByPk($notifId: String!){
             }
             gamePoint
             id
+            isLocated
             location
             notifications{
                 content
@@ -267,6 +323,7 @@ query notificationByPk($notifId: String!){
                     createdAt
                     gamePoint
                     id
+                    isLocated
                     location
                     photoUrl
                     profileChats{
@@ -293,6 +350,7 @@ query notificationByPk($notifId: String!){
                         spotId
                         updatedAt
                     }
+                    slogan
                     spots{
                         address
                         averageRating
@@ -325,6 +383,7 @@ query notificationByPk($notifId: String!){
             }
             photoUrl
             pseudo
+            slogan
             updatedAt
             userId
         }

@@ -12,6 +12,8 @@ export const contacts = gql`
         location
         photoUrl
         pseudo
+        slogan
+        isLocated
         updatedAt
         userId
         profileChats {

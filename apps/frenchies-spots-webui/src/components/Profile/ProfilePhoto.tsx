@@ -1,18 +1,34 @@
 import React, { useState } from "react";
 
+import { ProfileEntity } from "@frenchies-spots/gql";
 import { ImagePicker, PictureValue } from "@frenchies-spots/material";
 
+import toast from "react-hot-toast";
+import { useAuth } from "../../hooks";
 import ModalComfirm from "../Popup/ModalComfirm/ModalComfirm";
 
-const ProfilePhoto = () => {
-  const [picture, setPicture] = useState<PictureValue | null>(null);
+interface ProfilePhotoProps {
+  profile: ProfileEntity;
+}
+
+const ProfilePhoto = (props: ProfilePhotoProps) => {
+  const { profile } = props;
+
+  const { onUpdateProfile } = useAuth();
+  const [picture, setPicture] = useState<PictureValue | null>(
+    profile?.photoUrl ? { url: profile.photoUrl } : null
+  );
 
   const handleComfirm = () => {
-    alert("image saved !");
+    toast.promise(onUpdateProfile({ photoUrl: picture?.url }), {
+      loading: "Mise a jour de la photo de profile...",
+      success: <b>Photo de profile mis a jour !</b>,
+      error: <b>Mise a jour échoué.</b>,
+    });
   };
 
   const handleCancel = () => {
-    setPicture(null);
+    setPicture(profile?.photoUrl ? { url: profile.photoUrl } : null);
   };
 
   return (

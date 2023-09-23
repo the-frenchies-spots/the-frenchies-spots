@@ -23,6 +23,7 @@ import { friendRequest } from "./friendRequest";
 import { acceptFriendContact } from "./acceptFriendContact";
 import { updateContact } from "./updateContact";
 import { deleteNotif } from "./deleteNotif";
+import { buyAvatar } from "./buyAvatar";
 
 export const mutations = {
   createOrUpdateRating,
@@ -38,6 +39,7 @@ export const mutations = {
   friendRequest,
   updateContact,
   deleteNotif,
+  buyAvatar,
   upload,
   sendNotif,
   updateTag,

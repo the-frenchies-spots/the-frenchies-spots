@@ -11,6 +11,9 @@ import type {
   LogoutResponse,
   MutationSignUpArgs,
   MutationSignInArgs,
+  ProfileEntity,
+  MutationUpdateProfileArgs,
+  ProfileInput,
 } from "@frenchies-spots/gql";
 
 const TOKEN_STORAGE_KEY = process.env.NEXT_PUBLIC_TOKEN_STORAGE_KEY || "";
@@ -38,7 +41,10 @@ export const useInitAuth = () => {
 
   const [getLoginUser] = useLazyQuery<{
     getLoginUser: UserEntity;
-  }>(queries.getLoginUser);
+  }>(queries.getLoginUser, {
+    notifyOnNetworkStatusChange: true,
+    fetchPolicy: "no-cache",
+  });
 
   const [signOut, { loading: signoutLoading }] = useMutation<LogoutResponse>(
     mutations.logout
@@ -154,6 +160,17 @@ export const useAuth = () => {
     setUser,
   } = useAuthContext();
 
+  const [updateProfile] = useMutation<
+    { updateProfile: UserEntity },
+    MutationUpdateProfileArgs
+  >(mutations.updateProfile, {
+    refetchQueries: [queries.getLoginUser, queries.profiles],
+  });
+
+  const handleUpdateProfile = (profileInput: ProfileInput) => {
+    return updateProfile({ variables: { profileInput } });
+  };
+
   const handleRefresh = async (): Promise<boolean> => {
     if (typeof refresh === "function") {
       return refresh();
@@ -164,11 +181,12 @@ export const useAuth = () => {
   return {
     user: currentUser,
     profile: currentUser?.profile,
-    loading,
+    loading: loading,
     refresh: handleRefresh,
     setUser: getFuncOrThrow(setUser),
     onSignUp: getFuncOrThrow(processSignUp),
     onSignIn: getFuncOrThrow(processSignIn),
     onSignOut: getFuncOrThrow(processSignOut),
+    onUpdateProfile: handleUpdateProfile,
   };
 };

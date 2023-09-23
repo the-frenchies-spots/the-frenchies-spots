@@ -1,0 +1,16 @@
+mutation buyAvatar($avatarsInput: AvatarInput!) {
+  buyAvatar(avatarsInput: $avatarsInput) {
+    avatarUrl
+    avatars {
+      avatar {
+        avatarUrl
+        id
+        isPublic
+        pointsRequire
+      }
+      avatarId
+      id
+      profileId
+    }
+  }
+}

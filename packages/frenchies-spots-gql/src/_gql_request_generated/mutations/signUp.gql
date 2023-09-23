@@ -10,6 +10,30 @@ mutation signUp($signUpInput: SignUpInput!){
             id
             profile{
                 avatarUrl
+                avatars{
+                    avatar{
+                        avatarUrl
+                        id
+                        isPublic
+                        pointsRequire
+                    }
+                    avatarId
+                    id
+                    profile{
+                        avatarUrl
+                        createdAt
+                        gamePoint
+                        id
+                        isLocated
+                        location
+                        photoUrl
+                        pseudo
+                        slogan
+                        updatedAt
+                        userId
+                    }
+                    profileId
+                }
                 contacts{
                     authorization
                     contact{
@@ -17,9 +41,11 @@ mutation signUp($signUpInput: SignUpInput!){
                         createdAt
                         gamePoint
                         id
+                        isLocated
                         location
                         photoUrl
                         pseudo
+                        slogan
                         updatedAt
                         userId
                     }
@@ -32,9 +58,11 @@ mutation signUp($signUpInput: SignUpInput!){
                         createdAt
                         gamePoint
                         id
+                        isLocated
                         location
                         photoUrl
                         pseudo
+                        slogan
                         updatedAt
                         userId
                     }
@@ -50,9 +78,11 @@ mutation signUp($signUpInput: SignUpInput!){
                         createdAt
                         gamePoint
                         id
+                        isLocated
                         location
                         photoUrl
                         pseudo
+                        slogan
                         updatedAt
                         userId
                     }
@@ -77,6 +107,7 @@ mutation signUp($signUpInput: SignUpInput!){
                 }
                 gamePoint
                 id
+                isLocated
                 location
                 notifications{
                     content
@@ -88,9 +119,11 @@ mutation signUp($signUpInput: SignUpInput!){
                         createdAt
                         gamePoint
                         id
+                        isLocated
                         location
                         photoUrl
                         pseudo
+                        slogan
                         updatedAt
                         userId
                     }
@@ -122,9 +155,11 @@ mutation signUp($signUpInput: SignUpInput!){
                         createdAt
                         gamePoint
                         id
+                        isLocated
                         location
                         photoUrl
                         pseudo
+                        slogan
                         updatedAt
                         userId
                     }
@@ -141,9 +176,11 @@ mutation signUp($signUpInput: SignUpInput!){
                         createdAt
                         gamePoint
                         id
+                        isLocated
                         location
                         photoUrl
                         pseudo
+                        slogan
                         updatedAt
                         userId
                     }
@@ -159,9 +196,11 @@ mutation signUp($signUpInput: SignUpInput!){
                         createdAt
                         gamePoint
                         id
+                        isLocated
                         location
                         photoUrl
                         pseudo
+                        slogan
                         updatedAt
                         userId
                     }
@@ -185,6 +224,7 @@ mutation signUp($signUpInput: SignUpInput!){
                     spotId
                     updatedAt
                 }
+                slogan
                 spots{
                     address
                     averageRating
@@ -208,9 +248,11 @@ mutation signUp($signUpInput: SignUpInput!){
                         createdAt
                         gamePoint
                         id
+                        isLocated
                         location
                         photoUrl
                         pseudo
+                        slogan
                         updatedAt
                         userId
                     }

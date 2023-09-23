@@ -14,7 +14,7 @@ const SpotDrawer = (props: SpotDrawerProps) => {
 
   const { drawerOpened, closeFilter, isFilter } = useSpotUi();
 
-  const phoneSize = isFilter ? 300 : 300;
+  const phoneSize = isFilter ? 600 : 300;
 
   return (
     <CustomDrawer

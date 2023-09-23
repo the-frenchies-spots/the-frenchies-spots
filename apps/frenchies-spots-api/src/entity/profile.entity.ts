@@ -6,6 +6,7 @@ import {
   Column,
   ManyToOne,
   OneToMany,
+  ManyToMany,
 } from 'typeorm';
 
 import { UserEntity } from './user.entity';
@@ -17,6 +18,8 @@ import { ProfileChatEntity } from './profile-chat.entity';
 import GraphQLJSON from 'graphql-type-json';
 import { LocationEntity } from './location.entity';
 import { NotificationEntity } from './notification.entity';
+import { AvatarEntity } from './avatar.entity';
+import { AvatarProfileEntity } from './avatar-profile.entity';
 
 @ObjectType()
 @Entity('Profile')
@@ -32,7 +35,15 @@ export class ProfileEntity implements Profile {
 
   @Field({ nullable: true })
   @Column({ nullable: true })
+  slogan: string;
+
+  @Field({ nullable: true })
+  @Column({ nullable: true })
   photoUrl: string;
+
+  @Field()
+  @Column({ default: false })
+  isLocated: boolean;
 
   @Field({ nullable: true })
   @Column({ nullable: true })
@@ -86,7 +97,15 @@ export class ProfileEntity implements Profile {
   })
   favorites: FavoriteEntity[];
 
-  @Field(() => [ContactEntity])
+  @Field(() => [AvatarProfileEntity], { nullable: true })
+  @Column()
+  @ManyToMany(
+    () => AvatarProfileEntity,
+    (avatarProfile) => avatarProfile.avatar.profiles,
+  )
+  avatars: AvatarEntity[];
+
+  @Field(() => [ContactEntity], { nullable: true })
   @Column()
   @OneToMany(() => ContactEntity, (contact) => contact.profile, {
     cascade: true,

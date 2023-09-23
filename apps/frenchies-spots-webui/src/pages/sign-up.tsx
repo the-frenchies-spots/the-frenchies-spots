@@ -7,6 +7,11 @@ import {
   Flex,
   Stack,
   ScrollArea,
+  Group,
+  BackButton,
+  Text,
+  Log,
+  Switch,
 } from "@frenchies-spots/material";
 import { SignUpInput } from "@frenchies-spots/gql";
 import { useAuth } from "@/hooks";
@@ -19,15 +24,21 @@ import { Avatar, BubbleChat } from "@frenchies-spots/chat";
 import Bubble from "@frenchies-spots/chat/src/components/Bubble/Bubble";
 import { useRouter } from "next/router";
 import LoadingOverlay from "../components/LoadingOverlay/LoadingOverlay";
+import AvatarSwiper from "../components/Profile/AvatarSwiper/AvatarSwiper";
 
 const SignUp = () => {
   const { loading, onSignUp } = useAuth();
 
   const [isEmail, setIsEmail] = useState<boolean>(false);
 
+  const router = useRouter();
+
   const form = useForm<SignUpInput & { comfirmPassword: string }>({
     initialValues: {
       pseudo: "",
+      isLocated: false,
+      avatarUrl:
+        "https://res.cloudinary.com/dw2hb8vmu/image/upload/v1695397559/frenchies-spots/avatar/AVATAR_3_tomehg.gif",
       email: "",
       password: "",
       comfirmPassword: "",
@@ -46,6 +57,8 @@ const SignUp = () => {
         pseudo: form.values.pseudo,
         email: form.values.email,
         password: form.values.password,
+        isLocated: true,
+        avatarUrl: form.values.avatarUrl,
       });
     }
   };
@@ -59,6 +72,9 @@ const SignUp = () => {
   return (
     <Container size="sm">
       <LoadingOverlay visible={loading} overlayBlur={2} />
+      <Group h="10vh">
+        <BackButton onClick={() => router.push("/sign-in")} ml={8} mt={4} />
+      </Group>
       <SwiperForm onSubmit={handleSubmit}>
         <SwiperSlide>
           <SwiperFrame
@@ -129,9 +145,31 @@ const SignUp = () => {
             </ScrollArea>
           </SwiperFrame>
         </SwiperSlide>
+
         <SwiperSlide>
           <SwiperFrame
             type="submit"
+            nextLabel="suivant"
+            prevColor="superLightGrey"
+          >
+            <Flex gap="md" direction="row" w="100%" justify={"start"}>
+              <Avatar color="white" />
+              <Stack w="100%" spacing={1}>
+                <Bubble
+                  message="Choisis ton avatar ! Les autres te verront sous cette forme sur la carte."
+                  isParticipant={true}
+                  w="90%"
+                />
+              </Stack>
+            </Flex>
+            <AvatarSwiper {...form.getInputProps("avatarUrl")} />
+          </SwiperFrame>
+        </SwiperSlide>
+
+        <SwiperSlide>
+          <SwiperFrame
+            type="submit"
+            prevColor="superLightGrey"
             nextLabel="valider"
             disabled={
               !form.isValid("password") ||
@@ -169,6 +207,17 @@ const SignUp = () => {
                   "Le mot de passe doit avoir au moins 6 caractères"
                 }
                 required
+              />
+
+              <Switch
+                defaultChecked
+                label="Autoriser la localisation ?"
+                checked={form.getInputProps("isLocated").value}
+                onChange={(event) =>
+                  form
+                    .getInputProps("isLocated")
+                    .onChange(event.currentTarget.checked)
+                }
               />
             </Stack>
           </SwiperFrame>

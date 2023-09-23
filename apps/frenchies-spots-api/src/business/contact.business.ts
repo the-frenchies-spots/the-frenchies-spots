@@ -43,7 +43,10 @@ export class ContactBusiness {
       profileId,
       contactId,
     );
-    if (!contact1) throw new ErrorService(INTERNAL_SERVER_ERROR);
+
+    if (!contact1) {
+      throw new ErrorService(INTERNAL_SERVER_ERROR);
+    }
     const isContactFriend = await this.contactRepository.updateById(
       contact1.id,
       { isFriend: true },

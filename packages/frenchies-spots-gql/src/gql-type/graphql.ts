@@ -19,6 +19,29 @@ export type Scalars = {
   JSON: { input: any; output: any; }
 };
 
+export type AvatarEntity = {
+  __typename?: 'AvatarEntity';
+  avatarUrl: Scalars['String']['output'];
+  id: Scalars['String']['output'];
+  isPublic: Scalars['Boolean']['output'];
+  pointsRequire: Scalars['Float']['output'];
+  profiles?: Maybe<Array<ProfileEntity>>;
+};
+
+export type AvatarInput = {
+  avatarId: Scalars['String']['input'];
+  pointsRequire: Scalars['Float']['input'];
+};
+
+export type AvatarProfileEntity = {
+  __typename?: 'AvatarProfileEntity';
+  avatar: AvatarEntity;
+  avatarId: Scalars['String']['output'];
+  id: Scalars['String']['output'];
+  profile: ProfileEntity;
+  profileId: Scalars['String']['output'];
+};
+
 export type BuyPointInput = {
   amount: Scalars['Float']['input'];
   paymentId: Scalars['String']['input'];
@@ -109,6 +132,7 @@ export type LogoutResponse = {
 export type Mutation = {
   __typename?: 'Mutation';
   acceptFriendContact: Scalars['Boolean']['output'];
+  buyAvatar: ProfileEntity;
   buyPoint: UserEntity;
   createOrUpdateRating: RatingResponse;
   deleteNotif: DeleteResponse;
@@ -137,6 +161,11 @@ export type Mutation = {
 
 export type MutationAcceptFriendContactArgs = {
   contactId: Scalars['String']['input'];
+};
+
+
+export type MutationBuyAvatarArgs = {
+  avatarsInput: AvatarInput;
 };
 
 
@@ -285,11 +314,13 @@ export type ProfileChatEntity = {
 export type ProfileEntity = {
   __typename?: 'ProfileEntity';
   avatarUrl?: Maybe<Scalars['String']['output']>;
-  contacts: Array<ContactEntity>;
+  avatars?: Maybe<Array<AvatarProfileEntity>>;
+  contacts?: Maybe<Array<ContactEntity>>;
   createdAt: Scalars['DateTime']['output'];
   favorites?: Maybe<Array<FavoriteEntity>>;
   gamePoint: Scalars['Float']['output'];
   id: Scalars['String']['output'];
+  isLocated: Scalars['Boolean']['output'];
   location?: Maybe<Scalars['JSON']['output']>;
   notifications?: Maybe<Array<NotificationEntity>>;
   photoUrl?: Maybe<Scalars['String']['output']>;
@@ -297,6 +328,7 @@ export type ProfileEntity = {
   profileSender?: Maybe<Array<NotificationEntity>>;
   pseudo: Scalars['String']['output'];
   ratings?: Maybe<Array<RatingEntity>>;
+  slogan?: Maybe<Scalars['String']['output']>;
   spots?: Maybe<Array<SpotEntity>>;
   updatedAt: Scalars['DateTime']['output'];
   user: UserEntity;
@@ -306,9 +338,11 @@ export type ProfileEntity = {
 export type ProfileInput = {
   avatarUrl?: InputMaybe<Scalars['String']['input']>;
   gamePoint?: InputMaybe<Scalars['Float']['input']>;
+  isLocated?: InputMaybe<Scalars['Boolean']['input']>;
   location?: InputMaybe<Scalars['JSON']['input']>;
   photoUrl?: InputMaybe<Scalars['String']['input']>;
   pseudo?: InputMaybe<Scalars['String']['input']>;
+  slogan?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type ProfilesInput = {
@@ -429,8 +463,11 @@ export type SignResponse = {
 };
 
 export type SignUpInput = {
+  avatarUrl: Scalars['String']['input'];
   email: Scalars['String']['input'];
+  isLocated: Scalars['Boolean']['input'];
   password: Scalars['String']['input'];
+  photoUrl?: InputMaybe<Scalars['String']['input']>;
   pseudo: Scalars['String']['input'];
 };
 

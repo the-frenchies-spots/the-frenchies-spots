@@ -45,9 +45,11 @@ query chatByPk($chatId: String!){
                         createdAt
                         gamePoint
                         id
+                        isLocated
                         location
                         photoUrl
                         pseudo
+                        slogan
                         updatedAt
                         userId
                     }

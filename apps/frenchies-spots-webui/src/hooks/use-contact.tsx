@@ -38,7 +38,7 @@ const useContact = () => {
       toast.promise(friendRequest({ variables: { friendId: profile.id } }), {
         loading: "Demande en cours d'envoie...",
         success: <b>Demande envoyé !</b>,
-        error: <b>Nous avons pas réussi à joindre cette utilisateur.</b>,
+        error: <b>Nous avons pas réussie à joindre cette utilisateur.</b>,
       });
     }
   };
@@ -62,7 +62,7 @@ const useContact = () => {
           {
             loading: "Mise en relation avec votre partenaire...",
             success: <b>Bonne discussion !</b>,
-            error: <b>Nous avons pas réussi à joindre cette utilisateur.</b>,
+            error: <b>Nous avons pas réussie à joindre cette utilisateur.</b>,
           }
         );
       } else {

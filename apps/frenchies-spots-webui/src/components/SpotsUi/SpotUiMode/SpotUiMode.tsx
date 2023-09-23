@@ -36,7 +36,7 @@ const SpotUiMode = (props: SpotUiModeProps) => {
       {uiMode === filterListMode.PEOPLE && peopleList && (
         <ProfileList profileList={peopleList} />
       )}
-      {uiMode === filterListMode.SPOT && (
+      {(uiMode === filterListMode.SPOT || uiMode === filterListMode.ALL) && (
         <SpotList list={spotList}>
           {({ spotId, favoriteId, profileId }) => (
             <>

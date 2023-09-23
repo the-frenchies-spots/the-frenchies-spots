@@ -7,9 +7,29 @@ mutation updateProfile($profileInput: ProfileInput!){
         id
         profile{
             avatarUrl
-            contacts{
-                authorization
-                contact{
+            avatars{
+                avatar{
+                    avatarUrl
+                    id
+                    isPublic
+                    pointsRequire
+                    profiles{
+                        avatarUrl
+                        createdAt
+                        gamePoint
+                        id
+                        isLocated
+                        location
+                        photoUrl
+                        pseudo
+                        slogan
+                        updatedAt
+                        userId
+                    }
+                }
+                avatarId
+                id
+                profile{
                     avatarUrl
                     contacts{
                         authorization
@@ -30,6 +50,7 @@ mutation updateProfile($profileInput: ProfileInput!){
                     }
                     gamePoint
                     id
+                    isLocated
                     location
                     notifications{
                         content
@@ -64,83 +85,7 @@ mutation updateProfile($profileInput: ProfileInput!){
                         spotId
                         updatedAt
                     }
-                    spots{
-                        address
-                        averageRating
-                        category
-                        createdAt
-                        description
-                        id
-                        isCanPark
-                        isHidden
-                        location
-                        name
-                        profileId
-                        region
-                        updatedAt
-                    }
-                    updatedAt
-                    user{
-                        createdAt
-                        email
-                        hashedPassword
-                        hashedRefreshToken
-                        id
-                        role
-                        updatedAt
-                    }
-                    userId
-                }
-                contactId
-                createdAt
-                id
-                isFriend
-                profile{
-                    avatarUrl
-                    createdAt
-                    favorites{
-                        createdAt
-                        id
-                        profileId
-                        spotId
-                        updatedAt
-                    }
-                    gamePoint
-                    id
-                    location
-                    notifications{
-                        content
-                        id
-                        isRead
-                        profileId
-                        profileSenderId
-                        type
-                    }
-                    photoUrl
-                    profileChats{
-                        chatId
-                        createdAt
-                        id
-                        profileId
-                        updatedAt
-                    }
-                    profileSender{
-                        content
-                        id
-                        isRead
-                        profileId
-                        profileSenderId
-                        type
-                    }
-                    pseudo
-                    ratings{
-                        createdAt
-                        id
-                        profileId
-                        rate
-                        spotId
-                        updatedAt
-                    }
+                    slogan
                     spots{
                         address
                         averageRating
@@ -169,14 +114,15 @@ mutation updateProfile($profileInput: ProfileInput!){
                     userId
                 }
                 profileId
-                updatedAt
             }
             createdAt
             gamePoint
             id
+            isLocated
             location
             photoUrl
             pseudo
+            slogan
             updatedAt
             userId
         }

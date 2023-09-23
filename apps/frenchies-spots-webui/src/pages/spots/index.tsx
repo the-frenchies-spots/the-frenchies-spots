@@ -28,11 +28,16 @@ const SpotsPage = () => {
   const [getFilterSpots, { data, loading }] = useLazyQuery<
     { spots: SpotEntity[] },
     { spotsInput: SpotsInput }
-  >(queries.spots, { variables: { spotsInput: { searchValue: "" } } });
+  >(queries.spots, {
+    variables: { spotsInput: { searchValue: "" } },
+    notifyOnNetworkStatusChange: true,
+    fetchPolicy: "no-cache",
+  });
 
   const [getPeoples, { data: peoplesData, loading: peoplesLoading }] =
     useLazyQuery<{ profiles: ProfileEntity[] }, QueryProfilesArgs>(
-      queries.profiles
+      queries.profiles,
+      { notifyOnNetworkStatusChange: true, fetchPolicy: "no-cache" }
     );
 
   const form = useForm<SpotsInput>({
