@@ -2,7 +2,7 @@ import { Resolver, Args, Mutation } from '@nestjs/graphql';
 
 import { UseGuards } from '@nestjs/common';
 import { RefreshTokenGuard } from '../guard/refreshToken.guard';
-import { AvatarEntity } from '../entity/Avatar.entity';
+import { AvatarEntity } from '../entity/avatar.entity';
 import { AvatarInput } from '../dto/input/avatar/avatar.input';
 import { CurrentProfileId } from '../decorator/currentProfileId.decorator.';
 import { ProfileEntity } from '../entity/profile.entity';
