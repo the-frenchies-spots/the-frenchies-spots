@@ -77,7 +77,7 @@ export const SpotUiProvider = (props: SpotUiProviderProps) => {
 
   useEffect(() => {
     openPreviewSpot();
-
+    const initFilterPeople = getFuncOrThrow(getPeoples);
     const initFilterSpot = getFuncOrThrow(getFilterSpots);
     if (userPosition && !coordinates) {
       setPlaceName(userPosition.value);
@@ -90,6 +90,7 @@ export const SpotUiProvider = (props: SpotUiProviderProps) => {
         });
       } else {
         initFilterSpot();
+        initFilterPeople();
       }
     }
   }, [userPosition]);

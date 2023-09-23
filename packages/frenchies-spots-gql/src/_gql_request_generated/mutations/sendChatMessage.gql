@@ -44,9 +44,11 @@ mutation sendChatMessage($sendChatMessageInput: SendChatMessageInput!){
                         createdAt
                         gamePoint
                         id
+                        isLocated
                         location
                         photoUrl
                         pseudo
+                        slogan
                         updatedAt
                         userId
                     }

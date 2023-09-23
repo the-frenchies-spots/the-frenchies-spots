@@ -21,24 +21,17 @@ const FriendRequestButton = (props: FriendRequestButtonProps) => {
   const { onFriendRequestClick } = useContact();
 
   const isSelected = (profile?.notifications?.length || 0) > 0;
-  const isFriend = profile?.contacts[0]?.isFriend;
+  const isFriend = profile?.contacts ? profile?.contacts[0]?.isFriend : false;
 
   const { classes } = useStyles();
 
   return (
     <>
       {isSelected ? (
-        <Flex align="center" justify="center" className={classes.friendRequest}>
-          <IconUserQuestion color="white" />
-        </Flex>
-      ) : isFriend ? (
-        <ActionIcon
-          className={classes.isFriend}
-          onClick={() => router.push(`/profile/friends/${profile.id}`)}
-        >
-          <IconUsers color="#A480A6" />
+        <ActionIcon disabled className={classes.default}>
+          <IconUserPlus color="orange" />
         </ActionIcon>
-      ) : (
+      ) : isFriend ? null : (
         <ActionIcon
           onClick={() => onFriendRequestClick(profile)}
           className={classes.default}

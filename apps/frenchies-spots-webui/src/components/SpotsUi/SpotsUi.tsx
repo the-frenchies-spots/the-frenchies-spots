@@ -24,8 +24,8 @@ interface SpotsUiProps {
 const SpotsUi = (props: SpotsUiProps) => {
   const { spotList, peopleList } = props;
 
-  const { classes } = useStyles();
   const { profile } = useAuth();
+  const { classes } = useStyles(!!profile);
 
   const [uiMode, setUiMode] = useState<filterListMode>(filterListMode.ALL);
 

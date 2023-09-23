@@ -1,11 +1,14 @@
-import React, { FormEventHandler } from "react";
+import React, { FormEventHandler, useRef } from "react";
 
 import {
   Box,
   Checkbox,
   Flex,
   Font,
+  Group,
+  Log,
   MultipleImagePicker,
+  PrimaryButton,
   Stack,
   Text,
   TextInput,
@@ -19,17 +22,20 @@ import {
   InputMaybe,
   SpotByIdResponse,
   SpotInput,
+  SpotPictureEntity,
   SpotPictureInput,
   TagOnSpotEntity,
 } from "@frenchies-spots/gql";
 import { SelectTag } from "../../InputCustom";
 import { SwiperForm } from "@/components/SwiperForm/SwiperForm";
-import { SwiperSlide } from "swiper/react";
+import { SwiperRef, SwiperSlide } from "swiper/react";
 import { useCloudinary } from "../../../hooks/use-cloudinary";
 import { useAuth } from "./../../../hooks/use-auth";
 import { VSegmentControl } from "../../InputCustom/VSegmentControl";
 import SpotDetail from "../../SpotDetail/SpotDetail";
 import LoadingOverlay from "../../LoadingOverlay/LoadingOverlay";
+import Stepper from "../../SwiperForm/Stepper/Stepper";
+import { useRouter } from "next/router";
 
 interface SpotEditionFormProps {
   initialValues: SpotInput;
@@ -40,8 +46,10 @@ interface SpotEditionFormProps {
 export const SpotEditionForm = (props: SpotEditionFormProps) => {
   const { initialValues, onSubmit, loading = false } = props;
 
-  const { loading: uploadLoading, uploadMultipleImage } = useCloudinary();
+  const router = useRouter();
   const { user, profile } = useAuth();
+  const swiperRef = useRef<any>(null);
+  const { loading: uploadLoading, uploadMultipleImage } = useCloudinary();
 
   const form = useForm<SpotInput>({
     initialValues,
@@ -90,20 +98,41 @@ export const SpotEditionForm = (props: SpotEditionFormProps) => {
   return (
     <>
       <LoadingOverlay visible={loading || uploadLoading} overlayBlur={2} />
-      <SwiperForm onSubmit={handleSubmit}>
+
+      {swiperRef?.current?.swiper && (
+        <Stepper
+          nb={6}
+          onCancel={() => router.push("/profile")}
+          goToIndex={(index: number) => swiperRef.current.swiper.slideTo(index)}
+          validates={[
+            false,
+            !form.isValid("tags"),
+            !(form.isValid("name") && form.isValid("description")),
+            !(
+              form.isValid("address") &&
+              form.isValid("location") &&
+              form.isValid("region")
+            ),
+            false,
+            false,
+          ]}
+        />
+      )}
+
+      <SwiperForm onSubmit={handleSubmit} ref={swiperRef}>
         {/* SPOT CATEGORY */}
         <SwiperSlide>
           <SwiperFrame prevLabel="">
             <Stack mt="md">
               <Font variant="h2">
-                A quelle catégorie associerais-tu ton spot ?
+                A quelle catégorie associes-tu ton spot ?
               </Font>
               <VSegmentControl
                 list={[
                   {
                     name: "Aventure",
                     description:
-                      "spot dans lequel tu y vas pour te faire plaisir, découvrir de nouveaux paysages français",
+                      "spot dans lequel tu y vas pour te faire plaisir, découvrir de nouveaux paysages",
                     value: CategoriesSpotAndTag.SPARE_TIME_SPOT,
                   },
                   {
@@ -213,12 +242,12 @@ export const SpotEditionForm = (props: SpotEditionFormProps) => {
                 list={[
                   {
                     name: "Public",
-                    description: "Tout le monde y aura accès",
+                    description: "Tout le monde y a accès",
                     value: false,
                   },
                   {
                     name: "Privée",
-                    description: "Tu peux choisir qui y a accès",
+                    description: "Seulement toi peux le voir",
                     value: true,
                   },
                 ]}
@@ -248,7 +277,9 @@ export const SpotEditionForm = (props: SpotEditionFormProps) => {
                   name: form.values.name,
                   profileId: "profile1",
                   region: form.values.region,
-                  spotPicture: [],
+                  spotPicture: form.values.pictures?.map(({ url }) => ({
+                    url,
+                  })) as SpotPictureEntity[],
                   tags:
                     (form.values.tags?.map((tagId) => ({
                       tag: { id: tagId },

@@ -8,6 +8,7 @@ import { useAuth } from "../hooks/use-auth";
 import ShopBuyPoints from "../components/Shop/ShopBuyPoints/ShopBuyPoints";
 import StatusBar from "../components/StatusBar/StatusBar";
 import { GuardLayout } from "../components/Layout/GuardLayout/GuardLayout";
+import ShopPersonnalisation from "../components/Shop/ShopPersonnalisation/ShopPersonnalisation";
 
 // Carte de test
 // 4242 4242 4242 4242
@@ -30,7 +31,7 @@ const Shop = () => {
         </Tabs.List>
 
         <Tabs.Panel value="personalization" pt="xs" h="80%">
-          Personnalisation
+          <ShopPersonnalisation />
         </Tabs.Panel>
 
         <Tabs.Panel value="buy_points" pt="xs" h="80%">

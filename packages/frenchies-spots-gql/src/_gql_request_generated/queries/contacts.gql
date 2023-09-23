@@ -3,14 +3,35 @@ query contacts($contactsInput: ContactsInput!){
         authorization
         contact{
             avatarUrl
-            contacts{
-                authorization
-                contactId
-                createdAt
+            avatars{
+                avatar{
+                    avatarUrl
+                    id
+                    isPublic
+                    pointsRequire
+                    profiles{
+                        avatarUrl
+                        createdAt
+                        gamePoint
+                        id
+                        isLocated
+                        location
+                        photoUrl
+                        pseudo
+                        slogan
+                        updatedAt
+                        userId
+                    }
+                }
+                avatarId
                 id
-                isFriend
                 profile{
                     avatarUrl
+                    avatars{
+                        avatarId
+                        id
+                        profileId
+                    }
                     contacts{
                         authorization
                         contactId
@@ -30,6 +51,7 @@ query contacts($contactsInput: ContactsInput!){
                     }
                     gamePoint
                     id
+                    isLocated
                     location
                     notifications{
                         content
@@ -64,6 +86,7 @@ query contacts($contactsInput: ContactsInput!){
                         spotId
                         updatedAt
                     }
+                    slogan
                     spots{
                         address
                         averageRating
@@ -92,6 +115,27 @@ query contacts($contactsInput: ContactsInput!){
                     userId
                 }
                 profileId
+            }
+            contacts{
+                authorization
+                contactId
+                createdAt
+                id
+                isFriend
+                profile{
+                    avatarUrl
+                    createdAt
+                    gamePoint
+                    id
+                    isLocated
+                    location
+                    photoUrl
+                    pseudo
+                    slogan
+                    updatedAt
+                    userId
+                }
+                profileId
                 updatedAt
             }
             createdAt
@@ -103,9 +147,11 @@ query contacts($contactsInput: ContactsInput!){
                     createdAt
                     gamePoint
                     id
+                    isLocated
                     location
                     photoUrl
                     pseudo
+                    slogan
                     updatedAt
                     userId
                 }
@@ -133,9 +179,11 @@ query contacts($contactsInput: ContactsInput!){
                         createdAt
                         gamePoint
                         id
+                        isLocated
                         location
                         photoUrl
                         pseudo
+                        slogan
                         updatedAt
                         userId
                     }
@@ -171,6 +219,7 @@ query contacts($contactsInput: ContactsInput!){
             }
             gamePoint
             id
+            isLocated
             location
             notifications{
                 content
@@ -179,6 +228,11 @@ query contacts($contactsInput: ContactsInput!){
                 profileId
                 profileSender{
                     avatarUrl
+                    avatars{
+                        avatarId
+                        id
+                        profileId
+                    }
                     contacts{
                         authorization
                         contactId
@@ -198,6 +252,7 @@ query contacts($contactsInput: ContactsInput!){
                     }
                     gamePoint
                     id
+                    isLocated
                     location
                     notifications{
                         content
@@ -232,6 +287,7 @@ query contacts($contactsInput: ContactsInput!){
                         spotId
                         updatedAt
                     }
+                    slogan
                     spots{
                         address
                         averageRating
@@ -316,9 +372,11 @@ query contacts($contactsInput: ContactsInput!){
                     createdAt
                     gamePoint
                     id
+                    isLocated
                     location
                     photoUrl
                     pseudo
+                    slogan
                     updatedAt
                     userId
                 }
@@ -342,9 +400,11 @@ query contacts($contactsInput: ContactsInput!){
                     createdAt
                     gamePoint
                     id
+                    isLocated
                     location
                     photoUrl
                     pseudo
+                    slogan
                     updatedAt
                     userId
                 }
@@ -368,6 +428,7 @@ query contacts($contactsInput: ContactsInput!){
                 spotId
                 updatedAt
             }
+            slogan
             spots{
                 address
                 averageRating
@@ -391,9 +452,11 @@ query contacts($contactsInput: ContactsInput!){
                     createdAt
                     gamePoint
                     id
+                    isLocated
                     location
                     photoUrl
                     pseudo
+                    slogan
                     updatedAt
                     userId
                 }
@@ -459,9 +522,11 @@ query contacts($contactsInput: ContactsInput!){
                     createdAt
                     gamePoint
                     id
+                    isLocated
                     location
                     photoUrl
                     pseudo
+                    slogan
                     updatedAt
                     userId
                 }

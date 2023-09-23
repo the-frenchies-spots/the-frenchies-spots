@@ -16,6 +16,7 @@ import { IconMessages, IconUserSquareRounded } from "@frenchies-spots/icon";
 import useContact from "../../../../hooks/use-contact";
 import FriendRequestButton from "../../../Profile/FriendRequestButton/FriendRequestButton";
 import ContactButton from "./../../../Profile/ContactButton/ContactButton";
+import ProfileDevise from "./../../../Profile/ProfileDevise/ProfileDevise";
 
 interface ProfilePreviewProps extends StackProps {
   profile: ProfileEntity;
@@ -44,6 +45,8 @@ const ProfilePreview = (props: ProfilePreviewProps) => {
 
         {currentProfile && <FriendRequestButton profile={profile} />}
       </Group>
+
+      <ProfileDevise profile={profile} />
 
       {currentProfile ? (
         <ContactButton profile={profile} />

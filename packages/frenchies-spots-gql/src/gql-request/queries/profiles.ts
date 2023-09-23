@@ -7,6 +7,8 @@ export const profiles = gql`
       createdAt
       gamePoint
       id
+      slogan
+      isLocated
       location
       photoUrl
       pseudo

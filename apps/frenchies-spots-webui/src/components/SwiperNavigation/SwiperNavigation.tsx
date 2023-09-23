@@ -5,6 +5,7 @@ import {
   Button,
   ButtonProps,
   SecondaryButton,
+  TColor,
 } from "@frenchies-spots/material";
 import type { Swiper } from "swiper/types";
 
@@ -14,6 +15,8 @@ export interface SwiperNavigationProps {
   type?: ButtonProps["type"];
   prevLabel?: string;
   nextLabel?: string;
+  nextColor?: TColor;
+  prevColor?: TColor;
 }
 
 const SwiperNavigation = (props: SwiperNavigationProps) => {
@@ -23,12 +26,14 @@ const SwiperNavigation = (props: SwiperNavigationProps) => {
     type = "button",
     prevLabel = "Retour",
     nextLabel = "Suivant",
+    nextColor = "superLightGrey",
+    prevColor = "purple",
   } = props;
   return (
     <Group grow>
       <SecondaryButton
         variant="subtle"
-        color="purple"
+        color={prevColor}
         onClick={() => swiper.slidePrev()}
       >
         {prevLabel}
@@ -37,6 +42,7 @@ const SwiperNavigation = (props: SwiperNavigationProps) => {
         type={type}
         onClick={() => swiper.slideNext()}
         disabled={disabled}
+        color={nextColor}
       >
         {nextLabel}
       </SecondaryButton>

@@ -6,6 +6,7 @@ import { Container, type ContainerProps } from "@frenchies-spots/material";
 import ProfileCard from "../ProfileCard/ProfileCard";
 import ContactButton from "../ContactButton/ContactButton";
 import FriendRequestButton from "../FriendRequestButton/FriendRequestButton";
+import { useAuth } from "../../../hooks/use-auth";
 
 interface ProfileListProps extends ContainerProps {
   profileList: ProfileEntity[];
@@ -13,6 +14,8 @@ interface ProfileListProps extends ContainerProps {
 
 const ProfileList = (props: ProfileListProps) => {
   const { profileList, ...containerProps } = props;
+
+  const { profile: currentProfile } = useAuth();
 
   return (
     <Container
@@ -24,8 +27,12 @@ const ProfileList = (props: ProfileListProps) => {
     >
       {profileList.map((profile) => (
         <ProfileCard key={profile.id} profile={profile} mb="md">
-          <ContactButton profile={profile} isSmallMode />
-          <FriendRequestButton profile={profile} />
+          {currentProfile && (
+            <>
+              <ContactButton profile={profile} isSmallMode />
+              <FriendRequestButton profile={profile} />
+            </>
+          )}
         </ProfileCard>
       ))}
     </Container>

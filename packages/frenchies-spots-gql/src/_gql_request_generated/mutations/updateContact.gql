@@ -3,10 +3,44 @@ mutation updateContact($contactsInput: ContactInput!){
         authorization
         contact{
             avatarUrl
-            contacts{
-                authorization
-                contact{
+            avatars{
+                avatar{
                     avatarUrl
+                    id
+                    isPublic
+                    pointsRequire
+                    profiles{
+                        avatarUrl
+                        createdAt
+                        gamePoint
+                        id
+                        isLocated
+                        location
+                        photoUrl
+                        pseudo
+                        slogan
+                        updatedAt
+                        userId
+                    }
+                }
+                avatarId
+                id
+                profile{
+                    avatarUrl
+                    avatars{
+                        avatarId
+                        id
+                        profileId
+                    }
+                    contacts{
+                        authorization
+                        contactId
+                        createdAt
+                        id
+                        isFriend
+                        profileId
+                        updatedAt
+                    }
                     createdAt
                     favorites{
                         createdAt
@@ -17,6 +51,7 @@ mutation updateContact($contactsInput: ContactInput!){
                     }
                     gamePoint
                     id
+                    isLocated
                     location
                     notifications{
                         content
@@ -51,6 +86,86 @@ mutation updateContact($contactsInput: ContactInput!){
                         spotId
                         updatedAt
                     }
+                    slogan
+                    spots{
+                        address
+                        averageRating
+                        category
+                        createdAt
+                        description
+                        id
+                        isCanPark
+                        isHidden
+                        location
+                        name
+                        profileId
+                        region
+                        updatedAt
+                    }
+                    updatedAt
+                    user{
+                        createdAt
+                        email
+                        hashedPassword
+                        hashedRefreshToken
+                        id
+                        role
+                        updatedAt
+                    }
+                    userId
+                }
+                profileId
+            }
+            contacts{
+                authorization
+                contact{
+                    avatarUrl
+                    createdAt
+                    favorites{
+                        createdAt
+                        id
+                        profileId
+                        spotId
+                        updatedAt
+                    }
+                    gamePoint
+                    id
+                    isLocated
+                    location
+                    notifications{
+                        content
+                        id
+                        isRead
+                        profileId
+                        profileSenderId
+                        type
+                    }
+                    photoUrl
+                    profileChats{
+                        chatId
+                        createdAt
+                        id
+                        profileId
+                        updatedAt
+                    }
+                    profileSender{
+                        content
+                        id
+                        isRead
+                        profileId
+                        profileSenderId
+                        type
+                    }
+                    pseudo
+                    ratings{
+                        createdAt
+                        id
+                        profileId
+                        rate
+                        spotId
+                        updatedAt
+                    }
+                    slogan
                     spots{
                         address
                         averageRating
@@ -84,84 +199,15 @@ mutation updateContact($contactsInput: ContactInput!){
                 isFriend
                 profile{
                     avatarUrl
-                    contacts{
-                        authorization
-                        contactId
-                        createdAt
-                        id
-                        isFriend
-                        profileId
-                        updatedAt
-                    }
                     createdAt
-                    favorites{
-                        createdAt
-                        id
-                        profileId
-                        spotId
-                        updatedAt
-                    }
                     gamePoint
                     id
+                    isLocated
                     location
-                    notifications{
-                        content
-                        id
-                        isRead
-                        profileId
-                        profileSenderId
-                        type
-                    }
                     photoUrl
-                    profileChats{
-                        chatId
-                        createdAt
-                        id
-                        profileId
-                        updatedAt
-                    }
-                    profileSender{
-                        content
-                        id
-                        isRead
-                        profileId
-                        profileSenderId
-                        type
-                    }
                     pseudo
-                    ratings{
-                        createdAt
-                        id
-                        profileId
-                        rate
-                        spotId
-                        updatedAt
-                    }
-                    spots{
-                        address
-                        averageRating
-                        category
-                        createdAt
-                        description
-                        id
-                        isCanPark
-                        isHidden
-                        location
-                        name
-                        profileId
-                        region
-                        updatedAt
-                    }
+                    slogan
                     updatedAt
-                    user{
-                        createdAt
-                        email
-                        hashedPassword
-                        hashedRefreshToken
-                        id
-                        role
-                        updatedAt
-                    }
                     userId
                 }
                 profileId
@@ -170,9 +216,11 @@ mutation updateContact($contactsInput: ContactInput!){
             createdAt
             gamePoint
             id
+            isLocated
             location
             photoUrl
             pseudo
+            slogan
             updatedAt
             userId
         }
@@ -185,9 +233,11 @@ mutation updateContact($contactsInput: ContactInput!){
             createdAt
             gamePoint
             id
+            isLocated
             location
             photoUrl
             pseudo
+            slogan
             updatedAt
             userId
         }

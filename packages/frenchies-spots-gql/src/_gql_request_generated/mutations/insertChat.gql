@@ -45,9 +45,11 @@ mutation insertChat($inserChatInput: InserChatInput!){
                         createdAt
                         gamePoint
                         id
+                        isLocated
                         location
                         photoUrl
                         pseudo
+                        slogan
                         updatedAt
                         userId
                     }

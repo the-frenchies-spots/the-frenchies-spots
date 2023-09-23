@@ -10,6 +10,30 @@ mutation insertSpot($insertSpotInput: SpotInput!){
             id
             profile{
                 avatarUrl
+                avatars{
+                    avatar{
+                        avatarUrl
+                        id
+                        isPublic
+                        pointsRequire
+                    }
+                    avatarId
+                    id
+                    profile{
+                        avatarUrl
+                        createdAt
+                        gamePoint
+                        id
+                        isLocated
+                        location
+                        photoUrl
+                        pseudo
+                        slogan
+                        updatedAt
+                        userId
+                    }
+                    profileId
+                }
                 contacts{
                     authorization
                     contact{
@@ -17,9 +41,11 @@ mutation insertSpot($insertSpotInput: SpotInput!){
                         createdAt
                         gamePoint
                         id
+                        isLocated
                         location
                         photoUrl
                         pseudo
+                        slogan
                         updatedAt
                         userId
                     }
@@ -32,9 +58,11 @@ mutation insertSpot($insertSpotInput: SpotInput!){
                         createdAt
                         gamePoint
                         id
+                        isLocated
                         location
                         photoUrl
                         pseudo
+                        slogan
                         updatedAt
                         userId
                     }
@@ -66,6 +94,7 @@ mutation insertSpot($insertSpotInput: SpotInput!){
                 }
                 gamePoint
                 id
+                isLocated
                 location
                 notifications{
                     content
@@ -77,9 +106,11 @@ mutation insertSpot($insertSpotInput: SpotInput!){
                         createdAt
                         gamePoint
                         id
+                        isLocated
                         location
                         photoUrl
                         pseudo
+                        slogan
                         updatedAt
                         userId
                     }
@@ -111,9 +142,11 @@ mutation insertSpot($insertSpotInput: SpotInput!){
                         createdAt
                         gamePoint
                         id
+                        isLocated
                         location
                         photoUrl
                         pseudo
+                        slogan
                         updatedAt
                         userId
                     }
@@ -130,9 +163,11 @@ mutation insertSpot($insertSpotInput: SpotInput!){
                         createdAt
                         gamePoint
                         id
+                        isLocated
                         location
                         photoUrl
                         pseudo
+                        slogan
                         updatedAt
                         userId
                     }
@@ -148,9 +183,11 @@ mutation insertSpot($insertSpotInput: SpotInput!){
                         createdAt
                         gamePoint
                         id
+                        isLocated
                         location
                         photoUrl
                         pseudo
+                        slogan
                         updatedAt
                         userId
                     }
@@ -174,6 +211,7 @@ mutation insertSpot($insertSpotInput: SpotInput!){
                     spotId
                     updatedAt
                 }
+                slogan
                 spots{
                     address
                     averageRating
@@ -197,9 +235,11 @@ mutation insertSpot($insertSpotInput: SpotInput!){
                         createdAt
                         gamePoint
                         id
+                        isLocated
                         location
                         photoUrl
                         pseudo
+                        slogan
                         updatedAt
                         userId
                     }
@@ -242,9 +282,11 @@ mutation insertSpot($insertSpotInput: SpotInput!){
                         createdAt
                         gamePoint
                         id
+                        isLocated
                         location
                         photoUrl
                         pseudo
+                        slogan
                         updatedAt
                         userId
                     }
@@ -267,9 +309,11 @@ mutation insertSpot($insertSpotInput: SpotInput!){
             createdAt
             gamePoint
             id
+            isLocated
             location
             photoUrl
             pseudo
+            slogan
             updatedAt
             userId
         }
@@ -310,9 +354,11 @@ mutation insertSpot($insertSpotInput: SpotInput!){
                     createdAt
                     gamePoint
                     id
+                    isLocated
                     location
                     photoUrl
                     pseudo
+                    slogan
                     updatedAt
                     userId
                 }

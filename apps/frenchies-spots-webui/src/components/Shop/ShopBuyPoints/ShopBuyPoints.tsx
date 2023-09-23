@@ -3,7 +3,14 @@ import React, { useState } from "react";
 import toast from "react-hot-toast";
 import { useMutation } from "@apollo/client";
 import { amountPoints, formatStripeEuro } from "@frenchies-spots/utils";
-import { Box, Button, Group, Stack, Text } from "@frenchies-spots/material";
+import {
+  Box,
+  Button,
+  Group,
+  PrimaryButton,
+  Stack,
+  Text,
+} from "@frenchies-spots/material";
 import {
   MutationBuyPointArgs,
   UserEntity,
@@ -63,9 +70,9 @@ const ShopBuyPoints = () => {
           <Text>{amountPoints(price)} points</Text>
         </Stack>
 
-        <Button onClick={open} w="100%">
+        <PrimaryButton onClick={open} w="100%">
           ACHETER
-        </Button>
+        </PrimaryButton>
       </Stack>
       <CustomDrawer opened={opened} onClose={close}>
         <Stack p="md">
@@ -88,10 +95,10 @@ const ShopBuyPoints = () => {
           <Text>Paiement</Text>
           <StripeContainer onCheckout={handleCheckout}>
             <Group mt="md" grow>
-              <Button variant="subtle" onClick={close}>
+              <PrimaryButton variant="subtle" onClick={close}>
                 Retour
-              </Button>
-              <Button type="submit">PAYER</Button>
+              </PrimaryButton>
+              <PrimaryButton type="submit">PAYER</PrimaryButton>
             </Group>
           </StripeContainer>
         </Stack>

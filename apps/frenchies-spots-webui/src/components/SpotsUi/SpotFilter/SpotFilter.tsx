@@ -119,7 +119,6 @@ const SpotFilter = (props: SpotFilterProps) => {
         <Checkbox
           label="Afficher les spots où je peux me garer"
           checked={form.getInputProps("isCanPark").value}
-          sx={{}}
           onChange={(event) =>
             form
               .getInputProps("isCanPark")
@@ -131,13 +130,14 @@ const SpotFilter = (props: SpotFilterProps) => {
           
         /> */}
 
-        <Group>
+        <Stack>
           <Font variant="h4">Localisation</Font>
           <Switch
+            label="Afficher mon rayon de recherche"
             checked={isRayon}
             onChange={(event) => handleRayonChange(event.currentTarget.checked)}
           />
-        </Group>
+        </Stack>
         <Box h={50}>
           {isRayon && (
             <Slider

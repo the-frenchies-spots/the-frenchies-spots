@@ -15,6 +15,11 @@ mutation updateTag($tagUpdateInput: TagUpdateInput!){
                 id
                 profile{
                     avatarUrl
+                    avatars{
+                        avatarId
+                        id
+                        profileId
+                    }
                     contacts{
                         authorization
                         contactId
@@ -34,6 +39,7 @@ mutation updateTag($tagUpdateInput: TagUpdateInput!){
                     }
                     gamePoint
                     id
+                    isLocated
                     location
                     notifications{
                         content
@@ -68,6 +74,7 @@ mutation updateTag($tagUpdateInput: TagUpdateInput!){
                         spotId
                         updatedAt
                     }
+                    slogan
                     spots{
                         address
                         averageRating
@@ -119,9 +126,11 @@ mutation updateTag($tagUpdateInput: TagUpdateInput!){
                         createdAt
                         gamePoint
                         id
+                        isLocated
                         location
                         photoUrl
                         pseudo
+                        slogan
                         updatedAt
                         userId
                     }
@@ -165,9 +174,11 @@ mutation updateTag($tagUpdateInput: TagUpdateInput!){
                 createdAt
                 gamePoint
                 id
+                isLocated
                 location
                 photoUrl
                 pseudo
+                slogan
                 updatedAt
                 userId
             }
@@ -180,9 +191,11 @@ mutation updateTag($tagUpdateInput: TagUpdateInput!){
                     createdAt
                     gamePoint
                     id
+                    isLocated
                     location
                     photoUrl
                     pseudo
+                    slogan
                     updatedAt
                     userId
                 }

@@ -43,7 +43,7 @@ export const MapPerimeter = ({ lat, lng, radius }: MapPerimeterProps) => {
           type="line"
           paint={{
             "line-color": "#3F3979",
-            "line-width": 2,
+            "line-width": 1,
           }}
         />
       </Source>

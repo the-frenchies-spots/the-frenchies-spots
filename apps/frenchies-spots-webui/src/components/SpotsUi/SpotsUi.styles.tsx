@@ -1,6 +1,6 @@
 import { createStyles } from "@frenchies-spots/material";
 
-export const useStyles = createStyles((theme) => ({
+export const useStyles = createStyles((theme, isConnected: boolean) => ({
   container: {},
   spotMenu: {
     zIndex: 1,
@@ -13,7 +13,7 @@ export const useStyles = createStyles((theme) => ({
   buttonMode: {
     position: "absolute",
     left: "50%",
-    bottom: 100,
+    bottom: isConnected ? 100 : 20,
     transform: "translate(-50%, -50%)",
   },
 }));

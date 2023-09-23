@@ -24,12 +24,16 @@ const ContactButton = (props: ContactButtonProps) => {
 
   const { classes } = useStyles();
 
+  const handleContactClick: React.MouseEventHandler<HTMLButtonElement> = (
+    e
+  ) => {
+    e.stopPropagation();
+    onContactClick(profile);
+  };
+
   if (isSmallMode)
     return (
-      <ActionIcon
-        onClick={() => onContactClick(profile)}
-        className={classes.icon}
-      >
+      <ActionIcon onClick={handleContactClick} className={classes.icon}>
         <IconMessages color="white" />
       </ActionIcon>
     );

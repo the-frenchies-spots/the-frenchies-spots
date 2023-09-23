@@ -15,6 +15,11 @@ query tags($tagListInput: TagListInput!){
                 id
                 profile{
                     avatarUrl
+                    avatars{
+                        avatarId
+                        id
+                        profileId
+                    }
                     contacts{
                         authorization
                         contactId
@@ -34,6 +39,7 @@ query tags($tagListInput: TagListInput!){
                     }
                     gamePoint
                     id
+                    isLocated
                     location
                     notifications{
                         content
@@ -68,6 +74,7 @@ query tags($tagListInput: TagListInput!){
                         spotId
                         updatedAt
                     }
+                    slogan
                     spots{
                         address
                         averageRating
@@ -119,9 +126,11 @@ query tags($tagListInput: TagListInput!){
                         createdAt
                         gamePoint
                         id
+                        isLocated
                         location
                         photoUrl
                         pseudo
+                        slogan
                         updatedAt
                         userId
                     }
@@ -165,9 +174,11 @@ query tags($tagListInput: TagListInput!){
                 createdAt
                 gamePoint
                 id
+                isLocated
                 location
                 photoUrl
                 pseudo
+                slogan
                 updatedAt
                 userId
             }
@@ -180,9 +191,11 @@ query tags($tagListInput: TagListInput!){
                     createdAt
                     gamePoint
                     id
+                    isLocated
                     location
                     photoUrl
                     pseudo
+                    slogan
                     updatedAt
                     userId
                 }

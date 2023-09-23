@@ -19,7 +19,11 @@ export class AuthRepository {
   async getOneById(userId: string): Promise<UserEntity> {
     const user = await this.prisma.user.findUnique({
       where: { id: userId },
-      include: { profile: { include: { contacts: true } } },
+      include: {
+        profile: {
+          include: { contacts: true, avatars: { include: { avatar: true } } },
+        },
+      },
     });
     return plainToClass(user, UserEntity);
   }
@@ -28,12 +32,24 @@ export class AuthRepository {
     pseudo: string,
     hashedPassword: string,
     email: string,
+    photoUrl: string | undefined,
+    avatarUrl: string,
+    isLocated: boolean,
   ): Promise<UserEntity> {
     const user = await this.prisma.user.create({
       data: {
         hashedPassword,
         email,
-        profile: { create: { pseudo, location: null } },
+        profile: {
+          create: {
+            pseudo,
+            location: null,
+            photoUrl,
+            avatarUrl,
+            isLocated,
+            gamePoint: 500,
+          },
+        },
       },
       include: { profile: true },
     });

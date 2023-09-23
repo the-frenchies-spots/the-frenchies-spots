@@ -16,6 +16,8 @@ export const signUp = gql`
           photoUrl
           pseudo
           userId
+          isLocated
+          avatarUrl
         }
         role
       }

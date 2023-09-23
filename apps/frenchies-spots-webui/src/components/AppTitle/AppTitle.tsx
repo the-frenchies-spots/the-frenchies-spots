@@ -8,7 +8,7 @@ const AppTitle = (props: AppTitleProps) => {
   const { ...stackProps } = props;
 
   return (
-    <Stack {...stackProps}>
+    <Stack spacing={0} {...stackProps}>
       <Font variant="h1" color="white">
         Entraide
       </Font>

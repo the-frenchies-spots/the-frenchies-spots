@@ -8,7 +8,13 @@ export class ProfileInput {
   pseudo?: string;
 
   @Field({ nullable: true })
+  slogan?: string;
+
+  @Field({ nullable: true })
   gamePoint?: number;
+
+  @Field({ nullable: true })
+  isLocated?: boolean;
 
   @Field({ nullable: true })
   avatarUrl?: string;

@@ -1,7 +1,8 @@
 import { Prisma, PrismaClient } from '@prisma/client';
 import { faker } from '@faker-js/faker';
-import { tagsDataList } from '@frenchies-spots/utils';
+import { tagsDataList, avatarList } from '@frenchies-spots/utils';
 import { coordinatesFaker } from '../src/utils/coordinates.faker';
+import { sloganFaker } from '../src/utils/slogan-faker';
 
 const prisma = new PrismaClient();
 
@@ -24,8 +25,10 @@ const clearDatabase = async () => {
   console.log('Suppression terminée');
 };
 const avatarUrls = [
-  'https://res.cloudinary.com/dw2hb8vmu/image/upload/v1694783898/charac1_xkktq3.png',
-  'https://res.cloudinary.com/dw2hb8vmu/image/upload/v1694783898/charac2_pkbjkc.png',
+  'https://res.cloudinary.com/dw2hb8vmu/image/upload/v1695393898/frenchies-spots/avatar/AVATAR_1_jai09u.gif',
+  'https://res.cloudinary.com/dw2hb8vmu/image/upload/v1695396220/frenchies-spots/avatar/AVATAR_2_hjflww.gif',
+  'https://res.cloudinary.com/dw2hb8vmu/image/upload/v1695397559/frenchies-spots/avatar/AVATAR_3_tomehg.gif',
+  'https://res.cloudinary.com/dw2hb8vmu/image/upload/v1695397553/frenchies-spots/avatar/AVATAR_4_azcart.gif',
 ];
 
 const fakerUser = (index: number): Prisma.UserCreateInput => {
@@ -37,8 +40,10 @@ const fakerUser = (index: number): Prisma.UserCreateInput => {
     profile: {
       create: {
         pseudo: faker.internet.userName(),
+        slogan: sloganFaker(),
         location: randomCoordinates,
-        avatarUrl: avatarUrls[index % 2],
+        avatarUrl: avatarUrls[Math.floor(Math.random() * avatarUrls.length)],
+        isLocated: true,
       },
     },
   };
@@ -68,6 +73,16 @@ const createTag = async () => {
   console.log('Création des terminée');
 };
 
+const createAvatar = async () => {
+  console.log('--------------------------');
+  console.log('Création des avatars...');
+  avatarList.forEach(async (avatar) => {
+    await prisma.avatar.create({ data: avatar as Prisma.AvatarCreateInput });
+  });
+  console.log('--------------------------');
+  console.log('Création des terminée');
+};
+
 async function main() {
   console.log('--------------------------');
   console.log('Début du seed');
@@ -75,8 +90,9 @@ async function main() {
 
   const fakerRounds = 200;
   /// --------- Users ---------------
-  await createUsers(fakerRounds);
+  // await createUsers(fakerRounds);
   /// --------- Tags ---------------
+  await createAvatar();
   await createTag();
 
   console.log('--------------------------');

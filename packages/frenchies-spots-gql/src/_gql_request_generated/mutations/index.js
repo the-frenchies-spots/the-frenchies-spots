@@ -2,6 +2,7 @@ const fs = require('fs');
 const path = require('path');
 
 module.exports.acceptFriendContact = fs.readFileSync(path.join(__dirname, 'acceptFriendContact.gql'), 'utf8');
+module.exports.buyAvatar = fs.readFileSync(path.join(__dirname, 'buyAvatar.gql'), 'utf8');
 module.exports.buyPoint = fs.readFileSync(path.join(__dirname, 'buyPoint.gql'), 'utf8');
 module.exports.createOrUpdateRating = fs.readFileSync(path.join(__dirname, 'createOrUpdateRating.gql'), 'utf8');
 module.exports.deleteNotif = fs.readFileSync(path.join(__dirname, 'deleteNotif.gql'), 'utf8');

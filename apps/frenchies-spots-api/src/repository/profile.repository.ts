@@ -10,7 +10,7 @@ import { ProfileEntity } from '../entity/profile.entity';
 export class ProfileRepository {
   constructor(private prisma: PrismaService) {}
 
-  async getById(profileId: string, friendId: string): Promise<ProfileEntity> {
+  async getById(friendId: string, profileId?: string): Promise<ProfileEntity> {
     const profile = await this.prisma.profile.findUnique({
       where: { id: friendId },
       include: {
@@ -52,6 +52,9 @@ export class ProfileRepository {
       where: {
         id: {
           in: ids?.filter((_profileId) => _profileId !== profileId),
+        },
+        AND: {
+          isLocated: true,
         },
       },
       ...(profileId

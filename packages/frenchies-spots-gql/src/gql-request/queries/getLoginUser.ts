@@ -8,11 +8,14 @@ export const getLoginUser = gql`
       hashedPassword
       hashedRefreshToken
       id
+
       profile {
         createdAt
         gamePoint
         id
         avatarUrl
+        slogan
+        isLocated
         photoUrl
         pseudo
         updatedAt
@@ -25,6 +28,9 @@ export const getLoginUser = gql`
           isFriend
           profileId
           updatedAt
+        }
+        avatars {
+          avatarId
         }
       }
       role

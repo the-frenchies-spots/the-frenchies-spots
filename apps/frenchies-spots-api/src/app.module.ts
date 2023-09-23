@@ -16,6 +16,7 @@ import { ProfileModule } from './module/profile.module';
 import { SocketModule } from './module/socket.module';
 import { ContactModule } from './module/contact.module';
 import { PictureModule } from './module/picture.module';
+import { AvatarModule } from './module/avatar.module';
 
 @Module({
   imports: [
@@ -24,10 +25,6 @@ import { PictureModule } from './module/picture.module';
       driver: ApolloDriver,
       autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
       sortSchema: true,
-      // cors: {
-      //   credentials: true,
-      //   origin: true,
-      // },
     }),
     MongooseModule.forRoot(process.env.DATABASE_URL),
     AuthModule,
@@ -40,6 +37,7 @@ import { PictureModule } from './module/picture.module';
     SocketModule,
     ContactModule,
     PictureModule,
+    AvatarModule,
   ],
   providers: [PrismaService],
 })

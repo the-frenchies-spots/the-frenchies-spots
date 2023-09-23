@@ -2,6 +2,27 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type AvatarEntity {
+  avatarUrl: String!
+  id: String!
+  isPublic: Boolean!
+  pointsRequire: Float!
+  profiles: [ProfileEntity!]
+}
+
+input AvatarInput {
+  avatarId: String!
+  pointsRequire: Float!
+}
+
+type AvatarProfileEntity {
+  avatar: AvatarEntity!
+  avatarId: String!
+  id: String!
+  profile: ProfileEntity!
+  profileId: String!
+}
+
 input BuyPointInput {
   amount: Float!
   paymentId: String!
@@ -94,6 +115,7 @@ type LogoutResponse {
 
 type Mutation {
   acceptFriendContact(contactId: String!): Boolean!
+  buyAvatar(avatarsInput: AvatarInput!): ProfileEntity!
   buyPoint(buyPoint: BuyPointInput!): UserEntity!
   createOrUpdateRating(ratingInput: RatingInput!): RatingResponse!
   deleteNotif(notifId: String!): DeleteResponse!
@@ -160,11 +182,13 @@ type ProfileChatEntity {
 
 type ProfileEntity {
   avatarUrl: String
-  contacts: [ContactEntity!]!
+  avatars: [AvatarProfileEntity!]
+  contacts: [ContactEntity!]
   createdAt: DateTime!
   favorites: [FavoriteEntity!]
   gamePoint: Float!
   id: String!
+  isLocated: Boolean!
   location: JSON
   notifications: [NotificationEntity!]
   photoUrl: String
@@ -172,6 +196,7 @@ type ProfileEntity {
   profileSender: [NotificationEntity!]
   pseudo: String!
   ratings: [RatingEntity!]
+  slogan: String
   spots: [SpotEntity!]
   updatedAt: DateTime!
   user: UserEntity!
@@ -181,9 +206,11 @@ type ProfileEntity {
 input ProfileInput {
   avatarUrl: String
   gamePoint: Float
+  isLocated: Boolean
   location: JSON
   photoUrl: String
   pseudo: String
+  slogan: String
 }
 
 input ProfilesInput {
@@ -255,8 +282,11 @@ type SignResponse {
 }
 
 input SignUpInput {
+  avatarUrl: String!
   email: String!
+  isLocated: Boolean!
   password: String!
+  photoUrl: String
   pseudo: String!
 }
 
