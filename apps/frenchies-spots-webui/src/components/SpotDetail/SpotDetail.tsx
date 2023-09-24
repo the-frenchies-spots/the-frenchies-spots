@@ -78,7 +78,7 @@ const SpotDetail = (props: SpotDetailProps) => {
               </Font>
             </Group>
 
-            {!isPreviewMode && (
+            {!isPreviewMode && profile && (
               <>
                 {!userIsOwner ? (
                   <SpotRating id={spot.id} rating={spot?.rating} />

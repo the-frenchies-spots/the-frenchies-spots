@@ -15,6 +15,7 @@ import SpotPreview from "./Preview/SpotPreview/SpotPreview";
 import ProfilePreview from "./Preview/ProfilePreview/ProfilePreview";
 import { filterListMode } from "../../enum";
 import { useAuth } from "../../hooks/use-auth";
+import SpotUiParamBar from "./SpotUiParamBar/SpotUiParamBar";
 
 interface SpotsUiProps {
   spotList: SpotEntity[] | undefined;
@@ -49,6 +50,7 @@ const SpotsUi = (props: SpotsUiProps) => {
       />
       <SpotUiMode spotList={spotList} peopleList={peopleList} uiMode={uiMode} />
       <SpotModeButton className={classes.buttonMode} />
+      <SpotUiParamBar />
       <SpotDrawer>
         {currentSpot && <SpotPreview spot={currentSpot} h={250} />}
         {currentProfile && (

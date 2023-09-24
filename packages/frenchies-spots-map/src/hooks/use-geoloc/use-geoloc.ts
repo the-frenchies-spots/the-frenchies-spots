@@ -11,22 +11,39 @@ export const useGeoloc = (params?: useGeolocParams) => {
   const [loading, setLoading] = useState<boolean>(true);
 
   const getLocation = () => {
-    setLoading(true);
     if (navigator.geolocation) {
+      // navigator.geolocation.getCurrentPosition(
+      //   (position) => {
+      //     setUserPosition({
+      //       lat: position.coords.latitude,
+      //       lng: position.coords.longitude,
+      //     });
+      //   },
+      //   (error) => {
+      //     console.error(error);
+      //   }
+      // );
+
+      const successCallback: PositionCallback = (position) => {
+        const { latitude, longitude } = position.coords;
+        setUserPosition({ lat: latitude, lng: longitude });
+      };
+
+      const errorCallback: PositionErrorCallback = (error) => {
+        console.error("Erreur de géolocalisation :", error);
+      };
+
+      const options: PositionOptions = {
+        enableHighAccuracy: true,
+        timeout: 50000,
+      };
+
       navigator.geolocation.getCurrentPosition(
-        (position) => {
-          setUserPosition({
-            lat: position.coords.latitude,
-            lng: position.coords.longitude,
-          });
-        },
-        (error) => {
-          console.error(error);
-        }
+        successCallback,
+        errorCallback,
+        options
       );
     }
-    setLoading(false);
-    return null;
   };
 
   useEffect(() => {

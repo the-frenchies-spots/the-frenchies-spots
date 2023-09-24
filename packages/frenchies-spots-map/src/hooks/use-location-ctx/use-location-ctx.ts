@@ -11,6 +11,6 @@ export const useFrSpotsMapContext = () => {
 };
 
 export const useLocationCtx = () => {
-  const { location } = useFrSpotsMapContext();
-  return { location };
+  const { location, refreshLocation } = useFrSpotsMapContext();
+  return { location, refreshLocation };
 };
