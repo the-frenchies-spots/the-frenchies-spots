@@ -28,7 +28,7 @@ export const CornerItem = (props: CornerItemProps) => {
       height={height}
       viewBox="0 0 180.000000 180.000000"
       preserveAspectRatio="xMidYMid meet"
-      style={{ zIndex: 1000000 }}
+      style={{ zIndex: 10 }}
     >
       <g transform={cornerMode[mode]} fill={color} stroke="none">
         <path

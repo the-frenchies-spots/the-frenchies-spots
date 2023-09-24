@@ -15,7 +15,8 @@ export const useStyles = createStyles((theme, isSmallScreen: boolean) => ({
         "	.mantine-Drawer-close": {
           color: "white",
         },
+        zIndex: 10000,
       }
-    : {},
+    : {zIndex: 100000},
   bar: { width: 90, height: 5, background: "#BBB", borderRadius: 50 },
 }));
