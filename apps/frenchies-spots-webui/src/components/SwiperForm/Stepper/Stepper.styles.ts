@@ -18,4 +18,5 @@ export const useStyles = createStyles((theme) => ({
       backgroundColor: theme.colors.darkPurple[2],
     },
   },
+  mainContainer: { backgroundColor: theme.colors.darkPurple[0] },
 }));

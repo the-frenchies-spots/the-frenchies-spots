@@ -1,6 +1,12 @@
-import React, { ReactNode, useState } from "react";
+import React, { ReactNode, useEffect, useState } from "react";
 import { useStyles } from "./Stepper.styles";
-import { ActionIcon, Box, Group, Log } from "@frenchies-spots/material";
+import {
+  ActionIcon,
+  Box,
+  Container,
+  Group,
+  Log,
+} from "@frenchies-spots/material";
 import StepperButton from "./StepperButton/StepperButton";
 import toast from "react-hot-toast";
 import { IconAdjustments, IconX } from "@frenchies-spots/icon";
@@ -27,6 +33,10 @@ const Stepper = (props: StepperProps) => {
 
   const [currentIndex, setCurrentIndex] = useState<number>(initIndex);
 
+  useEffect(() => {
+    setCurrentIndex(initIndex);
+  }, [initIndex]);
+
   const { classes } = useStyles();
 
   const handleSlideTo = (index: number) => {
@@ -47,7 +57,7 @@ const Stepper = (props: StepperProps) => {
   };
 
   return (
-    <Box h="10vh">
+    <Box h="10vh" className={classes.mainContainer}>
       <Group className={classes.toolBar} position="right">
         <ActionIcon
           mx="md"
@@ -58,15 +68,17 @@ const Stepper = (props: StepperProps) => {
           <IconX color="white" />
         </ActionIcon>
       </Group>
-      <Group className={classes.paginationBar} h="50%" grow>
-        {[...Array(nb)].map((_, index) => (
-          <StepperButton
-            key={index}
-            onClick={() => handleChange(index)}
-            isSelected={index === currentIndex}
-          />
-        ))}
-      </Group>
+      <Container size="md" h="50%">
+        <Group className={classes.paginationBar} h="100%" grow>
+          {[...Array(nb)].map((_, index) => (
+            <StepperButton
+              key={index}
+              onClick={() => handleChange(index)}
+              isSelected={index === currentIndex}
+            />
+          ))}
+        </Group>
+      </Container>
     </Box>
   );
 };

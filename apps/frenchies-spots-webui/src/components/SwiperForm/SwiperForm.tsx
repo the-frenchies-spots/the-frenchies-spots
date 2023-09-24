@@ -7,11 +7,12 @@ import "swiper/css";
 interface SwiperFormProps {
   children: ReactNode;
   onSubmit: FormEventHandler<HTMLFormElement>;
+  onChange?: (value: number) => void;
 }
 
 export const SwiperForm = forwardRef(
   (
-    { children, onSubmit }: SwiperFormProps,
+    { children, onSubmit, onChange }: SwiperFormProps,
     ref: Ref<SwiperRef> | undefined
   ) => {
     const swiperParams = {
@@ -25,12 +26,19 @@ export const SwiperForm = forwardRef(
       },
     };
 
+    const handleChange = (newValue: number) => {
+      if (typeof onChange === "function") {
+        onChange(newValue);
+      }
+    };
+
     return (
       <form onSubmit={onSubmit}>
         <Swiper
           {...swiperParams}
           ref={ref}
           onTouchMove={(_, e) => e.preventDefault()}
+          onSlideChange={(swiperCore) => handleChange(swiperCore.activeIndex)}
         >
           {children}
         </Swiper>

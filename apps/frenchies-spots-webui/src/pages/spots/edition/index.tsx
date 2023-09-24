@@ -54,13 +54,11 @@ const SpotInsertPage = () => {
   };
 
   return (
-    <Container size="md">
-      <SpotEditionForm
-        initialValues={initialValues}
-        onSubmit={handleSubmit}
-        loading={loading}
-      />
-    </Container>
+    <SpotEditionForm
+      initialValues={initialValues}
+      onSubmit={handleSubmit}
+      loading={loading}
+    />
   );
 };
 

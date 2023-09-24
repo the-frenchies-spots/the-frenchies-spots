@@ -75,13 +75,21 @@ export const useInitAuth = () => {
         });
     });
 
-    toast.promise(signUpPromess, {
-      loading: "Connexion...",
-      success: (
-        <b>{`Bienvenue ${signUpInput.pseudo}, l'aventure vous attends !`}</b>
-      ),
-      error: <b>Une erreur est survenue !</b>,
-    });
+    toast.promise(
+      signUpPromess,
+      {
+        loading: "Connexion...",
+        success: (
+          <b>{`Bienvenue ${signUpInput.pseudo},  vous gagnez 500 points pour votre inscription !`}</b>
+        ),
+        error: <b>Une erreur est survenue !</b>,
+      },
+      {
+        success: {
+          duration: 5000,
+        },
+      }
+    );
   };
 
   const handleSignIn = async (signInInput: SignInInput): Promise<void> => {

@@ -88,14 +88,13 @@ const SpotUpdatePage = () => {
   return (
     <>
       <LoadingOverlay visible={loading} overlayBlur={2} />
-      <Container size="md" p="md" sx={{ border: "1px solid" }}>
-        {initialValues && (
-          <SpotEditionForm
-            initialValues={initialValues}
-            onSubmit={handleSubmit}
-          />
-        )}
-      </Container>
+
+      {initialValues && (
+        <SpotEditionForm
+          initialValues={initialValues}
+          onSubmit={handleSubmit}
+        />
+      )}
     </>
   );
 };
