@@ -15,7 +15,7 @@ const NotifProvider = ({ children }: NotifProviderProps) => {
     chatMessagesNotRead: number;
     notifications: NotificationEntity[];
   }>(queries.appNotification, {
-    pollInterval: 2000,
+    //pollInterval: 2000,
   });
 
   useEffect(() => {

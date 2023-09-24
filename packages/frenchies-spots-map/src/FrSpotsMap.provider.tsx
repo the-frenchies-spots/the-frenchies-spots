@@ -11,7 +11,7 @@ export const FrSpotsMapProvider = (props: FrSpotsMapProviderProps) => {
 
   const [location, setlocation] = useState<TLocation | null>(null);
 
-  const { userPosition } = useGeoloc({ autoStart: true });
+  const { userPosition, getLocation } = useGeoloc({ autoStart: true });
   const { searchPlace } = useGeocoding();
 
   useEffect(() => {
@@ -28,7 +28,9 @@ export const FrSpotsMapProvider = (props: FrSpotsMapProviderProps) => {
   }, [userPosition]);
 
   return (
-    <FrSpotsMapContext.Provider value={{ location }}>
+    <FrSpotsMapContext.Provider
+      value={{ location, refreshLocation: getLocation }}
+    >
       {children}
     </FrSpotsMapContext.Provider>
   );
