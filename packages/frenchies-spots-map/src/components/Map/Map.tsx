@@ -2,6 +2,7 @@ import React, { useState, useRef, type ReactNode } from "react";
 import ReactMapGL from "react-map-gl";
 import { TViewport, TCoordinate } from "../../types";
 import "mapbox-gl/dist/mapbox-gl.css";
+import { Box } from "@frenchies-spots/material";
 
 interface MapProps {
   viewport: TViewport;
@@ -36,7 +37,11 @@ export const Map = (props: MapProps) => {
       onMove={(evt) => handleViewportChange(evt.viewState)}
       onClick={(evt) => handleCoordinateClick(evt.lngLat)}
       onLoad={() => setLoaded(true)}
-      style={{ width: "100%", height: "100%", ...style }}
+      attributionControl={false}
+      style={{
+        width: "100%",
+        ...style,
+      }}
     >
       {children}
     </ReactMapGL>

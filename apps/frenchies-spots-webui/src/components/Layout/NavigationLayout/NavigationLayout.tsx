@@ -5,6 +5,7 @@ import { Box, Flex, ScrollArea } from "@frenchies-spots/material";
 import Navbar from "../../Navbar/Navbar";
 import { useStyles } from "./NavigationLayout.styles";
 import NotifProvider from "../../../provider/notif-provider";
+import CornerBar from "./../../CornerBar/CornerBar";
 
 interface NavigationLayoutProps {
   children: ReactNode;
@@ -21,7 +22,9 @@ const NavigationLayout = (props: NavigationLayoutProps) => {
         <Box h="100%" className={classes.children}>
           {children}
         </Box>
-        <Navbar className={classes.navbar} />
+        <CornerBar>
+          <Navbar className={classes.navbar} />
+        </CornerBar>
       </Flex>
     </NotifProvider>
   );

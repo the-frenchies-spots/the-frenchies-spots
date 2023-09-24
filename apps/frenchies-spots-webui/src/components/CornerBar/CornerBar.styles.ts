@@ -18,6 +18,7 @@ export const useStyles = createStyles(
     cornersBar: {
       position: "absolute",
       width: "100%",
+      top: params.mode === "bottom" ? -50 : undefined,
     },
     children: {
       backgroundColor: params.color,

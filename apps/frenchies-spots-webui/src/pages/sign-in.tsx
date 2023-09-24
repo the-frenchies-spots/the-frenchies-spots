@@ -31,8 +31,8 @@ const SignIn = () => {
 
   const form = useForm<SignInInput>({
     initialValues: {
-      email: "test@test21.com",
-      password: "azerty",
+      email: "",
+      password: "",
     },
     validate: {
       email: (value: string) => !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value),
