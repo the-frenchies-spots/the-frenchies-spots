@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="4792f459-d323-484d-9b61-de24dee2ef83" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/apps/frenchies-spots-api/prisma/seed.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/frenchies-spots-api/prisma/seed.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/frenchies-spots-api/test/test.spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/frenchies-spots-api/test/test.spec.ts" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2VhXKVTxB8FFpIlUidiORLKjMgP" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "seed-and-test",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.standard": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.standard": "",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs.jest.jest_package": "/Users/mathias/Documents/projects/the-frenchies-spots/apps/frenchies-spots-api/node_modules/jest",
+    "nodejs_package_manager_path": "pnpm",
+    "prettier.import.notification.dismissed": "true",
+    "prettierjs.PrettierConfiguration.Package": "/Users/mathias/Documents/projects/the-frenchies-spots/node_modules/prettier",
+    "ts.external.directory.path": "/Users/mathias/Documents/projects/the-frenchies-spots/packages/frenchies-spots-map/node_modules/typescript/lib",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RunManager" selected="Jest.AppController (e2e)">
+    <configuration name="AppController (e2e)" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+      <node-interpreter value="project" />
+      <jest-package value="$PROJECT_DIR$/apps/frenchies-spots-api/node_modules/jest" />
+      <working-dir value="$PROJECT_DIR$/apps/frenchies-spots-api" />
+      <envs />
+      <scope-kind value="SUITE" />
+      <test-file value="$PROJECT_DIR$/apps/frenchies-spots-api/test/test.spec.ts" />
+      <test-names>
+        <test-name value="AppController (e2e)" />
+      </test-names>
+      <method v="2" />
+    </configuration>
+    <configuration name="AppController (e2e).should create spot" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+      <node-interpreter value="project" />
+      <jest-package value="$PROJECT_DIR$/apps/frenchies-spots-api/node_modules/jest" />
+      <working-dir value="$PROJECT_DIR$/apps/frenchies-spots-api" />
+      <envs />
+      <scope-kind value="TEST" />
+      <test-file value="$PROJECT_DIR$/apps/frenchies-spots-api/test/test.spec.ts" />
+      <test-names>
+        <test-name value="AppController (e2e)" />
+        <test-name value="should create spot" />
+      </test-names>
+      <method v="2" />
+    </configuration>
+    <configuration name="AppController (e2e).should delete spot" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+      <node-interpreter value="project" />
+      <jest-package value="$PROJECT_DIR$/apps/frenchies-spots-api/node_modules/jest" />
+      <working-dir value="$PROJECT_DIR$/apps/frenchies-spots-api" />
+      <envs />
+      <scope-kind value="TEST" />
+      <test-file value="$PROJECT_DIR$/apps/frenchies-spots-api/test/test.spec.ts" />
+      <test-names>
+        <test-name value="AppController (e2e)" />
+        <test-name value="should delete spot" />
+      </test-names>
+      <method v="2" />
+    </configuration>
+    <configuration name="AppController (e2e).should get all spot by value" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+      <node-interpreter value="project" />
+      <jest-package value="$PROJECT_DIR$/apps/frenchies-spots-api/node_modules/jest" />
+      <working-dir value="$PROJECT_DIR$/apps/frenchies-spots-api" />
+      <envs />
+      <scope-kind value="TEST" />
+      <test-file value="$PROJECT_DIR$/apps/frenchies-spots-api/test/test.spec.ts" />
+      <test-names>
+        <test-name value="AppController (e2e)" />
+        <test-name value="should get all spot by value" />
+      </test-names>
+      <method v="2" />
+    </configuration>
+    <configuration name="AppController (e2e).should update spot" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+      <node-interpreter value="project" />
+      <jest-package value="$PROJECT_DIR$/apps/frenchies-spots-api/node_modules/jest" />
+      <working-dir value="$PROJECT_DIR$/apps/frenchies-spots-api" />
+      <envs />
+      <scope-kind value="TEST" />
+      <test-file value="$PROJECT_DIR$/apps/frenchies-spots-api/test/test.spec.ts" />
+      <test-names>
+        <test-name value="AppController (e2e)" />
+        <test-name value="should update spot" />
+      </test-names>
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Jest.AppController (e2e)" />
+        <item itemvalue="Jest.AppController (e2e).should get all spot by value" />
+        <item itemvalue="Jest.AppController (e2e).should delete spot" />
+        <item itemvalue="Jest.AppController (e2e).should update spot" />
+        <item itemvalue="Jest.AppController (e2e).should create spot" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="4792f459-d323-484d-9b61-de24dee2ef83" name="Changes" comment="" />
+      <created>1695289223938</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1695289223938</updated>
+      <workItem from="1695289225236" duration="18213000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="UnknownFeatures">
+    <option featureType="com.intellij.fileTypeFactory" implementationName=".env" />
+  </component>
+</project>

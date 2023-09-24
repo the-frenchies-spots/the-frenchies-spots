@@ -54,9 +54,23 @@ describe('AppController (e2e)', () => {
     }).expect(200);
   });
 
-  it('should get all spot', async () => {
+  it('should get all spot order by desc', async () => {
     await query(queries.spots, {
       orderBy: 'desc',
+    }).expect(200);
+  });
+
+  it('should get all spot limit 500 order by desc', async () => {
+    await query(queries.spots, {
+      take: 500,
+      skip: 0,
+      orderBy: 'asc',
+    }).expect(200);
+  });
+
+  it('should get all spot by value', async () => {
+    await query(queries.spots, {
+      searchValue: 'La dune du Pilat',
     }).expect(200);
   });
 

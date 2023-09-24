@@ -101,8 +101,8 @@ const userData: Prisma.UserCreateInput[] = [
     hashedPassword: "Alice",
     hashedRefreshToken: "token",
     role: "USER_ADMIN",
-    createdAt:"21/09/2023",
-    updatedAt:"21/09/2023",
+    createdAt:"2023-09-17T08:18:13.241+00:00",
+    updatedAt:"2023-09-17T08:18:13.241+00:00",
     profile: {
       create: {
         id: "640779bca1e1a3dc3fb33dc5",
@@ -118,7 +118,11 @@ const userData: Prisma.UserCreateInput[] = [
               isCanPark: false,
               isHidden: true,
               category: "SPARE_TIME_SPOT",
-              location: null,
+              location: {
+                create: {
+                  [43.9359823, -0.9236623],
+                },
+              },
               region: "75",
               address: "Av. de Biscarrosse, 33115 La Teste-de-Buch, France",
               spotPicture: {
