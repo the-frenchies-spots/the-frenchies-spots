@@ -87,12 +87,12 @@ async function main() {
   console.log('Début du seed');
   //await clearDatabase();
 
-  const fakerRounds = 200;
+  const fakerRounds = 100;
   /// --------- Users ---------------
-  // await createUsers(fakerRounds);
+  await createUsers(fakerRounds);
   /// --------- Tags ---------------
   //await createTag();
-  await createAvatar();
+  // await createAvatar();
 
   console.log('--------------------------');
   console.log('Fin du seed');
