@@ -6,9 +6,10 @@ export const useStyles = createStyles((theme, height: number) => ({
     display: "flex",
     flexDirection: "column",
   },
-  children: { flexGrow: 1 },
+  children: { flex: 1, boxSizing: "border-box", overflow: "auto" },
   navigation: {
-    height: height,
+    flex: `0 0 ${height}`,
+    boxSizing: "border-box",
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",

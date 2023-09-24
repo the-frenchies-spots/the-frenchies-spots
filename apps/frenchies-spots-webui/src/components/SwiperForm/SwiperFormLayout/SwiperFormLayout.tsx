@@ -21,7 +21,9 @@ export const SwiperFormLayout = (props: SwiperFormLayoutProps) => {
   return (
     <Box className={classes.container}>
       <Box className={classes.children}>{children}</Box>
-      <Box className={classes.navigation}>{navigation(swipper)}</Box>
+      <Box className={classes.navigation} py="md">
+        {navigation(swipper)}
+      </Box>
     </Box>
   );
 };

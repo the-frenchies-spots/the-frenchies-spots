@@ -14,7 +14,6 @@ const clearDatabase = async () => {
   await prisma.spotPicture.deleteMany({});
   await prisma.notification.deleteMany({});
   await prisma.tagsOnSpots.deleteMany({});
-  await prisma.tag.deleteMany({});
   await prisma.chatMessage.deleteMany({});
   await prisma.contact.deleteMany({});
   await prisma.profileChat.deleteMany({});
@@ -86,14 +85,14 @@ const createAvatar = async () => {
 async function main() {
   console.log('--------------------------');
   console.log('Début du seed');
-  await clearDatabase();
+  //await clearDatabase();
 
   const fakerRounds = 200;
   /// --------- Users ---------------
   // await createUsers(fakerRounds);
   /// --------- Tags ---------------
+  //await createTag();
   await createAvatar();
-  await createTag();
 
   console.log('--------------------------');
   console.log('Fin du seed');

@@ -9,6 +9,7 @@ import {
   Log,
   MultipleImagePicker,
   PrimaryButton,
+  ScrollArea,
   Stack,
   Text,
   TextInput,
@@ -259,36 +260,38 @@ export const SpotEditionForm = (props: SpotEditionFormProps) => {
         {/* PREVIEW */}
         <SwiperSlide>
           <SwiperFrame type="submit" nextLabel="Publier">
-            {profile && (
-              <SpotDetail
-                spot={{
-                  __typename: "SpotByIdResponse",
-                  address: form.values.address,
-                  averageRating: 0,
-                  category: form.values.category,
-                  createdAt: "2023-09-20T12:00:00Z",
-                  description: form.values.description,
-                  favorites: [],
-                  profile,
-                  id: "1",
-                  isCanPark: form.values.isCanPark,
-                  isHidden: form.values.isHidden,
-                  location: {},
-                  name: form.values.name,
-                  profileId: "profile1",
-                  region: form.values.region,
-                  spotPicture: form.values.pictures?.map(({ url }) => ({
-                    url,
-                  })) as SpotPictureEntity[],
-                  tags:
-                    (form.values.tags?.map((tagId) => ({
-                      tag: { id: tagId },
-                    })) as TagOnSpotEntity[]) || [],
-                  updatedAt: "2023-09-20T13:00:00Z",
-                }}
-                isPreviewMode
-              />
-            )}
+            <ScrollArea>
+              {profile && (
+                <SpotDetail
+                  spot={{
+                    __typename: "SpotByIdResponse",
+                    address: form.values.address,
+                    averageRating: 0,
+                    category: form.values.category,
+                    createdAt: "2023-09-20T12:00:00Z",
+                    description: form.values.description,
+                    favorites: [],
+                    profile,
+                    id: "1",
+                    isCanPark: form.values.isCanPark,
+                    isHidden: form.values.isHidden,
+                    location: {},
+                    name: form.values.name,
+                    profileId: "profile1",
+                    region: form.values.region,
+                    spotPicture: form.values.pictures?.map(({ url }) => ({
+                      url,
+                    })) as SpotPictureEntity[],
+                    tags:
+                      (form.values.tags?.map((tagId) => ({
+                        tag: { id: tagId },
+                      })) as TagOnSpotEntity[]) || [],
+                    updatedAt: "2023-09-20T13:00:00Z",
+                  }}
+                  isPreviewMode
+                />
+              )}
+            </ScrollArea>
           </SwiperFrame>
         </SwiperSlide>
       </SwiperForm>
