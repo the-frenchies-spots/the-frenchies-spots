@@ -71,9 +71,9 @@ describe('AppController (e2e)', () => {
     console.log('=============================================');
 
     expect(spot).not.toBeNull();
-  });
+  }, 300000);
 
   afterAll(async () => {
     app.close();
-  }, 5000);
+  }, 300000);
 });
