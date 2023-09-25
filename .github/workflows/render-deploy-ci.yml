@@ -1,0 +1,69 @@
+# .github/workflows/render-deploy-ci.yml
+name: Render Deploy Ci
+
+on:
+  pull_request:
+  push:
+    branches: [master]
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+      - uses: actions/checkout@v3
+
+      - name: Install Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: "18.16.1"
+
+      - name: Install pnpm
+        run: npm install -g pnpm
+
+      - name: Install project dependencies
+        run: pnpm install
+
+      - name: Run tests
+        run: pnpm test --filter frenchies-spots-api
+
+      - name: Deploy
+        if: github.ref == 'refs/heads/master'
+        env:
+          deploy_url: ${{ secrets.RENDER_TOKEN }}
+        run: |
+          curl "$deploy_url"
+
+# jobs:
+#   build-and-deploy:
+#     runs-on: ubuntu-latest
+
+#     steps:
+#       - name: Checkout code
+#         uses: actions/checkout@v2
+
+#       - name: Install Node.js
+#         uses: actions/setup-node@v2
+#         with:
+#           node-version: "14"
+
+#       - name: Install pnpm
+#         run: npm install -g pnpm
+
+#       - name: Install project dependencies
+#         run: pnpm install
+
+#       - name: Run tests
+#         run: pnpm test --filter frenchies-spots-api
+
+#       - name: Deploy to Render
+#         env:
+#           RENDER_TOKEN: ${{ secrets.RENDER_TOKEN }}
+#         run: |
+#           curl -X POST "https://api.render.com/v1/deploys" \
+#             -H "Authorization: Bearer $RENDER_TOKEN" \
+#             -d '{
+#               "branch": "master",
+#               "environment": "the-frenchies-spots-api",
+#               "githubCommitSha": "${{ github.sha }}"
+#             }'
