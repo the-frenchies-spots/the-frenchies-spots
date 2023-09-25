@@ -1,0 +1,262 @@
+//// ------------------------------------------------------
+//// THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+//// ------------------------------------------------------
+
+Table User {
+  id String [pk]
+  email String [unique, not null]
+  hashedPassword String [not null]
+  hashedRefreshToken String
+  role Role [not null, default: 'SIMPLE_USER']
+  createdAt DateTime [default: `now()`, not null]
+  updatedAt DateTime [default: `now()`, not null]
+  profile Profile
+}
+
+Table Profile {
+  id String [pk]
+  pseudo String [unique, not null]
+  slogan String
+  photoUrl String
+  avatarUrl String
+  gamePoint Int [not null, default: 0]
+  userId String [unique, not null]
+  user User [not null]
+  spots Spot [not null]
+  isLocated Boolean [not null, default: false]
+  location Location
+  ratings Rating [not null]
+  notifications Notification [not null]
+  favorites Favorite [not null]
+  avatars AvatarProfile [not null]
+  contacts Contact [not null]
+  profileChats ProfileChat [not null]
+  createdAt DateTime [default: `now()`, not null]
+  updatedAt DateTime [default: `now()`, not null]
+  contact Contact [not null]
+  profileSender Notification [not null]
+}
+
+Table AvatarProfile {
+  id String [pk]
+  avatar Avatar [not null]
+  avatarId String [not null]
+  profile Profile [not null]
+  profileId String [not null]
+  createdAt DateTime [default: `now()`, not null]
+  updatedAt DateTime [default: `now()`, not null]
+}
+
+Table Avatar {
+  id String [pk]
+  pointsRequire Int [not null]
+  avatarUrl String [not null]
+  isPublic Boolean [not null, default: false]
+  profiles AvatarProfile [not null]
+}
+
+Table Notification {
+  id String [pk]
+  profile Profile [not null]
+  profileId String [not null]
+  isRead Boolean [not null, default: false]
+  content Content
+  profileSender Profile [not null]
+  profileSenderId String [unique, not null]
+  type String [not null]
+
+  indexes {
+    (profileId, profileSenderId) [unique]
+  }
+}
+
+Table ProfileChat {
+  id String [pk]
+  profile Profile [not null]
+  profileId String [not null]
+  chat Chat [not null]
+  chatId String [not null]
+  chatMessages ChatMessage [not null]
+  createdAt DateTime [default: `now()`, not null]
+  updatedAt DateTime [default: `now()`, not null]
+
+  indexes {
+    (profileId, chatId) [unique]
+  }
+}
+
+Table Chat {
+  id String [pk]
+  participants ProfileChat [not null]
+  chatMessages ChatMessage [not null]
+  isTemporary Boolean [not null, default: true]
+  createdAt DateTime [default: `now()`, not null]
+  updatedAt DateTime [default: `now()`, not null]
+}
+
+Table ChatMessage {
+  id String [pk]
+  chat Chat [not null]
+  chatId String [unique, not null]
+  profileChat ProfileChat [not null]
+  profileChatId String [not null]
+  isRead Boolean [not null, default: false]
+  message String [not null]
+  createdAt DateTime [default: `now()`, not null]
+  updatedAt DateTime [default: `now()`, not null]
+}
+
+Table Contact {
+  id String [pk]
+  profile Profile [not null]
+  profileId String [unique, not null]
+  contact Profile [not null]
+  contactId String [unique, not null]
+  isFriend Boolean [not null, default: false]
+  authorization Boolean [not null, default: true]
+  createdAt DateTime [default: `now()`, not null]
+  updatedAt DateTime [default: `now()`, not null]
+
+  indexes {
+    (profileId, contactId) [unique]
+  }
+}
+
+Table Spot {
+  id String [pk]
+  name String [not null]
+  description String [not null]
+  isCanPark Boolean [not null, default: false]
+  isHidden Boolean [not null, default: false]
+  category CategoriesSpotAndTag [not null]
+  profile Profile [not null]
+  profileId String [unique, not null]
+  location Location [not null]
+  region String [not null]
+  address String [not null]
+  averageRating Float [not null, default: 0]
+  spotPicture SpotPicture [not null]
+  ratings Rating [not null]
+  favorites Favorite [not null]
+  tags TagsOnSpots [not null]
+  createdAt DateTime [default: `now()`, not null]
+  updatedAt DateTime [default: `now()`, not null]
+}
+
+Table TagsOnSpots {
+  id String [pk]
+  spot Spot
+  tag Tag [not null]
+  spotId String
+  tagId String [not null]
+  createdAt DateTime [default: `now()`, not null]
+  updatedAt DateTime [default: `now()`, not null]
+}
+
+Table Tag {
+  id String [pk]
+  name String [unique, not null]
+  tagPictureUrl String [not null]
+  category CategoriesSpotAndTag [not null]
+  spots TagsOnSpots [not null]
+  createdAt DateTime [default: `now()`, not null]
+  updatedAt DateTime [default: `now()`, not null]
+}
+
+Table SpotPicture {
+  id String [pk]
+  hostId String [not null]
+  url String [not null]
+  spot Spot [not null]
+  spotId String [unique, not null]
+  createdAt DateTime [default: `now()`, not null]
+  updatedAt DateTime [default: `now()`, not null]
+}
+
+Table Rating {
+  id String [pk]
+  rate Float [not null]
+  profile Profile [not null]
+  profileId String [unique, not null]
+  spot Spot [not null]
+  spotId String [unique, not null]
+  createdAt DateTime [default: `now()`, not null]
+  updatedAt DateTime [default: `now()`, not null]
+}
+
+Table Favorite {
+  id String [pk]
+  profile Profile [not null]
+  profileId String [unique, not null]
+  spot Spot [not null]
+  spotId String [unique, not null]
+  createdAt DateTime [default: `now()`, not null]
+  updatedAt DateTime [default: `now()`, not null]
+}
+
+Table Product {
+  id String [pk]
+  photoUrl String
+  gamePoints Int [not null]
+  price Int [not null]
+  createdAt DateTime [default: `now()`, not null]
+  updatedAt DateTime [default: `now()`, not null]
+}
+
+Enum Level {
+  Warning
+  Info
+  Error
+}
+
+Enum CategoriesSpotAndTag {
+  SPARE_TIME_SPOT
+  RESOURCES_SPOT
+}
+
+Enum Role {
+  SIMPLE_USER
+  USER_ADMIN
+}
+
+Enum GeoJSONPoint {
+  Point
+}
+
+Ref: Profile.userId - User.id [delete: Cascade]
+
+Ref: AvatarProfile.avatarId > Avatar.id [delete: Cascade]
+
+Ref: AvatarProfile.profileId > Profile.id [delete: Cascade]
+
+Ref: Notification.profileId > Profile.id
+
+Ref: Notification.profileSenderId > Profile.id
+
+Ref: ProfileChat.profileId > Profile.id
+
+Ref: ProfileChat.chatId > Chat.id
+
+Ref: ChatMessage.chatId > Chat.id [delete: Cascade]
+
+Ref: ChatMessage.profileChatId > ProfileChat.id
+
+Ref: Contact.profileId > Profile.id [delete: Cascade]
+
+Ref: Contact.contactId > Profile.id [delete: Cascade]
+
+Ref: Spot.profileId > Profile.id [delete: Cascade]
+
+Ref: TagsOnSpots.spotId > Spot.id [delete: Cascade]
+
+Ref: TagsOnSpots.tagId > Tag.id [delete: Cascade]
+
+Ref: SpotPicture.spotId > Spot.id [delete: Cascade]
+
+Ref: Rating.profileId > Profile.id [delete: Cascade]
+
+Ref: Rating.spotId > Spot.id [delete: Cascade]
+
+Ref: Favorite.profileId > Profile.id [delete: Cascade]
+
+Ref: Favorite.spotId > Spot.id [delete: Cascade]
