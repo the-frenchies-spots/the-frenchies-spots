@@ -1,5 +1,5 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { INestApplication } from '@nestjs/common';
+import { ExecutionContext, INestApplication } from '@nestjs/common';
 import * as request from 'supertest';
 import { AppModule } from '../src/app.module';
 import { SpotRepository } from '../src/repository/spot.repository';
@@ -8,6 +8,9 @@ import { DocumentNode } from 'graphql';
 import { AuthRepository } from '../src/repository/auth.repository';
 import { mockAuthRepository, mockUser } from './mocks/mock.auth.repository';
 import { mockSpotRepository } from './mocks/mock.spot.repository';
+import { PublicTokenGuard } from '../src/guard/publicToken.guard';
+import { GqlExecutionContext } from '@nestjs/graphql';
+import { RefreshTokenGuard } from '../src/guard/refreshToken.guard';
 
 describe('AppController (e2e)', () => {
   let app: INestApplication;
@@ -18,6 +21,22 @@ describe('AppController (e2e)', () => {
     const module: TestingModule = await Test.createTestingModule({
       imports: [AppModule],
     })
+      .overrideGuard(PublicTokenGuard)
+      .useValue({
+        canActivate: (context: ExecutionContext) => {
+          const ctx = GqlExecutionContext.create(context);
+          ctx.getContext().req.user = mockUser.user;
+          return true;
+        },
+      })
+      .overrideGuard(RefreshTokenGuard)
+      .useValue({
+        canActivate: (context: ExecutionContext) => {
+          const ctx = GqlExecutionContext.create(context);
+          ctx.getContext().req.user = mockUser.user;
+          return true;
+        },
+      })
       .overrideProvider(SpotRepository)
       .useValue(mockSpotRepository)
       .overrideProvider(AuthRepository)
