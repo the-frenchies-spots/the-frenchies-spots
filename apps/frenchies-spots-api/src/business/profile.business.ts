@@ -37,10 +37,7 @@ export class ProfileBusiness {
   ): Promise<ProfileEntity[]> {
     const { point } = profilesInput;
     if (point) {
-      return this.geoService.searchPeopleArround(point).then((profiles) => {
-        const ids = profiles?.length
-          ? profiles.map((profile) => profile._doc._id)
-          : [];
+      return this.geoService.searchPeopleArround(point).then((ids) => {
         if (ids?.length) {
           return this.profileRepository.getAll(profileId, ids);
         }

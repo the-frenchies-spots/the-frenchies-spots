@@ -1,23 +1,14 @@
-import * as mongoose from 'mongoose';
+import mongoose from 'mongoose';
 import { Injectable } from '@nestjs/common';
-import { InjectModel } from '@nestjs/mongoose';
-
-import { Spot } from '../schema/spot.shema';
 import { GeoPointInput } from '../dto/input/geo-point/geo-point-input';
-import { ProfileEntity } from '../entity/profile.entity';
+import { transformDocument } from '../utils/transform-document';
+import { ProfileModel, SpotModel } from './mongoose.service';
 
 @Injectable()
 export class GeospatialService {
-  constructor(
-    @InjectModel('Spot') private spotModel: mongoose.Model<Spot>,
-    @InjectModel('Profile') private profileModel: mongoose.Model<ProfileEntity>,
-  ) {}
-
-  async searchPeopleArround(
-    point: GeoPointInput,
-  ): Promise<{ _doc: Omit<ProfileEntity, 'id'> & { _id: string } }[]> {
+  async searchPeopleArround(point: GeoPointInput): Promise<string[]> {
     const { coordinates, maxDistance } = point;
-    return this.profileModel.find({
+    const profiles = await ProfileModel.find<{ _id: mongoose.Types.ObjectId }>({
       location: {
         $near: {
           $geometry: {
@@ -28,11 +19,12 @@ export class GeospatialService {
         },
       },
     });
+    return transformDocument(profiles);
   }
 
-  async searchArround(point: GeoPointInput): Promise<{ _id: string }[]> {
+  async searchArround(point: GeoPointInput): Promise<string[]> {
     const { coordinates, maxDistance } = point;
-    return this.spotModel.find({
+    const profiles = await SpotModel.find<{ _id: mongoose.Types.ObjectId }>({
       location: {
         $near: {
           $geometry: {
@@ -43,5 +35,6 @@ export class GeospatialService {
         },
       },
     });
+    return transformDocument(profiles);
   }
 }
