@@ -12,12 +12,12 @@ import {
   mockUser,
 } from '../../mocks/repository/mock.auth.repository';
 
+import { AppModule } from '../../../src/app.module';
 import { PublicTokenGuard } from '../../../src/guard/publicToken.guard';
 import { SpotRepository } from '../../../src/repository/spot.repository';
 import { AuthRepository } from '../../../src/repository/auth.repository';
 import { RefreshTokenGuard } from '../../../src/guard/refreshToken.guard';
 import { GeospatialService } from '../../../src/service/spot-geospatial.service';
-import { MockAppModule } from '../../mocks/module/mock.app.module';
 
 describe('AppController (e2e)', () => {
   let app: INestApplication;
@@ -26,7 +26,7 @@ describe('AppController (e2e)', () => {
   beforeEach(async () => {
     jest.setTimeout(60000);
     const module: TestingModule = await Test.createTestingModule({
-      imports: [MockAppModule],
+      imports: [AppModule],
     })
       .overrideGuard(PublicTokenGuard)
       .useValue({
