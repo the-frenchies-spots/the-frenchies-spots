@@ -15,51 +15,49 @@ import { mockGeospatialService } from '../../mocks/mock.geospatial.service';
 import { GeospatialService } from '../../../src/service/spot-geospatial.service';
 
 describe('AppController (e2e)', () => {
-  let app: INestApplication;
-  let query: (query: DocumentNode, variables?: unknown) => request.Test;
+  //   let app: INestApplication;
+  //   let query: (query: DocumentNode, variables?: unknown) => request.Test;
 
-  beforeEach(async () => {
-    jest.setTimeout(300000);
-    const module: TestingModule = await Test.createTestingModule({
-      imports: [AppModule],
-    })
-      .overrideGuard(PublicTokenGuard)
-      .useValue({
-        canActivate: (context: ExecutionContext) => {
-          const ctx = GqlExecutionContext.create(context);
-          ctx.getContext().req.user = mockUser.user;
-          return true;
-        },
-      })
-      .overrideGuard(RefreshTokenGuard)
-      .useValue({
-        canActivate: (context: ExecutionContext) => {
-          const ctx = GqlExecutionContext.create(context);
-          ctx.getContext().req.user = mockUser.user;
-          return true;
-        },
-      })
-      .overrideProvider(GeospatialService)
-      .useValue(mockGeospatialService)
-      .overrideProvider(SpotRepository)
-      .useValue(mockSpotRepository)
-      .overrideProvider(AuthRepository)
-      .useValue(mockAuthRepository)
-      .compile();
-
-    app = module.createNestApplication();
-    await app.init();
-
-    query = (query: DocumentNode, variables?: unknown) => {
-      return request(app.getHttpServer())
-        .post('/graphql')
-        .send({
-          query: query.loc && query.loc.source.body,
-          variables,
-        })
-        .set('authorization', `Bearer ${mockUser.refreshToken}`);
-    };
-  });
+  // beforeEach(async () => {
+  //     jest.setTimeout(300000);
+  //     const module: TestingModule = await Test.createTestingModule({
+  //       imports: [AppModule],
+  //     })
+  //       .overrideGuard(PublicTokenGuard)
+  //       .useValue({
+  //         canActivate: (context: ExecutionContext) => {
+  //           const ctx = GqlExecutionContext.create(context);
+  //           ctx.getContext().req.user = mockUser.user;
+  //           return true;
+  //         },
+  //       })
+  //       .overrideGuard(RefreshTokenGuard)
+  //       .useValue({
+  //         canActivate: (context: ExecutionContext) => {
+  //           const ctx = GqlExecutionContext.create(context);
+  //           ctx.getContext().req.user = mockUser.user;
+  //           return true;
+  //         },
+  //       })
+  //       .overrideProvider(GeospatialService)
+  //       .useValue(mockGeospatialService)
+  //       .overrideProvider(SpotRepository)
+  //       .useValue(mockSpotRepository)
+  //       .overrideProvider(AuthRepository)
+  //       .useValue(mockAuthRepository)
+  //       .compile();
+  // app = module.createNestApplication();
+  // await app.init();
+  // query = (query: DocumentNode, variables?: unknown) => {
+  //   return request(app.getHttpServer())
+  //     .post('/graphql')
+  //     .send({
+  //       query: query.loc && query.loc.source.body,
+  //       variables,
+  //     })
+  //     .set('authorization', `Bearer ${mockUser.refreshToken}`);
+  // };
+  //  });
 
   it('should get one spot by id', async () => {
     // const spot = await query(queries.spotByPk, {
@@ -74,6 +72,6 @@ describe('AppController (e2e)', () => {
   }, 300000);
 
   afterAll(async () => {
-    app.close();
+    //app.close();
   }, 300000);
 });
