@@ -23,6 +23,9 @@ export class SpotResolver {
     @Args('id', { type: () => String }) id: string,
     @CurrentProfileId() profileId: string | undefined,
   ): Promise<SpotByIdResponse> {
+    console.log('======================================================');
+    console.log('JE PASSE DANS LE RESOLVEUR');
+    console.log('======================================================');
     return this.spotBusiness.getById(id, profileId);
   }
 

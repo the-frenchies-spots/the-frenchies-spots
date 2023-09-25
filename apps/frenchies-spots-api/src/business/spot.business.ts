@@ -23,6 +23,9 @@ export class SpotBusiness {
     id: string,
     profileId?: string | undefined,
   ): Promise<SpotByIdResponse> {
+    console.log('======================================================');
+    console.log('JE PASSE DANS LE BUSINESS');
+    console.log('======================================================');
     return this.spotRepository.getById(id, profileId);
   }
 
