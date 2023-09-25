@@ -11,6 +11,8 @@ import { mockSpotRepository } from './mocks/mock.spot.repository';
 import { PublicTokenGuard } from '../src/guard/publicToken.guard';
 import { GqlExecutionContext } from '@nestjs/graphql';
 import { RefreshTokenGuard } from '../src/guard/refreshToken.guard';
+import { mockGeospatialService } from './mocks/mock.geospatial.service';
+import { GeospatialService } from '../src/service/spot-geospatial.service';
 
 describe('AppController (e2e)', () => {
   let app: INestApplication;
@@ -38,6 +40,8 @@ describe('AppController (e2e)', () => {
           return true;
         },
       })
+      .overrideProvider(GeospatialService)
+      .useValue(mockGeospatialService)
       .overrideProvider(SpotRepository)
       .useValue(mockSpotRepository)
       .overrideProvider(AuthRepository)
