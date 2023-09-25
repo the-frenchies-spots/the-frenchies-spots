@@ -77,7 +77,7 @@ describe('AppController (e2e)', () => {
     await query(queries.spots, {
       orderBy: 'desc',
     }).expect(200);
-  }, 5000);
+  });
 
   it('should get all spot limit 500 order by desc', async () => {
     await query(queries.spots, {
@@ -85,13 +85,13 @@ describe('AppController (e2e)', () => {
       skip: 0,
       orderBy: 'asc',
     }).expect(200);
-  }, 5000);
+  });
 
   it('should get all spot by value', async () => {
     await query(queries.spots, {
       searchValue: 'La dune du Pilat',
     }).expect(200);
-  }, 5000);
+  });
 
   it('should create spot', async () => {
     await mutation(mutations.insertSpot, {
@@ -124,22 +124,22 @@ describe('AppController (e2e)', () => {
         ],
       },
     }).expect(200);
-  }, 5000);
+  });
 
   it('should update spot', async () => {
     await mutation(mutations.updateSpot, {
       id: '640779bca1e1a3dc3fb33dc4',
       name: 'La dune du Pilat',
     }).expect(200);
-  }, 5000);
+  });
 
   it('should delete spot', async () => {
     await mutation(mutations.deleteSpot, {
       id: '640779bca1e1a3dc3fb33dc4',
     }).expect(200);
-  }, 5000);
+  });
 
   afterAll(async () => {
     app.close();
-  });
+  }, 5000);
 });
