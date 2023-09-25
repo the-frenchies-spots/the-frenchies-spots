@@ -1,1 +1,1 @@
-describe('getSpotById', () => {});
+// describe('getSpotById', () => {});
