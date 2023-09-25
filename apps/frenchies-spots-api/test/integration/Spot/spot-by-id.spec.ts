@@ -18,20 +18,18 @@ import { SpotRepository } from '../../../src/repository/spot.repository';
 import { AuthRepository } from '../../../src/repository/auth.repository';
 import { RefreshTokenGuard } from '../../../src/guard/refreshToken.guard';
 import { GeospatialService } from '../../../src/service/spot-geospatial.service';
-import { MockAppModule } from '../../mocks/module/mock.app.module';
+
+
 
 describe('AppController (e2e)', () => {
+  jest.setTimeout(60000);
   let app: INestApplication;
   let query: (query: DocumentNode, variables?: unknown) => request.Test;
 
   beforeEach(async () => {
-    jest.setTimeout(60000);
     const module: TestingModule = await Test.createTestingModule({
       imports: [AppModule],
     })
-      .overrideProvider(AppModule)
-      .useValue(MockAppModule)
-
       .overrideGuard(PublicTokenGuard)
       .useValue({
         canActivate: (context: ExecutionContext) => {

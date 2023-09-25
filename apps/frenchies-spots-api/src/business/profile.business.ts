@@ -36,14 +36,14 @@ export class ProfileBusiness {
     profileId: string | undefined,
   ): Promise<ProfileEntity[]> {
     const { point } = profilesInput;
-    if (point) {
-      return this.geoService.searchPeopleArround(point).then((ids) => {
-        if (ids?.length) {
-          return this.profileRepository.getAll(profileId, ids);
-        }
-        return [];
-      });
-    }
+    // if (point) {
+    //   return this.geoService.searchPeopleArround(point).then((ids) => {
+    //     if (ids?.length) {
+    //       return this.profileRepository.getAll(profileId, ids);
+    //     }
+    //     return [];
+    //   });
+    // }
     return this.profileRepository.getAll(profileId);
   }
 

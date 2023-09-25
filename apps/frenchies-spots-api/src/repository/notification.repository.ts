@@ -4,7 +4,6 @@ import { plainToClass, plainToClassMany } from '../utils/plain-to-class';
 import { PrismaService } from '../service/prisma.service';
 import { NotificationEntity } from '../entity/notification.entity';
 import { SendNotifInput } from '../dto/input/notif/send-notif.input';
-import { Profile } from './../schema/profile.shema';
 
 @Injectable()
 export class NotificationRepository {
