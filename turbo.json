@@ -29,6 +29,11 @@
       "persistent": true,
       "env": [".env"]
     },
+    "test": {
+      "cache": false,
+      "persistent": true,
+      "env": [".env"]
+    },
     "lint": {},
     "clean": {
       "cache": false

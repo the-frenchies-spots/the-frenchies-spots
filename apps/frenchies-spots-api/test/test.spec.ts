@@ -29,12 +29,12 @@ describe('AppController (e2e)', () => {
 
     mutation = (mutation: DocumentNode, variables?: unknown) => {
       return request(app.getHttpServer())
-          .post('/graphql')
-          .send({
-            query: mutation.loc && mutation.loc.source.body,
-            variables,
-          })
-          .set('authorization', `Bearer ${mockUser.refreshToken}`);
+        .post('/graphql')
+        .send({
+          query: mutation.loc && mutation.loc.source.body,
+          variables,
+        })
+        .set('authorization', `Bearer ${mockUser.refreshToken}`);
     };
 
     query = (query: DocumentNode, variables?: unknown) => {
@@ -76,19 +76,19 @@ describe('AppController (e2e)', () => {
 
   it('should create spot', async () => {
     await mutation(mutations.insertSpot, {
-      id: "640779bca1e1a3dc3fb33dc4",
-      name: "La dune du Pilat",
+      id: '640779bca1e1a3dc3fb33dc4',
+      name: 'La dune du Pilat',
       description: `La dune du Pilat gardienne du bassin d’Arcachon, mérite son titre de plus haute dune d’Europe. Unique par ses dimensions : 117 m de hauteur, 2,7 km de longueur, 500 m de largeur, son ascension est largement récompensée par la vue que nous réserve le site, il est d’une beauté exceptionnelle. Aux couleurs marines, vert des pins, doré du sable s’ajoute le parfum d’iode et d’odeurs balsamiques.`,
       isCanPark: false,
       isHidden: true,
-      category: "SPARE_TIME_SPOT",
+      category: 'SPARE_TIME_SPOT',
       location: null,
-      region: "75",
-      address: "Av. de Biscarrosse, 33115 La Teste-de-Buch, France",
+      region: '75',
+      address: 'Av. de Biscarrosse, 33115 La Teste-de-Buch, France',
       spotPicture: {
         create: [
           {
-            url: "https://res.cloudinary.com/db00tntyg/image/upload/v1674996522/travelerSpot/dune_du_pilat.png",
+            url: 'https://res.cloudinary.com/db00tntyg/image/upload/v1674996522/travelerSpot/dune_du_pilat.png',
             hostId: '',
           },
         ],
@@ -97,10 +97,10 @@ describe('AppController (e2e)', () => {
       tags: {
         create: [
           {
-            tagId: "641dacefaa522e8ce4a447f6",
+            tagId: '641dacefaa522e8ce4a447f6',
           },
           {
-            tagId: "641dacf89b0c0cb9c0fcb737",
+            tagId: '641dacf89b0c0cb9c0fcb737',
           },
         ],
       },
@@ -109,14 +109,14 @@ describe('AppController (e2e)', () => {
 
   it('should update spot', async () => {
     await mutation(mutations.updateSpot, {
-      id: "640779bca1e1a3dc3fb33dc4",
-      name: "La dune du Pilat",
+      id: '640779bca1e1a3dc3fb33dc4',
+      name: 'La dune du Pilat',
     }).expect(200);
   });
 
   it('should delete spot', async () => {
     await mutation(mutations.deleteSpot, {
-      id: "640779bca1e1a3dc3fb33dc4",
+      id: '640779bca1e1a3dc3fb33dc4',
     }).expect(200);
   });
 
