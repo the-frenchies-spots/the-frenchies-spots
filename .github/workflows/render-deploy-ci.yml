@@ -57,7 +57,12 @@ jobs:
         run: pnpm prisma
 
       - name: Run tests
-        run: pnpm test --filter frenchies-spots-api
+        run: |
+          export DATABASE_URL="${{ secrets.DATABASE_URL }}"
+          export SHADOW_DATABASE_URL="${{ secrets.SHADOW_DATABASE_URL }}"
+          export ACCESS_TOKEN_SECRET="${{ secrets.ACCESS_TOKEN_SECRET }}"
+          export REFRESH_TOKEN_SECRET="${{ secrets.REFRESH_TOKEN_SECRET }}"
+          pnpm test --filter frenchies-spots-api
 
       - name: Deploy to Render
         env:
