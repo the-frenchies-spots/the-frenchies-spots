@@ -29,9 +29,6 @@ describe('AppController (e2e)', () => {
     const module: TestingModule = await Test.createTestingModule({
       imports: [AppModule],
     })
-      .overrideProvider(AppModule)
-      .useValue(MockAppModule)
-
       .overrideGuard(PublicTokenGuard)
       .useValue({
         canActivate: (context: ExecutionContext) => {
