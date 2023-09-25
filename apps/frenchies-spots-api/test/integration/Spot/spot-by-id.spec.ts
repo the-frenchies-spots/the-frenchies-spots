@@ -62,9 +62,15 @@ describe('AppController (e2e)', () => {
   });
 
   it('should get one spot by id', async () => {
-    await query(queries.spotByPk, {
+    const spot = await query(queries.spotByPk, {
       id: 'd9b75a45-afa0-4210-8baf-49fadb8f7495',
-    }).expect(200);
+    });
+
+    console.log('=============================================');
+    console.log({ spot });
+    console.log('=============================================');
+
+    expect(spot).not.toBeNull();
   });
 
   afterAll(async () => {

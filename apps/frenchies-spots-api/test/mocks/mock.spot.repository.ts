@@ -38,7 +38,14 @@ export const mockSpotRepository = {
     isHidden: false,
     category: 'SPARE_TIME_SPOT',
     averageRating: 5,
-    createAt: new Date().toISOString(),
+    region: '3',
+    profileId: '',
+    location: {
+      type: 'Point',
+      coordinates: [0, 0],
+    },
+    createdAt: null,
+    updtaedAt: null,
   }),
 
   update: jest.fn().mockResolvedValue({}),
