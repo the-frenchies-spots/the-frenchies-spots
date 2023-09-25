@@ -1,18 +1,23 @@
+import * as request from 'supertest';
+import { DocumentNode } from 'graphql';
+import { queries } from '@frenchies-spots/gql';
+import { GqlExecutionContext } from '@nestjs/graphql';
 import { Test, TestingModule } from '@nestjs/testing';
 import { ExecutionContext, INestApplication } from '@nestjs/common';
-import * as request from 'supertest';
-import { AppModule } from '../../../src/app.module';
-import { SpotRepository } from '../../../src/repository/spot.repository';
-import { queries } from '@frenchies-spots/gql';
-import { DocumentNode } from 'graphql';
-import { AuthRepository } from '../../../src/repository/auth.repository';
-import { mockAuthRepository, mockUser } from '../../mocks/mock.auth.repository';
-import { mockSpotRepository } from '../../mocks/mock.spot.repository';
+
+import { mockSpotRepository } from '../../mocks/repository/mock.spot.repository';
+import { mockGeospatialService } from '../../mocks/service/mock.geospatial.service';
+import {
+  mockAuthRepository,
+  mockUser,
+} from '../../mocks/repository/mock.auth.repository';
+
 import { PublicTokenGuard } from '../../../src/guard/publicToken.guard';
-import { GqlExecutionContext } from '@nestjs/graphql';
+import { SpotRepository } from '../../../src/repository/spot.repository';
+import { AuthRepository } from '../../../src/repository/auth.repository';
 import { RefreshTokenGuard } from '../../../src/guard/refreshToken.guard';
-import { mockGeospatialService } from '../../mocks/mock.geospatial.service';
 import { GeospatialService } from '../../../src/service/spot-geospatial.service';
+import { MockAppModule } from '../../mocks/module/mock.app.module';
 
 describe('AppController (e2e)', () => {
   let app: INestApplication;
@@ -21,7 +26,7 @@ describe('AppController (e2e)', () => {
   beforeEach(async () => {
     jest.setTimeout(60000);
     const module: TestingModule = await Test.createTestingModule({
-      imports: [AppModule],
+      imports: [MockAppModule],
     })
       .overrideGuard(PublicTokenGuard)
       .useValue({
