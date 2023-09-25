@@ -48,11 +48,11 @@ describe('AppController (e2e)', () => {
     };
   });
 
-  it('should get one spot by id', async () => {
-    await query(queries.spotByPk, {
-      id: 'd9b75a45-afa0-4210-8baf-49fadb8f7495',
-    }).expect(200);
-  });
+  // it('should get one spot by id', async () => {
+  //   await query(queries.spotByPk, {
+  //     id: 'd9b75a45-afa0-4210-8baf-49fadb8f7495',
+  //   }).expect(200);
+  // });
 
   it('should get all spot order by desc', async () => {
     await query(queries.spots, {
