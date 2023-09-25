@@ -66,10 +66,6 @@ describe('AppController (e2e)', () => {
       id: 'd9b75a45-afa0-4210-8baf-49fadb8f7495',
     });
 
-    console.log('=============================================');
-    console.log({ spot });
-    console.log('=============================================');
-
     expect(spot).not.toBeNull();
   }, 300000);
 
