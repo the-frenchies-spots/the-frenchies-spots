@@ -14,6 +14,7 @@
     "webui": " dotenv -- turbo run dev --filter frenchies-spots-webui --no-daemon",
     "api": " dotenv -- turbo run dev --filter frenchies-spots-api --no-daemon",
     "build": "dotenv -- turbo run build",
+    "prisma": "dotenv -- turbo run prisma --filter frenchies-spots-api",
     "test": "dotenv -- turbo run test",
     "seed": "dotenv -- turbo run seed --filter frenchies-spots-api",
     "start": "dotenv -- turbo run start",

@@ -53,6 +53,9 @@ jobs:
       - name: Install project dependencies
         run: pnpm install
 
+      - name: Install prisma
+        run: pnpm prisma
+
       - name: Run tests
         run: pnpm test --filter frenchies-spots-api
 
