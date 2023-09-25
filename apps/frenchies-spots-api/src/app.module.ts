@@ -26,7 +26,7 @@ import { AvatarModule } from './module/avatar.module';
       autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
       sortSchema: true,
     }),
-    MongooseModule.forRoot(process.env.DATABASE_URL),
+    //MongooseModule.forRoot(process.env.DATABASE_URL),
     AuthModule,
     SpotModule,
     UserModule,
