@@ -30,17 +30,15 @@ const SpotList = (props: SpotListProps) => {
   if (!list) return null;
   return (
     <Container size="md" h="100%" {...containerProps}>
-      <ScrollArea h="100%" p={0} m={0}>
-        <Grid>
-          {list.map((spot) => (
-            <Grid.Col key={spot.id} md={4} sm={6} xs={12}>
-              <SpotCard spot={spot} onClick={handleDetailClick}>
-                {children}
-              </SpotCard>
-            </Grid.Col>
-          ))}
-        </Grid>
-      </ScrollArea>
+      <Grid>
+        {list.map((spot) => (
+          <Grid.Col key={spot.id} md={4} sm={6} xs={12}>
+            <SpotCard spot={spot} onClick={handleDetailClick}>
+              {children}
+            </SpotCard>
+          </Grid.Col>
+        ))}
+      </Grid>
     </Container>
   );
 };

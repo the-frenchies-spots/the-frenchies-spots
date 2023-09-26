@@ -5,6 +5,7 @@ import {
   RatingResponse,
   SpotByIdResponse,
   mutations,
+  queries,
 } from "@frenchies-spots/gql";
 import { useMutation } from "@apollo/client";
 import { Rating, Group, Text, Log, Loader } from "@frenchies-spots/material";
@@ -20,7 +21,9 @@ const SpotRating = ({ id: spotId, rating: initRating }: SpotRatingProps) => {
   const [insertRate, { loading }] = useMutation<
     { createOrUpdateRating: RatingResponse },
     MutationCreateOrUpdateRatingArgs
-  >(mutations.createOrUpdateRating);
+  >(mutations.createOrUpdateRating, {
+    refetchQueries: [queries.spots, queries.spotByPk],
+  });
 
   const handleRatingChange = (value: number) => {
     if (!loading) {

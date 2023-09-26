@@ -1,7 +1,7 @@
 import React from "react";
 
 import { useStyles } from "./SelectCardItemStyle";
-import { Box, Text, Title } from "@frenchies-spots/material";
+import { Box, Font, Stack, Text, Title } from "@frenchies-spots/material";
 
 export type TCardItem = {
   name: string;
@@ -26,11 +26,10 @@ export const SelectCardItem = (props: SelectCardItemProps) => {
 
   return (
     <Box className={classes.container} onClick={handleClick}>
-      <Text className={classes.label}>
-        <Text>{name}</Text>
-        <Text> - </Text>
-        <Text>{description}</Text>
-      </Text>
+      <Stack ta="center" spacing={4}>
+        <Font variant="h3">{name}</Font>
+        <Font variant="h4">{description}</Font>
+      </Stack>
     </Box>
   );
 };

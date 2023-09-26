@@ -2,7 +2,7 @@ import React from "react";
 
 import { useStyles } from "./DisplayTagItem.style";
 import { capitalize } from "lodash";
-import { Box, Image, Stack, Text } from "@frenchies-spots/material";
+import { Box, Font, Image, Stack, Text } from "@frenchies-spots/material";
 
 export type TTagItem = {
   id: string;
@@ -30,9 +30,9 @@ export const DisplayTagItem = (props: DisplayTagItemProps) => {
             alt="alt"
           />
         </Box>
-        <Text className={classes.tagLabel} ta="center">
+        <Font ta="center" variant="caption" color="darkPurple">
           {capitalize(name)}
-        </Text>
+        </Font>
       </Stack>
     </Box>
   );

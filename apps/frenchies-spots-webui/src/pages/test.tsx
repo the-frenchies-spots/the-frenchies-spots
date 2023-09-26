@@ -3,6 +3,7 @@ import React, { ReactElement } from "react";
 import {
   Container,
   Font,
+  InputForm,
   PrimaryButton,
   PrimaryButtonLittle,
   SecondaryButton,
@@ -14,27 +15,17 @@ import NavigationLayout from "../components/Layout/NavigationLayout/NavigationLa
 
 const TestPage = () => {
   return (
-    <Container size="sm" p={0} h="100%" sx={{ border: "2px solid" }}>
+    <Container size="sm" h="100%" sx={{ border: "2px solid" }} p="md">
       <Font variant="h1">Entraide partage voyage</Font>
-      <Font variant="h2">Entraide partage voyage</Font>
-      <Font variant="h3">Entraide partage voyage</Font>
-      <Font variant="h4">Entraide partage voyage</Font>
-      <Font variant="h5">Entraide partage voyage</Font>
-      <Font variant="body">Entraide partage voyage</Font>
-      <Font variant="subtitle1">Entraide partage voyage</Font>
-      <Font variant="subtitle2">Entraide partage voyage</Font>
-      <Font variant="caption">Entraide partage voyage</Font>
-      <Stack p="xl">
-        <SecondaryButton>Tout</SecondaryButton>
-        <SecondaryButton selected>Tout</SecondaryButton>
-        <PrimaryButton>Explore</PrimaryButton>
-        <PrimaryButton variant="outline">Contacter</PrimaryButton>
-        <PrimaryButtonLittle>Acheter des points</PrimaryButtonLittle>
-        <PrimaryButton variant="subtle">Déconnexion</PrimaryButton>
-        <PrimaryButton variant="subtle" color="purple">
-          Retour
-        </PrimaryButton>
-      </Stack>
+      <InputForm label="Je suis un label" />
+      <InputForm label="Je suis un label" variant="filled" />
+      <InputForm label="Je suis un label" error={true} errorMessage="test" />
+      <InputForm
+        label="Je suis un label"
+        variant="filled"
+        error={true}
+        errorMessage="test"
+      />
     </Container>
   );
 };

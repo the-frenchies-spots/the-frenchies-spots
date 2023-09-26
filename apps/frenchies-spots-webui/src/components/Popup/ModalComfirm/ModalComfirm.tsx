@@ -7,6 +7,8 @@ import {
   Modal,
   Text,
   type ModalProps,
+  PrimaryButton,
+  Font,
 } from "@frenchies-spots/material";
 
 interface ModalComfirmProps
@@ -56,10 +58,14 @@ const ModalComfirm = (props: ModalComfirmProps) => {
         onClose={close}
         onClick={(e) => e.stopPropagation()}
       >
-        <Text>{label || "Êtes-vous sûr de cette action ?"}</Text>
+        <Font>{label || "Êtes-vous sûr de cette action ?"}</Font>
         <Group position="right" mt="md">
-          <Button onClick={handleComfirm}>{comfirmLabel || "Oui"}</Button>
-          <Button onClick={handleCancel}>{cancelLabel || "Non"}</Button>
+          <PrimaryButton onClick={handleComfirm}>
+            {comfirmLabel || "Oui"}
+          </PrimaryButton>
+          <PrimaryButton variant="outline" onClick={handleCancel}>
+            {cancelLabel || "Non"}
+          </PrimaryButton>
         </Group>
       </Modal>
       {children(open)}

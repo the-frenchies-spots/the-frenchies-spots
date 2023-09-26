@@ -4,6 +4,7 @@ import React from "react";
 import { useRouter } from "next/router";
 import {
   BackButton,
+  Box,
   Container,
   Flex,
   Font,
@@ -11,7 +12,7 @@ import {
   PrimaryButton,
   Stack,
 } from "@frenchies-spots/material";
-import { SpotByIdResponse } from "@frenchies-spots/gql";
+import { SpotByIdResponse, SpotEntity } from "@frenchies-spots/gql";
 import SpotPictureSwiper from "../../components/Spots/SpotPictureSwiper/SpotPictureSwiper";
 import SpotRating from "../../components/Spots/SpotRating/SpotRating";
 import FavoriteButton from "../../components/Spots/SpotButton/FavoriteButton/FavoriteButton";
@@ -23,6 +24,7 @@ import DeleteButton from "../../components/Spots/SpotButton/DeleteButton/DeleteB
 import { tagsDataList } from "@frenchies-spots/utils";
 import { DisplayTag } from "../../components/Spots/DisplayTag";
 import LoadingOverlay from "../LoadingOverlay/LoadingOverlay";
+import SpotBadges from "../Spots/SpotBadges/SpotBadges";
 
 interface SpotDetailProps {
   spot: SpotByIdResponse | undefined;
@@ -50,15 +52,22 @@ const SpotDetail = (props: SpotDetailProps) => {
       <LoadingOverlay visible={loading} />
       {spot && (
         <Container size="md" p={0} sx={{ position: "relative" }}>
-          {!isPreviewMode && (
-            <BackButton
-              sx={{ position: "absolute", top: 0, left: 0 }}
-              m="xl"
-              onClick={() => router.back()}
-            />
-          )}
-
-          <SpotPictureSwiper pictures={spot?.spotPicture} />
+          <Box sx={{ position: "relative" }}>
+            {spot && (
+              <SpotBadges
+                spot={spot as SpotEntity}
+                sx={{ position: "absolute", bottom: 20 }}
+              />
+            )}
+            {!isPreviewMode && (
+              <BackButton
+                sx={{ position: "absolute", top: 0, left: 0 }}
+                m="xl"
+                onClick={() => router.back()}
+              />
+            )}
+            <SpotPictureSwiper pictures={spot?.spotPicture} />
+          </Box>
 
           <Stack p="md">
             <Group position="apart">

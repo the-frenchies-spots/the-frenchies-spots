@@ -1,12 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect } from "react";
-import {
-  ActionIcon,
-  Container,
-  Group,
-  Stack,
-  type StackProps,
-} from "@frenchies-spots/material";
+import React, { useCallback, useEffect } from "react";
+import { ActionIcon, Stack, type StackProps } from "@frenchies-spots/material";
 import {
   IconCurrentLocation,
   IconMinus,
@@ -16,6 +10,8 @@ import { useStyles } from "./SpotUiParamBar.styles";
 import { useLocationCtx } from "@frenchies-spots/map";
 import { useSpotUi } from "../../../hooks/use-spot-ui";
 import { getZoomByRadius } from "../../../utils/get-zoom-by-radius";
+import { SpotsInput } from "@frenchies-spots/gql";
+import { debounce } from "lodash";
 
 interface SpotUiParamBarProps extends StackProps {}
 
@@ -23,29 +19,57 @@ const SpotUiParamBar = (props: SpotUiParamBarProps) => {
   const { ...other } = props;
 
   const { classes } = useStyles();
+  const { location } = useLocationCtx();
 
-  const { refreshLocation } = useLocationCtx();
-  const { form, setViewPort, coordPoint } = useSpotUi();
+  const {
+    form,
+    setViewPort,
+    coordPoint,
+    setCoordPoint,
+    onFilterSpot,
+    onFilterPeople,
+  } = useSpotUi();
+
   const handlePositionClick = () => {
-    if (typeof refreshLocation === "function") {
-      refreshLocation();
+    if (location?.coordinates) {
+      setCoordPoint(location.coordinates);
+      setViewPort((prev) => {
+        if (coordPoint) {
+          return {
+            ...prev,
+            latitude: location.coordinates.lat,
+            longitude: location.coordinates.lng,
+          };
+        }
+        return { ...prev };
+      });
     }
   };
 
+  const handleDebounceChangeFilter = useCallback(
+    debounce((spotInput: SpotsInput) => {
+      onFilterSpot(spotInput);
+      onFilterPeople({ point: spotInput.point });
+    }, 700),
+    []
+  );
+
   const handlePlusClick = () => {
-    form.setValues((prev) => ({
-      ...prev,
-      point: { ...prev.point, maxDistance: prev.point.maxDistance + 1000 },
-    }));
+    form.setValues((prev) => {
+      const maxDistance = prev.point.maxDistance + 1000;
+      const point = { ...prev.point, maxDistance };
+      handleDebounceChangeFilter({ ...prev, point });
+      return { ...prev, point };
+    });
   };
 
   const handleMinusClick = () => {
     form.setValues((prev) => {
-      if (prev.point.maxDistance - 1000 <= 0) return prev;
-      return {
-        ...prev,
-        point: { ...prev.point, maxDistance: prev.point.maxDistance - 1000 },
-      };
+      const maxDistance = prev.point.maxDistance - 1000;
+      if (maxDistance - 1000 <= 0) return prev;
+      const point = { ...prev.point, maxDistance };
+      handleDebounceChangeFilter({ ...prev, point });
+      return { ...prev, point };
     });
   };
 
@@ -74,14 +98,16 @@ const SpotUiParamBar = (props: SpotUiParamBarProps) => {
       >
         <IconCurrentLocation color="black" />
       </ActionIcon>
-      <Stack spacing={0}>
-        <ActionIcon className={classes.zoomButton} onClick={handlePlusClick}>
-          <IconPlus color="black" />
-        </ActionIcon>
-        <ActionIcon className={classes.zoomButton} onClick={handleMinusClick}>
-          <IconMinus color="black" />
-        </ActionIcon>
-      </Stack>
+      {form?.values?.point && (
+        <Stack spacing={0}>
+          <ActionIcon className={classes.zoomButton} onClick={handlePlusClick}>
+            <IconPlus color="black" />
+          </ActionIcon>
+          <ActionIcon className={classes.zoomButton} onClick={handleMinusClick}>
+            <IconMinus color="black" />
+          </ActionIcon>
+        </Stack>
+      )}
     </Stack>
   );
 };

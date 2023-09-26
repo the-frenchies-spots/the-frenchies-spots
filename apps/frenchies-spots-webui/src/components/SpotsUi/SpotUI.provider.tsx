@@ -80,6 +80,7 @@ export const SpotUiProvider = (props: SpotUiProviderProps) => {
     const initFilterPeople = getFuncOrThrow(getPeoples);
     const initFilterSpot = getFuncOrThrow(getFilterSpots);
     if (userPosition && !coordinates) {
+      console.log({ userPosition });
       setPlaceName(userPosition.value);
       initViewPortMap(userPosition.coordinates);
     } else {

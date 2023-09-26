@@ -13,6 +13,7 @@ import {
   PrimaryButton,
   Box,
   Font,
+  InputForm,
 } from "@frenchies-spots/material";
 import { SignInInput } from "@frenchies-spots/gql";
 import { useAuth } from "@/hooks";
@@ -86,34 +87,35 @@ const SignIn = () => {
               p="md"
             >
               <Font variant="h2">Se Connecter</Font>
-              <TextInput
-                label="Email"
+              <InputForm
+                label="Mon email"
                 type="email"
+                variant="filled"
                 {...form.getInputProps("email")}
-                error={form.errors.email && "L'email est invalide"}
+                error={!!form.errors.email}
+                errorMessage="L'email est invalide"
                 required
               />
-              <TextInput
-                label="Mot de passe"
+              <InputForm
+                label="Mon mot de passe"
                 type="password"
+                variant="filled"
                 {...form.getInputProps("password")}
-                error={
-                  form.errors.password &&
-                  "Le mot de passe doit avoir au moins 6 caractères"
-                }
+                error={!!form.errors.password}
+                errorMessage="Le mot de passe doit avoir au moins 6 caractères"
                 required
               />
               <PrimaryButton type="submit" style={{ marginTop: 16 }} w="100%">
                 Se connecter
               </PrimaryButton>
               <Group position="apart">
-                <Button
+                <PrimaryButton
                   variant="subtle"
+                  color="purple"
                   onClick={() => router.push("/sign-up")}
                 >
                   Créer mon compte
-                </Button>
-                <Button variant="subtle">Mot de passe oublié</Button>
+                </PrimaryButton>
               </Group>
             </Stack>
           </form>

@@ -67,7 +67,7 @@ export const useInitAuth = () => {
             signResponse?.data?.signUp?.refreshToken
           );
           resolve(signResponse);
-          router.push("/spots");
+          router.push("/welcome");
         })
         .catch((error) => {
           reject(error);
@@ -75,21 +75,11 @@ export const useInitAuth = () => {
         });
     });
 
-    toast.promise(
-      signUpPromess,
-      {
-        loading: "Connexion...",
-        success: (
-          <b>{`Bienvenue ${signUpInput.pseudo},  vous gagnez 500 points pour votre inscription !`}</b>
-        ),
-        error: <b>Une erreur est survenue !</b>,
-      },
-      {
-        success: {
-          duration: 5000,
-        },
-      }
-    );
+    toast.promise(signUpPromess, {
+      loading: "Connexion...",
+      success: <b>{`Création de compte réussi !`}</b>,
+      error: <b>Une erreur est survenue !</b>,
+    });
   };
 
   const handleSignIn = async (signInInput: SignInInput): Promise<void> => {

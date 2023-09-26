@@ -1,6 +1,6 @@
 import React, { ReactElement } from "react";
 
-import { Container, Stack, Tabs, Text } from "@frenchies-spots/material";
+import { Container, Font, Stack, Tabs, Text } from "@frenchies-spots/material";
 
 import { PageLayout } from "../components";
 import NavigationLayout from "../components/Layout/NavigationLayout/NavigationLayout";
@@ -21,13 +21,27 @@ const Shop = () => {
     <Container size="md" h="100%">
       <Stack mt="md" mb="md">
         <StatusBar />
-        <Text>Espace boutique</Text>
-        <Text>tu as {profile?.gamePoint} points</Text>
+        <Font variant="h2">Espace boutique</Font>
+        <Font>
+          Tu as <b>{profile?.gamePoint}</b> points
+        </Font>
       </Stack>
-      <Tabs defaultValue="buy_points" h="80%">
+      <Tabs
+        defaultValue="personalization"
+        h="80%"
+        sx={{
+          ".mantine-1hher0m[data-active]": {
+            borderBottom: "2px solid #3F3979 ",
+          },
+        }}
+      >
         <Tabs.List grow>
-          <Tabs.Tab value="personalization">Personnalisation</Tabs.Tab>
-          <Tabs.Tab value="buy_points">Acheter des points</Tabs.Tab>
+          <Tabs.Tab value="personalization">
+            <Font>Personnalisation</Font>
+          </Tabs.Tab>
+          <Tabs.Tab value="buy_points">
+            <Font>Acheter des points</Font>
+          </Tabs.Tab>
         </Tabs.List>
 
         <Tabs.Panel value="personalization" pt="xs" h="80%">

@@ -8,9 +8,11 @@ import {
   BackButton,
   Container,
   Flex,
+  InputForm,
   PrimaryButton,
   Stack,
   Switch,
+  SwitchInput,
   TextInput,
 } from "@frenchies-spots/material";
 import LoadingOverlay from "../../components/LoadingOverlay/LoadingOverlay";
@@ -69,9 +71,17 @@ const ConfigPage = () => {
             </Flex>
 
             <Stack>
-              <TextInput label="pseudo" {...form.getInputProps("pseudo")} />
-              <TextInput label="slogan" {...form.getInputProps("slogan")} />
-              <Switch
+              <InputForm
+                variant="filled"
+                label="pseudo"
+                {...form.getInputProps("pseudo")}
+              />
+              <InputForm
+                variant="filled"
+                label="slogan"
+                {...form.getInputProps("slogan")}
+              />
+              <SwitchInput
                 defaultChecked
                 label="Autoriser la localisation ?"
                 checked={form.getInputProps("isLocated").value}

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import { Box } from "@frenchies-spots/material";
+import { Box, fonts } from "@frenchies-spots/material";
 import { AutocompleteAddress } from "./../AutocompleteAddress/AutocompleteAddress";
 import { LocationPicker } from "./../LocationPicker/LocationPicker";
 import { SelectRegion } from "../SelectRegion/SelectRegion";
@@ -39,6 +39,17 @@ export const LocationManager = ({ value, onChange }: LocationManagerProps) => {
       <AutocompleteAddress
         value={locationData?.location?.value}
         onChange={handleChange}
+        sx={(theme) => ({
+          ".mantine-Autocomplete-input": {
+            backgroundColor: theme.colors.lightBluePurple[0],
+            color: theme.colors.darkPurple[0],
+            ...fonts["Montserrat-Regular"].style,
+            fontSize: 16,
+            fontStyle: "normal",
+            fontWeight: 400,
+            boxShadow: "0px 4px 8px 0px #DBDBDB",
+          },
+        })}
       />
       <Box className={classes.locationPicker}>
         <LocationPicker

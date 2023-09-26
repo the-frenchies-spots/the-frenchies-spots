@@ -3,7 +3,7 @@ import React from "react";
 import {
   Stack,
   Group,
-  Button,
+  fonts,
   Container,
   Box,
   ActionIcon,
@@ -76,12 +76,25 @@ const SpotMenu = (props: SpotMenuProps) => {
             placeholder="search address"
             value={placeName}
             onTextChange={setPlaceName}
-            sx={{ position: "relative" }}
+            sx={{
+              position: "relative",
+              ".mantine-Autocomplete-input": {
+                borderRadius: 8,
+                overflow: "hidden",
+                borderColor: "#3F3979",
+                color: "#3F3979",
+                ...fonts["Montserrat-Regular"].style,
+                fontSize: 16,
+                fontStyle: "normal",
+                fontWeight: 400,
+                boxShadow: "0px 4px 8px 0px #DBDBDB",
+              },
+            }}
             rightSection={
               <Flex
                 sx={{
                   position: "absolute",
-                  right: 0,
+                  right: 2,
                   backgroundColor: "white",
                 }}
                 justify="center"

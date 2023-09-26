@@ -12,6 +12,8 @@ import {
   Text,
   Log,
   Switch,
+  InputForm,
+  SwitchInput,
 } from "@frenchies-spots/material";
 import { SignUpInput } from "@frenchies-spots/gql";
 import { useAuth } from "@/hooks";
@@ -100,14 +102,12 @@ const SignUp = () => {
               </Flex>
 
               <Stack mt="md">
-                <TextInput
+                <InputForm
                   label="Email"
                   type="email"
                   {...form.getInputProps("email")}
-                  error={
-                    form.values.password !== form.values.comfirmPassword &&
-                    "Le password ne corespond pas"
-                  }
+                  error={form.values.password !== form.values.comfirmPassword}
+                  errorMessage="Le password ne corespond pas"
                   required
                 />
 
@@ -129,14 +129,12 @@ const SignUp = () => {
                         />
                       </Stack>
                     </Flex>
-                    <TextInput
+                    <InputForm
                       label="Pseudo"
                       type="text"
                       {...form.getInputProps("pseudo")}
-                      error={
-                        form.errors.pseudo &&
-                        "Le pseudo doit avoir au moins 2 caractères"
-                      }
+                      error={!!form.errors.pseudo}
+                      errorMessage="Le pseudo doit avoir au moins 2 caractères"
                       required
                     />
                   </>
@@ -188,28 +186,24 @@ const SignUp = () => {
             </Flex>
 
             <Stack>
-              <TextInput
+              <InputForm
                 label="Mot de passe"
                 type="password"
                 {...form.getInputProps("password")}
-                error={
-                  form.errors.password &&
-                  "Le mot de passe doit avoir au moins 6 caractères"
-                }
+                error={!!form.errors.password}
+                errorMessage="Le mot de passe doit avoir au moins 6 caractères"
                 required
               />
-              <TextInput
+              <InputForm
                 label="Comfirme Mot de passe"
                 type="password"
                 {...form.getInputProps("comfirmPassword")}
-                error={
-                  form.errors.comfirmPassword &&
-                  "Le mot de passe doit avoir au moins 6 caractères"
-                }
+                error={!!form.errors.comfirmPassword}
+                errorMessage="Le mot de passe doit avoir au moins 6 caractères"
                 required
               />
 
-              <Switch
+              <SwitchInput
                 defaultChecked
                 label="Autoriser la localisation ?"
                 checked={form.getInputProps("isLocated").value}

@@ -2,6 +2,7 @@ import {
   IconBellFilled,
   IconMapPinFilled,
   IconUserSquareRounded,
+  ProfileUserIcon,
 } from "@frenchies-spots/icon";
 import {
   Group,
@@ -19,6 +20,7 @@ import { truncate } from "@frenchies-spots/utils";
 import { useAuth } from "../../hooks/use-auth";
 import { useRouter } from "next/router";
 import Notifiction from "../Notification/Notifiction";
+import { extractAddress } from "../../utils/extract-address";
 
 interface StatusBarProps extends GroupProps {
   isMapMode?: boolean;
@@ -46,7 +48,7 @@ const StatusBar = (props: StatusBarProps) => {
             <IconMapPinFilled size="16" style={{ color: "#3F3979" }} />
             {location ? (
               <Font variant="h5" truncate="end">
-                {truncate(location?.value, 30)}
+                {extractAddress(location?.value)}
               </Font>
             ) : (
               <Loader />
@@ -62,7 +64,7 @@ const StatusBar = (props: StatusBarProps) => {
           className={classes.actionIcon}
           onClick={() => router.push("/sign-in")}
         >
-          <IconUserSquareRounded />
+          <ProfileUserIcon color="#A480A6" size={25} />
         </ActionIcon>
       )}
     </Group>

@@ -1,7 +1,7 @@
 import React from "react";
 
 import { useStyles } from "./SelectCardLittleItem.styles";
-import { Box, Text } from "@frenchies-spots/material";
+import { Box, Font, Text } from "@frenchies-spots/material";
 
 export type TSelectCardLittle = {
   name: string;
@@ -27,7 +27,7 @@ export const SelectCardLittleItem = (props: SelectCardLittleItemProps) => {
   return (
     <Box className={classes.container} onClick={handleClick}>
       <Box className={classes.label}>
-        <Text>{name}</Text>
+        <Font>{name}</Font>
       </Box>
     </Box>
   );

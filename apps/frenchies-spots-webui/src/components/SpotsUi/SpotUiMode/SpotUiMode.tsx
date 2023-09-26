@@ -6,10 +6,12 @@ import SpotsMapUi from "../SpotsMapUi/SpotsMapUi";
 import SpotList from "../../Spots/SpotList/SpotList";
 import FavoriteButton from "../../Spots/SpotButton/FavoriteButton/FavoriteButton";
 import { useAuth } from "../../../hooks/use-auth";
-import { Box, ScrollArea, Text } from "@frenchies-spots/material";
+import { Box, Group, ScrollArea, Text } from "@frenchies-spots/material";
 import { useSpotUi } from "../../../hooks/use-spot-ui";
 import ProfileList from "../../Profile/ProfileList/ProfileList";
 import { filterListMode } from "../../../enum";
+import EditButton from "../../Spots/SpotButton/EditButton/EditButton";
+import DeleteButton from "../../Spots/SpotButton/DeleteButton/DeleteButton";
 
 interface SpotUiModeProps {
   spotList: SpotEntity[] | undefined;
@@ -43,7 +45,10 @@ const SpotUiMode = (props: SpotUiModeProps) => {
               {authProfileId !== profileId ? (
                 <FavoriteButton favorite={{ spotId, favoriteId }} />
               ) : (
-                <Text>Yours</Text>
+                <Group>
+                  <EditButton spotId={spotId} />
+                  <DeleteButton spotId={spotId} />
+                </Group>
               )}
             </>
           )}

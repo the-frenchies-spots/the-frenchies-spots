@@ -7,7 +7,7 @@ import { TButtonVariant, TColor } from "../../type";
 
 interface ActionButtonProps extends Omit<ButtonProps, "h"> {
   color?: TColor & string;
-  onClick?: () => void;
+  onClick?: React.MouseEventHandler<HTMLButtonElement>;
   h?: number | string;
 }
 

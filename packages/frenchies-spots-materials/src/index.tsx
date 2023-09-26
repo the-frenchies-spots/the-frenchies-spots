@@ -8,3 +8,6 @@ export * from "./BackButton/BackButton";
 export * from "./BadgeIcon/BadgeIcon";
 export * from "./ActionButton";
 export * from "./type";
+export * from "./InputForm/InputForm";
+export * from "./SwitchInput/SwitchInput";
+export * from "./CheckboxInput/CheckboxInput";

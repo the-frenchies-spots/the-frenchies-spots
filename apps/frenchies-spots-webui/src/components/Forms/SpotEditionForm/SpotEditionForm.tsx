@@ -3,9 +3,11 @@ import React, { FormEventHandler, useRef, useState } from "react";
 import {
   Box,
   Checkbox,
+  CheckboxInput,
   Container,
   Flex,
   Font,
+  InputForm,
   MultipleImagePicker,
   ScrollArea,
   Stack,
@@ -133,7 +135,7 @@ export const SpotEditionForm = (props: SpotEditionFormProps) => {
           {/* SPOT CATEGORY */}
           <SwiperSlide>
             <SwiperFrame prevLabel="">
-              <Stack mt="md">
+              <Stack mt={40}>
                 <Font variant="h2">
                   A quelle catégorie associes-tu ton spot ?
                 </Font>
@@ -160,7 +162,7 @@ export const SpotEditionForm = (props: SpotEditionFormProps) => {
           {/* SPOT TAG */}
           <SwiperSlide>
             <SwiperFrame disabled={!form.isValid("tags")}>
-              <Stack mt="md">
+              <Stack mt={40}>
                 <Font variant="h2">{`Quels tags correspondent à ton spot ?`}</Font>
                 <SelectTag
                   list={tagsDataList.filter(
@@ -176,25 +178,27 @@ export const SpotEditionForm = (props: SpotEditionFormProps) => {
             <SwiperFrame
               disabled={!(form.isValid("name") && form.isValid("description"))}
             >
-              <Stack mt="md">
+              <Stack mt={40}>
                 <Font variant="h2">Dis nous en plus sur ton spot !</Font>
-                <TextInput
+                <InputForm
+                  variant="filled"
                   label="Nom du spot"
                   placeholder=""
                   {...form.getInputProps("name")}
-                  error={form.errors.name && "Vous devez renseigner un nom"}
+                  error={form.errors.name}
+                  errorMessage="Vous devez renseigner un nom"
                   required
                 />
-                <TextInput
+                <InputForm
+                  variant="filled"
                   label="Description"
                   placeholder=""
                   {...form.getInputProps("description")}
-                  error={
-                    form.errors.name && "Vous devez renseigner une description"
-                  }
+                  error={form.errors.name}
+                  errorMessage="Vous devez renseigner une description"
                   required
                 />
-                <Checkbox
+                <CheckboxInput
                   label="Est-ce que je peux me garer ?"
                   checked={form.getInputProps("isCanPark").value}
                   onChange={(event) =>
@@ -218,7 +222,7 @@ export const SpotEditionForm = (props: SpotEditionFormProps) => {
                 )
               }
             >
-              <Flex h="100%" pt="md" direction="column">
+              <Flex h="100%" pt={40} direction="column">
                 <Font variant="h2" mb="md">
                   Où se situe ton spot ?
                 </Font>
@@ -243,7 +247,7 @@ export const SpotEditionForm = (props: SpotEditionFormProps) => {
           {/* PUBLIC || PRIVATE */}
           <SwiperSlide>
             <SwiperFrame nextLabel="Valider">
-              <Stack pt="md">
+              <Stack pt={40}>
                 <Font variant="h2">
                   Dernier effort ! Quel statut préfères-tu pour ton spot ?
                 </Font>

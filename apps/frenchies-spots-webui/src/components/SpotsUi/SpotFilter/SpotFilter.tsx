@@ -10,6 +10,9 @@ import {
   SecondaryButton,
   Font,
   Log,
+  InputForm,
+  SwitchInput,
+  CheckboxInput,
 } from "@frenchies-spots/material";
 import { HSegmentControl, SelectTag } from "../../InputCustom";
 import { CategoriesSpotAndTag } from "@frenchies-spots/gql";
@@ -74,7 +77,9 @@ const SpotFilter = (props: SpotFilterProps) => {
   return (
     <>
       <Stack spacing="xl" p="md">
-        <TextInput
+        <InputForm
+          isShadow={false}
+          sx={{ borderColor: "#A480A6" }}
           placeholder="spot name"
           {...form.getInputProps("searchValue")}
         />
@@ -116,7 +121,7 @@ const SpotFilter = (props: SpotFilterProps) => {
           />
         </Box>
 
-        <Checkbox
+        <CheckboxInput
           label="Afficher les spots où je peux me garer"
           checked={form.getInputProps("isCanPark").value}
           onChange={(event) =>
@@ -132,7 +137,7 @@ const SpotFilter = (props: SpotFilterProps) => {
 
         <Stack>
           <Font variant="h4">Localisation</Font>
-          <Switch
+          <SwitchInput
             label="Afficher mon rayon de recherche"
             checked={isRayon}
             onChange={(event) => handleRayonChange(event.currentTarget.checked)}

@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import React, { ReactElement } from "react";
 
 import { useAuth } from "../../hooks/use-auth";
@@ -98,7 +99,10 @@ const Profile = () => {
         <Divider my={32} />
 
         <Group grow>
-          <Image src={profile?.avatarUrl} alt="avatar" />
+          <Flex justify="center" align="center">
+            {profile?.avatarUrl && <img src={profile?.avatarUrl} alt="avatar" style={{ width: 80 }} />}
+          </Flex>
+          {/* <Image src={profile?.avatarUrl} alt="avatar" /> */}
           <Stack>
             <Stack spacing={2}>
               <Font variant="subtitle2">Statut</Font>

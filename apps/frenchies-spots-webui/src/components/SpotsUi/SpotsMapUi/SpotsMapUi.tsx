@@ -30,6 +30,7 @@ const SpotsMapUi = (props: SpotsMapUiProps) => {
     setViewPort,
     coordPoint,
     isRayon,
+    currentSpotId,
     setCurrentSpotId,
     setCurrentProfileId,
     openDrawer,
@@ -67,19 +68,22 @@ const SpotsMapUi = (props: SpotsMapUiProps) => {
           />
         )}
 
-        {!isCurrentUserPosition && coordPoint && (
+        {/* {!isCurrentUserPosition && coordPoint && (
           <PinMarker lat={coordPoint.lat} lng={coordPoint.lng} />
-        )}
+        )} */}
 
         {(uiMode === filterListMode.SPOT || uiMode === filterListMode.ALL) &&
           spotList?.map((spot) => {
             const { id, location } = spot;
             const [lng, lat] = location.coordinates;
+            const selected = id === currentSpotId;
             return (
               <MapMarker
                 key={id}
                 lat={lat}
                 lng={lng}
+                selected={selected}
+                color="#3F3979"
                 onClick={() => handleSpotClick(id)}
               />
             );

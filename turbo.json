@@ -24,6 +24,11 @@
       "persistent": true,
       "env": [".env"]
     },
+    "test": {
+      "cache": false,
+      "persistent": true,
+      "env": [".env"]
+    },
     "seed": {
       "cache": false,
       "persistent": true,

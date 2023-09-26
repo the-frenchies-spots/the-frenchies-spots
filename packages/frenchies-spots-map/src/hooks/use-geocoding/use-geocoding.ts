@@ -39,6 +39,10 @@ export const useGeocoding = () => {
     return MAPBOX_API.get(
       `${keyWord}.json?limit=1&bbox=-10.0,35.0,15.0,55.0&access_token=${MAPBOX_API_KEY}`
     ).then((response) => {
+      console.log("=====================================");
+      console.log(response);
+      console.log("=====================================");
+
       const place_name = response?.data?.features[0]?.place_name;
       const geometry = response?.data?.features[0]?.geometry;
       const lng = geometry?.coordinates[0];

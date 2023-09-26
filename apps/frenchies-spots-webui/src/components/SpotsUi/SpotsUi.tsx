@@ -30,7 +30,7 @@ const SpotsUi = (props: SpotsUiProps) => {
 
   const [uiMode, setUiMode] = useState<filterListMode>(filterListMode.ALL);
 
-  const { isFilter, currentSpotId, currentProfileId } = useSpotUi();
+  const { isFilter, currentSpotId, currentProfileId, isMapMode } = useSpotUi();
   const currentSpot = getListElement<SpotEntity>(
     spotList || [],
     `${currentSpotId}`
@@ -50,7 +50,7 @@ const SpotsUi = (props: SpotsUiProps) => {
       />
       <SpotUiMode spotList={spotList} peopleList={peopleList} uiMode={uiMode} />
       <SpotModeButton className={classes.buttonMode} />
-      <SpotUiParamBar />
+      {isMapMode && <SpotUiParamBar />}
       <SpotDrawer>
         {currentSpot && <SpotPreview spot={currentSpot} h={250} />}
         {currentProfile && (

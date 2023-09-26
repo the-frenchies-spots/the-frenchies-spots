@@ -2,7 +2,14 @@ import React from "react";
 
 import { useStyles } from "./SelectTagItem.style";
 import { capitalize } from "lodash";
-import { Box, Image, Stack, Text } from "@frenchies-spots/material";
+import {
+  Avatar,
+  Box,
+  Font,
+  Image,
+  Stack,
+  Text,
+} from "@frenchies-spots/material";
 
 export type TTagItem = {
   id: string;
@@ -35,24 +42,23 @@ export const SelectTagItem = (props: SelectTagItemProps) => {
   };
 
   return (
-    <Box
+    <Stack
+      spacing={5}
+      sx={{ borderRadius: 300 }}
       onClick={disabled ? undefined : handleClick}
-      className={classes.touchableContainer}
     >
-      <Stack spacing={5}>
-        <Box className={classes.container}>
-          <Image
-            src={tagPictureUrl}
-            className={classes.picture}
-            width={40}
-            height={40}
-            alt="alt"
-          />
-        </Box>
-        <Text className={classes.tagLabel} ta="center">
-          {capitalize(name)}
-        </Text>
-      </Stack>
-    </Box>
+      <Avatar className={classes.container}>
+        <Image
+          src={tagPictureUrl}
+          className={classes.picture}
+          width={40}
+          height={40}
+          alt="alt"
+        />
+      </Avatar>
+      <Font ta="center" variant="caption" color="darkPurple">
+        {capitalize(name)}
+      </Font>
+    </Stack>
   );
 };

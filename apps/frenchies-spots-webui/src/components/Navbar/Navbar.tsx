@@ -6,6 +6,7 @@ import {
   IconMessageCircle2Filled,
   IconShoppingCartFilled,
   IconUserCircle,
+  ProfileUserIcon,
 } from "@frenchies-spots/icon";
 import { useStyles } from "./NavBar.styles";
 import {
@@ -37,30 +38,52 @@ const Navbar = (props: NavbarProps) => {
     router.push(`/${route}`);
   };
 
+  const isSelected = (path: string) => {
+    if (router.pathname.includes(path)) {
+      return "selected";
+    }
+    return "default";
+  };
+
   return (
     <Box className={cx(classes.navbar, className)} {...boxProps}>
       <Container h={80} w="100%" size="md">
         <Group position="apart" h="100%" w="100%" p="md">
-          <ActionIcon onClick={() => onNavigateClick("spots")}>
-            <IconMapPinFilled />
+          <ActionIcon
+            onClick={() => onNavigateClick("spots")}
+            className={classes[isSelected("spots")]}
+          >
+            <IconMapPinFilled style={{ color: "white" }} />
           </ActionIcon>
 
-          <ActionIcon onClick={() => onNavigateClick("spots/favorit")}>
-            <IconHeartFilled />
+          <ActionIcon
+            onClick={() => onNavigateClick("spots/favorit")}
+            className={classes[isSelected("spots/favorit")]}
+          >
+            <IconHeartFilled style={{ color: "white" }} />
           </ActionIcon>
 
-          <ActionIcon onClick={() => onNavigateClick("chat")}>
+          <ActionIcon
+            onClick={() => onNavigateClick("chat")}
+            className={classes[isSelected("chat")]}
+          >
             <BadgeIcon content={messageNotRead}>
-              <IconMessageCircle2Filled />
+              <IconMessageCircle2Filled style={{ color: "white" }} />
             </BadgeIcon>
           </ActionIcon>
 
-          <ActionIcon onClick={() => onNavigateClick("shop")}>
-            <IconShoppingCartFilled />
+          <ActionIcon
+            onClick={() => onNavigateClick("shop")}
+            className={classes[isSelected("shop")]}
+          >
+            <IconShoppingCartFilled style={{ color: "white" }} />
           </ActionIcon>
 
-          <ActionIcon onClick={() => onNavigateClick("profile")}>
-            <IconUserCircle />
+          <ActionIcon
+            onClick={() => onNavigateClick("profile")}
+            className={classes[isSelected("profile")]}
+          >
+            <ProfileUserIcon color="white" size={22} />
           </ActionIcon>
         </Group>
       </Container>

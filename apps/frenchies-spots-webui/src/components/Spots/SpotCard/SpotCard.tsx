@@ -1,11 +1,19 @@
 import React, { ReactNode } from "react";
 
-import { Box, Card, Image, Log, Text } from "@frenchies-spots/material";
+import {
+  Box,
+  Card,
+  Font,
+  Group,
+  Image,
+  Log,
+  Text,
+} from "@frenchies-spots/material";
 import { SpotEntity } from "@frenchies-spots/gql";
 import { useStyles } from "./SpotCard.styles";
 import SpotPicture from "../SpotPicture/SpotPicture";
-import SpotButton from "../SpotButton/SpotButton";
-import FavoriteButton from "../SpotButton/FavoriteButton/FavoriteButton";
+import SpotBadges from "../SpotBadges/SpotBadges";
+import { IconStarFilled } from "@frenchies-spots/icon";
 
 const noImage =
   "https://res.cloudinary.com/dw2hb8vmu/image/upload/v1693846473/default_ac2sl7.webp";
@@ -22,17 +30,7 @@ export interface SpotCardProps {
 
 const SpotCard = (props: SpotCardProps) => {
   const { children, spot, onClick } = props;
-  const {
-    id,
-    name,
-    description,
-    spotPicture,
-    favorites,
-    address,
-    category,
-    isCanPark,
-    profileId,
-  } = spot;
+  const { id, name, description, spotPicture, favorites, profileId } = spot;
 
   const { classes } = useStyles();
 
@@ -54,10 +52,12 @@ const SpotCard = (props: SpotCardProps) => {
       withBorder
     >
       <Card.Section h={150} className={classes.section}>
+        <SpotBadges spot={spot} sx={{ position: "absolute" }} />
         <SpotPicture
           src={spotPicture ? spotPicture[0]?.url : undefined}
           h="100%"
         />
+
         {children && (
           <Box className={classes.spotButton}>
             {children({ spotId: id, favoriteId: favorite?.id, profileId })}
@@ -65,11 +65,20 @@ const SpotCard = (props: SpotCardProps) => {
         )}
       </Card.Section>
 
-      <Text>{name}</Text>
+      <Font variant="h3" pt="md">
+        {name}
+      </Font>
 
-      <Text size="sm" color="dimmed">
+      <Group spacing="xs">
+        <IconStarFilled size={16} style={{ color: "#707070" }} />
+        <Font color="#707070">
+          {spot?.averageRating ? spot?.averageRating : 0}
+        </Font>
+      </Group>
+
+      <Font size="sm" color="dimmed" lineClamp={3}>
         {description}
-      </Text>
+      </Font>
     </Card>
   );
 };

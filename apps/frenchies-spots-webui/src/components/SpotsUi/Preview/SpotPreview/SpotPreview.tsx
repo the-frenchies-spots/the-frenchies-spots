@@ -9,6 +9,7 @@ import {
   Stack,
   Text,
   PrimaryButton,
+  Font,
 } from "@frenchies-spots/material";
 
 import SpotPicture from "../../../Spots/SpotPicture/SpotPicture";
@@ -24,6 +25,7 @@ const SpotPreview = (props: SpotPreviewProps) => {
   const picture = spot?.spotPicture ? spot?.spotPicture[0]?.url : undefined;
 
   const router = useRouter();
+  console.log({ spot });
 
   return (
     <Group grow h={300} p="md" {...groupProps}>
@@ -31,12 +33,14 @@ const SpotPreview = (props: SpotPreviewProps) => {
 
       <Stack justify="space-between" h="100%">
         <Stack>
-          <Text>{spot.name}</Text>
-          <Group>
-            <IconStarFilled size={16} />
-            <Text>{spot?.ratings ? spot?.ratings[0]?.rate : 0}</Text>
+          <Font variant="h3">{spot.name}</Font>
+          <Group spacing="xs">
+            <IconStarFilled size={16} style={{ color: "#707070" }} />
+            <Font color="#707070">
+              {spot?.averageRating ? spot?.averageRating : 0}
+            </Font>
           </Group>
-          <Text>{spot.description}</Text>
+          <Text lineClamp={3}>{spot.description}</Text>
         </Stack>
 
         <PrimaryButton onClick={() => router.push(`/spots/${spot.id}`)}>

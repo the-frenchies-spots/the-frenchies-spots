@@ -6,6 +6,7 @@ import { amountPoints, formatStripeEuro } from "@frenchies-spots/utils";
 import {
   Box,
   Button,
+  Font,
   Group,
   PrimaryButton,
   Stack,
@@ -67,7 +68,10 @@ const ShopBuyPoints = () => {
             width={200}
           />
           <PriceInput price={price} onPriceChange={setPrice} />
-          <Text>{amountPoints(price)} points</Text>
+          <Group spacing={5}>
+            <Font variant="h3">{amountPoints(price)}</Font>
+            <Font> points</Font>
+          </Group>
         </Stack>
 
         <PrimaryButton onClick={open} w="100%">
