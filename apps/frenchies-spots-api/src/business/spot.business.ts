@@ -31,14 +31,17 @@ export class SpotBusiness {
     profileId: string | undefined,
   ): Promise<SpotEntity[]> {
     const { point, ...fields } = spotsInput;
-    // if (point) {
-    //   return this.geoService.searchArround(point).then((ids) => {
-    //     if (ids?.length) {
-    //       return this.spotRepository.getAll(fields, ids, profileId);
-    //     }
-    //     return [];
-    //   });
-    // }
+    if (point) {
+      return this.geoService.searchArround(point).then((spotAround) => {
+        const ids = spotAround.length
+          ? spotAround.map((spot) => spot._id)
+          : undefined;
+        if (ids?.length) {
+          return this.spotRepository.getAll(fields, ids, profileId);
+        }
+        return [];
+      });
+    }
     return this.spotRepository.getAll(fields, undefined, profileId);
   }
 

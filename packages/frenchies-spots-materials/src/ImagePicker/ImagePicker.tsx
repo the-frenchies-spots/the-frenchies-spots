@@ -67,23 +67,39 @@ export const ImagePicker = (props: ImagePickerProps) => {
 
   return (
     <FileButton onChange={handleImageChange} accept="image/*">
-      {(props) => (
-        <Box {...props} className={classes.container} h={h} w={w} {...other}>
-          {!disablePreview && selectedImage ? (
-            <BackgroundImage src={selectedImage.url} w="100%" h="100%" />
-          ) : (
-            <IconCameraFilled size={40} style={{ color: "#8F8FD9" }} />
-          )}
-          {isCardMode && (
+      {(props) =>
+        (
+          <>
             <Box
-              onClick={handleImageDelete}
-              className={classes.deleteContainer}
+              {...props}
+              className={classes.container}
+              h={h}
+              w={w}
+              {...other}
             >
-              <IconX size={16} color="white" />
+              {!disablePreview && selectedImage
+                ? ((
+                    <BackgroundImage
+                      src={selectedImage.url}
+                      w="100%"
+                      h="100%"
+                    />
+                  ) as any)
+                : ((
+                    <IconCameraFilled size={40} style={{ color: "#8F8FD9" }} />
+                  ) as any)}
+              {isCardMode && (
+                <Box
+                  onClick={handleImageDelete}
+                  className={classes.deleteContainer}
+                >
+                  {(<IconX size={16} color="white" />) as any}
+                </Box>
+              )}
             </Box>
-          )}
-        </Box>
-      )}
+          </>
+        ) as any
+      }
     </FileButton>
   );
 };

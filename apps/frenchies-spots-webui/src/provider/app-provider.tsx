@@ -16,9 +16,7 @@ export function AppProvider({ children }: AppProviderProps) {
       <AuthProvider>
         <FrSpotsMapProvider>
           <LocationProvider>
-            <FrSpotsMaterialProvider>
-              <>{children as ReactNode}</>
-            </FrSpotsMaterialProvider>
+            <FrSpotsMaterialProvider><>{children as ReactNode}</></FrSpotsMaterialProvider>
           </LocationProvider>
         </FrSpotsMapProvider>
       </AuthProvider>

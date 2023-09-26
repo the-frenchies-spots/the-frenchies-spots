@@ -17,9 +17,9 @@ export const BadgeIcon = (props: BadgeIconProps) => {
   return (
     <Box className={classes.container}>
       <Flex className={classes.badge} justify="center" align="center">
-        {content}
+        {content as any}
       </Flex>
-      {children}
+      {children as any}
     </Box>
   );
 };

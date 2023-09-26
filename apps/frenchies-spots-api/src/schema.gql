@@ -294,7 +294,7 @@ type SpotByIdResponse {
   address: String!
   averageRating: Float!
   category: String!
-  createdAt: DateTime
+  createdAt: DateTime!
   description: String!
   favorites: [FavoriteEntity!]
   id: String!
@@ -309,14 +309,14 @@ type SpotByIdResponse {
   region: String!
   spotPicture: [SpotPictureEntity!]
   tags: [TagOnSpotEntity!]
-  updatedAt: DateTime
+  updatedAt: DateTime!
 }
 
 type SpotEntity {
   address: String!
   averageRating: Float!
   category: String!
-  createdAt: DateTime
+  createdAt: DateTime!
   description: String!
   favorites: [FavoriteEntity!]
   id: String!
@@ -330,7 +330,7 @@ type SpotEntity {
   region: String!
   spotPicture: [SpotPictureEntity!]
   tags: [TagOnSpotEntity!]
-  updatedAt: DateTime
+  updatedAt: DateTime!
 }
 
 input SpotInput {

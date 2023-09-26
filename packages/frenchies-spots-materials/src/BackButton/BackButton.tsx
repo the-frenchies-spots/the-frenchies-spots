@@ -16,7 +16,7 @@ export const BackButton = ({ onClick, ...other }: BackButtonProps) => {
       onClick={onClick}
       {...other}
     >
-      <IconChevronLeft size={24} />
+      {(<IconChevronLeft size={24} />) as any}
     </ActionIcon>
   );
 };

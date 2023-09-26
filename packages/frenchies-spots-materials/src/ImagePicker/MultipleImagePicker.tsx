@@ -41,20 +41,31 @@ export const MultipleImagePicker = (props: MultipleImagePickerProps) => {
   return (
     <Group>
       <Box>
-        <ImagePicker disablePreview={true} onImageChange={handleImageChange} />
+        {
+          (
+            <ImagePicker
+              disablePreview={true}
+              onImageChange={handleImageChange}
+            />
+          ) as any
+        }
       </Box>
       {mediaList.map((picture, index) => {
         return (
           <Box key={index + Math.floor(Math.random() * 999999)}>
-            <ImagePicker
-              index={index}
-              value={picture}
-              isCardMode={true}
-              onImageDelete={handleDeleteImage}
-              onImageChange={(newPicture: PictureValue) =>
-                handleListChange(newPicture, index)
-              }
-            />
+            {
+              (
+                <ImagePicker
+                  index={index}
+                  value={picture}
+                  isCardMode={true}
+                  onImageDelete={handleDeleteImage}
+                  onImageChange={(newPicture: PictureValue) =>
+                    handleListChange(newPicture, index)
+                  }
+                />
+              ) as any
+            }
           </Box>
         );
       })}
