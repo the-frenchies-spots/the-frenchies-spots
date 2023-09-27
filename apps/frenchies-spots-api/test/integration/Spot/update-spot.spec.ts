@@ -21,6 +21,7 @@ import { SpotRepository } from '../../../src/repository/spot.repository';
 import { AuthRepository } from '../../../src/repository/auth.repository';
 import { RefreshTokenGuard } from '../../../src/guard/refreshToken.guard';
 import { GeospatialService } from '../../../src/service/spot-geospatial.service';
+import { mockJwtPayload } from "../../mocks/mockJwtPayload";
 
 describe('AppController (e2e)', () => {
   jest.setTimeout(60000);
@@ -35,7 +36,7 @@ describe('AppController (e2e)', () => {
       .useValue({
         canActivate: (context: ExecutionContext) => {
           const ctx = GqlExecutionContext.create(context);
-          ctx.getContext().req.user = mockUser.user;
+          ctx.getContext().req.user = mockJwtPayload;
           return true;
         },
       })
@@ -44,7 +45,7 @@ describe('AppController (e2e)', () => {
       .useValue({
         canActivate: (context: ExecutionContext) => {
           const ctx = GqlExecutionContext.create(context);
-          ctx.getContext().req.user = mockUser.user;
+          ctx.getContext().req.user = mockJwtPayload;
           return true;
         },
       })

@@ -100,6 +100,7 @@ export const updateSpotResponse: SpotEntity = {
   category: undefined,
   profile: undefined,
   updatedAt: undefined,
+  profileId: 'profileIdMock',
   id: 'd9b75a45-afa0-4210-8baf-49fadb8f7495',
   name: 'Tour Eiffel',
   description: 'Description Tour Eiffel',
@@ -111,7 +112,6 @@ export const updateSpotResponse: SpotEntity = {
   region: '3',
   spotPicture: null,
   tags: null,
-  profileId: '6506afb1b25d8fa703f27f14',
   location: {
     type: 'Point',
     coordinates: [0, 0],
