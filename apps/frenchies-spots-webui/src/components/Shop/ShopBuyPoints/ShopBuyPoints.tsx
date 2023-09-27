@@ -77,7 +77,7 @@ const ShopBuyPoints = () => {
         <PrimaryButton onClick={open} w="100%" mt="md">
           ACHETER
         </PrimaryButton>
-        <Box py={100} />
+        <Box py={20} />
       </Stack>
       <CustomDrawer opened={opened} onClose={close}>
         <Stack p="md">

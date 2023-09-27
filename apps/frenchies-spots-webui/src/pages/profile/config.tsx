@@ -76,12 +76,12 @@ const ConfigPage = () => {
             <Stack spacing="xl">
               <InputForm
                 variant="filled"
-                label="pseudo"
+                label="Pseudo"
                 {...form.getInputProps("pseudo")}
               />
               <InputForm
                 variant="filled"
-                label="slogan"
+                label="Slogan"
                 {...form.getInputProps("slogan")}
               />
               <SwitchInput
@@ -97,7 +97,7 @@ const ConfigPage = () => {
               />
             </Stack>
           </Stack>
-
+          <Box py={8} />
           <Stack>
             <PrimaryButton type="submit" disabled={!form.isValid()}>
               Enregistrer les modifications

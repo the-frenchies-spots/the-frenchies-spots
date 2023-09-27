@@ -56,6 +56,7 @@ export class ProfileRepository {
         AND: {
           isLocated: true,
         },
+        NOT: { id: profileId },
       },
       ...(profileId
         ? {

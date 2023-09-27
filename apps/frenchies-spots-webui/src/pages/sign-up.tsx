@@ -217,7 +217,7 @@ const SignUp = () => {
               {avatar}
               <Stack w="100%" spacing={1}>
                 <Bubble
-                  message="Les autres usagers pourront te voir sur la carte. Tu peux choisir d'autoriser ou non cette action. Tu pourras modifier à tout moment ce paramètre."
+                  message="Les autres usagers pourront te voir sur la carte. Tu peux choisir d'autoriser ou non cette action. Tu pourras modifier à tout moment ce paramètre dans ton profil."
                   isParticipant={true}
                   w="90%"
                 />
@@ -227,7 +227,7 @@ const SignUp = () => {
             <Stack py="md">
               <SwitchInput
                 defaultChecked
-                label="Accepté d'être géolocaliser"
+                label="J'accepte d'être localisé"
                 checked={form.getInputProps("isLocated").value}
                 onChange={(event) =>
                   form

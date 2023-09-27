@@ -28,7 +28,7 @@ const AvatarCard = ({
 }: AvatarCardProps) => {
   const { id, pointsRequire, isPublic, avatarUrl } = avatar;
 
-  const { classes } = useStyles(isPublic || isUnlocked);
+  const { classes } = useStyles({ isOpen: isPublic || isUnlocked, isSelected });
 
   const handleClick = () => {
     onClick(avatar);

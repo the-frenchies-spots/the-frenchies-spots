@@ -24,7 +24,7 @@ const ChatPage = () => {
         Chat
       </Font>
       <Font mt="md">
-        {`Retrouves toutes les personnes avec qui tu as parlé sur l'app !`}
+        {`Retrouves toutes les personnes avec qui tu as parlé !`}
       </Font>
       <Tabs
         defaultValue="contact"

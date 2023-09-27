@@ -62,7 +62,7 @@ const ProfilePreview = (props: ProfilePreviewProps) => {
           leftIcon={<IconUserSquareRounded />}
           onClick={() => router.push("/sign-in")}
         >
-          Connecter vous pour chatter
+          Connectez vous pour chatter
         </PrimaryButton>
       )}
     </Stack>

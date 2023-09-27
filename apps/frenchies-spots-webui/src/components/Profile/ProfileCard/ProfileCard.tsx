@@ -12,6 +12,7 @@ import {
 import { ProfileEntity } from "@frenchies-spots/gql";
 import { useStyles } from "./ProfileCard.styles";
 import { truncate } from "@frenchies-spots/utils";
+import ConnexionButton from "../ConnexionButton/ConnexionButton";
 
 export interface ProfileCardProps extends Omit<CardProps, "children"> {
   profile: ProfileEntity;
