@@ -9,6 +9,7 @@ import {
   Text,
   Log,
   BadgeIcon,
+  Font,
 } from "@frenchies-spots/material";
 import { UserChatResponse } from "@frenchies-spots/gql";
 import { useStyles } from "./ChatCard.styles";
@@ -53,7 +54,15 @@ const ChatCard = (props: ChatCardProps) => {
             const avatarUrl = participant?.profile?.avatarUrl;
             return (
               <BadgeIcon content={chat?._count?.chatMessages || 0} key={index}>
-                <Avatar src={photoUrl || avatarUrl} />
+                <Avatar
+                  src={photoUrl || avatarUrl}
+                  sx={{
+                    border: !photoUrl ? "1px solid #3F3979" : undefined,
+                    width: 50,
+                    height: 50,
+                    borderRadius: 50,
+                  }}
+                />
               </BadgeIcon>
             );
           })}
@@ -61,7 +70,11 @@ const ChatCard = (props: ChatCardProps) => {
         <Stack>
           {participantsFilter.map((participant, index) => {
             const pseudo = participant?.profile?.pseudo;
-            return <Text key={index}>{pseudo}</Text>;
+            return (
+              <Font key={index} variant="h3">
+                {pseudo}
+              </Font>
+            );
           })}
         </Stack>
       </Group>

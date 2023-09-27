@@ -7,6 +7,8 @@ import {
   BadgeIcon,
   Font,
   Box,
+  Stack,
+  Divider,
 } from "@frenchies-spots/material";
 import { useStyles } from "./Notifiction.styles";
 import { useMediaQuery } from "@frenchies-spots/hooks";
@@ -42,7 +44,7 @@ const Notifiction = (props: NotifictionProps) => {
   return (
     <Box onClick={handleClick}>
       <Popover
-        width={isSmallScreen ? "80%" : 500}
+        width={isSmallScreen ? "95%" : 500}
         position="bottom-end"
         withArrow
         shadow="md"
@@ -59,16 +61,21 @@ const Notifiction = (props: NotifictionProps) => {
           </ActionIcon>
         </Popover.Target>
         <Popover.Dropdown>
-          {notifications?.map((notif) => (
-            <ProfileCard
-              key={notif.id}
-              profile={notif.profileSender}
-              onClick={() => handleNotificationClick(notif.id)}
-              mb="sm"
-            >
-              <Font>{`Demande d'amis`}</Font>
-            </ProfileCard>
-          ))}
+          {notifications?.length > 0 ? (
+            notifications?.map((notif) => (
+              <ProfileCard
+                key={notif.id}
+                profile={notif.profileSender}
+                customSlogan="Demande d'amis"
+                onClick={() => handleNotificationClick(notif.id)}
+                mb="sm"
+              >
+                <IconBellFilled style={{ color: "EBA701" }} />
+              </ProfileCard>
+            ))
+          ) : (
+            <Font>Pas de notification en cours</Font>
+          )}
         </Popover.Dropdown>
       </Popover>
     </Box>

@@ -46,13 +46,18 @@ const AvatarCard = ({
         <Image src={avatarUrl} alt={id} />
       </Box>
       <Stack h="100%">
-        <Font variant="h5">Customize ton avatar</Font>
+        <Font
+          variant="h5"
+          color={isPublic || isUnlocked ? "#3F3979" : "#707070"}
+        >
+          Personnalise ton avatar
+        </Font>
         <Font variant="subtitle2" color="back">
           {isUnlocked ? 0 : pointsRequire} points
         </Font>
         {isSelected && (
-          <Badge sx={{ backgroundColor: "#EBA701", color: "white" }}>
-            Courant
+          <Badge sx={{ backgroundColor: "#B68973", color: "white" }}>
+            Utilisé
           </Badge>
         )}
       </Stack>

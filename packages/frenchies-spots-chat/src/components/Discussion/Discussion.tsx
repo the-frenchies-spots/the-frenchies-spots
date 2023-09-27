@@ -9,15 +9,16 @@ import {
 
 import { BubbleChat } from "../BubbleChat/BubbleChat";
 import { ChatMessageInput } from "../../hooks";
-import { Maybe } from "@frenchies-spots/gql";
+import { Maybe, ProfileChatEntity } from "@frenchies-spots/gql";
 
 export interface DiscussionProps extends StackProps {
   messages: ChatMessageInput[];
   currentProfileId: Maybe<string> | string | undefined;
+  otherParticipant: ProfileChatEntity | undefined;
 }
 
 export const Discussion = (props: DiscussionProps) => {
-  const { messages, currentProfileId, ...stackProps } = props;
+  const { messages, currentProfileId, otherParticipant, ...stackProps } = props;
 
   const viewport = useRef<HTMLDivElement>(null);
 
@@ -46,6 +47,7 @@ export const Discussion = (props: DiscussionProps) => {
             >
               <BubbleChat
                 w="70%"
+                otherParticipant={otherParticipant}
                 isParticipant={isParticipant}
                 message={message}
               />

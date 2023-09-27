@@ -1,13 +1,14 @@
 import React from "react";
 
-import { Avatar as AvatarMaterial } from "@frenchies-spots/material";
+import { Avatar as AvatarMaterial, Sx } from "@frenchies-spots/material";
 
 interface AvatarProps {
   src?: string;
   color?: string;
+  sx?: Sx;
 }
 
-export const Avatar = ({ src, color = "#8F8FD9" }: AvatarProps) => {
+export const Avatar = ({ src, sx, color = "#8F8FD9" }: AvatarProps) => {
   return (
     <AvatarMaterial
       src={src}
@@ -16,6 +17,7 @@ export const Avatar = ({ src, color = "#8F8FD9" }: AvatarProps) => {
           backgroundColor: color,
           color: color,
         },
+        ...sx,
       }}
       radius="xl"
     />

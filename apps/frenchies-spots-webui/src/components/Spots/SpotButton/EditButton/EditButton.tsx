@@ -22,8 +22,12 @@ const EditButton = (props: EditButtonProps) => {
   };
 
   return (
-    <SpotButtonBase {...other} onClick={handleClick}>
-      <IconPencil style={{ color: "#EBA701" }} />
+    <SpotButtonBase
+      {...other}
+      onClick={handleClick}
+      sx={{ backgroundColor: "#EBA701" }}
+    >
+      <IconPencil style={{ color: "white" }} />
     </SpotButtonBase>
   );
 };

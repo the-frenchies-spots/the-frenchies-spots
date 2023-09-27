@@ -27,7 +27,7 @@ import {
 } from "@frenchies-spots/gql";
 import { SelectTag } from "../../InputCustom";
 import { SwiperForm } from "@/components/SwiperForm/SwiperForm";
-import { SwiperRef, SwiperSlide } from "swiper/react";
+import { SwiperSlide } from "swiper/react";
 import { useCloudinary } from "../../../hooks/use-cloudinary";
 import { useAuth } from "./../../../hooks/use-auth";
 import { VSegmentControl } from "../../InputCustom/VSegmentControl";

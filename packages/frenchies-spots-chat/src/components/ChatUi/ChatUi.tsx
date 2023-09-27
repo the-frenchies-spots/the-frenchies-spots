@@ -23,17 +23,19 @@ export const ChatUi = (props: ChatUiProps) => {
     (participant) => participant.profileId === currentProfileId
   );
 
+  const otherParticipants = participants.filter(
+    (participants) => participants.profileId !== currentProfileId
+  );
+  const currentOtherParticipant =
+    otherParticipants?.length > 0 ? otherParticipants[0] : undefined;
+
   return (
     <Flex direction="column" h="100%">
-      <NavChat
-        onCancel={onCancel}
-        participants={participants.filter(
-          (participants) => participants.profileId !== currentProfileId
-        )}
-      />
+      <NavChat onCancel={onCancel} participant={currentOtherParticipant} />
       {loginParticipant && (
         <Discussion
           messages={messages}
+          otherParticipant={currentOtherParticipant}
           currentProfileId={loginParticipant.id}
           sx={{ flexGrow: 1 }}
         />

@@ -14,11 +14,11 @@ import { ProfileChatEntity } from "@frenchies-spots/gql";
 
 interface NavChatProps {
   onCancel?: () => void;
-  participants: ProfileChatEntity[];
+  participant: ProfileChatEntity | undefined;
 }
 
 const NavChat = (props: NavChatProps) => {
-  const { onCancel, participants } = props;
+  const { onCancel, participant } = props;
 
   const { classes } = useStyles();
 
@@ -33,12 +33,8 @@ const NavChat = (props: NavChatProps) => {
       <BackButton onClick={onCancel} />
       <Group sx={{ flexGrow: 1 }} position="apart">
         <Stack spacing={2}>
-          <Text>
-            {participants
-              .map((participant) => participant?.profile?.pseudo)
-              .join(" ")}
-          </Text>
-          <Text>En ligne il y a 20 min</Text>
+          <Text>{participant?.profile?.pseudo}</Text>
+          <Text> {participant?.profile?.slogan || "Pas de slogan"}</Text>
         </Stack>
         <ActionIcon>
           <IconInfoCircleFilled />

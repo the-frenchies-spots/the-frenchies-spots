@@ -70,7 +70,7 @@ const ConfigPage = () => {
               {profile && <ProfilePhoto profile={profile} />}
             </Flex>
 
-            <Stack>
+            <Stack spacing="xl">
               <InputForm
                 variant="filled"
                 label="pseudo"
@@ -82,8 +82,9 @@ const ConfigPage = () => {
                 {...form.getInputProps("slogan")}
               />
               <SwitchInput
+                mt="xl"
                 defaultChecked
-                label="Autoriser la localisation ?"
+                label="J'autorise à être géolocalisé"
                 checked={form.getInputProps("isLocated").value}
                 onChange={(event) =>
                   form

@@ -9,6 +9,7 @@ import {
   ActionIcon,
   Flex,
   SecondaryButton,
+  Font,
 } from "@frenchies-spots/material";
 import type { ContainerProps } from "@frenchies-spots/material";
 
@@ -161,6 +162,11 @@ const SpotMenu = (props: SpotMenuProps) => {
             Entraide
           </SecondaryButton>
         </Group>
+        {!isMapMode && (
+          <Font variant="h4" pt="xs">
+            Autour de moi
+          </Font>
+        )}
       </Stack>
     </Container>
   );
