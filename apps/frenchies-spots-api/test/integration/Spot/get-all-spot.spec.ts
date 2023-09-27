@@ -6,7 +6,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { ExecutionContext, INestApplication } from '@nestjs/common';
 
 import {
-  getByIdResponse,
+  getAllResponse,
   mockSpotRepository,
 } from '../../mocks/repository/mock.spot.repository';
 import { mockGeospatialService } from '../../mocks/service/mock.geospatial.service';
@@ -21,6 +21,7 @@ import { SpotRepository } from '../../../src/repository/spot.repository';
 import { AuthRepository } from '../../../src/repository/auth.repository';
 import { RefreshTokenGuard } from '../../../src/guard/refreshToken.guard';
 import { GeospatialService } from '../../../src/service/spot-geospatial.service';
+import { SpotsInput } from "../../../src/dto/input/spot/spots-input";
 
 describe('AppController (e2e)', () => {
   jest.setTimeout(60000);
@@ -71,14 +72,31 @@ describe('AppController (e2e)', () => {
     };
   });
 
-  it('should get one spot by id', async () => {
-    const data = (await query(queries.spotByPk, {
-      id: 'd9b75a45-afa0-4210-8baf-49fadb8f7495',
+  it('should get all spots', async () => {
+    const data = (await query(queries.spots, {
+       spotsInput: { searchValue: ''}
     })) as any;
 
-    const spot = JSON.parse(data.res.text).data.spotByPk;
+    const spots = JSON.parse(data.res.text).data.spots;
 
-    expect(spot).toEqual(getByIdResponse);
+    expect(spots).toEqual(getAllResponse);
+  }, 300000);
+
+  afterAll(async () => {
+    app.close();
+  }, 300000);
+
+  it('should get all spots by region', async () => {
+    const data = (await query(queries.spots, {
+      spotsInput: {
+        searchValue: '',
+        orderBy: 'asc',
+      }
+    })) as any;
+
+    const spots = JSON.parse(data.res.text).data.spots;
+
+    expect(spots).toEqual(getAllResponse);
   }, 300000);
 
   afterAll(async () => {

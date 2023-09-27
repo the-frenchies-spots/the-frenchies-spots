@@ -1,14 +1,14 @@
 import * as request from 'supertest';
 import { DocumentNode } from 'graphql';
-import { queries } from '@frenchies-spots/gql';
+import { mutations } from '@frenchies-spots/gql';
 import { GqlExecutionContext } from '@nestjs/graphql';
 import { Test, TestingModule } from '@nestjs/testing';
 import { ExecutionContext, INestApplication } from '@nestjs/common';
 
 import {
-  getByIdResponse,
-  mockSpotRepository,
-} from '../../mocks/repository/mock.spot.repository';
+  deleteSpotResponse,
+  mockSpotRepository
+} from "../../mocks/repository/mock.spot.repository";
 import { mockGeospatialService } from '../../mocks/service/mock.geospatial.service';
 import {
   mockAuthRepository,
@@ -25,7 +25,7 @@ import { GeospatialService } from '../../../src/service/spot-geospatial.service'
 describe('AppController (e2e)', () => {
   jest.setTimeout(60000);
   let app: INestApplication;
-  let query: (query: DocumentNode, variables?: unknown) => request.Test;
+  let mutation: (mutation: DocumentNode, variables?: unknown) => request.Test;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
@@ -60,25 +60,27 @@ describe('AppController (e2e)', () => {
     app = module.createNestApplication();
     await app.init();
 
-    query = (query: DocumentNode, variables?: unknown) => {
+    mutation = (mutation: DocumentNode, variables?: unknown) => {
       return request(app.getHttpServer())
         .post('/graphql')
         .send({
-          query: query.loc && query.loc.source.body,
+          query: mutation.loc && mutation.loc.source.body,
           variables,
         })
         .set('authorization', `Bearer ${mockUser.refreshToken}`);
     };
   });
 
-  it('should get one spot by id', async () => {
-    const data = (await query(queries.spotByPk, {
+  it('should delete spot', async () => {
+    const data = (await mutation(mutations.deleteSpot, {
       id: 'd9b75a45-afa0-4210-8baf-49fadb8f7495',
     })) as any;
 
-    const spot = JSON.parse(data.res.text).data.spotByPk;
-
-    expect(spot).toEqual(getByIdResponse);
+    const res = JSON.parse(data.res.text);
+    console.log("=================");
+    console.log(res);
+    console.log("=================");
+    expect(res).toEqual(deleteSpotResponse);
   }, 300000);
 
   afterAll(async () => {
