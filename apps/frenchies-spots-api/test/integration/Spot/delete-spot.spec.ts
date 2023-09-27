@@ -7,8 +7,8 @@ import { ExecutionContext, INestApplication } from '@nestjs/common';
 
 import {
   deleteSpotResponse,
-  mockSpotRepository
-} from "../../mocks/repository/mock.spot.repository";
+  mockSpotRepository,
+} from '../../mocks/repository/mock.spot.repository';
 import { mockGeospatialService } from '../../mocks/service/mock.geospatial.service';
 import {
   mockAuthRepository,
@@ -76,10 +76,7 @@ describe('AppController (e2e)', () => {
       id: 'd9b75a45-afa0-4210-8baf-49fadb8f7495',
     })) as any;
 
-    const res = JSON.parse(data.res.text);
-    console.log("=================");
-    console.log(res);
-    console.log("=================");
+    const res = JSON.parse(data.res.text).data.deleteSpot;
     expect(res).toEqual(deleteSpotResponse);
   }, 300000);
 

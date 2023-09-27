@@ -8,6 +8,7 @@ import { ExecutionContext, INestApplication } from '@nestjs/common';
 import {
   updateSpotResponse,
   mockSpotRepository,
+  requestResponse,
 } from '../../mocks/repository/mock.spot.repository';
 import { mockGeospatialService } from '../../mocks/service/mock.geospatial.service';
 import {
@@ -21,7 +22,7 @@ import { SpotRepository } from '../../../src/repository/spot.repository';
 import { AuthRepository } from '../../../src/repository/auth.repository';
 import { RefreshTokenGuard } from '../../../src/guard/refreshToken.guard';
 import { GeospatialService } from '../../../src/service/spot-geospatial.service';
-import { mockJwtPayload } from "../../mocks/mockJwtPayload";
+import { mockJwtPayload } from '../../mocks/mockJwtPayload';
 
 describe('AppController (e2e)', () => {
   jest.setTimeout(60000);
@@ -84,13 +85,13 @@ describe('AppController (e2e)', () => {
         name: 'Tour Eiffel',
         region: 'Ile de France',
         tags: [],
-        pictures: [{url: '', hostId: ''}]
+        pictures: [{ url: '', hostId: '' }],
       },
     })) as any;
 
     const spot = JSON.parse(data.res.text).data.updateSpot;
 
-    expect(spot).toEqual(updateSpotResponse);
+    expect(spot).toEqual(requestResponse);
   }, 300000);
 
   afterAll(async () => {

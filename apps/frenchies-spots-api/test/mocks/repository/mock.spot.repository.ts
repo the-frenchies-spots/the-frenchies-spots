@@ -1,5 +1,26 @@
-import { DeleteResponse } from "../../../src/dto/response/delete.response";
-import { SpotEntity } from "../../../src/entity/spot.entity";
+import { DeleteResponse } from '../../../src/dto/response/delete.response';
+import { LocationEntity } from '../../../src/entity/location.entity';
+import { SpotEntity } from '../../../src/entity/spot.entity';
+
+const location: LocationEntity = {
+  type: 'Point',
+  coordinates: [0, 0],
+};
+
+export const requestResponse = {
+  address: 'Paris, France',
+  averageRating: 5,
+  description: 'Description Tour Eiffel',
+  id: 'd9b75a45-afa0-4210-8baf-49fadb8f7495',
+  isCanPark: true,
+  isHidden: false,
+  location,
+  name: 'Tour Eiffel',
+  profileId: 'profileIdMock',
+  region: '3',
+  spotPicture: null,
+  tags: null,
+};
 
 export const getByIdResponse = {
   id: 'd9b75a45-afa0-4210-8baf-49fadb8f7495',
@@ -15,30 +36,27 @@ export const getByIdResponse = {
   region: '3',
   spotPicture: null,
   tags: null,
-  profileId: '',
   rating: null,
-  location: {
-    type: 'Point',
-    coordinates: [0, 0],
-  },
+  profileId: 'profileIdMock',
+  location,
 };
 
 export const getAllResponse = [
   {
-      id: '4bf71b15-c63f-4903-83b3-fa90c799705d',
-      name: 'Tour Eiffel',
-      description: 'Description Tour Eiffel',
-      address: 'Paris, France',
-      isCanPark: true,
-      isHidden: false,
-      category: 'SPARE_TIME_SPOT',
-      averageRating: 3,
-      profileId: '',
-      region: 'region',
-      favorites: null,
-      location: null,
-      ratings: null,
-      spotPicture: null,
+    id: '4bf71b15-c63f-4903-83b3-fa90c799705d',
+    name: 'Tour Eiffel',
+    description: 'Description Tour Eiffel',
+    address: 'Paris, France',
+    isCanPark: true,
+    isHidden: false,
+    category: 'SPARE_TIME_SPOT',
+    averageRating: 3,
+    profileId: '',
+    region: 'region',
+    favorites: null,
+    location: null,
+    ratings: null,
+    spotPicture: null,
   },
   {
     id: '397c7722-9cd9-4f8a-9063-dc64ab5f0d59',
@@ -49,7 +67,7 @@ export const getAllResponse = [
     isHidden: true,
     category: 'SPARE_TIME_SPOT',
     averageRating: 3,
-    profileId: '',
+    profileId: 'profileIdMock',
     region: 'region2',
     favorites: null,
     location: null,
@@ -71,7 +89,7 @@ export const getAllResponse = [
     location: null,
     ratings: null,
     spotPicture: null,
-  }
+  },
 ];
 
 export const createSpotResponse: SpotEntity = {
@@ -89,38 +107,25 @@ export const createSpotResponse: SpotEntity = {
   region: '3',
   spotPicture: null,
   tags: null,
-  profileId: '',
+  profileId: 'profileIdMock',
   location: {
     type: 'Point',
     coordinates: [0, 0],
-  }
-}
+  },
+};
 
 export const updateSpotResponse: SpotEntity = {
   category: undefined,
   profile: undefined,
   updatedAt: undefined,
-  profileId: 'profileIdMock',
-  id: 'd9b75a45-afa0-4210-8baf-49fadb8f7495',
-  name: 'Tour Eiffel',
-  description: 'Description Tour Eiffel',
-  address: 'Paris, France',
-  isCanPark: true,
-  isHidden: false,
   createdAt: null,
-  averageRating: 5,
-  region: '3',
   spotPicture: null,
-  tags: null,
-  location: {
-    type: 'Point',
-    coordinates: [0, 0],
-  }
-}
+  ...requestResponse,
+};
 
 export const deleteSpotResponse: DeleteResponse = {
   deleted: true,
-}
+};
 
 export const mockSpotRepository = {
   getAll: jest.fn().mockResolvedValue(getAllResponse),
@@ -131,5 +136,5 @@ export const mockSpotRepository = {
 
   create: jest.fn().mockResolvedValue(createSpotResponse),
 
-  delete: jest.fn().mockResolvedValue({}),
+  delete: jest.fn().mockResolvedValue(true),
 };
