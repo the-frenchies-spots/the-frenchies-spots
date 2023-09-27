@@ -16,6 +16,7 @@
     "build": "dotenv -- turbo run build",
     "seed": "dotenv -- turbo run seed --filter frenchies-spots-api",
     "test": "dotenv -- turbo run test --filter frenchies-spots-api",
+    "prisma": "dotenv -- turbo run prisma --filter frenchies-spots-api",
     "start": "dotenv -- turbo run start",
     "clean": "turbo run clean && rm -rf node_modules",
     "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,md}\" --ignore-path .gitignore"
