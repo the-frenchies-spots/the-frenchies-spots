@@ -34,6 +34,11 @@
       "persistent": true,
       "env": [".env"]
     },
+    "prisma": {
+      "cache": false,
+      "persistent": true,
+      "env": [".env"]
+    },
     "lint": {},
     "clean": {
       "cache": false
