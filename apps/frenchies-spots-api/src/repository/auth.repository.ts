@@ -81,4 +81,13 @@ export class AuthRepository {
       .then(() => true)
       .catch(() => false);
   }
+
+  async delete(userId: string): Promise<boolean> {
+    return this.prisma.user
+      .delete({
+        where: { id: userId },
+      })
+      .then(() => true)
+      .catch(() => false);
+  }
 }

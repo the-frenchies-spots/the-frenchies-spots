@@ -22,9 +22,12 @@ import ProfilePhoto from "../../components/Profile/ProfilePhoto";
 import { InputMaybe, ProfileInput } from "@frenchies-spots/gql";
 import toast from "react-hot-toast";
 import { useRouter } from "next/router";
+import { useMutation } from "@apollo/client";
+import ModalComfirm from "../../components/Popup/ModalComfirm/ModalComfirm";
+import { Box } from "@frenchies-spots/material";
 
 const ConfigPage = () => {
-  const { profile, onUpdateProfile } = useAuth();
+  const { profile, onUpdateProfile, onDeleteAccount } = useAuth();
 
   const router = useRouter();
 
@@ -99,12 +102,21 @@ const ConfigPage = () => {
             <PrimaryButton type="submit" disabled={!form.isValid()}>
               Enregistrer les modifications
             </PrimaryButton>
-            <PrimaryButton variant="outline" color="red">
-              Supprimer mon compte
-            </PrimaryButton>
+
+            <ModalComfirm
+              onComfirm={() => onDeleteAccount()}
+              label="Êtes-vous sûr de vouloir supprimer votre compte ?"
+            >
+              {(open) => (
+                <PrimaryButton variant="outline" color="red" onClick={open}>
+                  Supprimer mon compte
+                </PrimaryButton>
+              )}
+            </ModalComfirm>
           </Stack>
         </Stack>
       </form>
+      <Box py={100} />
     </Container>
   );
 };

@@ -37,4 +37,22 @@ export class ContactResolver {
   ): Promise<ContactEntity> {
     return this.contactBusiness.update(contactsInput);
   }
+
+  @UseGuards(RefreshTokenGuard)
+  @Mutation(() => Boolean)
+  blockContact(
+    @Args('blockContactId') blockContactId: string,
+    @CurrentProfileId() profileId: string,
+  ): Promise<boolean> {
+    return this.contactBusiness.block(profileId, blockContactId);
+  }
+
+  @UseGuards(RefreshTokenGuard)
+  @Mutation(() => Boolean)
+  unBlockContact(
+    @Args('blockContactId') blockContactId: string,
+    @CurrentProfileId() profileId: string,
+  ): Promise<boolean> {
+    return this.contactBusiness.unBlock(profileId, blockContactId);
+  }
 }

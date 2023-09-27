@@ -80,7 +80,7 @@ const ShopPersonnalisation = () => {
 
   return (
     <>
-      <Stack>
+      <Stack pb={100}>
         {profile &&
           avatarList?.map((avatar) => {
             return (

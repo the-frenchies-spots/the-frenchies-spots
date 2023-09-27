@@ -25,20 +25,26 @@ export class AuthResolver {
 
   @Public()
   @Mutation(() => SignResponse)
-  signUp(@Args('signUpInput') signUpInput: SignUpInput) {
+  signUp(@Args('signUpInput') signUpInput: SignUpInput): Promise<SignResponse> {
     return this.authBusiness.signup(signUpInput);
   }
 
   @Public()
   @Mutation(() => SignResponse)
-  signIn(@Args('signInInput') signInInput: SignInInput) {
+  signIn(@Args('signInInput') signInInput: SignInInput): Promise<SignResponse> {
     return this.authBusiness.signin(signInInput);
   }
 
   @UseGuards(RefreshTokenGuard)
   @Mutation(() => LogoutResponse)
-  logout(@CurrentUserId() userId: string) {
+  logout(@CurrentUserId() userId: string): Promise<LogoutResponse> {
     return this.authBusiness.logout(userId);
+  }
+
+  @UseGuards(RefreshTokenGuard)
+  @Mutation(() => Boolean)
+  deleteAccount(@CurrentUserId() userId: string): Promise<boolean> {
+    return this.authBusiness.delete(userId);
   }
 
   @Public()
@@ -47,7 +53,7 @@ export class AuthResolver {
   getNewTokens(
     @CurrentUserId() userId: string,
     @CurrentUser('refreshToken') refreshToken: string,
-  ) {
+  ): Promise<NewTokensResponse> {
     return this.authBusiness.getNewTokens(userId, refreshToken);
   }
 }

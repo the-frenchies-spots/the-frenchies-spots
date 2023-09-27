@@ -64,7 +64,10 @@ const FriendsPage = () => {
               >
                 <Group>
                   <ContactButton profile={friend.contact} isSmallMode />
-                  <BlockButton />
+                  {/* <BlockButton
+                    profile={friend.contact}
+                    isAuthorize={friend.authorization}
+                  /> */}
                 </Group>
               </ProfileCard>
             ))}
