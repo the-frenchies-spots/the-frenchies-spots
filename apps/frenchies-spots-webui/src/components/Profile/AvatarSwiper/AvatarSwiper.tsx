@@ -5,7 +5,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 
 import "swiper/css";
 import { avatarList } from "@frenchies-spots/utils";
-import { ActionIcon, Flex, Group } from "@frenchies-spots/material";
+import { ActionIcon, Box, Flex, Group } from "@frenchies-spots/material";
 import { IconChevronLeft, IconChevronRight } from "@frenchies-spots/icon";
 import { useStyles } from "./AvatarSwiper.styles";
 
@@ -55,6 +55,15 @@ const AvatarSwiper = ({ onChange }: AvatarSwiperProps) => {
         className={classes.mainContainer}
         sx={{ position: "relative" }}
       >
+        <Box
+          h={200}
+          w={200}
+          sx={{
+            backgroundColor: "white",
+            borderRadius: 200,
+            position: "absolute",
+          }}
+        />
         <Group position="apart" className={classes.arrowContainer} w="100%">
           <ActionIcon onClick={handlePrevClick} className={classes.actionIcon}>
             <IconChevronLeft color="white" />
@@ -63,6 +72,7 @@ const AvatarSwiper = ({ onChange }: AvatarSwiperProps) => {
             <IconChevronRight color="white" />
           </ActionIcon>
         </Group>
+
         <Swiper
           {...swiperParams}
           onTouchMove={(_, e) => e.preventDefault()}

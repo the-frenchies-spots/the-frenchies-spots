@@ -43,9 +43,11 @@ const SignUp = () => {
         "https://res.cloudinary.com/dw2hb8vmu/image/upload/v1695397559/frenchies-spots/avatar/AVATAR_3_tomehg.gif",
       email: "",
       password: "",
+      slogan: "",
       comfirmPassword: "",
     },
     validate: {
+      slogan: (value: string) => value.length < 4,
       pseudo: (value: string) => value.length < 2,
       email: (value: string) => !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value),
       password: (value: string) => value.length < 6,
@@ -61,6 +63,7 @@ const SignUp = () => {
         password: form.values.password,
         isLocated: true,
         avatarUrl: form.values.avatarUrl,
+        slogan: form.values.slogan,
       });
     }
   };
@@ -75,7 +78,7 @@ const SignUp = () => {
     <Container size="sm">
       <LoadingOverlay visible={loading} overlayBlur={2} />
       <Group h="10vh">
-        <BackButton onClick={() => router.push("/sign-in")} ml={8} mt={4} />
+        <BackButton onClick={() => router.push("/sign-in")} mt={4} />
       </Group>
       <SwiperForm onSubmit={handleSubmit}>
         <SwiperSlide>
@@ -106,8 +109,8 @@ const SignUp = () => {
                   label="Email"
                   type="email"
                   {...form.getInputProps("email")}
-                  error={form.values.password !== form.values.comfirmPassword}
-                  errorMessage="Le password ne corespond pas"
+                  error={!!form.errors.email}
+                  errorMessage="L'email n'est pas valide"
                   required
                 />
 
@@ -147,7 +150,7 @@ const SignUp = () => {
         <SwiperSlide>
           <SwiperFrame
             type="submit"
-            nextLabel="suivant"
+            nextLabel="Suivant"
             prevColor="superLightGrey"
           >
             <Flex gap="md" direction="row" w="100%" justify={"start"}>
@@ -166,9 +169,41 @@ const SignUp = () => {
 
         <SwiperSlide>
           <SwiperFrame
+            prevLabel="Retour"
+            prevColor="superLightGrey"
+            disabled={!form.isValid("slogan")}
+          >
+            <ScrollArea pt="xl">
+              <Flex gap="md" direction="row" w="100%" justify={"start"}>
+                <Avatar color="white" />
+                <Stack w="100%" spacing={1}>
+                  <Bubble
+                    message="Donne nous une petit description de toi."
+                    isParticipant={true}
+                    w="90%"
+                  />
+                </Stack>
+              </Flex>
+
+              <Stack mt="md">
+                <InputForm
+                  label="Description"
+                  type="text"
+                  {...form.getInputProps("slogan")}
+                  error={!!form.errors.slogan}
+                  errorMessage="Il faut une description."
+                  required
+                />
+              </Stack>
+            </ScrollArea>
+          </SwiperFrame>
+        </SwiperSlide>
+
+        <SwiperSlide>
+          <SwiperFrame
             type="submit"
             prevColor="superLightGrey"
-            nextLabel="valider"
+            nextLabel="Valider"
             disabled={
               !form.isValid("password") ||
               form.values.password !== form.values.comfirmPassword
@@ -195,24 +230,25 @@ const SignUp = () => {
                 required
               />
               <InputForm
-                label="Comfirme Mot de passe"
+                label="Confirme ton Mot de passe"
                 type="password"
                 {...form.getInputProps("comfirmPassword")}
                 error={!!form.errors.comfirmPassword}
                 errorMessage="Le mot de passe doit avoir au moins 6 caractères"
                 required
               />
-
-              <SwitchInput
-                defaultChecked
-                label="Autoriser la localisation ?"
-                checked={form.getInputProps("isLocated").value}
-                onChange={(event) =>
-                  form
-                    .getInputProps("isLocated")
-                    .onChange(event.currentTarget.checked)
-                }
-              />
+              <Stack pt="md">
+                <SwitchInput
+                  defaultChecked
+                  label="Accepté d'être géolocaliser"
+                  checked={form.getInputProps("isLocated").value}
+                  onChange={(event) =>
+                    form
+                      .getInputProps("isLocated")
+                      .onChange(event.currentTarget.checked)
+                  }
+                />
+              </Stack>
             </Stack>
           </SwiperFrame>
         </SwiperSlide>
@@ -225,7 +261,7 @@ export default SignUp;
 
 SignUp.getLayout = function getLayout(page: ReactElement) {
   return (
-    <PageLayout opacity={0.5}>
+    <PageLayout opacity={0.6}>
       <GuardLayout>{page}</GuardLayout>
     </PageLayout>
   );

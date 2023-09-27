@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Box, Text, type BoxProps } from "@frenchies-spots/material";
+import { Box, Text, type BoxProps, Font } from "@frenchies-spots/material";
 import { useStyles } from "./Bubble.styles";
 
 interface BubbleProps extends BoxProps {
@@ -26,7 +26,7 @@ const Bubble = (props: BubbleProps) => {
       }}
       {...other}
     >
-      <Text>{message}</Text>
+      <Font>{message}</Font>
     </Box>
   );
 };

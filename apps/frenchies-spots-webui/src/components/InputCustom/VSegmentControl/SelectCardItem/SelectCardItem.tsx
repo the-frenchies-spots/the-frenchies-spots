@@ -26,7 +26,7 @@ export const SelectCardItem = (props: SelectCardItemProps) => {
 
   return (
     <Box className={classes.container} onClick={handleClick}>
-      <Stack ta="center" spacing={4}>
+      <Stack ta="center" spacing={4} p="md">
         <Font variant="h3">{name}</Font>
         <Font variant="h4">{description}</Font>
       </Stack>

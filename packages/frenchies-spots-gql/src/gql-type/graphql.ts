@@ -469,6 +469,7 @@ export type SignUpInput = {
   password: Scalars['String']['input'];
   photoUrl?: InputMaybe<Scalars['String']['input']>;
   pseudo: Scalars['String']['input'];
+  slogan: Scalars['String']['input'];
 };
 
 export type SpotByIdResponse = {

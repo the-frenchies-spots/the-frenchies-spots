@@ -3,6 +3,7 @@ import {
   IconMapPinFilled,
   IconUserSquareRounded,
   ProfileUserIcon,
+  ProfileUserIconFilled,
 } from "@frenchies-spots/icon";
 import {
   Group,
@@ -64,7 +65,7 @@ const StatusBar = (props: StatusBarProps) => {
           className={classes.actionIcon}
           onClick={() => router.push("/sign-in")}
         >
-          <ProfileUserIcon color="#A480A6" size={25} />
+          <ProfileUserIconFilled color="#A480A6" size={25} />
         </ActionIcon>
       )}
     </Group>

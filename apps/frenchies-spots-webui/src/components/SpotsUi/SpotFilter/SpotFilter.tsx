@@ -20,6 +20,7 @@ import { tagsDataList } from "@frenchies-spots/utils";
 import { useSpotUi } from "../../../hooks/use-spot-ui";
 import { formatPoint } from "../../../utils/format-point";
 import { getZoomByRadius } from "../../../utils/get-zoom-by-radius";
+import { IconSearch } from "@frenchies-spots/icon";
 
 interface SpotFilterProps {}
 
@@ -79,27 +80,28 @@ const SpotFilter = (props: SpotFilterProps) => {
       <Stack spacing="xl" p="md">
         <InputForm
           isShadow={false}
+          icon={<IconSearch style={{ color: "#A480A6" }} size={20} />}
           sx={{ borderColor: "#A480A6" }}
-          placeholder="spot name"
+          placeholder="Nom du spot"
           {...form.getInputProps("searchValue")}
         />
 
-        <Box>
+        <Stack>
           <Font variant="h4">Types de spot</Font>
           <HSegmentControl
             list={[
               { name: "Tout", value: undefined },
-              { name: "Avanture", value: CategoriesSpotAndTag.SPARE_TIME_SPOT },
+              { name: "Aventure", value: CategoriesSpotAndTag.SPARE_TIME_SPOT },
               {
-                name: "Ressources",
+                name: "Ressource",
                 value: CategoriesSpotAndTag.RESOURCES_SPOT,
               },
             ]}
             {...form.getInputProps("category")}
           />
-        </Box>
+        </Stack>
 
-        <Box>
+        <Stack>
           <Font variant="h4">Spot aventure</Font>
           <SelectTag
             position="left"
@@ -108,9 +110,9 @@ const SpotFilter = (props: SpotFilterProps) => {
             )}
             {...form.getInputProps("tagListId")}
           />
-        </Box>
+        </Stack>
 
-        <Box>
+        <Stack>
           <Font variant="h4">Spot ressource</Font>
           <SelectTag
             position="left"
@@ -119,7 +121,7 @@ const SpotFilter = (props: SpotFilterProps) => {
             )}
             {...form.getInputProps("tagListId")}
           />
-        </Box>
+        </Stack>
 
         <CheckboxInput
           label="Afficher les spots où je peux me garer"

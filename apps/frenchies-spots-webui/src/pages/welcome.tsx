@@ -21,7 +21,7 @@ const WelcomePage = () => {
 
   return (
     <Container size="sm" h="100%">
-      <Stack h="100%" justify="space-between" py={100}>
+      <Stack h="100%" justify="space-between" py="md">
         <Flex mt="md" gap="md" direction="row" w="100%" justify={"start"}>
           <Avatar color="white" />
           <Stack w="100%" spacing={0}>

@@ -5,7 +5,7 @@ const size = 45;
 export const useStyles = createStyles((theme) => ({
   container: {
     position: "absolute",
-    top: "50%",
+    top: "60%",
     right: 0,
   },
   locationButton: {

@@ -26,9 +26,6 @@ export class AuthResolver {
   @Public()
   @Mutation(() => SignResponse)
   signUp(@Args('signUpInput') signUpInput: SignUpInput) {
-    console.log('==============================================');
-    console.log({ signUpInput });
-    console.log('==============================================');
     return this.authBusiness.signup(signUpInput);
   }
 

@@ -27,4 +27,9 @@ export class SignUpInput {
   @IsString()
   @Field()
   password: string;
+
+  @IsNotEmpty()
+  @IsString()
+  @Field()
+  slogan: string;
 }

@@ -79,9 +79,10 @@ const SpotMenu = (props: SpotMenuProps) => {
             sx={{
               position: "relative",
               ".mantine-Autocomplete-input": {
+                height: 42,
                 borderRadius: 8,
                 overflow: "hidden",
-                borderColor: "#3F3979",
+                borderColor: "#A480A6",
                 color: "#3F3979",
                 ...fonts["Montserrat-Regular"].style,
                 fontSize: 16,
@@ -106,11 +107,11 @@ const SpotMenu = (props: SpotMenuProps) => {
                   onClick={handleOpenDrawer}
                   sx={{ borderRadius: 0, borderLeft: "1px solid grey" }}
                 >
-                  <IconSortDescending size={16} />
+                  <IconSortDescending size={16} style={{ color: "#A480A6" }} />
                 </ActionIcon>
               </Flex>
             }
-            icon={<IconSearch size={16} />}
+            icon={<IconSearch size={16} style={{ color: "#A480A6" }} />}
           />
           <Flex
             h="100%"
@@ -130,7 +131,7 @@ const SpotMenu = (props: SpotMenuProps) => {
               sx={{ backgroundColor: "white" }}
               onClick={handleSearchPlaceName}
             >
-              <IconSearch size={16} />
+              <IconSearch size={16} style={{ color: "#A480A6" }} />
             </ActionIcon>
           </Flex>
         </Box>

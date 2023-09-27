@@ -37,6 +37,8 @@ export const LocationManager = ({ value, onChange }: LocationManagerProps) => {
   return (
     <Box className={classes.container}>
       <AutocompleteAddress
+        label="Rechercher une addresse"
+        placeholder="Taper une addresse"
         value={locationData?.location?.value}
         onChange={handleChange}
         sx={(theme) => ({
@@ -49,6 +51,13 @@ export const LocationManager = ({ value, onChange }: LocationManagerProps) => {
             fontWeight: 400,
             boxShadow: "0px 4px 8px 0px #DBDBDB",
           },
+          ".mantine-Autocomplete-label": {
+            color: theme.colors.darkPurple[0],
+            ...fonts["Montserrat-Regular"].style,
+            fontSize: 16,
+            fontStyle: "normal",
+            fontWeight: 400,
+          },
         })}
       />
       <Box className={classes.locationPicker}>
@@ -57,11 +66,11 @@ export const LocationManager = ({ value, onChange }: LocationManagerProps) => {
           onChange={handleChange}
         />
       </Box>
-      <SelectRegion
+      {/* <SelectRegion
         value={locationData?.codeRegion}
         placeholder="region"
         readOnly
-      />
+      /> */}
     </Box>
   );
 };

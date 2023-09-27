@@ -59,7 +59,7 @@ const SignIn = () => {
         </Stack>
         <Box
           sx={{
-            height: 400,
+            height: "45vh",
             position: "relative",
             width: "100%",
           }}
@@ -112,6 +112,7 @@ const SignIn = () => {
                 <PrimaryButton
                   variant="subtle"
                   color="purple"
+                  p={0}
                   onClick={() => router.push("/sign-up")}
                 >
                   Créer mon compte
@@ -129,7 +130,7 @@ export default SignIn;
 
 SignIn.getLayout = function getLayout(page: ReactElement) {
   return (
-    <PageLayout opacity={0.5}>
+    <PageLayout opacity={0.5} h="55vh">
       <GuardLayout>{page}</GuardLayout>
     </PageLayout>
   );

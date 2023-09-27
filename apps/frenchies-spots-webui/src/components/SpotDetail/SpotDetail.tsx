@@ -71,7 +71,9 @@ const SpotDetail = (props: SpotDetailProps) => {
 
           <Stack p="md">
             <Group position="apart">
-              <Font variant="h3">{spot?.name}</Font>
+              <Font variant="h3" sx={{ fontSize: 24 }}>
+                {spot?.name}
+              </Font>
               {!isPreviewMode && userIsOwner && (
                 <Group>
                   <EditButton spotId={spot.id} />
@@ -101,7 +103,7 @@ const SpotDetail = (props: SpotDetailProps) => {
 
             <Stack>
               <Font variant="h3">Description</Font>
-              <Font>{spot?.description}</Font>
+              <Font sx={{ wordWrap: "break-word" }}>{spot?.description}</Font>
             </Stack>
 
             {!isPreviewMode && (

@@ -76,7 +76,7 @@ const SpotCard = (props: SpotCardProps) => {
         </Font>
       </Group>
 
-      <Font size="sm" color="dimmed" lineClamp={3}>
+      <Font size="sm" color="dimmed" lineClamp={1}>
         {description}
       </Font>
     </Card>

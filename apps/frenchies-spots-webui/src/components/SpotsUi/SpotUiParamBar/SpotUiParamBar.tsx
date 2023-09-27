@@ -100,10 +100,10 @@ const SpotUiParamBar = (props: SpotUiParamBarProps) => {
       </ActionIcon>
       {form?.values?.point && (
         <Stack spacing={0}>
-          <ActionIcon className={classes.zoomButton} onClick={handlePlusClick}>
+          <ActionIcon className={classes.zoomButton} onClick={handleMinusClick}>
             <IconPlus color="black" />
           </ActionIcon>
-          <ActionIcon className={classes.zoomButton} onClick={handleMinusClick}>
+          <ActionIcon className={classes.zoomButton} onClick={handlePlusClick}>
             <IconMinus color="black" />
           </ActionIcon>
         </Stack>

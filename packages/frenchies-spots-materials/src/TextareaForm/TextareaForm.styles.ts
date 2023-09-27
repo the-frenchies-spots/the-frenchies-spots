@@ -12,7 +12,7 @@ export const useStyles = createStyles((theme, props: StyleParams) => {
   const { isShadow, error, filled, sx } = props;
   return {
     input: {
-      ".mantine-TextInput-wrapper, .mantine-TextInput-root, .mantine-TextInput-input":
+      ".mantine-Textarea-wrapper, .mantine-Textarea-root, .mantine-Textarea-input":
         {
           ...(error
             ? { borderColor: theme.colors.red[0], color: theme.colors.red[0] }
@@ -20,7 +20,7 @@ export const useStyles = createStyles((theme, props: StyleParams) => {
                 borderColor: filled ? theme.colors.lightBluePurple[0] : "white",
                 color: theme.colors.darkPurple[0],
               }),
-          height: 42,
+
           borderRadius: 8,
           backgroundColor: filled ? theme.colors.lightBluePurple[0] : "white",
           "&:focus": error
@@ -37,7 +37,7 @@ export const useStyles = createStyles((theme, props: StyleParams) => {
           ...sx,
         },
 
-      ".mantine-TextInput-label": {
+      ".mantine-Textarea-label": {
         ...fonts["Montserrat-Regular"].style,
         fontSize: 16,
         fontStyle: "normal",

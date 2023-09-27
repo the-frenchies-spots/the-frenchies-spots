@@ -288,6 +288,7 @@ input SignUpInput {
   password: String!
   photoUrl: String
   pseudo: String!
+  slogan: String!
 }
 
 type SpotByIdResponse {

@@ -35,6 +35,7 @@ export class AuthRepository {
     photoUrl: string | undefined,
     avatarUrl: string,
     isLocated: boolean,
+    slogan: string,
   ): Promise<UserEntity> {
     const user = await this.prisma.user.create({
       data: {
@@ -47,6 +48,7 @@ export class AuthRepository {
             photoUrl,
             avatarUrl,
             isLocated,
+            slogan,
             gamePoint: 500,
           },
         },

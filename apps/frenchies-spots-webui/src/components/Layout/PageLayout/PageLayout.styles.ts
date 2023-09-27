@@ -17,6 +17,7 @@ export const useStyles = createStyles(
       width: "100%",
     },
     children: {
+      zIndex: 1,
       position: "absolute",
       height: "100%",
       width: "100%",

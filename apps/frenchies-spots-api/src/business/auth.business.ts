@@ -26,7 +26,7 @@ export class AuthBusiness {
   }
 
   async signup(signUpInput: SignUpInput): Promise<SignResponse> {
-    const { pseudo, password, email, photoUrl, avatarUrl, isLocated } =
+    const { pseudo, password, email, photoUrl, avatarUrl, isLocated, slogan } =
       signUpInput;
     const hashedPassword = await hash(password, 10);
 
@@ -42,6 +42,7 @@ export class AuthBusiness {
       photoUrl,
       avatarUrl,
       isLocated,
+      slogan,
     );
 
     return this.refreshAuthAccess(user);

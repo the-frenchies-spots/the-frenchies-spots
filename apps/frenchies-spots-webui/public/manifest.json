@@ -1,10 +1,10 @@
 {
-  "theme_color": "#f69435",
-  "background_color": "#f69435",
+  "theme_color": "#3F3979",
+  "background_color": "#3F3979",
   "display": "standalone",
   "scope": "/",
   "start_url": "/",
-  "name": "Frenchies Spots",
+  "name": "The Frenchies Spots",
   "short_name": "Fr Spots",
   "icons": [
     {

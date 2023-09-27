@@ -12,6 +12,7 @@ import {
   ScrollArea,
   Stack,
   TextInput,
+  TextareaForm,
 } from "@frenchies-spots/material";
 import { useForm } from "@frenchies-spots/hooks";
 import { SwiperFrame } from "../../SwiperFrame/SwiperFrame";
@@ -126,7 +127,7 @@ export const SpotEditionForm = (props: SpotEditionFormProps) => {
           />
         </CornerBar>
       )}
-      <Container size="md">
+      <Container size="md" p={0}>
         <SwiperForm
           onSubmit={handleSubmit}
           ref={swiperRef}
@@ -135,8 +136,8 @@ export const SpotEditionForm = (props: SpotEditionFormProps) => {
           {/* SPOT CATEGORY */}
           <SwiperSlide>
             <SwiperFrame prevLabel="">
-              <Stack mt={40}>
-                <Font variant="h2">
+              <Stack mt={40} px="md">
+                <Font variant="h2" pb={20}>
                   A quelle catégorie associes-tu ton spot ?
                 </Font>
                 <VSegmentControl
@@ -162,8 +163,11 @@ export const SpotEditionForm = (props: SpotEditionFormProps) => {
           {/* SPOT TAG */}
           <SwiperSlide>
             <SwiperFrame disabled={!form.isValid("tags")}>
-              <Stack mt={40}>
-                <Font variant="h2">{`Quels tags correspondent à ton spot ?`}</Font>
+              <Stack mt={40} px="md">
+                <Font
+                  variant="h2"
+                  pb={20}
+                >{`Quels tags correspondent à ton spot ?`}</Font>
                 <SelectTag
                   list={tagsDataList.filter(
                     (tag) => tag.category === form.values.category
@@ -178,36 +182,46 @@ export const SpotEditionForm = (props: SpotEditionFormProps) => {
             <SwiperFrame
               disabled={!(form.isValid("name") && form.isValid("description"))}
             >
-              <Stack mt={40}>
-                <Font variant="h2">Dis nous en plus sur ton spot !</Font>
-                <InputForm
-                  variant="filled"
-                  label="Nom du spot"
-                  placeholder=""
-                  {...form.getInputProps("name")}
-                  error={form.errors.name}
-                  errorMessage="Vous devez renseigner un nom"
-                  required
-                />
-                <InputForm
-                  variant="filled"
-                  label="Description"
-                  placeholder=""
-                  {...form.getInputProps("description")}
-                  error={form.errors.name}
-                  errorMessage="Vous devez renseigner une description"
-                  required
-                />
-                <CheckboxInput
-                  label="Est-ce que je peux me garer ?"
-                  checked={form.getInputProps("isCanPark").value}
-                  onChange={(event) =>
-                    form
-                      .getInputProps("isCanPark")
-                      .onChange(event.currentTarget.checked)
-                  }
-                />
-                <MultipleImagePicker {...form.getInputProps("pictures")} />
+              <Stack mt={40} px="md">
+                <Font variant="h2" pb={30}>
+                  Dis nous en plus sur ton spot !
+                </Font>
+                <Stack spacing={24}>
+                  <InputForm
+                    variant="filled"
+                    label="Nom du spot"
+                    placeholder=""
+                    {...form.getInputProps("name")}
+                    error={form.errors.name}
+                    errorMessage="Vous devez renseigner un nom"
+                    required
+                  />
+
+                  <TextareaForm
+                    h={60}
+                    variant="filled"
+                    label="Description"
+                    placeholder=""
+                    {...form.getInputProps("description")}
+                    error={form.errors.name}
+                    errorMessage="Vous devez renseigner une description"
+                    required
+                  />
+                  <CheckboxInput
+                    mt={40}
+                    label="Est-ce que je peux me garer ?"
+                    checked={form.getInputProps("isCanPark").value}
+                    onChange={(event) =>
+                      form
+                        .getInputProps("isCanPark")
+                        .onChange(event.currentTarget.checked)
+                    }
+                  />
+                  <Stack>
+                    <Font>Rajouter des images*</Font>
+                    <MultipleImagePicker {...form.getInputProps("pictures")} />
+                  </Stack>
+                </Stack>
               </Stack>
             </SwiperFrame>
           </SwiperSlide>
@@ -222,8 +236,8 @@ export const SpotEditionForm = (props: SpotEditionFormProps) => {
                 )
               }
             >
-              <Flex h="100%" pt={40} direction="column">
-                <Font variant="h2" mb="md">
+              <Flex h="100%" pt={40} direction="column" px="md">
+                <Font variant="h2" mb={20}>
                   Où se situe ton spot ?
                 </Font>
                 <Box sx={{ flexGrow: 1 }} mb="xl">
@@ -247,8 +261,8 @@ export const SpotEditionForm = (props: SpotEditionFormProps) => {
           {/* PUBLIC || PRIVATE */}
           <SwiperSlide>
             <SwiperFrame nextLabel="Valider">
-              <Stack pt={40}>
-                <Font variant="h2">
+              <Stack pt={40} px="md">
+                <Font variant="h2" pb={20}>
                   Dernier effort ! Quel statut préfères-tu pour ton spot ?
                 </Font>
 
@@ -273,38 +287,36 @@ export const SpotEditionForm = (props: SpotEditionFormProps) => {
           {/* PREVIEW */}
           <SwiperSlide>
             <SwiperFrame type="submit" nextLabel="Publier">
-              <ScrollArea>
-                {profile && (
-                  <SpotDetail
-                    spot={{
-                      __typename: "SpotByIdResponse",
-                      address: form.values.address,
-                      averageRating: 0,
-                      category: form.values.category,
-                      createdAt: "2023-09-20T12:00:00Z",
-                      description: form.values.description,
-                      favorites: [],
-                      profile,
-                      id: "1",
-                      isCanPark: form.values.isCanPark,
-                      isHidden: form.values.isHidden,
-                      location: {},
-                      name: form.values.name,
-                      profileId: "profile1",
-                      region: form.values.region,
-                      spotPicture: form.values.pictures?.map(({ url }) => ({
-                        url,
-                      })) as SpotPictureEntity[],
-                      tags:
-                        (form.values.tags?.map((tagId) => ({
-                          tag: { id: tagId },
-                        })) as TagOnSpotEntity[]) || [],
-                      updatedAt: "2023-09-20T13:00:00Z",
-                    }}
-                    isPreviewMode
-                  />
-                )}
-              </ScrollArea>
+              {profile && (
+                <SpotDetail
+                  spot={{
+                    __typename: "SpotByIdResponse",
+                    address: form.values.address,
+                    averageRating: 0,
+                    category: form.values.category,
+                    createdAt: "2023-09-20T12:00:00Z",
+                    description: form.values.description,
+                    favorites: [],
+                    profile,
+                    id: "1",
+                    isCanPark: form.values.isCanPark,
+                    isHidden: form.values.isHidden,
+                    location: {},
+                    name: form.values.name,
+                    profileId: "profile1",
+                    region: form.values.region,
+                    spotPicture: form.values.pictures?.map(({ url }) => ({
+                      url,
+                    })) as SpotPictureEntity[],
+                    tags:
+                      (form.values.tags?.map((tagId) => ({
+                        tag: { id: tagId },
+                      })) as TagOnSpotEntity[]) || [],
+                    updatedAt: "2023-09-20T13:00:00Z",
+                  }}
+                  isPreviewMode
+                />
+              )}
             </SwiperFrame>
           </SwiperSlide>
         </SwiperForm>
