@@ -57,9 +57,9 @@ const ShopBuyPoints = () => {
   };
 
   return (
-    <Box h="100%">
+    <Box h="100%" mb={500}>
       <LoadingOverlay visible={loading} overlayBlur={2} />
-      <Stack justify="space-between" pt="xl" h="100%">
+      <Stack pt="xl">
         <Stack align="center" spacing={54}>
           <Image
             src="/images/shop_draw.svg"
@@ -74,9 +74,10 @@ const ShopBuyPoints = () => {
           </Group>
         </Stack>
 
-        <PrimaryButton onClick={open} w="100%">
+        <PrimaryButton onClick={open} w="100%" mt="md">
           ACHETER
         </PrimaryButton>
+        <Box py={100} />
       </Stack>
       <CustomDrawer opened={opened} onClose={close}>
         <Stack p="md">

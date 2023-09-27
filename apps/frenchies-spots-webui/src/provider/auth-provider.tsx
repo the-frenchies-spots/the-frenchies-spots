@@ -16,6 +16,7 @@ export const AuthProvider = (props: AuthProviderProps) => {
     onSignUp,
     onSignIn,
     refresh,
+    onDeleteAccount,
     onSignOut,
     setUser,
   } = useInitAuth();
@@ -30,6 +31,7 @@ export const AuthProvider = (props: AuthProviderProps) => {
         processSignIn: onSignIn,
         processSignUp: onSignUp,
         processSignOut: onSignOut,
+        processDeleteAccount: onDeleteAccount,
         setUser,
       }}
     >

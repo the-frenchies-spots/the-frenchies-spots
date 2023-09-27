@@ -132,9 +132,11 @@ export type LogoutResponse = {
 export type Mutation = {
   __typename?: 'Mutation';
   acceptFriendContact: Scalars['Boolean']['output'];
+  blockContact: Scalars['Boolean']['output'];
   buyAvatar: ProfileEntity;
   buyPoint: UserEntity;
   createOrUpdateRating: RatingResponse;
+  deleteAccount: Scalars['Boolean']['output'];
   deleteNotif: DeleteResponse;
   deleteSpot: DeleteResponse;
   deleteTag: DeleteResponse;
@@ -150,6 +152,7 @@ export type Mutation = {
   signIn: SignResponse;
   signUp: SignResponse;
   toggleFavorite: ToggleFavoriteResponse;
+  unBlockContact: Scalars['Boolean']['output'];
   updateContact: ContactEntity;
   updateNotifStatus: Scalars['Boolean']['output'];
   updateProfile: UserEntity;
@@ -161,6 +164,11 @@ export type Mutation = {
 
 export type MutationAcceptFriendContactArgs = {
   contactId: Scalars['String']['input'];
+};
+
+
+export type MutationBlockContactArgs = {
+  blockContactId: Scalars['String']['input'];
 };
 
 
@@ -241,6 +249,11 @@ export type MutationSignUpArgs = {
 
 export type MutationToggleFavoriteArgs = {
   favoriteInput: FavoriteInput;
+};
+
+
+export type MutationUnBlockContactArgs = {
+  blockContactId: Scalars['String']['input'];
 };
 
 

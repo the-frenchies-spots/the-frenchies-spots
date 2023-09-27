@@ -38,7 +38,7 @@ const SignUp = () => {
   const form = useForm<SignUpInput & { comfirmPassword: string }>({
     initialValues: {
       pseudo: "",
-      isLocated: false,
+      isLocated: true,
       avatarUrl:
         "https://res.cloudinary.com/dw2hb8vmu/image/upload/v1695397559/frenchies-spots/avatar/AVATAR_3_tomehg.gif",
       email: "",
@@ -68,6 +68,14 @@ const SignUp = () => {
     }
   };
 
+  const avatar = (
+    <Avatar
+      color="white"
+      sx={{ backgroundColor: "white" }}
+      src="https://res.cloudinary.com/dw2hb8vmu/image/upload/v1695748998/frenchies-spots/profiles/yolo/65131339b899fa2257a8f01a/oboplayk6mkzeg99qyyb.png"
+    />
+  );
+
   useEffect(() => {
     if (form.isValid("email")) {
       setIsEmail(true);
@@ -88,7 +96,7 @@ const SignUp = () => {
           >
             <ScrollArea pt="xl">
               <Flex gap="md" direction="row" w="100%" justify={"start"}>
-                <Avatar color="white" />
+                {avatar}
                 <Stack w="100%" spacing={1}>
                   <Bubble
                     message="Crée ton compte pour pouvoir demander de l'aide, enregistrer et créer des annonces !"
@@ -123,7 +131,7 @@ const SignUp = () => {
                       w="100%"
                       justify={"start"}
                     >
-                      <Avatar color="white" />
+                      {avatar}
                       <Stack w="100%" spacing={1}>
                         <Bubble
                           message="Rentre ton pseudo. Fais toi plaisir tu peux être qui tu veux aujourd'hui !"
@@ -154,7 +162,7 @@ const SignUp = () => {
             prevColor="superLightGrey"
           >
             <Flex gap="md" direction="row" w="100%" justify={"start"}>
-              <Avatar color="white" />
+              {avatar}
               <Stack w="100%" spacing={1}>
                 <Bubble
                   message="Choisis ton avatar ! Les autres te verront sous cette forme sur la carte."
@@ -175,7 +183,7 @@ const SignUp = () => {
           >
             <ScrollArea pt="xl">
               <Flex gap="md" direction="row" w="100%" justify={"start"}>
-                <Avatar color="white" />
+                {avatar}
                 <Stack w="100%" spacing={1}>
                   <Bubble
                     message="Donne nous une petit description de toi."
@@ -201,6 +209,38 @@ const SignUp = () => {
 
         <SwiperSlide>
           <SwiperFrame
+            prevLabel="Retour"
+            prevColor="superLightGrey"
+            disabled={!form.isValid("slogan")}
+          >
+            <Flex mt="md" gap="md" direction="row" w="100%" justify={"start"}>
+              {avatar}
+              <Stack w="100%" spacing={1}>
+                <Bubble
+                  message="Les autres usagers pourront te voir sur la carte. Tu peux choisir d'autoriser ou non cette action. Tu pourras modifier à tout moment ce paramètre."
+                  isParticipant={true}
+                  w="90%"
+                />
+              </Stack>
+            </Flex>
+
+            <Stack py="md">
+              <SwitchInput
+                defaultChecked
+                label="Accepté d'être géolocaliser"
+                checked={form.getInputProps("isLocated").value}
+                onChange={(event) =>
+                  form
+                    .getInputProps("isLocated")
+                    .onChange(event.currentTarget.checked)
+                }
+              />
+            </Stack>
+          </SwiperFrame>
+        </SwiperSlide>
+
+        <SwiperSlide>
+          <SwiperFrame
             type="submit"
             prevColor="superLightGrey"
             nextLabel="Valider"
@@ -210,7 +250,7 @@ const SignUp = () => {
             }
           >
             <Flex mt="md" gap="md" direction="row" w="100%" justify={"start"}>
-              <Avatar color="white" />
+              {avatar}
               <Stack w="100%" spacing={1}>
                 <Bubble
                   message="Deux pour le prix d'un ! Marque ton mot de passe, puis comfirme-le."
@@ -237,18 +277,6 @@ const SignUp = () => {
                 errorMessage="Le mot de passe doit avoir au moins 6 caractères"
                 required
               />
-              <Stack pt="md">
-                <SwitchInput
-                  defaultChecked
-                  label="Accepté d'être géolocaliser"
-                  checked={form.getInputProps("isLocated").value}
-                  onChange={(event) =>
-                    form
-                      .getInputProps("isLocated")
-                      .onChange(event.currentTarget.checked)
-                  }
-                />
-              </Stack>
             </Stack>
           </SwiperFrame>
         </SwiperSlide>

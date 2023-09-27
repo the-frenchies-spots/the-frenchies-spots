@@ -20,10 +20,6 @@ const FriendPage = (props: FriendPageProps) => {
 
       <Stack w="100%">
         <ContactButton profile={profile} w="100%" />
-        <PrimaryButton variant="outline" color="red" leftIcon={<IconUserOff />}>
-          Supprimer de mes amis
-        </PrimaryButton>
-        <BlockButton isSmallMode={false} />
       </Stack>
     </Stack>
   );

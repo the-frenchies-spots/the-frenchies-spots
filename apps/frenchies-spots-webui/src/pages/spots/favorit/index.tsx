@@ -5,7 +5,7 @@ import NavigationLayout from "../../../components/Layout/NavigationLayout/Naviga
 
 import { useQuery } from "@apollo/client";
 import { SpotEntity, queries } from "@frenchies-spots/gql";
-import { Container, InputForm } from "@frenchies-spots/material";
+import { Box, Container, InputForm } from "@frenchies-spots/material";
 
 import SpotList from "../../../components/Spots/SpotList/SpotList";
 import FavoriteButton from "../../../components/Spots/SpotButton/FavoriteButton/FavoriteButton";
@@ -36,19 +36,21 @@ const FavoritPage = () => {
           icon={<IconSearch style={{ color: "#A480A6" }} size={20} />}
         />
       </Container>
-      <SpotList
-        list={data?.spotsFavorite?.filter((_spot) =>
-          _spot.name.includes(searchKey)
-        )}
-      >
-        {({ spotId, favoriteId }) => (
-          <FavoriteButton
-            favorite={{ spotId, favoriteId }}
-            onClick={refetch}
-            withComfirm
-          />
-        )}
-      </SpotList>
+      <Box mb={100}>
+        <SpotList
+          list={data?.spotsFavorite?.filter((_spot) =>
+            _spot.name.includes(searchKey)
+          )}
+        >
+          {({ spotId, favoriteId }) => (
+            <FavoriteButton
+              favorite={{ spotId, favoriteId }}
+              onClick={refetch}
+              withComfirm
+            />
+          )}
+        </SpotList>
+      </Box>
     </>
   );
 };

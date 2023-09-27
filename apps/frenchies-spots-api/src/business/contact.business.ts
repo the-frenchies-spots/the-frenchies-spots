@@ -38,6 +38,14 @@ export class ContactBusiness {
     return this.contactRepository.updateOne(contactInput);
   }
 
+  async block(profileId: string, blockContactId: string): Promise<boolean> {
+    return this.contactRepository.block(profileId, blockContactId);
+  }
+
+  async unBlock(profileId: string, blockContactId: string): Promise<boolean> {
+    return this.contactRepository.unBlock(profileId, blockContactId);
+  }
+
   async acceptFriend(profileId: string, contactId: string): Promise<boolean> {
     const contact1 = await this.contactRepository.getByContactId(
       profileId,

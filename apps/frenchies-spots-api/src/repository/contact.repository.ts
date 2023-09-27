@@ -126,4 +126,42 @@ export class ContactRepository {
     });
     return plainToClass(contact, ContactEntity);
   }
+
+  async block(profileId: string, blockContactId: string): Promise<boolean> {
+    return this.prisma.profile
+      .update({
+        where: { id: profileId },
+        data: {
+          contacts: {
+            update: {
+              where: { id: blockContactId },
+              data: {
+                authorization: false,
+              },
+            },
+          },
+        },
+      })
+      .then(() => true)
+      .catch(() => false);
+  }
+
+  async unBlock(profileId: string, blockContactId: string): Promise<boolean> {
+    return this.prisma.profile
+      .update({
+        where: { id: profileId },
+        data: {
+          contacts: {
+            update: {
+              where: { id: blockContactId },
+              data: {
+                authorization: true,
+              },
+            },
+          },
+        },
+      })
+      .then(() => true)
+      .catch(() => false);
+  }
 }

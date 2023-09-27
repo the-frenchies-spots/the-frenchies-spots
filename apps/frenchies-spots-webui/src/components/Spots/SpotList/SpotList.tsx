@@ -29,7 +29,7 @@ const SpotList = (props: SpotListProps) => {
 
   if (!list) return null;
   return (
-    <Container size="md" h="100%" {...containerProps}>
+    <Container size="md" h="100%" {...containerProps} mb={400}>
       <Grid>
         {list.map((spot) => (
           <Grid.Col key={spot.id} md={4} sm={6} xs={12}>

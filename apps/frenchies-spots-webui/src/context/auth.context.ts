@@ -14,6 +14,7 @@ interface AuthContextData {
   processSignIn: ((variables: SignInInput) => Promise<void>) | undefined;
   processSignUp: ((signUpInput: SignUpInput) => Promise<void>) | undefined;
   processSignOut: (() => Promise<void>) | undefined;
+  processDeleteAccount: (() => Promise<void>) | undefined;
   setUser: Dispatch<SetStateAction<UserEntity | undefined>> | undefined;
 }
 
@@ -24,6 +25,7 @@ const defaultContext: AuthContextData = {
   refresh: undefined,
   processSignIn: undefined,
   processSignUp: undefined,
+  processDeleteAccount: undefined,
   processSignOut: undefined,
   setUser: undefined,
 };
