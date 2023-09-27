@@ -16,12 +16,12 @@ import { GeospatialService } from '../service/spot-geospatial.service';
 import { ProfileSchema } from '../schema/profile.shema';
 
 @Module({
-  // imports: [
-  //   MongooseModule.forFeature([
-  //     { name: 'Spot', schema: SpotSchema },
-  //     { name: 'Profile', schema: ProfileSchema },
-  //   ]),
-  // ],
+  imports: [
+    MongooseModule.forFeature([
+      { name: 'Spot', schema: SpotSchema },
+      { name: 'Profile', schema: ProfileSchema },
+    ]),
+  ],
   providers: [
     SpotResolver,
     SpotBusiness,
