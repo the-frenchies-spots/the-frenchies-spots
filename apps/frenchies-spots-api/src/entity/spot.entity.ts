@@ -88,11 +88,11 @@ export class SpotEntity implements Spot {
   @ManyToMany(() => TagOnSpotEntity, (tagEl) => tagEl.tag.spots)
   tags?: TagOnSpotEntity[] | null;
 
-  @Field()
+  @Field({ nullable: true })
   @Column({ default: () => 'CURRENT_TIMESTAMP' })
   createdAt: Date;
 
-  @Field()
+  @Field({ nullable: true })
   @Column({ default: () => 'CURRENT_TIMESTAMP' })
   updatedAt: Date;
 }

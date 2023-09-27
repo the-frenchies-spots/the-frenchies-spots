@@ -1,3 +1,20 @@
+export const getByIdResponse = {
+  id: 'd9b75a45-afa0-4210-8baf-49fadb8f7495',
+  name: 'Tour Eiffel',
+  description: 'Description Tour Eiffel',
+  address: 'Paris, France',
+  isCanPark: true,
+  isHidden: false,
+  category: 'SPARE_TIME_SPOT',
+  averageRating: 5,
+  region: '3',
+  profileId: '',
+  location: {
+    type: 'Point',
+    coordinates: [0, 0],
+  },
+};
+
 export const mockSpotRepository = {
   getAll: jest.fn().mockResolvedValue([
     {
@@ -29,24 +46,7 @@ export const mockSpotRepository = {
     },
   ]),
 
-  getById: jest.fn().mockResolvedValue({
-    id: 'd9b75a45-afa0-4210-8baf-49fadb8f7495',
-    name: 'Tour Eiffel',
-    description: 'Description Tour Eiffel',
-    address: 'Paris, France',
-    isCanPark: true,
-    isHidden: false,
-    category: 'SPARE_TIME_SPOT',
-    averageRating: 5,
-    region: '3',
-    profileId: '',
-    location: {
-      type: 'Point',
-      coordinates: [0, 0],
-    },
-    createdAt: null,
-    updtaedAt: null,
-  }),
+  getById: jest.fn().mockResolvedValue(getByIdResponse),
 
   update: jest.fn().mockResolvedValue({}),
   create: jest.fn().mockResolvedValue({}),

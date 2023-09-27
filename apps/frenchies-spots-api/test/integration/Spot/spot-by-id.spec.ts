@@ -5,7 +5,10 @@ import { GqlExecutionContext } from '@nestjs/graphql';
 import { Test, TestingModule } from '@nestjs/testing';
 import { ExecutionContext, INestApplication } from '@nestjs/common';
 
-import { mockSpotRepository } from '../../mocks/repository/mock.spot.repository';
+import {
+  getByIdResponse,
+  mockSpotRepository,
+} from '../../mocks/repository/mock.spot.repository';
 import { mockGeospatialService } from '../../mocks/service/mock.geospatial.service';
 import {
   mockAuthRepository,
@@ -70,11 +73,12 @@ describe('AppController (e2e)', () => {
   });
 
   it('should get one spot by id', async () => {
-    const spot = await query(queries.spotByPk, {
+    const spot = (await query(queries.spotByPk, {
       id: 'd9b75a45-afa0-4210-8baf-49fadb8f7495',
-    });
+    })) as any;
 
-    expect(spot).not.toBeNull();
+    const value = spot.res.text;
+    expect(value).toBe(getByIdResponse);
   }, 300000);
 
   afterAll(async () => {
