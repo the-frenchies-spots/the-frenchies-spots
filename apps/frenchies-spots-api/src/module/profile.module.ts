@@ -22,12 +22,12 @@ import { NotificationBusiness } from '../business/notification.business';
 import { NotificationRepository } from '../repository/notification.repository';
 
 @Module({
-  imports: [
-    MongooseModule.forFeature([
-      { name: 'Spot', schema: SpotSchema },
-      { name: 'Profile', schema: ProfileSchema },
-    ]),
-  ],
+  // imports: [
+  //   MongooseModule.forFeature([
+  //     { name: 'Spot', schema: SpotSchema },
+  //     { name: 'Profile', schema: ProfileSchema },
+  //   ]),
+  // ],
   providers: [
     ProfileResolver,
     ProfileRepository,
