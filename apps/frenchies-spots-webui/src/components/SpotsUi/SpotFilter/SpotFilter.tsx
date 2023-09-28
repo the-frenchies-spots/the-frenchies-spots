@@ -132,26 +132,20 @@ const SpotFilter = (props: SpotFilterProps) => {
               .onChange(event.currentTarget.checked)
           }
         />
-        {/* <Checkbox
-          label="Afficher les spots les mieux notés"
-          
-        /> */}
 
-        <Stack>
         <Slider
-              pb="xl"
-              mb="xl"
-              marks={[
-                { value: 20, label: "20 km" },
-                { value: 50, label: "50 km" },
-                { value: 80, label: "80 km" },
-              ]}
-              value={form.getInputProps("point.maxDistance").value / 1000}
-              onChange={handleRadiusChange}
-              labelAlwaysOn
-            />
+          pb="xl"
+          mb="xl"
+          marks={[
+            { value: 20, label: "20 km" },
+            { value: 50, label: "50 km" },
+            { value: 80, label: "80 km" },
+          ]}
+          value={form.getInputProps("point.maxDistance").value / 1000}
+          onChange={handleRadiusChange}
+          labelAlwaysOn
+        />
       </Stack>
-
       <Group
         grow
         sx={{
