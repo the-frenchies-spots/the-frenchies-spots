@@ -8,6 +8,7 @@ import {
   queries,
 } from "@frenchies-spots/gql";
 import {
+  BackButton,
   Container,
   Group,
   InputForm,
@@ -43,6 +44,7 @@ const FriendsPage = () => {
     <Container size="md" mt="md">
       <LoadingOverlay visible={loading} />
       <Stack>
+        <BackButton onClick={() => router.back()} />
         <InputForm
           placeholder="Rechercher un ami"
           onChange={(e) => setSearchKey(e.currentTarget.value)}
