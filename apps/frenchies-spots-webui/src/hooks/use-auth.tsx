@@ -104,8 +104,8 @@ export const useInitAuth = () => {
     });
 
     toast.promise(signInPromess, {
-      loading: "Connexion...",
-      success: <b>{`Bon retour parmis nous !`}</b>,
+      loading: "Connexion en cours...",
+      success: <b>{`Bon retour parmi nous !`}</b>,
       error: <b>Email ou mot de passe incorrect !</b>,
     });
   };
@@ -148,7 +148,7 @@ export const useInitAuth = () => {
 
     toast.promise(deleteAccountPromess, {
       loading: "Suppression...",
-      success: <b>{`Votre compte à été supprimer !`}</b>,
+      success: <b>{`Votre compte à été supprimé !`}</b>,
       error: <b>Une erreur est survenue !</b>,
     });
   };
