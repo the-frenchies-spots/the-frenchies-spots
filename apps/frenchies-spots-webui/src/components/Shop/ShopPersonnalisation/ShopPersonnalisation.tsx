@@ -98,7 +98,6 @@ const ShopPersonnalisation = () => {
         {avatar && (
           <Stack p="md" h={500} justify="space-between">
             <Stack>
-              <Font variant="h2">Récapitulatif</Font>
               <Group grow>
                 <Box h={120} sx={{ position: "relative", width: 80 }}>
                   <Image src={avatar.avatarUrl} alt={avatar.id} />
@@ -122,7 +121,7 @@ const ShopPersonnalisation = () => {
               <PrimaryButton
                 onClick={() => handleAvatarChange(avatar.avatarUrl)}
               >
-                Sélectionner cette avatar
+                Sélectionner cet avatar
               </PrimaryButton>
             ) : (
               <PrimaryButton

@@ -72,12 +72,12 @@ const ProfileRequestPage = (props: ProfileRequestPageProps) => {
 
       <ProfilePresentation profile={profile} />
 
-      <Font variant="h2">{`Demande d'amis ?`} </Font>
+      <Font variant="h2">{`Demande d'ami ?`} </Font>
 
       <Group w="100%" grow>
-        <PrimaryButton onClick={handleClick}>Accepté</PrimaryButton>
+        <PrimaryButton onClick={handleClick}>Accepter</PrimaryButton>
         <PrimaryButton onClick={handleCancel} variant="outline">
-          Refusé
+          Refuser
         </PrimaryButton>
       </Group>
     </Stack>

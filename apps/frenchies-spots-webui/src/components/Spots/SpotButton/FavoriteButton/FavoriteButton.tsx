@@ -44,6 +44,7 @@ const FavoriteButton = (props: FavoriteButtonProps) => {
 
   const handleFavoriteClick = () => {
     const { favoriteId, spotId } = favorite;
+
     toggleFavorite({
       variables: { favoriteInput: { favoriteId, spotId } },
     }).then((result) => {

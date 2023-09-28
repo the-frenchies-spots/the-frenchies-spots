@@ -34,11 +34,7 @@ const NavChat = (props: NavChatProps) => {
       <Group sx={{ flexGrow: 1 }} position="apart">
         <Stack spacing={2}>
           <Text>{participant?.profile?.pseudo}</Text>
-          <Text> {participant?.profile?.slogan || "Pas de slogan"}</Text>
         </Stack>
-        <ActionIcon>
-          <IconInfoCircleFilled />
-        </ActionIcon>
       </Group>
     </Flex>
   );

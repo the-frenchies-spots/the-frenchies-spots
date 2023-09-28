@@ -49,7 +49,7 @@ const ShopBuyPoints = () => {
         }
       ),
       {
-        loading: "Saving...",
+        loading: "Chargement...",
         success: <b>{`Vous venez d'obtenir ${amount} !`}</b>,
         error: <b>{`L'achat de point a échoué.`}</b>,
       }
@@ -67,6 +67,7 @@ const ShopBuyPoints = () => {
             height={200}
             width={200}
           />
+
           <PriceInput price={price} onPriceChange={setPrice} />
           <Group spacing={5}>
             <Font variant="h3">{amountPoints(price)}</Font>
@@ -81,7 +82,7 @@ const ShopBuyPoints = () => {
       </Stack>
       <CustomDrawer opened={opened} onClose={close}>
         <Stack p="md">
-          <Text>Récapitulatif</Text>
+          <Font variant="h2">Récapitulatif</Font>
           <Group grow>
             <Box>
               <Image
@@ -93,11 +94,11 @@ const ShopBuyPoints = () => {
             </Box>
 
             <Stack>
-              <Text>{amountPoints(price)} points</Text>
-              <Text>{price} €</Text>
+              <Font>{amountPoints(price)} points</Font>
+              <Font>{price} €</Font>
             </Stack>
           </Group>
-          <Text>Paiement</Text>
+          <Font>Paiement</Font>
           <StripeContainer onCheckout={handleCheckout}>
             <Group mt="md" grow>
               <PrimaryButton variant="subtle" onClick={close}>

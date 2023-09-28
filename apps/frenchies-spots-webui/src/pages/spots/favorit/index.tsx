@@ -19,7 +19,10 @@ const FavoritPage = () => {
 
   const { data, loading, refetch } = useQuery<{
     spotsFavorite: SpotEntity[];
-  }>(queries.spotsFavorite);
+  }>(queries.spotsFavorite, {
+    notifyOnNetworkStatusChange: true,
+    fetchPolicy: "no-cache",
+  });
 
   return (
     <>

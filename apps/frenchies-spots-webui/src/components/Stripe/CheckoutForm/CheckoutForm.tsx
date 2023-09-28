@@ -12,6 +12,7 @@ import {
   Box,
   Button,
   Flex,
+  Font,
   Stack,
   DEFAULT_THEME as theme,
 } from "@frenchies-spots/material";
@@ -41,20 +42,20 @@ const CardElementCustom: CardElementComponent = () => {
 
   return (
     <Stack>
-      <label>Numéro de carte</label>
+      <Font>Numéro de carte</Font>
       <Box sx={inputStyle}>
         <CardNumberElement options={cardElementOptions} />
       </Box>
 
       <Flex gap="md">
         <Box sx={{ flexGrow: 1 }}>
-          <label>{`Valable jusqu'au`}</label>
+          <Font>{`Valable jusqu'au`}</Font>
           <Box sx={inputStyle}>
             <CardExpiryElement options={cardElementOptions} />
           </Box>
         </Box>
         <Box w={100}>
-          <label>CVC</label>
+          <Font>CVC</Font>
           <Box sx={inputStyle}>
             <CardCvcElement options={cardElementOptions} />
           </Box>

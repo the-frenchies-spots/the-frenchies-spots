@@ -66,7 +66,7 @@ const Notifiction = (props: NotifictionProps) => {
               <ProfileCard
                 key={notif.id}
                 profile={notif.profileSender}
-                customSlogan="Demande d'amis"
+                customSlogan="Demande d'ami"
                 onClick={() => handleNotificationClick(notif.id)}
                 mb="sm"
               >
