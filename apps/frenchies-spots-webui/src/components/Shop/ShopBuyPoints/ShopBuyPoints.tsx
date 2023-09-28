@@ -98,7 +98,7 @@ const ShopBuyPoints = () => {
               <Font>{price} €</Font>
             </Stack>
           </Group>
-          <Font>Paiement</Font>
+          <Font variant="h2">Paiement</Font>
           <StripeContainer onCheckout={handleCheckout}>
             <Group mt="md" grow>
               <PrimaryButton variant="subtle" onClick={close}>

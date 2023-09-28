@@ -104,7 +104,9 @@ const ShopPersonnalisation = () => {
                   <Image src={avatar.avatarUrl} alt={avatar.id} />
                 </Box>
                 <Stack h="100%">
-                  <Font variant="h5">Customize ton avatar</Font>
+                  <Font variant="h5" color="#3F3979">
+                    Personnalise ton avatar
+                  </Font>
                   {!avatar.isPublic && !isUnlocked(avatar.id) && (
                     <Font variant="subtitle2" color="back">
                       {avatar.pointsRequire} points
