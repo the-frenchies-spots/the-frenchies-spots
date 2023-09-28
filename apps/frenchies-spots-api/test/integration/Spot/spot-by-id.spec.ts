@@ -21,6 +21,7 @@ import { SpotRepository } from '../../../src/repository/spot.repository';
 import { AuthRepository } from '../../../src/repository/auth.repository';
 import { RefreshTokenGuard } from '../../../src/guard/refreshToken.guard';
 import { GeospatialService } from '../../../src/service/spot-geospatial.service';
+import { codeErrors } from '../../../src/enum/code-errors.enum';
 
 describe('AppController (e2e)', () => {
   jest.setTimeout(60000);
@@ -72,16 +73,24 @@ describe('AppController (e2e)', () => {
   });
 
   it('should get one spot by id', async () => {
-    const data = (await query(queries.spotByPk, {
+    const data = await query(queries.spotByPk, {
       id: 'd9b75a45-afa0-4210-8baf-49fadb8f7495',
-    })) as any;
+    });
 
-    const spot = JSON.parse(data.res.text).data.spotByPk;
+    const spot = JSON.parse(data.text).data.spotByPk;
 
     expect(spot).toEqual(getByIdResponse);
-  }, 300000);
+  });
+
+  it('should not getByID spot with bad input', async () => {
+    const data = await query(queries.spotByPk, {});
+    const spotErrors = JSON.parse(data?.text);
+    const error = spotErrors?.errors[0];
+    const code = error.extensions.code;
+    expect(code).toEqual(codeErrors.BAD_USER_INPUT);
+  });
 
   afterAll(async () => {
     app.close();
-  }, 300000);
+  });
 });

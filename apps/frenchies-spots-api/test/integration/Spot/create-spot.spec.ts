@@ -21,6 +21,7 @@ import { SpotRepository } from '../../../src/repository/spot.repository';
 import { AuthRepository } from '../../../src/repository/auth.repository';
 import { RefreshTokenGuard } from '../../../src/guard/refreshToken.guard';
 import { GeospatialService } from '../../../src/service/spot-geospatial.service';
+import { codeErrors } from '../../../src/enum/code-errors.enum';
 
 describe('AppController (e2e)', () => {
   jest.setTimeout(60000);
@@ -72,7 +73,7 @@ describe('AppController (e2e)', () => {
   });
 
   it('should create spot', async () => {
-    const data = (await mutation(mutations.insertSpot, {
+    const data = await mutation(mutations.insertSpot, {
       insertSpotInput: {
         address: '123 Main Street',
         category: 'SPARE_TIME_SPOT',
@@ -88,13 +89,21 @@ describe('AppController (e2e)', () => {
           coordinates: [-0.694273, 44.952945],
         },
       },
-    })) as any;
+    });
 
-    const spot = JSON.parse(data.res.text)?.data?.insertSpot;
+    const spot = JSON.parse(data?.text)?.data?.insertSpot;
     expect(spot).toEqual(createSpotResponse);
-  }, 300000);
+  });
+
+  it('should not create spot with bad input', async () => {
+    const data = await mutation(mutations.insertSpot, {});
+    const spotErrors = JSON.parse(data?.text);
+    const error = spotErrors?.errors[0];
+    const code = error.extensions.code;
+    expect(code).toEqual(codeErrors.BAD_USER_INPUT);
+  });
 
   afterAll(async () => {
     app.close();
-  }, 300000);
+  });
 });

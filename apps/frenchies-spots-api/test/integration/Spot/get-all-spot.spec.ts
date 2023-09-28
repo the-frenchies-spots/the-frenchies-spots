@@ -21,7 +21,7 @@ import { SpotRepository } from '../../../src/repository/spot.repository';
 import { AuthRepository } from '../../../src/repository/auth.repository';
 import { RefreshTokenGuard } from '../../../src/guard/refreshToken.guard';
 import { GeospatialService } from '../../../src/service/spot-geospatial.service';
-import { SpotsInput } from "../../../src/dto/input/spot/spots-input";
+import { codeErrors } from '../../../src/enum/code-errors.enum';
 
 describe('AppController (e2e)', () => {
   jest.setTimeout(60000);
@@ -73,33 +73,40 @@ describe('AppController (e2e)', () => {
   });
 
   it('should get all spots', async () => {
-    const data = (await query(queries.spots, {
-       spotsInput: { searchValue: ''}
-    })) as any;
+    const data = await query(queries.spots, {
+      spotsInput: { searchValue: '' },
+    });
 
-    const spots = JSON.parse(data.res.text).data.spots;
-
+    const spots = JSON.parse(data.text).data.spots;
     expect(spots).toEqual(getAllResponse);
-  }, 300000);
+  });
 
   afterAll(async () => {
     app.close();
-  }, 300000);
+  });
 
-  it('should get all spots by region', async () => {
-    const data = (await query(queries.spots, {
+  it('should get all spots by asc', async () => {
+    const data = await query(queries.spots, {
       spotsInput: {
         searchValue: '',
         orderBy: 'asc',
-      }
-    })) as any;
+      },
+    });
 
-    const spots = JSON.parse(data.res.text).data.spots;
+    const spots = JSON.parse(data.text).data.spots;
 
     expect(spots).toEqual(getAllResponse);
-  }, 300000);
+  });
+
+  it('should not get all spot with bad input', async () => {
+    const data = await query(queries.spots, {});
+    const spotErrors = JSON.parse(data?.text);
+    const error = spotErrors?.errors[0];
+    const code = error.extensions.code;
+    expect(code).toEqual(codeErrors.BAD_USER_INPUT);
+  });
 
   afterAll(async () => {
     app.close();
-  }, 300000);
+  });
 });

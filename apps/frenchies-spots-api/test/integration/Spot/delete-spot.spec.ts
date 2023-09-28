@@ -21,6 +21,7 @@ import { SpotRepository } from '../../../src/repository/spot.repository';
 import { AuthRepository } from '../../../src/repository/auth.repository';
 import { RefreshTokenGuard } from '../../../src/guard/refreshToken.guard';
 import { GeospatialService } from '../../../src/service/spot-geospatial.service';
+import { codeErrors } from '../../../src/enum/code-errors.enum';
 
 describe('AppController (e2e)', () => {
   jest.setTimeout(60000);
@@ -72,15 +73,23 @@ describe('AppController (e2e)', () => {
   });
 
   it('should delete spot', async () => {
-    const data = (await mutation(mutations.deleteSpot, {
+    const data = await mutation(mutations.deleteSpot, {
       id: 'd9b75a45-afa0-4210-8baf-49fadb8f7495',
-    })) as any;
+    });
 
-    const res = JSON.parse(data.res.text).data.deleteSpot;
+    const res = JSON.parse(data.text).data.deleteSpot;
     expect(res).toEqual(deleteSpotResponse);
-  }, 300000);
+  });
+
+  it('should not delete spot with bad input', async () => {
+    const data = await mutation(mutations.deleteSpot);
+    const spotErrors = JSON.parse(data?.text);
+    const error = spotErrors?.errors[0];
+    const code = error.extensions.code;
+    expect(code).toEqual(codeErrors.BAD_USER_INPUT);
+  });
 
   afterAll(async () => {
     app.close();
-  }, 300000);
+  });
 });

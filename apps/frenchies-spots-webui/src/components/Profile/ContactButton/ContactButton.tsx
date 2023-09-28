@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { IconMessages } from "@frenchies-spots/icon";
 import { ProfileEntity } from "@frenchies-spots/gql";
@@ -19,6 +19,7 @@ interface ContactButtonProps
 
 const ContactButton = (props: ContactButtonProps) => {
   const { isSmallMode = false, profile, ...other } = props;
+  const [disabled, setDisabled] = useState(false);
 
   const { onContactClick } = useContact();
 
@@ -27,18 +28,24 @@ const ContactButton = (props: ContactButtonProps) => {
   const handleContactClick: React.MouseEventHandler<HTMLButtonElement> = (
     e
   ) => {
+    setDisabled(true);
     e.stopPropagation();
     onContactClick(profile);
   };
 
   if (isSmallMode)
     return (
-      <ActionIcon onClick={handleContactClick} className={classes.icon}>
+      <ActionIcon
+        onClick={handleContactClick}
+        className={classes.icon}
+        disabled={disabled}
+      >
         <IconMessages color="white" />
       </ActionIcon>
     );
   return (
     <PrimaryButton
+      disabled={disabled}
       leftIcon={<IconMessages />}
       onClick={() => onContactClick(profile)}
       {...other}

@@ -8,3 +8,9 @@ export type JwtPayload = {
 };
 
 export type JwtPayloadWithRefreshToken = JwtPayload & { refreshToken: string };
+
+export class RequestResponse {
+  res: {
+    text: string;
+  };
+}

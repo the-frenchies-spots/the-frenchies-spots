@@ -6,6 +6,10 @@ export interface TError {
 }
 
 export const errorsMessage: Record<keyof typeof codeErrors, TError> = {
+  BAD_USER_INPUT: {
+    statusCode: 401,
+    errorMessage: { en: 'Bad input' },
+  },
   ACCESS_DENIED: {
     statusCode: 401,
     errorMessage: { en: 'Access denied' },

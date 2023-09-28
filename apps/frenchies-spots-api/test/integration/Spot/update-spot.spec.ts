@@ -23,6 +23,7 @@ import { AuthRepository } from '../../../src/repository/auth.repository';
 import { RefreshTokenGuard } from '../../../src/guard/refreshToken.guard';
 import { GeospatialService } from '../../../src/service/spot-geospatial.service';
 import { mockJwtPayload } from '../../mocks/mockJwtPayload';
+import { codeErrors } from '../../../src/enum/code-errors.enum';
 
 describe('AppController (e2e)', () => {
   jest.setTimeout(60000);
@@ -74,7 +75,7 @@ describe('AppController (e2e)', () => {
   });
 
   it('should update spot', async () => {
-    const data = (await mutation(mutations.updateSpot, {
+    const data = await mutation(mutations.updateSpot, {
       updateSpotInput: {
         id: 'd9b75a45-afa0-4210-8baf-49fadb8f7495',
         address: 'Paris, France',
@@ -87,14 +88,21 @@ describe('AppController (e2e)', () => {
         tags: [],
         pictures: [{ url: '', hostId: '' }],
       },
-    })) as any;
+    });
 
-    const spot = JSON.parse(data.res.text).data.updateSpot;
-
+    const spot = JSON.parse(data.text).data.updateSpot;
     expect(spot).toEqual(requestResponse);
-  }, 300000);
+  });
+
+  it('should not update spot with bad input', async () => {
+    const data = await mutation(mutations.updateSpot, {});
+    const spotErrors = JSON.parse(data?.text);
+    const error = spotErrors?.errors[0];
+    const code = error.extensions.code;
+    expect(code).toEqual(codeErrors.BAD_USER_INPUT);
+  });
 
   afterAll(async () => {
     app.close();
-  }, 300000);
+  });
 });
