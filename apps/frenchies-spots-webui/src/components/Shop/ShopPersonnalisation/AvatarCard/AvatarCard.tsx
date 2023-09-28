@@ -18,21 +18,29 @@ interface AvatarCardProps {
   onClick: (avatar: AvatarEntity) => void;
   isUnlocked: boolean;
   isSelected: boolean;
+  isCanBuy: boolean;
 }
 
 const AvatarCard = ({
   avatar,
   isUnlocked,
   isSelected,
+  isCanBuy,
   onClick,
 }: AvatarCardProps) => {
   const { id, pointsRequire, isPublic, avatarUrl } = avatar;
 
-  const { classes } = useStyles({ isOpen: isPublic || isUnlocked, isSelected });
+  const { classes } = useStyles({
+    isOpen: isPublic || isUnlocked,
+    isSelected,
+    isCanBuy,
+  });
 
   const handleClick = () => {
     onClick(avatar);
   };
+
+  const isNoClick = !isPublic && !isUnlocked  && !isCanBuy
 
   return (
     <Group
@@ -40,7 +48,7 @@ const AvatarCard = ({
       p="md"
       align="center"
       position="apart"
-      onClick={handleClick}
+      onClick={isNoClick ? undefined : handleClick}
     >
       <Box h={120} sx={{ position: "relative", width: 80 }}>
         <Image src={avatarUrl} alt={id} />

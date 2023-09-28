@@ -3,6 +3,7 @@ import { createStyles } from "@frenchies-spots/material";
 interface StyleParams {
   isOpen: boolean;
   isSelected: boolean;
+  isCanBuy: boolean;
 }
 export const useStyles = createStyles((theme, params: StyleParams) => ({
   container: {
@@ -11,7 +12,7 @@ export const useStyles = createStyles((theme, params: StyleParams) => ({
     borderRadius: 8,
     border: params?.isSelected
       ? "1px solid #B68973"
-      : params?.isOpen
+      : params?.isOpen || params?.isCanBuy
       ? "1px solid #EBA701"
       : "1px solid #BBB",
     background: params?.isOpen ? "#FBFBFB" : "#E4E4E4",

@@ -56,7 +56,7 @@ const userData: Prisma.UserCreateInput[] = [
                   },
                 ],
               },
-              averageRating: 4,
+              averageRating: 0,
               tags: {
                 create: [
                   {
@@ -90,7 +90,7 @@ const userData: Prisma.UserCreateInput[] = [
                   },
                 ],
               },
-              averageRating: 4,
+              averageRating: 0,
               tags: {
                 create: [
                   {
@@ -121,7 +121,7 @@ const userData: Prisma.UserCreateInput[] = [
                   },
                 ],
               },
-              averageRating: 3,
+              averageRating: 0,
               tags: {
                 create: [
                   {
@@ -388,7 +388,7 @@ const userData: Prisma.UserCreateInput[] = [
                   },
                 ],
               },
-              averageRating: 2,
+              averageRating: 0,
               tags: {
                 create: [
                   {
@@ -594,7 +594,7 @@ const userData: Prisma.UserCreateInput[] = [
                   },
                 ],
               },
-              averageRating: 5,
+              averageRating: 0,
               tags: {
                 create: [
                   {
@@ -891,7 +891,7 @@ const userData: Prisma.UserCreateInput[] = [
                   },
                 ],
               },
-              averageRating: 3,
+              averageRating: 0,
               tags: {
                 create: [
                   {
@@ -1092,7 +1092,7 @@ const userData: Prisma.UserCreateInput[] = [
                   },
                 ],
               },
-              averageRating: 4,
+              averageRating: 0,
               tags: {
                 create: [
                   {
@@ -1157,7 +1157,7 @@ const userData: Prisma.UserCreateInput[] = [
                   },
                 ],
               },
-              averageRating: 3,
+              averageRating: 0,
               tags: {
                 create: [
                   {
@@ -1194,7 +1194,7 @@ const userData: Prisma.UserCreateInput[] = [
                   },
                 ],
               },
-              averageRating: 3,
+              averageRating: 0,
               tags: {
                 create: [
                   {
@@ -1232,7 +1232,7 @@ const userData: Prisma.UserCreateInput[] = [
                   },
                 ],
               },
-              averageRating: 5,
+              averageRating: 0,
               tags: {
                 create: [
                   {
@@ -1263,7 +1263,7 @@ const userData: Prisma.UserCreateInput[] = [
                   },
                 ],
               },
-              averageRating: 3,
+              averageRating: 0,
               tags: {
                 create: [
                   {
@@ -1295,7 +1295,7 @@ const userData: Prisma.UserCreateInput[] = [
                   },
                 ],
               },
-              averageRating: 5,
+              averageRating: 0,
               tags: {
                 create: [
                   {
@@ -1332,7 +1332,7 @@ const userData: Prisma.UserCreateInput[] = [
                   },
                 ],
               },
-              averageRating: 1,
+              averageRating: 0,
               tags: {
                 create: [
                   {
@@ -1362,7 +1362,7 @@ const userData: Prisma.UserCreateInput[] = [
                   },
                 ],
               },
-              averageRating: 3,
+              averageRating: 0,
               tags: {
                 create: [
                   {
@@ -1393,7 +1393,7 @@ const userData: Prisma.UserCreateInput[] = [
                   },
                 ],
               },
-              averageRating: 2,
+              averageRating: 0,
               tags: {
                 create: [
                   {
@@ -1427,7 +1427,7 @@ const userData: Prisma.UserCreateInput[] = [
                   },
                 ],
               },
-              averageRating: 4,
+              averageRating: 0,
               tags: {
                 create: [
                   {
@@ -1457,7 +1457,7 @@ const userData: Prisma.UserCreateInput[] = [
                   },
                 ],
               },
-              averageRating: 3,
+              averageRating: 0,
               tags: {
                 create: [
                   {
@@ -1488,11 +1488,68 @@ const userData: Prisma.UserCreateInput[] = [
                   },
                 ],
               },
-              averageRating: 3,
+              averageRating: 0,
               tags: {
                 create: [
                   {
                     tagId: '641dad297c5032d0440f3a00',
+                  },
+                ],
+              },
+            },
+          ],
+        },
+      },
+    },
+  },
+  {
+    email: 'morgane@gmail.com',
+    hashedPassword:
+      '$2a$10$4QGGpe.0G5m2mRNe9.QduehJEIMvsS5x5rSZkSXTDhChAzlRx/Mx.',
+    hashedRefreshToken: '',
+    role: 'SIMPLE_USER',
+    createdAt: '2023-09-17T08:18:13.241+00:00',
+    updatedAt: '2023-09-17T08:18:13.241+00:00',
+    profile: {
+      create: {
+        id: '651557f1f3036c6e13493233',
+        isLocated: true,
+        pseudo: 'Morgane',
+        slogan: "Le thé c'est la vie !",
+        avatarUrl:
+          'https://res.cloudinary.com/dw2hb8vmu/image/upload/v1695396220/frenchies-spots/avatar/AVATAR_2_hjflww.gif',
+        photoUrl:
+          'https://res.cloudinary.com/dw2hb8vmu/image/upload/v1695897525/MorganeImage_dzheor.png',
+        gamePoint: 0,
+        spots: {
+          create: [
+            {
+              id: '651563124b186e7fea81ca5f',
+              name: 'Bois du Bouscat',
+              description:
+                'Très agréable, ombragé avec des bancs. Le règlement est très bien fait de sorte que tout le monde puisse en profiter.',
+              isCanPark: true,
+              isHidden: false,
+              category: 'SPARE_TIME_SPOT',
+              location: {
+                type: 'Point',
+                coordinates: [-0.620325, 44.87281],
+              },
+              region: '33',
+              address:
+                'Bois du Bouscat, 36 Bd du Maréchal Lyautey, 33110 Le Bouscat',
+              spotPicture: {
+                create: [
+                  {
+                    url: 'https://res.cloudinary.com/dw2hb8vmu/image/upload/v1695900262/BOIS_BOUSCAT_hce64e.jpg',
+                    hostId: '',
+                  },
+                ],
+              },
+              tags: {
+                create: [
+                  {
+                    tagId: '641dacf89b0c0cb9c0fcb737',
                   },
                 ],
               },

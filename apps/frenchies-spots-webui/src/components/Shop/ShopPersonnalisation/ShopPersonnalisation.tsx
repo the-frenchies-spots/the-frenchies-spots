@@ -89,6 +89,7 @@ const ShopPersonnalisation = () => {
                 avatar={avatar}
                 onClick={handleClick}
                 isUnlocked={isUnlocked(avatar.id) || false}
+                isCanBuy={avatar.pointsRequire <= profile.gamePoint}
                 isSelected={avatar.avatarUrl === profile.avatarUrl}
               />
             );
