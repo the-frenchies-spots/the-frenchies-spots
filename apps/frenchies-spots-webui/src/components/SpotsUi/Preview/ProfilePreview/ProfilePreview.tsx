@@ -8,6 +8,8 @@ import {
   Stack,
   Text,
   PrimaryButton,
+  Avatar,
+  Font,
 } from "@frenchies-spots/material";
 import { useRouter } from "next/router";
 import { Maybe, ProfileEntity } from "@frenchies-spots/gql";
@@ -28,20 +30,25 @@ const ProfilePreview = (props: ProfilePreviewProps) => {
   const { onContactClick } = useContact();
 
   const router = useRouter();
+  const src = profile?.photoUrl || profile?.avatarUrl;
 
   return (
     <Stack h={300} p="md" justify="space-between" {...stackProps}>
       <Group position="apart" align="center">
-        {profile?.avatarUrl && (
-          <Image
-            src={profile.avatarUrl}
-            alt={profile.pseudo}
-            height={60}
-            width={50}
-            style={{ borderRadius: 50 }}
-          />
-        )}
-        <Text>{profile.pseudo}</Text>
+        <Group>
+          {profile?.avatarUrl && (
+            <Avatar
+              src={src}
+              sx={{
+                border: !profile?.photoUrl ? "1px solid #3F3979" : undefined,
+                width: 70,
+                height: 70,
+                borderRadius: 70,
+              }}
+            />
+          )}
+          <Font variant="h3">{profile.pseudo}</Font>
+        </Group>
 
         {currentProfile && <FriendRequestButton profile={profile} />}
       </Group>
@@ -55,7 +62,7 @@ const ProfilePreview = (props: ProfilePreviewProps) => {
           leftIcon={<IconUserSquareRounded />}
           onClick={() => router.push("/sign-in")}
         >
-          Connecter vous pour chatter
+          Connectez vous pour chatter
         </PrimaryButton>
       )}
     </Stack>

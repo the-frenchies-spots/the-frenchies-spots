@@ -1,0 +1,3 @@
+mutation blockContact($blockContactId: String!){
+    blockContact(blockContactId: $blockContactId)
+}

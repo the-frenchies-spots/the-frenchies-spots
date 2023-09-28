@@ -1,14 +1,14 @@
 import * as request from 'supertest';
 import { DocumentNode } from 'graphql';
-import { mutations } from "@frenchies-spots/gql";
+import { mutations } from '@frenchies-spots/gql';
 import { GqlExecutionContext } from '@nestjs/graphql';
 import { Test, TestingModule } from '@nestjs/testing';
 import { ExecutionContext, INestApplication } from '@nestjs/common';
 
 import {
   createSpotResponse,
-  mockSpotRepository
-} from "../../mocks/repository/mock.spot.repository";
+  mockSpotRepository,
+} from '../../mocks/repository/mock.spot.repository';
 import { mockGeospatialService } from '../../mocks/service/mock.geospatial.service';
 import {
   mockAuthRepository,
@@ -61,14 +61,14 @@ describe('AppController (e2e)', () => {
     await app.init();
 
     mutation = (mutation: DocumentNode, variables?: unknown) => {
-       return request(app.getHttpServer())
-         .post('/graphql')
-         .send({
-           query: mutation.loc && mutation.loc.source.body,
-           variables,
-         })
-         .set('authorization', `Bearer ${mockUser.refreshToken}`);
-     };
+      return request(app.getHttpServer())
+        .post('/graphql')
+        .send({
+          query: mutation.loc && mutation.loc.source.body,
+          variables,
+        })
+        .set('authorization', `Bearer ${mockUser.refreshToken}`);
+    };
   });
 
   it('should create spot', async () => {
@@ -81,16 +81,16 @@ describe('AppController (e2e)', () => {
         isHidden: false,
         name: 'Central Park',
         region: 'New York',
-        pictures: [{hostId: '', url: 'url'}],
+        pictures: [{ hostId: '', url: 'url' }],
         tags: [],
         location: {
           type: 'Point',
-          coordinates: [-0.694273, 44.952945]
+          coordinates: [-0.694273, 44.952945],
         },
-      }
+      },
     })) as any;
 
-    const spot = JSON.parse(data.res.text).data.insertSpot;
+    const spot = JSON.parse(data.res.text)?.data?.insertSpot;
     expect(spot).toEqual(createSpotResponse);
   }, 300000);
 

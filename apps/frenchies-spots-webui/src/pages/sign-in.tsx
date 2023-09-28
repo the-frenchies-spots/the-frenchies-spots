@@ -21,7 +21,7 @@ import { PageLayout } from "../components";
 
 import { GuardLayout } from "../components/Layout/GuardLayout/GuardLayout";
 import { useRouter } from "next/router";
-import toast from "react-hot-toast";
+
 import AppTitle from "../components/AppTitle/AppTitle";
 import Wave from "./../components/Wave/Wave";
 
@@ -55,7 +55,6 @@ const SignIn = () => {
       <Flex direction="column" h="100%">
         <Stack sx={{ flexGrow: 1 }} p="xl">
           <BackButton onClick={() => router.push("/spots")} />
-          <AppTitle />
         </Stack>
         <Box
           sx={{
@@ -86,7 +85,7 @@ const SignIn = () => {
               justify="space-between"
               p="md"
             >
-              <Font variant="h2">Se Connecter</Font>
+              <Font variant="h2">Connexion</Font>
               <InputForm
                 label="Mon email"
                 type="email"
@@ -106,7 +105,7 @@ const SignIn = () => {
                 required
               />
               <PrimaryButton type="submit" style={{ marginTop: 16 }} w="100%">
-                Se connecter
+                Connexion
               </PrimaryButton>
               <Group position="apart">
                 <PrimaryButton

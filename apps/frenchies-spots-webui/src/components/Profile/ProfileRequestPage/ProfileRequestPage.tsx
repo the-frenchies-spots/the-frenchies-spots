@@ -46,8 +46,8 @@ const ProfileRequestPage = (props: ProfileRequestPageProps) => {
       ]),
       {
         loading: "Validation en cours...",
-        success: <b>{`Vous avez un nouvel amis !`}</b>,
-        error: <b>Un problème est survenue !</b>,
+        success: <b>{`Vous avez un nouvel ami !`}</b>,
+        error: <b>Un problème est survenu !</b>,
       }
     );
     router.push("/profile");
@@ -72,12 +72,12 @@ const ProfileRequestPage = (props: ProfileRequestPageProps) => {
 
       <ProfilePresentation profile={profile} />
 
-      <Font variant="h2">{`Demande d'amis ?`} </Font>
+      <Font variant="h2">{`Demande d'ami ?`} </Font>
 
       <Group w="100%" grow>
-        <PrimaryButton onClick={handleClick}>Accepté</PrimaryButton>
+        <PrimaryButton onClick={handleClick}>Accepter</PrimaryButton>
         <PrimaryButton onClick={handleCancel} variant="outline">
-          Refusé
+          Refuser
         </PrimaryButton>
       </Group>
     </Stack>

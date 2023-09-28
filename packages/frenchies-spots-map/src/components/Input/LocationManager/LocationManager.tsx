@@ -37,8 +37,8 @@ export const LocationManager = ({ value, onChange }: LocationManagerProps) => {
   return (
     <Box className={classes.container}>
       <AutocompleteAddress
-        label="Rechercher une addresse"
-        placeholder="Taper une addresse"
+        label="Rechercher une adresse"
+        placeholder="Taper une adresse"
         value={locationData?.location?.value}
         onChange={handleChange}
         sx={(theme) => ({

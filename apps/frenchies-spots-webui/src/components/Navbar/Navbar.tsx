@@ -25,6 +25,14 @@ import { useNotif } from "../../hooks/use-notif";
 
 interface NavbarProps extends Omit<BoxProps, "children"> {}
 
+function getLastPath(path: string): string | null {
+  const pathParts = path.split("/");
+  if (pathParts.length === 0) {
+    return null; // Si le chemin est vide, renvoie null
+  }
+  return pathParts[pathParts.length - 1];
+}
+
 const Navbar = (props: NavbarProps) => {
   const { className, ...boxProps } = props;
 
@@ -39,7 +47,7 @@ const Navbar = (props: NavbarProps) => {
   };
 
   const isSelected = (path: string) => {
-    if (router.pathname.includes(path)) {
+    if (getLastPath(router.pathname) === path) {
       return "selected";
     }
     return "default";

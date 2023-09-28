@@ -3,7 +3,6 @@ import React, { ReactNode, useEffect } from "react";
 import { useQuery } from "@apollo/client";
 import { client } from "../utils/client.gql";
 import { NotificationEntity, queries } from "@frenchies-spots/gql";
-
 import NotifContext from "./../context/notif.context";
 
 interface NotifProviderProps {
@@ -15,7 +14,7 @@ const NotifProvider = ({ children }: NotifProviderProps) => {
     chatMessagesNotRead: number;
     notifications: NotificationEntity[];
   }>(queries.appNotification, {
-    // pollInterval: 2000,
+    pollInterval: 2000,
   });
 
   useEffect(() => {

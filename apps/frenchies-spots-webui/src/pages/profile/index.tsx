@@ -16,6 +16,7 @@ import {
   SecondaryButton,
   Stack,
   Font,
+  Box,
 } from "@frenchies-spots/material";
 import LogoutButton from "../../components/LogoutButton/LogoutButton";
 import {
@@ -100,13 +101,19 @@ const Profile = () => {
 
         <Group grow>
           <Flex justify="center" align="center">
-            {profile?.avatarUrl && <img src={profile?.avatarUrl} alt="avatar" style={{ width: 80 }} />}
+            {profile?.avatarUrl && (
+              <img
+                src={profile?.avatarUrl}
+                alt="avatar"
+                style={{ width: 80 }}
+              />
+            )}
           </Flex>
           {/* <Image src={profile?.avatarUrl} alt="avatar" /> */}
           <Stack>
             <Stack spacing={2}>
               <Font variant="subtitle2">Statut</Font>
-              <Font>Jeune avanturier</Font>
+              <Font>Jeune aventurier</Font>
             </Stack>
 
             <Stack spacing={2}>
@@ -119,6 +126,7 @@ const Profile = () => {
             </PrimaryButtonLittle>
           </Stack>
         </Group>
+        <Box py={100} />
       </Stack>
     </Container>
   );

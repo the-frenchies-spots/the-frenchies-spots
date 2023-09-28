@@ -23,7 +23,11 @@ const WelcomePage = () => {
     <Container size="sm" h="100%">
       <Stack h="100%" justify="space-between" py="md">
         <Flex mt="md" gap="md" direction="row" w="100%" justify={"start"}>
-          <Avatar color="white" />
+          <Avatar
+            color="white"
+            sx={{ backgroundColor: "white" }}
+            src="https://res.cloudinary.com/dw2hb8vmu/image/upload/v1695748998/frenchies-spots/profiles/yolo/65131339b899fa2257a8f01a/oboplayk6mkzeg99qyyb.png"
+          />
           <Stack w="100%" spacing={0}>
             <Bubble
               message={`Bienvenue ${profile?.pseudo} ! Tu gagne 500 points pour ton inscription ! `}

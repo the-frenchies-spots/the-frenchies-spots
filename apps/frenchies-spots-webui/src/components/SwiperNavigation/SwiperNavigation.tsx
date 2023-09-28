@@ -2,6 +2,7 @@ import React from "react";
 
 import {
   Group,
+  type GroupProps,
   Button,
   ButtonProps,
   SecondaryButton,
@@ -9,7 +10,7 @@ import {
 } from "@frenchies-spots/material";
 import type { Swiper } from "swiper/types";
 
-export interface SwiperNavigationProps {
+export interface SwiperNavigationProps extends GroupProps {
   swiper: Swiper;
   disabled?: boolean;
   type?: ButtonProps["type"];
@@ -28,9 +29,10 @@ const SwiperNavigation = (props: SwiperNavigationProps) => {
     nextLabel = "Suivant",
     nextColor = "superLightGrey",
     prevColor = "purple",
+    ...other
   } = props;
   return (
-    <Group grow>
+    <Group grow {...other}>
       <SecondaryButton
         variant="subtle"
         color={prevColor}

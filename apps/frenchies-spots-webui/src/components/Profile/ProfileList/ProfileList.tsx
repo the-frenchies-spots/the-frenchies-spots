@@ -7,6 +7,7 @@ import ProfileCard from "../ProfileCard/ProfileCard";
 import ContactButton from "../ContactButton/ContactButton";
 import FriendRequestButton from "../FriendRequestButton/FriendRequestButton";
 import { useAuth } from "../../../hooks/use-auth";
+import ConnexionButton from "../ConnexionButton/ConnexionButton";
 
 interface ProfileListProps extends ContainerProps {
   profileList: ProfileEntity[];
@@ -27,11 +28,13 @@ const ProfileList = (props: ProfileListProps) => {
     >
       {profileList.map((profile) => (
         <ProfileCard key={profile.id} profile={profile} mb="md">
-          {currentProfile && (
+          {currentProfile ? (
             <>
               <ContactButton profile={profile} isSmallMode />
               <FriendRequestButton profile={profile} />
             </>
+          ) : (
+            <ConnexionButton />
           )}
         </ProfileCard>
       ))}

@@ -22,11 +22,10 @@ const Bubble = (props: BubbleProps) => {
       my="md"
       sx={{
         background: isParticipant ? "white" : "#B68973",
-        color: isParticipant ? "purple" : "white",
       }}
       {...other}
     >
-      <Font>{message}</Font>
+      <Font color={isParticipant ? "purple" : "white"}>{message}</Font>
     </Box>
   );
 };

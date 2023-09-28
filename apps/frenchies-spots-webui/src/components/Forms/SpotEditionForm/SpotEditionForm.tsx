@@ -27,7 +27,7 @@ import {
 } from "@frenchies-spots/gql";
 import { SelectTag } from "../../InputCustom";
 import { SwiperForm } from "@/components/SwiperForm/SwiperForm";
-import { SwiperRef, SwiperSlide } from "swiper/react";
+import { SwiperSlide } from "swiper/react";
 import { useCloudinary } from "../../../hooks/use-cloudinary";
 import { useAuth } from "./../../../hooks/use-auth";
 import { VSegmentControl } from "../../InputCustom/VSegmentControl";
@@ -135,7 +135,7 @@ export const SpotEditionForm = (props: SpotEditionFormProps) => {
         >
           {/* SPOT CATEGORY */}
           <SwiperSlide>
-            <SwiperFrame prevLabel="">
+            <SwiperFrame prevLabel="" px="md">
               <Stack mt={40} px="md">
                 <Font variant="h2" pb={20}>
                   A quelle catégorie associes-tu ton spot ?
@@ -162,7 +162,7 @@ export const SpotEditionForm = (props: SpotEditionFormProps) => {
           </SwiperSlide>
           {/* SPOT TAG */}
           <SwiperSlide>
-            <SwiperFrame disabled={!form.isValid("tags")}>
+            <SwiperFrame disabled={!form.isValid("tags")} px="md">
               <Stack mt={40} px="md">
                 <Font
                   variant="h2"
@@ -180,6 +180,7 @@ export const SpotEditionForm = (props: SpotEditionFormProps) => {
           {/* SPOT DESCRIPTION */}
           <SwiperSlide>
             <SwiperFrame
+              px="md"
               disabled={!(form.isValid("name") && form.isValid("description"))}
             >
               <Stack mt={40} px="md">
@@ -228,6 +229,7 @@ export const SpotEditionForm = (props: SpotEditionFormProps) => {
           {/* SPOT ADDRESS */}
           <SwiperSlide>
             <SwiperFrame
+              px="md"
               disabled={
                 !(
                   form.isValid("address") &&
@@ -260,7 +262,7 @@ export const SpotEditionForm = (props: SpotEditionFormProps) => {
           </SwiperSlide>
           {/* PUBLIC || PRIVATE */}
           <SwiperSlide>
-            <SwiperFrame nextLabel="Valider">
+            <SwiperFrame nextLabel="Valider" px="md">
               <Stack pt={40} px="md">
                 <Font variant="h2" pb={20}>
                   Dernier effort ! Quel statut préfères-tu pour ton spot ?
@@ -286,7 +288,7 @@ export const SpotEditionForm = (props: SpotEditionFormProps) => {
           </SwiperSlide>
           {/* PREVIEW */}
           <SwiperSlide>
-            <SwiperFrame type="submit" nextLabel="Publier">
+            <SwiperFrame type="submit" nextLabel="Publier" px="md">
               {profile && (
                 <SpotDetail
                   spot={{

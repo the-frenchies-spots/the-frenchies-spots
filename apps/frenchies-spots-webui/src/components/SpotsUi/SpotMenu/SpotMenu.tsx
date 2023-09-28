@@ -9,6 +9,7 @@ import {
   ActionIcon,
   Flex,
   SecondaryButton,
+  Font,
 } from "@frenchies-spots/material";
 import type { ContainerProps } from "@frenchies-spots/material";
 
@@ -48,7 +49,7 @@ const SpotMenu = (props: SpotMenuProps) => {
   const handleSearchPlaceName = () => {
     searchPlace(placeName).then((address) => {
       if (!address.placeName) {
-        toast.error("L'address saisie est incorrecte !");
+        toast.error("L'adresse saisie est incorrecte !");
       } else {
         setPlaceName(address.placeName);
         setCoordPoint(address.coordinates);
@@ -73,7 +74,7 @@ const SpotMenu = (props: SpotMenuProps) => {
         <StatusBar isMapMode={isMapMode} />
         <Box sx={{ position: "relative" }}>
           <AutocompleteAddress
-            placeholder="search address"
+            placeholder="adresse..."
             value={placeName}
             onTextChange={setPlaceName}
             sx={{
@@ -161,6 +162,11 @@ const SpotMenu = (props: SpotMenuProps) => {
             Entraide
           </SecondaryButton>
         </Group>
+        {!isMapMode && (
+          <Font variant="h4" pt="xs">
+            Autour de moi
+          </Font>
+        )}
       </Stack>
     </Container>
   );

@@ -36,9 +36,9 @@ const useContact = () => {
   const handleFriendRequestClick = (profile: ProfileEntity) => {
     if (profile) {
       toast.promise(friendRequest({ variables: { friendId: profile.id } }), {
-        loading: "Demande en cours d'envoie...",
-        success: <b>Demande envoyé !</b>,
-        error: <b>Nous avons pas réussie à joindre cette utilisateur.</b>,
+        loading: "Demande en cours...",
+        success: <b>Demande envoyée !</b>,
+        error: <b>{`Nous n'avons pas réussi à joindre cet utilisateur.`}</b>,
       });
     }
   };

@@ -24,15 +24,20 @@ import { acceptFriendContact } from "./acceptFriendContact";
 import { updateContact } from "./updateContact";
 import { deleteNotif } from "./deleteNotif";
 import { buyAvatar } from "./buyAvatar";
+import { deleteAccount } from "./deleteAccount";
+import { blockContact } from "./blockContact";
+import { unBlockContact } from "./unBlockContact";
 
 export const mutations = {
   createOrUpdateRating,
   deleteSpot,
   deleteTag,
+  blockContact,
   insertSpot,
   insertTag,
   logout,
   signIn,
+  unBlockContact,
   signUp,
   toggleFavorite,
   updateSpot,
@@ -49,5 +54,6 @@ export const mutations = {
   sendChatMessage,
   updateNotifStatus,
   acceptFriendContact,
+  deleteAccount,
   markChatMessageAsRead,
 } satisfies Record<string, DocumentNode>;

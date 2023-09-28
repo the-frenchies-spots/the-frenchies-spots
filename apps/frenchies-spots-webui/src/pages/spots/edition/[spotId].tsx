@@ -78,9 +78,9 @@ const SpotUpdatePage = () => {
         router.push(`/spots?lat=${lat}&lng=${lng}&spotId=${id}`);
       }),
       {
-        loading: "Mise à jour...",
+        loading: "Mise à jour en cours...",
         success: <b>Spot mis à jour avec succès.</b>,
-        error: <b>La mise à jour à échoué.</b>,
+        error: <b>La mise à jour a échoué.</b>,
       }
     );
   };

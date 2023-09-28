@@ -22,9 +22,12 @@ import ProfilePhoto from "../../components/Profile/ProfilePhoto";
 import { InputMaybe, ProfileInput } from "@frenchies-spots/gql";
 import toast from "react-hot-toast";
 import { useRouter } from "next/router";
+import { useMutation } from "@apollo/client";
+import ModalComfirm from "../../components/Popup/ModalComfirm/ModalComfirm";
+import { Box } from "@frenchies-spots/material";
 
 const ConfigPage = () => {
-  const { profile, onUpdateProfile } = useAuth();
+  const { profile, onUpdateProfile, onDeleteAccount } = useAuth();
 
   const router = useRouter();
 
@@ -50,9 +53,9 @@ const ConfigPage = () => {
     e.preventDefault();
     if (form.isValid()) {
       toast.promise(onUpdateProfile(form.values), {
-        loading: "Mise a jour du profile...",
+        loading: "Mise à jour du profil...",
         success: <b>Mise à jour réussie !</b>,
-        error: <b>Mise à jour échoué.</b>,
+        error: <b>La mise à jour a échoué.</b>,
       });
     }
   };
@@ -70,20 +73,21 @@ const ConfigPage = () => {
               {profile && <ProfilePhoto profile={profile} />}
             </Flex>
 
-            <Stack>
+            <Stack spacing="xl">
               <InputForm
                 variant="filled"
-                label="pseudo"
+                label="Pseudo"
                 {...form.getInputProps("pseudo")}
               />
               <InputForm
                 variant="filled"
-                label="slogan"
+                label="Slogan"
                 {...form.getInputProps("slogan")}
               />
               <SwitchInput
+                mt="xl"
                 defaultChecked
-                label="Autoriser la localisation ?"
+                label="J'autorise à être localisé"
                 checked={form.getInputProps("isLocated").value}
                 onChange={(event) =>
                   form
@@ -93,17 +97,26 @@ const ConfigPage = () => {
               />
             </Stack>
           </Stack>
-
+          <Box py={8} />
           <Stack>
             <PrimaryButton type="submit" disabled={!form.isValid()}>
               Enregistrer les modifications
             </PrimaryButton>
-            <PrimaryButton variant="outline" color="red">
-              Supprimer mon compte
-            </PrimaryButton>
+
+            <ModalComfirm
+              onComfirm={() => onDeleteAccount()}
+              label="Êtes-vous sûr de vouloir supprimer votre compte ?"
+            >
+              {(open) => (
+                <PrimaryButton variant="outline" color="red" onClick={open}>
+                  Supprimer mon compte
+                </PrimaryButton>
+              )}
+            </ModalComfirm>
           </Stack>
         </Stack>
       </form>
+      <Box py={100} />
     </Container>
   );
 };

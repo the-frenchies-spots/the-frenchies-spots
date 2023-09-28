@@ -4,7 +4,7 @@ name: Render Deploy Ci
 on:
   pull_request:
   push:
-    branches: [preprod]
+    branches: [master, preprod]
 
 jobs:
   build-and-deploy:

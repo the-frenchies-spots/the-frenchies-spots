@@ -51,8 +51,8 @@ const ShopPersonnalisation = () => {
         close();
       }),
       {
-        loading: "Echange en cours...",
-        success: <b>Bravo vous avez débloqué un nouvelle avatar !</b>,
+        loading: "Échange en cours...",
+        success: <b>Bravo vous avez débloqué un nouvel avatar !</b>,
         error: <b>Une erreur est survenue.</b>,
       }
     );
@@ -80,7 +80,7 @@ const ShopPersonnalisation = () => {
 
   return (
     <>
-      <Stack>
+      <Stack pb={100}>
         {profile &&
           avatarList?.map((avatar) => {
             return (
@@ -89,6 +89,7 @@ const ShopPersonnalisation = () => {
                 avatar={avatar}
                 onClick={handleClick}
                 isUnlocked={isUnlocked(avatar.id) || false}
+                isCanBuy={avatar.pointsRequire <= profile.gamePoint}
                 isSelected={avatar.avatarUrl === profile.avatarUrl}
               />
             );
@@ -98,13 +99,14 @@ const ShopPersonnalisation = () => {
         {avatar && (
           <Stack p="md" h={500} justify="space-between">
             <Stack>
-              <Font variant="h2">Récapitulatif</Font>
               <Group grow>
                 <Box h={120} sx={{ position: "relative", width: 80 }}>
                   <Image src={avatar.avatarUrl} alt={avatar.id} />
                 </Box>
                 <Stack h="100%">
-                  <Font variant="h5">Customize ton avatar</Font>
+                  <Font variant="h5" color="#3F3979">
+                    Personnalise ton avatar
+                  </Font>
                   {!avatar.isPublic && !isUnlocked(avatar.id) && (
                     <Font variant="subtitle2" color="back">
                       {avatar.pointsRequire} points
@@ -122,7 +124,7 @@ const ShopPersonnalisation = () => {
               <PrimaryButton
                 onClick={() => handleAvatarChange(avatar.avatarUrl)}
               >
-                Sélectionner cette avatar
+                Sélectionner cet avatar
               </PrimaryButton>
             ) : (
               <PrimaryButton

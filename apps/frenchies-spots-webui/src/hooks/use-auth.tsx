@@ -39,6 +39,10 @@ export const useInitAuth = () => {
     MutationSignInArgs
   >(mutations.signIn);
 
+  const [deleteAccount, { loading: deleteLoading }] = useMutation<{
+    deleteAccount: boolean;
+  }>(mutations.deleteAccount);
+
   const [getLoginUser] = useLazyQuery<{
     getLoginUser: UserEntity;
   }>(queries.getLoginUser, {
@@ -76,8 +80,8 @@ export const useInitAuth = () => {
     });
 
     toast.promise(signUpPromess, {
-      loading: "Connexion...",
-      success: <b>{`Création de compte réussi !`}</b>,
+      loading: "Connexion en cours...",
+      success: <b>{`Création de compte réussie !`}</b>,
       error: <b>Une erreur est survenue !</b>,
     });
   };
@@ -100,8 +104,8 @@ export const useInitAuth = () => {
     });
 
     toast.promise(signInPromess, {
-      loading: "Connexion...",
-      success: <b>{`Bon retour parmis nous !`}</b>,
+      loading: "Connexion en cours...",
+      success: <b>{`Bon retour parmi nous !`}</b>,
       error: <b>Email ou mot de passe incorrect !</b>,
     });
   };
@@ -127,11 +131,34 @@ export const useInitAuth = () => {
       .catch(console.log);
   };
 
+  const handleDeleteAccount = async (): Promise<void> => {
+    const deleteAccountPromess = new Promise((resolve, reject) => {
+      deleteAccount()
+        .then(() => {
+          setUser(undefined);
+          updateToken("");
+          router.push("/sign-in");
+          resolve(true);
+        })
+        .catch((error) => {
+          reject(error);
+          console.error(error);
+        });
+    });
+
+    toast.promise(deleteAccountPromess, {
+      loading: "Suppression...",
+      success: <b>{`Votre compte à été supprimé !`}</b>,
+      error: <b>Une erreur est survenue !</b>,
+    });
+  };
+
   return {
     token: tokenStorage,
     user,
-    loading: signupLoading || signinLoading || signoutLoading,
+    loading: signupLoading || signinLoading || signoutLoading || deleteLoading,
     setUser,
+    onDeleteAccount: handleDeleteAccount,
     onSignUp: handleSignUp,
     onSignIn: handleSignIn,
     refresh: handleAuthByToken,
@@ -154,6 +181,7 @@ export const useAuth = () => {
     processSignUp,
     processSignIn,
     processSignOut,
+    processDeleteAccount,
     refresh,
     setUser,
   } = useAuthContext();
@@ -185,6 +213,7 @@ export const useAuth = () => {
     onSignUp: getFuncOrThrow(processSignUp),
     onSignIn: getFuncOrThrow(processSignIn),
     onSignOut: getFuncOrThrow(processSignOut),
+    onDeleteAccount: getFuncOrThrow(processDeleteAccount),
     onUpdateProfile: handleUpdateProfile,
   };
 };

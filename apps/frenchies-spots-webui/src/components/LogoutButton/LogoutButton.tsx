@@ -13,7 +13,7 @@ const LogoutButton = () => {
     toast.promise(
       onSignOut().then(() => router.push("/sign-in")),
       {
-        loading: "Déconnexion...",
+        loading: "Déconnexion en cours...",
         success: <b>À bientôt !</b>,
         error: <b>Une erreur est survenue !</b>,
       }

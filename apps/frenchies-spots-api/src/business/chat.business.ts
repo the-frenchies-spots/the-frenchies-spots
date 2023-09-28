@@ -3,8 +3,6 @@ import { InserChatInput } from '../dto/input/chat/insert-chat.input';
 import { ChatEntity } from '../entity/chat.entity';
 
 import { ChatRepository } from '../repository/chat.repository';
-import { extractArray } from '../utils/extract-array';
-import { ContactRepository } from '../repository/contact.repository';
 import ErrorService from '../service/error.service';
 import { codeErrors } from '../enum/code-errors.enum';
 import { SendChatMessageInput } from '../dto/input/chat/send-chat-message.input';

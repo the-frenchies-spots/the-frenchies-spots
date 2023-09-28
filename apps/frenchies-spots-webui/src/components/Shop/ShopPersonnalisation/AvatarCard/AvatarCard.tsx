@@ -18,21 +18,29 @@ interface AvatarCardProps {
   onClick: (avatar: AvatarEntity) => void;
   isUnlocked: boolean;
   isSelected: boolean;
+  isCanBuy: boolean;
 }
 
 const AvatarCard = ({
   avatar,
   isUnlocked,
   isSelected,
+  isCanBuy,
   onClick,
 }: AvatarCardProps) => {
   const { id, pointsRequire, isPublic, avatarUrl } = avatar;
 
-  const { classes } = useStyles(isPublic || isUnlocked);
+  const { classes } = useStyles({
+    isOpen: isPublic || isUnlocked,
+    isSelected,
+    isCanBuy,
+  });
 
   const handleClick = () => {
     onClick(avatar);
   };
+
+  const isNoClick = !isPublic && !isUnlocked  && !isCanBuy
 
   return (
     <Group
@@ -40,19 +48,24 @@ const AvatarCard = ({
       p="md"
       align="center"
       position="apart"
-      onClick={handleClick}
+      onClick={isNoClick ? undefined : handleClick}
     >
       <Box h={120} sx={{ position: "relative", width: 80 }}>
         <Image src={avatarUrl} alt={id} />
       </Box>
       <Stack h="100%">
-        <Font variant="h5">Customize ton avatar</Font>
+        <Font
+          variant="h5"
+          color={isPublic || isUnlocked ? "#3F3979" : "#707070"}
+        >
+          Personnalise ton avatar
+        </Font>
         <Font variant="subtitle2" color="back">
           {isUnlocked ? 0 : pointsRequire} points
         </Font>
         {isSelected && (
-          <Badge sx={{ backgroundColor: "#EBA701", color: "white" }}>
-            Courant
+          <Badge sx={{ backgroundColor: "#B68973", color: "white" }}>
+            Utilisé
           </Badge>
         )}
       </Stack>

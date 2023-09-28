@@ -49,6 +49,7 @@ const SpotCard = (props: SpotCardProps) => {
       padding="lg"
       radius="md"
       onClick={handleClick}
+      sx={{ backgroundColor: "#FBFBFB" }}
       withBorder
     >
       <Card.Section h={150} className={classes.section}>

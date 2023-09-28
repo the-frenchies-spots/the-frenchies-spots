@@ -115,9 +115,11 @@ type LogoutResponse {
 
 type Mutation {
   acceptFriendContact(contactId: String!): Boolean!
+  blockContact(blockContactId: String!): Boolean!
   buyAvatar(avatarsInput: AvatarInput!): ProfileEntity!
   buyPoint(buyPoint: BuyPointInput!): UserEntity!
   createOrUpdateRating(ratingInput: RatingInput!): RatingResponse!
+  deleteAccount: Boolean!
   deleteNotif(notifId: String!): DeleteResponse!
   deleteSpot(id: String!): DeleteResponse!
   deleteTag(id: String!): DeleteResponse!
@@ -133,6 +135,7 @@ type Mutation {
   signIn(signInInput: SignInInput!): SignResponse!
   signUp(signUpInput: SignUpInput!): SignResponse!
   toggleFavorite(favoriteInput: FavoriteInput!): ToggleFavoriteResponse!
+  unBlockContact(blockContactId: String!): Boolean!
   updateContact(contactsInput: ContactInput!): ContactEntity!
   updateNotifStatus: Boolean!
   updateProfile(profileInput: ProfileInput!): UserEntity!

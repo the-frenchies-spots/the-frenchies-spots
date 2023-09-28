@@ -97,4 +97,9 @@ export class AuthBusiness {
     const loggedOut = await this.authRepository.disconnect(userId);
     return { loggedOut };
   }
+
+  async delete(userId: string): Promise<boolean> {
+    const res = await this.authRepository.delete(userId);
+    return res;
+  }
 }

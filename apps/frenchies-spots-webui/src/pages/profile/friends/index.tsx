@@ -1,4 +1,4 @@
-import React, { ReactElement } from "react";
+import React, { ReactElement, useState } from "react";
 import { PageLayout } from "../../../components/Layout/PageLayout/PageLayout";
 import NavigationLayout from "../../../components/Layout/NavigationLayout/NavigationLayout";
 import { useQuery } from "@apollo/client";
@@ -8,8 +8,10 @@ import {
   queries,
 } from "@frenchies-spots/gql";
 import {
+  BackButton,
   Container,
   Group,
+  InputForm,
   Log,
   ScrollArea,
   Stack,
@@ -21,9 +23,11 @@ import ContactButton from "./../../../components/Profile/ContactButton/ContactBu
 import BlockButton from "./../../../components/Profile/BlockButton/BlockButton";
 import LoadingOverlay from "../../../components/LoadingOverlay/LoadingOverlay";
 import { useRouter } from "next/router";
+import { IconSearch } from "@frenchies-spots/icon";
 
 const FriendsPage = () => {
   const router = useRouter();
+  const [searchKey, setSearchKey] = useState<string>("");
 
   const { data, loading } = useQuery<
     { contacts: ContactEntity[] },
@@ -40,21 +44,35 @@ const FriendsPage = () => {
     <Container size="md" mt="md">
       <LoadingOverlay visible={loading} />
       <Stack>
-        <TextInput placeholder="Rechercher un contact" />
+        <BackButton onClick={() => router.back()} />
+        <InputForm
+          placeholder="Rechercher un ami"
+          onChange={(e) => setSearchKey(e.currentTarget.value)}
+          sx={{ borderColor: "#A480A6" }}
+          isShadow={false}
+          icon={<IconSearch style={{ color: "#A480A6" }} size={20} />}
+        />
         <ScrollArea>
-          {data?.contacts?.map((friend) => (
-            <ProfileCard
-              key={friend.id}
-              profile={friend.contact}
-              mb="sm"
-              onClick={handleViewProfileClick}
-            >
-              <Group>
-                <ContactButton profile={friend.contact} isSmallMode />
-                <BlockButton />
-              </Group>
-            </ProfileCard>
-          ))}
+          {data?.contacts
+            ?.filter(
+              (_friend) => !!_friend?.contact?.pseudo?.includes(searchKey)
+            )
+            ?.map((friend) => (
+              <ProfileCard
+                key={friend.id}
+                profile={friend.contact}
+                mb="sm"
+                onClick={handleViewProfileClick}
+              >
+                <Group>
+                  <ContactButton profile={friend.contact} isSmallMode />
+                  {/* <BlockButton
+                    profile={friend.contact}
+                    isAuthorize={friend.authorization}
+                  /> */}
+                </Group>
+              </ProfileCard>
+            ))}
         </ScrollArea>
       </Stack>
     </Container>

@@ -36,9 +36,9 @@ const ProfilePhoto = (props: ProfilePhotoProps) => {
         return onUpdateProfile({ photoUrl: image.secure_url });
       };
       toast.promise(upload(), {
-        loading: "Mise a jour de la photo de profile...",
-        success: <b>Photo de profile mis a jour !</b>,
-        error: <b>Mise a jour échoué.</b>,
+        loading: "Mise a jour de la photo de profil en cours...",
+        success: <b>Photo de profil mise à jour !</b>,
+        error: <b>La mise à jour a échoué.</b>,
       });
     }
   };
