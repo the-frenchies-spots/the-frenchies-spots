@@ -138,16 +138,7 @@ const SpotFilter = (props: SpotFilterProps) => {
         /> */}
 
         <Stack>
-          <Font variant="h4">Localisation</Font>
-          <SwitchInput
-            label="Afficher mon rayon de recherche"
-            checked={isRayon}
-            onChange={(event) => handleRayonChange(event.currentTarget.checked)}
-          />
-        </Stack>
-        <Box h={50}>
-          {isRayon && (
-            <Slider
+        <Slider
               pb="xl"
               mb="xl"
               marks={[
@@ -159,8 +150,6 @@ const SpotFilter = (props: SpotFilterProps) => {
               onChange={handleRadiusChange}
               labelAlwaysOn
             />
-          )}
-        </Box>
       </Stack>
 
       <Group
