@@ -80,8 +80,8 @@ export const useInitAuth = () => {
     });
 
     toast.promise(signUpPromess, {
-      loading: "Connexion...",
-      success: <b>{`Création de compte réussi !`}</b>,
+      loading: "Connexion en cours...",
+      success: <b>{`Création de compte réussie !`}</b>,
       error: <b>Une erreur est survenue !</b>,
     });
   };

@@ -21,7 +21,7 @@ import { PageLayout } from "../components";
 
 import { GuardLayout } from "../components/Layout/GuardLayout/GuardLayout";
 import { useRouter } from "next/router";
-import toast from "react-hot-toast";
+
 import AppTitle from "../components/AppTitle/AppTitle";
 import Wave from "./../components/Wave/Wave";
 

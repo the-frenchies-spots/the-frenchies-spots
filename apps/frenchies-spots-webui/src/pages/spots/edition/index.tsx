@@ -46,9 +46,9 @@ const SpotInsertPage = () => {
         router.push(`/spots?lat=${lat}&lng=${lng}&spotId=${id}`);
       }),
       {
-        loading: "Création...",
+        loading: "Création en cours...",
         success: <b>Spot crée avec succès.</b>,
-        error: <b>La Création à échoué.</b>,
+        error: <b>La création a échoué.</b>,
       }
     );
   };

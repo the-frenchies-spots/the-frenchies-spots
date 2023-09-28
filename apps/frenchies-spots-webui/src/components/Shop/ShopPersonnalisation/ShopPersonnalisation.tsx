@@ -51,8 +51,8 @@ const ShopPersonnalisation = () => {
         close();
       }),
       {
-        loading: "Echange en cours...",
-        success: <b>Bravo vous avez débloqué un nouvelle avatar !</b>,
+        loading: "Échange en cours...",
+        success: <b>Bravo vous avez débloqué un nouvel avatar !</b>,
         error: <b>Une erreur est survenue.</b>,
       }
     );

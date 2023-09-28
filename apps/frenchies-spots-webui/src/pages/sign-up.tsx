@@ -186,7 +186,7 @@ const SignUp = () => {
                 {avatar}
                 <Stack w="100%" spacing={1}>
                   <Bubble
-                    message="Donne nous une petit description de toi."
+                    message="Donne nous une petite description de toi."
                     isParticipant={true}
                     w="90%"
                   />
@@ -253,7 +253,7 @@ const SignUp = () => {
               {avatar}
               <Stack w="100%" spacing={1}>
                 <Bubble
-                  message="Deux pour le prix d'un ! Marque ton mot de passe, puis comfirme-le."
+                  message="Deux pour le prix d'un ! Marque ton mot de passe, puis confirme-le."
                   isParticipant={true}
                   w="90%"
                 />
@@ -270,7 +270,7 @@ const SignUp = () => {
                 required
               />
               <InputForm
-                label="Confirme ton Mot de passe"
+                label="Confirme ton mot de passe"
                 type="password"
                 {...form.getInputProps("comfirmPassword")}
                 error={!!form.errors.comfirmPassword}

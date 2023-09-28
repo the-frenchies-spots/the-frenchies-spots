@@ -49,7 +49,7 @@ const Stepper = (props: StepperProps) => {
       if (checkValidate(validates, index)) {
         handleSlideTo(index);
       } else {
-        toast.error("Il vous manquent des champs a remplir !");
+        toast.error("Il vous manque des champs à remplir !");
       }
     } else {
       handleSlideTo(index);

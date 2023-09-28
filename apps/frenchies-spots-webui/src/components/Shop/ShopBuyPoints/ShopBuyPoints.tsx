@@ -51,7 +51,7 @@ const ShopBuyPoints = () => {
       {
         loading: "Saving...",
         success: <b>{`Vous venez d'obtenir ${amount} !`}</b>,
-        error: <b>{`L'achat de point à échoué.`}</b>,
+        error: <b>{`L'achat de point a échoué.`}</b>,
       }
     );
   };

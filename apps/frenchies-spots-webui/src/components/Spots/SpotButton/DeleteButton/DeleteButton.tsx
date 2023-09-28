@@ -40,9 +40,9 @@ const DeleteButton = (props: DeleteButtonProps) => {
         client.cache.evict({ id: `SpotEntity:${spotId}` });
       }),
       {
-        loading: "Supression...",
+        loading: "Supression en cours...",
         success: <b>Spot supprimé avec succès.</b>,
-        error: <b>La suppression à échoué.</b>,
+        error: <b>La suppression a échoué.</b>,
       }
     );
   };

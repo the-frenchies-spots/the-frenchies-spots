@@ -46,8 +46,8 @@ const ProfileRequestPage = (props: ProfileRequestPageProps) => {
       ]),
       {
         loading: "Validation en cours...",
-        success: <b>{`Vous avez un nouvel amis !`}</b>,
-        error: <b>Un problème est survenue !</b>,
+        success: <b>{`Vous avez un nouvel ami !`}</b>,
+        error: <b>Un problème est survenu !</b>,
       }
     );
     router.push("/profile");

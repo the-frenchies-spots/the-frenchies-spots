@@ -49,7 +49,7 @@ const SpotMenu = (props: SpotMenuProps) => {
   const handleSearchPlaceName = () => {
     searchPlace(placeName).then((address) => {
       if (!address.placeName) {
-        toast.error("L'address saisie est incorrecte !");
+        toast.error("L'adresse saisie est incorrecte !");
       } else {
         setPlaceName(address.placeName);
         setCoordPoint(address.coordinates);
@@ -74,7 +74,7 @@ const SpotMenu = (props: SpotMenuProps) => {
         <StatusBar isMapMode={isMapMode} />
         <Box sx={{ position: "relative" }}>
           <AutocompleteAddress
-            placeholder="search address"
+            placeholder="adresse..."
             value={placeName}
             onTextChange={setPlaceName}
             sx={{

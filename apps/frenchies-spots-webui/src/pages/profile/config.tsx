@@ -53,9 +53,9 @@ const ConfigPage = () => {
     e.preventDefault();
     if (form.isValid()) {
       toast.promise(onUpdateProfile(form.values), {
-        loading: "Mise a jour du profile...",
+        loading: "Mise à jour du profil...",
         success: <b>Mise à jour réussie !</b>,
-        error: <b>Mise à jour échoué.</b>,
+        error: <b>La mise à jour a échoué.</b>,
       });
     }
   };
@@ -87,7 +87,7 @@ const ConfigPage = () => {
               <SwitchInput
                 mt="xl"
                 defaultChecked
-                label="J'autorise à être géolocalisé"
+                label="J'autorise à être localisé"
                 checked={form.getInputProps("isLocated").value}
                 onChange={(event) =>
                   form
